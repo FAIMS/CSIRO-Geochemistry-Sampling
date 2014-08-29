@@ -51,11 +51,11 @@ searchSamples(){
 
 /** Archent: Water Sample **/
 onEvent("Water_Sample/Basic_Info/Update", "delayclick", "saveWaterSample(\"\");");
-onEvent("Water_Sample/Basic_Info/Update_And_New", "delayclick", "saveWaterSample(\"newWaterSample();\");");
+onEvent("Water_Sample/Basic_Info/Update_And_New", "delayclick", "saveWaterSample(\"cancelTabGroup(\\\"Water_Sample\\\", false);newWaterSample();\");");
 onEvent("Water_Sample/Codes/Update", "delayclick", "saveWaterSample(\"\");");
-onEvent("Water_Sample/Codes/Update_And_New", "delayclick", "saveWaterSample(\"newWaterSample();\");");
+onEvent("Water_Sample/Codes/Update_And_New", "delayclick", "saveWaterSample(\"cancelTabGroup(\\\"Water_Sample\\\", false);newWaterSample();\");");
 onEvent("Water_Sample/Additional_Info/Update", "delayclick", "saveWaterSample(\"\");");
-onEvent("Water_Sample/Additional_Info/Update_And_New", "delayclick", "saveWaterSample(\"newWaterSample();\");");
+onEvent("Water_Sample/Additional_Info/Update_And_New", "delayclick", "saveWaterSample(\"cancelTabGroup(\\\"Water_Sample\\\", false);newWaterSample();\");");
 
 onEvent("Water_Sample/Basic_Info/Delete", "click", "deleteWaterSample();");
 onEvent("Water_Sample/Codes/Delete", "click", "deleteWaterSample();");
@@ -63,7 +63,7 @@ onEvent("Water_Sample/Additional_Info/Delete", "click", "deleteWaterSample();");
 
 onEvent("Water_Sample/pH_Eh", "show", "loadRelatedpH();");
 onEvent("Water_Sample/pH_Eh/New_pH", "delayclick", "saveWaterSample(\"newpH();\");");
-onEvent("Water_Sample/pH_Eh/pH_List", "delayclick", "loadpH();");
+onEvent("Water_Sample/pH_Eh/pH_List", "click", "loadpH();");
 
 onEvent("Water_Sample/Basic_Info/Take_GPS", "click", "fillInGPS(\"Water_Sample/Basic_Info/\")");
 onEvent("Water_Sample/Additional_Info/Take_GPS", "click", "fillInGPS(\"Water_Sample/Additional_Info/\")");
@@ -137,7 +137,7 @@ loadWaterSampleAttributes() {
     populateDropDown("Water_Sample/Codes/Hole_Angle", makeVocab("Hole Angle"));
     populateDropDown("Water_Sample/Codes/Outflow_From_Tank", makeVocab("Outflow From Tank"));
     populateDropDown("Water_Sample/Codes/Sampling_Issues", makeVocab("Sampling Issues"));
-    populateCheckBoxGroup("Water_Sample/Additional_Info/Samples_Collected", makeVocab("Samples Collected"));
+    populateCheckBoxGroup("Water_Sample/Additional_Info/Sample_Collected", makeVocab("Sample Collected"));
 }
 
 autoNumWaterSample() {
@@ -215,10 +215,9 @@ loadpHFrom(archentid) {
     showTabGroup("pH", ph_id);
 }
 
-
 savepH(String callback) {
     if (isNull(getFieldValue("pH/pH/pH")) || isNull(getFieldValue("pH/pH/Eh"))) {
-        showWarning("Validation Error", "Cannot save pH without pH and Eh.");
+        showWarning("Validation Error", "Cannot save pH/Eh without pH and Eh.");
         return;
     }
     
@@ -280,12 +279,17 @@ doNotDelete() {
 }
 
 fillInGPS(String path) {
-    Object position = getGPSPosition();    
+    Object position = getGPSPosition();
+    Object projPosition = getGPSPositionProjected();
     if (position != null) {
         Double latitude = position.getLatitude();
         Double longitude = position.getLongitude();
+        Double northing = projPosition.getLatitude();
+        Double easting = projPosition.getLongitude();
         setFieldValue(path+"Latitude", latitude);
         setFieldValue(path+"Longitude", longitude);
+        setFieldValue(path+"Northing", northing);
+        setFieldValue(path+"Easting", easting);
     } else {
         showToast("GPS Not initialized");
     }

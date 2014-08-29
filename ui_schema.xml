@@ -68,6 +68,14 @@
                   <Longitude/>
                 </child2>
               </container1>
+              <container2>
+                <child1>
+                  <Northing/>
+                </child1>
+                <child2>
+                  <Easting/>
+                </child2>
+              </container2>
               <Take_GPS/>
               <Photos/>
               <Take_Photo/>
@@ -99,7 +107,7 @@
               <pH_List/>
             </pH_Eh>
             <Additional_Info>
-              <Samples_Collected/>
+              <Sample_Collected/>
               <Tree/>
               <Species/>
               <container1>
@@ -118,6 +126,14 @@
                   <Longitude/>
                 </child2>
               </container2>
+              <container3>
+                <child1>
+                  <Northing/>
+                </child1>
+                <child2>
+                  <Easting/>
+                </child2>
+              </container3>
               <Take_GPS/>
               <Notes/>
               <Update/>
@@ -150,6 +166,8 @@
       <bind nodeset="/faims/Water_Sample/Additional_Info/container1/child2/Width" type="decimal"/>
       <bind nodeset="/faims/Water_Sample/Additional_Info/container2/child1/Latitude" type="decimal"/>
       <bind nodeset="/faims/Water_Sample/Additional_Info/container2/child2/Longitude" type="decimal"/>
+      <bind nodeset="/faims/pH/pH/pH" type="decimal"/>
+      <bind nodeset="/faims/pH/pH/Eh" type="decimal"/>
     </model>
   </h:head>
   <h:body>
@@ -255,7 +273,7 @@
         <input ref="Number" faims_attribute_name="Number" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false" faims_read_only="false">
           <label>{Number}</label>
         </input>
-        <input ref="Station" faims_attribute_name="Station" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+        <input ref="Station" faims_attribute_name="Station" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false" faims_read_only="false">
           <label>{Station}</label>
         </input>
         <input ref="mASL" faims_attribute_name="mASL" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
@@ -285,6 +303,21 @@
             <label></label>
             <input ref="Longitude" faims_attribute_name="Water Sample Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
               <label>{Longitude}</label>
+            </input>
+          </group>
+        </group>
+        <group ref="container2" faims_style="orientation">
+          <label></label>
+          <group ref="child1" faims_style="even">
+            <label></label>
+            <input ref="Northing" faims_attribute_name="Water Sample Northing" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label>{Northing}</label>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label></label>
+            <input ref="Easting" faims_attribute_name="Water Sample Easting" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label>{Easting}</label>
             </input>
           </group>
         </group>
@@ -399,8 +432,8 @@
       </group>
       <group ref="Additional_Info">
         <label>{Additional_Info}</label>
-        <select ref="Samples_Collected" faims_attribute_name="Samples Collected" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-          <label>{Samples_Collected}</label>
+        <select ref="Sample_Collected" faims_attribute_name="Sample Collected" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Sample_Collected}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
@@ -446,6 +479,21 @@
             </input>
           </group>
         </group>
+        <group ref="container3" faims_style="orientation">
+          <label></label>
+          <group ref="child1" faims_style="even">
+            <label></label>
+            <input ref="Northing" faims_attribute_name="Tree Northing" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label>{Northing}</label>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label></label>
+            <input ref="Easting" faims_attribute_name="Tree Easting" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label>{Easting}</label>
+            </input>
+          </group>
+        </group>
         <trigger ref="Take_GPS">
           <label>{Take_GPS}</label>
         </trigger>
@@ -470,10 +518,10 @@
         <input ref="Time" faims_attribute_name="Time" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false" faims_read_only="true">
           <label>{Time}</label>
         </input>
-        <input ref="pH" faims_attribute_name="pH" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+        <input ref="pH" faims_attribute_name="pH" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false">
           <label>{pH}</label>
         </input>
-        <input ref="Eh" faims_attribute_name="Eh" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+        <input ref="Eh" faims_attribute_name="Eh" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false">
           <label>{Eh}</label>
         </input>
         <trigger ref="Update_And_New">

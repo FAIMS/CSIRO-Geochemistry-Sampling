@@ -167,7 +167,7 @@
         </term>
       </lookup>
     </property>
-    <property name="Samples Collected" type="enum">
+    <property name="Sample Collected" type="enum">
       <description>Description TBD</description>
       <lookup>
         <term> {aCations}
@@ -190,10 +190,22 @@
     <property name="Water Sample Longitude" type="freetext">
       <description>Description TBD</description>
     </property>
+    <property name="Water Sample Northing" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Water Sample Easting" type="freetext">
+      <description>Description TBD</description>
+    </property>
     <property name="Tree Latitude" type="freetext">
       <description>Description TBD</description>
     </property>
     <property name="Tree Longitude" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Tree Northing" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Tree Easting" type="freetext">
       <description>Description TBD</description>
     </property>
     <property name="Species" type="freetext">
