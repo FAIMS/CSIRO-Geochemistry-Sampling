@@ -1,0 +1,379 @@
+/*** 'Editable' - you can edit the code below based on the needs ***/
+User user; 
+String userid;
+
+makeLocalID(){
+    fetchOne("CREATE TABLE IF NOT EXISTS localSettings (key text primary key, value text);");
+    fetchOne("drop view if exists identifierAsSpreadsheet;");
+    fetchOne("create view identifierAsSpreadsheet as select uuid, group_concat(coalesce(measure || ' ' || vocabname || '(' ||freetext||')',  measure || ' (' || freetext ||')',  vocabname || ' (' || freetext ||')',  measure || ' ' || vocabname ,  vocabname || ' (' || freetext || ')',  measure || ' (' || freetext || ')',  measure,  vocabname,  freetext,  measure,  vocabname,  freetext), ' ') as response from (select * from latestNonDeletedArchentIdentifiers order by attributename) group by uuid;");
+}
+
+makeLocalID();
+
+onEvent("control/Sample", "show", "refreshSampleList();");
+onEvent("control/Sample/newSample", "click", "newWaterSample()");
+onEvent("control/Sample/SampleList", "click", "loadWaterSample()");
+
+onEvent("control/Sample/Search", "click", "setFieldValue(\"control/Sample/Search\",\"\");");
+onEvent("control/Sample/searchButton", "click", "searchSamples()");
+
+onEvent("control/Control", "show", "updateTrackStatus()");
+
+refreshSampleList(){
+    populateList("control/Sample/SampleList", 
+        fetchAll("SELECT uuid, aenttypename || ': ' || group_concat(coalesce(freetext, ''),' - ') as response " +
+        "FROM (select * from latestNonDeletedArchentIdentifiers) " +
+        "WHERE aenttypename = 'Water Sample' " +
+        "GROUP BY uuid " +
+        "order by response;"));
+}
+
+searchSamples(){
+    populateList("control/Sample/SampleList", fetchAll(""+
+        "SELECT uuid, aennttypename || ': ' || group_concat(coalesce(measure   || ' '  || vocabname || '('  ||  freetext ||'; '|| (certainty * 100.0) || '% certain)',  "+
+        "                                     measure   || ' (' || freetext  || '; ' || (certainty * 100.0) || '% certain)',  "+
+        "                                     vocabname || ' (' || freetext  || '; ' || (certainty * 100.0) || '% certain)',  "+
+        "                                     measure   || ' '  || vocabname || ' (' || (certainty * 100.0) || '% certain)',  "+
+        "                                     vocabname || ' (' || freetext  || ')',  "+
+        "                                     measure   || ' (' || freetext  || ')',  "+
+        "                                     measure   || ' (' ||(certainty * 100.0) || '% certain)',  "+
+        "                                     vocabname || ' (' ||(certainty * 100.0) || '% certain)',  "+
+        "                                     freetext  || ' (' ||(certainty * 100.0) || '% certain)',  "+
+        "                                     measure,  "+
+        "                                     vocabname,  "+
+        "                                     freetext), ' ') as response  "+
+        "FROM (select * from latestNonDeletedArchentIdentifiers order by attributename) "+
+        "WHERE aenttypename = 'Water Sample' "+
+        "and uuid in (select uuid from latestnondeletedaentvalue left outer join vocabulary using (vocabid) where freetext like '%"+getFieldValue("control/Sample/Search")+"%' or vocabname like '%"+getFieldValue("control/Sample/Search")+"%' or measure like '%"+getFieldValue("control/Sample/Search")+"%') "+
+        "GROUP BY uuid "+
+        "order by response;"));
+}
+
+/** Archent: Water Sample **/
+onEvent("Water_Sample/Basic_Info/Update", "delayclick", "saveWaterSample(\"\");");
+onEvent("Water_Sample/Basic_Info/Update_And_New", "delayclick", "saveWaterSample(\"newWaterSample();\");");
+onEvent("Water_Sample/Codes/Update", "delayclick", "saveWaterSample(\"\");");
+onEvent("Water_Sample/Codes/Update_And_New", "delayclick", "saveWaterSample(\"newWaterSample();\");");
+onEvent("Water_Sample/Additional_Info/Update", "delayclick", "saveWaterSample(\"\");");
+onEvent("Water_Sample/Additional_Info/Update_And_New", "delayclick", "saveWaterSample(\"newWaterSample();\");");
+
+onEvent("Water_Sample/Basic_Info/Delete", "click", "deleteWaterSample();");
+onEvent("Water_Sample/Codes/Delete", "click", "deleteWaterSample();");
+onEvent("Water_Sample/Additional_Info/Delete", "click", "deleteWaterSample();");
+
+onEvent("Water_Sample/pH_Eh", "show", "loadRelatedpH();");
+onEvent("Water_Sample/pH_Eh/New_pH", "delayclick", "saveWaterSample(\"newpH();\");");
+onEvent("Water_Sample/pH_Eh/pH_List", "delayclick", "loadpH();");
+
+onEvent("Water_Sample/Basic_Info/Take_GPS", "click", "fillInGPS(\"Water_Sample/Basic_Info/\")");
+onEvent("Water_Sample/Additional_Info/Take_GPS", "click", "fillInGPS(\"Water_Sample/Additional_Info/\")");
+
+onEvent("Water_Sample/Basic_Info/Take_Photo", "click", "attachPictureTo(\"Water_Sample/Basic_Info/Photos\")");
+
+onEvent("Water_Sample/Codes/Hole_Angle", "click", "populateEstimatedAngle();");
+
+String water_sample_id = null;
+
+newWaterSample() {
+    water_sample_id = null;
+    newTabGroup("Water_Sample");
+    date = fetchOne("select datetime('now', 'localtime');");
+    setFieldValue("Water_Sample/Basic_Info/Date", date.get(0));
+    setFieldValue("Water_Sample/Basic_Info/Area", areaCode);
+    autoNumWaterSample();
+}
+
+loadWaterSample() {
+    water_sample_id = getListItemValue();
+    loadWaterSampleFrom(water_sample_id);
+}
+
+loadWaterSampleFrom(archentid) {
+    water_sample_id = archentid;
+    if (isNull(water_sample_id)) {
+        showToast("No Water Sample selected");
+        return;
+    }
+
+    showTabGroup("Water_Sample", water_sample_id);
+}
+
+saveWaterSample(String callback) {
+    if (isNull(getFieldValue("Water_Sample/Basic_Info/Number"))) {
+        showWarning("Validation Error", "Cannot save Water Sample without a Number");
+        return;
+    }
+    
+    if (!isNull(water_sample_id)) {
+        entity = fetchArchEnt(water_sample_id);
+    }
+    next_sample_id = fetchOne("select value from localSettings where key = 'Water Sample ID';").get(0);
+    if(Integer.parseInt(getFieldValue("Water_Sample/Basic_Info/Number")) >= Integer.parseInt(next_sample_id)) {
+        fetchOne("REPLACE INTO localSettings(key, value) VALUES('Water Sample ID', "+ getFieldValue("Water_Sample/Basic_Info/Number") +"+1);");
+    } else {
+        fetchOne("REPLACE INTO localSettings(key, value) VALUES('Water Sample ID', "+ next_sample_id +");");    
+    }
+    saveTabGroup("Water_Sample", water_sample_id, null, null, "water_sample_id = getLastSavedRecordId();refreshPictures();" + callback);
+}
+
+deleteWaterSample() {
+    if (!isNull(water_sample_id)) {
+        showAlert("Confirm Deletion", "Press OK to Delete this Water Sample!", "reallyDeleteWaterSample()", "doNotDelete()");
+    } else {
+        cancelTabGroup("Water_Sample", true);
+    }
+}
+
+reallyDeleteWaterSample() {
+    deleteArchEnt(water_sample_id);
+    cancelTabGroup("Water_Sample", false);
+}
+
+loadWaterSampleAttributes() {
+    populateDropDown("Water_Sample/Codes/Hole_Type", makeVocab("Hole Type"));
+    populateDropDown("Water_Sample/Codes/Hole_Lining", makeVocab("Hole Lining"));
+    populateRadioGroup("Water_Sample/Codes/Hole_Open_Closed", makeVocab("Hole Open or Closed"));
+    populateDropDown("Water_Sample/Codes/Pipes_In_Hole", makeVocab("Pipes In Hole"));
+    populateDropDown("Water_Sample/Codes/Hole_Angle", makeVocab("Hole Angle"));
+    populateDropDown("Water_Sample/Codes/Outflow_From_Tank", makeVocab("Outflow From Tank"));
+    populateDropDown("Water_Sample/Codes/Sampling_Issues", makeVocab("Sampling Issues"));
+    populateCheckBoxGroup("Water_Sample/Additional_Info/Samples_Collected", makeVocab("Samples Collected"));
+}
+
+autoNumWaterSample() {
+    next_sample_id = fetchOne("select value from localSettings where key = 'Water Sample ID';");
+    if(isNull(next_sample_id)) {
+        next_sample_id = "1";
+        fetchOne("REPLACE INTO localSettings(key, value) VALUES('Water Sample ID', 1);");
+    } else {
+        next_sample_id = next_sample_id.get(0);
+    }
+    setFieldValue("Water_Sample/Basic_Info/Number", next_sample_id); 
+}
+
+loadRelatedpH() {
+    ArrayList pHs = new ArrayList();
+    if(!isNull(water_sample_id)) {
+         pHs = fetchAll("select uuid, aenttypename || ': ' || group_concat(coalesce(measure || ' ' || vocabname || '(' ||freetext||')',  measure || ' (' || freetext ||')',  vocabname || ' (' || freetext ||')',  measure || ' ' || vocabname ,  vocabname || ' (' || freetext || ')',  measure || ' (' || freetext || ')',  measure,  vocabname,  freetext,  measure,  vocabname,  freetext), ' - ') as response, valuetimestamp\n"+
+            "  FROM (  SELECT uuid, attributeid, vocabid, attributename, vocabname, measure, freetext, certainty, attributetype, valuetimestamp, aenttypename\n"+
+            "            FROM latestNonDeletedArchentIdentifiers\n"+
+            "           WHERE aenttypename = 'pH/Eh'\n"+
+            "             AND uuid in (select uuid\n"+
+            "                            FROM latestNonDeletedAentReln\n"+
+            "                           where relationshipid in (select relationshipid\n"+
+            "                                                      FROM latestNonDeletedAentReln\n"+
+            "                                                      JOIN relationship using (relationshipid)\n"+
+            "                                                      JOIN relntype using (relntypeid)\n"+
+            "                                                    where uuid = "+water_sample_id+"\n"+
+            "                                                       and relntypeName = 'Sample pH')\n"+
+            "                             and uuid != "+water_sample_id+")\n"+
+            "        order by case attributename when 'pH' then 1 when 'eH' then 2 when 'Time' then 3 end)\n"+
+            "group by uuid\n"+
+            "order by valuetimestamp desc, uuid, attributename;");
+    }
+    populateList("Water_Sample/pH_Eh/pH_List", pHs);
+}
+
+refreshPictures() {
+    pictures = _convertPairsToList(getFieldValue("Water_Sample/Basic_Info/Photos"));
+    populateCameraPictureGallery("Water_Sample/Basic_Info/Photos", pictures);
+    setFieldValue("Water_Sample/Basic_Info/Photos", _convertListToPairs(pictures));
+}
+
+populateEstimatedAngle() {
+    if(getVocabName(getFieldValue("Water_Sample/Codes/Hole_Angle")).equals("{aVertical}")) {
+        setFieldValue("Water_Sample/Codes/Estimated_Angle", "90");
+    }
+}
+
+/** Archent: pH **/
+onEvent("pH/pH/Update_And_New", "delayclick", "savepH(\"newpH();\");");
+onEvent("pH/pH/Update_And_Close", "delayclick", "savepH(\"cancelTabGroup(\\\"pH\\\", false);showTab(\\\"Water_Sample/pH_Eh\\\");\");");
+onEvent("pH/pH/Delete", "delayclick", "deletepH();");
+
+String ph_id = null;
+
+newpH() {
+    ph_id = null;
+    newTabGroup("pH");
+    date = fetchOne("select datetime('now', 'localtime');");
+    setFieldValue("pH/pH/Time", date.get(0));
+}
+
+loadpH() {
+    ph_id = getListItemValue();
+    loadpHFrom(ph_id);
+}
+
+loadpHFrom(archentid) {
+    ph_id = archentid;
+    if (isNull(ph_id)) {
+        showToast("No pH selected");
+        return;
+    }
+
+    showTabGroup("pH", ph_id);
+}
+
+
+savepH(String callback) {
+    if (isNull(getFieldValue("pH/pH/pH")) || isNull(getFieldValue("pH/pH/Eh"))) {
+        showWarning("Validation Error", "Cannot save pH without pH and Eh.");
+        return;
+    }
+    
+    if (!isNull(ph_id)) {
+        entity = fetchArchEnt(ph_id);
+    }
+    saveTabGroup("pH", ph_id, null, null, "ph_id = getLastSavedRecordId(); saveEntitiesToRel(\"Sample pH\", water_sample_id, ph_id);" + callback);
+}
+
+deletepH() {
+    if (!isNull(ph_id)) {
+        showAlert("Confirm Deletion", "Press OK to Delete this pH!", "reallyDeletepH()", "doNotDelete()");
+    } else {
+        cancelTabGroup("pH", true);
+        showTab("Water_Sample/pH_Eh");
+    }
+}
+
+reallyDeletepH() {
+    deleteArchEnt(ph_id);
+    cancelTabGroup("pH", false);
+    showTab("Water_Sample/pH_Eh");
+}
+
+/*** MISC ***/
+
+saveEntitiesToRel(type, entity1, entity2) {
+    if (isNull(entity1) || isNull(entity2)) return;
+    
+    rel_id = saveRel(null, type, null, null);
+    addReln(entity1, rel_id, null);
+    addReln(entity2, rel_id, null);
+}
+
+saveEntitiesToHierRel(type, entity1, entity2, e1verb, e2verb) {
+    if (isNull(entity1) || isNull(entity2)) return;
+    
+    rel_id = saveRel(null, type, null, null);
+    addReln(entity1, rel_id, e1verb);
+    addReln(entity2, rel_id, e2verb);
+}
+
+makeVocab(String attrib) {
+    Object a = fetchAll("select vocabid, vocabname from vocabulary join attributekey using (attributeid) where attributename = '"+attrib+"' ");
+    return a;
+}
+
+getVocabName(String vocabid) {
+    Object a = fetchOne("select vocabName from vocabulary where vocabid = '"+ vocabid +"';");
+    return a.get(0);
+}
+
+makePictureGallery(String attrib) {
+    fetchAll("select vocabid, vocabname, pictureurl from vocabulary left join attributekey using (attributeid) where attributename = '" + attrib + "' order by vocabname;");
+}
+
+doNotDelete() {
+    showToast("Delete Cancelled.");
+}
+
+fillInGPS(String path) {
+    Object position = getGPSPosition();    
+    if (position != null) {
+        Double latitude = position.getLatitude();
+        Double longitude = position.getLongitude();
+        setFieldValue(path+"Latitude", latitude);
+        setFieldValue(path+"Longitude", longitude);
+    } else {
+        showToast("GPS Not initialized");
+    }
+}
+
+/*** 'Uneditable' - you can edit the code below with extreme precaution ***/
+/*** USER ***/
+
+getDefaultUsersList() {
+    users = fetchAll("select userid, fname ||' ' || lname from user");
+    return users;
+}
+
+populateListForUsers(){
+    populateDropDown("user/usertab/users", getDefaultUsersList());
+
+    Object localArea = fetchOne("select value from localSettings where key = 'Area';");
+    Object localUser = fetchOne("select value from localSettings where key = 'User';");
+
+    if (!isNull(localArea)){
+        setFieldValue("user/usertab/area", localArea.get(0));
+    }
+
+    if (!isNull(localUser)){
+        setFieldValue("user/usertab/users", localUser.get(0));
+    }
+
+}
+
+populateListForUsers();
+
+String username = "";
+String device = "";
+String areaCode = "";
+
+login(){
+    if(isNull(getFieldValue("user/usertab/area")) || isNull(getFieldValue("user/usertab/users"))){
+        showWarning("Warning", "Please select a User and an Area Code before logging in.");
+    } else {
+        Object userResult = fetchOne("select userid,fname,lname,email from user where userid='" + getFieldValue("user/usertab/users") + "';");
+        User user = new User(userResult.get(0),userResult.get(1),userResult.get(2),userResult.get(3));
+        userid = userResult.get(0);
+        setUser(user);
+        username = userResult.get(1) + " " + userResult.get(2);
+        showTabGroup("control");
+
+        fetchOne("REPLACE INTO localSettings(key, value) VALUES('User', '"+userid+"');");
+        fetchOne("REPLACE INTO localSettings(key, value) VALUES('Area', '"+getFieldValue("user/usertab/area")+"');");
+        areaCode = getFieldValue("user/usertab/area");
+    }
+}
+
+onEvent("user/usertab/login", "click", "login()");
+
+/*** SYNC ***/
+
+onEvent("control/Control/startsync", "click", "startSync()");
+onEvent("control/Control/stopsync", "click", "stopSync()");
+onEvent("control/Control/connectExternalGPS", "click", "startExternalGPS(); if(clicks < 1) intExt = \"External\"; clicks++; updateTrackStatus();");
+onEvent("control/Control/connectInternalGPS", "click", "startInternalGPS(); if(clicks < 1) intExt = \"Internal\"; clicks++; updateTrackStatus();");
+
+String intExt;
+int clicks = 0;
+
+setSyncMinInterval(10.0f);
+setSyncMaxInterval(20.0f);
+setSyncDelay(5.0f);
+
+startSync() {
+    setSyncEnabled(true);
+    setFileSyncEnabled(true);
+}
+
+stopSync() {
+    setSyncEnabled(false);
+    setFileSyncEnabled(false);
+}
+
+updateTrackStatus(){
+    String gpsStatus = "";
+    if(!isNull(intExt)){
+        gpsStatus += "Currently connected to " + intExt + " GPS.";
+        gpsStatus += "\nCurrent GPS Estimated Accuracy: "+ getGPSEstimatedAccuracy();
+    } else {
+        gpsStatus += "GPS not initialized.";
+    }
+
+    setFieldValue("control/Control/GPSStatus", gpsStatus);
+}
+
+loadWaterSampleAttributes();

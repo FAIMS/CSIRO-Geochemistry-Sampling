@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSchema>
+  <RelationshipElement name="Sample pH" type="bidirectional">
+    <description>Implements a 1:N relationship between Samples and pH/Eh</description>
+  </RelationshipElement>
+
+  <ArchaeologicalElement name="Water Sample">
+    <description></description>
+    <property name="Number" type="freetext" isIdentifier="true">
+      <description>Description TBD</description>
+    </property>
+    <property name="Date" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Station" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="ASL" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Water Table" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="mASL" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Sample Depth" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Bottom of Hole" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Temperature" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Condition" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Area" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Photos" type="file">
+      <description>Description TBD</description>
+    </property>
+    <property name="Hole Type" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> {0No_Observation}
+          <description>Description TBD</description>
+        </term>
+        <term> {aStill_Bore}
+          <description>Description TBD</description>
+        </term>
+        <term> {bStill_Well}
+          <description>Description TBD</description>
+        </term>
+        <term> {cFlowing_Bore}
+          <description>Description TBD</description>
+        </term>
+        <term> {dFlowing_Well}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Hole Lining" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> {0No_Observation}
+          <description>Description TBD</description>
+        </term>
+        <term> {aMetal}
+          <description>Description TBD</description>
+        </term>
+        <term> {bRusty}
+          <description>Description TBD</description>
+        </term>
+        <term> {cPoly}
+          <description>Description TBD</description>
+        </term>
+        <term> {dCement}
+          <description>Description TBD</description>
+        </term>
+        <term> {eWood}
+          <description>Description TBD</description>
+        </term>
+        <term> {fDirt}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Hole Open or Closed" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> {0No_Observation}
+          <description>Description TBD</description>
+        </term>
+        <term> {aOpen}
+          <description>Description TBD</description>
+        </term>
+        <term> {bClosed}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Pipes In Hole" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> {0No_Observation}
+          <description>Description TBD</description>
+        </term>
+        <term> {aMetal_Pipes}
+          <description>Description TBD</description>
+        </term>
+        <term> {bPoly_Pipes}
+          <description>Description TBD</description>
+        </term>
+        <term> {cFibreglass_Pipes}
+          <description>Description TBD</description>
+        </term>
+        <term> {dNo_pipes}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Hole Angle" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> {0No_Observation}
+          <description>Description TBD</description>
+        </term>
+        <term> {aVertical}
+          <description>Description TBD</description>
+        </term>
+        <term> {bAngled}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Estimated Angle" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Outflow From Tank" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> {0No_Observation}
+          <description>Description TBD</description>
+        </term>
+        <term> {aOutflow_under}
+          <description>Description TBD</description>
+        </term>
+        <term> {bOutflow_over}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Sampling Issues" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> {0No_Observation}
+          <description>Description TBD</description>
+        </term>
+        <term> {aSample_from_outflow}
+          <description>Description TBD</description>
+        </term>
+        <term> {bBailed_From_Flowing_Windmill}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Samples Collected" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> {aCations}
+          <description>Description TBD</description>
+        </term>
+        <term> {bAnions}
+          <description>Description TBD</description>
+        </term>
+        <term> {cAlkalinity}
+          <description>Description TBD</description>
+        </term>
+        <term> {dCarbon}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Water Sample Latitude" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Water Sample Longitude" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Tree Latitude" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Tree Longitude" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Species" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Height" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Width" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Notes" type="freetext">
+      <description>Description TBD</description>
+    </property>
+  </ArchaeologicalElement>
+  <ArchaeologicalElement name="pH/Eh">
+    <description></description>
+    <property name="Time" type="freetext" isIdentifier="true">
+      <description>Description TBD</description>
+    </property>
+    <property name="pH" type="freetext" isIdentifier="true">
+      <description>Description TBD</description>
+    </property>
+    <property name="Eh" type="freetext" isIdentifier="true">
+      <description>Description TBD</description>
+    </property>
+  </ArchaeologicalElement>
+</dataSchema>
