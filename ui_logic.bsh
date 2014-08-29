@@ -80,7 +80,7 @@ newWaterSample() {
     date = fetchOne("select datetime('now', 'localtime');");
     setFieldValue("Water_Sample/Basic_Info/Date", date.get(0));
     setFieldValue("Water_Sample/Basic_Info/Area", areaCode);
-    autoNumWaterSample();
+    //autoNumWaterSample();
 }
 
 loadWaterSample() {
@@ -107,12 +107,14 @@ saveWaterSample(String callback) {
     if (!isNull(water_sample_id)) {
         entity = fetchArchEnt(water_sample_id);
     }
+    /*
     next_sample_id = fetchOne("select value from localSettings where key = 'Water Sample ID';").get(0);
     if(Integer.parseInt(getFieldValue("Water_Sample/Basic_Info/Number")) >= Integer.parseInt(next_sample_id)) {
         fetchOne("REPLACE INTO localSettings(key, value) VALUES('Water Sample ID', "+ getFieldValue("Water_Sample/Basic_Info/Number") +"+1);");
     } else {
         fetchOne("REPLACE INTO localSettings(key, value) VALUES('Water Sample ID', "+ next_sample_id +");");    
     }
+    */
     saveTabGroup("Water_Sample", water_sample_id, null, null, "water_sample_id = getLastSavedRecordId();refreshPictures();" + callback);
 }
 

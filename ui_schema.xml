@@ -54,12 +54,13 @@
               <Area/>
               <Date/>
               <Number/>
+              <SiteName/>
               <Station/>
               <mASL/>
               <Water_Table/>
               <Bottom_Of_Hole/>
               <Temperature/>
-              <Condition/>
+              <Conductivity/>
               <container1>
                 <child1>
                   <Latitude/>
@@ -153,7 +154,7 @@
           </pH>
         </faims>
       </instance>
-      <bind nodeset="/faims/Water_Sample/Basic_Info/Number" type="decimal"/>
+      
       <bind nodeset="/faims/Water_Sample/Basic_Info/mASL" type="decimal"/>
       <bind nodeset="/faims/Water_Sample/Basic_Info/Water_Table" type="decimal"/>
       <bind nodeset="/faims/Water_Sample/Basic_Info/Bottom_Of_Hole" type="decimal"/>
@@ -166,7 +167,7 @@
       <bind nodeset="/faims/Water_Sample/Additional_Info/container2/child1/Latitude" type="decimal"/>
       <bind nodeset="/faims/Water_Sample/Additional_Info/container2/child2/Longitude" type="decimal"/>
       <bind nodeset="/faims/pH/pH/pH" type="decimal"/>
-      <bind nodeset="/faims/pH/pH/Eh" type="decimal"/>
+      
     </model>
   </h:head>
   <h:body>
@@ -269,8 +270,12 @@
         <input ref="Date" faims_attribute_name="Date" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false" faims_read_only="true">
           <label>{Date}</label>
         </input>
-        <input ref="Number" faims_attribute_name="Number" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+
+        <input ref="Number" faims_attribute_name="Sample Number" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false" faims_read_only="false">
           <label>{Number}</label>
+        </input>
+         <input ref="SiteName" faims_attribute_name="Site Name" faims_attribute_type="freetext" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+          <label>{SiteName}</label>
         </input>
         <input ref="Station" faims_attribute_name="Station" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false" faims_read_only="false">
           <label>{Station}</label>
@@ -287,8 +292,8 @@
         <input ref="Temperature" faims_attribute_name="Temperature" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Temperature}</label>
         </input>
-        <input ref="Condition" faims_attribute_name="Condition" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false" faims_read_only="false">
-          <label>{Condition}</label>
+        <input ref="Conductivity" faims_attribute_name="Conductivity" faims_attribute_type="freetext" faims_certainty="true" faims_annotation="false" faims_read_only="false">
+          <label>{Conductivity}</label>
         </input>
         <group ref="container1" faims_style="orientation">
           <label></label>
