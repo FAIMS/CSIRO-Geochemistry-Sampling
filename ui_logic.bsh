@@ -30,7 +30,7 @@ refreshSampleList(){
 
 searchSamples(){
     populateList("control/Sample/SampleList", fetchAll(""+
-        "SELECT uuid, aennttypename || ': ' || group_concat(coalesce(measure   || ' '  || vocabname || '('  ||  freetext ||'; '|| (certainty * 100.0) || '% certain)',  "+
+        "SELECT uuid, aenttypename || ': ' || group_concat(coalesce(measure   || ' '  || vocabname || '('  ||  freetext ||'; '|| (certainty * 100.0) || '% certain)',  "+
         "                                     measure   || ' (' || freetext  || '; ' || (certainty * 100.0) || '% certain)',  "+
         "                                     vocabname || ' (' || freetext  || '; ' || (certainty * 100.0) || '% certain)',  "+
         "                                     measure   || ' '  || vocabname || ' (' || (certainty * 100.0) || '% certain)',  "+
@@ -187,7 +187,7 @@ populateEstimatedAngle() {
 }
 
 /** Archent: pH **/
-onEvent("pH/pH/Update_And_New", "delayclick", "savepH(\"newpH();\");");
+onEvent("pH/pH/Update_And_New", "delayclick", "savepH(\"cancelTabGroup(\\\"pH\\\", false);newpH();\");");
 onEvent("pH/pH/Update_And_Close", "delayclick", "savepH(\"cancelTabGroup(\\\"pH\\\", false);showTab(\\\"Water_Sample/pH_Eh\\\");\");");
 onEvent("pH/pH/Delete", "delayclick", "deletepH();");
 

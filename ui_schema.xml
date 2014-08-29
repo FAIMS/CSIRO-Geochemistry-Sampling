@@ -102,10 +102,6 @@
               <Update_And_New/>
               <Delete/>
             </Codes>
-            <pH_Eh>
-              <New_pH/>
-              <pH_List/>
-            </pH_Eh>
             <Additional_Info>
               <Sample_Collected/>
               <Tree/>
@@ -140,6 +136,10 @@
               <Update_And_New/>
               <Delete/>
             </Additional_Info>
+            <pH_Eh>
+              <New_pH/>
+              <pH_List/>
+            </pH_Eh>
           </Water_Sample>
           <pH>
             <pH>
@@ -161,7 +161,6 @@
       <bind nodeset="/faims/Water_Sample/Basic_Info/container1/child1/Latitude" type="decimal"/>
       <bind nodeset="/faims/Water_Sample/Basic_Info/container1/child2/Longitude" type="decimal"/>
       <bind nodeset="/faims/Water_Sample/Codes/container1/child2/Estimated_Angle" type="decimal"/>
-      <bind nodeset="/faims/Water_Sample/Additional_Info/Notes" type="string"/>
       <bind nodeset="/faims/Water_Sample/Additional_Info/container1/child1/Height" type="decimal"/>
       <bind nodeset="/faims/Water_Sample/Additional_Info/container1/child2/Width" type="decimal"/>
       <bind nodeset="/faims/Water_Sample/Additional_Info/container2/child1/Latitude" type="decimal"/>
@@ -417,19 +416,6 @@
           <label>{Delete_Sample}</label>
         </trigger>
       </group>
-      <group ref="pH_Eh" faims_scrollable="false">
-        <label>{pH_Eh}</label>
-        <trigger ref="New_pH">
-          <label>{New_pH}</label>
-        </trigger>
-        <select1 appearance="compact" ref="pH_List" faims_certainty="false" faims_annotation="false">
-          <label>{pH_List}</label>
-          <item>
-            <label>placeholder</label>
-            <value>placeholder</value>
-          </item>
-        </select1>
-      </group>
       <group ref="Additional_Info">
         <label>{Additional_Info}</label>
         <select ref="Sample_Collected" faims_attribute_name="Sample Collected" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
@@ -509,6 +495,19 @@
         <trigger ref="Delete">
           <label>{Delete_Sample}</label>
         </trigger>
+      </group>
+      <group ref="pH_Eh" faims_scrollable="false">
+        <label>{pH_Eh}</label>
+        <trigger ref="New_pH">
+          <label>{New_pH}</label>
+        </trigger>
+        <select1 appearance="compact" ref="pH_List" faims_certainty="false" faims_annotation="false">
+          <label>{pH_List}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
       </group>
     </group>
     <group ref="pH" faims_archent_type="pH/Eh">
