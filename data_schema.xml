@@ -42,25 +42,25 @@
     <property name="Area" type="freetext">
       <description>Description TBD</description>
     </property>
-    <property name="Photos" type="file">
+    <property name="Photos" type="file" file="true" thumbnail="true">
       <description>Description TBD</description>
     </property>
     <property name="Hole Type" type="enum">
       <description>Description TBD</description>
       <lookup>
-        <term> {0No_Observation}
+        <term> {No_Observation}
           <description>Description TBD</description>
         </term>
-        <term> {aStill_Bore}
+        <term> {Still_Bore}
           <description>Description TBD</description>
         </term>
-        <term> {bStill_Well}
+        <term> {Still_Well}
           <description>Description TBD</description>
         </term>
-        <term> {cFlowing_Bore}
+        <term> {Flowing_Bore}
           <description>Description TBD</description>
         </term>
-        <term> {dFlowing_Well}
+        <term> {Flowing_Well}
           <description>Description TBD</description>
         </term>
       </lookup>
@@ -68,25 +68,25 @@
     <property name="Hole Lining" type="enum">
       <description>Description TBD</description>
       <lookup>
-        <term> {0No_Observation}
+        <term> {No_Observation}
           <description>Description TBD</description>
         </term>
-        <term> {aMetal}
+        <term> {Metal}
           <description>Description TBD</description>
         </term>
-        <term> {bRusty}
+        <term> {Rusty}
           <description>Description TBD</description>
         </term>
-        <term> {cPoly}
+        <term> {Poly}
           <description>Description TBD</description>
         </term>
-        <term> {dCement}
+        <term> {Cement}
           <description>Description TBD</description>
         </term>
-        <term> {eWood}
+        <term> {Wood}
           <description>Description TBD</description>
         </term>
-        <term> {fDirt}
+        <term> {Dirt}
           <description>Description TBD</description>
         </term>
       </lookup>
@@ -94,13 +94,13 @@
     <property name="Hole Open or Closed" type="enum">
       <description>Description TBD</description>
       <lookup>
-        <term> {0No_Observation}
+        <term> {No_Observation}
           <description>Description TBD</description>
         </term>
-        <term> {aOpen}
+        <term> {Open}
           <description>Description TBD</description>
         </term>
-        <term> {bClosed}
+        <term> {Closed}
           <description>Description TBD</description>
         </term>
       </lookup>
@@ -108,19 +108,19 @@
     <property name="Pipes In Hole" type="enum">
       <description>Description TBD</description>
       <lookup>
-        <term> {0No_Observation}
+        <term> {No_Observation}
           <description>Description TBD</description>
         </term>
-        <term> {aMetal_Pipes}
+        <term> {Metal_Pipes}
           <description>Description TBD</description>
         </term>
-        <term> {bPoly_Pipes}
+        <term> {Poly_Pipes}
           <description>Description TBD</description>
         </term>
-        <term> {cFibreglass_Pipes}
+        <term> {Fibreglass_Pipes}
           <description>Description TBD</description>
         </term>
-        <term> {dNo_pipes}
+        <term> {No_pipes}
           <description>Description TBD</description>
         </term>
       </lookup>
@@ -128,13 +128,13 @@
     <property name="Hole Angle" type="enum">
       <description>Description TBD</description>
       <lookup>
-        <term> {0No_Observation}
+        <term> {No_Observation}
           <description>Description TBD</description>
         </term>
-        <term> {aVertical}
+        <term> {Vertical}
           <description>Description TBD</description>
         </term>
-        <term> {bAngled}
+        <term> {Angled}
           <description>Description TBD</description>
         </term>
       </lookup>
@@ -145,13 +145,13 @@
     <property name="Outflow From Tank" type="enum">
       <description>Description TBD</description>
       <lookup>
-        <term> {0No_Observation}
+        <term> {No_Observation}
           <description>Description TBD</description>
         </term>
-        <term> {aOutflow_under}
+        <term> {Outflow_under}
           <description>Description TBD</description>
         </term>
-        <term> {bOutflow_over}
+        <term> {Outflow_over}
           <description>Description TBD</description>
         </term>
       </lookup>
@@ -159,13 +159,13 @@
     <property name="Sampling Issues" type="enum">
       <description>Description TBD</description>
       <lookup>
-        <term> {0No_Observation}
+        <term> {No_Observation}
           <description>Description TBD</description>
         </term>
-        <term> {aSample_from_outflow}
+        <term> {Sample_from_outflow}
           <description>Description TBD</description>
         </term>
-        <term> {bBailed_From_Flowing_Windmill}
+        <term> {Bailed_From_Flowing_Windmill}
           <description>Description TBD</description>
         </term>
       </lookup>
@@ -173,16 +173,16 @@
     <property name="Sample Collected" type="enum">
       <description>Description TBD</description>
       <lookup>
-        <term> {aCations}
+        <term> {Cations}
           <description>Description TBD</description>
         </term>
-        <term> {bAnions}
+        <term> {Anions}
           <description>Description TBD</description>
         </term>
-        <term> {cAlkalinity}
+        <term> {Alkalinity}
           <description>Description TBD</description>
         </term>
-        <term> {dCarbon}
+        <term> {Carbon}
           <description>Description TBD</description>
         </term>
       </lookup>
