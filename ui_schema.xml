@@ -41,14 +41,6 @@
               </container1>
               <SampleList/>
             </Sample>
-            <Control>
-              <startsync/>
-              <stopsync/>
-              <connectInternalGPS/>
-              <connectExternalGPS/>
-              <stopGPS/>
-              <GPSStatus/>
-            </Control>
           </control>
           <Water_Sample>
             <Basic_Info>
@@ -81,8 +73,6 @@
               <Take_GPS/>
               <Photos/>
               <Take_Photo/>
-              <Update_And_New/>
-              <Delete/>
             </Basic_Info>
             <Codes>
               <Hole_Type/>
@@ -99,8 +89,6 @@
               </container1>
               <Outflow_From_Tank/>
               <Sampling_Issues/>
-              <Update_And_New/>
-              <Delete/>
             </Codes>
             <Additional_Info>
               <Sample_Collected/>
@@ -132,8 +120,6 @@
               </container3>
               <Take_GPS/>
               <Notes/>
-              <Update_And_New/>
-              <Delete/>
             </Additional_Info>
             <pH_Eh>
               <New_pH/>
@@ -145,9 +131,7 @@
               <Time/>
               <pH/>
               <Eh/>
-              <Update_And_New/>
-              <Update_And_Close/>
-              <Delete/>
+              <Back/>
             </pH>
           </pH>
         </faims>
@@ -237,27 +221,6 @@
           </item>
         </select1>
       </group>
-      <group ref="Control">
-        <label>{Control}</label>
-        <trigger ref="connectExternalGPS">
-          <label>{connectExtGPS}</label>
-        </trigger>
-        <trigger ref="connectInternalGPS">
-          <label>{connectIntGPS}</label>
-        </trigger>
-        <trigger ref="stopGPS">
-          <label>{Stop_GPS}</label>
-        </trigger>
-        <trigger ref="startsync">
-          <label>{Start_Syncing}</label>
-        </trigger>
-        <trigger ref="stopsync">
-          <label>{Stop_Syncing}</label>
-        </trigger>
-        <input ref="GPSStatus" faims_certainty="false" faims_annotation="false" faims_read_only="true" faims_style_class="gps-status">
-          <label>{GPS_Status}</label>
-        </input>
-      </group>
     </group>
     <group ref="Water_Sample" faims_archent_type="Water Sample">
       <label>{Water_Sample}</label>
@@ -337,12 +300,6 @@
         <trigger ref="Take_Photo" faims_style_class="faims-blue">
           <label>{Take_Photo}</label>
         </trigger>
-        <trigger ref="Update_And_New" faims_style_class="faims-success">
-          <label>{Save_And_New_Sample}</label>
-        </trigger>
-        <trigger ref="Delete" faims_style_class="faims-danger">
-          <label>{Delete_Sample}</label>
-        </trigger>
       </group>
       <group ref="Codes">
         <label>{Codes}</label>
@@ -407,12 +364,6 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <trigger ref="Update_And_New" faims_style_class="faims-success">
-          <label>{Save_And_New_Sample}</label>
-        </trigger>
-        <trigger ref="Delete" faims_style_class="faims-danger">
-          <label>{Delete_Sample}</label>
-        </trigger>
       </group>
       <group ref="Additional_Info">
         <label>{Additional_Info}</label>
@@ -484,12 +435,6 @@
         <input ref="Notes" faims_attribute_name="Notes" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Notes}</label>
         </input>
-        <trigger ref="Update_And_New" faims_style_class="faims-success">
-          <label>{Save_And_New_Sample}</label>
-        </trigger>
-        <trigger ref="Delete" faims_style_class="faims-danger">
-          <label>{Delete_Sample}</label>
-        </trigger>
       </group>
       <group ref="pH_Eh">
         <label>{pH_Eh}</label>
@@ -518,14 +463,8 @@
         <input ref="Eh" faims_attribute_name="Eh" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true" faims_read_only="false" faims_style_class="required">
           <label>{Eh}</label>
         </input>
-        <trigger ref="Update_And_New" faims_style_class="faims-success">
-          <label>{Save_And_New_pH}</label>
-        </trigger>
-        <trigger ref="Update_And_Close" faims_style_class="faims-success">
-          <label>{Save_And_Close_pH}</label>
-        </trigger>
-        <trigger ref="Delete" faims_style_class="faims-danger">
-          <label>{Delete_pH}</label>
+        <trigger ref="Back" faims_style_class="faims-blue">
+          <label>{Back}</label>
         </trigger>
       </group>
     </group>

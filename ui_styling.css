@@ -6,60 +6,54 @@
     height: 80%;
 }
 
+.menu-list {
+    height: 75%;
+}
+
 .user_list{
-    height: 85%;
+    height: 80%;
 }
 .user_list-label{
-    margin-left:5%;
-}
+    }
 
 .button_and_list{
     height: 70%;
 }
 .button_and_list-label{
-    margin-left:5%;    
-    margin-top:7%;
+        margin-top:7%;
 }
 
 .list{    
-    margin-left:5%;
-    width:80%;
-    
+            
 }
 
 .list-label{
-    margin-left:5%;
-    margin-top:7%;
+        margin-top:7%;
 }
 
 .required-label {
-    margin-left: 5%;
-    color: red;
+        color: red;
 }
 
 .required{
-    width:87%;
-    margin-left: 7%;
+        }
+
+.required-picture-gallery-label{
+    color: red;
 }
 
-
 .input-field{
-    margin-left:5%;
-    
+        
 }
 .input-field-label{
     margin-top:7%;
-    margin-left:5%;
-}
+    }
 
 .read-only {
-    margin-left: 8%;
-    width:85%;
-    background-color: #EEEEEE;
+            background-color: #EEEEEE;
 }
 .read-only-label{
-    margin-left:5%;
-}
+    }
 
 .half-line {
     height: 60px;
@@ -82,47 +76,20 @@
     background-color: #33b5e5;
     border-color: #26a0cd;
     color: white;
-    margin-left:7%;
-    margin-top:5%;
-    margin-bottom:5%;
-    width:77%;
-    border-width:1%;
-    border-radius:10%;
+        margin-top:5%;
+    margin-bottom:20%;
+        border-    border-radius:10%;
     
-}
-
-.faims-blue-half {
-    background-color: #33b5e5;
-    border-color: #26a0cd;
-    color: white;
-    margin-left:7%;
-    margin-top:6%;
-    width:90%;
-    border-width:1%;
-    border-radius:4%;
-    font-size: 12px;
 }
 
 .faims-danger {
     background-color: #d9534f;
     border-color: #be3e3a;
     color: white;
-    margin-left:7%;
-    margin-top:5%;
-    margin-bottom:5%;
-    width:77%;
-    border-width:1%;
-    border-radius:10%;
 }
 
 .faims-success {
     background-color: #45b845;
     border-color: #38a538;
     color: white;
-    margin-left:7%;
-    margin-top:5%;
-    margin-bottom:5%;
-    width:77%;
-    border-width:1%;
-    border-radius:10%;
 }
