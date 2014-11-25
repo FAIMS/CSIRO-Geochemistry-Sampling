@@ -5,11 +5,11 @@
   
   <!-- ****** -->
   <h:head>
-    <h:title>AHMS Excavation</h:title>
+    <h:title>CSIRO module</h:title>
     <!--model lists user interface tabgroups, tabs and content of tabs-->
     <model>
       <instance>
-        <faims id="AHMS Excavation">
+        <faims id="CSIRO module">
           <style>
             <orientation>
               <orientation/>
@@ -41,6 +41,17 @@
               </container1>
               <SampleList/>
             </Sample>
+             <map>
+              <map/>
+              <container1>
+                <child1>
+                  <centre/>
+                </child1>
+                <child2>
+                  <saveSettings/>
+                </child2>
+              </container1>
+            </map>
           </control>
           <Water_Sample>
             <Basic_Info>
@@ -221,6 +232,27 @@
           </item>
         </select1>
       </group>
+            <group faims_scrollable="false" ref="map">
+        <label>{Map}</label>
+        <input ref="map" faims_map="true" faims_certainty="false" faims_annotation="false">
+          <label/>
+        </input>
+        <group faims_style="orientation" ref="container1">
+          <label/>
+          <group faims_style="even" ref="child1">
+            <label/>
+            <trigger ref="centre" faims_style_class="faims-blue">
+              <label>{CentreMe}</label>
+            </trigger>
+          </group>
+          <group faims_style="even" ref="child2">
+            <label/>
+            <trigger ref="saveSettings" faims_style_class="faims-blue-half">
+              <label>{saveSettings}</label>
+            </trigger>
+          </group>
+        </group>
+      </group>      
     </group>
     <group ref="Water_Sample" faims_archent_type="Water Sample">
       <label>{Water_Sample}</label>
