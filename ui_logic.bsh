@@ -510,7 +510,7 @@ ispHSaved() {
     return true;
 }
 
-saveAndClosepH() {
+closepH() {
     if(isNull(ph_id)) {
         if (isNull(getFieldValue("pH/pH/pH")) || isNull(getFieldValue("pH/pH/Eh"))) {
             cancelTabGroup("pH", true);
@@ -623,7 +623,7 @@ addpHNavigation() {
             "Close {pH}";
         }
         actionOn() {
-            saveAndClosepH();
+            closepH();
         }
     }, "success");
 
