@@ -1,0 +1,976 @@
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>CSIRO Samples</h:title>
+    <model>
+      <instance>
+        <faims id="CSIRO Samples">
+          <style>
+            <orientation>
+              <orientation/>
+            </orientation>
+            <even>
+              <layout_weight/>
+            </even>
+            <large>
+              <layout_weight/>
+            </large>
+          </style>
+          <user>
+            <usertab>
+              <users/>
+            </usertab>
+          </user>
+          <Project>
+            <Start>
+              <Author_Name/>
+              <Station_Deposit/>
+              <Project/>
+              <Area/>
+              <Sample_Dropdown/>
+              <New_Sample/>
+              <GPS_Status/>
+            </Start>
+            <Search>
+              <Sample_Dropdown/>
+              <Sample_List/>
+            </Search>
+            <Map>
+              <Map/>
+              <container1>
+                <child1>
+                  <Centre_On_Me/>
+                </child1>
+                <child2>
+                  <Save_Settings/>
+                </child2>
+              </container1>
+            </Map>
+          </Project>
+          <Water_Sample>
+            <Basic_Info>
+              <Water_Sample_ID/>
+              <container1>
+                <child1>
+                  <Timestamp/>
+                </child1>
+                <child2>
+                  <Author_Name/>
+                </child2>
+              </container1>
+              <Station_Deposit/>
+              <Project/>
+              <Area/>
+              <Site_Name/>
+              <container2>
+                <child1>
+                  <Latitude/>
+                </child1>
+                <child2>
+                  <Longitude/>
+                </child2>
+              </container2>
+              <container3>
+                <child1>
+                  <Northing/>
+                </child1>
+                <child2>
+                  <Easting/>
+                </child2>
+              </container3>
+              <Elevation/>
+              <Take_GPS/>
+              <Water_Table/>
+              <Sample_Depth/>
+              <Bottom_Of_Hole/>
+              <Notes/>
+              <Samples_Collected/>
+              <Photos/>
+              <Take_Photo/>
+              <Shapes/>
+              <Attach_Shape/>
+            </Basic_Info>
+            <Codes>
+              <Hole_Type/>
+              <Hole_Lining/>
+              <Hole_Open_Closed/>
+              <Pipes_In_Hole/>
+              <container1>
+                <child1>
+                  <Hole_Angle/>
+                </child1>
+                <child2>
+                  <Estimated_Angle/>
+                </child2>
+              </container1>
+              <Outflow_From_Tank/>
+              <Sampling_Issues/>
+            </Codes>
+            <pH_Eh>
+              <Temperature/>
+              <Conductivity/>
+              <New_pH/>
+              <pH_List/>
+            </pH_Eh>
+          </Water_Sample>
+          <Plant_Sample>
+            <Basic_Info>
+              <Plant_Record_ID/>
+              <container1>
+                <child1>
+                  <Timestamp/>
+                </child1>
+                <child2>
+                  <Author_Name/>
+                </child2>
+              </container1>
+              <Station_Deposit/>
+              <Project/>
+              <Area/>
+              <Plant_Species/>
+              <container2>
+                <child1>
+                  <Latitude/>
+                </child1>
+                <child2>
+                  <Longitude/>
+                </child2>
+              </container2>
+              <container3>
+                <child1>
+                  <Northing/>
+                </child1>
+                <child2>
+                  <Easting/>
+                </child2>
+              </container3>
+              <Elevation/>
+              <Take_GPS/>
+              <Plant_Height/>
+              <Plant_Width/>
+              <Soil_Description/>
+              <Landform_Description/>
+              <Notes/>
+              <Photos/>
+              <Take_Photo/>
+            </Basic_Info>
+          </Plant_Sample>
+          <Soil_Sample>
+            <Basic_Info>
+              <Soil_Sample_ID/>
+              <container1>
+                <child1>
+                  <Timestamp/>
+                </child1>
+                <child2>
+                  <Author_Name/>
+                </child2>
+              </container1>
+              <Station_Deposit/>
+              <Project/>
+              <Area/>
+              <container2>
+                <child1>
+                  <Latitude/>
+                </child1>
+                <child2>
+                  <Longitude/>
+                </child2>
+              </container2>
+              <container3>
+                <child1>
+                  <Northing/>
+                </child1>
+                <child2>
+                  <Easting/>
+                </child2>
+              </container3>
+              <Elevation/>
+              <Take_GPS/>
+              <Depth/>
+              <Colour/>
+              <Lag/>
+              <Soil_Texture/>
+              <Geology/>
+              <Drainage/>
+              <Contamination/>
+              <Regolith_Type/>
+              <Landform/>
+              <Vegetation/>
+              <Comments/>
+              <Photos/>
+              <Take_Photo/>
+              <Shapes/>
+              <Attach_Shape/>
+            </Basic_Info>
+          </Soil_Sample>
+          <Rock_Sample>
+            <Basic_Info>
+              <Rock_Sample_ID/>
+              <container1>
+                <child1>
+                  <Timestamp/>
+                </child1>
+                <child2>
+                  <Author_Name/>
+                </child2>
+              </container1>
+              <Station_Deposit/>
+              <Project/>
+              <Area/>
+              <Site_Name/>
+              <container2>
+                <child1>
+                  <Latitude/>
+                </child1>
+                <child2>
+                  <Longitude/>
+                </child2>
+              </container2>
+              <container3>
+                <child1>
+                  <Northing/>
+                </child1>
+                <child2>
+                  <Easting/>
+                </child2>
+              </container3>
+              <Elevation/>
+              <Take_GPS/>
+            </Basic_Info>
+            <Measurements>
+              <Strike_Of_Bedding/>
+              <Dip_Of_Bedding/>
+              <Veins/>
+              <Fractures/>
+              <Plunge_Of_Fold_Axes/>
+              <Other_Structural_Measurements/>
+            </Measurements>
+            <Lithological_Info>
+              <Lithology/>
+              <Fineness_Inclusion_Size/>
+              <Sorting/>
+              <Other_Lithological_Descriptors/>
+              <Stratigraphic_Unit/>
+              <Large_Scale_Structure/>
+              <Alteration/>
+              <Notes/>
+              <Photos/>
+              <Take_Photo/>
+              <Shapes/>
+              <Attach_Shape/>
+            </Lithological_Info>
+          </Rock_Sample>
+        </faims>
+      </instance>
+      <!-- Insert nodeset bindings here -->
+    </model>
+  </h:head>
+  <h:body>
+    <group ref="style">
+      <label/>
+      <group ref="orientation">
+        <label/>
+        <input ref="orientation">
+          <label>horizontal</label>
+        </input>
+      </group>
+      <group ref="even">
+        <label/>
+        <input ref="layout_weight">
+          <label>1</label>
+        </input>
+      </group>
+    </group>
+    <group ref="user">
+      <label>{User_List}</label>
+      <group ref="usertab" faims_scrollable="false">
+        <label>{User_List}</label>
+        <select1 appearance="compact" ref="users" faims_certainty="false" faims_annotation="false" faims_style_class="user_list">
+          <label>{Users}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+      </group>
+    </group>
+    <group ref="Project">
+      <label>{Project}</label>
+      <group ref="Start">
+        <label>{Start}</label>
+        <input ref="Author_Name" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+          <label>{Author_Name}</label>
+        </input>
+        <input ref="Station_Deposit" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+          <label>{Station_Deposit}</label>
+        </input>
+        <input ref="Project" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+          <label>{Project}</label>
+        </input>
+        <input ref="Area" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+          <label>{Area}</label>
+        </input>
+        <select1 ref="Sample_Dropdown" faims_certainty="false" faims_annotation="false">
+          <label>{Sample_Types}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <trigger ref="New_Sample">
+          <label>{New_Sample}</label>
+        </trigger>
+        <input ref="GPS_Status" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+          <label>{GPS_Status}</label>
+        </input>
+      </group>
+      <group ref="Search">
+        <label>{Search}</label>
+        <select1 ref="Sample_Dropdown" faims_certainty="false" faims_annotation="false">
+          <label>{Sample_Types}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 appearance="compact" ref="Sample_List" faims_certainty="false" faims_annotation="false">
+          <label>{Sample_List}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+      </group>
+      <group ref="Map" faims_scrollable="false">
+        <label>{Map}</label>
+         <input ref="map" faims_map="true" faims_certainty="false">
+          <label/>
+        </input>
+        <group faims_style="orientation" ref="container1">
+          <label/>
+          <group faims_style="even" ref="child1">
+            <label/>
+            <trigger ref="centre">
+              <label>{Centre_On_Me}</label>
+            </trigger>
+          </group>
+          <group faims_style="even" ref="child2">
+            <label/>
+            <trigger ref="saveSettings">
+              <label>{Save_Settings}</label>
+            </trigger>
+          </group>
+        </group>
+      </group>
+    </group>
+    <group ref="Water_Sample" faims_archent_type="Water Sample">
+      <label>{Water_Sample}</label>
+      <group ref="Basic_Info">
+        <label>{Basic_Info}</label>
+        <input ref="Water_Sample_ID" faims_attribute_name="Water Sample ID" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+          <label>{Water_Sample_ID}</label>
+        </input>
+        <group ref="container1" faims_style="orientation">
+          <label></label>
+          <group ref="child1" faims_style="even">
+            <label></label>
+            <input ref="Timestamp" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+              <label>{Timestamp}</label>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label></label>
+            <group ref="Author_Name" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+              <label>{Author_Name}</label>
+            </group>
+          </group>
+        </group>
+        <input ref="Station_Deposit" faims_attribute_name="Station" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+          <label>{Station_Deposit}</label>
+        </input>
+        <input ref="Project" faims_attribute_name="Project" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+          <label>{Project}</label>
+        </input>
+        <input ref="Area" faims_attribute_name="Area" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+          <label>{Area}</label>
+        </input>
+        <input ref="Site_Name" faims_attribute_name="Site Name" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Site_Name}</label>
+        </input>
+        <group ref="container2" faims_style="orientation">
+          <label></label>
+          <group ref="child1" faims_style="even">
+            <label></label>
+            <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label>{Latitude}</label>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label></label>
+            <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label>{Longitude}</label>
+            </input>
+          </group>
+        </group>
+        <group ref="container3" faims_style="orientation">
+          <label></label>
+          <group ref="child1" faims_style="even">
+            <label></label>
+            <input ref="Northing" faims_attribute_name="Northing" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label>{Northing}</label>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label></label>
+            <input ref="Easting" faims_attribute_name="Easting" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label>{Easting}</label>
+            </input>
+          </group>
+        </group>
+        <input ref="Elevation" faims_attribute_name="Elevation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Elevation}</label>
+        </input>
+        <trigger ref="Take_GPS">
+          <label>{Take_GPS}</label>
+        </trigger>
+        <input ref="Water_Table" faims_attribute_name="Water Table" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Water_Table}</label>
+        </input>
+        <input ref="Sample_Depth" faims_attribute_name="Sample Depth" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Sample_Depth}</label>
+        </input>
+        <input ref="Bottom_Of_Hole" faims_attribute_name="Bottom of Hole">
+          <label>{Bottom_Of_Hole}</label>
+        </input>
+        <input ref="Notes" faims_attribute_name="Notes" faims_attribute_type="measure" faims_certainty="true" faims_annotation="false" faims_read_only="false">
+          <label>{Notes}</label>
+        </input>
+        <select ref="Samples_Collected" faims_attribute_name="Samples Collected" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Samples_Collected}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select>
+        <select type="camera" faims_sync="true" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Photos}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select>
+        <trigger ref="Take_Photo">
+          <label>{Take_Photo}</label>
+        </trigger>
+        <select type="camera" faims_sync="true" ref="Shapes" faims_attribute_name="Shape" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Shapes}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select>
+        <trigger ref="Attach_Shape">
+          <label>{Attach_Shape}</label>
+        </trigger>
+      </group>
+      <group ref="Codes">
+        <label>{Codes}</label>
+        <select1 ref="Hole_Type" faims_attribute_name="Hole Type" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Hole_Type}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 ref="Hole_Lining" faims_attribute_name="Hole Lining" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Hole_Lining}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 appearance="full" ref="Hole_Open_Closed" faims_attribute_name="Hole Open or Closed" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Hole_Open_Closed}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 ref="Pipes_In_Hole" faims_attribute_name="Pipes In Hole" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Pipes_In_Hole}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <group ref="container1" faims_style="orientation">
+          <label></label>
+          <group ref="child1" faims_style="even">
+            <label></label>
+            <select1 ref="Hole_Angle" faims_attribute_name="Hole Angle" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label>{Hole_Angle}</label>
+              <item>
+                <label>placeholder</label>
+                <value>placeholder</value>
+              </item>
+            </select1>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label></label>
+            <input ref="Estimated_Angle" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label>{Estimated_Angle}</label>
+            </input>
+          </group>
+        </group>
+        <select1 ref="Outflow_From_Tank" faims_attribute_name="Outflow From Tank" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Outflow_From_Tank}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 ref="Sampling_Issues" faims_attribute_name="Sample Issues" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Sampling_Issues}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+      </group>
+      <group ref="pH_Eh">
+        <label>{pH_Eh}</label>
+        <input ref="Temperature" faims_attribute_name="Temperature" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Temperature}</label>
+        </input>
+        <input ref="Conductivity" faims_attribute_name="Conductivity" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Conductivity}</label>
+        </input>
+        <trigger ref="New_pH">
+          <label>{New_pH}</label>
+        </trigger>
+        <select1 appearance="compact" ref="pH_List">
+          <label>{pH_List}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+      </group>
+    </group>
+    <group ref="Plant_Sample" faims_archent_type="Plant Sample">
+      <label>{Plant_Sample}</label>
+      <group ref="Basic_Info">
+        <label>{Basic_Info}</label>
+        <input ref="Plant_Record_ID" faims_attribute_name="Plant Record ID" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+          <label>{Plant_Record_ID}</label>
+        </input>
+        <group ref="container1" faims_style="orientation">
+          <label></label>
+          <group ref="child1" faims_style="even">
+            <label></label>
+            <input ref="Timestamp" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+              <label>{Timestamp}</label>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label></label>
+            <group ref="Author_Name" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+              <label>{Author_Name}</label>
+            </group>
+          </group>
+        </group>
+        <input ref="Station_Deposit" faims_attribute_name="Station" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+          <label>{Station_Deposit}</label>
+        </input>
+        <input ref="Project" faims_attribute_name="Project" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+          <label>{Project}</label>
+        </input>
+        <input ref="Area" faims_attribute_name="Area" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+          <label>{Area}</label>
+        </input>
+        <input ref="Plant_Species" faims_attribute_name="Plant Species" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Plant_Species}</label>
+        </input>
+        <group ref="container2" faims_style="orientation">
+          <label></label>
+          <group ref="child1" faims_style="even">
+            <label></label>
+            <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label>{Latitude}</label>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label></label>
+            <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label>{Longitude}</label>
+            </input>
+          </group>
+        </group>
+        <group ref="container3" faims_style="orientation">
+          <label></label>
+          <group ref="child1" faims_style="even">
+            <label></label>
+            <input ref="Northing" faims_attribute_name="Northing" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label>{Northing}</label>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label></label>
+            <input ref="Easting" faims_attribute_name="Easting" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label>{Easting}</label>
+            </input>
+          </group>
+        </group>
+        <input ref="Elevation" faims_attribute_name="Elevation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Elevation}</label>
+        </input>
+        <trigger ref="Take_GPS">
+          <label>{Take_GPS}</label>
+        </trigger>
+        <input ref="Plant_Height" faims_attribute_name="Plant Height" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Plant_Height}</label>
+        </input>
+        <input ref="Plant_Width" faims_attribute_name="Plant Width" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Plant_Width}</label>
+        </input>
+        <select ref="Soil_Description" faims_attribute_name="Soil Description" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Soil_Description}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select>
+        <select1 ref="Landform_Description" faims_attribute_name="Landform Description" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Landform_Description}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <input ref="Notes" faims_attribute_name="Notes" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Notes}</label>
+        </input>
+        <select type="camera" faims_sync="true" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Photos}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select>
+        <trigger ref="Take_Photo">
+          <label>{Take_Photo}</label>
+        </trigger>
+      </group>
+    </group>
+    <group ref="Soil_Sample" faims_archent_type="Soil Sample">
+      <label>{Soil_Sample}</label>
+      <group ref="Basic_Info">
+        <label>{Basic_Info}</label>
+        <input ref="Soil_Sample_ID" faims_attribute_name="Plant Record ID" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+          <label>{Plant_Record_ID}</label>
+        </input>
+        <group ref="container1" faims_style="orientation">
+          <label></label>
+          <group ref="child1" faims_style="even">
+            <label></label>
+            <input ref="Timestamp" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+              <label>{Timestamp}</label>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label></label>
+            <group ref="Author_Name" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+              <label>{Author_Name}</label>
+            </group>
+          </group>
+        </group>
+        <input ref="Station_Deposit" faims_attribute_name="Station" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+          <label>{Station_Deposit}</label>
+        </input>
+        <input ref="Project" faims_attribute_name="Project" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+          <label>{Project}</label>
+        </input>
+        <input ref="Area" faims_attribute_name="Area" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+          <label>{Area}</label>
+        </input>
+        <group ref="container2" faims_style="orientation">
+          <label></label>
+          <group ref="child1" faims_style="even">
+            <label></label>
+            <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label>{Latitude}</label>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label></label>
+            <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label>{Longitude}</label>
+            </input>
+          </group>
+        </group>
+        <group ref="container3" faims_style="orientation">
+          <label></label>
+          <group ref="child1" faims_style="even">
+            <label></label>
+            <input ref="Northing" faims_attribute_name="Northing" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label>{Northing}</label>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label></label>
+            <input ref="Easting" faims_attribute_name="Easting" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label>{Easting}</label>
+            </input>
+          </group>
+        </group>
+        <input ref="Elevation" faims_attribute_name="Elevation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Elevation}</label>
+        </input>
+        <trigger ref="Take_GPS">
+          <label>{Take_GPS}</label>
+        </trigger>
+        <input ref="Depth" faims_attribute_name="Depth" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Depth}</label>
+        </input>
+        <input ref="Colour" faims_attribute_name="Colour" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Colour}</label>
+        </input>
+        <select1 appearance="full" ref="Lag" faims_attribute_name="Lag" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Lag}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select ref="Soil_Texture" faims_attribute_name="Soil_Texture" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Soil_Texture}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select>
+        <select1 ref="Geology" faims_attribute_name="Geology" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Geology}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 appearance="full" ref="Drainage" faims_attribute_name="Drainage" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Drainage}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 appearance="full" ref="Contamination" faims_attribute_name="Contamination" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Contamination}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 ref="Regolith_Type" faims_attribute_name="Regolith_Type" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Regolith_Type}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 ref="Landform" faims_attribute_name="Landform" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Landform}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <input ref="Vegetation" faims_attribute_name="Vegetation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Vegetation}</label>
+        </input>
+        <input ref="Comments" faims_attribute_name="Comments" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Comments}</label>
+        </input>
+        <select type="camera" faims_sync="true" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Photos}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select>
+        <trigger ref="Take_Photo">
+          <label>{Take_Photo}</label>
+        </trigger>
+        <select type="camera" faims_sync="true" ref="Shapes" faims_attribute_name="Shape" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Shapes}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select>
+        <trigger ref="Attach_Shape">
+          <label>{Attach_Shape}</label>
+        </trigger>
+      </group>
+    </group>
+    <group ref="Rock_Sample" faims_archent_type="Rock Sample">
+      <label>{Rock_Sample}</label>
+      <group ref="Basic_Info">
+        <label>{Basic_Info}</label>
+        <input ref="Rock_Sample_ID" faims_attribute_name="Water Sample ID" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+          <label>{Rock_Sample_ID}</label>
+        </input>
+        <group ref="container1" faims_style="orientation">
+          <label></label>
+          <group ref="child1" faims_style="even">
+            <label></label>
+            <input ref="Timestamp" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+              <label>{Timestamp}</label>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label></label>
+            <group ref="Author_Name" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+              <label>{Author_Name}</label>
+            </group>
+          </group>
+        </group>
+        <input ref="Station_Deposit" faims_attribute_name="Station" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+          <label>{Station_Deposit}</label>
+        </input>
+        <input ref="Project" faims_attribute_name="Project" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+          <label>{Project}</label>
+        </input>
+        <input ref="Area" faims_attribute_name="Area" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+          <label>{Area}</label>
+        </input>
+        <input ref="Site_Name" faims_attribute_name="Site Name" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Site_Name}</label>
+        </input>
+        <group ref="container2" faims_style="orientation">
+          <label></label>
+          <group ref="child1" faims_style="even">
+            <label></label>
+            <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label>{Latitude}</label>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label></label>
+            <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label>{Longitude}</label>
+            </input>
+          </group>
+        </group>
+        <group ref="container3" faims_style="orientation">
+          <label></label>
+          <group ref="child1" faims_style="even">
+            <label></label>
+            <input ref="Northing" faims_attribute_name="Northing" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label>{Northing}</label>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label></label>
+            <input ref="Easting" faims_attribute_name="Easting" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label>{Easting}</label>
+            </input>
+          </group>
+        </group>
+        <input ref="Elevation" faims_attribute_name="Elevation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Elevation}</label>
+        </input>
+        <trigger ref="Take_GPS">
+          <label>{Take_GPS}</label>
+        </trigger>
+      </group>
+      <group ref="Measurements" faims_attribute_name="Measurements" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+        <label>{Measurements}</label>
+        <input ref="Strike_Of_Bedding" faims_attribute_name="Strike of Bedding" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Strike_Of_Bedding}</label>
+        </input>
+        <input ref="Dip_Of_Bedding" faims_attribute_name="Dip of Bedding" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Dip_Of_Bedding}</label>
+        </input>
+        <select1 appearance="full" ref="Veins" faims_attribute_name="Veins" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Veins}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 appearance="full" ref="Fractures" faims_attribute_name="Fractures" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Fractures}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <input ref="Plunge_Of_Fold_Axes" faims_attribute_name="Plunge of Fold Axes" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Plunge_Of_Fold_Axes}</label>
+        </input>
+        <input ref="Other_Structural_Measurements" faims_attribute_name="Other Structural Measurements" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Other_Structural_Measurements}</label>
+        </input>
+      </group>
+      <group ref="Lithological_Info">
+        <label>{Lithological_Info}</label>
+        <select1 ref="Lithology" faims_attribute_name="Lithology" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Lithology}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 ref="Fineness_Inclusion_Size" faims_attribute_name="Fineness or Inclusion size" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Fineness_Inclusion_Size}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 ref="Sorting" faims_attribute_name="Sorting" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Sorting}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <input ref="Other_Lithological_Descriptors" faims_attribute_name="Other lithological descriptors" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Other_Lithological_Descriptors}</label>
+        </input>
+        <input ref="Stratigraphic_Unit" faims_attribute_name="Stratigraphic unit" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Stratigraphic_Unit}</label>
+        </input>
+        <input ref="Large_Scale_Structure" faims_attribute_name="Large-scale Structure" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Large_Scale_Structure}</label>
+        </input>
+        <input ref="Alteration" faims_attribute_name="Alteration" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Alteration}</label>
+        </input>
+        <input ref="Notes" faims_attribute_name="Notes" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Notes}</label>
+        </input>
+        <select type="camera" faims_sync="true" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Photos}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select>
+        <trigger ref="Take_Photo">
+          <label>{Take_Photo}</label>
+        </trigger>
+        <select type="camera" faims_sync="true" ref="Shapes" faims_attribute_name="Shape" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Shapes}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select>
+        <trigger ref="Attach_Shape">
+          <label>{Attach_Shape}</label>
+        </trigger>
+      </group>
+    </group>
+  </h:body>
+</h:html>
