@@ -26,12 +26,12 @@
               <Station_Deposit/>
               <Project/>
               <Area/>
-              <Sample_Dropdown/>
+              <Sample_Types/>
               <New_Sample/>
               <GPS_Status/>
             </Start>
             <Search>
-              <Sample_Dropdown/>
+              <Sample_Types/>
               <Sample_List/>
             </Search>
             <Map>
@@ -77,8 +77,8 @@
                   <Easting/>
                 </child2>
               </container3>
-              <Elevation/>
               <Take_GPS/>
+              <Elevation/>
               <Water_Table/>
               <Sample_Depth/>
               <Bottom_Of_Hole/>
@@ -102,12 +102,35 @@
                   <Estimated_Angle/>
                 </child2>
               </container1>
-              <Outflow_From_Tank/>
+              <Outflow_Present/>
               <Sampling_Issues/>
             </Codes>
             <pH_Eh>
-              <Temperature/>
-              <Conductivity/>
+              <container1>
+                <child1>
+                  <Temperature/>
+                </child1>
+                <child2>
+                  <Conductivity/>
+                </child2>
+              </container1>
+              <container2>
+                <child1>
+                  <Preferred_pH/>
+                </child1>
+                <child2>
+                  <Preferred_Eh/>
+                </child2>
+              </container2>
+              <addNewText/>
+              <container3>
+                <child1>
+                  <pH/>
+                </child1>
+                <child2>
+                  <Eh/>
+                </child2>
+              </container3>
               <New_pH/>
               <pH_List/>
             </pH_Eh>
@@ -143,10 +166,16 @@
                   <Easting/>
                 </child2>
               </container3>
-              <Elevation/>
               <Take_GPS/>
-              <Plant_Height/>
-              <Plant_Width/>
+              <Elevation/>
+              <container4>
+                <child1>
+                  <Plant_Height/>
+                </child1>
+                <child2>
+                  <Plant_Width/>
+                </child2>
+              </container4>
               <Soil_Description/>
               <Landform_Description/>
               <Notes/>
@@ -184,8 +213,8 @@
                   <Easting/>
                 </child2>
               </container3>
-              <Elevation/>
               <Take_GPS/>
+              <Elevation/>
               <Depth/>
               <Colour/>
               <Lag/>
@@ -234,8 +263,8 @@
                   <Easting/>
                 </child2>
               </container3>
-              <Elevation/>
               <Take_GPS/>
+              <Elevation/>
             </Basic_Info>
             <Measurements>
               <Strike_Of_Bedding/>
@@ -310,7 +339,7 @@
         <input ref="Area" faims_certainty="false" faims_annotation="false" faims_read_only="true">
           <label>{Area}</label>
         </input>
-        <select1 ref="Sample_Dropdown" faims_certainty="false" faims_annotation="false">
+        <select1 ref="Sample_Types" faims_certainty="false" faims_annotation="false">
           <label>{Sample_Types}</label>
           <item>
             <label>placeholder</label>
@@ -324,9 +353,27 @@
           <label>{GPS_Status}</label>
         </input>
       </group>
+      <group ref="Defaults">
+        <label>{Defaults}</label>
+        <input ref="Water_Sample" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+          <label>{Water_Sample_Default}</label>
+        </input>
+        <input ref="Plant_Sample" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+          <label>{Plant_Sample_Default}</label>
+        </input>
+        <input ref="Soil_Sample" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+          <label>{Soil_Sample_Default}</label>
+        </input>
+        <input ref="Rock_Sample" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+          <label>{Rock_Sample_Default}</label>
+        </input>
+        <trigger ref="Validate">
+          <label>{Validate}</label>
+        </trigger>
+      </group>
       <group ref="Search">
         <label>{Search}</label>
-        <select1 ref="Sample_Dropdown" faims_certainty="false" faims_annotation="false">
+        <select1 ref="Sample_Types" faims_certainty="false" faims_annotation="false">
           <label>{Sample_Types}</label>
           <item>
             <label>placeholder</label>
@@ -380,9 +427,9 @@
           </group>
           <group ref="child2" faims_style="even">
             <label></label>
-            <group ref="Author_Name" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+            <input ref="Author_Name" faims_certainty="false" faims_annotation="false" faims_read_only="true">
               <label>{Author_Name}</label>
-            </group>
+            </input>
           </group>
         </group>
         <input ref="Station_Deposit" faims_attribute_name="Station" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
@@ -427,12 +474,12 @@
             </input>
           </group>
         </group>
-        <input ref="Elevation" faims_attribute_name="Elevation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-          <label>{Elevation}</label>
-        </input>
         <trigger ref="Take_GPS">
           <label>{Take_GPS}</label>
         </trigger>
+        <input ref="Elevation" faims_attribute_name="Elevation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Elevation}</label>
+        </input>
         <input ref="Water_Table" faims_attribute_name="Water Table" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Water_Table}</label>
         </input>
@@ -522,8 +569,8 @@
             </input>
           </group>
         </group>
-        <select1 ref="Outflow_From_Tank" faims_attribute_name="Outflow From Tank" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-          <label>{Outflow_From_Tank}</label>
+        <select1 appearance="full" ref="Outflow_Present" faims_attribute_name="Outflow Present" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Outflow_Present}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
@@ -539,12 +586,59 @@
       </group>
       <group ref="pH_Eh">
         <label>{pH_Eh}</label>
-        <input ref="Temperature" faims_attribute_name="Temperature" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-          <label>{Temperature}</label>
-        </input>
-        <input ref="Conductivity" faims_attribute_name="Conductivity" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-          <label>{Conductivity}</label>
-        </input>
+        <group ref="container1" faims_style="orientation">
+          <label></label>
+          <group ref="child1" faims_style="even">
+            <label></label>
+            <input ref="Temperature" faims_attribute_name="Temperature" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label>{Temperature}</label>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label></label>
+            <input ref="Conductivity" faims_attribute_name="Conductivity" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label>{Conductivity}</label>
+            </input>
+          </group>
+        </group>
+        <group ref="container2" faims_style="orientation">
+          <label></label>
+          <group ref="child1" faims_style="even">
+            <label></label>
+            <input ref="Preferred_pH" faims_attribute_name="Preferred pH" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="true">
+              <label>{Preferred_pH}</label>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label></label>
+            <input ref="Preferred_Eh" faims_attribute_name="Preferred Eh" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="true">
+              <label>{Preferred_Eh}</label>
+            </input>
+          </group>
+        </group>
+        <select1 appearance="compact" ref="addNewText">
+          <label></label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        </select1>
+        <group ref="container3" faims_style="orientation">
+          <label></label>
+          <group ref="child1" faims_style="even">
+            <label></label>
+            <input ref="pH" faims_attribute_name="pH" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label>{pH}</label>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label></label>
+            <input ref="Eh" faims_attribute_name="Eh" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="true">
+              <label>{Eh}</label>
+            </input>
+          </group>
+        </group>
         <trigger ref="New_pH">
           <label>{New_pH}</label>
         </trigger>
@@ -574,9 +668,9 @@
           </group>
           <group ref="child2" faims_style="even">
             <label></label>
-            <group ref="Author_Name" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+            <input ref="Author_Name" faims_certainty="false" faims_annotation="false" faims_read_only="true">
               <label>{Author_Name}</label>
-            </group>
+            </input>
           </group>
         </group>
         <input ref="Station_Deposit" faims_attribute_name="Station" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
@@ -621,18 +715,27 @@
             </input>
           </group>
         </group>
-        <input ref="Elevation" faims_attribute_name="Elevation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-          <label>{Elevation}</label>
-        </input>
         <trigger ref="Take_GPS">
           <label>{Take_GPS}</label>
         </trigger>
-        <input ref="Plant_Height" faims_attribute_name="Plant Height" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-          <label>{Plant_Height}</label>
+        <input ref="Elevation" faims_attribute_name="Elevation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Elevation}</label>
         </input>
-        <input ref="Plant_Width" faims_attribute_name="Plant Width" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-          <label>{Plant_Width}</label>
+        <group ref="container4" faims_style="orientation">
+          <label></label>
+          <group ref="child1" faims_style="even">
+            <label></label>
+              <input ref="Plant_Height" faims_attribute_name="Plant Height" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+            <label>{Plant_Height}</label>
         </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label></label>
+              <input ref="Plant_Width" faims_attribute_name="Plant Width" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+            <label>{Plant_Width}</label>
+        </input>
+          </group>
+        </group>       
         <select ref="Soil_Description" faims_attribute_name="Soil Description" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Soil_Description}</label>
           <item>
@@ -667,7 +770,7 @@
       <group ref="Basic_Info">
         <label>{Basic_Info}</label>
         <input ref="Soil_Sample_ID" faims_attribute_name="Plant Record ID" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false">
-          <label>{Plant_Record_ID}</label>
+          <label>{Soil_Sample_ID}</label>
         </input>
         <group ref="container1" faims_style="orientation">
           <label></label>
@@ -679,9 +782,9 @@
           </group>
           <group ref="child2" faims_style="even">
             <label></label>
-            <group ref="Author_Name" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+            <input ref="Author_Name" faims_certainty="false" faims_annotation="false" faims_read_only="true">
               <label>{Author_Name}</label>
-            </group>
+            </input>
           </group>
         </group>
         <input ref="Station_Deposit" faims_attribute_name="Station" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
@@ -723,12 +826,12 @@
             </input>
           </group>
         </group>
-        <input ref="Elevation" faims_attribute_name="Elevation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-          <label>{Elevation}</label>
-        </input>
         <trigger ref="Take_GPS">
           <label>{Take_GPS}</label>
         </trigger>
+        <input ref="Elevation" faims_attribute_name="Elevation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Elevation}</label>
+        </input>
         <input ref="Depth" faims_attribute_name="Depth" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Depth}</label>
         </input>
@@ -829,9 +932,9 @@
           </group>
           <group ref="child2" faims_style="even">
             <label></label>
-            <group ref="Author_Name" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+            <input ref="Author_Name" faims_certainty="false" faims_annotation="false" faims_read_only="true">
               <label>{Author_Name}</label>
-            </group>
+            </input>
           </group>
         </group>
         <input ref="Station_Deposit" faims_attribute_name="Station" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
@@ -876,12 +979,12 @@
             </input>
           </group>
         </group>
-        <input ref="Elevation" faims_attribute_name="Elevation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-          <label>{Elevation}</label>
-        </input>
         <trigger ref="Take_GPS">
           <label>{Take_GPS}</label>
         </trigger>
+        <input ref="Elevation" faims_attribute_name="Elevation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Elevation}</label>
+        </input>
       </group>
       <group ref="Measurements" faims_attribute_name="Measurements" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
         <label>{Measurements}</label>

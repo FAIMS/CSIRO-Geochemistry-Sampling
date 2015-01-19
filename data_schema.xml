@@ -4,136 +4,6 @@
     <description>Implements a 1:N relationship between Samples and pH/Eh</description>
   </RelationshipElement>
 
-  <ArchaeologicalElement name="Rock Sample">
-    <description>Description TBD</description>
-    <property name="Core ID" type="freetext" isIdentifier="true">
-      <description>Description TBD</description>
-    </property>
-    <property name="Station" type="freetext">
-      <description>Description TBD</description>
-    </property>
-    <property name="Project" type="freetext">
-      <description>Description TBD</description>
-    </property>
-    <property name="Area" type="freetext">
-      <description>Description TBD</description>
-    </property>
-    <property name="Latitude" type="freetext">
-      <description>Description TBD</description>
-    </property>
-    <property name="Longitude" type="freetext">
-      <description>Description TBD</description>
-    </property>
-    <property name="Northing" type="freetext">
-      <description>Description TBD</description>
-    </property>
-    <property name="Easting" type="freetext">
-      <description>Description TBD</description>
-    </property>
-    <property name="Elevation" type="freetext">
-      <description>Description TBD</description>
-    </property>
-    <property name="Strike of Bedding" type="freetext">
-      <description>Description TBD</description>
-    </property>
-    <property name="Dip of Bedding" type="freetext">
-      <description>Description TBD</description>
-    </property>
-    <property name="Veins" type="enum">
-      <description>If you have selected 'Yes' please provide a description in the Annotation</description>
-      <lookup>
-        <term> {No_Observation}
-          <description>Description TBD</description>
-        </term>
-        <term> {Yes}
-          <description>Description TBD</description>
-        </term>
-        <term> {No}
-          <description>Description TBD</description>
-        </term>
-      </lookup>
-    </property>
-    <property name="Fractures" type="enum">
-      <description>If you have selected 'Yes' please provide a description in the Annotation</description>
-      <lookup>
-        <term> {No_Observation}
-          <description>Description TBD</description>
-        </term>
-        <term> {Yes}
-          <description>Description TBD</description>
-        </term>
-        <term> {No}
-          <description>Description TBD</description>
-        </term>
-      </lookup>
-    </property>
-    <property name="Plunge of Fold Axes" type="freetext">
-      <description>Description TBD</description>
-    </property>
-    <property name="Other Structural Measurements" type="freetext">
-      <description>Description TBD</description>
-    </property>
-    <property name="Lithology" type="enum">
-      <description>Description TBD</description>
-      <lookup>
-        <term> {Basalt}
-          <description>Description TBD</description>
-        </term>
-        <term> {Sandstone}
-          <description>Description TBD</description>
-        </term>
-      </lookup>
-    </property>
-    <property name="Fineness or Inclusion size" type="enum">
-      <description>Description TBD</description>
-      <lookup>
-        <term> {Fine}
-          <description>Description TBD</description>
-        </term>
-        <term> {Medium}
-          <description>Description TBD</description>
-        </term>
-        <term> {Coarse}
-          <description>Description TBD</description>
-        </term>
-      </lookup>
-    </property>
-    <property name="Sorting" type="enum">
-      <description>Description TBD</description>
-      <lookup>
-        <term> {Poor}
-          <description>Description TBD</description>
-        </term>
-        <term> {Moderate}
-          <description>Description TBD</description>
-        </term>
-        <term> {Well_Sorted}
-          <description>Description TBD</description>
-        </term>
-      </lookup>
-    </property>
-    <property name="Other lithological descriptors" type="freetext">
-      <description>Description TBD</description>
-    </property>
-    <property name="Stratigraphic unit" type="freetext">
-      <description>Optional if known from maps</description>
-    </property>
-    <property name="Large-scale Structure" type="freetext">
-      <description>Basic description of what the rocks are like, e.g., massive, thickly bedded, laminated, pillow structures, etc.</description>
-    </property>
-    <property name="Alteration" type="freetext">
-      <description>Any signs of obvious alteration, e.g., pervasive epidote, silicification around veins, etc.</description>
-    </property>
-    <property name="Notes" type="freetext">
-      <description>For anything else....</description>
-    </property>
-    <property name="Photos" type="file" file="true" thumbnail="true">
-      <description>Description TBD</description>
-    </property>
-    <property name="Shape" type="file" file="true" thumbnail="true">
-      <description>Description TBD</description>
-    </property>
-  </ArchaeologicalElement>
   <ArchaeologicalElement name="Water Sample">
     <description></description>
     <property name="Water Sample ID" type="freetext" isIdentifier="true">
@@ -335,7 +205,14 @@
     <property name="Shape" type="file" file="true" thumbnail="true">
       <description>Description TBD</description>
     </property>
+    <property name="Preferred pH" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Preferred Eh" type="freetext">
+      <description>Description TBD</description>
+    </property>
   </ArchaeologicalElement>
+
   <ArchaeologicalElement name="pH">
     <description></description>
     <property name="Time" type="freetext" isIdentifier="true">
@@ -347,7 +224,8 @@
     <property name="Eh" type="freetext" isIdentifier="true">
       <description>Description TBD</description>
     </property>
-  </ArchaeologicalElement>
+  </ArchaeologicalElement>  
+  
   <ArchaeologicalElement name="Plant Sample">
     <description></description>
     <property name="Plant Record ID" isIdentifier="true">
@@ -601,6 +479,7 @@
       <description>Description TBD</description>
     </property>
   </ArchaeologicalElement>
+
   <ArchaeologicalElement name="Soil Sample">
     <description>Description TBD</description>
     <property name="Soil Sample ID" isIdentifier="true">
@@ -1321,6 +1200,137 @@
     </property>
     <property name="Notes" type="freetext">
       <description>Description TBD</description>
+    </property>
+    <property name="Photos" type="file" file="true" thumbnail="true">
+      <description>Description TBD</description>
+    </property>
+    <property name="Shape" type="file" file="true" thumbnail="true">
+      <description>Description TBD</description>
+    </property>
+  </ArchaeologicalElement>
+
+  <ArchaeologicalElement name="Rock Sample">
+    <description>Description TBD</description>
+    <property name="Core ID" type="freetext" isIdentifier="true">
+      <description>Description TBD</description>
+    </property>
+    <property name="Station" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Project" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Area" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Latitude" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Longitude" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Northing" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Easting" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Elevation" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Strike of Bedding" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Dip of Bedding" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Veins" type="enum">
+      <description>If you have selected 'Yes' please provide a description in the Annotation</description>
+      <lookup>
+        <term> {No_Observation}
+          <description>Description TBD</description>
+        </term>
+        <term> {Yes}
+          <description>Description TBD</description>
+        </term>
+        <term> {No}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Fractures" type="enum">
+      <description>If you have selected 'Yes' please provide a description in the Annotation</description>
+      <lookup>
+        <term> {No_Observation}
+          <description>Description TBD</description>
+        </term>
+        <term> {Yes}
+          <description>Description TBD</description>
+        </term>
+        <term> {No}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Plunge of Fold Axes" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Other Structural Measurements" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Lithology" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> {Basalt}
+          <description>Description TBD</description>
+        </term>
+        <term> {Sandstone}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Fineness or Inclusion size" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> {Fine}
+          <description>Description TBD</description>
+        </term>
+        <term> {Medium}
+          <description>Description TBD</description>
+        </term>
+        <term> {Coarse}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Sorting" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> {Poor}
+          <description>Description TBD</description>
+        </term>
+        <term> {Moderate}
+          <description>Description TBD</description>
+        </term>
+        <term> {Well_Sorted}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Other lithological descriptors" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Stratigraphic unit" type="freetext">
+      <description>Optional if known from maps</description>
+    </property>
+    <property name="Large-scale Structure" type="freetext">
+      <description>Basic description of what the rocks are like, e.g., massive, thickly bedded, laminated, pillow structures, etc.</description>
+    </property>
+    <property name="Alteration" type="freetext">
+      <description>Any signs of obvious alteration, e.g., pervasive epidote, silicification around veins, etc.</description>
+    </property>
+    <property name="Notes" type="freetext">
+      <description>For anything else....</description>
     </property>
     <property name="Photos" type="file" file="true" thumbnail="true">
       <description>Description TBD</description>
