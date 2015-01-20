@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSchema>
   <RelationshipElement name="Water Sample pH" type="bidirectional">
-    <description>Implements a 1:N relationship between Samples and pH/Eh</description>
+    <description>Implements a 1:N relationship between Water Samples and pH</description>
+  </RelationshipElement>
+  <RelationshipElement name="Water Sample Eh" type="bidirectional">
+    <description>Implements a 1:N relationship between Water Samples and Eh</description>
+  </RelationshipElement>
+  <RelationshipElement name="Sample Photolog" type="bidirectional">
+    <description>Implements a 1:N relationship between Samples and Photologs</description>
   </RelationshipElement>
 
   <ArchaeologicalElement name="Water Sample">
@@ -202,7 +208,7 @@
     <property name="Conductivity" type="freetext">
       <description>Description TBD</description>
     </property>
-    <property name="Shape" type="file" file="true" thumbnail="true">
+    <property name="Sketch" type="file" file="true" thumbnail="true">
       <description>Description TBD</description>
     </property>
     <property name="Preferred pH" type="freetext">
@@ -221,10 +227,17 @@
     <property name="pH" type="freetext" isIdentifier="true">
       <description>Description TBD</description>
     </property>
+  </ArchaeologicalElement>
+
+  <ArchaeologicalElement name="Eh">
+    <description></description>
+    <property name="Time" type="freetext" isIdentifier="true">
+      <description>Description TBD</description>
+    </property>
     <property name="Eh" type="freetext" isIdentifier="true">
       <description>Description TBD</description>
     </property>
-  </ArchaeologicalElement>  
+  </ArchaeologicalElement>
   
   <ArchaeologicalElement name="Plant Sample">
     <description></description>
@@ -1204,7 +1217,7 @@
     <property name="Photos" type="file" file="true" thumbnail="true">
       <description>Description TBD</description>
     </property>
-    <property name="Shape" type="file" file="true" thumbnail="true">
+    <property name="Sketch" type="file" file="true" thumbnail="true">
       <description>Description TBD</description>
     </property>
   </ArchaeologicalElement>
@@ -1335,7 +1348,30 @@
     <property name="Photos" type="file" file="true" thumbnail="true">
       <description>Description TBD</description>
     </property>
-    <property name="Shape" type="file" file="true" thumbnail="true">
+    <property name="Sketch" type="file" file="true" thumbnail="true">
+      <description>Description TBD</description>
+    </property>
+  </ArchaeologicalElement>
+
+  <ArchaeologicalElement name="Photolog">
+    <description>A record of images created and stored on another device, eg by a professional site photographer.</description>
+    <property name="Photo ID" isIdentifier= "true" type="freetext">
+      <description>Unique number or code allocated by creator of the image. It could be a filename or a reference number</description>
+    </property>
+    <property name="Photo Timestamp" type="freetext">
+      <description>Time at which the photo was taken</description>
+    </property>
+    <property name="Photo Note" type="freetext">
+      <description>Description TBD</description>
+    </property>
+  </ArchaeologicalElement>
+
+  <ArchaeologicalElement name="Note">
+    <description>Description TBD</description>
+    <property name="Label" isIdentifier= "true" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Note" type="freetext">
       <description>Description TBD</description>
     </property>
   </ArchaeologicalElement>

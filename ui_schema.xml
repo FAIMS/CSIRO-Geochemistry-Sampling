@@ -30,11 +30,18 @@
               <New_Sample/>
               <GPS_Status/>
             </Start>
+            <Defaults>
+              <Water_Sample/>
+              <Plant_Sample/>
+              <Soil_Sample/>
+              <Rock_Sample/>
+              <Validate/>
+            </Defaults>
             <Search>
               <Sample_Types/>
               <Sample_List/>
             </Search>
-            <Map>
+            <!-- <Map>
               <Map/>
               <container1>
                 <child1>
@@ -44,7 +51,7 @@
                   <Save_Settings/>
                 </child2>
               </container1>
-            </Map>
+            </Map> -->
           </Project>
           <Water_Sample>
             <Basic_Info>
@@ -86,8 +93,8 @@
               <Samples_Collected/>
               <Photos/>
               <Take_Photo/>
-              <Shapes/>
-              <Attach_Shape/>
+              <Sketches/>
+              <Attach_Sketch/>
             </Basic_Info>
             <Codes>
               <Hole_Type/>
@@ -131,9 +138,13 @@
                   <Eh/>
                 </child2>
               </container3>
-              <New_pH/>
-              <pH_List/>
+              <!-- <New_pH/>
+              <pH_List/> -->
             </pH_Eh>
+            <Photolog>
+              <New_Photolog/>
+              <Photolog_List/>
+            </Photolog>
           </Water_Sample>
           <Plant_Sample>
             <Basic_Info>
@@ -182,6 +193,10 @@
               <Photos/>
               <Take_Photo/>
             </Basic_Info>
+            <Photolog>
+              <New_Photolog/>
+              <Photolog_List/>
+            </Photolog>
           </Plant_Sample>
           <Soil_Sample>
             <Basic_Info>
@@ -225,16 +240,20 @@
               <Regolith_Type/>
               <Landform/>
               <Vegetation/>
-              <Comments/>
+              <Notes/>
               <Photos/>
               <Take_Photo/>
-              <Shapes/>
-              <Attach_Shape/>
+              <Sketches/>
+              <Attach_Sketch/>
             </Basic_Info>
+            <Photolog>
+              <New_Photolog/>
+              <Photolog_List/>
+            </Photolog>
           </Soil_Sample>
           <Rock_Sample>
             <Basic_Info>
-              <Rock_Sample_ID/>
+              <Core_ID/>
               <container1>
                 <child1>
                   <Timestamp/>
@@ -246,7 +265,6 @@
               <Station_Deposit/>
               <Project/>
               <Area/>
-              <Site_Name/>
               <container2>
                 <child1>
                   <Latitude/>
@@ -285,13 +303,35 @@
               <Notes/>
               <Photos/>
               <Take_Photo/>
-              <Shapes/>
-              <Attach_Shape/>
+              <Sketches/>
+              <Attach_Sketch/>
             </Lithological_Info>
+            <Photolog>
+              <New_Photolog/>
+              <Photolog_List/>
+            </Photolog>
           </Rock_Sample>
+          <Photolog>
+            <Photolog>
+              <Photo_ID/>
+              <Photo_Timestamp/>
+              <Photo_Note/>
+              <Back/>
+            </Photolog>
+          </Photolog>
         </faims>
       </instance>
-      <!-- Insert nodeset bindings here -->
+      <bind nodeset="/faims/Project/Defaults/Water_Sample" type="decimal"/>
+      <bind nodeset="/faims/Project/Defaults/Plant_Sample" type="decimal"/>
+      <bind nodeset="/faims/Project/Defaults/Soil_Sample" type="decimal"/>
+      <bind nodeset="/faims/Project/Defaults/Rock_Sample" type="decimal"/>
+      <bind nodeset="/faims/Project/Defaults/Rock_Sample" type="decimal"/>
+      <bind nodeset="/faims/Plant_Sample/Basic_Info/Plant_Width" type="decimal"/>
+      <bind nodeset="/faims/Plant_Sample/Basic_Info/Plant_Height" type="decimal"/>
+      <bind nodeset="/faims/Soil_Sample/Basic_Info/Depth" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/Strike_Of_Bedding" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/Dip_Of_Bedding" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/Plunge_Of_Fold_Axes" type="decimal"/>
     </model>
   </h:head>
   <h:body>
@@ -314,7 +354,7 @@
       <label>{User_List}</label>
       <group ref="usertab" faims_scrollable="false">
         <label>{User_List}</label>
-        <select1 appearance="compact" ref="users" faims_certainty="false" faims_annotation="false" faims_style_class="user_list">
+        <select1 appearance="compact" ref="users" faims_certainty="false" faims_annotation="false">
           <label>{Users}</label>
           <item>
             <label>placeholder</label>
@@ -330,13 +370,13 @@
         <input ref="Author_Name" faims_certainty="false" faims_annotation="false" faims_read_only="true">
           <label>{Author_Name}</label>
         </input>
-        <input ref="Station_Deposit" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+        <input ref="Station_Deposit" faims_certainty="false" faims_annotation="false" faims_read_only="false">
           <label>{Station_Deposit}</label>
         </input>
-        <input ref="Project" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+        <input ref="Project" faims_certainty="false" faims_annotation="false" faims_read_only="false">
           <label>{Project}</label>
         </input>
-        <input ref="Area" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+        <input ref="Area" faims_certainty="false" faims_annotation="false" faims_read_only="false">
           <label>{Area}</label>
         </input>
         <select1 ref="Sample_Types" faims_certainty="false" faims_annotation="false">
@@ -349,7 +389,7 @@
         <trigger ref="New_Sample">
           <label>{New_Sample}</label>
         </trigger>
-        <input ref="GPS_Status" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+        <input ref="GPS_Status" faims_certainty="false" faims_annotation="false" faims_read_only="true" faims_style_class="gps-status">
           <label>{GPS_Status}</label>
         </input>
       </group>
@@ -371,7 +411,7 @@
           <label>{Validate}</label>
         </trigger>
       </group>
-      <group ref="Search">
+      <group ref="Search" faims_scrollable="false">
         <label>{Search}</label>
         <select1 ref="Sample_Types" faims_certainty="false" faims_annotation="false">
           <label>{Sample_Types}</label>
@@ -388,7 +428,7 @@
           </item>
         </select1>
       </group>
-      <group ref="Map" faims_scrollable="false">
+      <!-- <group ref="Map" faims_scrollable="false">
         <label>{Map}</label>
          <input ref="map" faims_map="true" faims_certainty="false">
           <label/>
@@ -408,7 +448,7 @@
             </trigger>
           </group>
         </group>
-      </group>
+      </group> -->
     </group>
     <group ref="Water_Sample" faims_archent_type="Water Sample">
       <label>{Water_Sample}</label>
@@ -448,13 +488,13 @@
           <label></label>
           <group ref="child1" faims_style="even">
             <label></label>
-            <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+            <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="true">
               <label>{Latitude}</label>
             </input>
           </group>
           <group ref="child2" faims_style="even">
             <label></label>
-            <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+            <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="true">
               <label>{Longitude}</label>
             </input>
           </group>
@@ -463,13 +503,13 @@
           <label></label>
           <group ref="child1" faims_style="even">
             <label></label>
-            <input ref="Northing" faims_attribute_name="Northing" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+            <input ref="Northing" faims_attribute_name="Northing" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="true">
               <label>{Northing}</label>
             </input>
           </group>
           <group ref="child2" faims_style="even">
             <label></label>
-            <input ref="Easting" faims_attribute_name="Easting" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+            <input ref="Easting" faims_attribute_name="Easting" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="true">
               <label>{Easting}</label>
             </input>
           </group>
@@ -489,7 +529,7 @@
         <input ref="Bottom_Of_Hole" faims_attribute_name="Bottom of Hole">
           <label>{Bottom_Of_Hole}</label>
         </input>
-        <input ref="Notes" faims_attribute_name="Notes" faims_attribute_type="measure" faims_certainty="true" faims_annotation="false" faims_read_only="false">
+        <input ref="Notes" faims_attribute_name="Notes" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Notes}</label>
         </input>
         <select ref="Samples_Collected" faims_attribute_name="Samples Collected" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
@@ -509,15 +549,15 @@
         <trigger ref="Take_Photo">
           <label>{Take_Photo}</label>
         </trigger>
-        <select type="camera" faims_sync="true" ref="Shapes" faims_attribute_name="Shape" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-          <label>{Shapes}</label>
+        <select type="file" faims_sync="true" ref="Sketches" faims_attribute_name="Sketch" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Sketches}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select>
-        <trigger ref="Attach_Shape">
-          <label>{Attach_Shape}</label>
+        <trigger ref="Attach_Sketch">
+          <label>{Attach_Sketch}</label>
         </trigger>
       </group>
       <group ref="Codes">
@@ -564,7 +604,7 @@
           </group>
           <group ref="child2" faims_style="even">
             <label></label>
-            <input ref="Estimated_Angle" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+            <input ref="Estimated_Angle" faims_attribute_name="Estimated Angle" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
               <label>{Estimated_Angle}</label>
             </input>
           </group>
@@ -576,7 +616,7 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <select1 ref="Sampling_Issues" faims_attribute_name="Sample Issues" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+        <select1 ref="Sampling_Issues" faims_attribute_name="Sampling Issues" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Sampling_Issues}</label>
           <item>
             <label>placeholder</label>
@@ -623,27 +663,39 @@
             <value>placeholder</value>
           </item>
         </select1>
-        </select1>
         <group ref="container3" faims_style="orientation">
           <label></label>
           <group ref="child1" faims_style="even">
             <label></label>
-            <input ref="pH" faims_attribute_name="pH" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+            <input ref="pH">
               <label>{pH}</label>
             </input>
           </group>
           <group ref="child2" faims_style="even">
             <label></label>
-            <input ref="Eh" faims_attribute_name="Eh" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="true">
+            <input ref="Eh">
               <label>{Eh}</label>
             </input>
           </group>
         </group>
-        <trigger ref="New_pH">
+        <!-- <trigger ref="New_pH">
           <label>{New_pH}</label>
         </trigger>
         <select1 appearance="compact" ref="pH_List">
           <label>{pH_List}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+ -->      </group>
+      <group ref="Photolog" faims_scrollable="false">
+        <label>{Photolog}</label>
+        <trigger ref="New_Photolog">
+          <label>{New_Photolog}</label>
+        </trigger>
+        <select1 appearance="compact" ref="Photolog_List">
+          <label>{Photolog_List}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
@@ -689,13 +741,13 @@
           <label></label>
           <group ref="child1" faims_style="even">
             <label></label>
-            <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+            <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="true">
               <label>{Latitude}</label>
             </input>
           </group>
           <group ref="child2" faims_style="even">
             <label></label>
-            <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+            <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="true">
               <label>{Longitude}</label>
             </input>
           </group>
@@ -704,13 +756,13 @@
           <label></label>
           <group ref="child1" faims_style="even">
             <label></label>
-            <input ref="Northing" faims_attribute_name="Northing" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+            <input ref="Northing" faims_attribute_name="Northing" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="true">
               <label>{Northing}</label>
             </input>
           </group>
           <group ref="child2" faims_style="even">
             <label></label>
-            <input ref="Easting" faims_attribute_name="Easting" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+            <input ref="Easting" faims_attribute_name="Easting" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="true">
               <label>{Easting}</label>
             </input>
           </group>
@@ -764,12 +816,25 @@
           <label>{Take_Photo}</label>
         </trigger>
       </group>
+      <group ref="Photolog" faims_scrollable="false">
+        <label>{Photolog}</label>
+        <trigger ref="New_Photolog">
+          <label>{New_Photolog}</label>
+        </trigger>
+        <select1 appearance="compact" ref="Photolog_List">
+          <label>{Photolog_List}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+      </group>
     </group>
     <group ref="Soil_Sample" faims_archent_type="Soil Sample">
       <label>{Soil_Sample}</label>
       <group ref="Basic_Info">
         <label>{Basic_Info}</label>
-        <input ref="Soil_Sample_ID" faims_attribute_name="Plant Record ID" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+        <input ref="Soil_Sample_ID" faims_attribute_name="Soil Sample ID" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false">
           <label>{Soil_Sample_ID}</label>
         </input>
         <group ref="container1" faims_style="orientation">
@@ -800,13 +865,13 @@
           <label></label>
           <group ref="child1" faims_style="even">
             <label></label>
-            <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+            <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="true">
               <label>{Latitude}</label>
             </input>
           </group>
           <group ref="child2" faims_style="even">
             <label></label>
-            <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+            <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="true">
               <label>{Longitude}</label>
             </input>
           </group>
@@ -815,13 +880,13 @@
           <label></label>
           <group ref="child1" faims_style="even">
             <label></label>
-            <input ref="Northing" faims_attribute_name="Northing" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+            <input ref="Northing" faims_attribute_name="Northing" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="true">
               <label>{Northing}</label>
             </input>
           </group>
           <group ref="child2" faims_style="even">
             <label></label>
-            <input ref="Easting" faims_attribute_name="Easting" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+            <input ref="Easting" faims_attribute_name="Easting" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="true">
               <label>{Easting}</label>
             </input>
           </group>
@@ -845,7 +910,7 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <select ref="Soil_Texture" faims_attribute_name="Soil_Texture" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+        <select ref="Soil_Texture" faims_attribute_name="Soil Texture" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Soil_Texture}</label>
           <item>
             <label>placeholder</label>
@@ -873,7 +938,7 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <select1 ref="Regolith_Type" faims_attribute_name="Regolith_Type" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+        <select1 ref="Regolith_Type" faims_attribute_name="Regolith Type" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Regolith_Type}</label>
           <item>
             <label>placeholder</label>
@@ -890,8 +955,8 @@
         <input ref="Vegetation" faims_attribute_name="Vegetation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Vegetation}</label>
         </input>
-        <input ref="Comments" faims_attribute_name="Comments" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-          <label>{Comments}</label>
+        <input ref="Notes" faims_attribute_name="Notes" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Notes}</label>
         </input>
         <select type="camera" faims_sync="true" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Photos}</label>
@@ -903,24 +968,37 @@
         <trigger ref="Take_Photo">
           <label>{Take_Photo}</label>
         </trigger>
-        <select type="camera" faims_sync="true" ref="Shapes" faims_attribute_name="Shape" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-          <label>{Shapes}</label>
+        <select type="file" faims_sync="true" ref="Sketches" faims_attribute_name="Sketch" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Sketches}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select>
-        <trigger ref="Attach_Shape">
-          <label>{Attach_Shape}</label>
+        <trigger ref="Attach_Sketch">
+          <label>{Attach_Sketch}</label>
         </trigger>
+      </group>
+      <group ref="Photolog" faims_scrollable="false">
+        <label>{Photolog}</label>
+        <trigger ref="New_Photolog">
+          <label>{New_Photolog}</label>
+        </trigger>
+        <select1 appearance="compact" ref="Photolog_List">
+          <label>{Photolog_List}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
       </group>
     </group>
     <group ref="Rock_Sample" faims_archent_type="Rock Sample">
       <label>{Rock_Sample}</label>
       <group ref="Basic_Info">
         <label>{Basic_Info}</label>
-        <input ref="Rock_Sample_ID" faims_attribute_name="Water Sample ID" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false">
-          <label>{Rock_Sample_ID}</label>
+        <input ref="Core_ID" faims_attribute_name="Core ID" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+          <label>{Core_ID}</label>
         </input>
         <group ref="container1" faims_style="orientation">
           <label></label>
@@ -946,20 +1024,17 @@
         <input ref="Area" faims_attribute_name="Area" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
           <label>{Area}</label>
         </input>
-        <input ref="Site_Name" faims_attribute_name="Site Name" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-          <label>{Site_Name}</label>
-        </input>
         <group ref="container2" faims_style="orientation">
           <label></label>
           <group ref="child1" faims_style="even">
             <label></label>
-            <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+            <input ref="Latitude" faims_attribute_name="Latitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="true">
               <label>{Latitude}</label>
             </input>
           </group>
           <group ref="child2" faims_style="even">
             <label></label>
-            <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+            <input ref="Longitude" faims_attribute_name="Longitude" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="true">
               <label>{Longitude}</label>
             </input>
           </group>
@@ -968,13 +1043,13 @@
           <label></label>
           <group ref="child1" faims_style="even">
             <label></label>
-            <input ref="Northing" faims_attribute_name="Northing" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+            <input ref="Northing" faims_attribute_name="Northing" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="true">
               <label>{Northing}</label>
             </input>
           </group>
           <group ref="child2" faims_style="even">
             <label></label>
-            <input ref="Easting" faims_attribute_name="Easting" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+            <input ref="Easting" faims_attribute_name="Easting" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="true">
               <label>{Easting}</label>
             </input>
           </group>
@@ -986,7 +1061,7 @@
           <label>{Elevation}</label>
         </input>
       </group>
-      <group ref="Measurements" faims_attribute_name="Measurements" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+      <group ref="Measurements">
         <label>{Measurements}</label>
         <input ref="Strike_Of_Bedding" faims_attribute_name="Strike of Bedding" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Strike_Of_Bedding}</label>
@@ -1063,15 +1138,46 @@
         <trigger ref="Take_Photo">
           <label>{Take_Photo}</label>
         </trigger>
-        <select type="camera" faims_sync="true" ref="Shapes" faims_attribute_name="Shape" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-          <label>{Shapes}</label>
+        <select type="file" faims_sync="true" ref="Sketches" faims_attribute_name="Sketch" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Sketches}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>
           </item>
         </select>
-        <trigger ref="Attach_Shape">
-          <label>{Attach_Shape}</label>
+        <trigger ref="Attach_Sketch">
+          <label>{Attach_Sketch}</label>
+        </trigger>
+      </group>
+      <group ref="Photolog" faims_scrollable="false">
+        <label>{Photolog}</label>
+        <trigger ref="New_Photolog">
+          <label>{New_Photolog}</label>
+        </trigger>
+        <select1 appearance="compact" ref="Photolog_List">
+          <label>{Photolog_List}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+      </group>
+    </group>
+    <group ref="Photolog" faims_archent_type="Photolog">
+      <label>{Photolog}</label>
+      <group ref="Photolog">
+        <label>{Photolog}</label>
+        <input ref="Photo_ID" faims_attribute_name="Photo ID" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false" faims_style_class="required">
+          <label>{Photo_ID}</label>
+        </input>
+        <input ref="Photo_Timestamp" faims_attribute_name="Photo Timestamp" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+          <label>{Photo_Timestamp}</label>
+        </input>
+        <input ref="Photo_Note" faims_attribute_name="Photo Note" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Photo_Note}</label>
+        </input>
+        <trigger ref="Back">
+          <label>{Back}</label>
         </trigger>
       </group>
     </group>

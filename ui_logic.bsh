@@ -88,7 +88,7 @@ addActionBarItem("external_gps", new ToggleActionButtonCallback() {
 // Put your control tab things here
 onEvent("Project", "show", "removeNavigationButtons();");
 
-onEvent("Project/Start/New_Sample", "delayclick", "newSample();")
+onEvent("Project/Start/New_Sample", "delayclick", "newSample();");
 onEvent("Project/Defaults", "show", "loadDefaultIDs();");
 onFocus("Project/Defaults/Water_Sample", null, "saveDefault(\"Water\");");
 onFocus("Project/Defaults/Plant_Sample", null, "saveDefault(\"Plant\");");
@@ -97,7 +97,8 @@ onFocus("Project/Defaults/Rock_Sample", null, "saveDefault(\"Rock\");");
 onEvent("Project/Defaults/Validate", "click", "showToast(\"Not implemented yet.\");");
 
 onEvent("Project/Search", "show", "loadSearch();");
-onEvent("Project/Search/Sample_List", "show", "loadSample();");
+onEvent("Project/Search/Sample_Types", "click", "loadSearch();");
+onEvent("Project/Search/Sample_List", "click", "loadSample();");
 
 sample_types = new ArrayList();
 sample_types.add(new NameValuePair("{Water_Sample}", "Water Sample"));
@@ -105,7 +106,7 @@ sample_types.add(new NameValuePair("{Plant_Sample}", "Plant Sample"));
 sample_types.add(new NameValuePair("{Soil_Sample}", "Soil Sample"));
 sample_types.add(new NameValuePair("{Rock_Sample}", "Rock Sample"));
 populateDropDown("Project/Start/Sample_Types", sample_types);
-sample_types.add(0, new NameValuePair("{All}, ''"));
+sample_types.add(0, new NameValuePair("{All}", ""));
 populateDropDown("Project/Search/Sample_Types", sample_types);
 
 newSample() {
@@ -129,24 +130,43 @@ removeNavigationButtons() {
 loadDefaultIDs() {
     fetchOne("SELECT value FROM localSettings WHERE key = 'Water Sample ID';", new FetchCallback() {
         onFetch(result) {
-            setFieldValue("Project/Defaults/Water_Sample", result.get(0));
+            if(isNull(result)) {
+                setFieldValue("Project/Defaults/Water_Sample", "1");
+                fetchOne("REPLACE INTO localSettings(key, value) VALUES('Water Sample ID', '1');", null);
+            } else {
+                setFieldValue("Project/Defaults/Water_Sample", result.get(0));    
+            }
         }
-    }
+    });
     fetchOne("SELECT value FROM localSettings WHERE key = 'Plant Sample ID';", new FetchCallback() {
         onFetch(result) {
-            setFieldValue("Project/Defaults/Plant_Sample", result.get(0));
+            if(isNull(result)) {
+                setFieldValue("Project/Defaults/Plant_Sample", "1");
+                fetchOne("REPLACE INTO localSettings(key, value) VALUES('Plant Sample ID', '1');", null);
+            } else {
+                setFieldValue("Project/Defaults/Plant_Sample", result.get(0));    
+            }
         }
-    }
+    });
     fetchOne("SELECT value FROM localSettings WHERE key = 'Soil Sample ID';", new FetchCallback() {
         onFetch(result) {
-            setFieldValue("Project/Defaults/Soil_Sample", result.get(0));
+            if(isNull(result)) {
+                setFieldValue("Project/Defaults/Soil_Sample", "1");
+                fetchOne("REPLACE INTO localSettings(key, value) VALUES('Soil Sample ID', '1');", null);
+            } else {
+                setFieldValue("Project/Defaults/Soil_Sample", result.get(0));    
+            }
         }
-    }
+    });
     fetchOne("SELECT value FROM localSettings WHERE key = 'Rock Sample ID';", new FetchCallback() {
-        onFetch(result) {
-            setFieldValue("Project/Defaults/Rock_Sample", result.get(0));
+        onFetch(result) {if(isNull(result)) {
+                setFieldValue("Project/Defaults/Rock_Sample", "1");
+                fetchOne("REPLACE INTO localSettings(key, value) VALUES('Rock Sample ID', '1');", null);
+            } else {
+                setFieldValue("Project/Defaults/Rock_Sample", result.get(0));    
+            }
         }
-    }
+    });
 }
 
 saveDefault(String type) {
@@ -158,11 +178,11 @@ loadSearch() {
     fetchAll("select uuid, response from identifierAsSpreadsheet join latestnondeletedArchEnt using (uuid) join aenttype using (aenttypeid) where aenttypename like '%"+type+"%' order by aenttimestamp;",
         new FetchCallback() {
             onFetch(result) {
-                if (!isNull(result)) {
-                    populateList("Project/Search/Sample_List", result);
-                } else {
-                    populateList("Project/Search/Sample_List", new ArrayList() {{ add(new NameValuePair("No records found.", "")); }});
+                if (isNull(result)) {
+                    result = new ArrayList();
+                    result.add(new NameValuePair("{No_records_found}", ""));
                 }
+                populateList("Project/Search/Sample_List", result);
             }
         });
 }
@@ -171,12 +191,11 @@ loadSample() {
     fetchAll("select aenttypename from identifierAsSpreadsheet join latestnondeletedArchEnt using (uuid) join aenttype using (aenttypeid) where uuid = '" + getListItemValue() + "';",
         new FetchCallback() {
             onFetch(result) {
-                print(result.get(0));
-                if (result.get(0).equals("Water Sample")) {
+                if (result.get(0).get(0).equals("Water Sample")) {
                     loadWaterSample();
-                } else if (result.get(0).equals("Plant Sample")) {
+                } else if (result.get(0).get(0).equals("Plant Sample")) {
                     loadPlantSample();
-                } else if (result.get(0).equals("Soil Sample")) {
+                } else if (result.get(0).get(0).equals("Soil Sample")) {
                     loadSoilSample();
                 } else {
                     loadRockSample();
@@ -186,13 +205,17 @@ loadSample() {
 }
 
 /*** WATER SAMPLE ***/
-onEvent("Water_Sample", "show", "addWaterSampleNavigation();");
+onEvent("Water_Sample", "show", "addWaterSampleNavigation();resumeAutoSavingWaterSample();");
 
 onEvent("Water_Sample/Basic_Info/Take_GPS", "click", "fillInGPS(\"Water_Sample/Basic_Info/\")");
 onEvent("Water_Sample/Basic_Info/Take_Photo", "click", "attachPictureTo(\"Water_Sample/Basic_Info/Photos\")");
-onEvent("Water_Sample/Basic_Info/Attach_Shape", "click", "attachFileTo(\"Water_Sample/Basic_Info/Shapes\");");
+onEvent("Water_Sample/Basic_Info/Attach_Sketch", "click", "attachFileTo(\"Water_Sample/Basic_Info/Sketches\");");
 
 onEvent("Water_Sample/Codes/Hole_Angle", "click", "populateEstimatedAngle();");
+
+onEvent("Water_Sample/Photolog", "show", "loadRelatedPhotologs(water_sample_id, \"Water_Sample\");");
+onEvent("Water_Sample/Photolog/New_Photolog", "click", "newPhotolog(); sample_id = water_sample_id;");
+onEvent("Water_Sample/Photolog/Photolog_List", "click", "loadPhotolog();");
 
 String water_sample_id = null;
 
@@ -206,10 +229,14 @@ newWaterSample() {
     setFieldValue("Water_Sample/Basic_Info/Area", getFieldValue("Project/Start/Area"));
     fetchOne("SELECT value FROM localSettings WHERE key = 'Water Sample ID';", new FetchCallback() {
         onFetch(result) {
-            setFieldValue("Water_Sample/Basic_Info/Water_Sample_ID", result.get(0));
+            String id = "Water - " + result.get(0) + " - " + new java.text.SimpleDateFormat("ddMMMyy").format(new Date());
+            setFieldValue("Water_Sample/Basic_Info/Water_Sample_ID", id);
             saveTabGroup("Water_Sample", water_sample_id, null, null, new SaveCallback() {
                 onSave(uuid, newRecord) {
                     water_sample_id = uuid;
+                    Integer next_id = Integer.parseInt(result.get(0));
+                    next_id++;
+                    fetchOne("REPLACE INTO localSettings(key, value) VALUES('Water Sample ID', '" + next_id + "');", null);
                     saveTabGroup("Water_Sample", water_sample_id, null, null, new SaveCallback() {
                         onSave(uuid, newRecord) {
                             water_sample_id = uuid;
@@ -217,7 +244,6 @@ newWaterSample() {
                     }, true);
                 }
             });
-            fetchOne("REPLACE INTO localSettings(key, value) VALUES('Water Sample ID', '" + result.get(0) + 1 + "');", null);
         }
     });
 }
@@ -235,6 +261,16 @@ loadWaterSampleFrom(archentid) {
     showTabGroup("Water_Sample", archentid, new FetchCallback() {
         onFetch(result) {
             water_sample_id = archentid;
+            fetchOne("select fname || ' ' || lname from user join archentity using (userid) where uuid = '" + water_sample_id + "' group by uuid having min(aenttimestamp)", new FetchCallback() {
+                onFetch(username) {
+                    setFieldValue("Water_Sample/Basic_Info/Author_Name", username.get(0));
+                }
+            });
+            fetchOne("select datetime(aentTimestamp, 'localtime')  from archentity where uuid = '" + water_sample_id + "' group by uuid having min(aenttimestamp);", new FetchCallback() {
+                onFetch(timestamp) {
+                    setFieldValue("Water_Sample/Basic_Info/Timestamp", timestamp.get(0));
+                }
+            });
             saveTabGroup("Water_Sample", water_sample_id, null, null, new SaveCallback() {
                 onSave(uuid, newRecord) {
                     water_sample_id = uuid;
@@ -250,6 +286,20 @@ loadWaterSampleFrom(archentid) {
                 showToast(message);
             }
     });
+}
+
+resumeAutoSavingWaterSample() {
+    if(!isNull(water_sample_id)) {
+        saveTabGroup("Water_Sample", water_sample_id, null, null, new SaveCallback() {
+            onSave(uuid, newRecord) {
+                water_sample_id = uuid;
+            }
+
+            onError(message) {
+                showToast(message);
+            }
+        },true);
+    }
 }
 
 deleteWaterSample() {
@@ -274,9 +324,9 @@ loadWaterSampleAttributes() {
     makeVocab("DropDown", "Water_Sample/Codes/Hole_Lining", "Hole Lining");
     makeVocab("RadioGroup", "Water_Sample/Codes/Hole_Open_Closed", "Hole Open or Closed");
     makeVocab("DropDown", "Water_Sample/Codes/Pipes_In_Hole", "Pipes In Hole");
-    makeVocab("DropDown", "Water_Sample/Codes/container1/child1/Hole_Angle", "Hole Angle");
+    makeVocab("DropDown", "Water_Sample/Codes/Hole_Angle", "Hole Angle");
     makeVocab("RadioGroup", "Water_Sample/Codes/Outflow_Present", "Outflow Present");
-    makeVocab("DropDown", "Water_Sample/Codes/Sampling_Issues", "Sample Issues");
+    makeVocab("DropDown", "Water_Sample/Codes/Sampling_Issues", "Sampling Issues");
 }
 
 addWaterSampleNavigation() {
@@ -357,11 +407,14 @@ populateEstimatedAngle() {
 
 /*** PLANT SAMPLE ***/
 
-onEvent("Plant_Sample", "show", "addPlantSampleNavigation();");
+onEvent("Plant_Sample", "show", "addPlantSampleNavigation();resumeAutoSavingPlantSample();");
 
 onEvent("Plant_Sample/Basic_Info/Take_GPS", "click", "fillInGPS(\"Plant_Sample/Basic_Info/\")");
 onEvent("Plant_Sample/Basic_Info/Take_Photo", "click", "attachPictureTo(\"Plant_Sample/Basic_Info/Photos\")");
-onEvent("Plant_Sample/Basic_Info/Attach_Shape", "click", "attachFileTo(\"Plant_Sample/Basic_Info/Shapes\");");
+
+onEvent("Plant_Sample/Photolog", "show", "loadRelatedPhotologs(plant_sample_id, \"Plant_Sample\");");
+onEvent("Plant_Sample/Photolog/New_Photolog", "click", "newPhotolog(); sample_id = plant_sample_id;");
+onEvent("Plant_Sample/Photolog/Photolog_List", "click", "loadPhotolog();");
 
 String plant_sample_id = null;
 
@@ -375,10 +428,14 @@ newPlantSample() {
     setFieldValue("Plant_Sample/Basic_Info/Area", getFieldValue("Project/Start/Area"));
     fetchOne("SELECT value FROM localSettings WHERE key = 'Plant Sample ID';", new FetchCallback() {
         onFetch(result) {
-            setFieldValue("Plant_Sample/Basic_Info/Plant_Sample_ID", result.get(0));
+            String id = "Plant - " + result.get(0) + " - " + new java.text.SimpleDateFormat("ddMMMyy").format(new Date());
+            setFieldValue("Plant_Sample/Basic_Info/Plant_Record_ID", id);
             saveTabGroup("Plant_Sample", plant_sample_id, null, null, new SaveCallback() {
                 onSave(uuid, newRecord) {
                     plant_sample_id = uuid;
+                    Integer next_id = Integer.parseInt(result.get(0));
+                    next_id++;
+                    fetchOne("REPLACE INTO localSettings(key, value) VALUES('Plant Sample ID', '" + next_id + "');", null);
                     saveTabGroup("Plant_Sample", plant_sample_id, null, null, new SaveCallback() {
                         onSave(uuid, newRecord) {
                             plant_sample_id = uuid;
@@ -386,7 +443,6 @@ newPlantSample() {
                     }, true);
                 }
             });
-            fetchOne("REPLACE INTO localSettings(key, value) VALUES('Plant Sample ID', '" + result.get(0) + 1 + "');", null);
         }
     });
 }
@@ -405,6 +461,16 @@ loadPlantSampleFrom(archentid) {
     showTabGroup("Plant_Sample", archentid, new FetchCallback() {
         onFetch(result) {
             plant_sample_id = archentid;
+            fetchOne("select fname || ' ' || lname from user join archentity using (userid) where uuid = '" + plant_sample_id + "' group by uuid having min(aenttimestamp)", new FetchCallback() {
+                onFetch(username) {
+                    setFieldValue("Plant_Sample/Basic_Info/Author_Name", username.get(0));
+                }
+            });
+            fetchOne("select datetime(aentTimestamp, 'localtime')  from archentity where uuid = '" + plant_sample_id + "' group by uuid having min(aenttimestamp);", new FetchCallback() {
+                onFetch(timestamp) {
+                    setFieldValue("Plant_Sample/Basic_Info/Timestamp", timestamp.get(0));
+                }
+            });
             saveTabGroup("Plant_Sample", plant_sample_id, null, null, new SaveCallback() {
                 onSave(uuid, newRecord) {
                     plant_sample_id = uuid;
@@ -412,6 +478,20 @@ loadPlantSampleFrom(archentid) {
             }, true);
         }
     });
+}
+
+resumeAutoSavingPlantSample() {
+    if(!isNull(plant_sample_id)) {
+        saveTabGroup("Plant_Sample", plant_sample_id, null, null, new SaveCallback() {
+            onSave(uuid, newRecord) {
+                plant_sample_id = uuid;
+            }
+
+            onError(message) {
+                showToast(message);
+            }
+        },true);
+    }
 }
 
 deletePlantSample() {
@@ -462,11 +542,15 @@ addPlantSampleNavigation() {
 
 /*** SOIL SAMPLE ***/
 
-onEvent("Soil_Sample", "show", "addSoilSampleNavigation();");
+onEvent("Soil_Sample", "show", "addSoilSampleNavigation();resumeAutoSavingSoilSample();");
 
 onEvent("Soil_Sample/Basic_Info/Take_GPS", "click", "fillInGPS(\"Soil_Sample/Basic_Info/\")");
 onEvent("Soil_Sample/Basic_Info/Take_Photo", "click", "attachPictureTo(\"Soil_Sample/Basic_Info/Photos\")");
-onEvent("Soil_Sample/Basic_Info/Attach_Shape", "click", "attachFileTo(\"Soil_Sample/Basic_Info/Shapes\");");
+onEvent("Soil_Sample/Basic_Info/Attach_Sketch", "click", "attachFileTo(\"Soil_Sample/Basic_Info/Sketches\");");
+
+onEvent("Soil_Sample/Photolog", "show", "loadRelatedPhotologs(soil_sample_id, \"Soil_Sample\");");
+onEvent("Soil_Sample/Photolog/New_Photolog", "click", "newPhotolog(); sample_id = soil_sample_id;");
+onEvent("Soil_Sample/Photolog/Photolog_List", "click", "loadPhotolog();");
 
 String soil_sample_id = null;
 
@@ -480,10 +564,14 @@ newSoilSample() {
     setFieldValue("Soil_Sample/Basic_Info/Area", getFieldValue("Project/Start/Area"));
     fetchOne("SELECT value FROM localSettings WHERE key = 'Soil Sample ID';", new FetchCallback() {
         onFetch(result) {
-            setFieldValue("Soil_Sample/Basic_Info/Soil_Sample_ID", result.get(0));
+            String id = "Soil - " + result.get(0) + " - " + new java.text.SimpleDateFormat("ddMMMyy").format(new Date());
+            setFieldValue("Soil_Sample/Basic_Info/Soil_Sample_ID", id);
             saveTabGroup("Soil_Sample", soil_sample_id, null, null, new SaveCallback() {
                 onSave(uuid, newRecord) {
                     soil_sample_id = uuid;
+                    Integer next_id = Integer.parseInt(result.get(0));
+                    next_id++;
+                    fetchOne("REPLACE INTO localSettings(key, value) VALUES('Soil Sample ID', '" + next_id + "');", null);
                     saveTabGroup("Soil_Sample", soil_sample_id, null, null, new SaveCallback() {
                         onSave(uuid, newRecord) {
                             soil_sample_id = uuid;
@@ -491,7 +579,6 @@ newSoilSample() {
                     }, true);
                 }
             });
-            fetchOne("REPLACE INTO localSettings(key, value) VALUES('Soil Sample ID', '" + result.get(0) + 1 + "');", null);
         }
     });
 }
@@ -510,6 +597,16 @@ loadSoilSampleFrom(archentid) {
     showTabGroup("Soil_Sample", archentid, new FetchCallback() {
         onFetch(result) {
             soil_sample_id = archentid;
+            fetchOne("select fname || ' ' || lname from user join archentity using (userid) where uuid = '" + soil_sample_id + "' group by uuid having min(aenttimestamp)", new FetchCallback() {
+                onFetch(username) {
+                    setFieldValue("Soil_Sample/Basic_Info/Author_Name", username.get(0));
+                }
+            });
+            fetchOne("select datetime(aentTimestamp, 'localtime')  from archentity where uuid = '" + soil_sample_id + "' group by uuid having min(aenttimestamp);", new FetchCallback() {
+                onFetch(timestamp) {
+                    setFieldValue("Soil_Sample/Basic_Info/Timestamp", timestamp.get(0));
+                }
+            });
             saveTabGroup("Soil_Sample", soil_sample_id, null, null, new SaveCallback() {
                 onSave(uuid, newRecord) {
                     soil_sample_id = uuid;
@@ -517,6 +614,20 @@ loadSoilSampleFrom(archentid) {
             }, true);
         }
     });
+}
+
+resumeAutoSavingSoilSample() {
+    if(!isNull(soil_sample_id)) {
+        saveTabGroup("Soil_Sample", soil_sample_id, null, null, new SaveCallback() {
+            onSave(uuid, newRecord) {
+                soil_sample_id = uuid;
+            }
+
+            onError(message) {
+                showToast(message);
+            }
+        },true);
+    }
 }
 
 deleteSoilSample() {
@@ -541,7 +652,7 @@ loadSoilSampleAttributes() {
     populateHierarchicalDropDown("Soil_Sample/Basic_Info/Landform", "Landform");
 }
 
-addSoilSampleNavigation();() {
+addSoilSampleNavigation() {
     removeNavigationButton("new");
     removeNavigationButton("delete");
 
@@ -568,14 +679,17 @@ addSoilSampleNavigation();() {
     }, "danger");
 }
 
-
 /*** ROCK SAMPLE ***/
 
-onEvent("Rock_Sample", "show", "addRockSampleNavigation();");
+onEvent("Rock_Sample", "show", "addRockSampleNavigation();resumeAutoSavingRockSample();");
 
 onEvent("Rock_Sample/Basic_Info/Take_GPS", "click", "fillInGPS(\"Rock_Sample/Basic_Info/\")");
 onEvent("Rock_Sample/Lithological_Info/Take_Photo", "click", "attachPictureTo(\"Rock_Sample/Lithological_Info/Photos\")");
-onEvent("Rock_Sample/Lithological_Info/Attach_Shape", "click", "attachFileTo(\"Rock_Sample/Lithological_Info/Shapes\");");
+onEvent("Rock_Sample/Lithological_Info/Attach_Sketch", "click", "attachFileTo(\"Rock_Sample/Lithological_Info/Sketches\");");
+
+onEvent("Rock_Sample/Photolog", "show", "loadRelatedPhotologs(rock_sample_id, \"Rock_Sample\");");
+onEvent("Rock_Sample/Photolog/New_Photolog", "click", "newPhotolog(); sample_id = rock_sample_id;");
+onEvent("Rock_Sample/Photolog/Photolog_List", "click", "loadPhotolog();");
 
 String rock_sample_id = null;
 
@@ -589,10 +703,14 @@ newRockSample() {
     setFieldValue("Rock_Sample/Basic_Info/Area", getFieldValue("Project/Start/Area"));
     fetchOne("SELECT value FROM localSettings WHERE key = 'Rock Sample ID';", new FetchCallback() {
         onFetch(result) {
-            setFieldValue("Rock_Sample/Basic_Info/Rock_Sample_ID", result.get(0));
+            String id = "Rock - " + result.get(0) + " - " + new java.text.SimpleDateFormat("ddMMMyy").format(new Date());
+            setFieldValue("Rock_Sample/Basic_Info/Core_ID", id);
             saveTabGroup("Rock_Sample", rock_sample_id, null, null, new SaveCallback() {
                 onSave(uuid, newRecord) {
                     rock_sample_id = uuid;
+                    Integer next_id = Integer.parseInt(result.get(0));
+                    next_id++;
+                    fetchOne("REPLACE INTO localSettings(key, value) VALUES('Rock Sample ID', '" + next_id + "');", null);
                     saveTabGroup("Rock_Sample", rock_sample_id, null, null, new SaveCallback() {
                         onSave(uuid, newRecord) {
                             rock_sample_id = uuid;
@@ -600,7 +718,6 @@ newRockSample() {
                     }, true);
                 }
             });
-            fetchOne("REPLACE INTO localSettings(key, value) VALUES('Rock Sample ID', '" + result.get(0) + 1 + "');", null);
         }
     });
 }
@@ -619,6 +736,16 @@ loadRockSampleFrom(archentid) {
     showTabGroup("Rock_Sample", archentid, new FetchCallback() {
         onFetch(result) {
             rock_sample_id = archentid;
+            fetchOne("select fname || ' ' || lname from user join archentity using (userid) where uuid = '" + rock_sample_id + "' group by uuid having min(aenttimestamp)", new FetchCallback() {
+                onFetch(username) {
+                    setFieldValue("Rock_Sample/Basic_Info/Author_Name", username.get(0));
+                }
+            });
+            fetchOne("select datetime(aentTimestamp, 'localtime')  from archentity where uuid = '" + rock_sample_id + "' group by uuid having min(aenttimestamp);", new FetchCallback() {
+                onFetch(timestamp) {
+                    setFieldValue("Rock_Sample/Basic_Info/Timestamp", timestamp.get(0));
+                }
+            });
             saveTabGroup("Rock_Sample", rock_sample_id, null, null, new SaveCallback() {
                 onSave(uuid, newRecord) {
                     rock_sample_id = uuid;
@@ -626,6 +753,20 @@ loadRockSampleFrom(archentid) {
             }, true);
         }
     });
+}
+
+resumeAutoSavingRockSample() {
+    if(!isNull(rock_sample_id)) {
+        saveTabGroup("Rock_Sample", rock_sample_id, null, null, new SaveCallback() {
+            onSave(uuid, newRecord) {
+                rock_sample_id = uuid;
+            }
+
+            onError(message) {
+                showToast(message);
+            }
+        },true);
+    }
 }
 
 deleteRockSample() {
@@ -649,7 +790,7 @@ loadRockSampleAttributes() {
     makeVocab("DropDown", "Rock_Sample/Lithological_Info/Sorting", "Sorting");
 }
 
-addRockSampleNavigation();() {
+addRockSampleNavigation() {
     removeNavigationButton("new");
     removeNavigationButton("delete");
 
@@ -676,6 +817,134 @@ addRockSampleNavigation();() {
     }, "danger");
 }
 
+
+/*** PHOTOLOG ***/
+
+onEvent("Photolog", "show", "addPhotologNavigation();");
+onFocus("Photolog/Photolog/Photo_ID", null, "activateAutoSavePhotolog();");
+
+String photolog_id = null;
+String sample_id = null;
+
+newPhotolog() {
+    newTabGroup("Photolog");
+    photolog_id = null;
+    setTimestamp("Photolog/Photolog/Photo_Timestamp");
+}
+
+loadPhotolog() {
+    photolog_id = getListItemValue();
+    loadPhotologFrom(photolog_id);
+}
+
+loadPhotologFrom(archentid) {
+    if (isNull(archentid)) {
+        showToast("No {Photolog} selected");
+        return;
+    }
+
+    showTabGroup("Photolog", archentid, new FetchCallback() {
+        onFetch(result) {
+            photolog_id = archentid;
+            saveTabGroup("Photolog", photolog_id, null, null, new SaveCallback() {
+                onSave(uuid, newRecord) {
+                    photolog_id = uuid;
+                }
+            }, true);
+        }
+    });
+}
+
+activateAutoSavePhotolog() {
+    if(!isNull(photolog_id) || isNull(getFieldValue("Photolog/Photolog/Photo_ID"))) return;
+    saveTabGroup("Photolog", photolog_id, null, null, new SaveCallback() {
+        onSave(uuid, newRecord) {
+            photolog_id = uuid;
+            saveEntitiesToRel("Sample Photolog", sample_id, photolog_id);
+            saveTabGroup("Photolog", photolog_id, null, null, new SaveCallback() {
+                onSave(uuid, newRecord) {
+                    photolog_id = uuid;
+                    
+                }
+            }, true);
+        }
+    });
+}
+
+deletePhotolog() {
+    if (!isNull(photolog_id)) {
+        showAlert("Confirm Deletion", "Press OK to Delete this {Photolog}!", "reallyDeletePhotolog()", "doNotDelete()");
+    } else {
+        cancelTabGroup("Photolog", true);
+    }
+}
+
+reallyDeletePhotolog() {
+    deleteArchEnt(photolog_id);
+    cancelTabGroup("Photolog", false);
+}
+
+addPhotologNavigation() {
+    removeNavigationButton("new");
+    removeNavigationButton("delete");
+
+    addNavigationButton("new", new ActionButtonCallback() {
+        actionOnLabel() {
+            "{New_Photolog}";
+        }
+        actionOn() {
+            if(!isNull(photolog_id)) {
+                newPhotolog();
+            } else {
+                showAlert("Warning", "You will lose any unsaved changes!", "newPhotolog()", "");
+            }
+        }
+    }, "success");
+
+    addNavigationButton("delete", new ActionButtonCallback() {
+        actionOnLabel() {
+            "{Delete_Photolog}";
+        }
+        actionOn() {
+            deletePhotolog();
+        }
+    }, "danger");
+}
+
+loadRelatedPhotologs(String related_sample_id, String type) {
+    if(!isNull(related_sample_id)) {
+        fetchAll("select uuid, aenttypename || ': ' || group_concat(coalesce(measure || ' ' || vocabname || '(' ||freetext||')',  measure || ' (' || freetext ||')',  vocabname || ' (' || freetext ||')',  measure || ' ' || vocabname ,  vocabname || ' (' || freetext || ')',  measure || ' (' || freetext || ')',  measure,  vocabname,  freetext,  measure,  vocabname,  freetext), ' - ') as response, valuetimestamp\n"+
+            "  FROM (  SELECT uuid, attributeid, vocabid, attributename, vocabname, measure, freetext, certainty, attributetype, valuetimestamp, aenttypename\n"+
+            "            FROM latestNonDeletedArchentIdentifiers\n"+
+            "           WHERE aenttypename = 'Photolog'\n"+
+            "             AND uuid in (select uuid\n"+
+            "                            FROM latestNonDeletedAentReln\n"+
+            "                           where relationshipid in (select relationshipid\n"+
+            "                                                      FROM latestNonDeletedAentReln\n"+
+            "                                                      JOIN relationship using (relationshipid)\n"+
+            "                                                      JOIN relntype using (relntypeid)\n"+
+            "                                                    where uuid = "+related_sample_id+"\n"+
+            "                                                       and relntypeName = 'Sample Photolog')\n"+
+            "                             and uuid != "+related_sample_id+"))\n"+
+            "group by uuid\n"+
+            "order by valuetimestamp desc, uuid, attributename;",  new FetchCallback() {
+                onFetch(result) {
+                    if(isNull(result)) {
+                        result = new ArrayList();
+                        result.add(new NameValuePair("{No_records_found}", ""));
+                    }
+                    populateList(type + "/Photolog/Photolog_List", result);
+                }
+                onError(message) {
+                    showToast(message);
+                }
+            });     
+    } else {
+        result = new ArrayList();
+        result.add(new NameValuePair("{No_records_found}", ""));
+        populateList(type + "/Photolog/Photolog_List", result);
+    }    
+}
 
 /*** MISC ***/
 
@@ -736,6 +1005,10 @@ makePictureGallery(String path, String attrib) {
         });
 }
 
+setTimestamp(String path) {
+    setFieldValue(path, new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss z").format(new Date()));
+}
+
 doNotDelete() {
     showToast("Delete Cancelled.");
 }
@@ -777,10 +1050,13 @@ login() {
             user = new User(result.get(0),result.get(1),result.get(2),result.get(3));
             setUser(user);
             username = result.get(1) + " " + result.get(2);
-            showTabGroup("control");
+            showTabGroup("Project");
+            setFieldValue("Project/Start/Author_Name", username);
         }
     });
 }
+
+loadUsers();
 
 onEvent("user/usertab/users", "click", "login()");
 
