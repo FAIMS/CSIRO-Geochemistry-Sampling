@@ -259,6 +259,9 @@
     <property name="Time" type="freetext" isIdentifier="true">
       <description>Description TBD</description>
     </property>
+    <property name="Preferred" type="freetext">
+      <description>Description TBD</description>
+    </property>
   </ArchaeologicalElement>
 
   <ArchaeologicalElement name="Eh">
@@ -267,6 +270,9 @@
       <description>Description TBD</description>
     </property>
     <property name="Time" type="freetext" isIdentifier="true">
+      <description>Description TBD</description>
+    </property>
+    <property name="Preferred" type="freetext">
       <description>Description TBD</description>
     </property>
   </ArchaeologicalElement>
