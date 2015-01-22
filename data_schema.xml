@@ -12,6 +12,9 @@
 
   <ArchaeologicalElement name="Water Sample">
     <description></description>
+    <property name="Water Sample Prefix" type="freetext" isIdentifier="true">
+      <description>Description TBD</description>
+    </property>
     <property name="Water Sample ID" type="freetext" isIdentifier="true">
       <description>Description TBD</description>
     </property>
@@ -199,6 +202,35 @@
     <property name="Easting" type="freetext">
       <description>Description TBD</description>
     </property>
+    <property name="SRID" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> 28349
+          <description>Description TBD</description>
+        </term>
+        <term> 28350
+          <description>Description TBD</description>
+        </term>
+        <term> 28351
+          <description>Description TBD</description>
+        </term>
+        <term> 28352
+          <description>Description TBD</description>
+        </term>
+        <term> 28353
+          <description>Description TBD</description>
+        </term>
+        <term> 28354
+          <description>Description TBD</description>
+        </term>
+        <term> 28355
+          <description>Description TBD</description>
+        </term>
+        <term> 28356
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
     <property name="Elevation" type="freetext">
       <description>Description TBD</description>
     </property>
@@ -221,26 +253,29 @@
 
   <ArchaeologicalElement name="pH">
     <description></description>
-    <property name="Time" type="freetext" isIdentifier="true">
+    <property name="pH" type="freetext" isIdentifier="true">
       <description>Description TBD</description>
     </property>
-    <property name="pH" type="freetext" isIdentifier="true">
+    <property name="Time" type="freetext" isIdentifier="true">
       <description>Description TBD</description>
     </property>
   </ArchaeologicalElement>
 
   <ArchaeologicalElement name="Eh">
     <description></description>
-    <property name="Time" type="freetext" isIdentifier="true">
+    <property name="Eh" type="freetext" isIdentifier="true">
       <description>Description TBD</description>
     </property>
-    <property name="Eh" type="freetext" isIdentifier="true">
+    <property name="Time" type="freetext" isIdentifier="true">
       <description>Description TBD</description>
     </property>
   </ArchaeologicalElement>
   
   <ArchaeologicalElement name="Plant Sample">
     <description></description>
+    <property name="Plant Sample Prefix" type="freetext" isIdentifier="true">
+      <description>Description TBD</description>
+    </property>
     <property name="Plant Record ID" isIdentifier="true">
       <description>Description TBD</description>
     </property>
@@ -267,6 +302,35 @@
     </property>
     <property name="Easting" type="freetext">
       <description>Description TBD</description>
+    </property>
+    <property name="SRID" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> 28349
+          <description>Description TBD</description>
+        </term>
+        <term> 28350
+          <description>Description TBD</description>
+        </term>
+        <term> 28351
+          <description>Description TBD</description>
+        </term>
+        <term> 28352
+          <description>Description TBD</description>
+        </term>
+        <term> 28353
+          <description>Description TBD</description>
+        </term>
+        <term> 28354
+          <description>Description TBD</description>
+        </term>
+        <term> 28355
+          <description>Description TBD</description>
+        </term>
+        <term> 28356
+          <description>Description TBD</description>
+        </term>
+      </lookup>
     </property>
     <property name="Elevation" type="freetext">
       <description>Description TBD</description>
@@ -495,6 +559,9 @@
 
   <ArchaeologicalElement name="Soil Sample">
     <description>Description TBD</description>
+    <property name="Soil Sample Prefix" type="freetext" isIdentifier="true">
+      <description>Description TBD</description>
+    </property>
     <property name="Soil Sample ID" isIdentifier="true">
       <description>Description TBD</description>
     </property>
@@ -518,6 +585,35 @@
     </property>
     <property name="Easting" type="freetext">
       <description>Description TBD</description>
+    </property>
+    <property name="SRID" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> 28349
+          <description>Description TBD</description>
+        </term>
+        <term> 28350
+          <description>Description TBD</description>
+        </term>
+        <term> 28351
+          <description>Description TBD</description>
+        </term>
+        <term> 28352
+          <description>Description TBD</description>
+        </term>
+        <term> 28353
+          <description>Description TBD</description>
+        </term>
+        <term> 28354
+          <description>Description TBD</description>
+        </term>
+        <term> 28355
+          <description>Description TBD</description>
+        </term>
+        <term> 28356
+          <description>Description TBD</description>
+        </term>
+      </lookup>
     </property>
     <property name="Elevation" type="freetext">
       <description>Description TBD</description>
@@ -1224,6 +1320,9 @@
 
   <ArchaeologicalElement name="Rock Sample">
     <description>Description TBD</description>
+    <property name="Rock Sample Prefix" type="freetext" isIdentifier="true">
+      <description>Description TBD</description>
+    </property>
     <property name="Core ID" type="freetext" isIdentifier="true">
       <description>Description TBD</description>
     </property>
@@ -1247,6 +1346,35 @@
     </property>
     <property name="Easting" type="freetext">
       <description>Description TBD</description>
+    </property>
+    <property name="SRID" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> 28349
+          <description>Description TBD</description>
+        </term>
+        <term> 28350
+          <description>Description TBD</description>
+        </term>
+        <term> 28351
+          <description>Description TBD</description>
+        </term>
+        <term> 28352
+          <description>Description TBD</description>
+        </term>
+        <term> 28353
+          <description>Description TBD</description>
+        </term>
+        <term> 28354
+          <description>Description TBD</description>
+        </term>
+        <term> 28355
+          <description>Description TBD</description>
+        </term>
+        <term> 28356
+          <description>Description TBD</description>
+        </term>
+      </lookup>
     </property>
     <property name="Elevation" type="freetext">
       <description>Description TBD</description>

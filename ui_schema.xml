@@ -55,7 +55,14 @@
           </Project>
           <Water_Sample>
             <Basic_Info>
-              <Water_Sample_ID/>
+              <container0>
+                <child1>
+                  <Water_Sample_Prefix/>
+                </child1>
+                <child2>
+                  <Water_Sample_ID/>
+                </child2>
+              </container0>
               <container1>
                 <child1>
                   <Timestamp/>
@@ -84,6 +91,7 @@
                   <Easting/>
                 </child2>
               </container3>
+              <SRID/>
               <Take_GPS/>
               <Elevation/>
               <Water_Table/>
@@ -124,22 +132,13 @@
               <container2>
                 <child1>
                   <Preferred_pH/>
+                  <addNewpHText/>
                 </child1>
                 <child2>
                   <Preferred_Eh/>
+                  <addNewEhText/>
                 </child2>
               </container2>
-              <addNewText/>
-              <container3>
-                <child1>
-                  <pH/>
-                </child1>
-                <child2>
-                  <Eh/>
-                </child2>
-              </container3>
-              <!-- <New_pH/>
-              <pH_List/> -->
             </pH_Eh>
             <Photolog>
               <New_Photolog/>
@@ -148,7 +147,14 @@
           </Water_Sample>
           <Plant_Sample>
             <Basic_Info>
-              <Plant_Record_ID/>
+              <container0>
+                <child1>
+                  <Plant_Sample_Prefix/>
+                </child1>
+                <child2>
+                  <Plant_Record_ID/>
+                </child2>
+              </container0>
               <container1>
                 <child1>
                   <Timestamp/>
@@ -177,6 +183,7 @@
                   <Easting/>
                 </child2>
               </container3>
+              <SRID/>
               <Take_GPS/>
               <Elevation/>
               <container4>
@@ -200,7 +207,14 @@
           </Plant_Sample>
           <Soil_Sample>
             <Basic_Info>
-              <Soil_Sample_ID/>
+              <container0>
+                <child1>
+                  <Soil_Sample_Prefix/>
+                </child1>
+                <child2>
+                  <Soil_Sample_ID/>
+                </child2>
+              </container0>
               <container1>
                 <child1>
                   <Timestamp/>
@@ -228,6 +242,7 @@
                   <Easting/>
                 </child2>
               </container3>
+              <SRID/>
               <Take_GPS/>
               <Elevation/>
               <Depth/>
@@ -253,7 +268,14 @@
           </Soil_Sample>
           <Rock_Sample>
             <Basic_Info>
-              <Core_ID/>
+              <container0>
+                <child1>
+                  <Rock_Sample_Prefix/>
+                </child1>
+                <child2>
+                  <Core_ID/>
+                </child2>
+              </container0>
               <container1>
                 <child1>
                   <Timestamp/>
@@ -281,6 +303,7 @@
                   <Easting/>
                 </child2>
               </container3>
+              <SRID/>
               <Take_GPS/>
               <Elevation/>
             </Basic_Info>
@@ -326,8 +349,10 @@
       <bind nodeset="/faims/Project/Defaults/Soil_Sample" type="decimal"/>
       <bind nodeset="/faims/Project/Defaults/Rock_Sample" type="decimal"/>
       <bind nodeset="/faims/Project/Defaults/Rock_Sample" type="decimal"/>
-      <bind nodeset="/faims/Plant_Sample/Basic_Info/Plant_Width" type="decimal"/>
-      <bind nodeset="/faims/Plant_Sample/Basic_Info/Plant_Height" type="decimal"/>
+      <bind nodeset="/faims/Water_Sample/Basic_Info/Elevation" type="decimal"/>
+      <bind nodeset="/faims/Water_Sample/Codes/container1/child2/Estimated_Angle" type="decimal"/>
+      <bind nodeset="/faims/Plant_Sample/Basic_Info/container4/child1/Plant_Height" type="decimal"/>
+      <bind nodeset="/faims/Plant_Sample/Basic_Info/container4/child2/Plant_Width" type="decimal"/>
       <bind nodeset="/faims/Soil_Sample/Basic_Info/Depth" type="decimal"/>
       <bind nodeset="/faims/Rock_Sample/Measurements/Strike_Of_Bedding" type="decimal"/>
       <bind nodeset="/faims/Rock_Sample/Measurements/Dip_Of_Bedding" type="decimal"/>
@@ -454,9 +479,21 @@
       <label>{Water_Sample}</label>
       <group ref="Basic_Info">
         <label>{Basic_Info}</label>
-        <input ref="Water_Sample_ID" faims_attribute_name="Water Sample ID" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false">
-          <label>{Water_Sample_ID}</label>
-        </input>
+        <group ref="container0" faims_style="orientation">
+          <label></label>
+          <group ref="child1" faims_style="even">
+            <label></label>
+            <input ref="Water_Sample_Prefix" faims_attribute_name="Water Sample Prefix" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+              <label>{Water_Sample_Prefix}</label>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label></label>
+            <input ref="Water_Sample_ID" faims_attribute_name="Water Sample ID" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+              <label>{Water_Sample_ID}</label>
+            </input>
+          </group>
+        </group>
         <group ref="container1" faims_style="orientation">
           <label></label>
           <group ref="child1" faims_style="even">
@@ -514,6 +551,13 @@
             </input>
           </group>
         </group>
+        <select1 ref="SRID" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+          <label>{SRID}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
         <trigger ref="Take_GPS">
           <label>{Take_GPS}</label>
         </trigger>
@@ -648,47 +692,29 @@
             <input ref="Preferred_pH" faims_attribute_name="Preferred pH" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="true">
               <label>{Preferred_pH}</label>
             </input>
+            <select1 appearance="compact" ref="addNewpHText">
+              <label></label>
+              <item>
+                <label>{Add_New_pH_Text}</label>
+                <value></value>
+              </item>
+            </select1>
           </group>
           <group ref="child2" faims_style="even">
             <label></label>
             <input ref="Preferred_Eh" faims_attribute_name="Preferred Eh" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="true">
               <label>{Preferred_Eh}</label>
             </input>
+            <select1 appearance="compact" ref="addNewEhText">
+              <label></label>
+              <item>
+                <label>{Add_New_Eh_Text}</label>
+                <value></value>
+              </item>
+            </select1>
           </group>
         </group>
-        <select1 appearance="compact" ref="addNewText">
-          <label></label>
-          <item>
-            <label>placeholder</label>
-            <value>placeholder</value>
-          </item>
-        </select1>
-        <group ref="container3" faims_style="orientation">
-          <label></label>
-          <group ref="child1" faims_style="even">
-            <label></label>
-            <input ref="pH">
-              <label>{pH}</label>
-            </input>
-          </group>
-          <group ref="child2" faims_style="even">
-            <label></label>
-            <input ref="Eh">
-              <label>{Eh}</label>
-            </input>
-          </group>
-        </group>
-        <!-- <trigger ref="New_pH">
-          <label>{New_pH}</label>
-        </trigger>
-        <select1 appearance="compact" ref="pH_List">
-          <label>{pH_List}</label>
-          <item>
-            <label>placeholder</label>
-            <value>placeholder</value>
-          </item>
-        </select1>
- -->      </group>
+      </group>
       <group ref="Photolog" faims_scrollable="false">
         <label>{Photolog}</label>
         <trigger ref="New_Photolog">
@@ -707,9 +733,21 @@
       <label>{Plant_Sample}</label>
       <group ref="Basic_Info">
         <label>{Basic_Info}</label>
-        <input ref="Plant_Record_ID" faims_attribute_name="Plant Record ID" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false">
-          <label>{Plant_Record_ID}</label>
-        </input>
+        <group ref="container0" faims_style="orientation">
+          <label></label>
+          <group ref="child1" faims_style="even">
+            <label></label>
+            <input ref="Plant_Sample_Prefix" faims_attribute_name="Plant Sample Prefix" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+              <label>{Plant_Sample_Prefix}</label>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label></label>
+            <input ref="Plant_Record_ID" faims_attribute_name="Plant Record ID" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+              <label>{Plant_Record_ID}</label>
+            </input>
+          </group>
+        </group>
         <group ref="container1" faims_style="orientation">
           <label></label>
           <group ref="child1" faims_style="even">
@@ -767,6 +805,13 @@
             </input>
           </group>
         </group>
+        <select1 ref="SRID" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+          <label>{SRID}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
         <trigger ref="Take_GPS">
           <label>{Take_GPS}</label>
         </trigger>
@@ -834,9 +879,21 @@
       <label>{Soil_Sample}</label>
       <group ref="Basic_Info">
         <label>{Basic_Info}</label>
-        <input ref="Soil_Sample_ID" faims_attribute_name="Soil Sample ID" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false">
-          <label>{Soil_Sample_ID}</label>
-        </input>
+        <group ref="container0" faims_style="orientation">
+          <label></label>
+          <group ref="child1" faims_style="even">
+            <label></label>
+            <input ref="Soil_Sample_Prefix" faims_attribute_name="Soil Sample Prefix" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+              <label>{Soil_Sample_Prefix}</label>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label></label>
+            <input ref="Soil_Sample_ID" faims_attribute_name="Soil Sample ID" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+              <label>{Soil_Sample_ID}</label>
+            </input>
+          </group>
+        </group>
         <group ref="container1" faims_style="orientation">
           <label></label>
           <group ref="child1" faims_style="even">
@@ -891,6 +948,13 @@
             </input>
           </group>
         </group>
+        <select1 ref="SRID" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+          <label>{SRID}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
         <trigger ref="Take_GPS">
           <label>{Take_GPS}</label>
         </trigger>
@@ -997,9 +1061,21 @@
       <label>{Rock_Sample}</label>
       <group ref="Basic_Info">
         <label>{Basic_Info}</label>
-        <input ref="Core_ID" faims_attribute_name="Core ID" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false">
-          <label>{Core_ID}</label>
-        </input>
+        <group ref="container0" faims_style="orientation">
+          <label></label>
+          <group ref="child1" faims_style="even">
+            <label></label>
+            <input ref="Rock_Sample_Prefix" faims_attribute_name="Rock Sample Prefix" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+              <label>{Rock_Sample_Prefix}</label>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label></label>
+            <input ref="Core_ID" faims_attribute_name="Core ID" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+              <label>{Core_ID}</label>
+            </input>
+          </group>
+        </group>
         <group ref="container1" faims_style="orientation">
           <label></label>
           <group ref="child1" faims_style="even">
@@ -1054,6 +1130,13 @@
             </input>
           </group>
         </group>
+        <select1 ref="SRID" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+          <label>{SRID}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
         <trigger ref="Take_GPS">
           <label>{Take_GPS}</label>
         </trigger>
