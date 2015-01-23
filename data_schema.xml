@@ -1,30 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSchema>
-  <RelationshipElement name="Sample pH" type="bidirectional">
-    <description>Implements a 1:N relationship between Samples and pH/Eh</description>
+  <RelationshipElement name="Water Sample pH" type="bidirectional">
+    <description>Implements a 1:N relationship between Water Samples and pH</description>
+  </RelationshipElement>
+  <RelationshipElement name="Water Sample Eh" type="bidirectional">
+    <description>Implements a 1:N relationship between Water Samples and Eh</description>
+  </RelationshipElement>
+  <RelationshipElement name="Sample Photolog" type="bidirectional">
+    <description>Implements a 1:N relationship between Samples and Photologs</description>
   </RelationshipElement>
 
   <ArchaeologicalElement name="Water Sample">
     <description></description>
-    <property name="Sample Number" type="freetext" isIdentifier="true">
+    <property name="Water Sample Prefix" type="freetext" isIdentifier="true">
       <description>Description TBD</description>
     </property>
-    <property name="Site Name" type="freetext" isIdentifier="true">
-      <description>Description TBD</description>
-    </property>
-    <property name="Date" type="freetext">
+    <property name="Water Sample ID" type="freetext" isIdentifier="true">
       <description>Description TBD</description>
     </property>
     <property name="Station" type="freetext">
       <description>Description TBD</description>
     </property>
-    <property name="ASL" type="freetext">
+    <property name="Project" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Area" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Site Name" type="freetext">
       <description>Description TBD</description>
     </property>
     <property name="Water Table" type="freetext">
-      <description>Description TBD</description>
-    </property>
-    <property name="mASL" type="freetext">
       <description>Description TBD</description>
     </property>
     <property name="Sample Depth" type="freetext">
@@ -33,13 +39,7 @@
     <property name="Bottom of Hole" type="freetext">
       <description>Description TBD</description>
     </property>
-    <property name="Temperature" type="freetext">
-      <description>Description TBD</description>
-    </property>
-    <property name="Conductivity" type="freetext">
-      <description>Description TBD</description>
-    </property>
-    <property name="Area" type="freetext">
+    <property name="Notes" type="freetext">
       <description>Description TBD</description>
     </property>
     <property name="Photos" type="file" file="true" thumbnail="true">
@@ -142,16 +142,16 @@
     <property name="Estimated Angle" type="freetext">
       <description>Description TBD</description>
     </property>
-    <property name="Outflow From Tank" type="enum">
+    <property name="Outflow Present" type="enum">
       <description>Description TBD</description>
       <lookup>
         <term> {No_Observation}
           <description>Description TBD</description>
         </term>
-        <term> {Outflow_under}
+        <term> {Yes}
           <description>Description TBD</description>
         </term>
-        <term> {Outflow_over}
+        <term> {No}
           <description>Description TBD</description>
         </term>
       </lookup>
@@ -168,9 +168,12 @@
         <term> {Bailed_From_Flowing_Windmill}
           <description>Description TBD</description>
         </term>
+        <term> {Pumped}
+          <description>Description TBD</description>
+        </term>
       </lookup>
     </property>
-    <property name="Sample Collected" type="enum">
+    <property name="Samples Collected" type="enum">
       <description>Description TBD</description>
       <lookup>
         <term> {Cations}
@@ -187,52 +190,1328 @@
         </term>
       </lookup>
     </property>
-    <property name="Water Sample Latitude" type="freetext">
+    <property name="Latitude" type="freetext">
       <description>Description TBD</description>
     </property>
-    <property name="Water Sample Longitude" type="freetext">
+    <property name="Longitude" type="freetext">
       <description>Description TBD</description>
     </property>
-    <property name="Water Sample Northing" type="freetext">
+    <property name="Northing" type="freetext">
       <description>Description TBD</description>
     </property>
-    <property name="Water Sample Easting" type="freetext">
+    <property name="Easting" type="freetext">
       <description>Description TBD</description>
     </property>
-    <property name="Tree Latitude" type="freetext">
+    <property name="SRID" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> 28349
+          <description>Description TBD</description>
+        </term>
+        <term> 28350
+          <description>Description TBD</description>
+        </term>
+        <term> 28351
+          <description>Description TBD</description>
+        </term>
+        <term> 28352
+          <description>Description TBD</description>
+        </term>
+        <term> 28353
+          <description>Description TBD</description>
+        </term>
+        <term> 28354
+          <description>Description TBD</description>
+        </term>
+        <term> 28355
+          <description>Description TBD</description>
+        </term>
+        <term> 28356
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Elevation" type="freetext">
       <description>Description TBD</description>
     </property>
-    <property name="Tree Longitude" type="freetext">
+    <property name="Temperature" type="freetext">
       <description>Description TBD</description>
     </property>
-    <property name="Tree Northing" type="freetext">
+    <property name="Conductivity" type="freetext">
       <description>Description TBD</description>
     </property>
-    <property name="Tree Easting" type="freetext">
+    <property name="Sketch" type="file" file="true" thumbnail="true">
       <description>Description TBD</description>
     </property>
-    <property name="Species" type="freetext">
+    <property name="Preferred pH" type="freetext">
       <description>Description TBD</description>
     </property>
-    <property name="Height" type="freetext">
+    <property name="Preferred pH Time" type="freetext">
       <description>Description TBD</description>
     </property>
-    <property name="Width" type="freetext">
+    <property name="Preferred Eh" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Preferred Eh Time" type="freetext">
+      <description>Description TBD</description>
+    </property>
+  </ArchaeologicalElement>
+
+  <ArchaeologicalElement name="pH">
+    <description></description>
+    <property name="pH" type="freetext" isIdentifier="true">
+      <description>Description TBD</description>
+    </property>
+    <property name="Time" type="freetext" isIdentifier="true">
+      <description>Description TBD</description>
+    </property>
+    <property name="Preferred" type="freetext">
+      <description>Description TBD</description>
+    </property>
+  </ArchaeologicalElement>
+
+  <ArchaeologicalElement name="Eh">
+    <description></description>
+    <property name="Eh" type="freetext" isIdentifier="true">
+      <description>Description TBD</description>
+    </property>
+    <property name="Time" type="freetext" isIdentifier="true">
+      <description>Description TBD</description>
+    </property>
+    <property name="Preferred" type="freetext">
+      <description>Description TBD</description>
+    </property>
+  </ArchaeologicalElement>
+  
+  <ArchaeologicalElement name="Plant Sample">
+    <description></description>
+    <property name="Plant Sample Prefix" type="freetext" isIdentifier="true">
+      <description>Description TBD</description>
+    </property>
+    <property name="Plant Record ID" isIdentifier="true">
+      <description>Description TBD</description>
+    </property>
+    <property name="Station" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Project" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Area" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Plant Species" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Latitude" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Longitude" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Northing" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Easting" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="SRID" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> 28349
+          <description>Description TBD</description>
+        </term>
+        <term> 28350
+          <description>Description TBD</description>
+        </term>
+        <term> 28351
+          <description>Description TBD</description>
+        </term>
+        <term> 28352
+          <description>Description TBD</description>
+        </term>
+        <term> 28353
+          <description>Description TBD</description>
+        </term>
+        <term> 28354
+          <description>Description TBD</description>
+        </term>
+        <term> 28355
+          <description>Description TBD</description>
+        </term>
+        <term> 28356
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Elevation" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Plant Height" type="freetext">
+      <description>Please list the maximum height of the plant in metres</description>
+    </property>
+    <property name="Plant Width" type="freetext">
+      <description>Please list the maximum width of the plant in metres</description>
+    </property>
+    <property name="Soil Description" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> {Clay}
+          <description>Description TBD</description>
+        </term>
+        <term> {Sandy}
+          <description>Description TBD</description>
+        </term>
+        <term> {Silty}
+          <description>Description TBD</description>
+        </term>
+        <term> {Loam}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Landform Description" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> {No_Observation}
+          <description>Description TBD</description>
+        </term>
+        <term> {a}
+          <description>Description TBD</description>
+          <term> {ap}
+            <description>Description TBD</description>
+          </term>
+          <term> {af}
+            <description>Description TBD</description>
+          </term>
+          <term> {aa}
+            <description>Description TBD</description>
+          </term>
+          <term> {ab}
+            <description>Description TBD</description>
+          </term>
+          <term> {ac}
+            <description>Description TBD</description>
+          </term>
+          <term> {am}
+            <description>Description TBD</description>
+          </term>
+          <term> {ao}
+            <description>Description TBD</description>
+          </term>
+          <term> {at}
+            <description>Description TBD</description>
+          </term>
+          <term> {as}
+            <description>Description TBD</description>
+          </term>
+          <term> {aw}
+            <description>Description TBD</description>
+          </term>
+          <term> {al}
+            <description>Description TBD</description>
+          </term>
+        </term>
+        <term> {u}
+          <description>Description TBD</description>
+          <term> {ul}
+            <description>Description TBD</description>
+          </term>
+        </term>
+        <term> {f}
+          <description>Description TBD</description>
+          <term> {fa}
+            <description>Description TBD</description>
+          </term>
+          <term> {fc}
+            <description>Description TBD</description>
+          </term>
+          <term> {fs}
+            <description>Description TBD</description>
+          </term>
+        </term>
+        <term> {p}
+          <description>Description TBD</description>
+          <term> {pd}
+            <description>Description TBD</description>
+          </term>
+          <term> {pi}
+            <description>Description TBD</description>
+          </term>
+          <term> {pp}
+            <description>Description TBD</description>
+          </term>
+          <term> {ps}
+            <description>Description TBD</description>
+          </term>
+        </term>
+        <term> {g}
+          <description>Description TBD</description>
+          <term> {gd}
+            <description>Description TBD</description>
+          </term>
+          <term> {ge}
+            <description>Description TBD</description>
+          </term>
+        </term>
+        <term> {d}
+          <description>Description TBD</description>
+        </term>
+        <term> {c}
+          <description>Description TBD</description>
+          <term> {cb}
+            <description>Description TBD</description>
+          </term>
+          <term> {chp}
+            <description>Description TBD</description>
+          </term>
+          <term> {cr}
+            <description>Description TBD</description>
+          </term>
+          <term> {cm}
+            <description>Description TBD</description>
+          </term>
+          <term> {ct}
+            <description>Description TBD</description>
+          </term>
+          <term> {cd}
+            <description>Description TBD</description>
+          </term>
+          <term> {cp}
+            <description>Description TBD</description>
+          </term>
+          <term> {cc}
+            <description>Description TBD</description>
+          </term>
+        </term>
+        <term> {e}
+          <description>Description TBD</description>
+          <term> {ep}
+            <description>Description TBD</description>
+          </term>
+          <term> {ei}
+            <description>Description TBD</description>
+          </term>
+          <term> {ea}
+            <description>Description TBD</description>
+          </term>
+          <term> {en}
+            <description>Description TBD</description>
+          </term>
+          <term> {ec}
+            <description>Description TBD</description>
+          </term>
+          <term> {er}
+            <description>Description TBD</description>
+          </term>
+          <term> {eu}
+            <description>Description TBD</description>
+          </term>
+          <term> {el}
+            <description>Description TBD</description>
+          </term>
+          <term> {eh}
+            <description>Description TBD</description>
+          </term>
+          <term> {em}
+            <description>Description TBD</description>
+          </term>
+          <term> {ee}
+            <description>Description TBD</description>
+          </term>
+          <term> {eb}
+            <description>Description TBD</description>
+          </term>
+          <term> {ed}
+            <description>Description TBD</description>
+          </term>
+        </term>
+        <term> {k}
+          <description>Description TBD</description>
+        </term>
+        <term> {i}
+          <description>Description TBD</description>
+        </term>
+        <term> {v}
+          <description>Description TBD</description>
+          <term> {vc}
+            <description>Description TBD</description>
+          </term>
+          <term> {w}
+            <description>Description TBD</description>
+          </term>
+          <term> {vi}
+            <description>Description TBD</description>
+          </term>
+          <term> {va}
+            <description>Description TBD</description>
+          </term>
+          <term> {vf}
+            <description>Description TBD</description>
+          </term>
+          <term> {vp}
+            <description>Description TBD</description>
+          </term>
+        </term>
+        <term> {m}
+          <description>Description TBD</description>
+        </term>
+        <term> {t}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Notes" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Photos" type="file" file="true" thumbnail="true">
+      <description>Description TBD</description>
+    </property>
+  </ArchaeologicalElement>
+
+  <ArchaeologicalElement name="Soil Sample">
+    <description>Description TBD</description>
+    <property name="Soil Sample Prefix" type="freetext" isIdentifier="true">
+      <description>Description TBD</description>
+    </property>
+    <property name="Soil Sample ID" isIdentifier="true">
+      <description>Description TBD</description>
+    </property>
+    <property name="Station" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Project" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Area" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Latitude" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Longitude" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Northing" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Easting" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="SRID" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> 28349
+          <description>Description TBD</description>
+        </term>
+        <term> 28350
+          <description>Description TBD</description>
+        </term>
+        <term> 28351
+          <description>Description TBD</description>
+        </term>
+        <term> 28352
+          <description>Description TBD</description>
+        </term>
+        <term> 28353
+          <description>Description TBD</description>
+        </term>
+        <term> 28354
+          <description>Description TBD</description>
+        </term>
+        <term> 28355
+          <description>Description TBD</description>
+        </term>
+        <term> 28356
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Elevation" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Depth" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Colour">
+      <description>Description TBD</description>
+    </property>
+    <property name="Lag" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> {No_Observation}
+          <description>Description TBD</description>
+        </term>
+        <term> {Yes}
+          <description>Description TBD</description>
+        </term>
+        <term> {No}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Soil Texture" type="enum">
+      <description>Check all that apply</description>
+      <lookup>
+        <term> {Clay}
+          <description>Description TBD</description>
+        </term>
+        <term> {Sandy}
+          <description>Description TBD</description>
+        </term>
+        <term> {Silty}
+          <description>Description TBD</description>
+        </term>
+        <term> {Loam}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Geology" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> {No_Observation}
+          <description>Description TBD</description>
+        </term>
+        <term> {Sedimentary}
+          <description>Description TBD</description>
+          <term> {VAG}
+            <description>Description TBD</description>
+          </term>
+          <term> {TAL}
+            <description>Description TBD</description>
+          </term>
+          <term> {ARNT}
+            <description>Description TBD</description>
+          </term>
+          <term> {AGLT}
+            <description>Description TBD</description>
+          </term>
+          <term> {SA}
+            <description>Description TBD</description>
+          </term>
+          <term> {LC}
+            <description>Description TBD</description>
+          </term>
+          <term> {SHCS}
+            <description>Description TBD</description>
+          </term>
+          <term> {CHCS}
+            <description>Description TBD</description>
+          </term>
+          <term> {CBR}
+            <description>Description TBD</description>
+          </term>
+          <term> {CHT}
+            <description>Description TBD</description>
+          </term>
+          <term> {SHC}
+            <description>Description TBD</description>
+          </term>
+          <term> {CY}
+            <description>Description TBD</description>
+          </term>
+          <term> {SCY}
+            <description>Description TBD</description>
+          </term>
+          <term> {TC}
+            <description>Description TBD</description>
+          </term>
+          <term> {SCO}
+            <description>Description TBD</description>
+          </term>
+          <term> {SCM}
+            <description>Description TBD</description>
+          </term>
+          <term> {SCP}
+            <description>Description TBD</description>
+          </term>
+          <term> {SDS}
+            <description>Description TBD</description>
+          </term>
+          <term> {SHD}
+            <description>Description TBD</description>
+          </term>
+          <term> {SDI}
+            <description>Description TBD</description>
+          </term>
+          <term> {DRC}
+            <description>Description TBD</description>
+          </term>
+          <term> {DCTL}
+            <description>Description TBD</description>
+          </term>
+          <term> {FRC}
+            <description>Description TBD</description>
+          </term>
+          <term> {FER}
+            <description>Description TBD</description>
+          </term>
+          <term> {SLG}
+            <description>Description TBD</description>
+          </term>
+          <term> {GR}
+            <description>Description TBD</description>
+          </term>
+          <term> {NG}
+            <description>Description TBD</description>
+          </term>
+          <term> {GYW}
+            <description>Description TBD</description>
+          </term>
+          <term> {IFE}
+            <description>Description TBD</description>
+          </term>
+          <term> {KAO}
+            <description>Description TBD</description>
+          </term>
+          <term> {LMZ}
+            <description>Description TBD</description>
+          </term>
+          <term> {LPZ}
+            <description>Description TBD</description>
+          </term>
+          <term> {SL}
+            <description>Description TBD</description>
+          </term>
+          <term> {SLS}
+            <description>Description TBD</description>
+          </term>
+          <term> {MDS}
+            <description>Description TBD</description>
+          </term>
+          <term> {SLM}
+            <description>Description TBD</description>
+          </term>
+          <term> {SLP}
+            <description>Description TBD</description>
+          </term>
+          <term> {NS}
+            <description>Description TBD</description>
+          </term>
+          <term> {SS_(geology)}
+            <description>Description TBD</description>
+          </term>
+          <term> {SSA}
+            <description>Description TBD</description>
+          </term>
+          <term> {SSC}
+            <description>Description TBD</description>
+          </term>
+          <term> {CSS}
+            <description>Description TBD</description>
+          </term>
+          <term> {SSD}
+            <description>Description TBD</description>
+          </term>
+          <term> {SSL}
+            <description>Description TBD</description>
+          </term>
+          <term> {SSM}
+            <description>Description TBD</description>
+          </term>
+          <term> {SSQ}
+            <description>Description TBD</description>
+          </term>
+          <term> {SST}
+            <description>Description TBD</description>
+          </term>
+          <term> {SR}
+            <description>Description TBD</description>
+          </term>
+          <term> {LS}
+            <description>Description TBD</description>
+          </term>
+          <term> {US}
+            <description>Description TBD</description>
+          </term>
+          <term> {SN}
+            <description>Description TBD</description>
+          </term>
+          <term> {SH_(geology)}
+            <description>Description TBD</description>
+          </term>
+          <term> {SI}
+            <description>Description TBD</description>
+          </term>
+          <term> {SIC}
+            <description>Description TBD</description>
+          </term>
+          <term> {SID}
+            <description>Description TBD</description>
+          </term>
+          <term> {MSI}
+            <description>Description TBD</description>
+          </term>
+          <term> {SLT}
+            <description>Description TBD</description>
+          </term>
+          <term> {SLW}
+            <description>Description TBD</description>
+          </term>
+          <term> {SLC}
+            <description>Description TBD</description>
+          </term>
+        </term>
+        <term> {Metamorphic}
+          <description>Description TBD</description>
+          <term> {MCS}
+            <description>Description TBD</description>
+          </term>
+          <term> {MGN}
+            <description>Description TBD</description>
+          </term>
+          <term> {MLS}
+            <description>Description TBD</description>
+          </term>
+          <term> {M}
+            <description>Description TBD</description>
+          </term>
+          <term> {MGM}
+            <description>Description TBD</description>
+          </term>
+          <term> {MMY}
+            <description>Description TBD</description>
+          </term>
+          <term> {MSC}
+            <description>Description TBD</description>
+          </term>
+          <term> {MQZ}
+            <description>Description TBD</description>
+          </term>
+        </term>
+        <term> {Igneous}
+          <description>Description TBD</description>
+          <term> {MAM}
+            <description>Description TBD</description>
+          </term>
+          <term> {VAN}
+            <description>Description TBD</description>
+          </term>
+          <term> {GAN}
+            <description>Description TBD</description>
+          </term>
+          <term> {BAS}
+            <description>Description TBD</description>
+          </term>
+          <term> {VXY}
+            <description>Description TBD</description>
+          </term>
+          <term> {VXV}
+            <description>Description TBD</description>
+          </term>
+          <term> {VDA}
+            <description>Description TBD</description>
+          </term>
+          <term> {GDI}
+            <description>Description TBD</description>
+          </term>
+          <term> {DOL}
+            <description>Description TBD</description>
+          </term>
+          <term> {GAB}
+            <description>Description TBD</description>
+          </term>
+          <term> {GGN}
+            <description>Description TBD</description>
+          </term>
+          <term> {GGT}
+            <description>Description TBD</description>
+          </term>
+          <term> {GGD}
+            <description>Description TBD</description>
+          </term>
+          <term> {GNI}
+            <description>Description TBD</description>
+          </term>
+          <term> {VTG}
+            <description>Description TBD</description>
+          </term>
+          <term> {KIM}
+            <description>Description TBD</description>
+          </term>
+          <term> {GMD}
+            <description>Description TBD</description>
+          </term>
+          <term> {GMO}
+            <description>Description TBD</description>
+          </term>
+          <term> {GNO}
+            <description>Description TBD</description>
+          </term>
+          <term> {GOG}
+            <description>Description TBD</description>
+          </term>
+          <term> {GPE}
+            <description>Description TBD</description>
+          </term>
+          <term> {GPO}
+            <description>Description TBD</description>
+          </term>
+          <term> {VRD}
+            <description>Description TBD</description>
+          </term>
+          <term> {VRH}
+            <description>Description TBD</description>
+          </term>
+          <term> {GSY}
+            <description>Description TBD</description>
+          </term>
+          <term> {GTO}
+            <description>Description TBD</description>
+          </term>
+          <term> {VTR}
+            <description>Description TBD</description>
+          </term>
+          <term> {GTC}
+            <description>Description TBD</description>
+          </term>
+          <term> {VTU}
+            <description>Description TBD</description>
+          </term>
+          <term> {VTX}
+            <description>Description TBD</description>
+          </term>
+          <term> {VTP}
+            <description>Description TBD</description>
+          </term>
+          <term> {VTK}
+            <description>Description TBD</description>
+          </term>
+          <term> {VTL}
+            <description>Description TBD</description>
+          </term>
+          <term> {VNO}
+            <description>Description TBD</description>
+          </term>
+        </term>
+      </lookup>
+    </property>
+    <property name="Drainage" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> {No_Observation}
+          <description>Description TBD</description>
+        </term>
+        <term> {Yes}
+          <description>Description TBD</description>
+        </term>
+        <term> {No}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Contamination" type="enum">
+      <description>If you have selected 'Yes' please provide a description in the Annotation</description>
+      <lookup>
+        <term> {No_Observation}
+          <description>Description TBD</description>
+        </term>
+        <term> {Yes}
+          <description>Description TBD</description>
+        </term>
+        <term> {No}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Regolith Type" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> {No_Observation}
+          <description>Description TBD</description>
+        </term>
+        <term> {Transported_Regolith}
+          <description>Description TBD</description>
+          <term> {A}
+            <description>Description TBD</description>
+            <term> {AC}
+              <description>Description TBD</description>
+            </term>
+            <term> {AO}
+              <description>Description TBD</description>
+            </term>
+          </term>
+          <term> {I}
+            <description>Description TBD</description>
+            <term> {IS}
+              <description>Description TBD</description>
+            </term>
+            <term> {IL}
+              <description>Description TBD</description>
+            </term>
+            <term> {IP}
+              <description>Description TBD</description>
+            </term>
+          </term>
+          <term> {C}
+            <description>Description TBD</description>
+            <term> {CM}
+              <description>Description TBD</description>
+            </term>
+            <term> {CH}
+              <description>Description TBD</description>
+            </term>
+            <term> {CF}
+              <description>Description TBD</description>
+            </term>
+          </term>
+          <term> {E}
+            <description>Description TBD</description>
+            <term> {EH}
+              <description>Description TBD</description>
+            </term>
+            <term> {EG}
+              <description>Description TBD</description>
+            </term>
+          </term>
+          <term> {L}
+            <description>Description TBD</description>
+          </term>
+          <term> {G}
+            <description>Description TBD</description>
+          </term>
+          <term> {V}
+            <description>Description TBD</description>
+            <term> {VT}
+              <description>Description TBD</description>
+            </term>
+          </term>
+          <term> {F}
+            <description>Description TBD</description>
+          </term>
+          <term> {O}
+            <description>Description TBD</description>
+            <term> {OB}
+              <description>Description TBD</description>
+            </term>
+            <term> {OE}
+              <description>Description TBD</description>
+            </term>
+            <term> {OC}
+              <description>Description TBD</description>
+            </term>
+            <term> {OM}
+              <description>Description TBD</description>
+            </term>
+          </term>
+        </term>
+        <term> {In_Situ_Regolith}
+          <description>Description TBD</description>
+          <term> {W}
+            <description>Description TBD</description>
+          </term>
+          <term> {R}
+            <description>Description TBD</description>
+          </term>
+          <term> {S}
+            <description>Description TBD</description>
+            <term> {SC}
+              <description>Description TBD</description>
+            </term>
+            <term> {SV}
+              <description>Description TBD</description>
+            </term>
+            <term> {SH_(regolith)}
+              <description>Description TBD</description>
+            </term>
+            <term> {SM}
+              <description>Description TBD</description>
+            </term>
+            <term> {SS_(regolith)}
+              <description>Description TBD</description>
+            </term>
+          </term>
+        </term>
+      </lookup>
+    </property>
+    <property name="Landform" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> {No_Observation}
+          <description>Description TBD</description>
+        </term>
+        <term> {a}
+          <description>Description TBD</description>
+          <term> {ap}
+            <description>Description TBD</description>
+          </term>
+          <term> {af}
+            <description>Description TBD</description>
+          </term>
+          <term> {aa}
+            <description>Description TBD</description>
+          </term>
+          <term> {ab}
+            <description>Description TBD</description>
+          </term>
+          <term> {ac}
+            <description>Description TBD</description>
+          </term>
+          <term> {am}
+            <description>Description TBD</description>
+          </term>
+          <term> {ao}
+            <description>Description TBD</description>
+          </term>
+          <term> {at}
+            <description>Description TBD</description>
+          </term>
+          <term> {as}
+            <description>Description TBD</description>
+          </term>
+          <term> {aw}
+            <description>Description TBD</description>
+          </term>
+          <term> {al}
+            <description>Description TBD</description>
+          </term>
+        </term>
+        <term> {u}
+          <description>Description TBD</description>
+          <term> {ul}
+            <description>Description TBD</description>
+          </term>
+        </term>
+        <term> {f}
+          <description>Description TBD</description>
+          <term> {fa}
+            <description>Description TBD</description>
+          </term>
+          <term> {fc}
+            <description>Description TBD</description>
+          </term>
+          <term> {fs}
+            <description>Description TBD</description>
+          </term>
+        </term>
+        <term> {p}
+          <description>Description TBD</description>
+          <term> {pd}
+            <description>Description TBD</description>
+          </term>
+          <term> {pi}
+            <description>Description TBD</description>
+          </term>
+          <term> {pp}
+            <description>Description TBD</description>
+          </term>
+          <term> {ps}
+            <description>Description TBD</description>
+          </term>
+        </term>
+        <term> {g}
+          <description>Description TBD</description>
+          <term> {gd}
+            <description>Description TBD</description>
+          </term>
+          <term> {ge}
+            <description>Description TBD</description>
+          </term>
+        </term>
+        <term> {d}
+          <description>Description TBD</description>
+        </term>
+        <term> {c}
+          <description>Description TBD</description>
+          <term> {cb}
+            <description>Description TBD</description>
+          </term>
+          <term> {chp}
+            <description>Description TBD</description>
+          </term>
+          <term> {cr}
+            <description>Description TBD</description>
+          </term>
+          <term> {cm}
+            <description>Description TBD</description>
+          </term>
+          <term> {ct}
+            <description>Description TBD</description>
+          </term>
+          <term> {cd}
+            <description>Description TBD</description>
+          </term>
+          <term> {cp}
+            <description>Description TBD</description>
+          </term>
+          <term> {cc}
+            <description>Description TBD</description>
+          </term>
+        </term>
+        <term> {e}
+          <description>Description TBD</description>
+          <term> {ep}
+            <description>Description TBD</description>
+          </term>
+          <term> {ei}
+            <description>Description TBD</description>
+          </term>
+          <term> {ea}
+            <description>Description TBD</description>
+          </term>
+          <term> {en}
+            <description>Description TBD</description>
+          </term>
+          <term> {ec}
+            <description>Description TBD</description>
+          </term>
+          <term> {er}
+            <description>Description TBD</description>
+          </term>
+          <term> {eu}
+            <description>Description TBD</description>
+          </term>
+          <term> {el}
+            <description>Description TBD</description>
+          </term>
+          <term> {eh}
+            <description>Description TBD</description>
+          </term>
+          <term> {em}
+            <description>Description TBD</description>
+          </term>
+          <term> {ee}
+            <description>Description TBD</description>
+          </term>
+          <term> {eb}
+            <description>Description TBD</description>
+          </term>
+          <term> {ed}
+            <description>Description TBD</description>
+          </term>
+        </term>
+        <term> {k}
+          <description>Description TBD</description>
+        </term>
+        <term> {i}
+          <description>Description TBD</description>
+        </term>
+        <term> {v}
+          <description>Description TBD</description>
+          <term> {vc}
+            <description>Description TBD</description>
+          </term>
+          <term> {w}
+            <description>Description TBD</description>
+          </term>
+          <term> {vi}
+            <description>Description TBD</description>
+          </term>
+          <term> {va}
+            <description>Description TBD</description>
+          </term>
+          <term> {vf}
+            <description>Description TBD</description>
+          </term>
+          <term> {vp}
+            <description>Description TBD</description>
+          </term>
+        </term>
+        <term> {m}
+          <description>Description TBD</description>
+        </term>
+        <term> {t}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Vegetation" type="freetext">
       <description>Description TBD</description>
     </property>
     <property name="Notes" type="freetext">
       <description>Description TBD</description>
     </property>
+    <property name="Photos" type="file" file="true" thumbnail="true">
+      <description>Description TBD</description>
+    </property>
+    <property name="Sketch" type="file" file="true" thumbnail="true">
+      <description>Description TBD</description>
+    </property>
   </ArchaeologicalElement>
-  <ArchaeologicalElement name="pH/Eh">
-    <description></description>
-    <property name="Time" type="freetext" isIdentifier="true">
+
+  <ArchaeologicalElement name="Rock Sample">
+    <description>Description TBD</description>
+    <property name="Rock Sample Prefix" type="freetext" isIdentifier="true">
       <description>Description TBD</description>
     </property>
-    <property name="pH" type="freetext" isIdentifier="true">
+    <property name="Core ID" type="freetext" isIdentifier="true">
       <description>Description TBD</description>
     </property>
-    <property name="Eh" type="freetext" isIdentifier="true">
+    <property name="Station" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Project" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Area" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Latitude" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Longitude" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Northing" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Easting" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="SRID" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> 28349
+          <description>Description TBD</description>
+        </term>
+        <term> 28350
+          <description>Description TBD</description>
+        </term>
+        <term> 28351
+          <description>Description TBD</description>
+        </term>
+        <term> 28352
+          <description>Description TBD</description>
+        </term>
+        <term> 28353
+          <description>Description TBD</description>
+        </term>
+        <term> 28354
+          <description>Description TBD</description>
+        </term>
+        <term> 28355
+          <description>Description TBD</description>
+        </term>
+        <term> 28356
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Elevation" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Strike of Bedding" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Dip of Bedding" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Veins" type="enum">
+      <description>If you have selected 'Yes' please provide a description in the Annotation</description>
+      <lookup>
+        <term> {No_Observation}
+          <description>Description TBD</description>
+        </term>
+        <term> {Yes}
+          <description>Description TBD</description>
+        </term>
+        <term> {No}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Fractures" type="enum">
+      <description>If you have selected 'Yes' please provide a description in the Annotation</description>
+      <lookup>
+        <term> {No_Observation}
+          <description>Description TBD</description>
+        </term>
+        <term> {Yes}
+          <description>Description TBD</description>
+        </term>
+        <term> {No}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Plunge of Fold Axes" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Other Structural Measurements" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Lithology" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> {Basalt}
+          <description>Description TBD</description>
+        </term>
+        <term> {Sandstone}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Fineness or Inclusion size" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> {Fine}
+          <description>Description TBD</description>
+        </term>
+        <term> {Medium}
+          <description>Description TBD</description>
+        </term>
+        <term> {Coarse}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Sorting" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> {Poor}
+          <description>Description TBD</description>
+        </term>
+        <term> {Moderate}
+          <description>Description TBD</description>
+        </term>
+        <term> {Well_Sorted}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Other lithological descriptors" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Stratigraphic unit" type="freetext">
+      <description>Optional if known from maps</description>
+    </property>
+    <property name="Large-scale Structure" type="freetext">
+      <description>Basic description of what the rocks are like, e.g., massive, thickly bedded, laminated, pillow structures, etc.</description>
+    </property>
+    <property name="Alteration" type="freetext">
+      <description>Any signs of obvious alteration, e.g., pervasive epidote, silicification around veins, etc.</description>
+    </property>
+    <property name="Notes" type="freetext">
+      <description>For anything else....</description>
+    </property>
+    <property name="Photos" type="file" file="true" thumbnail="true">
+      <description>Description TBD</description>
+    </property>
+    <property name="Sketch" type="file" file="true" thumbnail="true">
+      <description>Description TBD</description>
+    </property>
+  </ArchaeologicalElement>
+
+  <ArchaeologicalElement name="Photolog">
+    <description>A record of images created and stored on another device, eg by a professional site photographer.</description>
+    <property name="Photo ID" isIdentifier= "true" type="freetext">
+      <description>Unique number or code allocated by creator of the image. It could be a filename or a reference number</description>
+    </property>
+    <property name="Photo Timestamp" type="freetext">
+      <description>Time at which the photo was taken</description>
+    </property>
+    <property name="Photo Note" type="freetext">
+      <description>Description TBD</description>
+    </property>
+  </ArchaeologicalElement>
+
+  <ArchaeologicalElement name="Note">
+    <description>Description TBD</description>
+    <property name="Label" isIdentifier= "true" type="freetext">
+      <description>Description TBD</description>
+    </property>
+    <property name="Note" type="freetext">
       <description>Description TBD</description>
     </property>
   </ArchaeologicalElement>
