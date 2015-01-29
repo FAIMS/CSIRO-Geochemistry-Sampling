@@ -27,32 +27,45 @@
               <Project/>
               <Area/>
               <Sample_Types/>
+              <container1>
+                <child1>
+                  <Sample_Prefix/>
+                </child1>
+                <child2>
+                  <Sample_Starting_ID/>
+                </child2>
+              </container1>
               <New_Sample/>
+              <Validate_Sample_ID/>
               <GPS_Status/>
             </Start>
-            <Defaults>
-              <Water_Sample/>
-              <Plant_Sample/>
-              <Soil_Sample/>
-              <Rock_Sample/>
-              <Validate/>
-            </Defaults>
             <Search>
               <Sample_Types/>
               <Sample_List/>
             </Search>
-            <!-- <Map>
-              <Map/>
+            <Map>
+              <map/>
               <container1>
                 <child1>
-                  <Centre_On_Me/>
+                  <Centre_Map/>
                 </child1>
                 <child2>
-                  <Save_Settings/>
+                  <Save_Map_Settings/>
                 </child2>
+                <child3>
+                  <Create_Shape/>
+                </child3>
               </container1>
-            </Map> -->
+            </Map>
           </Project>
+          <Shape>
+            <Shape_Note>
+              <label/>
+              <note/>
+              <return/>
+              <delete/>
+            </Shape_Note>
+          </Shape>
           <Water_Sample>
             <Basic_Info>
               <container0>
@@ -350,11 +363,6 @@
           </Photolog>
         </faims>
       </instance>
-      <bind nodeset="/faims/Project/Defaults/Water_Sample" type="decimal"/>
-      <bind nodeset="/faims/Project/Defaults/Plant_Sample" type="decimal"/>
-      <bind nodeset="/faims/Project/Defaults/Soil_Sample" type="decimal"/>
-      <bind nodeset="/faims/Project/Defaults/Rock_Sample" type="decimal"/>
-      <bind nodeset="/faims/Project/Defaults/Rock_Sample" type="decimal"/>
       <bind nodeset="/faims/Water_Sample/Basic_Info/Elevation" type="decimal"/>
       <bind nodeset="/faims/Water_Sample/Codes/container1/child2/Estimated_Angle" type="decimal"/>
       <bind nodeset="/faims/Plant_Sample/Basic_Info/container4/child1/Plant_Height" type="decimal"/>
@@ -417,30 +425,30 @@
             <value>placeholder</value>
           </item>
         </select1>
+        <group ref="container1" faims_style="orientation">
+          <label/>
+          <group ref="child1" faims_style="even">
+            <label/>
+            <input ref="Sample_Prefix" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+              <label>{Sample_Prefix}</label>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label/>
+            <input ref="Sample_Starting_ID" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+              <label>{Sample_Starting_ID}</label>
+            </input>
+          </group>
+        </group>
         <trigger ref="New_Sample">
           <label>{New_Sample}</label>
+        </trigger>
+        <trigger ref="Validate_Sample_ID">
+          <label>{Validate_Sample_ID}</label>
         </trigger>
         <input ref="GPS_Status" faims_certainty="false" faims_annotation="false" faims_read_only="true" faims_style_class="gps-status">
           <label>{GPS_Status}</label>
         </input>
-      </group>
-      <group ref="Defaults">
-        <label>{Defaults}</label>
-        <input ref="Water_Sample" faims_certainty="false" faims_annotation="false" faims_read_only="false">
-          <label>{Water_Sample_Default}</label>
-        </input>
-        <input ref="Plant_Sample" faims_certainty="false" faims_annotation="false" faims_read_only="false">
-          <label>{Plant_Sample_Default}</label>
-        </input>
-        <input ref="Soil_Sample" faims_certainty="false" faims_annotation="false" faims_read_only="false">
-          <label>{Soil_Sample_Default}</label>
-        </input>
-        <input ref="Rock_Sample" faims_certainty="false" faims_annotation="false" faims_read_only="false">
-          <label>{Rock_Sample_Default}</label>
-        </input>
-        <trigger ref="Validate">
-          <label>{Validate}</label>
-        </trigger>
       </group>
       <group ref="Search" faims_scrollable="false">
         <label>{Search}</label>
@@ -459,7 +467,7 @@
           </item>
         </select1>
       </group>
-      <!-- <group ref="Map" faims_scrollable="false">
+      <group ref="Map" faims_scrollable="false">
         <label>{Map}</label>
          <input ref="map" faims_map="true" faims_certainty="false">
           <label/>
@@ -468,18 +476,42 @@
           <label/>
           <group faims_style="even" ref="child1">
             <label/>
-            <trigger ref="centre">
-              <label>{Centre_On_Me}</label>
+            <trigger ref="Centre_Map">
+              <label>{Centre_Map}</label>
             </trigger>
           </group>
           <group faims_style="even" ref="child2">
             <label/>
-            <trigger ref="saveSettings">
-              <label>{Save_Settings}</label>
+            <trigger ref="Save_Map_Settings">
+              <label>{Save_Map_Settings}</label>
+            </trigger>
+          </group>
+          <group faims_style="even" ref="child3">
+            <label/>
+            <trigger ref="Create_Shape">
+              <label>{Create_Shape}</label>
             </trigger>
           </group>
         </group>
-      </group> -->
+      </group>
+    </group>
+    <group ref="Shape">
+      <label>{Shape}</label>
+      <group ref="Shape_Note">
+        <label>{Shape_Note}</label>
+        <input ref="label" faims_certainty="true" faims_annotation="true">
+          <label>{Shape_Label}</label>
+        </input>
+        <input ref="note" faims_certainty="true" faims_annotation="true">
+          <label>{Shape_Note_Note}</label>
+        </input>
+        <trigger ref="return">
+          <label>{Shape_Return}</label>
+        </trigger>
+        <trigger ref="delete">
+          <label>{Shape_Delete}</label>
+        </trigger>
+      </group>
     </group>
     <group ref="Water_Sample" faims_archent_type="Water Sample">
       <label>{Water_Sample}</label>
@@ -489,13 +521,13 @@
           <label></label>
           <group ref="child1" faims_style="even">
             <label></label>
-            <input ref="Water_Sample_Prefix" faims_attribute_name="Water Sample Prefix" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+            <input ref="Water_Sample_Prefix" faims_certainty="false" faims_annotation="false" faims_read_only="false">
               <label>{Water_Sample_Prefix}</label>
             </input>
           </group>
           <group ref="child2" faims_style="even">
             <label></label>
-            <input ref="Water_Sample_ID" faims_attribute_name="Water Sample ID" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+            <input ref="Water_Sample_ID" faims_certainty="false" faims_annotation="false" faims_read_only="false">
               <label>{Water_Sample_ID}</label>
             </input>
           </group>
