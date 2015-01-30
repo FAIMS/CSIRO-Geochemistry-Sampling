@@ -92,6 +92,7 @@ addActionBarItem("external_gps", new ToggleActionButtonCallback() {
 onEvent("Project", "show", "removeNavigationButtons();");
 
 onEvent("Project/Start/New_Sample", "delayclick", "newSample();");
+//onEvent("Project/Start/Validate_Sample_ID", "click", "validSampleID();");
 
 // onEvent("Project/Defaults", "show", "loadDefaultIDs();");
 // onFocus("Project/Defaults/Water_Sample", null, "saveDefault(\"Water\");");
@@ -121,9 +122,8 @@ populateDropDown("Project/Start/Sample_Types", sample_types);
 sample_types.add(0, new NameValuePair("{All}", "Sample"));
 populateDropDown("Project/Search/Sample_Types", sample_types);
 
-/* Validates the sample prefix for the right length, returns true if the prefix is
-valid or false otherwise. */
-boolean validateSamplePrefix() {
+/* Validates the sample prefix for the right length. Returns true if the prefix is valid or false otherwise. */
+boolean validSamplePrefix() {
     sample_prefix = getFieldValue("Project/Start/Sample_Prefix");
     if (isNull(sample_prefix)) {
         showWarning("Warning", "A sample prefix needs to be provided.");
@@ -136,10 +136,36 @@ boolean validateSamplePrefix() {
     return true;
 }
 
+// /* Validates the entered sample ID for duplicates. Returns true if the ID is valid or false otherwise.*/
+// boolean validSampleID() {
+//     sample_id = null;
+//     showToast("Sample ID validation functionality not implemented yet.");
+//     if(isNull(getFieldValue("Project/Start/Sample_Starting_ID"))) {
+//         showWarning("Warning", "A sample starting ID needs to be entered.");
+//         return false;
+//     }
+//     boolean queryOK = true;
+//     if (queryOK) {
+//         sample_id = getFieldValue("Project/Start/Sample_Prefix");
+//         fetchOne("REPLACE INTO localSettings(key, value) VALUES('Sample ID', '" + sample_id + "'');", null);
+//     }
+// }
+
+// /* Sets the sample starting ID to the validated user input. */
+// setSampleStartingID() {
+//     if (validSampleID) { 
+
+//     }
+
+// }
+
+
+
+
 /* Creates a new sample based on selected type. */
 newSample() {
     // Validate the entered sample prefix before making a new sample.
-    if (!validateSamplePrefix()) {
+    if (!validSamplePrefix()) {
         return;
     }
     String type = getFieldValue("Project/Start/Sample_Types");
