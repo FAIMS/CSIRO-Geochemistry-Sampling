@@ -10,9 +10,7 @@ makeLocalID(){
 }
 makeLocalID();
 
-
-onEvent("Project/Map/Create_Shape", "click", "newTabGroup(\"Shape\");");
-
+/** Action Bar **/
 
 addActionBarItem("sync", new ToggleActionButtonCallback() {
     actionOnLabel() {
@@ -88,22 +86,32 @@ addActionBarItem("external_gps", new ToggleActionButtonCallback() {
     }
 });
 
-/*** CONTROL ***/
-// Put your control tab things here
+/*** Project Tab Group ***/
+
+/* Event Handling */
 onEvent("Project", "show", "removeNavigationButtons();");
 
 onEvent("Project/Start/New_Sample", "delayclick", "newSample();");
-onEvent("Project/Defaults", "show", "loadDefaultIDs();");
-onFocus("Project/Defaults/Water_Sample", null, "saveDefault(\"Water\");");
-onFocus("Project/Defaults/Plant_Sample", null, "saveDefault(\"Plant\");");
-onFocus("Project/Defaults/Soil_Sample", null, "saveDefault(\"Soil\");");
-onFocus("Project/Defaults/Rock_Sample", null, "saveDefault(\"Rock\");");
-onEvent("Project/Defaults/Validate", "click", "showToast(\"Not implemented yet.\");");
+
+// onEvent("Project/Defaults", "show", "loadDefaultIDs();");
+// onFocus("Project/Defaults/Water_Sample", null, "saveDefault(\"Water\");");
+// onFocus("Project/Defaults/Plant_Sample", null, "saveDefault(\"Plant\");");
+// onFocus("Project/Defaults/Soil_Sample", null, "saveDefault(\"Soil\");");
+// onFocus("Project/Defaults/Rock_Sample", null, "saveDefault(\"Rock\");");
+// onEvent("Project/Defaults/Validate", "click", "showToast(\"Not implemented yet.\");");
 
 onEvent("Project/Search", "show", "loadSearch();");
 onEvent("Project/Search/Sample_Types", "click", "loadSearch();");
 onEvent("Project/Search/Sample_List", "click", "loadSample();");
 
+onEvent("Project/Map/Centre_Map", "click", "showToast(\"Centring functionality not implemented yet.\");");
+onEvent("Project/Map/Save_Map_Settings", "click", "showToast(\"Save settings functionality not implemented yet.\");");
+onEvent("Project/Map/Create_Shape", "click", "newTabGroup(\"Shape\");");
+
+String sample_prefix = null;
+String sample_id = null;
+
+/* Generates of sample types for dropdown selection. */
 sample_types = new ArrayList();
 sample_types.add(new NameValuePair("{Water_Sample}", "Water Sample"));
 sample_types.add(new NameValuePair("{Plant_Sample}", "Plant Sample"));
@@ -113,7 +121,27 @@ populateDropDown("Project/Start/Sample_Types", sample_types);
 sample_types.add(0, new NameValuePair("{All}", "Sample"));
 populateDropDown("Project/Search/Sample_Types", sample_types);
 
+/* Validates the sample prefix for the right length, returns true if the prefix is
+valid or false otherwise. */
+boolean validateSamplePrefix() {
+    sample_prefix = getFieldValue("Project/Start/Sample_Prefix");
+    if (isNull(sample_prefix)) {
+        showWarning("Warning", "A sample prefix needs to be provided.");
+        return false;
+    } 
+    if (sample_prefix.length() > 5) {
+        showWarning("Warning", "The sample prefix must be at most 5 characters.");
+        return false;
+    }
+    return true;
+}
+
+/* Creates a new sample based on selected type. */
 newSample() {
+    // Validate the entered sample prefix before making a new sample.
+    if (!validateSamplePrefix()) {
+        return;
+    }
     String type = getFieldValue("Project/Start/Sample_Types");
     if(type.equals("Water Sample")) {
         newWaterSample();
@@ -126,11 +154,13 @@ newSample() {
     }
 }
 
+/* Removes sidebar buttons. */
 removeNavigationButtons() {
     removeNavigationButton("new");
     removeNavigationButton("delete");
 }
 
+/*
 loadDefaultIDs() {
     fetchOne("SELECT value FROM localSettings WHERE key = 'Water Sample ID';", new FetchCallback() {
         onFetch(result) {
@@ -180,7 +210,9 @@ saveDefault(String type) {
 validateDefaults() {
 
 }
+*/
 
+/* Loads a list view of existing samples. */
 loadSearch() {
     type = getFieldValue("Project/Search/Sample_Types");
     fetchAll("select uuid, response from identifierAsSpreadsheet join latestnondeletedArchEnt using (uuid) join aenttype using (aenttypeid) where aenttypename like '%"+type+"%' order by aenttimestamp;",
@@ -195,6 +227,7 @@ loadSearch() {
         });
 }
 
+/* Loads an existing sample for editing. */
 loadSample() {
     fetchAll("select aenttypename from identifierAsSpreadsheet join latestnondeletedArchEnt using (uuid) join aenttype using (aenttypeid) where uuid = '" + getListItemValue() + "';",
         new FetchCallback() {
@@ -227,6 +260,7 @@ onEvent("Water_Sample/Photolog/Photolog_List", "click", "loadPhotolog();");
 
 String water_sample_id = null;
 
+/* Creates a new water sample and initialises autosaving. */
 newWaterSample() {
     newTabGroup("Water_Sample");
     water_sample_id = null;
@@ -241,7 +275,7 @@ newWaterSample() {
     } else {
         setFieldValue("Water_Sample/Basic_Info/SRID", "28350");
     }
-    setFieldValue("Water_Sample/Basic_Info/Water_Sample_Prefix", "Water");
+    setFieldValue("Water_Sample/Basic_Info/Water_Sample_Prefix", sample_prefix);
     fetchOne("SELECT value FROM localSettings WHERE key = 'Water Sample ID';", new FetchCallback() {
         onFetch(result) {
             if(!isNull(result)) {
@@ -270,11 +304,13 @@ newWaterSample() {
     });
 }
 
+/* Loads an existing water sample based on the most recent list item selected. */
 loadWaterSample() {
     water_sample_id = getListItemValue();
     loadWaterSampleFrom(water_sample_id);
 }
 
+/* Loads a specific water sample based on the given ID. */
 loadWaterSampleFrom(archentid) {
     if (isNull(archentid)) {
         showToast("No Water Sample selected");
@@ -358,6 +394,7 @@ loadWaterSampleFrom(archentid) {
     });
 }
 
+/* Resumes autosaving for the water sample. */
 resumeAutoSavingWaterSample() {
     if(!isNull(water_sample_id)) {
         saveTabGroup("Water_Sample", water_sample_id, null, null, new SaveCallback() {
@@ -372,6 +409,7 @@ resumeAutoSavingWaterSample() {
     }
 }
 
+/* Generates a confirmation prompt for deleting the current water sample. */
 deleteWaterSample() {
     if (!isNull(water_sample_id)) {
         showAlert("Confirm Deletion", "Press OK to Delete this {Water_Sample}!", "reallyDeleteWaterSample()", "doNotDelete()");
@@ -380,6 +418,7 @@ deleteWaterSample() {
     }
 }
 
+/* Deletes the current water sample. */
 reallyDeleteWaterSample() {
     deleteArchEnt(water_sample_id, new DeleteCallback() {
         onDelete(uuid) {
@@ -388,6 +427,7 @@ reallyDeleteWaterSample() {
     });
 }
 
+/* Populates all auto-generated fields for the water sample. */
 loadWaterSampleAttributes() {
     makeVocab("DropDown", "Water_Sample/Basic_Info/SRID", "SRID");
     makeVocab("CheckBoxGroup", "Water_Sample/Basic_Info/Samples_Collected", "Samples Collected");
@@ -400,6 +440,7 @@ loadWaterSampleAttributes() {
     makeVocab("DropDown", "Water_Sample/Codes/Sampling_Issues", "Sampling Issues");
 }
 
+/* Creates sidebar navigation buttons for the water sample. */
 addWaterSampleNavigation() {
     removeNavigationButton("new");
     removeNavigationButton("delete");
@@ -427,6 +468,7 @@ addWaterSampleNavigation() {
     }, "danger");
 }
 
+/* Populates the estimated angle of the water sample from the database. */
 populateEstimatedAngle() {
     fetchOne("select vocabName from vocabulary where vocabid = '"+ getFieldValue("Water_Sample/Codes/Hole_Angle") +"';", new FetchCallback() {
         onFetch(result) {
@@ -449,6 +491,7 @@ preferred_eh = null;
 
 onEvent("Water_Sample/pH_Eh", "show", "renderpHEhPage();");
 
+/* Renders the pH/Eh tab using dynamic UI. */
 renderpHEhPage() {
     executeViewTask(new ViewTask() {
         doTask() {
@@ -568,6 +611,7 @@ renderpHEhPage() {
     });
 }
 
+/* Adds a new pH value, saves the entity and updates the dynamic UI. */
 addNewpH(String ph_value) {
     if(isNull(ph_value)) {
         showToast("Please fill in an pH value");
@@ -606,6 +650,7 @@ addNewpH(String ph_value) {
     });
 }
 
+/* Adds a new Eh value, saves the entity and updates the dynamic UI. */
 addNewEh(String eh_value) {
     if(isNull(eh_value)) {
         showToast("Please fill in an Eh value");
@@ -644,6 +689,7 @@ addNewEh(String eh_value) {
     });
 }
 
+/* Sets the preferred pH and time for the given pH ID and saves to the database. */
 setPreferredpH(String ph_id, String ph_value, String ph_time, int index) {
     if(ph_id == preferred_ph) return;
     List attributes = createAttributeList();
@@ -667,6 +713,7 @@ setPreferredpH(String ph_id, String ph_value, String ph_time, int index) {
     setFieldValue("Water_Sample/Hidden/Preferred_pH_Time", ph_time);
 }
 
+/* Sets the preferred Eh and time for the given Eh ID and saves to the database. */
 setPreferredEh(String eh_id, String eh_value, String eh_time, int index) {
     if(eh_id == preferred_eh) return;
     List attributes = createAttributeList();
@@ -690,10 +737,12 @@ setPreferredEh(String eh_id, String eh_value, String eh_time, int index) {
     setFieldValue("Water_Sample/Hidden/Preferred_Eh_Time", eh_time);
 }
 
+/* Generates a confirmation prompt to delete the given pH. */
 deletepH(String ph_id) {
     showAlert("Confirm Deletion", "Press OK to Delete this {pH}!", "reallyDeletepH(\"" + ph_id + "\")", "doNotDelete()");
 }
 
+/* Deletes the given pH. */
 reallyDeletepH(String ph_id) {
     deleteArchEnt(ph_id, new DeleteCallback() {
         onDelete(uuid) {
@@ -709,10 +758,12 @@ reallyDeletepH(String ph_id) {
     });
 }
 
+/* Generates a confirmation prompt to delete the given pH. */
 deleteEh(String eh_id) {
     showAlert("Confirm Deletion", "Press OK to Delete this {Eh}!", "reallyDeleteEh(\"" + eh_id + "\")", "doNotDelete()");
 }
 
+/* Deletes the given Eh. */
 reallyDeleteEh(String eh_id) {
     deleteArchEnt(eh_id, new DeleteCallback() {
         onDelete(uuid) {
@@ -741,6 +792,7 @@ onEvent("Plant_Sample/Photolog/Photolog_List", "click", "loadPhotolog();");
 
 String plant_sample_id = null;
 
+/* Creates a new plant sample and initialises autosaving. */
 newPlantSample() {
     newTabGroup("Plant_Sample");
     plant_sample_id = null;
@@ -755,7 +807,7 @@ newPlantSample() {
     } else {
         setFieldValue("Plant_Sample/Basic_Info/SRID", "28350");
     }
-    setFieldValue("Plant_Sample/Basic_Info/Plant_Sample_Prefix", "Plant");
+    setFieldValue("Plant_Sample/Basic_Info/Plant_Sample_Prefix", sample_prefix);
     fetchOne("SELECT value FROM localSettings WHERE key = 'Plant Sample ID';", new FetchCallback() {
         onFetch(result) {
             if(!isNull(result)) {
@@ -784,11 +836,13 @@ newPlantSample() {
     });
 }
 
+/* Loads an existing plant sample based on the most recent list item selected. */
 loadPlantSample() {
     plant_sample_id = getListItemValue();
     loadPlantSampleFrom(plant_sample_id);
 }
 
+/* Loads a specific plant sample based on the given ID. */
 loadPlantSampleFrom(archentid) {
     if (isNull(archentid)) {
         showToast("No {Plant Sample} selected");
@@ -817,6 +871,7 @@ loadPlantSampleFrom(archentid) {
     });
 }
 
+/* Resumes autosaving for the plant sample. */
 resumeAutoSavingPlantSample() {
     if(!isNull(plant_sample_id)) {
         saveTabGroup("Plant_Sample", plant_sample_id, null, null, new SaveCallback() {
@@ -831,6 +886,7 @@ resumeAutoSavingPlantSample() {
     }
 }
 
+/* Generates a confirmation to delete the current plant sample. */
 deletePlantSample() {
     if (!isNull(plant_sample_id)) {
         showAlert("Confirm Deletion", "Press OK to Delete this {Plant_Sample}!", "reallyDeletePlantSample()", "doNotDelete()");
@@ -839,6 +895,7 @@ deletePlantSample() {
     }
 }
 
+/* Deletes the plant sample. */
 reallyDeletePlantSample() {
     deleteArchEnt(plant_sample_id, new DeleteCallback() {
         onDelete(uuid) {
@@ -847,12 +904,14 @@ reallyDeletePlantSample() {
     });
 }
 
+/* Populates all auto-generated fields for the plant sample. */
 loadPlantSampleAttributes() {
     makeVocab("DropDown", "Plant_Sample/Basic_Info/SRID", "SRID");
     makeVocab("CheckBoxGroup", "Plant_Sample/Basic_Info/Soil_Description", "Soil Description");
     populateHierarchicalDropDown("Plant_Sample/Basic_Info/Landform_Description", "Landform Description");
 }
 
+/* Creates sidebar navigation buttons for the plant sample. */
 addPlantSampleNavigation() {
     removeNavigationButton("new");
     removeNavigationButton("delete");
@@ -895,6 +954,7 @@ onEvent("Soil_Sample/Photolog/Photolog_List", "click", "loadPhotolog();");
 
 String soil_sample_id = null;
 
+/* Createes a new soil sample and initialises autosaving. */
 newSoilSample() {
     newTabGroup("Soil_Sample");
     soil_sample_id = null;
@@ -909,7 +969,7 @@ newSoilSample() {
     } else {
         setFieldValue("Soil_Sample/Basic_Info/SRID", "28350");
     }
-    setFieldValue("Soil_Sample/Basic_Info/Soil_Sample_Prefix", "Soil");
+    setFieldValue("Soil_Sample/Basic_Info/Soil_Sample_Prefix", sample_prefix);
     fetchOne("SELECT value FROM localSettings WHERE key = 'Soil Sample ID';", new FetchCallback() {
         onFetch(result) {
             if(!isNull(result)) {
@@ -938,11 +998,13 @@ newSoilSample() {
     });
 }
 
+/* Loads an existing soil sample based on the most recent list item selected. */
 loadSoilSample() {
     soil_sample_id = getListItemValue();
     loadSoilSampleFrom(soil_sample_id);
 }
 
+/* Loads a specific soil sample based on the given ID. */
 loadSoilSampleFrom(archentid) {
     if (isNull(archentid)) {
         showToast("No {Soil Sample} selected");
@@ -971,6 +1033,7 @@ loadSoilSampleFrom(archentid) {
     });
 }
 
+/* Resumes autosaving for soil sample. */
 resumeAutoSavingSoilSample() {
     if(!isNull(soil_sample_id)) {
         saveTabGroup("Soil_Sample", soil_sample_id, null, null, new SaveCallback() {
@@ -985,6 +1048,7 @@ resumeAutoSavingSoilSample() {
     }
 }
 
+/* Generates a confirmation to delete the selected soil sample. */
 deleteSoilSample() {
     if (!isNull(soil_sample_id)) {
         showAlert("Confirm Deletion", "Press OK to Delete this {Soil_Sample}!", "reallyDeleteSoilSample()", "doNotDelete()");
@@ -993,6 +1057,7 @@ deleteSoilSample() {
     }
 }
 
+/* Deletes the selected soil sample. */
 reallyDeleteSoilSample() {
     deleteArchEnt(soil_sample_id, new DeleteCallback() {
         onDelete(uuid) {
@@ -1001,6 +1066,7 @@ reallyDeleteSoilSample() {
     });
 }
 
+/* Populates all auto-generated fields for the soil sample. */
 loadSoilSampleAttributes() {
     makeVocab("DropDown", "Soil_Sample/Basic_Info/SRID", "SRID");
     makeVocab("RadioGroup", "Soil_Sample/Basic_Info/Lag", "Lag");
@@ -1011,6 +1077,7 @@ loadSoilSampleAttributes() {
     populateHierarchicalDropDown("Soil_Sample/Basic_Info/Landform", "Landform");
 }
 
+/* Creates sidebar navigation buttons for the soil sample. */
 addSoilSampleNavigation() {
     removeNavigationButton("new");
     removeNavigationButton("delete");
@@ -1052,6 +1119,7 @@ onEvent("Rock_Sample/Photolog/Photolog_List", "click", "loadPhotolog();");
 
 String rock_sample_id = null;
 
+/* Creates a new rock sample and initialises autosaving. */
 newRockSample() {
     newTabGroup("Rock_Sample");
     rock_sample_id = null;
@@ -1066,7 +1134,7 @@ newRockSample() {
     } else {
         setFieldValue("Rock_Sample/Basic_Info/SRID", "28350");
     }
-    setFieldValue("Rock_Sample/Basic_Info/Rock_Sample_Prefix", "Rock");
+    setFieldValue("Rock_Sample/Basic_Info/Rock_Sample_Prefix", sample_prefix);
     fetchOne("SELECT value FROM localSettings WHERE key = 'Rock Sample ID';", new FetchCallback() {
         onFetch(result) {
             if(!isNull(result)) {
@@ -1095,11 +1163,13 @@ newRockSample() {
     });
 }
 
+/* Loads a rock sample based on the most recent list item selected. */
 loadRockSample() {
     rock_sample_id = getListItemValue();
     loadRockSampleFrom(rock_sample_id);
 }
 
+/* Loads a rock sample based on the given ID. */
 loadRockSampleFrom(archentid) {
     if (isNull(archentid)) {
         showToast("No {Rock_Sample} selected");
@@ -1128,6 +1198,7 @@ loadRockSampleFrom(archentid) {
     });
 }
 
+/* Resumes autosaving for the rock sample. */
 resumeAutoSavingRockSample() {
     if(!isNull(rock_sample_id)) {
         saveTabGroup("Rock_Sample", rock_sample_id, null, null, new SaveCallback() {
@@ -1142,6 +1213,7 @@ resumeAutoSavingRockSample() {
     }
 }
 
+/* Generates a confirmation to delete the current rock sample. */
 deleteRockSample() {
     if (!isNull(rock_sample_id)) {
         showAlert("Confirm Deletion", "Press OK to Delete this {Rock_Sample}!", "reallyDeleteRockSample()", "doNotDelete()");
@@ -1150,6 +1222,7 @@ deleteRockSample() {
     }
 }
 
+/* Deletes the current rock sample. */
 reallyDeleteRockSample() {
     deleteArchEnt(rock_sample_id, new DeleteCallback() {
         onDelete(uuid) {
@@ -1158,6 +1231,7 @@ reallyDeleteRockSample() {
     });
 }
 
+/* Populates all auto-generated fields for the rock sample. */
 loadRockSampleAttributes() {
     makeVocab("DropDown", "Rock_Sample/Basic_Info/SRID", "SRID");
     makeVocab("RadioGroup", "Rock_Sample/Measurements/Veins", "Veins");
@@ -1167,6 +1241,7 @@ loadRockSampleAttributes() {
     makeVocab("DropDown", "Rock_Sample/Lithological_Info/Sorting", "Sorting");
 }
 
+/* Creates sidebar navigation buttons for the rock sample. */
 addRockSampleNavigation() {
     removeNavigationButton("new");
     removeNavigationButton("delete");
@@ -1199,22 +1274,26 @@ addRockSampleNavigation() {
 
 onEvent("Photolog", "show", "addPhotologNavigation();");
 onFocus("Photolog/Photolog/Photo_ID", null, "activateAutoSavePhotolog();");
+onEvent("Photolog/Photolog/Back", "click", "showToast(\"Back functionality not implemented yet.\");");
 
 String photolog_id = null;
 String sample_id = null;
 String type = null;
 
+/* Creates a new photolog for the user to fill out, with the timestamp auto-generated. */
 newPhotolog() {
     newTabGroup("Photolog");
     photolog_id = null;
     setTimestamp("Photolog/Photolog/Photo_Timestamp");
 }
 
+/* Loads a photolog based on the most recent list item selected. */
 loadPhotolog() {
     photolog_id = getListItemValue();
     loadPhotologFrom(photolog_id);
 }
 
+/* Loads a photolog based on the given ID. */
 loadPhotologFrom(archentid) {
     if (isNull(archentid)) {
         showToast("No {Photolog} selected");
@@ -1233,6 +1312,7 @@ loadPhotologFrom(archentid) {
     });
 }
 
+/* Activates autosaving for the photolog. */
 activateAutoSavePhotolog() {
     if(!isNull(photolog_id) || isNull(getFieldValue("Photolog/Photolog/Photo_ID"))) return;
     saveTabGroup("Photolog", photolog_id, null, null, new SaveCallback() {
@@ -1249,6 +1329,7 @@ activateAutoSavePhotolog() {
     });
 }
 
+/* Generates a confirmation to delete the current photolog */
 deletePhotolog() {
     if (!isNull(photolog_id)) {
         showAlert("Confirm Deletion", "Press OK to Delete this {Photolog}!", "reallyDeletePhotolog()", "doNotDelete()");
@@ -1257,6 +1338,7 @@ deletePhotolog() {
     }
 }
 
+/* Deletes the current photolog. */
 reallyDeletePhotolog() {
     deleteArchEnt(photolog_id, new DeleteCallback() {
         onDelete(uuid) {
@@ -1274,6 +1356,7 @@ reallyDeletePhotolog() {
     });
 }
 
+/* Creates sidebar navigation buttons for the photolog. */
 addPhotologNavigation() {
     removeNavigationButton("new");
     removeNavigationButton("delete");
@@ -1301,6 +1384,7 @@ addPhotologNavigation() {
     }, "danger");
 }
 
+/* Populates the photolog list with the existing photologs linked to the given sample ID. */
 loadRelatedPhotologs(String related_sample_id, String type) {
     if(!isNull(related_sample_id)) {
         fetchAll("select uuid, aenttypename || ': ' || group_concat(coalesce(measure || ' ' || vocabname || '(' ||freetext||')',  measure || ' (' || freetext ||')',  vocabname || ' (' || freetext ||')',  measure || ' ' || vocabname ,  vocabname || ' (' || freetext || ')',  measure || ' (' || freetext || ')',  measure,  vocabname,  freetext,  measure,  vocabname,  freetext), ' - ') as response, valuetimestamp\n"+
@@ -1359,6 +1443,7 @@ saveEntitiesToRel(String type, String entity1, String entity2, Callable callback
     });
 }
 
+// 
 saveEntitiesToHierRel(String type, String entity1, String entity2, String e1verb, String e2verb) {
     if (isNull(entity1) || isNull(entity2)) return;
     saveRel(null, type, null, null, new SaveCallback() {
@@ -1369,6 +1454,8 @@ saveEntitiesToHierRel(String type, String entity1, String entity2, String e1verb
     });
 }
 
+/* Populates the path specified vocabulary from the database based on the given attribute name, where type 
+is the type of the vocab to populate (checkbox, dropdown, radio or list). */
 makeVocab(String type, String path, String attrib){
     fetchAll("select vocabid, vocabname from vocabulary join attributekey using (attributeid) where attributename = '"+attrib+"' order by vocabcountorder",
         new FetchCallback() {
@@ -1386,6 +1473,7 @@ makeVocab(String type, String path, String attrib){
         });
 }
 
+/* Populates the path specified picture gallery from the database based on the given attribute name. */
 makePictureGallery(String path, String attrib) {
     fetchAll("select vocabid, vocabname, pictureurl from vocabulary left join attributekey using (attributeid) where attributename = '" + attrib + "' order by vocabcountorder;",
         new FetchCallback() {
@@ -1395,14 +1483,17 @@ makePictureGallery(String path, String attrib) {
         });
 }
 
+/* Sets the value of the given view path to the current timestamp. */
 setTimestamp(String path) {
     setFieldValue(path, new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss z").format(new Date()));
 }
 
+/* Informs the user that the delete operation was cancelled. */
 doNotDelete() {
     showToast("Delete Cancelled.");
 }
 
+/* Autogenerates the value of GPS attributes for the given tab path. */
 fillInGPS(String path) {
     Object position = getGPSPosition();
     if (position == null) {

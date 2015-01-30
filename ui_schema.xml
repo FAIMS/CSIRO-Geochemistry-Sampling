@@ -521,13 +521,13 @@
           <label></label>
           <group ref="child1" faims_style="even">
             <label></label>
-            <input ref="Water_Sample_Prefix" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+            <input ref="Water_Sample_Prefix" faims_certainty="false" faims_annotation="false" faims_read_only="true">
               <label>{Water_Sample_Prefix}</label>
             </input>
           </group>
           <group ref="child2" faims_style="even">
             <label></label>
-            <input ref="Water_Sample_ID" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+            <input ref="Water_Sample_ID" faims_certainty="false" faims_annotation="false" faims_read_only="true">
               <label>{Water_Sample_ID}</label>
             </input>
           </group>
@@ -790,7 +790,7 @@
           <label></label>
           <group ref="child1" faims_style="even">
             <label></label>
-            <input ref="Plant_Sample_Prefix" faims_attribute_name="Plant Sample Prefix" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+            <input ref="Plant_Sample_Prefix" faims_attribute_name="Plant Sample Prefix" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
               <label>{Plant_Sample_Prefix}</label>
             </input>
           </group>
@@ -936,7 +936,7 @@
           <label></label>
           <group ref="child1" faims_style="even">
             <label></label>
-            <input ref="Soil_Sample_Prefix" faims_attribute_name="Soil Sample Prefix" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+            <input ref="Soil_Sample_Prefix" faims_attribute_name="Soil Sample Prefix" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
               <label>{Soil_Sample_Prefix}</label>
             </input>
           </group>
@@ -1118,7 +1118,7 @@
           <label></label>
           <group ref="child1" faims_style="even">
             <label></label>
-            <input ref="Rock_Sample_Prefix" faims_attribute_name="Rock Sample Prefix" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+            <input ref="Rock_Sample_Prefix" faims_attribute_name="Rock Sample Prefix" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
               <label>{Rock_Sample_Prefix}</label>
             </input>
           </group>
