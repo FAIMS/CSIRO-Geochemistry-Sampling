@@ -91,16 +91,9 @@ addActionBarItem("external_gps", new ToggleActionButtonCallback() {
 /* Event Handling */
 onEvent("Project", "show", "removeNavigationButtons();");
 
-onEvent("Project/Start", "show", "loadSamplePrefix(); loadSampleID();");
+onEvent("Project/Start", "show", "loadSamplePrefix(); loadSampleStartingID();");
 onEvent("Project/Start/New_Sample", "delayclick", "newSample();");
 //onEvent("Project/Start/Validate_Sample_ID", "click", "validSampleID();");
-
-// onEvent("Project/Defaults", "show", "loadDefaultIDs();");
-// onFocus("Project/Defaults/Water_Sample", null, "saveDefault(\"Water\");");
-// onFocus("Project/Defaults/Plant_Sample", null, "saveDefault(\"Plant\");");
-// onFocus("Project/Defaults/Soil_Sample", null, "saveDefault(\"Soil\");");
-// onFocus("Project/Defaults/Rock_Sample", null, "saveDefault(\"Rock\");");
-// onEvent("Project/Defaults/Validate", "click", "showToast(\"Not implemented yet.\");");
 
 onEvent("Project/Search", "show", "loadSearch();");
 onEvent("Project/Search/Sample_Types", "click", "loadSearch();");
@@ -120,46 +113,40 @@ populateDropDown("Project/Start/Sample_Types", sample_types);
 sample_types.add(0, new NameValuePair("{All}", "Sample"));
 populateDropDown("Project/Search/Sample_Types", sample_types);
 
-String sample_prefix = null;
-String sample_starting_id = null;
-
 /* Sets the sample prefix to the given value. */
 setSamplePrefix(String samplePrefix) {
-    sample_prefix = samplePrefix;
+    setFieldValue("Project/Start/Sample_Prefix", samplePrefix);
     fetchOne("REPLACE INTO localSettings(key, value) VALUES('Sample Prefix', '" + samplePrefix + "');", null);
 }
 
-/* Sets the sample ID to the given value. */
-setSampleID(String sampleID) {
-    sample_starting_id = sampleID;
-    fetchOne("REPLACE INTO localSettings(key, value) VALUES('Sample ID', '" + sampleID + "');", null);
+/* Sets the sample starting ID to the given value. */
+setSampleStartingID(String sampleStartingID) {
+    setFieldValue("Project/Start/Sample_Starting_ID", sampleStartingID);
+    fetchOne("REPLACE INTO localSettings(key, value) VALUES('Sample Starting ID', '" + sampleStartingID + "');", null);
 }
 
 /* Loads the sample prefix if one exists. */
 loadSamplePrefix() {
     fetchOne("SELECT value FROM localSettings WHERE key = 'Sample Prefix';", new FetchCallback() {
         onFetch(result) {
-            print("prefix" + result);
             if (!isNull(result)) {
-                sample_prefix = result.get(0);
-                setFieldValue("Project/Start/Sample_Prefix", sample_prefix);
+                samplePrefix = result.get(0);
+                setFieldValue("Project/Start/Sample_Prefix", samplePrefix);
             }
         }
     });
 }
 
 /* Loads the sample starting ID if one exists, otherwise defaults to '1'. */
-loadSampleID() {
-    fetchOne("SELECT value FROM localSettings WHERE key = 'Sample ID';", new FetchCallback() {
+loadSampleStartingID() {
+    fetchOne("SELECT value FROM localSettings WHERE key = 'Sample Starting ID';", new FetchCallback() {
         onFetch(result) {
-            print("id:" + result);
             if (isNull(result)) {
-                sample_starting_id = "1";
-                setFieldValue("Project/Start/Sample_Starting_ID", sample_starting_id);
-                setSampleID(sample_starting_id);
+                sampleStartingID = "1";
+                setSampleStartingID(sampleStartingID);
             } else {
-                sample_starting_id = result.get(0);
-                setFieldValue("Project/Start/Sample_Starting_ID", sample_starting_id);
+                sampleStartingID = result.get(0);
+                setFieldValue("Project/Start/Sample_Starting_ID", sampleStartingID);
             }
         }
     });
@@ -179,9 +166,23 @@ boolean validSamplePrefix() {
     return true;
 }
 
-nextSampleStartingID() {
-
+/* Returns the tabgroup path for the currently selected sample type. */
+String getSampleTypePath() {
+    String tabgroup = null;
+    String type = getFieldValue("Project/Start/Sample_Types");
+    if(type.equals("Water Sample")) {
+        tabgroup = "Water_Sample";
+    } else if(type.equals("Plant Sample")) {
+        tabgroup = "Plant_Sample";
+    } else if(type.equals("Soil Sample")) {
+        tabgroup = "Soil_Sample";
+    } else if(type.equals("Rock Sample")) {
+        tabgroup = "Rock_Sample";
+    }
+    return tabgroup;
 }
+
+String currentSampleUUID = null;
 
 /* Creates a new sample based on selected type. */
 newSample() {
@@ -189,18 +190,114 @@ newSample() {
     if (!validSamplePrefix()) {
         return;
     }
+
+    // Set the sample prefix and starting ID in-case the user changed them.
     setSamplePrefix(getFieldValue("Project/Start/Sample_Prefix"));
-    setSampleID(getFieldValue("Project/Start/Sample_Starting_ID"));
-    String type = getFieldValue("Project/Start/Sample_Types");
-    if(type.equals("Water Sample")) {
-        newWaterSample();
-    } else if(type.equals("Plant Sample")) {
-        newPlantSample();
-    } else if(type.equals("Soil Sample")) {
-        newSoilSample();
+    setSampleStartingID(getFieldValue("Project/Start/Sample_Starting_ID"));
+
+    // Determine the type of sample required.
+    String tabgroup = getSampleTypePath();
+
+    // Populate sample field values.
+    newTabGroup(tabgroup);
+    setTimestamp(tabgroup + "/Basic_Info/Timestamp");
+    setFieldValue(tabgroup + "/Basic_Info/Author_Name", getFieldValue("Project/Start/Author_Name"));
+    setFieldValue(tabgroup + "/Basic_Info/Station_Deposit", getFieldValue("Project/Start/Station_Deposit"));
+    setFieldValue(tabgroup + "/Basic_Info/Project", getFieldValue("Project/Start/Project"));
+    setFieldValue(tabgroup + "/Basic_Info/Area", getFieldValue("Project/Start/Area"));
+    srid = Integer.parseInt(getModuleSrid());
+    if(srid >= 28349 && srid <= 29356) {
+        setFieldValue(tabgroup + "/Basic_Info/SRID", getModuleSrid());
     } else {
-        newRockSample();
+        setFieldValue(tabgroup + "/Basic_Info/SRID", "28350");
     }
+
+    // Set the sample ID and prefix.
+    samplePrefix = getFieldValue("Project/Start/Sample_Prefix");
+    sampleID = getFieldValue("Project/Start/Sample_Starting_ID");
+    setFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_Prefix", samplePrefix);
+    setFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_ID", sampleID);
+
+    // Save the new sample tabgroup and turn on autosaving.
+    enable_autosave = true;
+    saveTabGroup(tabgroup, null, null, null, new SaveCallback() {
+        onSave(uuid, record) {
+            currentSampleUUID = uuid;
+            saveTabGroup(tabgroup, currentSampleUUID, null, null, new SaveCallback() {
+                onSave(uuid, newRecord) {
+                    currentSampleUUID = uuid;
+                }
+            }, enable_autosave);
+
+            // Increment the sample starting ID for the next sample.
+            setSampleStartingID(Integer.toString(Integer.parseInt(sampleID) + 1));
+        }
+    });
+}
+
+/* Resumes autosaving for the sample. */
+resumeAutoSavingSample() {
+    if(!isNull(currentSampleUUID)) {
+        tabgroup = getSampleTypePath();
+        saveTabGroup(tabgroup, currentSampleUUID, null, null, new SaveCallback() {
+            onSave(uuid, newRecord) {
+                currentSampleUUID = uuid;
+            }
+            onError(message) {
+                showToast(message);
+            }
+        },true);
+    }
+}
+
+/* Creates sidebar navigation for the sample. */
+addSampleNavigation() {
+    tabgroup = getSampleTypePath();
+    removeNavigationButton("new");
+    removeNavigationButton("delete");
+
+    addNavigationButton("new", new ActionButtonCallback() {
+        actionOnLabel() {
+            "{New_" + tabgroup + "}";
+        }
+        actionOn() {
+            if(!isNull(currentSampleUUID)) {
+                newSample();
+            } else {
+                showAlert("Warning", "You will lose any unsaved changes!", "newSample()", "");
+            }
+        }
+    }, "success");
+
+    addNavigationButton("delete", new ActionButtonCallback() {
+        actionOnLabel() {
+            "{Delete_" + tabgroup + "}";
+        }
+        actionOn() {
+            deleteSample();
+        }
+    }, "danger");    
+
+}
+
+/* Generates a confirmation prompt for deleting the current sample. */
+deleteSample() {
+    tabgroup = getSampleTypePath();
+    if (!isNull(currentSampleUUID)) {
+        showAlert("Confirm Deletion", "Press OK to Delete this {" + tabgroup + "}!", "reallyDeleteSample()", "doNotDelete()");
+    } else {
+        cancelTabGroup(tabgroup, true);
+    }
+}
+
+/* Deletes the current water sample. */
+reallyDeleteSample() {
+    tabgroup = getSampleTypePath();
+    deleteArchEnt(currentSampleUUID, new DeleteCallback() {
+        onDelete(uuid) {
+            cancelTabGroup(tabgroup, false);
+        }
+    });
 }
 
 /* Removes sidebar buttons. */
@@ -208,58 +305,6 @@ removeNavigationButtons() {
     removeNavigationButton("new");
     removeNavigationButton("delete");
 }
-
-/*
-loadDefaultIDs() {
-    fetchOne("SELECT value FROM localSettings WHERE key = 'Water Sample ID';", new FetchCallback() {
-        onFetch(result) {
-            if(isNull(result)) {
-                setFieldValue("Project/Defaults/Water_Sample", "1");
-                fetchOne("REPLACE INTO localSettings(key, value) VALUES('Water Sample ID', '1');", null);
-            } else {
-                setFieldValue("Project/Defaults/Water_Sample", result.get(0));    
-            }
-        }
-    });
-    fetchOne("SELECT value FROM localSettings WHERE key = 'Plant Sample ID';", new FetchCallback() {
-        onFetch(result) {
-            if(isNull(result)) {
-                setFieldValue("Project/Defaults/Plant_Sample", "1");
-                fetchOne("REPLACE INTO localSettings(key, value) VALUES('Plant Sample ID', '1');", null);
-            } else {
-                setFieldValue("Project/Defaults/Plant_Sample", result.get(0));    
-            }
-        }
-    });
-    fetchOne("SELECT value FROM localSettings WHERE key = 'Soil Sample ID';", new FetchCallback() {
-        onFetch(result) {
-            if(isNull(result)) {
-                setFieldValue("Project/Defaults/Soil_Sample", "1");
-                fetchOne("REPLACE INTO localSettings(key, value) VALUES('Soil Sample ID', '1');", null);
-            } else {
-                setFieldValue("Project/Defaults/Soil_Sample", result.get(0));    
-            }
-        }
-    });
-    fetchOne("SELECT value FROM localSettings WHERE key = 'Rock Sample ID';", new FetchCallback() {
-        onFetch(result) {if(isNull(result)) {
-                setFieldValue("Project/Defaults/Rock_Sample", "1");
-                fetchOne("REPLACE INTO localSettings(key, value) VALUES('Rock Sample ID', '1');", null);
-            } else {
-                setFieldValue("Project/Defaults/Rock_Sample", result.get(0));    
-            }
-        }
-    });
-}
-
-saveDefault(String type) {
-    fetchOne("REPLACE INTO localSettings(key, value) VALUES('" + type + " Sample ID', '" + getFieldValue("Project/Defaults/" + type + "_Sample") + "');", null);
-}
-
-validateDefaults() {
-
-}
-*/
 
 /* Loads a list view of existing samples. */
 loadSearch() {
@@ -295,7 +340,7 @@ loadSample() {
 }
 
 /*** WATER SAMPLE ***/
-onEvent("Water_Sample", "show", "addWaterSampleNavigation();resumeAutoSavingWaterSample();");
+onEvent("Water_Sample", "show", "addSampleNavigation();resumeAutoSavingSample();");
 
 onEvent("Water_Sample/Basic_Info/Take_GPS", "click", "fillInGPS(\"Water_Sample/Basic_Info/\")");
 onEvent("Water_Sample/Basic_Info/Take_Photo", "click", "attachPictureTo(\"Water_Sample/Basic_Info/Photos\")");
@@ -308,64 +353,6 @@ onEvent("Water_Sample/Photolog/New_Photolog", "click", "newPhotolog(); sample_id
 onEvent("Water_Sample/Photolog/Photolog_List", "click", "loadPhotolog();");
 
 String water_sample_id = null;
-
-/* Creates a new water sample and initialises autosaving. */
-newWaterSample() {
-    newTabGroup("Water_Sample");
-    water_sample_id = sample_starting_id;
-    setTimestamp("Water_Sample/Basic_Info/Timestamp");
-    setFieldValue("Water_Sample/Basic_Info/Author_Name", getFieldValue("Project/Start/Author_Name"));
-    setFieldValue("Water_Sample/Basic_Info/Station_Deposit", getFieldValue("Project/Start/Station_Deposit"));
-    setFieldValue("Water_Sample/Basic_Info/Project", getFieldValue("Project/Start/Project"));
-    setFieldValue("Water_Sample/Basic_Info/Area", getFieldValue("Project/Start/Area"));
-    srid = Integer.parseInt(getModuleSrid());
-    if(srid >= 28349 && srid <= 29356) {
-        setFieldValue("Water_Sample/Basic_Info/SRID", getModuleSrid());
-    } else {
-        setFieldValue("Water_Sample/Basic_Info/SRID", "28350");
-    }
-    setFieldValue("Water_Sample/Basic_Info/Water_Sample_Prefix", sample_prefix);
-
-    // grab water sample id from local settings
-    fetchOne("SELECT value FROM localSettings WHERE key = 'Water Sample ID';", new FetchCallback() {
-        onFetch(result) {
-            // if a water sample id exists then set the water sample id field to that grabbed value. 
-            // otherwise set the water sample id field to '1' and save that into the local settings.
-            if(!isNull(result)) {
-                setFieldValue("Water_Sample/Basic_Info/Water_Sample_ID", result.get(0));
-            } else {
-                setFieldValue("Water_Sample/Basic_Info/Water_Sample_ID", "1");
-                fetchOne("REPLACE INTO localSettings(key, value) VALUES('Water Sample ID', '1');", null);
-            }
-
-            // save the water sample tab group into local settings
-            saveTabGroup("Water_Sample", water_sample_id, null, null, new SaveCallback() {
-                onSave(uuid, newRecord) {
-                    // set the water sample id to the actual id of the saved database record
-                    water_sample_id = uuid;
-
-                    // if a water sample id exists in local settings, then use the increment of that id as the next id.
-                    // otherwise use the increment of the default id '1' as the next id.
-                    next_id = 1;
-                    if(!isNull(result)) {
-                        next_id = Integer.parseInt(result.get(0));
-                    }
-                    next_id++;
-
-                    // store the next id in local settings as the value for water sample id.
-                    fetchOne("REPLACE INTO localSettings(key, value) VALUES('Water Sample ID', '" + next_id + "');", null);
-                    
-                    // save the water sample tab group once more with autosaving turned on.
-                    saveTabGroup("Water_Sample", water_sample_id, null, null, new SaveCallback() {
-                        onSave(uuid, newRecord) {
-                            water_sample_id = uuid;
-                        }
-                    }, true);
-                }
-            });
-        }
-    });
-}
 
 /* Loads an existing water sample based on the most recent list item selected. */
 loadWaterSample() {
@@ -457,38 +444,23 @@ loadWaterSampleFrom(archentid) {
     });
 }
 
-/* Resumes autosaving for the water sample. */
-resumeAutoSavingWaterSample() {
-    if(!isNull(water_sample_id)) {
-        saveTabGroup("Water_Sample", water_sample_id, null, null, new SaveCallback() {
-            onSave(uuid, newRecord) {
-                water_sample_id = uuid;
-            }
+// /* Generates a confirmation prompt for deleting the current water sample. */
+// deleteWaterSample() {
+//     if (!isNull(water_sample_id)) {
+//         showAlert("Confirm Deletion", "Press OK to Delete this {Water_Sample}!", "reallyDeleteWaterSample()", "doNotDelete()");
+//     } else {
+//         cancelTabGroup("Water_Sample", true);
+//     }
+// }
 
-            onError(message) {
-                showToast(message);
-            }
-        },true);
-    }
-}
-
-/* Generates a confirmation prompt for deleting the current water sample. */
-deleteWaterSample() {
-    if (!isNull(water_sample_id)) {
-        showAlert("Confirm Deletion", "Press OK to Delete this {Water_Sample}!", "reallyDeleteWaterSample()", "doNotDelete()");
-    } else {
-        cancelTabGroup("Water_Sample", true);
-    }
-}
-
-/* Deletes the current water sample. */
-reallyDeleteWaterSample() {
-    deleteArchEnt(water_sample_id, new DeleteCallback() {
-        onDelete(uuid) {
-            cancelTabGroup("Water_Sample", false);
-        }
-    });
-}
+// /* Deletes the current water sample. */
+// reallyDeleteWaterSample() {
+//     deleteArchEnt(water_sample_id, new DeleteCallback() {
+//         onDelete(uuid) {
+//             cancelTabGroup("Water_Sample", false);
+//         }
+//     });
+// }
 
 /* Populates all auto-generated fields for the water sample. */
 loadWaterSampleAttributes() {
@@ -503,33 +475,34 @@ loadWaterSampleAttributes() {
     makeVocab("DropDown", "Water_Sample/Codes/Sampling_Issues", "Sampling Issues");
 }
 
-/* Creates sidebar navigation buttons for the water sample. */
-addWaterSampleNavigation() {
-    removeNavigationButton("new");
-    removeNavigationButton("delete");
+// /* Creates sidebar navigation buttons for the water sample. */
+// addWaterSampleNavigation() {
+//     removeNavigationButton("new");
+//     removeNavigationButton("delete");
 
-    addNavigationButton("new", new ActionButtonCallback() {
-        actionOnLabel() {
-            "{New_Water_Sample}";
-        }
-        actionOn() {
-            if(!isNull(water_sample_id)) {
-                newWaterSample();
-            } else {
-                showAlert("Warning", "You will lose any unsaved changes!", "newWaterSample()", "");
-            }
-        }
-    }, "success");
+//     addNavigationButton("new", new ActionButtonCallback() {
+//         actionOnLabel() {
+//             "{New_Water_Sample}";
+//         }
+//         actionOn() {
+//             setFieldValue("Project/Search/Sample_Types", "Water Sample");
+//             if(!isNull(water_sample_id)) {
+//                 newSample();
+//             } else {
+//                 showAlert("Warning", "You will lose any unsaved changes!", "newSample()", "");
+//             }
+//         }
+//     }, "success");
 
-    addNavigationButton("delete", new ActionButtonCallback() {
-        actionOnLabel() {
-            "{Delete_Water_Sample}";
-        }
-        actionOn() {
-            deleteWaterSample();
-        }
-    }, "danger");
-}
+//     addNavigationButton("delete", new ActionButtonCallback() {
+//         actionOnLabel() {
+//             "{Delete_Water_Sample}";
+//         }
+//         actionOn() {
+//             deleteWaterSample();
+//         }
+//     }, "danger");
+// }
 
 /* Populates the estimated angle of the water sample from the database. */
 populateEstimatedAngle() {
@@ -844,7 +817,7 @@ reallyDeleteEh(String eh_id) {
 
 /*** PLANT SAMPLE ***/
 
-onEvent("Plant_Sample", "show", "addPlantSampleNavigation();resumeAutoSavingPlantSample();");
+onEvent("Plant_Sample", "show", "addSampleNavigation();resumeAutoSavingSample();");
 
 onEvent("Plant_Sample/Basic_Info/Take_GPS", "click", "fillInGPS(\"Plant_Sample/Basic_Info/\")");
 onEvent("Plant_Sample/Basic_Info/Take_Photo", "click", "attachPictureTo(\"Plant_Sample/Basic_Info/Photos\")");
@@ -854,50 +827,6 @@ onEvent("Plant_Sample/Photolog/New_Photolog", "click", "newPhotolog(); sample_id
 onEvent("Plant_Sample/Photolog/Photolog_List", "click", "loadPhotolog();");
 
 String plant_sample_id = null;
-
-/* Creates a new plant sample and initialises autosaving. */
-newPlantSample() {
-    newTabGroup("Plant_Sample");
-    plant_sample_id = null;
-    setTimestamp("Plant_Sample/Basic_Info/Timestamp");
-    setFieldValue("Plant_Sample/Basic_Info/Author_Name", getFieldValue("Project/Start/Author_Name"));
-    setFieldValue("Plant_Sample/Basic_Info/Station_Deposit", getFieldValue("Project/Start/Station_Deposit"));
-    setFieldValue("Plant_Sample/Basic_Info/Project", getFieldValue("Project/Start/Project"));
-    setFieldValue("Plant_Sample/Basic_Info/Area", getFieldValue("Project/Start/Area"));
-    srid = Integer.parseInt(getModuleSrid());
-    if(srid >= 28349 && srid <= 29356) {
-        setFieldValue("Plant_Sample/Basic_Info/SRID", getModuleSrid());
-    } else {
-        setFieldValue("Plant_Sample/Basic_Info/SRID", "28350");
-    }
-    setFieldValue("Plant_Sample/Basic_Info/Plant_Sample_Prefix", sample_prefix);
-    fetchOne("SELECT value FROM localSettings WHERE key = 'Plant Sample ID';", new FetchCallback() {
-        onFetch(result) {
-            if(!isNull(result)) {
-                setFieldValue("Plant_Sample/Basic_Info/Plant_Record_ID", result.get(0));
-            } else {
-                setFieldValue("Plant_Sample/Basic_Info/Plant_Record_ID", "1");
-                fetchOne("REPLACE INTO localSettings(key, value) VALUES('Plant Sample ID', '1');", null);
-            }
-            saveTabGroup("Plant_Sample", plant_sample_id, null, null, new SaveCallback() {
-                onSave(uuid, newRecord) {
-                    plant_sample_id = uuid;
-                    next_id = 1;
-                    if(!isNull(result)) {
-                        next_id = Integer.parseInt(result.get(0));
-                    }
-                    next_id++;
-                    fetchOne("REPLACE INTO localSettings(key, value) VALUES('Plant Sample ID', '" + next_id + "');", null);
-                    saveTabGroup("Plant_Sample", plant_sample_id, null, null, new SaveCallback() {
-                        onSave(uuid, newRecord) {
-                            plant_sample_id = uuid;
-                        }
-                    }, true);
-                }
-            });
-        }
-    });
-}
 
 /* Loads an existing plant sample based on the most recent list item selected. */
 loadPlantSample() {
@@ -934,38 +863,23 @@ loadPlantSampleFrom(archentid) {
     });
 }
 
-/* Resumes autosaving for the plant sample. */
-resumeAutoSavingPlantSample() {
-    if(!isNull(plant_sample_id)) {
-        saveTabGroup("Plant_Sample", plant_sample_id, null, null, new SaveCallback() {
-            onSave(uuid, newRecord) {
-                plant_sample_id = uuid;
-            }
+// /* Generates a confirmation to delete the current plant sample. */
+// deletePlantSample() {
+//     if (!isNull(plant_sample_id)) {
+//         showAlert("Confirm Deletion", "Press OK to Delete this {Plant_Sample}!", "reallyDeletePlantSample()", "doNotDelete()");
+//     } else {
+//         cancelTabGroup("Plant_Sample", true);
+//     }
+// }
 
-            onError(message) {
-                showToast(message);
-            }
-        },true);
-    }
-}
-
-/* Generates a confirmation to delete the current plant sample. */
-deletePlantSample() {
-    if (!isNull(plant_sample_id)) {
-        showAlert("Confirm Deletion", "Press OK to Delete this {Plant_Sample}!", "reallyDeletePlantSample()", "doNotDelete()");
-    } else {
-        cancelTabGroup("Plant_Sample", true);
-    }
-}
-
-/* Deletes the plant sample. */
-reallyDeletePlantSample() {
-    deleteArchEnt(plant_sample_id, new DeleteCallback() {
-        onDelete(uuid) {
-            cancelTabGroup("Plant_Sample", false);
-        }
-    });
-}
+// /* Deletes the plant sample. */
+// reallyDeletePlantSample() {
+//     deleteArchEnt(plant_sample_id, new DeleteCallback() {
+//         onDelete(uuid) {
+//             cancelTabGroup("Plant_Sample", false);
+//         }
+//     });
+// }
 
 /* Populates all auto-generated fields for the plant sample. */
 loadPlantSampleAttributes() {
@@ -974,38 +888,39 @@ loadPlantSampleAttributes() {
     populateHierarchicalDropDown("Plant_Sample/Basic_Info/Landform_Description", "Landform Description");
 }
 
-/* Creates sidebar navigation buttons for the plant sample. */
-addPlantSampleNavigation() {
-    removeNavigationButton("new");
-    removeNavigationButton("delete");
+// /* Creates sidebar navigation buttons for the plant sample. */
+// addPlantSampleNavigation() {
+//     removeNavigationButton("new");
+//     removeNavigationButton("delete");
 
-    addNavigationButton("new", new ActionButtonCallback() {
-        actionOnLabel() {
-            "{New_Plant_Sample}";
-        }
-        actionOn() {
-            if(!isNull(plant_sample_id)) {
-                newPlantSample();
-            } else {
-                showAlert("Warning", "You will lose any unsaved changes!", "newPlantSample()", "");
-            }
-        }
-    }, "success");
+//     addNavigationButton("new", new ActionButtonCallback() {
+//         actionOnLabel() {
+//             "{New_Plant_Sample}";
+//         }
+//         actionOn() {
+//             setFieldValue("Project/Search/Sample_Types", "Plant Sample");
+//             if(!isNull(plant_sample_id)) {
+//                 newSample();
+//             } else {
+//                 showAlert("Warning", "You will lose any unsaved changes!", "newSample()", "");
+//             }
+//         }
+//     }, "success");
 
-    addNavigationButton("delete", new ActionButtonCallback() {
-        actionOnLabel() {
-            "{Delete_Plant_Sample}";
-        }
-        actionOn() {
-            deletePlantSample();
-        }
-    }, "danger");
-}
+//     addNavigationButton("delete", new ActionButtonCallback() {
+//         actionOnLabel() {
+//             "{Delete_Plant_Sample}";
+//         }
+//         actionOn() {
+//             deletePlantSample();
+//         }
+//     }, "danger");
+// }
 
 
 /*** SOIL SAMPLE ***/
 
-onEvent("Soil_Sample", "show", "addSoilSampleNavigation();resumeAutoSavingSoilSample();");
+onEvent("Soil_Sample", "show", "addSampleNavigation();resumeAutoSavingSample();");
 
 onEvent("Soil_Sample/Basic_Info/Take_GPS", "click", "fillInGPS(\"Soil_Sample/Basic_Info/\")");
 onEvent("Soil_Sample/Basic_Info/Take_Photo", "click", "attachPictureTo(\"Soil_Sample/Basic_Info/Photos\")");
@@ -1016,50 +931,6 @@ onEvent("Soil_Sample/Photolog/New_Photolog", "click", "newPhotolog(); sample_id 
 onEvent("Soil_Sample/Photolog/Photolog_List", "click", "loadPhotolog();");
 
 String soil_sample_id = null;
-
-/* Createes a new soil sample and initialises autosaving. */
-newSoilSample() {
-    newTabGroup("Soil_Sample");
-    soil_sample_id = null;
-    setTimestamp("Soil_Sample/Basic_Info/Timestamp");
-    setFieldValue("Soil_Sample/Basic_Info/Author_Name", getFieldValue("Project/Start/Author_Name"));
-    setFieldValue("Soil_Sample/Basic_Info/Station_Deposit", getFieldValue("Project/Start/Station_Deposit"));
-    setFieldValue("Soil_Sample/Basic_Info/Project", getFieldValue("Project/Start/Project"));
-    setFieldValue("Soil_Sample/Basic_Info/Area", getFieldValue("Project/Start/Area"));
-    srid = Integer.parseInt(getModuleSrid());
-    if(srid >= 28349 && srid <= 29356) {
-        setFieldValue("Soil_Sample/Basic_Info/SRID", getModuleSrid());
-    } else {
-        setFieldValue("Soil_Sample/Basic_Info/SRID", "28350");
-    }
-    setFieldValue("Soil_Sample/Basic_Info/Soil_Sample_Prefix", sample_prefix);
-    fetchOne("SELECT value FROM localSettings WHERE key = 'Soil Sample ID';", new FetchCallback() {
-        onFetch(result) {
-            if(!isNull(result)) {
-                setFieldValue("Soil_Sample/Basic_Info/Soil_Sample_ID", result.get(0));
-            } else {
-                setFieldValue("Soil_Sample/Basic_Info/Soil_Sample_ID", "1");
-                fetchOne("REPLACE INTO localSettings(key, value) VALUES('Soil Sample ID', '1');", null);
-            }
-            saveTabGroup("Soil_Sample", soil_sample_id, null, null, new SaveCallback() {
-                onSave(uuid, newRecord) {
-                    soil_sample_id = uuid;
-                    next_id = 1;
-                    if(!isNull(result)) {
-                        next_id = Integer.parseInt(result.get(0));
-                    }
-                    next_id++;
-                    fetchOne("REPLACE INTO localSettings(key, value) VALUES('Soil Sample ID', '" + next_id + "');", null);
-                    saveTabGroup("Soil_Sample", soil_sample_id, null, null, new SaveCallback() {
-                        onSave(uuid, newRecord) {
-                            soil_sample_id = uuid;
-                        }
-                    }, true);
-                }
-            });
-        }
-    });
-}
 
 /* Loads an existing soil sample based on the most recent list item selected. */
 loadSoilSample() {
@@ -1096,38 +967,23 @@ loadSoilSampleFrom(archentid) {
     });
 }
 
-/* Resumes autosaving for soil sample. */
-resumeAutoSavingSoilSample() {
-    if(!isNull(soil_sample_id)) {
-        saveTabGroup("Soil_Sample", soil_sample_id, null, null, new SaveCallback() {
-            onSave(uuid, newRecord) {
-                soil_sample_id = uuid;
-            }
+// /* Generates a confirmation to delete the selected soil sample. */
+// deleteSoilSample() {
+//     if (!isNull(soil_sample_id)) {
+//         showAlert("Confirm Deletion", "Press OK to Delete this {Soil_Sample}!", "reallyDeleteSoilSample()", "doNotDelete()");
+//     } else {
+//         cancelTabGroup("Soil_Sample", true);
+//     }
+// }
 
-            onError(message) {
-                showToast(message);
-            }
-        },true);
-    }
-}
-
-/* Generates a confirmation to delete the selected soil sample. */
-deleteSoilSample() {
-    if (!isNull(soil_sample_id)) {
-        showAlert("Confirm Deletion", "Press OK to Delete this {Soil_Sample}!", "reallyDeleteSoilSample()", "doNotDelete()");
-    } else {
-        cancelTabGroup("Soil_Sample", true);
-    }
-}
-
-/* Deletes the selected soil sample. */
-reallyDeleteSoilSample() {
-    deleteArchEnt(soil_sample_id, new DeleteCallback() {
-        onDelete(uuid) {
-            cancelTabGroup("Soil_Sample", false);
-        }
-    });
-}
+// /* Deletes the selected soil sample. */
+// reallyDeleteSoilSample() {
+//     deleteArchEnt(soil_sample_id, new DeleteCallback() {
+//         onDelete(uuid) {
+//             cancelTabGroup("Soil_Sample", false);
+//         }
+//     });
+// }
 
 /* Populates all auto-generated fields for the soil sample. */
 loadSoilSampleAttributes() {
@@ -1140,37 +996,38 @@ loadSoilSampleAttributes() {
     populateHierarchicalDropDown("Soil_Sample/Basic_Info/Landform", "Landform");
 }
 
-/* Creates sidebar navigation buttons for the soil sample. */
-addSoilSampleNavigation() {
-    removeNavigationButton("new");
-    removeNavigationButton("delete");
+// /* Creates sidebar navigation buttons for the soil sample. */
+// addSoilSampleNavigation() {
+//     removeNavigationButton("new");
+//     removeNavigationButton("delete");
 
-    addNavigationButton("new", new ActionButtonCallback() {
-        actionOnLabel() {
-            "{New_Soil_Sample}";
-        }
-        actionOn() {
-            if(!isNull(soil_sample_id)) {
-                newSoilSample();
-            } else {
-                showAlert("Warning", "You will lose any unsaved changes!", "newSoilSample()", "");
-            }
-        }
-    }, "success");
+//     addNavigationButton("new", new ActionButtonCallback() {
+//         actionOnLabel() {
+//             "{New_Soil_Sample}";
+//         }
+//         actionOn() {
+//             setFieldValue("Project/Search/Sample_Types", "Soil Sample");
+//             if(!isNull(soil_sample_id)) {
+//                 newSample();
+//             } else {
+//                 showAlert("Warning", "You will lose any unsaved changes!", "newSample()", "");
+//             }
+//         }
+//     }, "success");
 
-    addNavigationButton("delete", new ActionButtonCallback() {
-        actionOnLabel() {
-            "{Delete_Soil_Sample}";
-        }
-        actionOn() {
-            deleteSoilSample();
-        }
-    }, "danger");
-}
+//     addNavigationButton("delete", new ActionButtonCallback() {
+//         actionOnLabel() {
+//             "{Delete_Soil_Sample}";
+//         }
+//         actionOn() {
+//             deleteSoilSample();
+//         }
+//     }, "danger");
+// }
 
 /*** ROCK SAMPLE ***/
 
-onEvent("Rock_Sample", "show", "addRockSampleNavigation();resumeAutoSavingRockSample();");
+onEvent("Rock_Sample", "show", "addSampleNavigation();resumeAutoSavingSample();");
 
 onEvent("Rock_Sample/Basic_Info/Take_GPS", "click", "fillInGPS(\"Rock_Sample/Basic_Info/\")");
 onEvent("Rock_Sample/Lithological_Info/Take_Photo", "click", "attachPictureTo(\"Rock_Sample/Lithological_Info/Photos\")");
@@ -1181,50 +1038,6 @@ onEvent("Rock_Sample/Photolog/New_Photolog", "click", "newPhotolog(); sample_id 
 onEvent("Rock_Sample/Photolog/Photolog_List", "click", "loadPhotolog();");
 
 String rock_sample_id = null;
-
-/* Creates a new rock sample and initialises autosaving. */
-newRockSample() {
-    newTabGroup("Rock_Sample");
-    rock_sample_id = null;
-    setTimestamp("Rock_Sample/Basic_Info/Timestamp");
-    setFieldValue("Rock_Sample/Basic_Info/Author_Name", getFieldValue("Project/Start/Author_Name"));
-    setFieldValue("Rock_Sample/Basic_Info/Station_Deposit", getFieldValue("Project/Start/Station_Deposit"));
-    setFieldValue("Rock_Sample/Basic_Info/Project", getFieldValue("Project/Start/Project"));
-    setFieldValue("Rock_Sample/Basic_Info/Area", getFieldValue("Project/Start/Area"));
-    srid = Integer.parseInt(getModuleSrid());
-    if(srid >= 28349 && srid <= 29356) {
-        setFieldValue("Rock_Sample/Basic_Info/SRID", getModuleSrid());
-    } else {
-        setFieldValue("Rock_Sample/Basic_Info/SRID", "28350");
-    }
-    setFieldValue("Rock_Sample/Basic_Info/Rock_Sample_Prefix", sample_prefix);
-    fetchOne("SELECT value FROM localSettings WHERE key = 'Rock Sample ID';", new FetchCallback() {
-        onFetch(result) {
-            if(!isNull(result)) {
-                setFieldValue("Rock_Sample/Basic_Info/Core_ID", result.get(0));
-            } else {
-                setFieldValue("Rock_Sample/Basic_Info/Core_ID", "1");
-                fetchOne("REPLACE INTO localSettings(key, value) VALUES('Rock Sample ID', '1');", null);
-            }
-            saveTabGroup("Rock_Sample", rock_sample_id, null, null, new SaveCallback() {
-                onSave(uuid, newRecord) {
-                    rock_sample_id = uuid;
-                    next_id = 1;
-                    if(!isNull(result)) {
-                        next_id = Integer.parseInt(result.get(0));
-                    }
-                    next_id++;
-                    fetchOne("REPLACE INTO localSettings(key, value) VALUES('Rock Sample ID', '" + next_id + "');", null);
-                    saveTabGroup("Rock_Sample", rock_sample_id, null, null, new SaveCallback() {
-                        onSave(uuid, newRecord) {
-                            rock_sample_id = uuid;
-                        }
-                    }, true);
-                }
-            });
-        }
-    });
-}
 
 /* Loads a rock sample based on the most recent list item selected. */
 loadRockSample() {
@@ -1261,38 +1074,23 @@ loadRockSampleFrom(archentid) {
     });
 }
 
-/* Resumes autosaving for the rock sample. */
-resumeAutoSavingRockSample() {
-    if(!isNull(rock_sample_id)) {
-        saveTabGroup("Rock_Sample", rock_sample_id, null, null, new SaveCallback() {
-            onSave(uuid, newRecord) {
-                rock_sample_id = uuid;
-            }
+// /* Generates a confirmation to delete the current rock sample. */
+// deleteRockSample() {
+//     if (!isNull(rock_sample_id)) {
+//         showAlert("Confirm Deletion", "Press OK to Delete this {Rock_Sample}!", "reallyDeleteRockSample()", "doNotDelete()");
+//     } else {
+//         cancelTabGroup("Rock_Sample", true);
+//     }
+// }
 
-            onError(message) {
-                showToast(message);
-            }
-        },true);
-    }
-}
-
-/* Generates a confirmation to delete the current rock sample. */
-deleteRockSample() {
-    if (!isNull(rock_sample_id)) {
-        showAlert("Confirm Deletion", "Press OK to Delete this {Rock_Sample}!", "reallyDeleteRockSample()", "doNotDelete()");
-    } else {
-        cancelTabGroup("Rock_Sample", true);
-    }
-}
-
-/* Deletes the current rock sample. */
-reallyDeleteRockSample() {
-    deleteArchEnt(rock_sample_id, new DeleteCallback() {
-        onDelete(uuid) {
-            cancelTabGroup("Rock_Sample", false);
-        }
-    });
-}
+// /* Deletes the current rock sample. */
+// reallyDeleteRockSample() {
+//     deleteArchEnt(rock_sample_id, new DeleteCallback() {
+//         onDelete(uuid) {
+//             cancelTabGroup("Rock_Sample", false);
+//         }
+//     });
+// }
 
 /* Populates all auto-generated fields for the rock sample. */
 loadRockSampleAttributes() {
@@ -1304,33 +1102,34 @@ loadRockSampleAttributes() {
     makeVocab("DropDown", "Rock_Sample/Lithological_Info/Sorting", "Sorting");
 }
 
-/* Creates sidebar navigation buttons for the rock sample. */
-addRockSampleNavigation() {
-    removeNavigationButton("new");
-    removeNavigationButton("delete");
+// /* Creates sidebar navigation buttons for the rock sample. */
+// addRockSampleNavigation() {
+//     removeNavigationButton("new");
+//     removeNavigationButton("delete");
 
-    addNavigationButton("new", new ActionButtonCallback() {
-        actionOnLabel() {
-            "{New_Rock_Sample}";
-        }
-        actionOn() {
-            if(!isNull(rock_sample_id)) {
-                newRockSample();
-            } else {
-                showAlert("Warning", "You will lose any unsaved changes!", "newRockSample()", "");
-            }
-        }
-    }, "success");
+//     addNavigationButton("new", new ActionButtonCallback() {
+//         actionOnLabel() {
+//             "{New_Rock_Sample}";
+//         }
+//         actionOn() {
+//             setFieldValue("Project/Search/Sample_Types", "Rock Sample");
+//             if(!isNull(rock_sample_id)) {
+//                 newSample();
+//             } else {
+//                 showAlert("Warning", "You will lose any unsaved changes!", "newSample()", "");
+//             }
+//         }
+//     }, "success");
 
-    addNavigationButton("delete", new ActionButtonCallback() {
-        actionOnLabel() {
-            "{Delete_Rock_Sample}";
-        }
-        actionOn() {
-            deleteRockSample();
-        }
-    }, "danger");
-}
+//     addNavigationButton("delete", new ActionButtonCallback() {
+//         actionOnLabel() {
+//             "{Delete_Rock_Sample}";
+//         }
+//         actionOn() {
+//             deleteRockSample();
+//         }
+//     }, "danger");
+// }
 
 
 /*** PHOTOLOG ***/
