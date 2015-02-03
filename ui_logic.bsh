@@ -179,6 +179,10 @@ boolean validSamplePrefix() {
     return true;
 }
 
+nextSampleStartingID() {
+
+}
+
 /* Creates a new sample based on selected type. */
 newSample() {
     // Validate the entered sample prefix before making a new sample.
@@ -308,7 +312,7 @@ String water_sample_id = null;
 /* Creates a new water sample and initialises autosaving. */
 newWaterSample() {
     newTabGroup("Water_Sample");
-    water_sample_id = null;
+    water_sample_id = sample_starting_id;
     setTimestamp("Water_Sample/Basic_Info/Timestamp");
     setFieldValue("Water_Sample/Basic_Info/Author_Name", getFieldValue("Project/Start/Author_Name"));
     setFieldValue("Water_Sample/Basic_Info/Station_Deposit", getFieldValue("Project/Start/Station_Deposit"));
@@ -321,23 +325,37 @@ newWaterSample() {
         setFieldValue("Water_Sample/Basic_Info/SRID", "28350");
     }
     setFieldValue("Water_Sample/Basic_Info/Water_Sample_Prefix", sample_prefix);
+
+    // grab water sample id from local settings
     fetchOne("SELECT value FROM localSettings WHERE key = 'Water Sample ID';", new FetchCallback() {
         onFetch(result) {
+            // if a water sample id exists then set the water sample id field to that grabbed value. 
+            // otherwise set the water sample id field to '1' and save that into the local settings.
             if(!isNull(result)) {
                 setFieldValue("Water_Sample/Basic_Info/Water_Sample_ID", result.get(0));
             } else {
                 setFieldValue("Water_Sample/Basic_Info/Water_Sample_ID", "1");
                 fetchOne("REPLACE INTO localSettings(key, value) VALUES('Water Sample ID', '1');", null);
             }
+
+            // save the water sample tab group into local settings
             saveTabGroup("Water_Sample", water_sample_id, null, null, new SaveCallback() {
                 onSave(uuid, newRecord) {
+                    // set the water sample id to the actual id of the saved database record
                     water_sample_id = uuid;
+
+                    // if a water sample id exists in local settings, then use the increment of that id as the next id.
+                    // otherwise use the increment of the default id '1' as the next id.
                     next_id = 1;
                     if(!isNull(result)) {
                         next_id = Integer.parseInt(result.get(0));
                     }
                     next_id++;
+
+                    // store the next id in local settings as the value for water sample id.
                     fetchOne("REPLACE INTO localSettings(key, value) VALUES('Water Sample ID', '" + next_id + "');", null);
+                    
+                    // save the water sample tab group once more with autosaving turned on.
                     saveTabGroup("Water_Sample", water_sample_id, null, null, new SaveCallback() {
                         onSave(uuid, newRecord) {
                             water_sample_id = uuid;
