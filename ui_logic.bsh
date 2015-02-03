@@ -91,6 +91,7 @@ addActionBarItem("external_gps", new ToggleActionButtonCallback() {
 /* Event Handling */
 onEvent("Project", "show", "removeNavigationButtons();");
 
+onEvent("Project/Start", "show", "loadSamplePrefix(); loadSampleID();");
 onEvent("Project/Start/New_Sample", "delayclick", "newSample();");
 //onEvent("Project/Start/Validate_Sample_ID", "click", "validSampleID();");
 
@@ -109,9 +110,6 @@ onEvent("Project/Map/Centre_Map", "click", "showToast(\"Centring functionality n
 onEvent("Project/Map/Save_Map_Settings", "click", "showToast(\"Save settings functionality not implemented yet.\");");
 onEvent("Project/Map/Create_Shape", "click", "newTabGroup(\"Shape\");");
 
-String sample_prefix = null;
-String sample_id = null;
-
 /* Generates of sample types for dropdown selection. */
 sample_types = new ArrayList();
 sample_types.add(new NameValuePair("{Water_Sample}", "Water Sample"));
@@ -122,45 +120,64 @@ populateDropDown("Project/Start/Sample_Types", sample_types);
 sample_types.add(0, new NameValuePair("{All}", "Sample"));
 populateDropDown("Project/Search/Sample_Types", sample_types);
 
+String sample_prefix = null;
+String sample_starting_id = null;
+
+/* Sets the sample prefix to the given value. */
+setSamplePrefix(String samplePrefix) {
+    sample_prefix = samplePrefix;
+    fetchOne("REPLACE INTO localSettings(key, value) VALUES('Sample Prefix', '" + samplePrefix + "');", null);
+}
+
+/* Sets the sample ID to the given value. */
+setSampleID(String sampleID) {
+    sample_starting_id = sampleID;
+    fetchOne("REPLACE INTO localSettings(key, value) VALUES('Sample ID', '" + sampleID + "');", null);
+}
+
+/* Loads the sample prefix if one exists. */
+loadSamplePrefix() {
+    fetchOne("SELECT value FROM localSettings WHERE key = 'Sample Prefix';", new FetchCallback() {
+        onFetch(result) {
+            print("prefix" + result);
+            if (!isNull(result)) {
+                sample_prefix = result.get(0);
+                setFieldValue("Project/Start/Sample_Prefix", sample_prefix);
+            }
+        }
+    });
+}
+
+/* Loads the sample starting ID if one exists, otherwise defaults to '1'. */
+loadSampleID() {
+    fetchOne("SELECT value FROM localSettings WHERE key = 'Sample ID';", new FetchCallback() {
+        onFetch(result) {
+            print("id:" + result);
+            if (isNull(result)) {
+                sample_starting_id = "1";
+                setFieldValue("Project/Start/Sample_Starting_ID", sample_starting_id);
+                setSampleID(sample_starting_id);
+            } else {
+                sample_starting_id = result.get(0);
+                setFieldValue("Project/Start/Sample_Starting_ID", sample_starting_id);
+            }
+        }
+    });
+}
+
 /* Validates the sample prefix for the right length. Returns true if the prefix is valid or false otherwise. */
 boolean validSamplePrefix() {
-    sample_prefix = getFieldValue("Project/Start/Sample_Prefix");
-    if (isNull(sample_prefix)) {
+    prefix = getFieldValue("Project/Start/Sample_Prefix");
+    if (isNull(prefix)) {
         showWarning("Warning", "A sample prefix needs to be provided.");
         return false;
     } 
-    if (sample_prefix.length() > 5) {
+    if (prefix.length() > 5) {
         showWarning("Warning", "The sample prefix must be at most 5 characters.");
         return false;
     }
     return true;
 }
-
-// /* Validates the entered sample ID for duplicates. Returns true if the ID is valid or false otherwise.*/
-// boolean validSampleID() {
-//     sample_id = null;
-//     showToast("Sample ID validation functionality not implemented yet.");
-//     if(isNull(getFieldValue("Project/Start/Sample_Starting_ID"))) {
-//         showWarning("Warning", "A sample starting ID needs to be entered.");
-//         return false;
-//     }
-//     boolean queryOK = true;
-//     if (queryOK) {
-//         sample_id = getFieldValue("Project/Start/Sample_Prefix");
-//         fetchOne("REPLACE INTO localSettings(key, value) VALUES('Sample ID', '" + sample_id + "'');", null);
-//     }
-// }
-
-// /* Sets the sample starting ID to the validated user input. */
-// setSampleStartingID() {
-//     if (validSampleID) { 
-
-//     }
-
-// }
-
-
-
 
 /* Creates a new sample based on selected type. */
 newSample() {
@@ -168,6 +185,8 @@ newSample() {
     if (!validSamplePrefix()) {
         return;
     }
+    setSamplePrefix(getFieldValue("Project/Start/Sample_Prefix"));
+    setSampleID(getFieldValue("Project/Start/Sample_Starting_ID"));
     String type = getFieldValue("Project/Start/Sample_Types");
     if(type.equals("Water Sample")) {
         newWaterSample();
