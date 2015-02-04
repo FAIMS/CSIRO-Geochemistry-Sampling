@@ -225,16 +225,20 @@ newSample() {
     sampleID = getFieldValue("Project/Start/Sample_Starting_ID");
     setFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_Prefix", samplePrefix);
     setFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_ID", sampleID);
-
     print("Making a new sample.\nPrefix: "+samplePrefix+"\nID: "+sampleID+"\nTimestamp: "+getFieldValue(tabgroup+"/Basic_Info/Timestamp"));
+    
+    // Increment the sample starting ID for the next sample.
+    keepTabGroupChanges(tabgroup);
+    setSampleStartingID(Integer.toString(Integer.parseInt(sampleID) + 1));
+}
 
-    // Save the new sample tabgroup, turn on autosaving and Increment the sample starting ID for the next sample.
+/* Generates and returns the date attribute for the current sample type. */
+List getSampleDateAttributeList() {
     List attributes = createAttributeList();
     sampleDate = new java.text.SimpleDateFormat("ddMMMyy").format(new Date());
     attributes.add(createEntityAttribute(getSampleType() + " Date", null, null, sampleDate, null));
-    keepTabGroupChanges(tabgroup);
-    autoSaveSample(attributes);
-    setSampleStartingID(Integer.toString(Integer.parseInt(sampleID) + 1));
+    print("Created the attributes: " + attrbutes);
+    return attributes;
 }
 
 /* Autosaves the current sample using the provided attribute list. */
@@ -242,6 +246,7 @@ autoSaveSample(attributeList) {
     currentSampleUUID = null;
     enable_autosave = true;
     tabgroup = getSampleTypePath();
+    print("saving with the attributes: " + attributeList);
     saveTabGroup(tabgroup, currentSampleUUID, null, attributeList, new SaveCallback() {
         onSave(uuid, newRecord) {
             currentSampleUUID = uuid;
@@ -355,7 +360,7 @@ loadSample() {
 }
 
 /*** WATER SAMPLE ***/
-onEvent("Water_Sample", "show", "addSampleNavigation();autoSaveSample();");
+onEvent("Water_Sample", "show", "addSampleNavigation();autoSaveSample(getSampleDateAttributeList());");
 
 onEvent("Water_Sample/Basic_Info/Take_GPS", "click", "fillInGPS(\"Water_Sample/Basic_Info/\")");
 onEvent("Water_Sample/Basic_Info/Take_Photo", "click", "attachPictureTo(\"Water_Sample/Basic_Info/Photos\")");
@@ -796,7 +801,7 @@ reallyDeleteEh(String eh_id) {
 
 /*** PLANT SAMPLE ***/
 
-onEvent("Plant_Sample", "show", "addSampleNavigation();autoSaveSample();");
+onEvent("Plant_Sample", "show", "addSampleNavigation();autoSaveSample(getSampleDateAttributeList());");
 
 onEvent("Plant_Sample/Basic_Info/Take_GPS", "click", "fillInGPS(\"Plant_Sample/Basic_Info/\")");
 onEvent("Plant_Sample/Basic_Info/Take_Photo", "click", "attachPictureTo(\"Plant_Sample/Basic_Info/Photos\")");
@@ -845,7 +850,7 @@ loadPlantSampleAttributes() {
 
 /*** SOIL SAMPLE ***/
 
-onEvent("Soil_Sample", "show", "addSampleNavigation();autoSaveSample();");
+onEvent("Soil_Sample", "show", "addSampleNavigation();autoSaveSample(getSampleDateAttributeList());");
 
 onEvent("Soil_Sample/Basic_Info/Take_GPS", "click", "fillInGPS(\"Soil_Sample/Basic_Info/\")");
 onEvent("Soil_Sample/Basic_Info/Take_Photo", "click", "attachPictureTo(\"Soil_Sample/Basic_Info/Photos\")");
@@ -899,7 +904,7 @@ loadSoilSampleAttributes() {
 
 /*** ROCK SAMPLE ***/
 
-onEvent("Rock_Sample", "show", "addSampleNavigation();autoSaveSample();");
+onEvent("Rock_Sample", "show", "addSampleNavigation();autoSaveSample(getSampleDateAttributeList());");
 
 onEvent("Rock_Sample/Basic_Info/Take_GPS", "click", "fillInGPS(\"Rock_Sample/Basic_Info/\")");
 onEvent("Rock_Sample/Lithological_Info/Take_Photo", "click", "attachPictureTo(\"Rock_Sample/Lithological_Info/Photos\")");
