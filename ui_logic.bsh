@@ -221,6 +221,7 @@ newSample() {
     }
 
     // Set the sample ID and prefix.
+    currentSampleUUID = null;
     samplePrefix = getFieldValue("Project/Start/Sample_Prefix");
     sampleID = getFieldValue("Project/Start/Sample_Starting_ID");
     setFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_Prefix", samplePrefix);
@@ -243,7 +244,6 @@ List getSampleDateAttributeList() {
 
 /* Autosaves the current sample using the provided attribute list. */
 autoSaveSample(attributeList) {
-    currentSampleUUID = null;
     enable_autosave = true;
     tabgroup = getSampleTypePath();
     print("saving with the attributes: " + attributeList);
@@ -297,15 +297,19 @@ addSampleNavigation() {
 /* Generates a confirmation prompt for deleting the current sample. */
 deleteSample() {
     tabgroup = getSampleTypePath();
+    print("Prompting a sample deletion, currentSampleUUID = " + currentSampleUUID);
     if (!isNull(currentSampleUUID)) {
+        print("Confirming a sample deletion");
         showAlert("Confirm Deletion", "Press OK to Delete this {" + tabgroup + "}!", "reallyDeleteSample()", "doNotDelete()");
     } else {
         cancelTabGroup(tabgroup, true);
+        print("Cancelling a sample deletion.");
     }
 }
 
 /* Deletes the current water sample. */
 reallyDeleteSample() {
+    print("Really deleting the sample.");
     tabgroup = getSampleTypePath();
     deleteArchEnt(currentSampleUUID, new DeleteCallback() {
         onDelete(uuid) {
@@ -338,10 +342,13 @@ loadSearch() {
 
 /* Loads the most recetly clicked on existing sample for editing. */
 loadSample() {
-    fetchAll("select aenttypename from identifierAsSpreadsheet join latestnondeletedArchEnt using (uuid) join aenttype using (aenttypeid) where uuid = '" + getListItemValue() + "';",
-        new FetchCallback() {
+    String sampleID = getListItemValue();
+    if (!isNull(sampleID)) {
+        fetchAll("select aenttypename from identifierAsSpreadsheet join latestnondeletedArchEnt using (uuid) join aenttype using (aenttypeid) where uuid = '" + sampleID + "';", 
+         new FetchCallback() {
             onFetch(result) {
-                sampleID = getListItemValue();
+                currentSampleUUID = sampleID;
+                print("Loading a sample, currentSampleUUID = " + currentSampleUUID);
                 if (result.get(0).get(0).equals("Water Sample")) {
                     setFieldValue("Project/Start/Sample_Types", "Water Sample");
                     loadWaterSampleFrom(sampleID);
@@ -357,6 +364,7 @@ loadSample() {
                 }
             }
         });
+    }    
 }
 
 /*** WATER SAMPLE ***/
