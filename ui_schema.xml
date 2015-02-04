@@ -363,6 +363,7 @@
           </Photolog>
         </faims>
       </instance>
+      <bind nodeset="/faims/Project/Start/Sample_Starting_ID" type="decimal"/>
       <bind nodeset="/faims/Water_Sample/Basic_Info/Elevation" type="decimal"/>
       <bind nodeset="/faims/Water_Sample/Codes/container1/child2/Estimated_Angle" type="decimal"/>
       <bind nodeset="/faims/Plant_Sample/Basic_Info/container4/child1/Plant_Height" type="decimal"/>
@@ -521,13 +522,13 @@
           <label></label>
           <group ref="child1" faims_style="even">
             <label></label>
-            <input ref="Water_Sample_Prefix" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+            <input ref="Water_Sample_Prefix" faims_attribute_name="Water Sample Prefix" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
               <label>{Water_Sample_Prefix}</label>
             </input>
           </group>
           <group ref="child2" faims_style="even">
             <label></label>
-            <input ref="Water_Sample_ID" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+            <input ref="Water_Sample_ID" faims_attribute_name="Water Sample ID" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
               <label>{Water_Sample_ID}</label>
             </input>
           </group>

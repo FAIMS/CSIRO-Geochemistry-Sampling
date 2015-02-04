@@ -168,6 +168,7 @@ boolean validSamplePrefix() {
 
 /* Returns the String representation of the sample type. */
 String getSampleType() {
+    print("Sample Type is: " + getFieldValue("Project/Start/Sample_Types"));
     return getFieldValue("Project/Start/Sample_Types");
 }
 
@@ -184,6 +185,7 @@ String getSampleTypePath() {
     } else if(type.equals("Rock Sample")) {
         tabgroup = "Rock_Sample";
     }
+    print("Tabgroup is: " + tabgroup);
     return tabgroup;
 }
 
@@ -224,12 +226,13 @@ newSample() {
     setFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_Prefix", samplePrefix);
     setFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_ID", sampleID);
 
-    print("Making a new sample \n Prefix: "+samplePrefix+"\nID: "+sampleID+"\nTimestamp: "+getFieldValue(tabgroup+"/Basic_Info/Timestamp"));
+    print("Making a new sample.\nPrefix: "+samplePrefix+"\nID: "+sampleID+"\nTimestamp: "+getFieldValue(tabgroup+"/Basic_Info/Timestamp"));
 
     // Save the new sample tabgroup, turn on autosaving and Increment the sample starting ID for the next sample.
     List attributes = createAttributeList();
     sampleDate = new java.text.SimpleDateFormat("ddMMMyy").format(new Date());
     attributes.add(createEntityAttribute(getSampleType() + " Date", null, null, sampleDate, null));
+    keepTabGroupChanges(tabgroup);
     autoSaveSample(attributes);
     setSampleStartingID(Integer.toString(Integer.parseInt(sampleID) + 1));
 }
