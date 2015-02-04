@@ -796,7 +796,7 @@
           </group>
           <group ref="child2" faims_style="even">
             <label></label>
-            <input ref="Plant_Sample_ID" faims_attribute_name="Plant Record ID" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+            <input ref="Plant_Sample_ID" faims_attribute_name="Plant Sample ID" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
               <label>{Plant_Record_ID}</label>
             </input>
           </group>
@@ -1124,7 +1124,7 @@
           </group>
           <group ref="child2" faims_style="even">
             <label></label>
-            <input ref="Rock_Sample_ID" faims_attribute_name="Core ID" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
+            <input ref="Rock_Sample_ID" faims_attribute_name="Rock Sample ID" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
               <label>{Core_ID}</label>
             </input>
           </group>

@@ -18,6 +18,10 @@
     <property name="Water Sample ID" type="freetext" isIdentifier="true">
       <description>Description TBD</description>
     </property>
+    <property name="Water Sample Date" type="measure" isIdentifier="true">
+      <description>Description TBD</description>
+      <formatString><![CDATA[$2]]></formatString>
+    </property>
     <property name="Station" type="freetext">
       <description>Description TBD</description>
     </property>
@@ -288,8 +292,12 @@
     <property name="Plant Sample Prefix" type="freetext" isIdentifier="true">
       <description>Description TBD</description>
     </property>
-    <property name="Plant Record ID" isIdentifier="true">
+    <property name="Plant Sample ID" isIdentifier="true">
       <description>Description TBD</description>
+    </property>
+    <property name="Plant Sample Date" type="measure" isIdentifier="true">
+      <description>Description TBD</description>
+      <formatString><![CDATA[$2]]></formatString>
     </property>
     <property name="Station" type="freetext">
       <description>Description TBD</description>
@@ -576,6 +584,10 @@
     </property>
     <property name="Soil Sample ID" isIdentifier="true">
       <description>Description TBD</description>
+    </property>
+    <property name="Soil Sample Date" type="measure" isIdentifier="true">
+      <description>Description TBD</description>
+      <formatString><![CDATA[$2]]></formatString>
     </property>
     <property name="Station" type="freetext">
       <description>Description TBD</description>
@@ -1335,8 +1347,12 @@
     <property name="Rock Sample Prefix" type="freetext" isIdentifier="true">
       <description>Description TBD</description>
     </property>
-    <property name="Core ID" type="freetext" isIdentifier="true">
+    <property name="Rock Sample ID" type="freetext" isIdentifier="true">
       <description>Description TBD</description>
+    </property>
+    <property name="Rock Sample Date" type="measure" isIdentifier="true">
+      <description>Description TBD</description>
+      <formatString><![CDATA[$2]]></formatString>
     </property>
     <property name="Station" type="freetext">
       <description>Description TBD</description>

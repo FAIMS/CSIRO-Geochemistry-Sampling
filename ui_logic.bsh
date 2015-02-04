@@ -166,10 +166,15 @@ boolean validSamplePrefix() {
     return true;
 }
 
+/* Returns the String representation of the sample type. */
+String getSampleType() {
+    return getFieldValue("Project/Start/Sample_Types");
+}
+
 /* Returns the tabgroup path for the currently selected sample type. */
 String getSampleTypePath() {
     String tabgroup = null;
-    String type = getFieldValue("Project/Start/Sample_Types");
+    String type = getSampleType();
     if(type.equals("Water Sample")) {
         tabgroup = "Water_Sample";
     } else if(type.equals("Plant Sample")) {
@@ -219,65 +224,36 @@ newSample() {
     setFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_Prefix", samplePrefix);
     setFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_ID", sampleID);
 
+    print("Making a new sample \n Prefix: "+samplePrefix+"\nID: "+sampleID+"\nTimestamp: "+getFieldValue(tabgroup+"/Basic_Info/Timestamp"));
+
     // Save the new sample tabgroup, turn on autosaving and Increment the sample starting ID for the next sample.
-    autoSaveSample();
+    List attributes = createAttributeList();
+    sampleDate = new java.text.SimpleDateFormat("ddMMMyy").format(new Date());
+    attributes.add(createEntityAttribute(getSampleType() + " Date", null, null, sampleDate, null));
+    autoSaveSample(attributes);
     setSampleStartingID(Integer.toString(Integer.parseInt(sampleID) + 1));
-
-
-
-    // currentSampleUUID = null;
-    // enable_autosave = true;
-    // saveTabGroup(tabgroup, currentSampleUUID, null, null, new SaveCallback() {
-    //     onSave(uuid, record) {
-    //         currentSampleUUID = uuid;
-    //         saveTabGroup(tabgroup, currentSampleUUID, null, null, new SaveCallback() {
-    //             onSave(uuid, newRecord) {
-    //                 currentSampleUUID = uuid;
-    //             }
-    //             onError(message) {
-    //                 onError(message);
-    //                 showToast(message);
-    //             }
-    //         }, enable_autosave);
-
-    //         // Increment the sample starting ID for the next sample.
-    //         setSampleStartingID(Integer.toString(Integer.parseInt(sampleID) + 1));
-    //     }
-    //     onError(message) {
-    //         print(message);
-    //         showToast(message);
-    //     }
-    // });
 }
 
-// /* Resumes autosaving for the sample. */
-// resumeAutoSavingSample() {
-//     if(!isNull(currentSampleUUID)) {
-//         tabgroup = getSampleTypePath();
-//         saveTabGroup(tabgroup, currentSampleUUID, null, null, new SaveCallback() {
-//             onSave(uuid, newRecord) {
-//                 currentSampleUUID = uuid;
-//             }
-//             onError(message) {
-//                 showToast(message);
-//             }
-//         },true);
-//     }
-// }
-
-/* Autosaves the current sample. */
-autoSaveSample() {
+/* Autosaves the current sample using the provided attribute list. */
+autoSaveSample(attributeList) {
     currentSampleUUID = null;
     enable_autosave = true;
     tabgroup = getSampleTypePath();
-    saveTabGroup(tabgroup, currentSampleUUID, null, null, new SaveCallback() {
+    saveTabGroup(tabgroup, currentSampleUUID, null, attributeList, new SaveCallback() {
         onSave(uuid, newRecord) {
             currentSampleUUID = uuid;
+
+            print("Saved sample uuid: "+currentSampleUUID);
         }
         onError(message) {
-            print(message);
+            showToast(message);
         }  
     }, enable_autosave);
+}
+
+/* Autosaves the current sample. */
+autoSaveSample() {
+    autoSaveSample(null);
 }
 
 /* Creates sidebar navigation for the sample. */
@@ -347,6 +323,7 @@ loadSearch() {
                     result.add(new NameValuePair("{No_records_found}", ""));
                 }
                 populateList("Project/Search/Sample_List", result);
+                print(result);
             }
         });
 }
@@ -375,7 +352,6 @@ loadSample() {
 }
 
 /*** WATER SAMPLE ***/
-// onEvent("Water_Sample", "show", "addSampleNavigation();resumeAutoSavingSample();");
 onEvent("Water_Sample", "show", "addSampleNavigation();autoSaveSample();");
 
 onEvent("Water_Sample/Basic_Info/Take_GPS", "click", "fillInGPS(\"Water_Sample/Basic_Info/\")");
@@ -387,6 +363,11 @@ onEvent("Water_Sample/Codes/Hole_Angle", "click", "populateEstimatedAngle();");
 onEvent("Water_Sample/Photolog", "show", "loadRelatedPhotologs(water_sample_id, \"Water_Sample\");");
 onEvent("Water_Sample/Photolog/New_Photolog", "click", "newPhotolog(); sample_id = water_sample_id; type = \"Water\";");
 onEvent("Water_Sample/Photolog/Photolog_List", "click", "loadPhotolog();");
+
+/* Validates the temperature and conductivity fields if no value is entered upon navigating off the tab. */
+validateTempConduct() {
+    showAlert("Alert", "a temperature and conductivity should be entered.", "OK", "");
+}
 
 String water_sample_id = null;
 
@@ -510,6 +491,12 @@ preferred_eh = null;
 
 onEvent("Water_Sample/pH_Eh", "show", "renderpHEhPage();");
 
+/*********************************************************************************\
+ *                                                                               *
+ * WARNING: Do NOT re-use the following renderpHEhPage() code in future modules. *
+ *                                                                               *
+\*********************************************************************************/
+
 /* Renders the pH/Eh tab using dynamic UI. */
 renderpHEhPage() {
     executeViewTask(new ViewTask() {
@@ -629,6 +616,12 @@ renderpHEhPage() {
         }
     });
 }
+
+/********************************************************************************\
+ *                                                                              *
+ * WARNING: Do NOT re-use the previous renderpHEhPage() code in future modules. *
+ *                                                                              *
+\********************************************************************************/
 
 /* Adds a new pH value, saves the entity and updates the dynamic UI. */
 addNewpH(String ph_value) {
@@ -800,7 +793,6 @@ reallyDeleteEh(String eh_id) {
 
 /*** PLANT SAMPLE ***/
 
-// onEvent("Plant_Sample", "show", "addSampleNavigation();resumeAutoSavingSample();");
 onEvent("Plant_Sample", "show", "addSampleNavigation();autoSaveSample();");
 
 onEvent("Plant_Sample/Basic_Info/Take_GPS", "click", "fillInGPS(\"Plant_Sample/Basic_Info/\")");
@@ -850,7 +842,6 @@ loadPlantSampleAttributes() {
 
 /*** SOIL SAMPLE ***/
 
-// onEvent("Soil_Sample", "show", "addSampleNavigation();resumeAutoSavingSample();");
 onEvent("Soil_Sample", "show", "addSampleNavigation();autoSaveSample();");
 
 onEvent("Soil_Sample/Basic_Info/Take_GPS", "click", "fillInGPS(\"Soil_Sample/Basic_Info/\")");
@@ -905,7 +896,6 @@ loadSoilSampleAttributes() {
 
 /*** ROCK SAMPLE ***/
 
-// onEvent("Rock_Sample", "show", "addSampleNavigation();resumeAutoSavingSample();");
 onEvent("Rock_Sample", "show", "addSampleNavigation();autoSaveSample();");
 
 onEvent("Rock_Sample/Basic_Info/Take_GPS", "click", "fillInGPS(\"Rock_Sample/Basic_Info/\")");
