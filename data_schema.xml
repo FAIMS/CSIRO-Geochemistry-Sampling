@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+s<?xml version="1.0" encoding="UTF-8"?>
 <dataSchema>
   <RelationshipElement name="Water Sample pH" type="bidirectional">
     <description>Implements a 1:N relationship between Water Samples and pH</description>
@@ -21,6 +21,20 @@
     <property name="Water Sample Date" type="measure" isIdentifier="true">
       <description>Description TBD</description>
       <formatString><![CDATA[$2]]></formatString>
+    </property>
+    <property name="Observation Type" type="vocab">
+      <description>Description TBD</description>
+      <lookup>
+        <term> {Sampling_Location}
+          <description>Description TBD</description>
+        </term>
+        <term> {Observation_Only}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Location Number" type="measure">
+      <description>Description TBD</description>
     </property>
     <property name="Station" type="freetext">
       <description>Description TBD</description>
@@ -298,6 +312,17 @@
     <property name="Plant Sample Date" type="measure" isIdentifier="true">
       <description>Description TBD</description>
       <formatString><![CDATA[$2]]></formatString>
+    </property>
+    <property name="Observation Type" type="vocab">
+      <description>Description TBD</description>
+      <lookup>
+        <term> {Sampling_Location}
+          <description>Description TBD</description>
+        </term>
+        <term> {Observation_Only}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
     </property>
     <property name="Station" type="freetext">
       <description>Description TBD</description>
@@ -588,6 +613,17 @@
     <property name="Soil Sample Date" type="measure" isIdentifier="true">
       <description>Description TBD</description>
       <formatString><![CDATA[$2]]></formatString>
+    </property>
+    <property name="Observation Type" type="vocab">
+      <description>Description TBD</description>
+      <lookup>
+        <term> {Sampling_Location}
+          <description>Description TBD</description>
+        </term>
+        <term> {Observation_Only}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
     </property>
     <property name="Station" type="freetext">
       <description>Description TBD</description>
@@ -1353,6 +1389,17 @@
     <property name="Rock Sample Date" type="measure" isIdentifier="true">
       <description>Description TBD</description>
       <formatString><![CDATA[$2]]></formatString>
+    </property>
+    <property name="Observation Type" type="vocab">
+      <description>Description TBD</description>
+      <lookup>
+        <term> {Sampling_Location}
+          <description>Description TBD</description>
+        </term>
+        <term> {Observation_Only}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
     </property>
     <property name="Station" type="freetext">
       <description>Description TBD</description>

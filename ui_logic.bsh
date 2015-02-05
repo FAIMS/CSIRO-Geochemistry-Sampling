@@ -208,6 +208,12 @@ newSample() {
 
     // Populate sample field values.
     newTabGroup(tabgroup);
+    fetchOne("select vocabid from vocabulary join attributekey using (attributeid) where attributename = 'Observation Type' and vocabname =  '{Sampling_Location}';", 
+     new FetchCallback() {
+        onFetch(result) {
+            setFieldValue(tabgroup + "/Basic_Info/Observation_Type", result.get(0));
+        }
+    });
     setTimestamp(tabgroup + "/Basic_Info/Timestamp");
     setFieldValue(tabgroup + "/Basic_Info/Author_Name", getFieldValue("Project/Start/Author_Name"));
     setFieldValue(tabgroup + "/Basic_Info/Station_Deposit", getFieldValue("Project/Start/Station_Deposit"));
@@ -240,6 +246,39 @@ List getSampleDateAttributeList() {
     attributes.add(createEntityAttribute(getSampleType() + " Date", null, null, sampleDate, null));
     print("Created the attributes: " + attrbutes);
     return attributes;
+}
+
+
+// onEvent("Water_Sample/Basic_Info/Observation_Type", "click", "renderLocationNumber()");
+// onEvent("Water_Sample/Basic_Info", "show", "renderLocationNumber()");
+// onEvent("Plant_Sample/Basic_Info/Observation_Type", "click", "renderLocationNumber()");
+// onEvent("Plant_Sample/Basic_Info", "show", "renderLocationNumber()");
+// onEvent("Soil_Sample/Basic_Info/Observation_Type", "click", "renderLocationNumber()");
+// onEvent("Soil_Sample/Basic_Info", "show", "renderLocationNumber()");
+// onEvent("Rock_Sample/Basic_Info/Observation_Type", "click", "renderLocationNumber()");
+// onEvent("Rock_Sample/Basic_Info", "show", "renderLocationNumber()");
+
+renderLocationNumber() {
+    fetchOne("select vocabid from vocabulary join attributekey using (attributeid) where attributename = 'Observation Type' and vocabname =  '{Observation_Only}';", 
+     new FetchCallback() {
+        onFetch(result) {
+            String tabgroup = getSampleTypePath();
+            observationOnly = result.get(0);
+            selectedObservationType = getFieldValue(tabgroup + "/Basic_Info/Observation_Type");
+            // if the observation only radio button is selected then create and display the location number field, otherwise remove that field.
+            executeViewTask(new ViewTask() {
+                doTask() {
+                    if (selectedObservationType.equals(observationOnly)) {
+                        textDef = createViewDef().createTextField().setLabel("{Location_Number}").setAttributeName("Location Number").setAttributeType("measure");
+                        createView(tabgroup + "/Basic_Info/Location_Number", textDef);
+                    } else {
+                        //removeView(tabgroup + "/Basic_Info/Location_Number");
+                        removeAllViewsAndContainers(tabgroup);
+                    }
+                }
+            });
+        }
+    });
 }
 
 /* Autosaves the current sample using the provided attribute list. */
@@ -473,6 +512,7 @@ loadWaterSampleFrom(archentid) {
 
 /* Populates all auto-generated fields for the water sample. */
 loadWaterSampleAttributes() {
+    makeVocab("RadioGroup", "Water_Sample/Basic_Info/Observation_Type", "Observation Type");
     makeVocab("DropDown", "Water_Sample/Basic_Info/SRID", "SRID");
     makeVocab("CheckBoxGroup", "Water_Sample/Basic_Info/Samples_Collected", "Samples Collected");
     makeVocab("DropDown", "Water_Sample/Codes/Hole_Type", "Hole Type");
@@ -851,6 +891,7 @@ loadPlantSampleFrom(archentid) {
 
 /* Populates all auto-generated fields for the plant sample. */
 loadPlantSampleAttributes() {
+    makeVocab("RadioGroup", "Plant_Sample/Basic_Info/Observation_Type", "Observation Type");
     makeVocab("DropDown", "Plant_Sample/Basic_Info/SRID", "SRID");
     makeVocab("CheckBoxGroup", "Plant_Sample/Basic_Info/Soil_Description", "Soil Description");
     populateHierarchicalDropDown("Plant_Sample/Basic_Info/Landform_Description", "Landform Description");
@@ -901,6 +942,7 @@ loadSoilSampleFrom(archentid) {
 
 /* Populates all auto-generated fields for the soil sample. */
 loadSoilSampleAttributes() {
+    makeVocab("RadioGroup", "Soil_Sample/Basic_Info/Observation_Type", "Observation Type");
     makeVocab("DropDown", "Soil_Sample/Basic_Info/SRID", "SRID");
     makeVocab("RadioGroup", "Soil_Sample/Basic_Info/Lag", "Lag");
     makeVocab("CheckBoxGroup", "Soil_Sample/Basic_Info/Soil_Texture", "Soil_Texture");
@@ -955,6 +997,7 @@ loadRockSampleFrom(archentid) {
 
 /* Populates all auto-generated fields for the rock sample. */
 loadRockSampleAttributes() {
+    makeVocab("RadioGroup", "Rock_Sample/Basic_Info/Observation_Type", "Observation Type");
     makeVocab("DropDown", "Rock_Sample/Basic_Info/SRID", "SRID");
     makeVocab("RadioGroup", "Rock_Sample/Measurements/Veins", "Veins");
     makeVocab("RadioGroup", "Rock_Sample/Measurements/Fractures", "Fractures");
