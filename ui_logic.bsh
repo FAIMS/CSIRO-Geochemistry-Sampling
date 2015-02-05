@@ -4,9 +4,29 @@ User user; // don't touch
 String userid;
 
 makeLocalID(){
-    fetchOne("CREATE TABLE IF NOT EXISTS localSettings (key text primary key, value text);");
-    fetchOne("drop view if exists identifierAsSpreadsheet;");
-    fetchOne("create view identifierAsSpreadsheet as select uuid, group_concat(coalesce(measure || ' ' || vocabname || '(' ||freetext||')',  measure || ' (' || freetext ||')',  vocabname || ' (' || freetext ||')',  measure || ' ' || vocabname ,  vocabname || ' (' || freetext || ')',  measure || ' (' || freetext || ')',  measure,  vocabname,  freetext,  measure,  vocabname,  freetext), ' ') as response from (select * from latestNonDeletedArchentIdentifiers order by attributename) group by uuid;");
+    fetchOne("drop view latestNonDeletedArchEntFormattedIdentifiers;");
+    fetchOne("CREATE VIEW latestNonDeletedArchEntFormattedIdentifiers as " +
+              "select uuid, aenttypeid, aenttypename, group_concat(response, '') as response, null as deleted " +
+              "from ( " +
+                "select uuid, aenttypeid, aenttypename, group_concat(format(formatstring, vocabname, measure, freetext, certainty), appendcharacterstring) as response, null as deleted, aentcountorder " +
+                "from ( " +
+                  "select uuid, aenttypeid, aenttypename, formatstring, vocabname, measure, freetext, certainty, appendcharacterstring, null as deleted, aentcountorder, vocabcountorder, attributeid " +
+                  "from latestNonDeletedArchent " +
+                    "JOIN aenttype using (aenttypeid) " +
+                    "JOIN (select * from idealaent where isIdentifier='true') using (aenttypeid) " +
+                    "join attributekey  using (attributeid) " +
+                    "join latestNonDeletedAentValue using (uuid, attributeid) " +
+                    "left outer join vocabulary using (attributeid, vocabid) " +
+                  "order by uuid, aentcountorder, vocabcountorder " +
+                ") " +
+                "group by uuid, attributeid " +
+                "having response is not null " +
+                "order by uuid, aentcountorder) " +
+              "group by uuid " +
+              "order by uuid;"
+    );
+
+
 }
 makeLocalID();
 
@@ -366,7 +386,7 @@ removeNavigationButtons() {
 /* Loads a list view of existing samples. */
 loadSearch() {
     type = getFieldValue("Project/Search/Sample_Types");
-    fetchAll("select uuid, response from identifierAsSpreadsheet join latestnondeletedArchEnt using (uuid) join aenttype using (aenttypeid) where aenttypename like '%"+type+"%' order by aenttimestamp;",
+    fetchAll("select uuid, response from latestNonDeletedArchEntFormattedIdentifiers where aenttypename like '%" + type + "%';", 
         new FetchCallback() {
             onFetch(result) {
                 if (isNull(result)) {
@@ -383,7 +403,7 @@ loadSearch() {
 loadSample() {
     String sampleID = getListItemValue();
     if (!isNull(sampleID)) {
-        fetchAll("select aenttypename from identifierAsSpreadsheet join latestnondeletedArchEnt using (uuid) join aenttype using (aenttypeid) where uuid = '" + sampleID + "';", 
+        fetchAll("select aenttypename from latestnondeletedarchent join aenttype using (aenttypeid) where uuid = '" + sampleID + "';", 
          new FetchCallback() {
             onFetch(result) {
                 currentSampleUUID = sampleID;
@@ -435,12 +455,12 @@ loadWaterSampleFrom(archentid) {
     showTabGroup("Water_Sample", archentid, new FetchCallback() {
         onFetch(result) {
             water_sample_id = archentid;
-            fetchOne("select fname || ' ' || lname from user join archentity using (userid) where uuid = '" + water_sample_id + "' group by uuid having min(aenttimestamp)", new FetchCallback() {
+            fetchOne("select createdBy from createdModifiedAtBy where uuid = '" + water_sample_id + "';", new FetchCallback() {
                 onFetch(username) {
                     setFieldValue("Water_Sample/Basic_Info/Author_Name", username.get(0));
                 }
             });
-            fetchOne("select datetime(aentTimestamp, 'localtime')  from archentity where uuid = '" + water_sample_id + "' group by uuid having min(aenttimestamp);", new FetchCallback() {
+            fetchOne("select datetime(createdAt , 'localtime') from createdModifiedAtBy where uuid = '" + water_sample_id + "';", new FetchCallback() {
                 onFetch(timestamp) {
                     setFieldValue("Water_Sample/Basic_Info/Timestamp", timestamp.get(0));
                 }
@@ -454,39 +474,37 @@ loadWaterSampleFrom(archentid) {
             if(!isNull(getFieldValue("Water_Sample/Hidden/Preferred_Eh_Time"))) {
                 Date preferred_eh_time = fromFormat.parse(getFieldValue("Water_Sample/Hidden/Preferred_Eh_Time"));
                 setFieldValue("Water_Sample/pH_Eh/Preferred_Eh_Time", toFormat.format(preferred_eh_time));
-            }
-
+            }           
             fetchOne("select uuid " + 
-                    "from latestnondeletedaentvalue " + 
-                    "join latestnondeletedarchent using (uuid) " + 
-                    "join aenttype using (aenttypeid) " + 
-                    "join attributekey using (attributeid)  " + 
-                    "where attributename = 'Preferred'  " + 
-                    "and aenttypename = 'pH' " + 
-                    "and measure=1 " + 
-                    "and uuid in (select a.uuid " + 
-                            "from latestnondeletedaentreln a join latestnondeletedaentreln b using (relationshipid) " + 
-                            "where a.uuid != b.uuid " + 
-                            "and b.uuid = " + water_sample_id + "); ", new FetchCallback() {
+                    "from latestnondeletedaentvalue " +
+                    "join latestnondeletedarchent using (uuid) " +
+                    "join aenttype using (aenttypeid) " +
+                    "join attributekey using (attributeid)  " +
+                    "where attributename = 'Preferred'  " +
+                    "and aenttypename = 'pH' " +
+                    "and measure=1 " +
+                    "and uuid in (select a.uuid " +
+                    "from latestnondeletedaentreln a join latestnondeletedaentreln b using (relationshipid) " +
+                    "where a.uuid != b.uuid " +
+                    "and b.uuid = " + water_sample_id + ");", new FetchCallback() {
                 onFetch(result) {
                     if(!isNull(result)) {
                         preferred_ph = result.get(0);
                     }
                 }
             });
-
-            fetchOne("select uuid " + 
-                    "from latestnondeletedaentvalue " + 
-                    "join latestnondeletedarchent using (uuid) " + 
-                    "join aenttype using (aenttypeid) " + 
-                    "join attributekey using (attributeid)  " + 
-                    "where attributename = 'Preferred'  " + 
-                    "and aenttypename = 'Eh' " + 
-                    "and measure=1 " + 
-                    "and uuid in (select a.uuid " + 
-                            "from latestnondeletedaentreln a join latestnondeletedaentreln b using (relationshipid) " + 
-                            "where a.uuid != b.uuid " + 
-                            "and b.uuid = " + water_sample_id + "); ", new FetchCallback() {
+            fetchOne("select uuid " +
+                    "from latestnondeletedaentvalue " +
+                    "join latestnondeletedarchent using (uuid) " +
+                    "join aenttype using (aenttypeid) " +
+                    "join attributekey using (attributeid)  " +
+                    "where attributename = 'Preferred'  " +
+                    "and aenttypename = 'Eh' " +
+                    "and measure=1 " +
+                    "and uuid in (select a.uuid " +
+                    "from latestnondeletedaentreln a join latestnondeletedaentreln b using (relationshipid) " +
+                    "where a.uuid != b.uuid " +
+                    "and b.uuid = " + water_sample_id + ") ;", new FetchCallback() {
                 onFetch(result) {
                     if(!isNull(result)) { 
                         preferred_eh = result.get(0);
@@ -571,39 +589,29 @@ renderpHEhPage() {
             eh_count = 0;
             ArrayList ph_list = new ArrayList();
             ArrayList eh_list = new ArrayList();
-            fetchAll("select uuid, group_concat(coalesce(measure || ' ' || vocabname || '(' ||freetext||')',  measure || ' (' || freetext ||')',  vocabname || ' (' || freetext ||')',  measure || ' ' || vocabname ,  vocabname || ' (' || freetext || ')',  measure || ' (' || freetext || ')',  measure,  vocabname,  freetext,  measure,  vocabname,  freetext), '|') as response, valuetimestamp\n"+
-                "  FROM (  SELECT uuid, attributeid, vocabid, attributename, vocabname, measure, freetext, certainty, attributetype, valuetimestamp, aenttypename\n"+
-                "            FROM latestNonDeletedArchentIdentifiers\n"+
-                "           WHERE aenttypename = 'pH'\n"+
-                "             AND uuid in (select uuid\n"+
-                "                            FROM latestNonDeletedAentReln\n"+
-                "                           where relationshipid in (select relationshipid\n"+
-                "                                                      FROM latestNonDeletedAentReln\n"+
-                "                                                      JOIN relationship using (relationshipid)\n"+
-                "                                                      JOIN relntype using (relntypeid)\n"+
-                "                                                    where uuid = "+water_sample_id+"\n"+
-                "                                                       and relntypeName = 'Water Sample pH')\n"+
-                "                             and uuid != "+water_sample_id+")\n"+
-                "        ORDER BY uuid, attributename DESC)\n"+
-                "group by uuid\n"+
-                "order by valuetimestamp, uuid, attributename;",  new FetchCallback() {
+            fetchAll("select uuid, group_concat(measure,'|') " +
+                    "from latestnondeletedaentvalue " +
+                    "join latestnondeletedarchent using (uuid) " +
+                    "join aenttype using (aenttypeid) " +
+                    "join attributekey using (attributeid) " +
+                    "where aenttypename = 'pH' " +
+                    "and uuid in (select a.uuid " +
+                    "from latestnondeletedaentreln a join latestnondeletedaentreln b using (relationshipid) " +
+                    "where a.uuid != b.uuid " +
+                    "and b.uuid = "+water_sample_id+") " +
+                    "order by uuid, attributename desc; ",  new FetchCallback() {
                     onFetch(ph_list) {
-                        fetchAll("select uuid, group_concat(coalesce(measure || ' ' || vocabname || '(' ||freetext||')',  measure || ' (' || freetext ||')',  vocabname || ' (' || freetext ||')',  measure || ' ' || vocabname ,  vocabname || ' (' || freetext || ')',  measure || ' (' || freetext || ')',  measure,  vocabname,  freetext,  measure,  vocabname,  freetext), '|') as response, valuetimestamp\n"+
-                        "  FROM (  SELECT uuid, attributeid, vocabid, attributename, vocabname, measure, freetext, certainty, attributetype, valuetimestamp, aenttypename\n"+
-                        "            FROM latestNonDeletedArchentIdentifiers\n"+
-                        "           WHERE aenttypename = 'Eh'\n"+
-                        "             AND uuid in (select uuid\n"+
-                        "                            FROM latestNonDeletedAentReln\n"+
-                        "                           where relationshipid in (select relationshipid\n"+
-                        "                                                      FROM latestNonDeletedAentReln\n"+
-                        "                                                      JOIN relationship using (relationshipid)\n"+
-                        "                                                      JOIN relntype using (relntypeid)\n"+
-                        "                                                    where uuid = "+water_sample_id+"\n"+
-                        "                                                       and relntypeName = 'Water Sample Eh')\n"+
-                        "                             and uuid != "+water_sample_id+")\n"+
-                        "        ORDER BY uuid, attributename DESC)\n"+
-                        "group by uuid\n"+
-                        "order by valuetimestamp, uuid, attributename;",  new FetchCallback() {
+                        fetchAll("select uuid, group_concat(measure,'|') " +
+                                "from latestnondeletedaentvalue " +
+                                "join latestnondeletedarchent using (uuid) " +
+                                "join aenttype using (aenttypeid)  " +
+                                "join attributekey using (attributeid) " +
+                                "where aenttypename = 'Eh' " +
+                                "and uuid in (select a.uuid " +
+                                "from latestnondeletedaentreln a join latestnondeletedaentreln b using (relationshipid) " +
+                                "where a.uuid != b.uuid " +
+                                "and b.uuid = "+water_sample_id+") " +
+                                "order by uuid, attributename desc;",  new FetchCallback() {
                             onFetch(eh_list) {
                                 for(ph : ph_list) {
                                     createContainer("Water_Sample/pH_Eh/pH_Row_" + ph_count, "orientation", "Water_Sample/pH_Eh/pH_Container");
@@ -870,12 +878,12 @@ loadPlantSampleFrom(archentid) {
     showTabGroup("Plant_Sample", archentid, new FetchCallback() {
         onFetch(result) {
             plant_sample_id = archentid;
-            fetchOne("select fname || ' ' || lname from user join archentity using (userid) where uuid = '" + plant_sample_id + "' group by uuid having min(aenttimestamp)", new FetchCallback() {
+            fetchOne("select createdBy from createdModifiedAtBy where uuid = '" + plant_sample_id + "';", new FetchCallback() {
                 onFetch(username) {
                     setFieldValue("Plant_Sample/Basic_Info/Author_Name", username.get(0));
                 }
             });
-            fetchOne("select datetime(aentTimestamp, 'localtime')  from archentity where uuid = '" + plant_sample_id + "' group by uuid having min(aenttimestamp);", new FetchCallback() {
+            fetchOne("select datetime(createdAt , 'localtime') from createdModifiedAtBy where uuid = '" + plant_sample_id + "';", new FetchCallback() {
                 onFetch(timestamp) {
                     setFieldValue("Plant_Sample/Basic_Info/Timestamp", timestamp.get(0));
                 }
@@ -921,12 +929,12 @@ loadSoilSampleFrom(archentid) {
     showTabGroup("Soil_Sample", archentid, new FetchCallback() {
         onFetch(result) {
             soil_sample_id = archentid;
-            fetchOne("select fname || ' ' || lname from user join archentity using (userid) where uuid = '" + soil_sample_id + "' group by uuid having min(aenttimestamp)", new FetchCallback() {
+            fetchOne("select createdBy from createdModifiedAtBy where uuid = '" + soil_sample_id + "';", new FetchCallback() {
                 onFetch(username) {
                     setFieldValue("Soil_Sample/Basic_Info/Author_Name", username.get(0));
                 }
             });
-            fetchOne("select datetime(aentTimestamp, 'localtime')  from archentity where uuid = '" + soil_sample_id + "' group by uuid having min(aenttimestamp);", new FetchCallback() {
+            fetchOne("select datetime(createdAt , 'localtime') from createdModifiedAtBy where uuid = '" + soil_sample_id + "';", new FetchCallback() {
                 onFetch(timestamp) {
                     setFieldValue("Soil_Sample/Basic_Info/Timestamp", timestamp.get(0));
                 }
@@ -976,12 +984,12 @@ loadRockSampleFrom(archentid) {
     showTabGroup("Rock_Sample", archentid, new FetchCallback() {
         onFetch(result) {
             rock_sample_id = archentid;
-            fetchOne("select fname || ' ' || lname from user join archentity using (userid) where uuid = '" + rock_sample_id + "' group by uuid having min(aenttimestamp)", new FetchCallback() {
+            fetchOne("select createdBy from createdModifiedAtBy where uuid = '" + rock_sample_id + "';", new FetchCallback() {
                 onFetch(username) {
                     setFieldValue("Rock_Sample/Basic_Info/Author_Name", username.get(0));
                 }
             });
-            fetchOne("select datetime(aentTimestamp, 'localtime')  from archentity where uuid = '" + rock_sample_id + "' group by uuid having min(aenttimestamp);", new FetchCallback() {
+            fetchOne("select datetime(createdAt , 'localtime') from createdModifiedAtBy where uuid = '" + rock_sample_id + "';", new FetchCallback() {
                 onFetch(timestamp) {
                     setFieldValue("Rock_Sample/Basic_Info/Timestamp", timestamp.get(0));
                 }
@@ -1123,21 +1131,18 @@ addPhotologNavigation() {
 /* Populates the photolog list with the existing photologs linked to the given sample ID. */
 loadRelatedPhotologs(String related_sample_id, String type) {
     if(!isNull(related_sample_id)) {
-        fetchAll("select uuid, aenttypename || ': ' || group_concat(coalesce(measure || ' ' || vocabname || '(' ||freetext||')',  measure || ' (' || freetext ||')',  vocabname || ' (' || freetext ||')',  measure || ' ' || vocabname ,  vocabname || ' (' || freetext || ')',  measure || ' (' || freetext || ')',  measure,  vocabname,  freetext,  measure,  vocabname,  freetext), ' - ') as response, valuetimestamp\n"+
-            "  FROM (  SELECT uuid, attributeid, vocabid, attributename, vocabname, measure, freetext, certainty, attributetype, valuetimestamp, aenttypename\n"+
-            "            FROM latestNonDeletedArchentIdentifiers\n"+
-            "           WHERE aenttypename = 'Photolog'\n"+
-            "             AND uuid in (select uuid\n"+
-            "                            FROM latestNonDeletedAentReln\n"+
-            "                           where relationshipid in (select relationshipid\n"+
-            "                                                      FROM latestNonDeletedAentReln\n"+
-            "                                                      JOIN relationship using (relationshipid)\n"+
-            "                                                      JOIN relntype using (relntypeid)\n"+
-            "                                                    where uuid = "+related_sample_id+"\n"+
-            "                                                       and relntypeName = 'Sample Photolog')\n"+
-            "                             and uuid != "+related_sample_id+"))\n"+
-            "group by uuid\n"+
-            "order by valuetimestamp desc, uuid, attributename;",  new FetchCallback() {
+        fetchAll("select uuid, response " +
+                "from latestNonDeletedArchEntFormattedIdentifiers " +
+                "where aenttypename = 'Photolog' " +
+                "and uuid in  (select uuid " +
+                "FROM latestNonDeletedAentReln " +
+                "where relationshipid in (select relationshipid " +
+                "FROM latestNonDeletedAentReln " +
+                "JOIN relationship using (relationshipid) " +
+                "JOIN relntype using (relntypeid) " +
+                "where uuid = "+related_sample_id + "" +
+                "and relntypeName = 'Sample Photolog') " +
+                "and uuid != "+related_sample_id+");",  new FetchCallback() {
                 onFetch(result) {
                     if(isNull(result)) {
                         result = new ArrayList();
@@ -1179,7 +1184,6 @@ saveEntitiesToRel(String type, String entity1, String entity2, Callable callback
     });
 }
 
-// 
 saveEntitiesToHierRel(String type, String entity1, String entity2, String e1verb, String e2verb) {
     if (isNull(entity1) || isNull(entity2)) return;
     saveRel(null, type, null, null, new SaveCallback() {
@@ -1193,7 +1197,7 @@ saveEntitiesToHierRel(String type, String entity1, String entity2, String e1verb
 /* Populates the path specified vocabulary from the database based on the given attribute name, where type 
 is the type of the vocab to populate (checkbox, dropdown, radio or list). */
 makeVocab(String type, String path, String attrib){
-    fetchAll("select vocabid, vocabname from vocabulary join attributekey using (attributeid) where attributename = '"+attrib+"' order by vocabcountorder",
+    fetchAll("select vocabid, vocabname from vocabulary join attributekey using (attributeid) where attributename = '" + attrib + "' order by vocabcountorder;",
         new FetchCallback() {
             onFetch(result) {
                 if(type.equals("CheckBoxGroup")) {
@@ -1251,7 +1255,7 @@ fillInGPS(String path) {
 /*** USER ***/
 
 loadUsers() {
-    fetchAll("select userid, fname || ' ' || lname from user where userdeleted is null", new FetchCallback() {
+    fetchAll("select userid, fname || ' ' || lname from user where userdeleted is null;", new FetchCallback() {
         onFetch(result) {
             populateList("user/usertab/users", result);
         }
