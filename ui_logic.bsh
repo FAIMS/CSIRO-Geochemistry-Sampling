@@ -189,7 +189,9 @@ boolean validSamplePrefix() {
 
 /* Returns the String representation of the sample type. */
 String getSampleType() {
-    print("Sample Type is: " + getFieldValue("Project/Start/Sample_Types"));
+    // print(this.getName());
+    Log.e("foo", "bar");
+    print("[getSampleType()] Sample Type is: " + getFieldValue("Project/Start/Sample_Types"));
     return getFieldValue("Project/Start/Sample_Types");
 }
 
@@ -206,7 +208,7 @@ String getSampleTypePath() {
     } else if(type.equals("Rock Sample")) {
         tabgroup = "Rock_Sample";
     }
-    print("Tabgroup is: " + tabgroup);
+    print("[getSampleTypePath()] Tabgroup is: " + tabgroup);
     return tabgroup;
 }
 
@@ -256,7 +258,7 @@ newSample() {
     sampleID = getFieldValue("Project/Start/Sample_Starting_ID");
     setFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_Prefix", samplePrefix);
     setFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_ID", sampleID);
-    print("Making a new sample.\nPrefix: "+samplePrefix+"\nID: "+sampleID+"\nTimestamp: "+getFieldValue(tabgroup+"/Basic_Info/Timestamp"));
+    print("[newSample()] Making a new sample.\nPrefix: "+samplePrefix+"\nID: "+sampleID+"\nTimestamp: "+getFieldValue(tabgroup+"/Basic_Info/Timestamp"));
     
     // Increment the sample starting ID for the next sample.
     keepTabGroupChanges(tabgroup);
@@ -268,7 +270,7 @@ List getSampleDateAttributeList() {
     List attributes = createAttributeList();
     sampleDate = new java.text.SimpleDateFormat("ddMMMyy").format(new Date());
     attributes.add(createEntityAttribute(getSampleType() + " Date", null, null, sampleDate, null));
-    print("Created the attributes: " + attrbutes);
+    print("[getSampleDateAttributeList()] Created the attributes: " + attrbutes);
     return attributes;
 }
 
@@ -309,12 +311,12 @@ renderLocationNumber() {
 autoSaveSample(attributeList) {
     enable_autosave = true;
     tabgroup = getSampleTypePath();
-    print("saving with the attributes: " + attributeList);
+    print("[autoSaveSample(attributeList)] Autosaving uuid " + currentSampleUUID + "with the attributes: " + attributeList);
     saveTabGroup(tabgroup, currentSampleUUID, null, attributeList, new SaveCallback() {
         onSave(uuid, newRecord) {
             currentSampleUUID = uuid;
 
-            print("Saved sample uuid: "+currentSampleUUID);
+            print("[autoSaveSample(attributeList)] Autosaved sample uuid: "+currentSampleUUID);
         }
         onError(message) {
             showToast(message);
@@ -374,19 +376,19 @@ addSampleNavigation() {
 /* Generates a confirmation prompt for deleting the current sample. */
 deleteSample() {
     tabgroup = getSampleTypePath();
-    print("Prompting a sample deletion, currentSampleUUID = " + currentSampleUUID);
+    print("[deleteSample()] Prompting a sample deletion, currentSampleUUID = " + currentSampleUUID);
     if (!isNull(currentSampleUUID)) {
-        print("Confirming a sample deletion");
+        print("[deleteSample()] Confirming a sample deletion");
         showAlert("Confirm Deletion", "Press OK to Delete this {" + tabgroup + "}!", "reallyDeleteSample()", "doNotDelete()");
     } else {
         cancelTabGroup(tabgroup, true);
-        print("Cancelling a sample deletion.");
+        print("[deleteSample()] Cancelling a sample deletion.");
     }
 }
 
 /* Deletes the current water sample. */
 reallyDeleteSample() {
-    print("Really deleting the sample.");
+    print("[reallyDeleteSample()] Really deleting the sample.");
     tabgroup = getSampleTypePath();
     deleteArchEnt(currentSampleUUID, new DeleteCallback() {
         onDelete(uuid) {
@@ -413,7 +415,7 @@ loadSearch() {
                     result.add(new NameValuePair("{No_records_found}", ""));
                 }
                 populateList("Project/Search/Sample_List", result);
-                print(result);
+                print("[loadSearch()]" + result);
             }
         });
 }
@@ -429,7 +431,7 @@ loadSample() {
                 initValidationGlobals();
                 currentSampleUUID = sampleID;
                 
-                print("Loading a sample, currentSampleUUID = " + currentSampleUUID);
+                print("[loadSample()] Loading a sample, currentSampleUUID = " + currentSampleUUID);
                 if (result.get(0).get(0).equals("Water Sample")) {
                     setFieldValue("Project/Start/Sample_Types", "Water Sample");
                     loadWaterSampleFrom(sampleID);
@@ -459,125 +461,41 @@ copyAttribute(String attrib) {
 
 /* Duplicates the current sample excluding any attachments or pictures */
 duplicateSample() {
+    // save the sample with a null ID to duplicate the sample, but with autosave off.
+    tabgroup = getSampleTypePath();
+    saveTabGroup(tabgroup, null, null, getSampleDateAttributeList(), new SaveCallback() {
+        onSave(uuid, newRecord) {
+            currentSampleUUID = uuid;
+            print("[duplicateSample()] duplicated sample, new uuid: " + currentSampleUUID);
+        }
+    }, false);
 
-    // still need to copy all dynamic attributes, inluding eh, ph, and location number.
+    // Update any required fields and reset any undesired duplicate attributes.
+    setSampleStartingID(getFieldValue("Project/Start/Sample_Starting_ID"));
+    sampleID = getFieldValue("Project/Start/Sample_Starting_ID");
+    setFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_ID", sampleID);
+    setSampleStartingID(Integer.toString(Integer.parseInt(sampleID) + 1));
+    print("[duplicateSample()] Photos value: " + getFieldValue(tabgroup + "/Basic_Info/Photos"));
+    print("[duplicateSample()] Sketches value: " + getFieldValue(tabgroup + "/Basic_Info/Sketches"));
+    // print("[duplicateSample()] Photolog list value: " + getFieldValue(tabgroup + "/Photolog/Photolog_List"));
+    setFieldValue(tabgroup + "/Basic_Info/Photos", null);
+    setFieldValue(tabgroup + "/Basic_Info/Sketches", null);
+    // setFieldValue(tabgroup + "/Photolog/Photolog_List", null);
 
-
-    // make a copy of the attribute data, depending on the type of the sample
-    attributes = new ArrayList();
-    // attributes.add(copyAttribute(""));
-    String sampleType = getSampleType();
-    if (sampleType == "Water Sample") {
-        attributes.add(copyAttribute("Water_Sample/Basic_Info/Observation_Type"));
-        attributes.add(copyAttribute("Water_Sample/Basic_Info/Latitude"));
-        attributes.add(copyAttribute("Water_Sample/Basic_Info/Longitude"));
-        attributes.add(copyAttribute("Water_Sample/Basic_Info/Northing"));
-        attributes.add(copyAttribute("Water_Sample/Basic_Info/Easting"));
-        attributes.add(copyAttribute("Water_Sample/Basic_Info/SRID"));
-        attributes.add(copyAttribute("Water_Sample/Basic_Info/Elevation"));
-        attributes.add(copyAttribute("Water_Sample/Basic_Info/Water_Table"));
-        attributes.add(copyAttribute("Water_Sample/Basic_Info/Sample_Depth"));
-        attributes.add(copyAttribute("Water_Sample/Basic_Info/Bottom_Of_Hole"));
-        attributes.add(copyAttribute("Water_Sample/Basic_Info/Notes"));
-        attributes.add(copyAttribute("Water_Sample/Basic_Info/Samples_Collected"));
-        attributes.add(copyAttribute("Water_Sample/Codes/Hole_Type"));
-        attributes.add(copyAttribute("Water_Sample/Codes/Hole_Lining"));
-        attributes.add(copyAttribute("Water_Sample/Codes/Hole_Open_Closed"));
-        attributes.add(copyAttribute("Water_Sample/Codes/Pipes_In_Hole"));
-        attributes.add(copyAttribute("Water_Sample/Codes/Hole_Angle"));
-        attributes.add(copyAttribute("Water_Sample/Codes/Estimated_Angle"));
-        attributes.add(copyAttribute("Water_Sample/Codes/Outflow_Present"));
-        attributes.add(copyAttribute("Water_Sample/Codes/Sampling_Issues"));
-        attributes.add(copyAttribute("Water_Sample/pH_Eh/Temperature"));
-        attributes.add(copyAttribute("Water_Sample/pH_Eh/Conductivity"));
-        attributes.add(copyAttribute("Water_Sample/pH_Eh/Preferred_pH"));
-        attributes.add(copyAttribute("Water_Sample/pH_Eh/Preferred_pH_Time"));
-        attributes.add(copyAttribute("Water_Sample/pH_Eh/Preferred_Eh"));
-        attributes.add(copyAttribute("Water_Sample/pH_Eh/Preferred_Eh_Time"));
-        attributes.add(copyAttribute("Water_Sample/Hidden/Preferred_pH_Time"));
-        attributes.add(copyAttribute("Water_Sample/Hidden/Preferred_Eh_Time"));
-        attributes.add(copyAttribute("Water_Sample/Hidden/Validation_Override"));
-        
-        // copy over ph and eh dynamic attribute data 
-
-
-    } else if (sampleType == "Plant Sample") {
-        attributes.add(copyAttribute("Plant_Sample/Basic_Info/Observation_Type"));
-        attributes.add(copyAttribute("Plant_Sample/Basic_Info/Plant_Species"));
-        attributes.add(copyAttribute("Plant_Sample/Basic_Info/Latitude"));
-        attributes.add(copyAttribute("Plant_Sample/Basic_Info/Longitude"));
-        attributes.add(copyAttribute("Plant_Sample/Basic_Info/Northing"));
-        attributes.add(copyAttribute("Plant_Sample/Basic_Info/Easting"));
-        attributes.add(copyAttribute("Plant_Sample/Basic_Info/SRID"));
-        attributes.add(copyAttribute("Plant_Sample/Basic_Info/Elevation"));
-        attributes.add(copyAttribute("Plant_Sample/Basic_Info/Plant_Height"));
-        attributes.add(copyAttribute("Plant_Sample/Basic_Info/Plant_Width"));
-        attributes.add(copyAttribute("Plant_Sample/Basic_Info/Soil_Description"));
-        attributes.add(copyAttribute("Plant_Sample/Basic_Info/Landform_Description"));
-        attributes.add(copyAttribute("Plant_Sample/Basic_Info/Notes"));
-    } else if (sampleType == "Soil Sample") {
-        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Observation_Type"));
-        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Latitude"));
-        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Longitude"));
-        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Northing"));
-        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Easting"));
-        attributes.add(copyAttribute("Soil_Sample/Basic_Info/SRID"));
-        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Elevation"));
-        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Depth"));
-        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Colour"));
-        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Lag"));
-        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Soil_Texture"));
-        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Geology"));
-        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Drainage"));
-        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Contamination"));
-        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Regolith_Type"));
-        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Landform"));
-        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Vegetation"));
-        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Notes"));
-    } else if (sampleType == "Rock Sample") {
-        attributes.add(copyAttribute("Rock_Sample/Basic_Info/Observation_Type"));
-        attributes.add(copyAttribute("Rock_Sample/Basic_Info/Latitude"));
-        attributes.add(copyAttribute("Rock_Sample/Basic_Info/Longitude"));
-        attributes.add(copyAttribute("Rock_Sample/Basic_Info/Northing"));
-        attributes.add(copyAttribute("Rock_Sample/Basic_Info/Easting"));
-        attributes.add(copyAttribute("Rock_Sample/Basic_Info/SRID"));
-        attributes.add(copyAttribute("Rock_Sample/Basic_Info/Elevation"));
-        attributes.add(copyAttribute("Rock_Sample/Measurements/Strike_Of_Bedding"));
-        attributes.add(copyAttribute("Rock_Sample/Measurements/Dip_Of_Bedding"));
-        attributes.add(copyAttribute("Rock_Sample/Measurements/Veins"));
-        attributes.add(copyAttribute("Rock_Sample/Measurements/Fractures"));
-        attributes.add(copyAttribute("Rock_Sample/Measurements/Plunge_Of_Fold_Axes"));
-        attributes.add(copyAttribute("Rock_Sample/Measurements/Other_Structural_Measurements"));
-        attributes.add(copyAttribute("Rock_Sample/Lithological_Info/Lithology"));
-        attributes.add(copyAttribute("Rock_Sample/Lithological_Info/Fineness_Inclusion_Size"));
-        attributes.add(copyAttribute("Rock_Sample/Lithological_Info/Sorting"));
-        attributes.add(copyAttribute("Rock_Sample/Lithological_Info/Other_Lithological_Descriptors"));
-        attributes.add(copyAttribute("Rock_Sample/Lithological_Info/Stratigraphic_Unit"));
-        attributes.add(copyAttribute("Rock_Sample/Lithological_Info/Large_Scale_Structure"));
-        attributes.add(copyAttribute("Rock_Sample/Lithological_Info/Alteration"));
-        attributes.add(copyAttribute("Rock_Sample/Lithological_Info/Notes"));
-    }
-
-    print("Stored Attributes: \n" + attributes);
-
-    // make a new sample
-    newSample();
-
-    // set the new sample attribute values to the copied data
-    iterator = attributes.iterator();
-    while (iterator.hasNext()) {
-        pair = iterator.next();
-        fieldName = pair.get(0);
-        fieldValue = pair.get(1);
-        setFieldValue(fieldName, fieldValue);
-        print("Setting attribute: " + fieldName + "\n .....to value: " + fieldValue);
-    }
+    keepTabGroupChanges(tabgroup);
+    print("[duplicateSample()] Set/Reset attributes of duplicate field.");
 
     // save the new sample
-    autoSaveSample(getSampleDateAttributeList());
+    print("[duplicateSample()] Before autosave call on duplicate");
+    autoSaveSample();
+    print("[duplicateSample()] After autosave call on duplicate");
 
     // alert the user that a duplicate sample has been created
-    showToast("A duplicate sample has been created");
+    showTabGroup(tabgroup, currentSampleUUID, new FetchCallback() {
+        onFetch(result) {
+            showToast("[duplicateSample()] A duplicate sample has been created");
+        }
+    });
 }
 
 /*** WATER SAMPLE ***/
@@ -1324,13 +1242,13 @@ loadRelatedPhotologs(String related_sample_id, String type) {
                 "FROM latestNonDeletedAentReln " +
                 "JOIN relationship using (relationshipid) " +
                 "JOIN relntype using (relntypeid) " +
-                "where uuid = "+related_sample_id + "" +
+                "where uuid = "+related_sample_id + " " +
                 "and relntypeName = 'Sample Photolog') " +
                 "and uuid != "+related_sample_id+");",  new FetchCallback() {
                 onFetch(result) {
                     if(isNull(result)) {
                         result = new ArrayList();
-                        result.add(new NameValuePair("{No_records_found}", ""));
+                        result.add(new NameValuePair("{No_records_found}", " "));
                     }
                     populateList(type + "/Photolog/Photolog_List", result);
                 }
