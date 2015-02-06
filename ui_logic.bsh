@@ -331,6 +331,7 @@ autoSaveSample() {
 addSampleNavigation() {
     tabgroup = getSampleTypePath();
     removeNavigationButton("new");
+    removeNavigationButton("duplicate");
     removeNavigationButton("delete");
 
     addNavigationButton("new", new ActionButtonCallback() {
@@ -345,6 +346,19 @@ addSampleNavigation() {
             }
         }
     }, "success");
+
+    addNavigationButton("duplicate", new ActionButtonCallback() {
+        actionOnLabel() {
+            "{Duplicate_" + tabgroup + "}";
+        }
+        actionOn() {
+            if(!isNull(currentSampleUUID)) {
+                duplicateSample();
+            } else {
+                showWarning("Warning", "The current sample is empty");
+            }
+        }
+    }, "primary");
 
     addNavigationButton("delete", new ActionButtonCallback() {
         actionOnLabel() {
@@ -384,6 +398,7 @@ reallyDeleteSample() {
 /* Removes sidebar buttons. */
 removeNavigationButtons() {
     removeNavigationButton("new");
+    removeNavigationButton("duplicate");
     removeNavigationButton("delete");
 }
 
@@ -431,6 +446,138 @@ loadSample() {
             }
         });
     }    
+}
+
+/* Returns a name value pair for the given attribute. */
+copyAttribute(String attrib) {
+    value = getFieldValue(attrib);
+    pair = new ArrayList();
+    pair.add(attrib);
+    pair.add(value);
+    return pair;   
+}
+
+/* Duplicates the current sample excluding any attachments or pictures */
+duplicateSample() {
+
+    // still need to copy all dynamic attributes, inluding eh, ph, and location number.
+
+
+    // make a copy of the attribute data, depending on the type of the sample
+    attributes = new ArrayList();
+    // attributes.add(copyAttribute(""));
+    String sampleType = getSampleType();
+    if (sampleType == "Water Sample") {
+        attributes.add(copyAttribute("Water_Sample/Basic_Info/Observation_Type"));
+        attributes.add(copyAttribute("Water_Sample/Basic_Info/Latitude"));
+        attributes.add(copyAttribute("Water_Sample/Basic_Info/Longitude"));
+        attributes.add(copyAttribute("Water_Sample/Basic_Info/Northing"));
+        attributes.add(copyAttribute("Water_Sample/Basic_Info/Easting"));
+        attributes.add(copyAttribute("Water_Sample/Basic_Info/SRID"));
+        attributes.add(copyAttribute("Water_Sample/Basic_Info/Elevation"));
+        attributes.add(copyAttribute("Water_Sample/Basic_Info/Water_Table"));
+        attributes.add(copyAttribute("Water_Sample/Basic_Info/Sample_Depth"));
+        attributes.add(copyAttribute("Water_Sample/Basic_Info/Bottom_Of_Hole"));
+        attributes.add(copyAttribute("Water_Sample/Basic_Info/Notes"));
+        attributes.add(copyAttribute("Water_Sample/Basic_Info/Samples_Collected"));
+        attributes.add(copyAttribute("Water_Sample/Codes/Hole_Type"));
+        attributes.add(copyAttribute("Water_Sample/Codes/Hole_Lining"));
+        attributes.add(copyAttribute("Water_Sample/Codes/Hole_Open_Closed"));
+        attributes.add(copyAttribute("Water_Sample/Codes/Pipes_In_Hole"));
+        attributes.add(copyAttribute("Water_Sample/Codes/Hole_Angle"));
+        attributes.add(copyAttribute("Water_Sample/Codes/Estimated_Angle"));
+        attributes.add(copyAttribute("Water_Sample/Codes/Outflow_Present"));
+        attributes.add(copyAttribute("Water_Sample/Codes/Sampling_Issues"));
+        attributes.add(copyAttribute("Water_Sample/pH_Eh/Temperature"));
+        attributes.add(copyAttribute("Water_Sample/pH_Eh/Conductivity"));
+        attributes.add(copyAttribute("Water_Sample/pH_Eh/Preferred_pH"));
+        attributes.add(copyAttribute("Water_Sample/pH_Eh/Preferred_pH_Time"));
+        attributes.add(copyAttribute("Water_Sample/pH_Eh/Preferred_Eh"));
+        attributes.add(copyAttribute("Water_Sample/pH_Eh/Preferred_Eh_Time"));
+        attributes.add(copyAttribute("Water_Sample/Hidden/Preferred_pH_Time"));
+        attributes.add(copyAttribute("Water_Sample/Hidden/Preferred_Eh_Time"));
+        attributes.add(copyAttribute("Water_Sample/Hidden/Validation_Override"));
+        
+        // copy over ph and eh dynamic attribute data 
+
+
+    } else if (sampleType == "Plant Sample") {
+        attributes.add(copyAttribute("Plant_Sample/Basic_Info/Observation_Type"));
+        attributes.add(copyAttribute("Plant_Sample/Basic_Info/Plant_Species"));
+        attributes.add(copyAttribute("Plant_Sample/Basic_Info/Latitude"));
+        attributes.add(copyAttribute("Plant_Sample/Basic_Info/Longitude"));
+        attributes.add(copyAttribute("Plant_Sample/Basic_Info/Northing"));
+        attributes.add(copyAttribute("Plant_Sample/Basic_Info/Easting"));
+        attributes.add(copyAttribute("Plant_Sample/Basic_Info/SRID"));
+        attributes.add(copyAttribute("Plant_Sample/Basic_Info/Elevation"));
+        attributes.add(copyAttribute("Plant_Sample/Basic_Info/Plant_Height"));
+        attributes.add(copyAttribute("Plant_Sample/Basic_Info/Plant_Width"));
+        attributes.add(copyAttribute("Plant_Sample/Basic_Info/Soil_Description"));
+        attributes.add(copyAttribute("Plant_Sample/Basic_Info/Landform_Description"));
+        attributes.add(copyAttribute("Plant_Sample/Basic_Info/Notes"));
+    } else if (sampleType == "Soil Sample") {
+        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Observation_Type"));
+        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Latitude"));
+        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Longitude"));
+        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Northing"));
+        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Easting"));
+        attributes.add(copyAttribute("Soil_Sample/Basic_Info/SRID"));
+        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Elevation"));
+        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Depth"));
+        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Colour"));
+        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Lag"));
+        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Soil_Texture"));
+        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Geology"));
+        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Drainage"));
+        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Contamination"));
+        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Regolith_Type"));
+        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Landform"));
+        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Vegetation"));
+        attributes.add(copyAttribute("Soil_Sample/Basic_Info/Notes"));
+    } else if (sampleType == "Rock Sample") {
+        attributes.add(copyAttribute("Rock_Sample/Basic_Info/Observation_Type"));
+        attributes.add(copyAttribute("Rock_Sample/Basic_Info/Latitude"));
+        attributes.add(copyAttribute("Rock_Sample/Basic_Info/Longitude"));
+        attributes.add(copyAttribute("Rock_Sample/Basic_Info/Northing"));
+        attributes.add(copyAttribute("Rock_Sample/Basic_Info/Easting"));
+        attributes.add(copyAttribute("Rock_Sample/Basic_Info/SRID"));
+        attributes.add(copyAttribute("Rock_Sample/Basic_Info/Elevation"));
+        attributes.add(copyAttribute("Rock_Sample/Measurements/Strike_Of_Bedding"));
+        attributes.add(copyAttribute("Rock_Sample/Measurements/Dip_Of_Bedding"));
+        attributes.add(copyAttribute("Rock_Sample/Measurements/Veins"));
+        attributes.add(copyAttribute("Rock_Sample/Measurements/Fractures"));
+        attributes.add(copyAttribute("Rock_Sample/Measurements/Plunge_Of_Fold_Axes"));
+        attributes.add(copyAttribute("Rock_Sample/Measurements/Other_Structural_Measurements"));
+        attributes.add(copyAttribute("Rock_Sample/Lithological_Info/Lithology"));
+        attributes.add(copyAttribute("Rock_Sample/Lithological_Info/Fineness_Inclusion_Size"));
+        attributes.add(copyAttribute("Rock_Sample/Lithological_Info/Sorting"));
+        attributes.add(copyAttribute("Rock_Sample/Lithological_Info/Other_Lithological_Descriptors"));
+        attributes.add(copyAttribute("Rock_Sample/Lithological_Info/Stratigraphic_Unit"));
+        attributes.add(copyAttribute("Rock_Sample/Lithological_Info/Large_Scale_Structure"));
+        attributes.add(copyAttribute("Rock_Sample/Lithological_Info/Alteration"));
+        attributes.add(copyAttribute("Rock_Sample/Lithological_Info/Notes"));
+    }
+
+    print("Stored Attributes: \n" + attributes);
+
+    // make a new sample
+    newSample();
+
+    // set the new sample attribute values to the copied data
+    iterator = attributes.iterator();
+    while (iterator.hasNext()) {
+        pair = iterator.next();
+        fieldName = pair.get(0);
+        fieldValue = pair.get(1);
+        setFieldValue(fieldName, fieldValue);
+        print("Setting attribute: " + fieldName + "\n .....to value: " + fieldValue);
+    }
+
+    // save the new sample
+    autoSaveSample(getSampleDateAttributeList());
+
+    // alert the user that a duplicate sample has been created
+    showToast("A duplicate sample has been created");
 }
 
 /*** WATER SAMPLE ***/
