@@ -1,4 +1,4 @@
-s<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <dataSchema>
   <RelationshipElement name="Water Sample pH" type="bidirectional">
     <description>Implements a 1:N relationship between Water Samples and pH</description>
@@ -14,9 +14,11 @@ s<?xml version="1.0" encoding="UTF-8"?>
     <description></description>
     <property name="Water Sample Prefix" type="freetext" isIdentifier="true">
       <description>Description TBD</description>
+      <formatString><![CDATA[$2]]></formatString>
     </property>
-    <property name="Water Sample ID" type="freetext" isIdentifier="true">
+    <property name="Water Sample ID" type="measure" isIdentifier="true">
       <description>Description TBD</description>
+      <formatString><![CDATA[$2 - Water - ]]></formatString>
     </property>
     <property name="Water Sample Date" type="measure" isIdentifier="true">
       <description>Description TBD</description>
@@ -258,6 +260,9 @@ s<?xml version="1.0" encoding="UTF-8"?>
     <property name="Conductivity" type="freetext">
       <description>Description TBD</description>
     </property>
+    <property name="Validation Override" type="measure">
+      <description>Description TBD</description>
+    </property>
     <property name="Sketch" type="file" file="true" thumbnail="true">
       <description>Description TBD</description>
     </property>
@@ -305,9 +310,11 @@ s<?xml version="1.0" encoding="UTF-8"?>
     <description></description>
     <property name="Plant Sample Prefix" type="freetext" isIdentifier="true">
       <description>Description TBD</description>
+      <formatString><![CDATA[$2]]></formatString>
     </property>
-    <property name="Plant Sample ID" isIdentifier="true">
+    <property name="Plant Sample ID" type="measure" isIdentifier="true">
       <description>Description TBD</description>
+      <formatString><![CDATA[$2 - Plant - ]]></formatString>
     </property>
     <property name="Plant Sample Date" type="measure" isIdentifier="true">
       <description>Description TBD</description>
@@ -606,9 +613,11 @@ s<?xml version="1.0" encoding="UTF-8"?>
     <description>Description TBD</description>
     <property name="Soil Sample Prefix" type="freetext" isIdentifier="true">
       <description>Description TBD</description>
+      <formatString><![CDATA[$2]]></formatString>
     </property>
-    <property name="Soil Sample ID" isIdentifier="true">
+    <property name="Soil Sample ID" type="measure" isIdentifier="true">
       <description>Description TBD</description>
+      <formatString><![CDATA[$2 - Soil - ]]></formatString>
     </property>
     <property name="Soil Sample Date" type="measure" isIdentifier="true">
       <description>Description TBD</description>
@@ -1382,9 +1391,11 @@ s<?xml version="1.0" encoding="UTF-8"?>
     <description>Description TBD</description>
     <property name="Rock Sample Prefix" type="freetext" isIdentifier="true">
       <description>Description TBD</description>
+      <formatString><![CDATA[$2]]></formatString>
     </property>
-    <property name="Rock Sample ID" type="freetext" isIdentifier="true">
+    <property name="Rock Sample ID" type="measure" isIdentifier="true">
       <description>Description TBD</description>
+      <formatString><![CDATA[$2 - Rock - ]]></formatString>
     </property>
     <property name="Rock Sample Date" type="measure" isIdentifier="true">
       <description>Description TBD</description>

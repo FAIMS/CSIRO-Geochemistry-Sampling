@@ -4,6 +4,7 @@ User user; // don't touch
 String userid;
 
 makeLocalID(){
+    fetchOne("CREATE TABLE IF NOT EXISTS localSettings (key text primary key, value text);");
     fetchOne("drop view latestNonDeletedArchEntFormattedIdentifiers;");
     fetchOne("CREATE VIEW latestNonDeletedArchEntFormattedIdentifiers as " +
               "select uuid, aenttypeid, aenttypename, group_concat(response, '') as response, null as deleted " +
@@ -219,6 +220,9 @@ newSample() {
         return;
     }
 
+    // Perform any initialisation required.
+    initValidationGlobals();
+
     // Set the sample prefix and starting ID in-case the user changed them.
     setSamplePrefix(getFieldValue("Project/Start/Sample_Prefix"));
     setSampleStartingID(getFieldValue("Project/Start/Sample_Starting_ID"));
@@ -406,7 +410,10 @@ loadSample() {
         fetchAll("select aenttypename from latestnondeletedarchent join aenttype using (aenttypeid) where uuid = '" + sampleID + "';", 
          new FetchCallback() {
             onFetch(result) {
+                // Perform any sample initialisation 
+                initValidationGlobals();
                 currentSampleUUID = sampleID;
+                
                 print("Loading a sample, currentSampleUUID = " + currentSampleUUID);
                 if (result.get(0).get(0).equals("Water Sample")) {
                     setFieldValue("Project/Start/Sample_Types", "Water Sample");
@@ -439,9 +446,39 @@ onEvent("Water_Sample/Photolog", "show", "loadRelatedPhotologs(water_sample_id, 
 onEvent("Water_Sample/Photolog/New_Photolog", "click", "newPhotolog(); sample_id = water_sample_id; type = \"Water\";");
 onEvent("Water_Sample/Photolog/Photolog_List", "click", "loadPhotolog();");
 
-/* Validates the temperature and conductivity fields if no value is entered upon navigating off the tab. */
+onEvent("Water_Sample/Basic_Info", "show", "validateTempConduct()");
+onEvent("Water_Sample/Codes", "show", "validateTempConduct()");
+onEvent("Water_Sample/pH_Eh", "show", "seenPhEhTab=true;");
+onEvent("Water_Sample/Photolog", "show", "validateTempConduct()");
+
+boolean overrideTempCond = false;
+boolean seenPhEhTab = false;
+
+/* Initialises the globals used for temp and conductivity validation. */
+initValidationGlobals() {
+    overrideTempCond = false;
+    storedOverride = getFieldValue("Water_Sample/Hidden/Validation_Override");
+    if (!isNull(storedOverride)) {
+        overrideTempCond = Boolean.parseBoolean(storedOverride);
+        // overrideTempCond = storedOverride;
+    }
+    seenPhEhTab = false;
+}
+
+overrideTempValidation() {
+    overrideTempCond = true;
+    // setFieldValue("Water_Sample/Hidden/Validation_Override", overrideTempCond);
+    setFieldValue("Water_Sample/Hidden/Validation_Override", String.valueOf(overrideTempCond));
+}
+
+/* Validates the temperature and conductivity fields. */
 validateTempConduct() {
-    showAlert("Alert", "a temperature and conductivity should be entered.", "OK", "");
+    temp = getFieldValue("Water_Sample/pH_Eh/Temperature");
+    cond = getFieldValue("Water_Sample/pH_Eh/Conductivity");
+    // generate a prompt if the fields are empty and the user hasn't overriden the prompt previously.
+    if (seenPhEhTab && !overrideTempCond && (isNull(temp) || isNull(cond))) {
+        showAlert("Alert", "There is no value entered for Temperature/Conductivity.", "overrideTempValidation()", "overrideTempValidation()");
+    }
 }
 
 String water_sample_id = null;
