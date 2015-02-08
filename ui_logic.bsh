@@ -1,5 +1,8 @@
 /*** 'Editable' - you can edit the code below based on the needs ***/
 import java.util.concurrent.Callable;
+
+print("Very first line of logic after the import lines");
+
 User user; // don't touch
 String userid;
 
@@ -189,8 +192,6 @@ boolean validSamplePrefix() {
 
 /* Returns the String representation of the sample type. */
 String getSampleType() {
-    // print(this.getName());
-    Log.e("foo", "bar");
     print("[getSampleType()] Sample Type is: " + getFieldValue("Project/Start/Sample_Types"));
     return getFieldValue("Project/Start/Sample_Types");
 }
@@ -267,10 +268,14 @@ newSample() {
 
 /* Generates and returns the date attribute for the current sample type. */
 List getSampleDateAttributeList() {
-    List attributes = createAttributeList();
+    attributes = createAttributeList();
+    print("[getSampleDateAttributeList()] created an attribute list: " + attributes);
     sampleDate = new java.text.SimpleDateFormat("ddMMMyy").format(new Date());
-    attributes.add(createEntityAttribute(getSampleType() + " Date", null, null, sampleDate, null));
-    print("[getSampleDateAttributeList()] Created the attributes: " + attrbutes);
+    print("[getSampleDateAttributeList()] grabbed the date: " + sampleDate);
+    entityAttribute = createEntityAttribute(getSampleType() + " Date", null, null, sampleDate, null);
+    print("[getSampleDateAttributeList()] created the entity attribute: " + entityAttribute);
+    attributes.add(entityAttribute);
+    print("[getSampleDateAttributeList()] added to the attribute list, the attributes: " + attributes);
     return attributes;
 }
 
@@ -463,39 +468,58 @@ copyAttribute(String attrib) {
 duplicateSample() {
     // save the sample with a null ID to duplicate the sample, but with autosave off.
     tabgroup = getSampleTypePath();
+    boolean enable_autosave = true;
+    showTabGroup("Project");
+    dialog = showBusy("Duplicating Sample", "Please wait");
+    print("[duplicateSample] Before initial save of new duplicate sample.");
     saveTabGroup(tabgroup, null, null, getSampleDateAttributeList(), new SaveCallback() {
         onSave(uuid, newRecord) {
             currentSampleUUID = uuid;
             print("[duplicateSample()] duplicated sample, new uuid: " + currentSampleUUID);
+
+            // Update any required fields and reset any undesired duplicate attributes.
+            setSampleStartingID(getFieldValue("Project/Start/Sample_Starting_ID"));
+            sampleID = getFieldValue("Project/Start/Sample_Starting_ID");
+            setFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_ID", sampleID);
+            setSampleStartingID(Integer.toString(Integer.parseInt(sampleID) + 1));
+            if (!tabgroup.equals("Rock_Sample")) {
+                print("[duplicateSample()] Photos value: " + getFieldValue(tabgroup + "/Basic_Info/Photos"));
+                print("[duplicateSample()] Sketches value: " + getFieldValue(tabgroup + "/Basic_Info/Sketches"));
+                // setFieldValue(tabgroup + "/Basic_Info/Photos", null);
+                // setFieldValue(tabgroup + "/Basic_Info/Sketches", null);
+                setFieldValue(tabgroup + "/Basic_Info/Photos", new ArrayList());
+                setFieldValue(tabgroup + "/Basic_Info/Sketches", new ArrayList()); 
+            } else {
+                print("[duplicateSample()] Photos value: " + getFieldValue("Rock_Sample/Lithological_Info/Photos"));
+                print("[duplicateSample()] Sketches value: " + getFieldValue("Rock_Sample/Lithological_Info/Sketches"));
+                // setFieldValue("Rock_Sample/Lithological_Info/Photos", null);
+                // setFieldValue("Rock_Sample/Lithological_Info/Sketches", null);
+                setFieldValue("Rock_Sample/Lithological_Info/Photos", new ArrayList());
+                setFieldValue("Rock_Sample/Lithological_Info/Sketches", new ArrayList());
+            }
+
+            // alert the user that a duplicate sample has been created
+            showTabGroup(tabgroup, currentSampleUUID, new FetchCallback() {
+                onFetch(result) {
+                    showToast("[duplicateSample()] A duplicate sample has been created");
+                    keepTabGroupChanges(tabgroup);
+                    print("[duplicateSample()] Set/Reset attributes of duplicate field.");
+
+                    // save the new sample
+                    print("[duplicateSample()] Before autosave call on duplicate");
+                    //autoSaveSample();
+                    saveTabGroup(tabgroup, currentSampleUUID, null, null, new SaveCallback() {
+                        onSave(uuid, newRecord) {
+                            currentSampleUUID = uuid;
+                            print("[duplicateSample()] Duplicate sample saved after setting new field values and removing attatchements.");
+                            dialog.dismiss();
+                        }
+                    }, enable_autosave);
+                    print("[duplicateSample()] After autosave call on duplicate");
+                }
+            });
         }
-    }, false);
-
-    // Update any required fields and reset any undesired duplicate attributes.
-    setSampleStartingID(getFieldValue("Project/Start/Sample_Starting_ID"));
-    sampleID = getFieldValue("Project/Start/Sample_Starting_ID");
-    setFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_ID", sampleID);
-    setSampleStartingID(Integer.toString(Integer.parseInt(sampleID) + 1));
-    print("[duplicateSample()] Photos value: " + getFieldValue(tabgroup + "/Basic_Info/Photos"));
-    print("[duplicateSample()] Sketches value: " + getFieldValue(tabgroup + "/Basic_Info/Sketches"));
-    // print("[duplicateSample()] Photolog list value: " + getFieldValue(tabgroup + "/Photolog/Photolog_List"));
-    setFieldValue(tabgroup + "/Basic_Info/Photos", null);
-    setFieldValue(tabgroup + "/Basic_Info/Sketches", null);
-    // setFieldValue(tabgroup + "/Photolog/Photolog_List", null);
-
-    keepTabGroupChanges(tabgroup);
-    print("[duplicateSample()] Set/Reset attributes of duplicate field.");
-
-    // save the new sample
-    print("[duplicateSample()] Before autosave call on duplicate");
-    autoSaveSample();
-    print("[duplicateSample()] After autosave call on duplicate");
-
-    // alert the user that a duplicate sample has been created
-    showTabGroup(tabgroup, currentSampleUUID, new FetchCallback() {
-        onFetch(result) {
-            showToast("[duplicateSample()] A duplicate sample has been created");
-        }
-    });
+    }, enable_autosave);
 }
 
 /*** WATER SAMPLE ***/
@@ -963,6 +987,7 @@ onEvent("Plant_Sample", "show", "addSampleNavigation();autoSaveSample(getSampleD
 
 onEvent("Plant_Sample/Basic_Info/Take_GPS", "click", "fillInGPS(\"Plant_Sample/Basic_Info/\")");
 onEvent("Plant_Sample/Basic_Info/Take_Photo", "click", "attachPictureTo(\"Plant_Sample/Basic_Info/Photos\")");
+onEvent("Plant_Sample/Basic_Info/Attach_Sketch", "click", "attachFileTo(\"Plant_Sample/Basic_Info/Sketches\");");
 
 onEvent("Plant_Sample/Photolog", "show", "loadRelatedPhotologs(plant_sample_id, \"Plant_Sample\");");
 onEvent("Plant_Sample/Photolog/New_Photolog", "click", "newPhotolog(); sample_id = plant_sample_id; type = \"Plant\";");

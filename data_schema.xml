@@ -607,6 +607,9 @@
     <property name="Photos" type="file" file="true" thumbnail="true">
       <description>Description TBD</description>
     </property>
+    <property name="Sketch" type="file" file="true" thumbnail="true">
+      <description>Description TBD</description>
+    </property>
   </ArchaeologicalElement>
 
   <ArchaeologicalElement name="Soil Sample">

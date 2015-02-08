@@ -221,6 +221,8 @@
               <Notes/>
               <Photos/>
               <Take_Photo/>
+              <Sketches/>
+              <Attach_Sketch/>
             </Basic_Info>
             <Photolog>
               <New_Photolog/>
@@ -935,6 +937,16 @@
         </select>
         <trigger ref="Take_Photo">
           <label>{Take_Photo}</label>
+        </trigger>
+        <select type="file" faims_sync="true" ref="Sketches" faims_attribute_name="Sketch" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Sketches}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select>
+        <trigger ref="Attach_Sketch">
+          <label>{Attach_Sketch}</label>
         </trigger>
       </group>
       <group ref="Photolog" faims_scrollable="false">
