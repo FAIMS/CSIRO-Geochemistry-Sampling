@@ -334,16 +334,130 @@
               <Elevation/>
             </Basic_Info>
             <Measurements>
-              <Strike_Of_Bedding/>
-              <Dip_Of_Bedding/>
-              <Veins/>
-              <Fractures/>
-              <Plunge_Of_Fold_Axes/>
+              <container00>
+                <child0/>
+                <child1>
+                  <Web_Strike/>
+                </child1>
+                <child2>
+                  <Web_Dip/>
+                </child2>
+              </container00>
+              <container0>
+                <child0>
+                  <Web_Bedding/>
+                </child0>
+                <child1>
+                  <Strike_Of_Bedding/>
+                </child1>
+                <child2>
+                  <Dip_Of_Bedding/>
+                </child2>
+              </container0> 
+              <container1>
+                <child0>
+                  <Web_Cleavage/>
+                </child0>
+                <child1>
+                  <Strike_Of_Cleavage/>
+                </child1>
+                <child2>
+                  <Dip_Of_Cleavage/>
+                </child2>
+              </container1>
+              <container2>
+                <child0>
+                  <Web_Foliation/>
+                </child0>
+                <child1>
+                  <Strike_Of_Foliation/>
+                </child1>
+                <child2>
+                  <Dip_Of_Foliation/>
+                </child2>
+              </container2>
+              <container3>
+                <child0>
+                  <Web_Veins/>
+                </child0>
+                <child1>
+                  <Strike_Of_Veins/>
+                </child1>
+                <child2>
+                  <Dip_Of_Veins/>
+                </child2>
+              </container3> 
               <Other_Structural_Measurements/>
+              <container01>
+                <child0/>
+                <child1>
+                  <Web_Plunge/>
+                </child1>
+                <child2>
+                  <Web_Azimuth/>
+                </child2>
+              </container01>
+              <container4>
+                <child0>
+                  <Web_Fold_Axis_1/>
+                </child0>
+                <child1>
+                  <Plunge_Of_Fold_Axis_1/>
+                </child1>
+                <child2>
+                  <Azimuth_Of_Fold_Axis_1/>
+                </child2>
+              </container4>
+              <container5>
+                <child0>
+                  <Web_Fold_Axis_2/>
+                </child0>
+                <child1>
+                  <Plunge_Of_Fold_Axis_2/>
+                </child1>
+                <child2>
+                  <Azimuth_Of_Fold_Axis_2/>
+                </child2>
+              </container5> 
+              <container6>
+                <child0>
+                  <Web_Fold_Axis_3/>
+                </child0>
+                <child1>
+                  <Plunge_Of_Fold_Axis_3/>
+                </child1>
+                <child2>
+                  <Azimuth_Of_Fold_Axis_3/>
+                </child2>
+              </container6> 
+              <container7>
+                <child0>
+                  <Web_Mineral_Lineation/>
+                </child0>
+                <child1>
+                  <Plunge_Of_Mineral_Lineation/>
+                </child1>
+                <child2>
+                  <Azimuth_Of_Mineral_Lineation/>
+                </child2>
+              </container7> 
+              <container8>
+                <child0>
+                  <Web_Stretching_Lineation/>
+                </child0>
+                <child1>
+                  <Plunge_Of_Stretching_Lineation/>
+                </child1>
+                <child2>
+                  <Azimuth_Of_Stretching_Lineation/>
+                </child2>
+              </container8> 
+              <Other_Lineation/>
             </Measurements>
             <Lithological_Info>
               <Lithology/>
               <Fineness_Inclusion_Size/>
+              <Grain_Size/>
               <Sorting/>
               <Other_Lithological_Descriptors/>
               <Stratigraphic_Unit/>
@@ -378,6 +492,8 @@
       <bind nodeset="/faims/Soil_Sample/Basic_Info/Depth" type="decimal"/>
       <bind nodeset="/faims/Rock_Sample/Measurements/Strike_Of_Bedding" type="decimal"/>
       <bind nodeset="/faims/Rock_Sample/Measurements/Dip_Of_Bedding" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/Strike_Of_Cleavage" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/Dip_Of_Cleavage" type="decimal"/>
       <bind nodeset="/faims/Rock_Sample/Measurements/Plunge_Of_Fold_Axes" type="decimal"/>
     </model>
   </h:head>
@@ -1248,31 +1364,236 @@
       </group>
       <group ref="Measurements">
         <label>{Measurements}</label>
-        <input ref="Strike_Of_Bedding" faims_attribute_name="Strike of Bedding" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-          <label>{Strike_Of_Bedding}</label>
-        </input>
-        <input ref="Dip_Of_Bedding" faims_attribute_name="Dip of Bedding" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-          <label>{Dip_Of_Bedding}</label>
-        </input>
-        <select1 appearance="full" ref="Veins" faims_attribute_name="Veins" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-          <label>{Veins}</label>
-          <item>
-            <label>placeholder</label>
-            <value>placeholder</value>
-          </item>
-        </select1>
-        <select1 appearance="full" ref="Fractures" faims_attribute_name="Fractures" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-          <label>{Fractures}</label>
-          <item>
-            <label>placeholder</label>
-            <value>placeholder</value>
-          </item>
-        </select1>
-        <input ref="Plunge_Of_Fold_Axes" faims_attribute_name="Plunge of Fold Axes" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-          <label>{Plunge_Of_Fold_Axes}</label>
-        </input>
-        <input ref="Other_Structural_Measurements" faims_attribute_name="Other Structural Measurements" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+        <group ref="container00" faims_style="orientation">
+          <label/>
+          <group ref="child0" faims_style="even">
+            <label/>
+          </group>
+          <group ref="child1" faims_style="even">
+            <label/>
+            <input ref="Web_Strike" faims_web="true">
+              <label/>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label/>
+            <input ref="Web_Dip" faims_web="true">
+              <label/>
+            </input>
+          </group>
+        </group>
+        <group ref="container0" faims_style="orientation">
+          <label/>
+          <group ref="child0" faims_style="even">
+            <label/>
+            <input ref="Web_Bedding" faims_web="true">
+              <label/>
+            </input>
+          </group>
+          <group ref="child1" faims_style="even">
+            <label/>
+            <input ref="Strike_Of_Bedding" faims_attribute_name="Strike Of Bedding" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label/>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label/>
+            <input ref="Dip_Of_Bedding" faims_attribute_name="Dip Of Bedding" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label/>
+            </input>
+          </group>
+        </group>
+        <group ref="container1" faims_style="orientation">
+          <label/>
+          <group ref="child0" faims_style="even">
+            <label/>
+            <input ref="Web_Cleavage" faims_web="true">
+              <label/>
+            </input>
+          </group>
+          <group ref="child1" faims_style="even">
+            <label/>
+            <input ref="Strike_Of_Cleavage" faims_attribute_name="Strike Of Cleavage" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label/>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label/>
+            <input ref="Dip_Of_Cleavage" faims_attribute_name="Dip Of Cleavage" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label/>
+            </input>
+          </group>
+        </group>
+        <group ref="container2" faims_style="orientation">
+          <label/>
+          <group ref="child0" faims_style="even">
+            <label/>
+            <input ref="Web_Foliation" faims_web="true">
+              <label/>
+            </input>
+          </group>
+          <group ref="child1" faims_style="even">
+            <label/>
+            <input ref="Strike_Of_Foliation" faims_attribute_name="Strike Of Foliation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label/>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label/>
+            <input ref="Dip_Of_Foliation" faims_attribute_name="Dip Of Foliation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label/>
+            </input>
+          </group>
+        </group>
+        <group ref="container3" faims_style="orientation">
+          <label/>
+          <group ref="child0" faims_style="even">
+            <label/>
+            <input ref="Web_Veins" faims_web="true">
+              <label/>
+            </input>
+          </group>
+          <group ref="child1" faims_style="even">
+            <label/>
+            <input ref="Strike_Of_Veins" faims_attribute_name="Strike Of Veins" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label/>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label/>
+            <input ref="Dip_Of_Veins" faims_attribute_name="Dip Of Veins" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label/>
+            </input>
+          </group>
+        </group>
+        <input ref="Other_Structural_Measurements" faims_attribute_name="Other Structural Measurements" faims_attribute_type="meaure" faims_certainty="true" faims_annotation="true">
           <label>{Other_Structural_Measurements}</label>
+        </input>
+        <group ref="container01" faims_style="orientation">
+          <label/>
+          <group ref="child0" faims_style="even">
+            <label/>
+          </group>
+          <group ref="child1" faims_style="even">
+            <label/>
+            <input ref="Web_Plunge" faims_web="true">
+              <label/>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label/>
+            <input ref="Web_Azimuth" faims_web="true">
+              <label/>
+            </input>
+          </group>
+        </group>
+        <group ref="container4" faims_style="orientation">
+          <label/>
+          <group ref="child0" faims_style="even">
+            <label/>
+            <input ref="Web_Fold_Axis_1" faims_web="true">
+              <label/>
+            </input>
+          </group>
+          <group ref="child1" faims_style="even">
+            <label/>
+            <input ref="Plunge_Of_Fold_Axis_1" faims_attribute_name="Plunge Of Fold Axis 1" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label/>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label/>
+            <input ref="Azimuth_Of_Fold_Axis_1" faims_attribute_name="Azimuth Of Fold Axis 1" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label/>
+            </input>
+          </group>
+        </group>
+        <group ref="container5" faims_style="orientation">
+          <label/>
+          <group ref="child0" faims_style="even">
+            <label/>
+            <input ref="Web_Fold_Axis_2" faims_web="true">
+              <label/>
+            </input>
+          </group>
+          <group ref="child1" faims_style="even">
+            <label/>
+            <input ref="Plunge_Of_Fold_Axis_2" faims_attribute_name="Plunge Of Fold Axis 2" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label/>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label/>
+            <input ref="Azimuth_Of_Fold_Axis_2" faims_attribute_name="Azimuth Of Fold Axis 2" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label/>
+            </input>
+          </group>
+        </group>
+        <group ref="container6" faims_style="orientation">
+          <label/>
+          <group ref="child0" faims_style="even">
+            <label/>
+            <input ref="Web_Fold_Axis_3" faims_web="true">
+              <label/>
+            </input>
+          </group>
+          <group ref="child1" faims_style="even">
+            <label/>
+            <input ref="Plunge_Of_Fold_Axis_3" faims_attribute_name="Plunge Of Fold Axis 3" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label/>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label/>
+            <input ref="Azimuth_Of_Fold_Axis_3" faims_attribute_name="Azimuth Of Fold Axis 3" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label/>
+            </input>
+          </group>
+        </group>
+        <group ref="container7" faims_style="orientation">
+          <label/>
+          <group ref="child0" faims_style="even">
+            <label/>
+            <input ref="Web_Mineral_Lineation" faims_web="true">
+              <label/>
+            </input>
+          </group>
+          <group ref="child1" faims_style="even">
+            <label/>
+            <input ref="Plunge_Of_Mineral_Lineation" faims_attribute_name="Plunge Of Mineral Lineation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label/>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label/>
+            <input ref="Azimuth_Of_Mineral_Lineation" faims_attribute_name="Azimuth Of Mineral Lineation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label/>
+            </input>
+          </group>
+        </group>
+        <group ref="container8" faims_style="orientation">
+          <label/>
+          <group ref="child0" faims_style="even">
+            <label/>
+            <input ref="Web_Stretching_Lineation" faims_web="true">
+              <label/>
+            </input>
+          </group>
+          <group ref="child1" faims_style="even">
+            <label/>
+            <input ref="Plunge_Of_Stretching_Lineation" faims_attribute_name="Plunge Of Stretching Lineation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label/>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label/>
+            <input ref="Azimuth_Of_Stretching_Lineation" faims_attribute_name="Azimuth Of Stretching Lineation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label/>
+            </input>
+          </group>
+        </group>
+        <input ref="Other_Lineation" faims_attribute_name="Other Lineation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
+          <label>{Other_Lineation}</label>
         </input>
       </group>
       <group ref="Lithological_Info">
@@ -1286,6 +1607,13 @@
         </select1>
         <select1 ref="Fineness_Inclusion_Size" faims_attribute_name="Fineness or Inclusion size" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Fineness_Inclusion_Size}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <select1 ref="Grain_Size" faims_attribute_name="Grain Size" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Grain_Size}</label>
           <item>
             <label>placeholder</label>
             <value>placeholder</value>

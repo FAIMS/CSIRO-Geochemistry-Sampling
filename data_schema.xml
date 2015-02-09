@@ -1468,44 +1468,64 @@
     <property name="Elevation" type="freetext">
       <description>Description TBD</description>
     </property>
-    <property name="Strike of Bedding" type="freetext">
+    <property name="Strike Of Bedding" type="measure">
       <description>Description TBD</description>
     </property>
-    <property name="Dip of Bedding" type="freetext">
+    <property name="Dip Of Bedding" type="measure">
       <description>Description TBD</description>
     </property>
-    <property name="Veins" type="enum">
-      <description>If you have selected 'Yes' please provide a description in the Annotation</description>
-      <lookup>
-        <term> {No_Observation}
-          <description>Description TBD</description>
-        </term>
-        <term> {Yes}
-          <description>Description TBD</description>
-        </term>
-        <term> {No}
-          <description>Description TBD</description>
-        </term>
-      </lookup>
-    </property>
-    <property name="Fractures" type="enum">
-      <description>If you have selected 'Yes' please provide a description in the Annotation</description>
-      <lookup>
-        <term> {No_Observation}
-          <description>Description TBD</description>
-        </term>
-        <term> {Yes}
-          <description>Description TBD</description>
-        </term>
-        <term> {No}
-          <description>Description TBD</description>
-        </term>
-      </lookup>
-    </property>
-    <property name="Plunge of Fold Axes" type="freetext">
+    <property name="Strike Of Cleavage" type="measure">
       <description>Description TBD</description>
     </property>
-    <property name="Other Structural Measurements" type="freetext">
+    <property name="Dip Of Cleavage" type="measure">
+      <description>Description TBD</description>
+    </property>
+    <property name="Strike Of Foliation" type="measure">
+      <description>Description TBD</description>
+    </property>
+    <property name="Dip Of Foliation" type="measure">
+      <description>Description TBD</description>
+    </property>
+    <property name="Strike Of Veins" type="measure">
+      <description>Description TBD</description>
+    </property>
+    <property name="Dip Of Veins" type="measure">
+      <description>Description TBD</description>
+    </property>
+    <property name="Other Structural Measurements" type="measure">
+      <description>Description TBD</description>
+    </property>
+    <property name="Plunge Of Fold Axis 1" type="measure">
+      <description>Description TBD</description>
+    </property>
+    <property name="Azimuth Of Fold Axis 1" type="measure">
+      <description>Description TBD</description>
+    </property>
+    <property name="Plunge Of Fold Axis 2" type="measure">
+      <description>Description TBD</description>
+    </property>
+    <property name="Azimuth Of Fold Axis 2" type="measure">
+      <description>Description TBD</description>
+    </property>
+    <property name="Plunge Of Fold Axis 3" type="measure">
+      <description>Description TBD</description>
+    </property>
+    <property name="Azimuth Of Fold Axis 3" type="measure">
+      <description>Description TBD</description>
+    </property>
+    <property name="Plunge Of Mineral Lineation" type="measure">
+      <description>Description TBD</description>
+    </property>
+    <property name="Azimuth Of Mineral Lineation" type="measure">
+      <description>Description TBD</description>
+    </property>
+    <property name="Plunge Of Stretching Lineation" type="measure">
+      <description>Description TBD</description>
+    </property>
+    <property name="Azimuth Of Stretching Lineation" type="measure">
+      <description>Description TBD</description>
+    </property>
+    <property name="Other Lineation" type="measure">
       <description>Description TBD</description>
     </property>
     <property name="Lithology" type="enum">
@@ -1520,6 +1540,20 @@
       </lookup>
     </property>
     <property name="Fineness or Inclusion size" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> {Fine}
+          <description>Description TBD</description>
+        </term>
+        <term> {Medium}
+          <description>Description TBD</description>
+        </term>
+        <term> {Coarse}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
+    <property name="Grain Size" type="vocab">
       <description>Description TBD</description>
       <lookup>
         <term> {Fine}
