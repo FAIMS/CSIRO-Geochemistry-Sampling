@@ -490,11 +490,24 @@
       <bind nodeset="/faims/Plant_Sample/Basic_Info/container4/child1/Plant_Height" type="decimal"/>
       <bind nodeset="/faims/Plant_Sample/Basic_Info/container4/child2/Plant_Width" type="decimal"/>
       <bind nodeset="/faims/Soil_Sample/Basic_Info/Depth" type="decimal"/>
-      <bind nodeset="/faims/Rock_Sample/Measurements/Strike_Of_Bedding" type="decimal"/>
-      <bind nodeset="/faims/Rock_Sample/Measurements/Dip_Of_Bedding" type="decimal"/>
-      <bind nodeset="/faims/Rock_Sample/Measurements/Strike_Of_Cleavage" type="decimal"/>
-      <bind nodeset="/faims/Rock_Sample/Measurements/Dip_Of_Cleavage" type="decimal"/>
-      <bind nodeset="/faims/Rock_Sample/Measurements/Plunge_Of_Fold_Axes" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/container0/child1/Strike_Of_Bedding" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/container0/child2/Dip_Of_Bedding" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/container1/child1/Strike_Of_Cleavage" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/container1/child2/Dip_Of_Cleavage" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/container2/child1/Strike_Of_Foliation" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/container2/child2/Dip_Of_Foliation" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/container3/child1/Strike_Of_Veins" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/container3/child2/Dip_Of_Veins" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/container4/child1/Plunge_Of_Fold_Axis_1" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/container4/child2/Azimuth_Of_Fold_Axis_1" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/container5/child1/Plunge_Of_Fold_Axis_2" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/container5/child2/Azimuth_Of_Fold_Axis_2" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/container6/child1/Plunge_Of_Fold_Axis_3" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/container6/child2/Azimuth_Of_Fold_Axis_3" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/container7/child1/Plunge_Of_Mineral_Lineation" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/container7/child2/Azimuth_Of_Mineral_Lineation" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/container8/child1/Plunge_Of_Stretching_Lineation" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/container8/child2/Azimuth_Of_Stretching_Lineation" type="decimal"/>
     </model>
   </h:head>
   <h:body>

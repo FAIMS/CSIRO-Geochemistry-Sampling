@@ -1097,11 +1097,11 @@ loadRockSampleAttributes() {
     populateWebViewHtml("Rock_Sample/Measurements/Web_Veins", "Veins");
     populateWebViewHtml("Rock_Sample/Measurements/Web_Plunge", "Plunge");
     populateWebViewHtml("Rock_Sample/Measurements/Web_Azimuth", "Azimuth");                                                
-    populateWebViewHtml("Rock_Sample/Measurements/Web_Fold_Axis_1", "Fold_Axis_1");
-    populateWebViewHtml("Rock_Sample/Measurements/Web_Fold_Axis_2", "Fold_Axis_2");
-    populateWebViewHtml("Rock_Sample/Measurements/Web_Fold_Axis_3", "Fold_Axis_3");
-    populateWebViewHtml("Rock_Sample/Measurements/Web_Mineral_Lineation", "Mineral_Lineation");
-    populateWebViewHtml("Rock_Sample/Measurements/Web_Stretching_Lineation", "Stretching_Lineation");
+    populateWebViewHtml("Rock_Sample/Measurements/Web_Fold_Axis_1", "Fold Axis 1");
+    populateWebViewHtml("Rock_Sample/Measurements/Web_Fold_Axis_2", "Fold Axis 2");
+    populateWebViewHtml("Rock_Sample/Measurements/Web_Fold_Axis_3", "Fold Axis 3");
+    populateWebViewHtml("Rock_Sample/Measurements/Web_Mineral_Lineation", "Mineral Lineation");
+    populateWebViewHtml("Rock_Sample/Measurements/Web_Stretching_Lineation", "Stretching Lineation");
 }
 
 /*** PHOTOLOG ***/
