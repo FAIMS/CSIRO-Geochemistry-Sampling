@@ -320,8 +320,10 @@ autoSaveSample(attributeList) {
     saveTabGroup(tabgroup, currentSampleUUID, null, attributeList, new SaveCallback() {
         onSave(uuid, newRecord) {
             currentSampleUUID = uuid;
-
             print("[autoSaveSample(attributeList)] Autosaved sample uuid: "+currentSampleUUID);
+            if (newRecord) {
+                 print("[autoSaveSample()] new record created");
+            }
         }
         onError(message) {
             showToast(message);
@@ -468,58 +470,29 @@ copyAttribute(String attrib) {
 duplicateSample() {
     // save the sample with a null ID to duplicate the sample, but with autosave off.
     tabgroup = getSampleTypePath();
-    boolean enable_autosave = true;
-    showTabGroup("Project");
-    dialog = showBusy("Duplicating Sample", "Please wait");
+    cancelTabGroup(tabgroup, false);
+    currentSampleUUID = null;
     print("[duplicateSample] Before initial save of new duplicate sample.");
-    saveTabGroup(tabgroup, null, null, getSampleDateAttributeList(), new SaveCallback() {
-        onSave(uuid, newRecord) {
-            currentSampleUUID = uuid;
-            print("[duplicateSample()] duplicated sample, new uuid: " + currentSampleUUID);
+    
+    // Update any required fields and reset any undesired duplicate attributes.
+    setSampleStartingID(getFieldValue("Project/Start/Sample_Starting_ID"));
+    sampleID = getFieldValue("Project/Start/Sample_Starting_ID");
+    setFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_ID", sampleID);
+    setSampleStartingID(Integer.toString(Integer.parseInt(sampleID) + 1));
+    if (!tabgroup.equals("Rock_Sample")) {
+        setFieldValue(tabgroup + "/Basic_Info/Photos", new ArrayList());
+        setFieldValue(tabgroup + "/Basic_Info/Sketches", new ArrayList()); 
+        print("[duplicateSample()] Photos value: " + getFieldValue(tabgroup + "/Basic_Info/Photos"));
+        print("[duplicateSample()] Sketches value: " + getFieldValue(tabgroup + "/Basic_Info/Sketches"));
+    } else {
+        setFieldValue("Rock_Sample/Lithological_Info/Photos", new ArrayList());
+        setFieldValue("Rock_Sample/Lithological_Info/Sketches", new ArrayList());
+        print("[duplicateSample()] Photos value: " + getFieldValue("Rock_Sample/Lithological_Info/Photos"));
+        print("[duplicateSample()] Sketches value: " + getFieldValue("Rock_Sample/Lithological_Info/Sketches"));
+    }
 
-            // Update any required fields and reset any undesired duplicate attributes.
-            setSampleStartingID(getFieldValue("Project/Start/Sample_Starting_ID"));
-            sampleID = getFieldValue("Project/Start/Sample_Starting_ID");
-            setFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_ID", sampleID);
-            setSampleStartingID(Integer.toString(Integer.parseInt(sampleID) + 1));
-            if (!tabgroup.equals("Rock_Sample")) {
-                print("[duplicateSample()] Photos value: " + getFieldValue(tabgroup + "/Basic_Info/Photos"));
-                print("[duplicateSample()] Sketches value: " + getFieldValue(tabgroup + "/Basic_Info/Sketches"));
-                // setFieldValue(tabgroup + "/Basic_Info/Photos", null);
-                // setFieldValue(tabgroup + "/Basic_Info/Sketches", null);
-                setFieldValue(tabgroup + "/Basic_Info/Photos", new ArrayList());
-                setFieldValue(tabgroup + "/Basic_Info/Sketches", new ArrayList()); 
-            } else {
-                print("[duplicateSample()] Photos value: " + getFieldValue("Rock_Sample/Lithological_Info/Photos"));
-                print("[duplicateSample()] Sketches value: " + getFieldValue("Rock_Sample/Lithological_Info/Sketches"));
-                // setFieldValue("Rock_Sample/Lithological_Info/Photos", null);
-                // setFieldValue("Rock_Sample/Lithological_Info/Sketches", null);
-                setFieldValue("Rock_Sample/Lithological_Info/Photos", new ArrayList());
-                setFieldValue("Rock_Sample/Lithological_Info/Sketches", new ArrayList());
-            }
-
-            // alert the user that a duplicate sample has been created
-            showTabGroup(tabgroup, currentSampleUUID, new FetchCallback() {
-                onFetch(result) {
-                    showToast("[duplicateSample()] A duplicate sample has been created");
-                    keepTabGroupChanges(tabgroup);
-                    print("[duplicateSample()] Set/Reset attributes of duplicate field.");
-
-                    // save the new sample
-                    print("[duplicateSample()] Before autosave call on duplicate");
-                    //autoSaveSample();
-                    saveTabGroup(tabgroup, currentSampleUUID, null, null, new SaveCallback() {
-                        onSave(uuid, newRecord) {
-                            currentSampleUUID = uuid;
-                            print("[duplicateSample()] Duplicate sample saved after setting new field values and removing attatchements.");
-                            dialog.dismiss();
-                        }
-                    }, enable_autosave);
-                    print("[duplicateSample()] After autosave call on duplicate");
-                }
-            });
-        }
-    }, enable_autosave);
+    // show the tabgroup for the new sample, which enables autosave by event handling.
+    showTabGroup(tabgroup);
 }
 
 /*** WATER SAMPLE ***/
@@ -637,15 +610,6 @@ loadWaterSampleFrom(archentid) {
                     }
                 }
             });
-            saveTabGroup("Water_Sample", water_sample_id, null, null, new SaveCallback() {
-                onSave(uuid, newRecord) {
-                    water_sample_id = uuid;
-                }
-
-                onError(message) {
-                    showToast(message);
-                }
-            },true);
         }
 
             onError(message) {
@@ -1015,11 +979,6 @@ loadPlantSampleFrom(archentid) {
                     setFieldValue("Plant_Sample/Basic_Info/Timestamp", timestamp.get(0));
                 }
             });
-            saveTabGroup("Plant_Sample", plant_sample_id, null, null, new SaveCallback() {
-                onSave(uuid, newRecord) {
-                    plant_sample_id = uuid;
-                }
-            }, true);
         }
     });
 }
@@ -1066,11 +1025,6 @@ loadSoilSampleFrom(archentid) {
                     setFieldValue("Soil_Sample/Basic_Info/Timestamp", timestamp.get(0));
                 }
             });
-            saveTabGroup("Soil_Sample", soil_sample_id, null, null, new SaveCallback() {
-                onSave(uuid, newRecord) {
-                    soil_sample_id = uuid;
-                }
-            }, true);
         }
     });
 }
@@ -1121,11 +1075,6 @@ loadRockSampleFrom(archentid) {
                     setFieldValue("Rock_Sample/Basic_Info/Timestamp", timestamp.get(0));
                 }
             });
-            saveTabGroup("Rock_Sample", rock_sample_id, null, null, new SaveCallback() {
-                onSave(uuid, newRecord) {
-                    rock_sample_id = uuid;
-                }
-            }, true);
         }
     });
 }
