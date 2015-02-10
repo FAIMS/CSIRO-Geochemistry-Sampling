@@ -76,7 +76,6 @@
                   <Water_Sample_ID/>
                 </child2>
               </container0>
-              <Observation_Type/>
               <container1>
                 <child1>
                   <Timestamp/>
@@ -89,6 +88,8 @@
               <Project/>
               <Area/>
               <Site_Name/>
+              <Observation_Type/>
+              <Location_Number_Container/>
               <container2>
                 <child1>
                   <Latitude/>
@@ -176,7 +177,6 @@
                   <Plant_Sample_ID/>
                 </child2>
               </container0>
-              <Observation_Type/>
               <container1>
                 <child1>
                   <Timestamp/>
@@ -188,6 +188,8 @@
               <Station_Deposit/>
               <Project/>
               <Area/>
+              <Observation_Type/>
+              <Location_Number_Container/>
               <Plant_Species/>
               <container2>
                 <child1>
@@ -239,7 +241,6 @@
                   <Soil_Sample_ID/>
                 </child2>
               </container0>
-              <Observation_Type/>
               <container1>
                 <child1>
                   <Timestamp/>
@@ -251,6 +252,8 @@
               <Station_Deposit/>
               <Project/>
               <Area/>
+              <Observation_Type/>
+              <Location_Number_Container/>
               <container2>
                 <child1>
                   <Latitude/>
@@ -301,7 +304,6 @@
                   <Rock_Sample_ID/>
                 </child2>
               </container0>
-              <Observation_Type/>
               <container1>
                 <child1>
                   <Timestamp/>
@@ -313,6 +315,8 @@
               <Station_Deposit/>
               <Project/>
               <Area/>
+              <Observation_Type/>
+              <Location_Number_Container/>
               <container2>
                 <child1>
                   <Latitude/>
@@ -484,7 +488,7 @@
           </Photolog>
         </faims>
       </instance>
-      <bind nodeset="/faims/Project/Start/Sample_Starting_ID" type="decimal"/>
+      <bind nodeset="/faims/Project/Start/container1/child2/Sample_Starting_ID" type="decimal"/>
       <bind nodeset="/faims/Water_Sample/Basic_Info/Elevation" type="decimal"/>
       <bind nodeset="/faims/Water_Sample/Codes/container1/child2/Estimated_Angle" type="decimal"/>
       <bind nodeset="/faims/Plant_Sample/Basic_Info/container4/child1/Plant_Height" type="decimal"/>
@@ -669,13 +673,6 @@
             </input>
           </group>
         </group>
-        <select1 appearance="full" ref="Observation_Type" faims_attribute_name="Observation Type" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="false" faims_read_only="false">
-          <label>{Observation_Type}</label>
-          <item>
-            <label>placeholder</label>
-            <value>placeholder</value>
-          </item>
-        </select1>
         <group ref="container1" faims_style="orientation">
           <label></label>
           <group ref="child1" faims_style="even">
@@ -703,6 +700,16 @@
         <input ref="Site_Name" faims_attribute_name="Site Name" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Site_Name}</label>
         </input>
+        <select1 appearance="full" ref="Observation_Type" faims_attribute_name="Observation Type" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+          <label>{Observation_Type}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <group ref="Location_Number_Container">
+          <label/>
+        </group>
         <group ref="container2" faims_style="orientation">
           <label></label>
           <group ref="child1" faims_style="even">
@@ -948,13 +955,6 @@
             </input>
           </group>
         </group>
-        <select1 appearance="full" ref="Observation_Type" faims_attribute_name="Observation Type" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="false" faims_read_only="false">
-          <label>{Observation_Type}</label>
-          <item>
-            <label>placeholder</label>
-            <value>placeholder</value>
-          </item>
-        </select1>
         <group ref="container1" faims_style="orientation">
           <label></label>
           <group ref="child1" faims_style="even">
@@ -979,6 +979,16 @@
         <input ref="Area" faims_attribute_name="Area" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
           <label>{Area}</label>
         </input>
+        <select1 appearance="full" ref="Observation_Type" faims_attribute_name="Observation Type" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+          <label>{Observation_Type}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>        
+        <group ref="Location_Number_Container">
+          <label/>
+        </group>
         <input ref="Plant_Species" faims_attribute_name="Plant Species" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Plant_Species}</label>
         </input>
@@ -1111,13 +1121,6 @@
             </input>
           </group>
         </group>
-        <select1 appearance="full" ref="Observation_Type" faims_attribute_name="Observation Type" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="false" faims_read_only="false">
-          <label>{Observation_Type}</label>
-          <item>
-            <label>placeholder</label>
-            <value>placeholder</value>
-          </item>
-        </select1>
         <group ref="container1" faims_style="orientation">
           <label></label>
           <group ref="child1" faims_style="even">
@@ -1142,6 +1145,16 @@
         <input ref="Area" faims_attribute_name="Area" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
           <label>{Area}</label>
         </input>
+        <select1 appearance="full" ref="Observation_Type" faims_attribute_name="Observation Type" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+          <label>{Observation_Type}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <group ref="Location_Number_Container">
+          <label/>
+        </group>
         <group ref="container2" faims_style="orientation">
           <label></label>
           <group ref="child1" faims_style="even">
@@ -1300,13 +1313,6 @@
             </input>
           </group>
         </group>
-        <select1 appearance="full" ref="Observation_Type" faims_attribute_name="Observation Type" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="false" faims_read_only="false">
-          <label>{Observation_Type}</label>
-          <item>
-            <label>placeholder</label>
-            <value>placeholder</value>
-          </item>
-        </select1>
         <group ref="container1" faims_style="orientation">
           <label></label>
           <group ref="child1" faims_style="even">
@@ -1331,6 +1337,16 @@
         <input ref="Area" faims_attribute_name="Area" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
           <label>{Area}</label>
         </input>
+        <select1 appearance="full" ref="Observation_Type" faims_attribute_name="Observation Type" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+          <label>{Observation_Type}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
+        <group ref="Location_Number_Container">
+          <label/>
+        </group>
         <group ref="container2" faims_style="orientation">
           <label></label>
           <group ref="child1" faims_style="even">

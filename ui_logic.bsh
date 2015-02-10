@@ -279,16 +279,24 @@ List getSampleDateAttributeList() {
     return attributes;
 }
 
+// onEvent("Water_Sample/Basic_Info/Observation_Type", "click", "print(\"showing tab\");showTab(\"Water_Sample/Basic_Info\");");
+// onEvent("Plant_Sample/Basic_Info/Observation_Type", "click", "print(\"showing tab\");showTab(\"Plant_Sample/Basic_Info\");");
+// onEvent("Soil_Sample/Basic_Info/Observation_Type", "click", "print(\"showing tab\");showTab(\"Soil_Sample/Basic_Info\");");
+// onEvent("Rock_Sample/Basic_Info/Observation_Type", "click", "print(\"showing tab\");showTab(\"Rock_Sample/Basic_Info\");");
 
-// onEvent("Water_Sample/Basic_Info/Observation_Type", "click", "renderLocationNumber()");
-// onEvent("Water_Sample/Basic_Info", "show", "renderLocationNumber()");
-// onEvent("Plant_Sample/Basic_Info/Observation_Type", "click", "renderLocationNumber()");
-// onEvent("Plant_Sample/Basic_Info", "show", "renderLocationNumber()");
-// onEvent("Soil_Sample/Basic_Info/Observation_Type", "click", "renderLocationNumber()");
-// onEvent("Soil_Sample/Basic_Info", "show", "renderLocationNumber()");
-// onEvent("Rock_Sample/Basic_Info/Observation_Type", "click", "renderLocationNumber()");
-// onEvent("Rock_Sample/Basic_Info", "show", "renderLocationNumber()");
+onEvent("Water_Sample/Basic_Info/Observation_Type", "click", "print(\"render on click\");renderLocationNumber()");
+onEvent("Plant_Sample/Basic_Info/Observation_Type", "click", "print(\"render on click\");renderLocationNumber()");
+onEvent("Soil_Sample/Basic_Info/Observation_Type", "click", "print(\"render on click\");renderLocationNumber()");
+onEvent("Rock_Sample/Basic_Info/Observation_Type", "click", "print(\"render on click\");renderLocationNumber()");
 
+onEvent("Water_Sample/Basic_Info", "show", "print(\"render on show\");renderLocationNumber();");
+onEvent("Plant_Sample/Basic_Info", "show", "print(\"render on show\");renderLocationNumber();");
+onEvent("Soil_Sample/Basic_Info", "show", "print(\"render on show\");renderLocationNumber();");
+onEvent("Rock_Sample/Basic_Info", "show", "print(\"render on show\");renderLocationNumber();");
+
+Boolean locationNumberRendered = false;
+
+/* Renders the location number dynamic view if obervation only is selected for the current sample. */ 
 renderLocationNumber() {
     fetchOne("select vocabid from vocabulary join attributekey using (attributeid) where attributename = 'Observation Type' and vocabname =  '{Observation_Only}';", 
      new FetchCallback() {
@@ -300,11 +308,17 @@ renderLocationNumber() {
             executeViewTask(new ViewTask() {
                 doTask() {
                     if (selectedObservationType.equals(observationOnly)) {
-                        textDef = createViewDef().createTextField().setLabel("{Location_Number}").setAttributeName("Location Number").setAttributeType("measure");
-                        createView(tabgroup + "/Basic_Info/Location_Number", textDef);
+                        if (!locationNumberRendered) {
+                            print("[renderLocationNumber()] Dynamically creating the Location Number view.");
+                            textDef = createViewDef().createTextField().setLabel("{Location_Number}").setAttributeName("Location Number").setAttributeType("measure");
+                            createView(tabgroup + "/Basic_Info/Location_Number", textDef, tabgroup + "/Basic_Info/Location_Number_Container");
+                            locationNumberRendered = true;
+                        }
                     } else {
+                        print("[renderLocationNumber()] Dynamically removing all views for the tabgroup.");
                         //removeView(tabgroup + "/Basic_Info/Location_Number");
                         removeAllViewsAndContainers(tabgroup);
+                        locationNumberRendered = false;
                     }
                 }
             });
