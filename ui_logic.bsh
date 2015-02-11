@@ -117,7 +117,7 @@ onEvent("Project", "show", "removeNavigationButtons();");
 
 onEvent("Project/Start", "show", "loadSamplePrefix(); loadSampleStartingID();");
 onEvent("Project/Start/New_Sample", "delayclick", "newSample();");
-//onEvent("Project/Start/Validate_Sample_ID", "click", "validSampleID();");
+onEvent("Project/Start/Validate_Sample_ID", "click", "validateSampleID();");
 
 onEvent("Project/Search", "show", "loadSearch();");
 onEvent("Project/Search/Sample_Types", "click", "loadSearch();");
@@ -174,6 +174,11 @@ loadSampleStartingID() {
             }
         }
     });
+}
+
+/* Validates the sample ID for duplicates. */
+boolean validateSampleID() {
+
 }
 
 /* Validates the sample prefix for the right length. Returns true if the prefix is valid or false otherwise. */
@@ -310,6 +315,10 @@ renderLocationNumber() {
                     if (selectedObservationType.equals(observationOnly)) {
                         if (!locationNumberRendered) {
                             print("[renderLocationNumber()] Dynamically creating the Location Number view.");
+                            // fetch any saved value for location number and set the field value to that.
+
+
+                            // render the view
                             textDef = createViewDef().createTextField().setLabel("{Location_Number}").setAttributeName("Location Number").setAttributeType("measure");
                             createView(tabgroup + "/Basic_Info/Location_Number", textDef, tabgroup + "/Basic_Info/Location_Number_Container");
                             locationNumberRendered = true;
@@ -508,6 +517,61 @@ duplicateSample() {
     // show the tabgroup for the new sample, which enables autosave by event handling.
     showTabGroup(tabgroup);
 }
+
+/** Map GPS **/
+startInternalGPS();
+
+// initMap() {
+//     setMapZoom("Map/map/map", 15.0f);
+//     showBaseMap("Map/map/map", "base map", "files/data/maps/SydneyStreetmap.tif");
+
+//     ps = createPointStyle(10, Color.BLUE, 0.2f, 0.5f);
+//     ls = createLineStyle(10, Color.GREEN, 0.05f, 0.3f, null);
+//     pos = createPolygonStyle(10, Color.parseColor("#440000FF"), createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
+//     ts = createTextStyle(10, Color.BLACK, 40, Typeface.SANS_SERIF);
+//     isEntity = true;
+//     queryName = "Artefact_Points";
+//     querySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Artefact' and userid ="+userid;
+//     showDatabaseLayer("Map/map/map", "Points Ive found", isEntity, queryName, querySql, ps, ls, pos, ts); 
+// }
+
+// takePoint() {
+//     positionProj = getGPSPositionProjected();
+//     if (positionProj == null) {
+//         showToast("GPS position not found");
+//     } else {
+//         // update the GPS point and save/overwrite the record
+//         artefact_point = new Point(new MapPos(positionProj.getLongitude(), positionProj.getLatitude()), null, (PointStyle) null, null);
+//         showToast("Current GPS point updated");
+//         ArrayList geolist = new ArrayList();
+//         geolist.add(artefact_point);
+//         accuracy = getGPSEstimatedAccuracy();
+//         setFieldValue("Artefacts/Metadata/accuracy", accuracy);
+//         heading = getGPSHeading();
+//         setFieldValue("Artefacts/Metadata/heading", heading);
+//         saveArchEnt(artefact_id, "Artefact", geolist, null, null);
+//     }
+// }
+
+// onEvent("Artefacts/Artefact/Current_Point", "click", "takePoint()");
+
+// centreMap() {
+//     if(!isExternalGPSOn() && !isInternalGPSOn()) {
+//         showToast("GPS is not enabled.");
+//     } else {
+//         if (artefact_point == null) {
+//             showToast("setting GPS position");
+//             takePoint();
+//         }
+//         centerOnCurrentPosition("Map/map/map");
+//     }
+// }
+
+// onEvent("Map/map/Map_Centre", "click", "centreMap()");
+// onEvent("Map/map/Record_Artefact", "click", "transitionToArtefacts()");
+// onEvent("Artefacts/Artefact/View_Map", "click", "showTabGroup(\"Map\");");
+
+
 
 /*** WATER SAMPLE ***/
 onEvent("Water_Sample", "show", "addSampleNavigation();autoSaveSample(getSampleDateAttributeList());");
