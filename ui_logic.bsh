@@ -289,9 +289,9 @@ newSample() {
     print("[newSample()] Making a new sample.\nPrefix: "+samplePrefix+"\nID: "+sampleID+"\nTimestamp: "+getFieldValue(tabgroup+"/Basic_Info/Timestamp"));
     
     // Increment the sample starting ID for the next sample.
-    keepTabGroupChanges(tabgroup);
     setSampleStartingID(Integer.toString(Integer.parseInt(sampleID) + 1));
-
+    
+    keepTabGroupChanges(tabgroup);
     newSampleFlag = true;
 }
 
@@ -477,7 +477,7 @@ removeNavigationButtons() {
 
 /* Loads a list view of existing samples. */
 loadSearch() {
-    type = getFieldValue("Project/Search/Sample_Types");
+    String type = getFieldValue("Project/Search/Sample_Types");
     fetchAll("select uuid, response from latestNonDeletedArchEntFormattedIdentifiers where aenttypename like '%" + type + "%';", 
         new FetchCallback() {
             onFetch(result) {
@@ -560,7 +560,6 @@ duplicateSample() {
 }
 
 /** Map GPS **/
-startInternalGPS();
 
 // initMap() {
 //     setMapZoom("Map/map/map", 15.0f);
@@ -623,8 +622,8 @@ onEvent("Water_Sample/Basic_Info/Attach_Sketch", "click", "attachFileTo(\"Water_
 
 onEvent("Water_Sample/Codes/Hole_Angle", "click", "populateEstimatedAngle();");
 
-onEvent("Water_Sample/Photolog", "show", "loadRelatedPhotologs(water_sample_id, \"Water_Sample\");");
-onEvent("Water_Sample/Photolog/New_Photolog", "click", "newPhotolog(); sample_id = water_sample_id; type = \"Water\";");
+onEvent("Water_Sample/Photolog", "show", "loadRelatedPhotologs(currentSampleUUID, \"Water_Sample\");");
+onEvent("Water_Sample/Photolog/New_Photolog", "click", "newPhotolog();");
 onEvent("Water_Sample/Photolog/Photolog_List", "click", "loadPhotolog();");
 
 onEvent("Water_Sample/Basic_Info", "show", "validateTempConduct()");
@@ -662,8 +661,6 @@ validateTempConduct() {
     }
 }
 
-String water_sample_id = null;
-
 /* Loads a specific water sample based on the given ID. */
 loadWaterSampleFrom(archentid) {
     if (isNull(archentid)) {
@@ -672,13 +669,12 @@ loadWaterSampleFrom(archentid) {
     }
     showTabGroup("Water_Sample", archentid, new FetchCallback() {
         onFetch(result) {
-            water_sample_id = archentid;
-            fetchOne("select createdBy from createdModifiedAtBy where uuid = '" + water_sample_id + "';", new FetchCallback() {
+            fetchOne("select createdBy from createdModifiedAtBy where uuid = '" + archentid + "';", new FetchCallback() {
                 onFetch(username) {
                     setFieldValue("Water_Sample/Basic_Info/Author_Name", username.get(0));
                 }
             });
-            fetchOne("select datetime(createdAt , 'localtime') from createdModifiedAtBy where uuid = '" + water_sample_id + "';", new FetchCallback() {
+            fetchOne("select datetime(createdAt , 'localtime') from createdModifiedAtBy where uuid = '" + archentid + "';", new FetchCallback() {
                 onFetch(timestamp) {
                     setFieldValue("Water_Sample/Basic_Info/Timestamp", timestamp.get(0));
                 }
@@ -704,7 +700,7 @@ loadWaterSampleFrom(archentid) {
                     "and uuid in (select a.uuid " +
                     "from latestnondeletedaentreln a join latestnondeletedaentreln b using (relationshipid) " +
                     "where a.uuid != b.uuid " +
-                    "and b.uuid = " + water_sample_id + ");", new FetchCallback() {
+                    "and b.uuid = " + archentid + ");", new FetchCallback() {
                 onFetch(result) {
                     if(!isNull(result)) {
                         preferred_ph = result.get(0);
@@ -722,7 +718,7 @@ loadWaterSampleFrom(archentid) {
                     "and uuid in (select a.uuid " +
                     "from latestnondeletedaentreln a join latestnondeletedaentreln b using (relationshipid) " +
                     "where a.uuid != b.uuid " +
-                    "and b.uuid = " + water_sample_id + ") ;", new FetchCallback() {
+                    "and b.uuid = " + archentid + ") ;", new FetchCallback() {
                 onFetch(result) {
                     if(!isNull(result)) { 
                         preferred_eh = result.get(0);
@@ -807,9 +803,11 @@ renderpHEhPage() {
                     "and uuid in (select a.uuid " +
                     "from latestnondeletedaentreln a join latestnondeletedaentreln b using (relationshipid) " +
                     "where a.uuid != b.uuid " +
-                    "and b.uuid = "+water_sample_id+") " +
+                    "and b.uuid = "+ currentSampleUUID +") " +
+                    "group by uuid " + 
                     "order by uuid, attributename desc; ",  new FetchCallback() {
                     onFetch(ph_list) {
+                        print("[renderpHEhPage()] ph list: " + ph_list);
                         fetchAll("select uuid, group_concat(measure,'|') " +
                                 "from latestnondeletedaentvalue " +
                                 "join latestnondeletedarchent using (uuid) " +
@@ -819,9 +817,11 @@ renderpHEhPage() {
                                 "and uuid in (select a.uuid " +
                                 "from latestnondeletedaentreln a join latestnondeletedaentreln b using (relationshipid) " +
                                 "where a.uuid != b.uuid " +
-                                "and b.uuid = "+water_sample_id+") " +
+                                "and b.uuid = "+ currentSampleUUID +") " +
+                                "group by uuid " + 
                                 "order by uuid, attributename desc;",  new FetchCallback() {
                             onFetch(eh_list) {
+                                print("[renderpHEhPage()] eh list: " + eh_list);
                                 for(ph : ph_list) {
                                     createContainer("Water_Sample/pH_Eh/pH_Row_" + ph_count, "orientation", "Water_Sample/pH_Eh/pH_Container");
                                     createContainer("Water_Sample/pH_Eh/Check_pH_Container_" + ph_count, "even", "Water_Sample/pH_Eh/pH_Row_" + ph_count);
@@ -853,9 +853,8 @@ renderpHEhPage() {
                                     createView("Water_Sample/pH_Eh/Check_Eh_" + eh_count, createViewDef().createRadioGroup().addChoice("", ""), "Water_Sample/pH_Eh/Check_Eh_Container_" + eh_count);
                                     createView("Water_Sample/pH_Eh/Eh_Value_" + eh_count, createViewDef().createTextField("decimal").setReadOnly(true), "Water_Sample/pH_Eh/Eh_Value_Container_" + eh_count);
                                     createView("Water_Sample/pH_Eh/Delete_Eh_" + eh_count, createViewDef().createButton().setLabel("X").setStyleCss("faims-danger"), "Water_Sample/pH_Eh/Delete_Eh_Container_" + eh_count);
-
-                                    String eh_value = eh.get(1).split("[|]")[1];
-                                    String eh_time = eh.get(1).split("[|]")[0];
+                                    String eh_value = eh.get(1).split("[|]")[0];
+                                    String eh_time = eh.get(1).split("[|]")[1];
                                     String eh_id = eh.get(0);
                                     int index = eh_count;
 
@@ -909,7 +908,7 @@ addNewpH(String ph_value) {
 
     saveArchEnt(null, "pH", null, attributes, new SaveCallback() {
         onSave(ph_id, newRecord) {
-            saveEntitiesToRel("Water Sample pH", water_sample_id, ph_id);
+            saveEntitiesToRel("Water Sample pH", currentSampleUUID, ph_id);
             removeView("Water_Sample/pH_Eh/pH_Value_" + ph_count);
             removeView("Water_Sample/pH_Eh/New_pH");
 
@@ -948,7 +947,7 @@ addNewEh(String eh_value) {
 
     saveArchEnt(null, "Eh", null, attributes, new SaveCallback() {
         onSave(eh_id, newRecord) {
-            saveEntitiesToRel("Water Sample Eh", water_sample_id, eh_id);
+            saveEntitiesToRel("Water Sample Eh", currentSampleUUID, eh_id);
             removeView("Water_Sample/pH_Eh/Eh_Value_" + eh_count);
             removeView("Water_Sample/pH_Eh/New_Eh");
 
@@ -1072,11 +1071,9 @@ onEvent("Plant_Sample/Basic_Info/Take_GPS", "click", "fillInGPS(\"Plant_Sample/B
 onEvent("Plant_Sample/Basic_Info/Take_Photo", "click", "attachPictureTo(\"Plant_Sample/Basic_Info/Photos\")");
 onEvent("Plant_Sample/Basic_Info/Attach_Sketch", "click", "attachFileTo(\"Plant_Sample/Basic_Info/Sketches\");");
 
-onEvent("Plant_Sample/Photolog", "show", "loadRelatedPhotologs(plant_sample_id, \"Plant_Sample\");");
-onEvent("Plant_Sample/Photolog/New_Photolog", "click", "newPhotolog(); sample_id = plant_sample_id; type = \"Plant\";");
+onEvent("Plant_Sample/Photolog", "show", "loadRelatedPhotologs(currentSampleUUID, \"Plant_Sample\");");
+onEvent("Plant_Sample/Photolog/New_Photolog", "click", "newPhotolog();");
 onEvent("Plant_Sample/Photolog/Photolog_List", "click", "loadPhotolog();");
-
-String plant_sample_id = null;
 
 /* Loads a specific plant sample based on the given ID. */
 loadPlantSampleFrom(archentid) {
@@ -1087,13 +1084,12 @@ loadPlantSampleFrom(archentid) {
 
     showTabGroup("Plant_Sample", archentid, new FetchCallback() {
         onFetch(result) {
-            plant_sample_id = archentid;
-            fetchOne("select createdBy from createdModifiedAtBy where uuid = '" + plant_sample_id + "';", new FetchCallback() {
+            fetchOne("select createdBy from createdModifiedAtBy where uuid = '" + archentid + "';", new FetchCallback() {
                 onFetch(username) {
                     setFieldValue("Plant_Sample/Basic_Info/Author_Name", username.get(0));
                 }
             });
-            fetchOne("select datetime(createdAt , 'localtime') from createdModifiedAtBy where uuid = '" + plant_sample_id + "';", new FetchCallback() {
+            fetchOne("select datetime(createdAt , 'localtime') from createdModifiedAtBy where uuid = '" + archentid + "';", new FetchCallback() {
                 onFetch(timestamp) {
                     setFieldValue("Plant_Sample/Basic_Info/Timestamp", timestamp.get(0));
                 }
@@ -1118,11 +1114,9 @@ onEvent("Soil_Sample/Basic_Info/Take_GPS", "click", "fillInGPS(\"Soil_Sample/Bas
 onEvent("Soil_Sample/Basic_Info/Take_Photo", "click", "attachPictureTo(\"Soil_Sample/Basic_Info/Photos\")");
 onEvent("Soil_Sample/Basic_Info/Attach_Sketch", "click", "attachFileTo(\"Soil_Sample/Basic_Info/Sketches\");");
 
-onEvent("Soil_Sample/Photolog", "show", "loadRelatedPhotologs(soil_sample_id, \"Soil_Sample\");");
-onEvent("Soil_Sample/Photolog/New_Photolog", "click", "newPhotolog(); sample_id = soil_sample_id; type = \"Soil\";");
+onEvent("Soil_Sample/Photolog", "show", "loadRelatedPhotologs(currentSampleUUID, \"Soil_Sample\");");
+onEvent("Soil_Sample/Photolog/New_Photolog", "click", "newPhotolog();");
 onEvent("Soil_Sample/Photolog/Photolog_List", "click", "loadPhotolog();");
-
-String soil_sample_id = null;
 
 /* Loads a specific soil sample based on the given ID. */
 loadSoilSampleFrom(archentid) {
@@ -1133,13 +1127,12 @@ loadSoilSampleFrom(archentid) {
 
     showTabGroup("Soil_Sample", archentid, new FetchCallback() {
         onFetch(result) {
-            soil_sample_id = archentid;
-            fetchOne("select createdBy from createdModifiedAtBy where uuid = '" + soil_sample_id + "';", new FetchCallback() {
+            fetchOne("select createdBy from createdModifiedAtBy where uuid = '" + archentid + "';", new FetchCallback() {
                 onFetch(username) {
                     setFieldValue("Soil_Sample/Basic_Info/Author_Name", username.get(0));
                 }
             });
-            fetchOne("select datetime(createdAt , 'localtime') from createdModifiedAtBy where uuid = '" + soil_sample_id + "';", new FetchCallback() {
+            fetchOne("select datetime(createdAt , 'localtime') from createdModifiedAtBy where uuid = '" + archentid + "';", new FetchCallback() {
                 onFetch(timestamp) {
                     setFieldValue("Soil_Sample/Basic_Info/Timestamp", timestamp.get(0));
                 }
@@ -1168,13 +1161,9 @@ onEvent("Rock_Sample/Basic_Info/Take_GPS", "click", "fillInGPS(\"Rock_Sample/Bas
 onEvent("Rock_Sample/Lithological_Info/Take_Photo", "click", "attachPictureTo(\"Rock_Sample/Lithological_Info/Photos\")");
 onEvent("Rock_Sample/Lithological_Info/Attach_Sketch", "click", "attachFileTo(\"Rock_Sample/Lithological_Info/Sketches\");");
 
-onEvent("Rock_Sample/Photolog", "show", "loadRelatedPhotologs(rock_sample_id, \"Rock_Sample\");");
-onEvent("Rock_Sample/Photolog/New_Photolog", "click", "newPhotolog(); sample_id = rock_sample_id; type = \"Rock\";");
+onEvent("Rock_Sample/Photolog", "show", "loadRelatedPhotologs(currentSampleUUID, \"Rock_Sample\");");
+onEvent("Rock_Sample/Photolog/New_Photolog", "click", "newPhotolog();");
 onEvent("Rock_Sample/Photolog/Photolog_List", "click", "loadPhotolog();");
-
-//populateWebViewHtml("Rock_Sample/Measurements/web1", "<h2>Strike</h2> <h2>Dip</h2>");
-
-String rock_sample_id = null;
 
 /* Loads a rock sample based on the given ID. */
 loadRockSampleFrom(archentid) {
@@ -1185,13 +1174,12 @@ loadRockSampleFrom(archentid) {
 
     showTabGroup("Rock_Sample", archentid, new FetchCallback() {
         onFetch(result) {
-            rock_sample_id = archentid;
-            fetchOne("select createdBy from createdModifiedAtBy where uuid = '" + rock_sample_id + "';", new FetchCallback() {
+            fetchOne("select createdBy from createdModifiedAtBy where uuid = '" + archentid + "';", new FetchCallback() {
                 onFetch(username) {
                     setFieldValue("Rock_Sample/Basic_Info/Author_Name", username.get(0));
                 }
             });
-            fetchOne("select datetime(createdAt , 'localtime') from createdModifiedAtBy where uuid = '" + rock_sample_id + "';", new FetchCallback() {
+            fetchOne("select datetime(createdAt , 'localtime') from createdModifiedAtBy where uuid = '" + archentid + "';", new FetchCallback() {
                 onFetch(timestamp) {
                     setFieldValue("Rock_Sample/Basic_Info/Timestamp", timestamp.get(0));
                 }
@@ -1227,11 +1215,9 @@ loadRockSampleAttributes() {
 
 onEvent("Photolog", "show", "addPhotologNavigation();");
 onFocus("Photolog/Photolog/Photo_ID", null, "activateAutoSavePhotolog();");
-onEvent("Photolog/Photolog/Back", "click", "showToast(\"Back functionality not implemented yet.\");");
+onEvent("Photolog/Photolog/Photo_Back", "click", "showTabGroup(getSampleTypePath());");
 
 String photolog_id = null;
-String sample_id = null;
-String type = null;
 
 /* Creates a new photolog for the user to fill out, with the timestamp auto-generated. */
 newPhotolog() {
@@ -1243,7 +1229,9 @@ newPhotolog() {
 /* Loads a photolog based on the most recent list item selected. */
 loadPhotolog() {
     photolog_id = getListItemValue();
-    loadPhotologFrom(photolog_id);
+    if (!isNull(photolog_id)) {
+        loadPhotologFrom(photolog_id);
+    }
 }
 
 /* Loads a photolog based on the given ID. */
@@ -1271,7 +1259,7 @@ activateAutoSavePhotolog() {
     saveTabGroup("Photolog", photolog_id, null, null, new SaveCallback() {
         onSave(uuid, newRecord) {
             photolog_id = uuid;
-            saveEntitiesToRel("Sample Photolog", sample_id, photolog_id);
+            saveEntitiesToRel("Sample Photolog", currentSampleUUID, photolog_id);
             saveTabGroup("Photolog", photolog_id, null, null, new SaveCallback() {
                 onSave(uuid, newRecord) {
                     photolog_id = uuid;
@@ -1296,15 +1284,8 @@ reallyDeletePhotolog() {
     deleteArchEnt(photolog_id, new DeleteCallback() {
         onDelete(uuid) {
             cancelTabGroup("Photolog", false);
-            if(type.equals("Water")) {
-                showTab("Water_Sample/Photolog");
-            } else if(type.equals("Plant")) {
-                showTab("Plant_Sample/Photolog");
-            } else if(type.equals("Soil")) {
-                showTab("Soil_Sample/Photolog");
-            } else {
-                showTab("Rock_Sample/Photolog");
-            }
+            tabgroup = getSampleTypePath();
+            showTab(tabgroup + "/Photolog");
         }
     });
 }

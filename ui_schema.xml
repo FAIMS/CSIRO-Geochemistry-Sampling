@@ -484,7 +484,7 @@
               <Photo_ID/>
               <Photo_Timestamp/>
               <Photo_Note/>
-              <Back/>
+              <Photo_Back/>
             </Photolog>
           </Photolog>
         </faims>
@@ -1726,7 +1726,7 @@
         <input ref="Photo_Note" faims_attribute_name="Photo Note" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Photo_Note}</label>
         </input>
-        <trigger ref="Back">
+        <trigger ref="Photo_Back">
           <label>{Back}</label>
         </trigger>
       </group>
