@@ -110,6 +110,10 @@ addActionBarItem("external_gps", new ToggleActionButtonCallback() {
     }
 });
 
+/*** Shape Tab Group ***/
+onEvent("Shape/Shape_Note/shape_return", "click", "showTabGroup(\"Project\");");
+onEvent("Shape/Shape_Note/shape_delete", "click", "showToast(\"Delete not implemented\");");
+
 /*** Project Tab Group ***/
 
 /* Event Handling */
@@ -561,62 +565,76 @@ duplicateSample() {
 
 /** Map GPS **/
 
-// initMap() {
-//     setMapZoom("Map/map/map", 15.0f);
-//     showBaseMap("Map/map/map", "base map", "files/data/maps/SydneyStreetmap.tif");
+/* Takes the current point using gps. */
+takePoint() {
+    Object position = getGPSPosition();
+    if (position == null) {
+        showToast("GPS Not initialised");
+        return;
+    }
+    Object projPosition = getGPSPositionProjected();
+    Double latitude = position.getLatitude();
+    Double longitude = position.getLongitude();
+    Double northing = projPosition.getLatitude();
+    Double easting = projPosition.getLongitude();
 
-//     ps = createPointStyle(10, Color.BLUE, 0.2f, 0.5f);
-//     ls = createLineStyle(10, Color.GREEN, 0.05f, 0.3f, null);
-//     pos = createPolygonStyle(10, Color.parseColor("#440000FF"), createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
-//     ts = createTextStyle(10, Color.BLACK, 40, Typeface.SANS_SERIF);
-//     isEntity = true;
-//     queryName = "Artefact_Points";
-//     querySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Artefact' and userid ="+userid;
-//     showDatabaseLayer("Map/map/map", "Points Ive found", isEntity, queryName, querySql, ps, ls, pos, ts); 
+    samplePoint = new Point(new MapPos(easting, northing), null, (PointStyle) null, null);
+    ArrayList geolist = new ArrayList();
+    geolist.add(samplePoint);
+    saveArchEnt(currentSampleUUID, getSampleType(), geolist, null, null);
+    print("[takePoint()] Added geometry: " + geolist);
+}
+
+/* Autogenerates the value of GPS attributes for the given tab path. */
+// fillInGPS(String path) {
+//     setFieldValue(path+"Latitude", latitude);
+//     setFieldValue(path+"Longitude", longitude);
+//     setFieldValue(path+"Northing", northing);
+//     setFieldValue(path+"Easting", easting);
 // }
 
-// takePoint() {
-//     positionProj = getGPSPositionProjected();
-//     if (positionProj == null) {
-//         showToast("GPS position not found");
-//     } else {
-//         // update the GPS point and save/overwrite the record
-//         artefact_point = new Point(new MapPos(positionProj.getLongitude(), positionProj.getLatitude()), null, (PointStyle) null, null);
-//         showToast("Current GPS point updated");
-//         ArrayList geolist = new ArrayList();
-//         geolist.add(artefact_point);
-//         accuracy = getGPSEstimatedAccuracy();
-//         setFieldValue("Artefacts/Metadata/accuracy", accuracy);
-//         heading = getGPSHeading();
-//         setFieldValue("Artefacts/Metadata/heading", heading);
-//         saveArchEnt(artefact_id, "Artefact", geolist, null, null);
-//     }
-// }
+/* Initialises the map. */
+initMap() {
+    setMapZoom("Project/Map/map", 15.0f);
+    showBaseMap("Project/Map/map", "base map", "files/data/maps/SydneyStreetmap.tif");
+    ps = createPointStyle(10, Color.BLUE, 0.2f, 0.5f);
+    ls = createLineStyle(10, Color.GREEN, 0.05f, 0.3f, null);
+    pos = createPolygonStyle(10, Color.parseColor("#440000FF"), createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
+    ts = createTextStyle(10, Color.BLACK, 40, Typeface.SANS_SERIF);
+    isEntity = true;
+    queryName = "Water Samples";
+    querySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Water Sample' and userid ="+userid;
+    showDatabaseLayer("Project/Map/map", "Water Samples", isEntity, queryName, querySql, ps, ls, pos, ts);
+    queryName = "Plant Samples";
+    querySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Plant Sample' and userid ="+userid;
+    showDatabaseLayer("Project/Map/map", "Plant Samples", isEntity, queryName, querySql, ps, ls, pos, ts);
+    queryName = "Soil Samples";
+    querySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Soil Sample' and userid ="+userid;
+    showDatabaseLayer("Project/Map/map", "Soil Samples", isEntity, queryName, querySql, ps, ls, pos, ts);
+    queryName = "Rock Samples";
+    querySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Rock Sample' and userid ="+userid;
+    showDatabaseLayer("Project/Map/map", "Rock Samples", isEntity, queryName, querySql, ps, ls, pos, ts);
+}
 
-// onEvent("Artefacts/Artefact/Current_Point", "click", "takePoint()");
+/* Centres the map on the current position. */
+centreMap() {
+    if(!isExternalGPSOn() && !isInternalGPSOn()) {
+        showToast("GPS is not initialised.");
+    } else {
+        centerOnCurrentPosition("Project/Map/map");
+    }
+}
 
-// centreMap() {
-//     if(!isExternalGPSOn() && !isInternalGPSOn()) {
-//         showToast("GPS is not enabled.");
-//     } else {
-//         if (artefact_point == null) {
-//             showToast("setting GPS position");
-//             takePoint();
-//         }
-//         centerOnCurrentPosition("Map/map/map");
-//     }
-// }
-
-// onEvent("Map/map/Map_Centre", "click", "centreMap()");
-// onEvent("Map/map/Record_Artefact", "click", "transitionToArtefacts()");
-// onEvent("Artefacts/Artefact/View_Map", "click", "showTabGroup(\"Map\");");
+initMap();
+setSelectedLayer("Project/Map/map", "base map");
+onEvent("Project/Map/Centre_Map", "click", "centreMap()");
 
 
 
 /*** WATER SAMPLE ***/
 onEvent("Water_Sample", "show", "addSampleNavigation();autoSaveSample(getSampleDateAttributeList());");
 
-onEvent("Water_Sample/Basic_Info/Take_GPS", "click", "fillInGPS(\"Water_Sample/Basic_Info/\")");
+onEvent("Water_Sample/Basic_Info/Take_GPS", "click", "takePoint()");
 onEvent("Water_Sample/Basic_Info/Take_Photo", "click", "attachPictureTo(\"Water_Sample/Basic_Info/Photos\")");
 onEvent("Water_Sample/Basic_Info/Attach_Sketch", "click", "attachFileTo(\"Water_Sample/Basic_Info/Sketches\");");
 
@@ -1067,7 +1085,7 @@ reallyDeleteEh(String eh_id) {
 
 onEvent("Plant_Sample", "show", "addSampleNavigation();autoSaveSample(getSampleDateAttributeList());");
 
-onEvent("Plant_Sample/Basic_Info/Take_GPS", "click", "fillInGPS(\"Plant_Sample/Basic_Info/\")");
+onEvent("Plant_Sample/Basic_Info/Take_GPS", "click", "takePoint()");
 onEvent("Plant_Sample/Basic_Info/Take_Photo", "click", "attachPictureTo(\"Plant_Sample/Basic_Info/Photos\")");
 onEvent("Plant_Sample/Basic_Info/Attach_Sketch", "click", "attachFileTo(\"Plant_Sample/Basic_Info/Sketches\");");
 
@@ -1110,7 +1128,7 @@ loadPlantSampleAttributes() {
 
 onEvent("Soil_Sample", "show", "addSampleNavigation();autoSaveSample(getSampleDateAttributeList());");
 
-onEvent("Soil_Sample/Basic_Info/Take_GPS", "click", "fillInGPS(\"Soil_Sample/Basic_Info/\")");
+onEvent("Soil_Sample/Basic_Info/Take_GPS", "click", "takePoint()");
 onEvent("Soil_Sample/Basic_Info/Take_Photo", "click", "attachPictureTo(\"Soil_Sample/Basic_Info/Photos\")");
 onEvent("Soil_Sample/Basic_Info/Attach_Sketch", "click", "attachFileTo(\"Soil_Sample/Basic_Info/Sketches\");");
 
@@ -1157,7 +1175,7 @@ loadSoilSampleAttributes() {
 
 onEvent("Rock_Sample", "show", "addSampleNavigation();autoSaveSample(getSampleDateAttributeList());");
 
-onEvent("Rock_Sample/Basic_Info/Take_GPS", "click", "fillInGPS(\"Rock_Sample/Basic_Info/\")");
+onEvent("Rock_Sample/Basic_Info/Take_GPS", "click", "takePoint()");
 onEvent("Rock_Sample/Lithological_Info/Take_Photo", "click", "attachPictureTo(\"Rock_Sample/Lithological_Info/Photos\")");
 onEvent("Rock_Sample/Lithological_Info/Attach_Sketch", "click", "attachFileTo(\"Rock_Sample/Lithological_Info/Sketches\");");
 
@@ -1421,24 +1439,6 @@ setTimestamp(String path) {
 /* Informs the user that the delete operation was cancelled. */
 doNotDelete() {
     showToast("Delete Cancelled.");
-}
-
-/* Autogenerates the value of GPS attributes for the given tab path. */
-fillInGPS(String path) {
-    Object position = getGPSPosition();
-    if (position == null) {
-        showToast("GPS Not initialized");
-        return;
-    }
-    Object projPosition = getGPSPositionProjected();
-    Double latitude = position.getLatitude();
-    Double longitude = position.getLongitude();
-    Double northing = projPosition.getLatitude();
-    Double easting = projPosition.getLongitude();
-    setFieldValue(path+"Latitude", latitude);
-    setFieldValue(path+"Longitude", longitude);
-    setFieldValue(path+"Northing", northing);
-    setFieldValue(path+"Easting", easting);
 }
 
 /*** Uneditable - you can edit the code below with extreme precaution ***/

@@ -63,8 +63,8 @@
             <Shape_Note>
               <label/>
               <note/>
-              <return/>
-              <delete/>
+              <shape_return/>
+              <shape_delete/>
             </Shape_Note>
           </Shape>
           <Water_Sample>
@@ -654,10 +654,10 @@
         <input ref="note" faims_certainty="true" faims_annotation="true">
           <label>{Shape_Note_Note}</label>
         </input>
-        <trigger ref="return">
+        <trigger ref="shape_return">
           <label>{Shape_Return}</label>
         </trigger>
-        <trigger ref="delete">
+        <trigger ref="shape_delete">
           <label>{Shape_Delete}</label>
         </trigger>
       </group>
