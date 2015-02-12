@@ -36,8 +36,9 @@
                 </child2>
               </container1>
               <New_Sample/>
-              <Validate_Sample_ID/>
               <GPS_Status/>
+              <Check_For_Duplicates/>
+              <Duplicate_ID_List/>
             </Start>
             <Search>
               <Sample_Types/>
@@ -584,12 +585,19 @@
         <trigger ref="New_Sample">
           <label>{New_Sample}</label>
         </trigger>
-        <trigger ref="Validate_Sample_ID">
-          <label>{Validate_Sample_ID}</label>
-        </trigger>
         <input ref="GPS_Status" faims_certainty="false" faims_annotation="false" faims_read_only="true" faims_style_class="gps-status">
           <label>{GPS_Status}</label>
         </input>
+        <trigger ref="Check_For_Duplicates">
+          <label>{Check_For_Duplicates}</label>
+        </trigger>
+        <select1 appearance="compact" ref="Duplicate_ID_List" faims_certainty="false" faims_annotation="false" faims_style_class="duplicate-id-list">
+          <label>{Duplicate_ID_List}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select1>
       </group>
       <group ref="Search" faims_scrollable="false">
         <label>{Search}</label>

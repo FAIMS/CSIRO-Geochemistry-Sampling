@@ -114,10 +114,12 @@ addActionBarItem("external_gps", new ToggleActionButtonCallback() {
 
 /* Event Handling */
 onEvent("Project", "show", "removeNavigationButtons();");
+onEvent("Project", "load", "populateList(\"Project/Start/Duplicate_ID_List\", new ArrayList());");
 
 onEvent("Project/Start", "show", "loadSamplePrefix(); loadSampleStartingID();");
 onEvent("Project/Start/New_Sample", "delayclick", "newSample();");
-onEvent("Project/Start/Validate_Sample_ID", "click", "validateSampleID();");
+onEvent("Project/Start/Check_For_Duplicates", "click", "checkForDuplicates();");
+onEvent("Project/Start/Duplicate_ID_List", "click", "loadSample();");
 
 onEvent("Project/Search", "show", "loadSearch();");
 onEvent("Project/Search/Sample_Types", "click", "loadSearch();");
@@ -176,20 +178,24 @@ loadSampleStartingID() {
     });
 }
 
-/* Validates the sample ID for duplicates. */
-validateSampleID() {
+/* Checks the db for duplicate sample ID duplicates */
+checkForDuplicates() {
     String query = "select uuid, response || ' created at: ' || datetime(createdAt, 'localtime') || ' created by: '||createdBy " + 
             "from latestNonDeletedArchEntFormattedIdentifiers join createdModifiedAtBy using (uuid) " +
             "where response in ( " +
             "select response from latestNonDeletedArchEntFormattedIdentifiers group by response having count(response) > 1);";
-    fetchOne(query, new FetchCallback() {
+    fetchAll(query, new FetchCallback() {
         onFetch(result) {
-            print("[validateSampleID()] Checking for duplicates: " + result);
             if (isNull(result)) {
                 showToast("Starting sample ID is valid.");
+                result = new ArrayList();
+                result.add(new NameValuePair("{No_Duplicates_Found}", ""));
             } else {
-                showToast("Starting sampleID is not valid.");
+                showToast(result.size() + " Duplicate IDs found.");
             }
+            print("[checkForDuplicates()] Checking for duplicates: " + result);
+            populateList("Project/Start/Duplicate_ID_List", result);
+            refreshTabgroupCSS("Project");
         }
     });
 }
