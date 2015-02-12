@@ -331,6 +331,9 @@
         </term>
       </lookup>
     </property>
+    <property name="Location Number" type="measure">
+      <description>Description TBD</description>
+    </property>
     <property name="Station" type="freetext">
       <description>Description TBD</description>
     </property>
@@ -636,6 +639,9 @@
           <description>Description TBD</description>
         </term>
       </lookup>
+    </property>
+    <property name="Location Number" type="measure">
+      <description>Description TBD</description>
     </property>
     <property name="Station" type="freetext">
       <description>Description TBD</description>
@@ -1414,6 +1420,9 @@
           <description>Description TBD</description>
         </term>
       </lookup>
+    </property>
+    <property name="Location Number" type="measure">
+      <description>Description TBD</description>
     </property>
     <property name="Station" type="freetext">
       <description>Description TBD</description>

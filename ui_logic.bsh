@@ -177,8 +177,21 @@ loadSampleStartingID() {
 }
 
 /* Validates the sample ID for duplicates. */
-boolean validateSampleID() {
-
+validateSampleID() {
+    String query = "select uuid, response || ' created at: ' || datetime(createdAt, 'localtime') || ' created by: '||createdBy " + 
+            "from latestNonDeletedArchEntFormattedIdentifiers join createdModifiedAtBy using (uuid) " +
+            "where response in ( " +
+            "select response from latestNonDeletedArchEntFormattedIdentifiers group by response having count(response) > 1);";
+    fetchOne(query, new FetchCallback() {
+        onFetch(result) {
+            print("[validateSampleID()] Checking for duplicates: " + result);
+            if (isNull(result)) {
+                showToast("Starting sample ID is valid.");
+            } else {
+                showToast("Starting sampleID is not valid.");
+            }
+        }
+    });
 }
 
 /* Validates the sample prefix for the right length. Returns true if the prefix is valid or false otherwise. */
@@ -220,6 +233,9 @@ String getSampleTypePath() {
 
 // uuid for the curent sample.
 String currentSampleUUID = null;
+
+// flag to track when a new sample is made to add the location number attribute
+Boolean newSampleFlag = false;
 
 /* Creates a new sample based on selected type. */
 newSample() {
@@ -269,6 +285,8 @@ newSample() {
     // Increment the sample starting ID for the next sample.
     keepTabGroupChanges(tabgroup);
     setSampleStartingID(Integer.toString(Integer.parseInt(sampleID) + 1));
+
+    newSampleFlag = true;
 }
 
 /* Generates and returns the date attribute for the current sample type. */
@@ -316,7 +334,15 @@ renderLocationNumber() {
                         if (!locationNumberRendered) {
                             print("[renderLocationNumber()] Dynamically creating the Location Number view.");
                             // fetch any saved value for location number and set the field value to that.
-
+                            fetchOne ("select measure from latestnondeletedaentvalue join attributekey using (attributeid) where attributename = 'Location Number' and uuid = '" + currentSampleUUID + "';", 
+                             new FetchCallback() {
+                                onFetch(result) {
+                                    if (!isNull(result)) {
+                                        print("[renderLocationNumber()] fetched saved location number value: " + result);
+                                        setFieldValue(tabgroup + "/Basic_Info/Location_Number", result.get(0));
+                                    }
+                                }
+                            });
 
                             // render the view
                             textDef = createViewDef().createTextField().setLabel("{Location_Number}").setAttributeName("Location Number").setAttributeType("measure");
@@ -339,6 +365,14 @@ renderLocationNumber() {
 autoSaveSample(attributeList) {
     enable_autosave = true;
     tabgroup = getSampleTypePath();
+    // check if a new sample was made, and if so then add the workaround fix for the location number view save
+    if (newSampleFlag) {
+        print("[autoSaveSample(attributeList)] Autosaving with attributes: " + attributeList);
+        workaround = createEntityAttribute("Location Number", null, null, null, null);
+        attributeList.add(workaround);
+        print("[autoSaveSample(attributeList)] Autosaving with attributes: " + attributeList);
+        newSampleFlag = false;
+    }
     print("[autoSaveSample(attributeList)] Autosaving uuid " + currentSampleUUID + "with the attributes: " + attributeList);
     saveTabGroup(tabgroup, currentSampleUUID, null, attributeList, new SaveCallback() {
         onSave(uuid, newRecord) {
@@ -347,6 +381,7 @@ autoSaveSample(attributeList) {
             if (newRecord) {
                  print("[autoSaveSample()] new record created");
             }
+            attributeList = null;
         }
         onError(message) {
             showToast(message);
