@@ -110,8 +110,12 @@ addActionBarItem("external_gps", new ToggleActionButtonCallback() {
     }
 });
 
+// Flag used for onShow tab redirects
+Boolean redirectFlag = false;
+
 /*** Shape Tab Group ***/
-onEvent("Shape/Shape_Note/shape_return", "click", "showTabGroup(\"Project\");");
+onEvent("Shape/Shape_Note/shape_return", "delayclick", "redirectFlag=true;showTabGroup(\"Project\");");
+onEvent("Project/Start", "show", "if(redirectFlag){showTab(\"Project/Map\");redirectFlag=false;}");
 onEvent("Shape/Shape_Note/shape_delete", "click", "showToast(\"Delete not implemented\");");
 
 /*** Project Tab Group ***/
@@ -241,6 +245,17 @@ String getSampleTypePath() {
     return tabgroup;
 }
 
+// default SRID set to srid 28350.
+String defaultSRID = null;
+fetchOne("select vocabid from vocabulary join attributekey using (attributeid) where attributename = 'SRID' and vocabname = '28350';", new FetchCallback() {
+    onFetch(result) {
+        if (!isNull(result)) {
+            defaultSRID = result.get(0);
+        }
+        print("[global default SRID] SRID 3850 vocab id: " + defaultSRID);
+    }
+});
+
 // uuid for the curent sample.
 String currentSampleUUID = null;
 
@@ -278,11 +293,18 @@ newSample() {
     setFieldValue(tabgroup + "/Basic_Info/Project", getFieldValue("Project/Start/Project"));
     setFieldValue(tabgroup + "/Basic_Info/Area", getFieldValue("Project/Start/Area"));
     srid = Integer.parseInt(getModuleSrid());
+    print("[newSample()] Module SRID: " + srid);
     if(srid >= 28349 && srid <= 29356) {
-        setFieldValue(tabgroup + "/Basic_Info/SRID", getModuleSrid());
+        fetchOne("select vocabid from vocabulary join attributekey using (attributeid) where attributename = 'SRID' and vocabname = '" + getModuleSrid() + "';",
+         new FetchCallback() {
+            onFetch(result) {
+                setFieldValue(tabgroup + "/Basic_Info/SRID", result.get(0)); // BUG: module SRID doesn't match the vocab ID
+            }
+        });
     } else {
-        setFieldValue(tabgroup + "/Basic_Info/SRID", "28350");
+        setFieldValue(tabgroup + "/Basic_Info/SRID", defaultSRID);
     }
+    print("[newSample()] Set SRID: " + getFieldValue(tabgroup + "/Basic_Info/SRID"));
 
     // Set the sample ID and prefix.
     currentSampleUUID = null;
@@ -565,6 +587,10 @@ duplicateSample() {
 
 /** Map GPS **/
 
+// Detect when user has selected a different SRID, update the module srid and update northing/easting. 
+onEvent(getSampleTypePath() + "/Basic_Info", "show", "fillInGPS()");
+onEvent(getSampleTypePath() + "/Basic_Info/SRID", "click", "fillInGPS();");
+
 /* Takes the current point using gps. */
 takePoint() {
     Object position = getGPSPosition();
@@ -581,20 +607,38 @@ takePoint() {
     samplePoint = new Point(new MapPos(easting, northing), null, (PointStyle) null, null);
     ArrayList geolist = new ArrayList();
     geolist.add(samplePoint);
-    saveArchEnt(currentSampleUUID, getSampleType(), geolist, null, null);
-    print("[takePoint()] Added geometry: " + geolist);
+    saveArchEnt(currentSampleUUID, getSampleType(), geolist, null, new SaveCallback() {
+        onSave(uuid, newRecord) {
+            print("[takePoint()] Added geometry: " + geolist);
+            fillInGPS();
+        }  
+    });    
 }
 
-/* Autogenerates the value of GPS attributes for the given tab path. */
-// fillInGPS(String path) {
-//     setFieldValue(path+"Latitude", latitude);
-//     setFieldValue(path+"Longitude", longitude);
-//     setFieldValue(path+"Northing", northing);
-//     setFieldValue(path+"Easting", easting);
-// }
+/* Sets the value of GPS views for the given tab path. */
+fillInGPS() {
+    if (isNull(currentSampleUUID)) {
+        return;
+    }
+    String tabgroup = getSampleTypePath();
+    String query = "select x(transform(geospatialcolumn, 4326)) as longtiude, y(transform(geospatialcolumn, 4326)) as latitude, x(transform(geospatialcolumn, CAST (vocabname AS INTEGER))) as easting, y(transform(geospatialcolumn, CAST (vocabname AS INTEGER))) as northing " +
+        "from latestnondeletedarchent, vocabulary " +
+        "where uuid = " + currentSampleUUID + " " +
+        "and vocabid = " + getFieldValue(tabgroup + "/Basic_Info/SRID") + ";";
+    fetchOne(query, new FetchCallback() {
+        onFetch(result) {
+            print("[fillInGPS()] Fetched DB transformed geometry: " + result);
+            setFieldValue(tabgroup + "/Basic_Info/Latitude", result.get(0));
+            setFieldValue(tabgroup + "/Basic_Info/Longitude", result.get(1));
+            setFieldValue(tabgroup + "/Basic_Info/Northing", result.get(2));
+            setFieldValue(tabgroup + "/Basic_Info/Easting", result.get(3));
+        }
+    });
+}
 
 /* Initialises the map. */
 initMap() {
+    // Base map layer
     setMapZoom("Project/Map/map", 15.0f);
     showBaseMap("Project/Map/map", "base map", "files/data/maps/SydneyStreetmap.tif");
     ps = createPointStyle(10, Color.BLUE, 0.2f, 0.5f);
@@ -602,18 +646,21 @@ initMap() {
     pos = createPolygonStyle(10, Color.parseColor("#440000FF"), createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
     ts = createTextStyle(10, Color.BLACK, 40, Typeface.SANS_SERIF);
     isEntity = true;
+    // Database layers
     queryName = "Water Samples";
-    querySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Water Sample' and userid ="+userid;
+    querySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Water Sample'";
     showDatabaseLayer("Project/Map/map", "Water Samples", isEntity, queryName, querySql, ps, ls, pos, ts);
     queryName = "Plant Samples";
-    querySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Plant Sample' and userid ="+userid;
+    querySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Plant Sample'";
     showDatabaseLayer("Project/Map/map", "Plant Samples", isEntity, queryName, querySql, ps, ls, pos, ts);
     queryName = "Soil Samples";
-    querySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Soil Sample' and userid ="+userid;
+    querySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Soil Sample'";
     showDatabaseLayer("Project/Map/map", "Soil Samples", isEntity, queryName, querySql, ps, ls, pos, ts);
     queryName = "Rock Samples";
-    querySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Rock Sample' and userid ="+userid;
+    querySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Rock Sample'";
     showDatabaseLayer("Project/Map/map", "Rock Samples", isEntity, queryName, querySql, ps, ls, pos, ts);
+    // Canvas layer
+    canvasLayerID = createCanvasLayer("Project/Map/map", "Data Entry Layer");
 }
 
 /* Centres the map on the current position. */
@@ -626,7 +673,7 @@ centreMap() {
 }
 
 initMap();
-setSelectedLayer("Project/Map/map", "base map");
+setSelectedLayer("Project/Map/map", "Data Entry Layer");
 onEvent("Project/Map/Centre_Map", "click", "centreMap()");
 
 
