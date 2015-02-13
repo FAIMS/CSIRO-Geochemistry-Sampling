@@ -108,7 +108,12 @@
                 </child2>
               </container3>
               <SRID/>
-              <Take_GPS/>
+              <containerTakePoint>
+                <child1>
+                  <Take_GPS/>
+                </child1>
+                <child2/>
+              </containerTakePoint>
               <Elevation/>
               <Water_Table/>
               <Sample_Depth/>
@@ -209,7 +214,12 @@
                 </child2>
               </container3>
               <SRID/>
-              <Take_GPS/>
+              <containerTakePoint>
+                <child1>
+                  <Take_GPS/>
+                </child1>
+                <child2/>
+              </containerTakePoint>
               <Elevation/>
               <container4>
                 <child1>
@@ -272,7 +282,12 @@
                 </child2>
               </container3>
               <SRID/>
-              <Take_GPS/>
+              <containerTakePoint>
+                <child1>
+                  <Take_GPS/>
+                </child1>
+                <child2/>
+              </containerTakePoint>
               <Elevation/>
               <Depth/>
               <Colour/>
@@ -335,7 +350,12 @@
                 </child2>
               </container3>
               <SRID/>
-              <Take_GPS/>
+              <containerTakePoint>
+                <child1>
+                  <Take_GPS/>
+                </child1>
+                <child2/>
+              </containerTakePoint>
               <Elevation/>
             </Basic_Info>
             <Measurements>
@@ -755,9 +775,18 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <trigger ref="Take_GPS">
-          <label>{Take_GPS}</label>
-        </trigger>
+        <group ref="containerTakePoint" faims_style="orientation">
+          <label/>
+          <group ref="child1" faims_style="even">
+            <label/>
+              <trigger ref="Take_GPS">
+                <label>{Take_GPS}</label>
+              </trigger>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label/>
+          </group>
+        </group>
         <input ref="Elevation" faims_attribute_name="Elevation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Elevation}</label>
         </input>
@@ -1037,9 +1066,18 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <trigger ref="Take_GPS">
-          <label>{Take_GPS}</label>
-        </trigger>
+        <group ref="containerTakePoint" faims_style="orientation">
+          <label/>
+          <group ref="child1" faims_style="even">
+            <label/>
+              <trigger ref="Take_GPS">
+                <label>{Take_GPS}</label>
+              </trigger>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label/>
+          </group>
+        </group>
         <input ref="Elevation" faims_attribute_name="Elevation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Elevation}</label>
         </input>
@@ -1200,9 +1238,18 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <trigger ref="Take_GPS">
-          <label>{Take_GPS}</label>
-        </trigger>
+        <group ref="containerTakePoint" faims_style="orientation">
+          <label/>
+          <group ref="child1" faims_style="even">
+            <label/>
+              <trigger ref="Take_GPS">
+                <label>{Take_GPS}</label>
+              </trigger>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label/>
+          </group>
+        </group>
         <input ref="Elevation" faims_attribute_name="Elevation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Elevation}</label>
         </input>
@@ -1392,9 +1439,18 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <trigger ref="Take_GPS">
-          <label>{Take_GPS}</label>
-        </trigger>
+        <group ref="containerTakePoint" faims_style="orientation">
+          <label/>
+          <group ref="child1" faims_style="even">
+            <label/>
+              <trigger ref="Take_GPS">
+                <label>{Take_GPS}</label>
+              </trigger>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label/>
+          </group>
+        </group>
         <input ref="Elevation" faims_attribute_name="Elevation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Elevation}</label>
         </input>

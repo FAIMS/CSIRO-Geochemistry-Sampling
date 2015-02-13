@@ -112,10 +112,10 @@ addActionBarItem("external_gps", new ToggleActionButtonCallback() {
 
 // Flag used for onShow tab redirects
 Boolean redirectFlag = false;
+onEvent("Project/Start", "show", "if(redirectFlag){showTab(\"Project/Map\");redirectFlag=false;}");
 
 /*** Shape Tab Group ***/
 onEvent("Shape/Shape_Note/shape_return", "delayclick", "redirectFlag=true;showTabGroup(\"Project\");");
-onEvent("Project/Start", "show", "if(redirectFlag){showTab(\"Project/Map\");redirectFlag=false;}");
 onEvent("Shape/Shape_Note/shape_delete", "click", "showToast(\"Delete not implemented\");");
 
 /*** Project Tab Group ***/
@@ -334,6 +334,33 @@ List getSampleDateAttributeList() {
     return attributes;
 }
 
+/* Renders a plotFromMap or showMap button depending on how many points have been drawn on the map. */
+renderMapButton() {
+    executeViewTask(new ViewTask() {
+        doTask() {
+            String tabgroup = getSampleTypePath();
+            boolean onlyOnePoint = false;
+            buttonDef = null;
+            if (onlyOnePoint) {
+                print("[renderMapButton()] Rendering plot from point button.");
+                buttonDef = createViewDef().createButton().setLabel("Plot point from map");
+                createView(tabgroup + "/Basic_Info/plotPoint", buttonDef, tabgroup + "/Basic_Info/containerTakePoint/child2");
+                onEvent(tabgroup + "/Basic_Info/plotPoint", "click", "getPointFromMap();");
+            } else {
+                print("[renderMapButton()] Rendering show map button.");     
+                buttonDef = createViewDef().createButton().setLabel("Show map");
+                createView(tabgroup + "/Basic_Info/showMap", buttonDef, tabgroup + "/Basic_Info/containerTakePoint/child2");
+                onEvent(tabgroup + "/Basic_Info/showMap", "click", "arrivedFromSample=true;redirectFlag=true;showTabGroup(\"Project\");");
+            }
+        }
+    });
+}
+
+/* Saves the sample archent with geometry equal to the single point drawn on the map. */
+getPointFromMap() {
+    showToast("Not implemented yet.");
+}
+
 // onEvent("Water_Sample/Basic_Info/Observation_Type", "click", "print(\"showing tab\");showTab(\"Water_Sample/Basic_Info\");");
 // onEvent("Plant_Sample/Basic_Info/Observation_Type", "click", "print(\"showing tab\");showTab(\"Plant_Sample/Basic_Info\");");
 // onEvent("Soil_Sample/Basic_Info/Observation_Type", "click", "print(\"showing tab\");showTab(\"Soil_Sample/Basic_Info\");");
@@ -350,6 +377,7 @@ onEvent("Soil_Sample/Basic_Info", "show", "print(\"render on show\");renderLocat
 onEvent("Rock_Sample/Basic_Info", "show", "print(\"render on show\");renderLocationNumber();");
 
 Boolean locationNumberRendered = false;
+Boolean mapButtonRendered = false;
 
 /* Renders the location number dynamic view if obervation only is selected for the current sample. */ 
 renderLocationNumber() {
@@ -386,6 +414,12 @@ renderLocationNumber() {
                         //removeView(tabgroup + "/Basic_Info/Location_Number");
                         removeAllViewsAndContainers(tabgroup);
                         locationNumberRendered = false;
+                        mapButtonRendered = false;
+                    }
+                    // render the map button after the location number, due to issues with view removal and timing/ordering.
+                    if (!mapButtonRendered) {
+                        renderMapButton();
+                        mapButtonRendered = true;
                     }
                 }
             });
@@ -636,6 +670,8 @@ fillInGPS() {
     });
 }
 
+canvasLayerID = null;
+
 /* Initialises the map. */
 initMap() {
     // Base map layer
@@ -661,6 +697,7 @@ initMap() {
     showDatabaseLayer("Project/Map/map", "Rock Samples", isEntity, queryName, querySql, ps, ls, pos, ts);
     // Canvas layer
     canvasLayerID = createCanvasLayer("Project/Map/map", "Data Entry Layer");
+    setSelectedLayer("Project/Map/map", "Data Entry Layer");
 }
 
 /* Centres the map on the current position. */
@@ -672,10 +709,75 @@ centreMap() {
     }
 }
 
-initMap();
-setSelectedLayer("Project/Map/map", "Data Entry Layer");
-onEvent("Project/Map/Centre_Map", "click", "centreMap()");
+Boolean arrivedFromSample = false;
 
+/* Renders all the dynamic views for the map tab. */
+renderDynamicMapViews() {
+    print("[renderDynamicMapViews()] arrived at map from sample: " + arrivedFromSample);
+    removeAllViewsAndContainers("Project");
+    executeViewTask(new ViewTask() {
+        doTask() {
+            if (arrivedFromSample) {
+                print("[renderDynamicMapViews()] arrived at map from sample.");
+                arrivedFromSample = false;
+                buttonDef = createViewDef().createButton().setLabel("Return to data recording and save point");
+                createView("Project/Map/returnToSample", buttonDef);
+                onEvent("Project/Map/returnToSample", "click", "returnToSample();");
+            } else {
+                print("[renderDynamicMapViews()] arrived at map from somewhere other than a sample.");
+            }
+        }
+    });
+}
+
+// // Bind newly created geometry to a geo ID list to use later in clearing.
+// ArrayList geometryIDList = new ArrayList();
+// onToolEvent("Project/Map/map", "create", "onCreate()");
+// onCreate() {
+//     geometryIDList.add(getMapGeometryCreated());
+//     print("Geometry id list: " + geometryIDList);
+// }
+
+/* Returns to the sample from the map after recording a point. */
+returnToSample() {
+    String tabgroup = getSampleTypePath();
+
+    // Get the geometry from the data layer and proceed only if the geometry is a single point.
+    List geolist = getGeometryList("Project/Map/map", canvasLayerID);
+    print("[returnToSample()] Gemoetry List: " + geolist);
+    if (geolist.size() != 1) {
+        showAlert("alert", "Only 1 point can be created. Please remove any other points or shapes before saving.", "", "showTabGroup(" + tabgroup + ");");
+        return;
+    }
+    boolean isPoint = false;
+    if (geolist.get(0) instanceof Point) {
+        isPoint = true;
+    }
+    if (!isPoint) {
+        return;
+    }
+
+    // Save the archent with the point as the entity geometry
+    saveArchEnt(currentSampleUUID, getSampleType(), geolist, null, new SaveCallback() {
+        onSave(uuid, newRecord) {
+            print("[returnToSample()] Saved geometry: " + geolist);
+            fillInGPS();
+            for (Geometry geomId : geolist) {
+                clearGeometry("Project/Map/map", geomId);
+            }
+        }  
+    });
+
+    // Clear the data entry layer and return to the sample tab
+    
+    // clearGeometryList("Project/Map/map", geolist);
+    showTabGroup(tabgroup);
+}
+
+onEvent("Project/Map/Centre_Map", "click", "centreMap();");
+onEvent("Project/Map", "show", "renderDynamicMapViews();");
+// onEvent("Project", "load", "initMap();");
+initMap();
 
 
 /*** WATER SAMPLE ***/
