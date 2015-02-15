@@ -112,7 +112,8 @@ addActionBarItem("external_gps", new ToggleActionButtonCallback() {
 
 // Flag used for onShow tab redirects
 Boolean redirectFlag = false;
-onEvent("Project/Start", "show", "if(redirectFlag){showTab(\"Project/Map\");redirectFlag=false;}");
+onEvent("Project/Start", "show", "print(\"[project onShow] map redirect flag: \" + redirectFlag);if(redirectFlag){showTab(\"Project/Map\");redirectFlag=false;}");
+// onEvent("Project", "show", "print(\"[project onShow] map redirect flag: \" + redirectFlag);if(redirectFlag){showTab(\"Project/Map\");redirectFlag=false;}");
 
 /*** Shape Tab Group ***/
 onEvent("Shape/Shape_Note/shape_return", "delayclick", "redirectFlag=true;showTabGroup(\"Project\");");
@@ -124,7 +125,7 @@ onEvent("Shape/Shape_Note/shape_delete", "click", "showToast(\"Delete not implem
 onEvent("Project", "show", "removeNavigationButtons();");
 onEvent("Project", "load", "populateList(\"Project/Start/Duplicate_ID_List\", new ArrayList());");
 
-onEvent("Project/Start", "show", "loadSamplePrefix(); loadSampleStartingID();");
+onEvent("Project/Start", "show", "loadSamplePrefix(); loadSampleStartingID(); updateGPSStatus();");
 onEvent("Project/Start/New_Sample", "delayclick", "newSample();");
 onEvent("Project/Start/Check_For_Duplicates", "click", "checkForDuplicates();");
 onEvent("Project/Start/Duplicate_ID_List", "click", "loadSample();");
@@ -133,7 +134,8 @@ onEvent("Project/Search", "show", "loadSearch();");
 onEvent("Project/Search/Sample_Types", "click", "loadSearch();");
 onEvent("Project/Search/Sample_List", "click", "loadSample();");
 
-onEvent("Project/Map/Centre_Map", "click", "showToast(\"Centring functionality not implemented yet.\");");
+onEvent("Project/Map", "show", "renderDynamicMapViews();");
+onEvent("Project/Map/Centre_Map", "click", "centreMap();");
 onEvent("Project/Map/Save_Map_Settings", "click", "showToast(\"Save settings functionality not implemented yet.\");");
 onEvent("Project/Map/Create_Shape", "click", "newTabGroup(\"Shape\");");
 
@@ -184,6 +186,42 @@ loadSampleStartingID() {
             }
         }
     });
+}
+
+/* Updates the GPS_Status view on the Start tab of the Project tabgroup. */
+updateGPSStatus() {
+    String status = "";
+    String previousStatus = getFieldValue("Project/Start/GPS_Status");
+    String notInitialised = "GPS is not initialised";
+
+    // Check if GPS is initialised or was previously initialised.
+    if (!isExternalGPSOn() && !isInternalGPSOn()) {
+        if (!isNull(previousStatus) && !previousStatus.equals(notInitialised)) {
+            // previous gps status is some last valid coordinate.
+            status = "GPS is no longer initailised. Previous status: \n" + previousStatus;
+        } else {
+            status = notInitialised;
+        }
+    } else {
+        status += "Internal GPS: ";
+        if (isInternalGPSOn()) {status += "on";} else {status += "off";}
+        status += "\n External GPS: ";
+        if (isExternalGPSOn()) {if (isBluetoothConnected()) {status += "on and bluetooth connected";} else {status += "on and bluetooth disconnected";}} else {status += "off";}
+        Object position = getGPSPosition();
+        if (position != null) {
+            Object projPosition = getGPSPositionProjected();
+            status += "\n Latitude: " + position.getLatitude();
+            status += "   Longitude: " + position.getLongitude();
+            status += "\n Northing: " + projPosition.getLatitude();
+            status += "   Easting: " + projPosition.getLongitude();
+            status += "\n Accuracy: " + getGPSEstimatedAccuracy();
+            // status += "\n Heading: " + getGPSHeading();
+        } else {
+            status += "\n Position: no GPS position could be found";
+        }
+    }
+    print("[updateGPSStatus()] GPS status: " + status);
+    setFieldValue("Project/Start/GPS_Status", status);
 }
 
 /* Checks the db for duplicate sample ID duplicates */
@@ -339,19 +377,24 @@ renderMapButton() {
     executeViewTask(new ViewTask() {
         doTask() {
             String tabgroup = getSampleTypePath();
-            boolean onlyOnePoint = false;
             buttonDef = null;
-            if (onlyOnePoint) {
-                print("[renderMapButton()] Rendering plot from point button.");
-                buttonDef = createViewDef().createButton().setLabel("Plot point from map");
-                createView(tabgroup + "/Basic_Info/plotPoint", buttonDef, tabgroup + "/Basic_Info/containerTakePoint/child2");
-                onEvent(tabgroup + "/Basic_Info/plotPoint", "click", "getPointFromMap();");
-            } else {
-                print("[renderMapButton()] Rendering show map button.");     
-                buttonDef = createViewDef().createButton().setLabel("Show map");
-                createView(tabgroup + "/Basic_Info/showMap", buttonDef, tabgroup + "/Basic_Info/containerTakePoint/child2");
-                onEvent(tabgroup + "/Basic_Info/showMap", "click", "arrivedFromSample=true;redirectFlag=true;showTabGroup(\"Project\");");
-            }
+            // Note: logic for only allowing one point is currently handled in returnToSample().  
+            // boolean onlyOnePoint = false;    
+            // if (onlyOnePoint) {
+            //     print("[renderMapButton()] Rendering plot from point button.");
+            //     buttonDef = createViewDef().createButton().setLabel("Plot point from map");
+            //     createView(tabgroup + "/Basic_Info/plotPoint", buttonDef, tabgroup + "/Basic_Info/containerTakePoint/child2");
+            //     onEvent(tabgroup + "/Basic_Info/plotPoint", "click", "getPointFromMap();");
+            // } else {
+            //     print("[renderMapButton()] Rendering show map button.");     
+            //     buttonDef = createViewDef().createButton().setLabel("Show map");
+            //     createView(tabgroup + "/Basic_Info/showMap", buttonDef, tabgroup + "/Basic_Info/containerTakePoint/child2");
+            //     onEvent(tabgroup + "/Basic_Info/showMap", "delayclick", "arrivedFromSample=true;redirectFlag=true;showTabGroup(\"Project\");");
+            // }
+            print("[renderMapButton()] Rendering show map button.");     
+            buttonDef = createViewDef().createButton().setLabel("Show map");
+            createView(tabgroup + "/Basic_Info/showMap", buttonDef, tabgroup + "/Basic_Info/containerTakePoint/child2");
+            onEvent(tabgroup + "/Basic_Info/showMap", "delayclick", "arrivedFromSample=true;redirectFlag=true;showTabGroup(\"Project\");");
         }
     });
 }
@@ -746,7 +789,7 @@ returnToSample() {
     List geolist = getGeometryList("Project/Map/map", canvasLayerID);
     print("[returnToSample()] Gemoetry List: " + geolist);
     if (geolist.size() != 1) {
-        showAlert("alert", "Only 1 point can be created. Please remove any other points or shapes before saving.", "", "showTabGroup(" + tabgroup + ");");
+        showAlert("alert", "Only 1 point can be created. Please remove any other points or shapes before saving, or press Cancel to return to data recording without saving.", "", "showTabGroup(" + tabgroup + ");");
         return;
     }
     boolean isPoint = false;
@@ -762,21 +805,18 @@ returnToSample() {
         onSave(uuid, newRecord) {
             print("[returnToSample()] Saved geometry: " + geolist);
             fillInGPS();
-            for (Geometry geomId : geolist) {
-                clearGeometry("Project/Map/map", geomId);
-            }
+            // for (Geometry geomId : geolist) {
+            //     clearGeometry("Project/Map/map", geomId);
+            // }
         }  
     });
 
     // Clear the data entry layer and return to the sample tab
     
     // clearGeometryList("Project/Map/map", geolist);
-    showTabGroup(tabgroup);
+    showTabGroup("" + tabgroup);
 }
 
-onEvent("Project/Map/Centre_Map", "click", "centreMap();");
-onEvent("Project/Map", "show", "renderDynamicMapViews();");
-// onEvent("Project", "load", "initMap();");
 initMap();
 
 

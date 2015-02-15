@@ -605,7 +605,7 @@
         <trigger ref="New_Sample">
           <label>{New_Sample}</label>
         </trigger>
-        <input ref="GPS_Status" faims_certainty="false" faims_annotation="false" faims_read_only="true" faims_style_class="gps-status">
+        <input ref="GPS_Status" faims_web="false" faims_certainty="false" faims_annotation="false" faims_read_only="true" faims_style_class="gps-status">
           <label>{GPS_Status}</label>
         </input>
         <trigger ref="Check_For_Duplicates">
