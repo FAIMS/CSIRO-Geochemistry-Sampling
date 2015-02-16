@@ -136,7 +136,7 @@ onEvent("Project/Search/Sample_List", "click", "loadSample();");
 
 onEvent("Project/Map", "show", "renderDynamicMapViews();");
 onEvent("Project/Map/Centre_Map", "click", "centreMap();");
-onEvent("Project/Map/Save_Map_Settings", "click", "showToast(\"Save settings functionality not implemented yet.\");");
+onEvent("Project/Map/Save_Map_Settings", "click", "showToast(\"Save settings functionality not implemented yet. look at saveMapViewConfiguration(String ref, String file, String callback)  and loadMapViewConfiguration(String ref, String configFile, String callback) ;\");");
 onEvent("Project/Map/Create_Shape", "click", "newTabGroup(\"Shape\");");
 
 /* Generates of sample types for dropdown selection. */
@@ -373,41 +373,23 @@ List getSampleDateAttributeList() {
 }
 
 /* Renders a plotFromMap or showMap button depending on how many points have been drawn on the map. */
-renderMapButton() {
-    executeViewTask(new ViewTask() {
-        doTask() {
-            String tabgroup = getSampleTypePath();
-            buttonDef = null;
-            // Note: logic for only allowing one point is currently handled in returnToSample().  
-            // boolean onlyOnePoint = false;    
-            // if (onlyOnePoint) {
-            //     print("[renderMapButton()] Rendering plot from point button.");
-            //     buttonDef = createViewDef().createButton().setLabel("Plot point from map");
-            //     createView(tabgroup + "/Basic_Info/plotPoint", buttonDef, tabgroup + "/Basic_Info/containerTakePoint/child2");
-            //     onEvent(tabgroup + "/Basic_Info/plotPoint", "click", "getPointFromMap();");
-            // } else {
-            //     print("[renderMapButton()] Rendering show map button.");     
-            //     buttonDef = createViewDef().createButton().setLabel("Show map");
-            //     createView(tabgroup + "/Basic_Info/showMap", buttonDef, tabgroup + "/Basic_Info/containerTakePoint/child2");
-            //     onEvent(tabgroup + "/Basic_Info/showMap", "delayclick", "arrivedFromSample=true;redirectFlag=true;showTabGroup(\"Project\");");
-            // }
-            print("[renderMapButton()] Rendering show map button.");     
-            buttonDef = createViewDef().createButton().setLabel("Show map");
-            createView(tabgroup + "/Basic_Info/showMap", buttonDef, tabgroup + "/Basic_Info/containerTakePoint/child2");
-            onEvent(tabgroup + "/Basic_Info/showMap", "delayclick", "arrivedFromSample=true;redirectFlag=true;showTabGroup(\"Project\");");
-        }
-    });
-}
+// renderMapButton() {
+//     executeViewTask(new ViewTask() {
+//         doTask() {
+//             String tabgroup = getSampleTypePath();
+//             buttonDef = null;
+//             print("[renderMapButton()] Rendering show map button.");     
+//             buttonDef = createViewDef().createButton().setLabel("Show map");
+//             createView(tabgroup + "/Basic_Info/showMap", buttonDef, tabgroup + "/Basic_Info/containerTakePoint/child2");
+//             onEvent(tabgroup + "/Basic_Info/showMap", "delayclick", "arrivedFromSample=true;redirectFlag=true;showTabGroup(\"Project\");");
+//         }
+//     });
+// }
 
 /* Saves the sample archent with geometry equal to the single point drawn on the map. */
 getPointFromMap() {
     showToast("Not implemented yet.");
 }
-
-// onEvent("Water_Sample/Basic_Info/Observation_Type", "click", "print(\"showing tab\");showTab(\"Water_Sample/Basic_Info\");");
-// onEvent("Plant_Sample/Basic_Info/Observation_Type", "click", "print(\"showing tab\");showTab(\"Plant_Sample/Basic_Info\");");
-// onEvent("Soil_Sample/Basic_Info/Observation_Type", "click", "print(\"showing tab\");showTab(\"Soil_Sample/Basic_Info\");");
-// onEvent("Rock_Sample/Basic_Info/Observation_Type", "click", "print(\"showing tab\");showTab(\"Rock_Sample/Basic_Info\");");
 
 onEvent("Water_Sample/Basic_Info/Observation_Type", "click", "print(\"render on click\");renderLocationNumber()");
 onEvent("Plant_Sample/Basic_Info/Observation_Type", "click", "print(\"render on click\");renderLocationNumber()");
@@ -460,10 +442,10 @@ renderLocationNumber() {
                         mapButtonRendered = false;
                     }
                     // render the map button after the location number, due to issues with view removal and timing/ordering.
-                    if (!mapButtonRendered) {
-                        renderMapButton();
-                        mapButtonRendered = true;
-                    }
+                    // if (!mapButtonRendered) {
+                    //     renderMapButton();
+                    //     mapButtonRendered = true;
+                    // }
                 }
             });
         }
@@ -789,7 +771,7 @@ returnToSample() {
     List geolist = getGeometryList("Project/Map/map", canvasLayerID);
     print("[returnToSample()] Gemoetry List: " + geolist);
     if (geolist.size() != 1) {
-        showAlert("alert", "Only 1 point can be created. Please remove any other points or shapes before saving, or press Cancel to return to data recording without saving.", "", "showTabGroup(" + tabgroup + ");");
+        showAlert("alert", "Only 1 point can be created. Please remove any other points or shapes before saving, or press Cancel to return to data recording without saving.", "", "showTabGroup(\""+tabgroup+"\");");
         return;
     }
     boolean isPoint = false;
@@ -814,7 +796,7 @@ returnToSample() {
     // Clear the data entry layer and return to the sample tab
     
     // clearGeometryList("Project/Map/map", geolist);
-    showTabGroup("" + tabgroup);
+    showTabGroup(tabgroup);
 }
 
 initMap();
@@ -1353,7 +1335,7 @@ loadSoilSampleAttributes() {
     makeVocab("RadioGroup", "Soil_Sample/Basic_Info/Observation_Type", "Observation Type");
     makeVocab("DropDown", "Soil_Sample/Basic_Info/SRID", "SRID");
     makeVocab("RadioGroup", "Soil_Sample/Basic_Info/Lag", "Lag");
-    makeVocab("CheckBoxGroup", "Soil_Sample/Basic_Info/Soil_Texture", "Soil_Texture");
+    makeVocab("CheckBoxGroup", "Soil_Sample/Basic_Info/Soil_Texture", "Soil Texture");
     populateHierarchicalDropDown("Soil_Sample/Basic_Info/Geology", "Geology");
     makeVocab("RadioGroup", "Soil_Sample/Basic_Info/Drainage", "Drainage");
     makeVocab("RadioGroup", "Soil_Sample/Basic_Info/Contamination", "Contamination");
@@ -1422,7 +1404,7 @@ loadRockSampleAttributes() {
 
 onEvent("Photolog", "show", "addPhotologNavigation();");
 onFocus("Photolog/Photolog/Photo_ID", null, "activateAutoSavePhotolog();");
-onEvent("Photolog/Photolog/Photo_Back", "click", "showTabGroup(getSampleTypePath());");
+onEvent("Photolog/Photolog/Photo_Back", "click", "cancelTabGroup(\"Photolog\", false);showTabGroup(getSampleTypePath());");
 
 String photolog_id = null;
 
