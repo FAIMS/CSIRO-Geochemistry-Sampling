@@ -665,14 +665,14 @@
         </group>
       </group>
     </group>
-    <group ref="Shape">
+    <group ref="Shape" faims_archent_type="Note">
       <label>{Shape}</label>
       <group ref="Shape_Note">
         <label>{Shape_Note}</label>
-        <input ref="label" faims_certainty="true" faims_annotation="true">
+        <input ref="label" faims_attribute_name="Label" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>{Shape_Label}</label>
         </input>
-        <input ref="note" faims_certainty="true" faims_annotation="true">
+        <input ref="note" faims_attribute_name="Note" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>{Shape_Note_Note}</label>
         </input>
         <trigger ref="shape_return">

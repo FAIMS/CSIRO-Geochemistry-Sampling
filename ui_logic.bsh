@@ -112,12 +112,15 @@ addActionBarItem("external_gps", new ToggleActionButtonCallback() {
 
 // Flag used for onShow tab redirects
 Boolean redirectFlag = false;
+navigateToMap() {
+    redirectFlag = true;
+    showTabGroup("Project");
+}
 onEvent("Project/Start", "show", "print(\"[project onShow] map redirect flag: \" + redirectFlag);if(redirectFlag){showTab(\"Project/Map\");redirectFlag=false;}");
-// onEvent("Project", "show", "print(\"[project onShow] map redirect flag: \" + redirectFlag);if(redirectFlag){showTab(\"Project/Map\");redirectFlag=false;}");
 
 /*** Shape Tab Group ***/
-onEvent("Shape/Shape_Note/shape_return", "delayclick", "redirectFlag=true;showTabGroup(\"Project\");");
-onEvent("Shape/Shape_Note/shape_delete", "click", "showToast(\"Delete not implemented\");");
+onEvent("Shape/Shape_Note/shape_return", "delayclick", "cancelTabGroup(\"Shape\", false);navigateToMap();");
+onEvent("Shape/Shape_Note/shape_delete", "click", "deleteShape(shapeUUID);");
 
 /*** Project Tab Group ***/
 
@@ -136,8 +139,8 @@ onEvent("Project/Search/Sample_List", "click", "loadSample();");
 
 onEvent("Project/Map", "show", "renderDynamicMapViews();");
 onEvent("Project/Map/Centre_Map", "click", "centreMap();");
-onEvent("Project/Map/Save_Map_Settings", "click", "showToast(\"Save settings functionality not implemented yet. look at saveMapViewConfiguration(String ref, String file, String callback)  and loadMapViewConfiguration(String ref, String configFile, String callback) ;\");");
-onEvent("Project/Map/Create_Shape", "click", "newTabGroup(\"Shape\");");
+onEvent("Project/Map/Save_Map_Settings", "click", "saveMapSettings();");
+onEvent("Project/Map/Create_Shape", "click", "createShape();");
 
 /* Generates of sample types for dropdown selection. */
 sample_types = new ArrayList();
@@ -701,7 +704,7 @@ fillInGPS() {
     });
 }
 
-canvasLayerID = null;
+dataEntryLayerID = null;
 
 /* Initialises the map. */
 initMap() {
@@ -726,9 +729,12 @@ initMap() {
     queryName = "Rock Samples";
     querySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Rock Sample'";
     showDatabaseLayer("Project/Map/map", "Rock Samples", isEntity, queryName, querySql, ps, ls, pos, ts);
-    // Canvas layer
-    canvasLayerID = createCanvasLayer("Project/Map/map", "Data Entry Layer");
+    // querySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Note'";
+    // showDatabaseLayer("Project/Map/map", "Shape Notes", isEntity, queryName, querySql, ps, ls, pos, ts);
+    // Canvas layers
+    dataEntryLayerID = createCanvasLayer("Project/Map/map", "Data Entry Layer");
     setSelectedLayer("Project/Map/map", "Data Entry Layer");
+    loadMapSettings();
 }
 
 /* Centres the map on the current position. */
@@ -738,6 +744,75 @@ centreMap() {
     } else {
         centerOnCurrentPosition("Project/Map/map");
     }
+}
+
+/* Loads a map configuration file if one exists. */
+loadMapSettings() {
+   jsonFile = getAttachedFilePath("files/data/saved_config.json");
+    if(new File(jsonFile).exists()) {
+        loadMapViewConfiguration("Project/Map/map", jsonFile, "showToast(\"Loaded map configuration\")");
+    }
+}
+
+/* Saves the current map configuration. */
+saveMapSettings() {
+    file = getAttachedFilePath("files/data/saved_config.json");
+    saveMapViewConfiguration("Project/Map/map", file, "showToast(\"Saved map configuration\")");
+}
+
+shapeUUID = null;
+onEvent("Shape/Shape_Note", "show", "saveShape();");
+
+/* Generates a confirmation prompt to delete the given shape note. */
+deleteShape(String shapeID) {
+    showAlert("Confirm Deletion", "Press OK to Delete this {shape_note}!", "reallyDeleteShape(\"" + shapeID + "\")", "doNotDelete()");
+}
+
+/* Deletes the given Shape. */
+reallyDeleteShape(String shapeID) {
+    deleteArchEnt(shapeID, new DeleteCallback() {
+        onDelete(uuid) {
+            shapeUUID = null;
+            showToast("Shape Note deleted");
+            navigateToMap();
+        }
+    });
+}
+
+/* Auto saves the shape note entity. */
+saveShape() {
+    List geolist = getGeometryList("Project/Map/map", dataEntryLayerID);
+    saveTabGroup("Shape", shapeUUID, geolist, null, new SaveCallback() {
+        onSave(uuid, newRecord) {
+            shapeUUID = uuid;
+            print("[saveShape()] Autosaved shape uuid: "+shapeUUID);
+            // Clear the data entry layer
+            if (geoList != null) {
+                for (geom : geolist) {
+                    print("Geometry cleared:" + geom.userData.geomId);
+                    clearGeometry("Project/Map/map", geom.userData.geomId);
+                }
+                geoList = null;
+            }
+        }
+        onError(message) {
+            showToast(message);
+        }  
+    }, enable_autosave);
+}
+
+/* Saves drawn shapes with an attatched note. */
+createShape() {
+    shapeUUID = null;
+    // List geolist = getGeometryList("Project/Map/map", dataEntryLayerID);
+    // print("[createShape()] geolist: " + geolist);
+    // if (geolist == null) {
+    //     showWarning("Warning", "At least one shape must be present on the data entry layer.");
+    // } else {
+    //     newTabGroup("Shape");
+    //     print("[createShape()] new shape tab group");
+    // }
+    showToast("Shape Note functionality currently undergoing implementation");
 }
 
 Boolean arrivedFromSample = false;
@@ -774,7 +849,7 @@ returnToSample() {
     String tabgroup = getSampleTypePath();
 
     // Get the geometry from the data layer and proceed only if the geometry is a single point.
-    List geolist = getGeometryList("Project/Map/map", canvasLayerID);
+    List geolist = getGeometryList("Project/Map/map", dataEntryLayerID);
     print("[returnToSample()] Gemoetry List: " + geolist);
     if (geolist.size() != 1) {
         showAlert("alert", "Only 1 point can be created. Please remove any other points or shapes before saving, or press Cancel to return to data recording without saving.", "", "showTabGroup(\""+tabgroup+"\");");
