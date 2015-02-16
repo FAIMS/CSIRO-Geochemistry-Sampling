@@ -1385,6 +1385,23 @@
     <property name="Vegetation" type="freetext">
       <description>Description TBD</description>
     </property>
+    <property name="Samples Collected" type="enum">
+      <description>Description TBD</description>
+      <lookup>
+        <term> {Cations}
+          <description>Description TBD</description>
+        </term>
+        <term> {Anions}
+          <description>Description TBD</description>
+        </term>
+        <term> {Alkalinity}
+          <description>Description TBD</description>
+        </term>
+        <term> {Carbon}
+          <description>Description TBD</description>
+        </term>
+      </lookup>
+    </property>
     <property name="Notes" type="freetext">
       <description>Description TBD</description>
     </property>

@@ -647,8 +647,14 @@ duplicateSample() {
 /** Map GPS **/
 
 // Detect when user has selected a different SRID, update the module srid and update northing/easting. 
-onEvent(getSampleTypePath() + "/Basic_Info", "show", "fillInGPS()");
-onEvent(getSampleTypePath() + "/Basic_Info/SRID", "click", "fillInGPS();");
+onEvent("Water_Sample/Basic_Info", "show", "fillInGPS()");
+onEvent("Water_Sample/Basic_Info/SRID", "click", "fillInGPS();");
+onEvent("Plant_Sample/Basic_Info", "show", "fillInGPS()");
+onEvent("Plant_Sample/Basic_Info/SRID", "click", "fillInGPS();");
+onEvent("Soil_Sample/Basic_Info", "show", "fillInGPS()");
+onEvent("Soil_Sample/Basic_Info/SRID", "click", "fillInGPS();");
+onEvent("Rock_Sample/Basic_Info", "show", "fillInGPS()");
+onEvent("Rock_Sample/Basic_Info/SRID", "click", "fillInGPS();");
 
 /* Takes the current point using gps. */
 takePoint() {
@@ -1339,7 +1345,9 @@ loadSoilSampleAttributes() {
     populateHierarchicalDropDown("Soil_Sample/Basic_Info/Geology", "Geology");
     makeVocab("RadioGroup", "Soil_Sample/Basic_Info/Drainage", "Drainage");
     makeVocab("RadioGroup", "Soil_Sample/Basic_Info/Contamination", "Contamination");
+    populateHierarchicalDropDown("Soil_Sample/Basic_Info/Regolith_Type", "Regolith Type");
     populateHierarchicalDropDown("Soil_Sample/Basic_Info/Landform", "Landform");
+    makeVocab("CheckBoxGroup", "Soil_Sample/Basic_Info/Samples_Collected", "Samples Collected");
 }
 
 /*** ROCK SAMPLE ***/

@@ -299,6 +299,7 @@
               <Regolith_Type/>
               <Landform/>
               <Vegetation/>
+              <Samples_Collected/>
               <Notes/>
               <Photos/>
               <Take_Photo/>
@@ -1311,8 +1312,15 @@
         <input ref="Vegetation" faims_attribute_name="Vegetation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Vegetation}</label>
         </input>
+        <select ref="Samples_Collected" faims_attribute_name="Samples Collected" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Samples_Collected}</label>
+          <item>
+            <label>placeholder</label>
+            <value>placeholder</value>
+          </item>
+        </select>
         <input ref="Notes" faims_attribute_name="Notes" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-          <label>{Notes}</label>
+          <label>{Comments}</label>
         </input>
         <select type="camera" faims_sync="true" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Photos}</label>
