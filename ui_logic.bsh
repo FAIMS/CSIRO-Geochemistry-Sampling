@@ -729,8 +729,8 @@ initMap() {
     queryName = "Rock Samples";
     querySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Rock Sample'";
     showDatabaseLayer("Project/Map/map", "Rock Samples", isEntity, queryName, querySql, ps, ls, pos, ts);
-    // querySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Note'";
-    // showDatabaseLayer("Project/Map/map", "Shape Notes", isEntity, queryName, querySql, ps, ls, pos, ts);
+    querySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Note'";
+    showDatabaseLayer("Project/Map/map", "Shape Notes", isEntity, queryName, querySql, ps, ls, pos, ts);
     // Canvas layers
     dataEntryLayerID = createCanvasLayer("Project/Map/map", "Data Entry Layer");
     setSelectedLayer("Project/Map/map", "Data Entry Layer");
@@ -765,14 +765,15 @@ onEvent("Shape/Shape_Note", "show", "saveShape();");
 
 /* Generates a confirmation prompt to delete the given shape note. */
 deleteShape(String shapeID) {
-    showAlert("Confirm Deletion", "Press OK to Delete this {shape_note}!", "reallyDeleteShape(\"" + shapeID + "\")", "doNotDelete()");
+    showAlert("Confirm Deletion", "Press OK to Delete this {Shape_Note}!", "reallyDeleteShape(\"" + shapeID + "\")", "doNotDelete()");
 }
 
 /* Deletes the given Shape. */
 reallyDeleteShape(String shapeID) {
     deleteArchEnt(shapeID, new DeleteCallback() {
         onDelete(uuid) {
-            shapeUUID = null;
+            shapeID = null;
+            shapeUUID = shapeID;
             showToast("Shape Note deleted");
             navigateToMap();
         }
@@ -782,17 +783,20 @@ reallyDeleteShape(String shapeID) {
 /* Auto saves the shape note entity. */
 saveShape() {
     List geolist = getGeometryList("Project/Map/map", dataEntryLayerID);
+    print("[saveShape()] saving with geolist: " + geolist);
+    Boolean enable_autosave = true;
     saveTabGroup("Shape", shapeUUID, geolist, null, new SaveCallback() {
         onSave(uuid, newRecord) {
             shapeUUID = uuid;
             print("[saveShape()] Autosaved shape uuid: "+shapeUUID);
             // Clear the data entry layer
-            if (geoList != null) {
+            if (newRecord && geoList != null && geolist.size() != 0) {
                 for (geom : geolist) {
                     print("Geometry cleared:" + geom.userData.geomId);
                     clearGeometry("Project/Map/map", geom.userData.geomId);
                 }
-                geoList = null;
+                geoList = getGeometryList("Project/Map/map", dataEntryLayerID);
+                print("[saveShape()] Cleared geometry list: " + geoList);
             }
         }
         onError(message) {
@@ -804,15 +808,14 @@ saveShape() {
 /* Saves drawn shapes with an attatched note. */
 createShape() {
     shapeUUID = null;
-    // List geolist = getGeometryList("Project/Map/map", dataEntryLayerID);
-    // print("[createShape()] geolist: " + geolist);
-    // if (geolist == null) {
-    //     showWarning("Warning", "At least one shape must be present on the data entry layer.");
-    // } else {
-    //     newTabGroup("Shape");
-    //     print("[createShape()] new shape tab group");
-    // }
-    showToast("Shape Note functionality currently undergoing implementation");
+    List geolist = getGeometryList("Project/Map/map", dataEntryLayerID);
+    print("[createShape()] geolist: " + geolist);
+    if (geolist == null || geolist.size() == 0) {
+        showWarning("Warning", "At least one shape must be present on the data entry layer.");
+    } else {
+        newTabGroup("Shape");
+        print("[createShape()] new shape tab group");
+    }
 }
 
 Boolean arrivedFromSample = false;
