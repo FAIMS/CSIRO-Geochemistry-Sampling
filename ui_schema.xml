@@ -124,6 +124,7 @@
               <Take_Photo/>
               <Sketches/>
               <Attach_Sketch/>
+              <View_Sketch/>
             </Basic_Info>
             <Codes>
               <Hole_Type/>
@@ -236,6 +237,7 @@
               <Take_Photo/>
               <Sketches/>
               <Attach_Sketch/>
+              <View_Sketch/>
             </Basic_Info>
             <Photolog>
               <New_Photolog/>
@@ -305,6 +307,7 @@
               <Take_Photo/>
               <Sketches/>
               <Attach_Sketch/>
+              <View_Sketch/>
             </Basic_Info>
             <Photolog>
               <New_Photolog/>
@@ -494,6 +497,7 @@
               <Take_Photo/>
               <Sketches/>
               <Attach_Sketch/>
+              <View_Sketch/>
             </Lithological_Info>
             <Photolog>
               <New_Photolog/>
@@ -830,6 +834,9 @@
         <trigger ref="Attach_Sketch">
           <label>{Attach_Sketch}</label>
         </trigger>
+        <trigger ref="View_Sketch">
+          <label>{View_Sketch}</label>
+        </trigger>
       </group>
       <group ref="Codes">
         <label>{Codes}</label>
@@ -1134,6 +1141,9 @@
         <trigger ref="Attach_Sketch">
           <label>{Attach_Sketch}</label>
         </trigger>
+        <trigger ref="View_Sketch">
+          <label>{View_Sketch}</label>
+        </trigger>
       </group>
       <group ref="Photolog" faims_scrollable="false">
         <label>{Photolog}</label>
@@ -1342,6 +1352,9 @@
         <trigger ref="Attach_Sketch">
           <label>{Attach_Sketch}</label>
         </trigger>
+        <trigger ref="View_Sketch">
+          <label>{View_Sketch}</label>
+        </trigger>
       </group>
       <group ref="Photolog" faims_scrollable="false">
         <label>{Photolog}</label>
@@ -1494,13 +1507,13 @@
           <group ref="child1" faims_style="even">
             <label/>
             <input ref="Strike_Of_Bedding" faims_attribute_name="Strike Of Bedding" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-              <label/>
+              <label>{Blank_Label}</label>
             </input>
           </group>
           <group ref="child2" faims_style="even">
             <label/>
             <input ref="Dip_Of_Bedding" faims_attribute_name="Dip Of Bedding" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-              <label/>
+              <label>{Blank_Label}</label>
             </input>
           </group>
         </group>
@@ -1515,13 +1528,13 @@
           <group ref="child1" faims_style="even">
             <label/>
             <input ref="Strike_Of_Cleavage" faims_attribute_name="Strike Of Cleavage" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-              <label/>
+              <label>{Blank_Label}</label>
             </input>
           </group>
           <group ref="child2" faims_style="even">
             <label/>
             <input ref="Dip_Of_Cleavage" faims_attribute_name="Dip Of Cleavage" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-              <label/>
+              <label>{Blank_Label}</label>
             </input>
           </group>
         </group>
@@ -1536,13 +1549,13 @@
           <group ref="child1" faims_style="even">
             <label/>
             <input ref="Strike_Of_Foliation" faims_attribute_name="Strike Of Foliation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-              <label/>
+              <label>{Blank_Label}</label>
             </input>
           </group>
           <group ref="child2" faims_style="even">
             <label/>
             <input ref="Dip_Of_Foliation" faims_attribute_name="Dip Of Foliation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-              <label/>
+              <label>{Blank_Label}</label>
             </input>
           </group>
         </group>
@@ -1557,13 +1570,13 @@
           <group ref="child1" faims_style="even">
             <label/>
             <input ref="Strike_Of_Veins" faims_attribute_name="Strike Of Veins" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-              <label/>
+              <label>{Blank_Label}</label>
             </input>
           </group>
           <group ref="child2" faims_style="even">
             <label/>
             <input ref="Dip_Of_Veins" faims_attribute_name="Dip Of Veins" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-              <label/>
+              <label>{Blank_Label}</label>
             </input>
           </group>
         </group>
@@ -1599,13 +1612,13 @@
           <group ref="child1" faims_style="even">
             <label/>
             <input ref="Plunge_Of_Fold_Axis_1" faims_attribute_name="Plunge Of Fold Axis 1" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-              <label/>
+              <label>{Blank_Label}</label>
             </input>
           </group>
           <group ref="child2" faims_style="even">
             <label/>
             <input ref="Azimuth_Of_Fold_Axis_1" faims_attribute_name="Azimuth Of Fold Axis 1" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-              <label/>
+              <label>{Blank_Label}</label>
             </input>
           </group>
         </group>
@@ -1620,13 +1633,13 @@
           <group ref="child1" faims_style="even">
             <label/>
             <input ref="Plunge_Of_Fold_Axis_2" faims_attribute_name="Plunge Of Fold Axis 2" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-              <label/>
+              <label>{Blank_Label}</label>
             </input>
           </group>
           <group ref="child2" faims_style="even">
             <label/>
             <input ref="Azimuth_Of_Fold_Axis_2" faims_attribute_name="Azimuth Of Fold Axis 2" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-              <label/>
+              <label>{Blank_Label}</label>
             </input>
           </group>
         </group>
@@ -1641,13 +1654,13 @@
           <group ref="child1" faims_style="even">
             <label/>
             <input ref="Plunge_Of_Fold_Axis_3" faims_attribute_name="Plunge Of Fold Axis 3" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-              <label/>
+              <label>{Blank_Label}</label>
             </input>
           </group>
           <group ref="child2" faims_style="even">
             <label/>
             <input ref="Azimuth_Of_Fold_Axis_3" faims_attribute_name="Azimuth Of Fold Axis 3" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-              <label/>
+              <label>{Blank_Label}</label>
             </input>
           </group>
         </group>
@@ -1662,13 +1675,13 @@
           <group ref="child1" faims_style="even">
             <label/>
             <input ref="Plunge_Of_Mineral_Lineation" faims_attribute_name="Plunge Of Mineral Lineation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-              <label/>
+              <label>{Blank_Label}</label>
             </input>
           </group>
           <group ref="child2" faims_style="even">
             <label/>
             <input ref="Azimuth_Of_Mineral_Lineation" faims_attribute_name="Azimuth Of Mineral Lineation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-              <label/>
+              <label>{Blank_Label}</label>
             </input>
           </group>
         </group>
@@ -1683,13 +1696,13 @@
           <group ref="child1" faims_style="even">
             <label/>
             <input ref="Plunge_Of_Stretching_Lineation" faims_attribute_name="Plunge Of Stretching Lineation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-              <label/>
+              <label>{Blank_Label}</label>
             </input>
           </group>
           <group ref="child2" faims_style="even">
             <label/>
             <input ref="Azimuth_Of_Stretching_Lineation" faims_attribute_name="Azimuth Of Stretching Lineation" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-              <label/>
+              <label>{Blank_Label}</label>
             </input>
           </group>
         </group>
@@ -1761,6 +1774,9 @@
         </select>
         <trigger ref="Attach_Sketch">
           <label>{Attach_Sketch}</label>
+        </trigger>
+        <trigger ref="View_Sketch">
+          <label>{View_Sketch}</label>
         </trigger>
       </group>
       <group ref="Photolog" faims_scrollable="false">

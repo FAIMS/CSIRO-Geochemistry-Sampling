@@ -232,7 +232,8 @@ checkForDuplicates() {
     String query = "select uuid, response || ' created at: ' || datetime(createdAt, 'localtime') || ' created by: '||createdBy " + 
             "from latestNonDeletedArchEntFormattedIdentifiers join createdModifiedAtBy using (uuid) " +
             "where response in ( " +
-            "select response from latestNonDeletedArchEntFormattedIdentifiers group by response having count(response) > 1);";
+            "select response from latestNonDeletedArchEntFormattedIdentifiers group by response having count(response) > 1) " +
+            " and aenttypename like '%Sample';";
     fetchAll(query, new FetchCallback() {
         onFetch(result) {
             if (isNull(result)) {
@@ -253,11 +254,21 @@ checkForDuplicates() {
 boolean validSamplePrefix() {
     prefix = getFieldValue("Project/Start/Sample_Prefix");
     if (isNull(prefix)) {
-        showWarning("Warning", "A sample prefix needs to be provided.");
+        showWarning("Warning", "A sample prefix needs to be entered.");
         return false;
     } 
     if (prefix.length() > 5) {
         showWarning("Warning", "The sample prefix must be at most 5 characters.");
+        return false;
+    }
+    return true;
+}
+
+/* Validates the sample starting ID, returns true if ID is valid or false otherwise. */
+boolean validStartingSampleID() {
+    String sampleID = getFieldValue("Project/Start/Sample_Starting_ID");
+    if (isNull(sampleID)) {
+        showWarning("Warning", "A sample starting ID needs to be entered.");
         return false;
     }
     return true;
@@ -305,8 +316,8 @@ Boolean newSampleFlag = false;
 
 /* Creates a new sample based on selected type. */
 newSample() {
-    // Validate the entered sample prefix before making a new sample.
-    if (!validSamplePrefix()) {
+    // Validate the entered sample prefix and ID before making a new sample.
+    if (!validSamplePrefix() || !validStartingSampleID()) {
         return;
     }
 
@@ -502,8 +513,16 @@ addSampleNavigation() {
         actionOn() {
             if(!isNull(currentSampleUUID)) {
                 newSample();
+                autoSaveSample(getSampleDateAttributeList());
+                print("[Sidebar New Sample] Saved a new sample: " + currentSampleUUID);
+                showToast("New " + getSampleType() + " created");
             } else {
-                showAlert("Warning", "You will lose any unsaved changes!", "newSample()", "");
+                String newSampleLogic = "" + 
+                "newSample();" + 
+                "autoSaveSample(getSampleDateAttributeList());" + 
+                "print(\"[Sidebar New Sample] Saved a new sample: \" + currentSampleUUID);" + 
+                "showToast(\"New \" + getSampleType() + \" created\");";
+                showAlert("Warning", "You will lose any unsaved changes!", newSampleLogic, "");
             }
         }
     }, "success");
@@ -892,6 +911,7 @@ onEvent("Water_Sample", "show", "addSampleNavigation();autoSaveSample(getSampleD
 onEvent("Water_Sample/Basic_Info/Take_GPS", "click", "takePoint()");
 onEvent("Water_Sample/Basic_Info/Take_Photo", "click", "attachPictureTo(\"Water_Sample/Basic_Info/Photos\")");
 onEvent("Water_Sample/Basic_Info/Attach_Sketch", "click", "attachFileTo(\"Water_Sample/Basic_Info/Sketches\");");
+onEvent("Water_Sample/Basic_Info/View_Sketch", "click", "viewArchEntAttachedFiles(currentSampleUUID);");
 
 onEvent("Water_Sample/Codes/Hole_Angle", "click", "populateEstimatedAngle();");
 
@@ -1343,6 +1363,7 @@ onEvent("Plant_Sample", "show", "addSampleNavigation();autoSaveSample(getSampleD
 onEvent("Plant_Sample/Basic_Info/Take_GPS", "click", "takePoint()");
 onEvent("Plant_Sample/Basic_Info/Take_Photo", "click", "attachPictureTo(\"Plant_Sample/Basic_Info/Photos\")");
 onEvent("Plant_Sample/Basic_Info/Attach_Sketch", "click", "attachFileTo(\"Plant_Sample/Basic_Info/Sketches\");");
+onEvent("Plant_Sample/Basic_Info/View_Sketch", "click", "viewArchEntAttachedFiles(currentSampleUUID);");
 
 onEvent("Plant_Sample/Photolog", "show", "loadRelatedPhotologs(currentSampleUUID, \"Plant_Sample\");");
 onEvent("Plant_Sample/Photolog/New_Photolog", "click", "newPhotolog();");
@@ -1386,6 +1407,7 @@ onEvent("Soil_Sample", "show", "addSampleNavigation();autoSaveSample(getSampleDa
 onEvent("Soil_Sample/Basic_Info/Take_GPS", "click", "takePoint()");
 onEvent("Soil_Sample/Basic_Info/Take_Photo", "click", "attachPictureTo(\"Soil_Sample/Basic_Info/Photos\")");
 onEvent("Soil_Sample/Basic_Info/Attach_Sketch", "click", "attachFileTo(\"Soil_Sample/Basic_Info/Sketches\");");
+onEvent("Soil_Sample/Basic_Info/View_Sketch", "click", "viewArchEntAttachedFiles(currentSampleUUID);");
 
 onEvent("Soil_Sample/Photolog", "show", "loadRelatedPhotologs(currentSampleUUID, \"Soil_Sample\");");
 onEvent("Soil_Sample/Photolog/New_Photolog", "click", "newPhotolog();");
@@ -1435,6 +1457,7 @@ onEvent("Rock_Sample", "show", "addSampleNavigation();autoSaveSample(getSampleDa
 onEvent("Rock_Sample/Basic_Info/Take_GPS", "click", "takePoint()");
 onEvent("Rock_Sample/Lithological_Info/Take_Photo", "click", "attachPictureTo(\"Rock_Sample/Lithological_Info/Photos\")");
 onEvent("Rock_Sample/Lithological_Info/Attach_Sketch", "click", "attachFileTo(\"Rock_Sample/Lithological_Info/Sketches\");");
+onEvent("Rock_Sample/Lithological_Info/View_Sketch", "click", "viewArchEntAttachedFiles(currentSampleUUID);");
 
 onEvent("Rock_Sample/Photolog", "show", "loadRelatedPhotologs(currentSampleUUID, \"Rock_Sample\");");
 onEvent("Rock_Sample/Photolog/New_Photolog", "click", "newPhotolog();");
