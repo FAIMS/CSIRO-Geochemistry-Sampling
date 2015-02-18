@@ -729,31 +729,46 @@ dataEntryLayerID = null;
 initMap() {
     // Base map layer
     setMapZoom("Project/Map/map", 15.0f);
-    showBaseMap("Project/Map/map", "base map", "files/data/maps/SydneyStreetmap.tif");
+    // showBaseMap("Project/Map/map", "base map", "files/data/maps/SydneyStreetmap.tif");
+    showBaseMap("Project/Map/map", "base map", "files/data/maps/Capricorn.tif");
     ps = createPointStyle(10, Color.BLUE, 0.2f, 0.5f);
     ls = createLineStyle(10, Color.GREEN, 0.05f, 0.3f, null);
     pos = createPolygonStyle(10, Color.parseColor("#440000FF"), createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
     ts = createTextStyle(10, Color.BLACK, 40, Typeface.SANS_SERIF);
+    
+    
     isEntity = true;
     // Database layers
-    queryName = "Water Samples";
-    querySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Water Sample'";
-    showDatabaseLayer("Project/Map/map", "Water Samples", isEntity, queryName, querySql, ps, ls, pos, ts);
-    queryName = "Plant Samples";
-    querySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Plant Sample'";
-    showDatabaseLayer("Project/Map/map", "Plant Samples", isEntity, queryName, querySql, ps, ls, pos, ts);
-    queryName = "Soil Samples";
-    querySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Soil Sample'";
-    showDatabaseLayer("Project/Map/map", "Soil Samples", isEntity, queryName, querySql, ps, ls, pos, ts);
-    queryName = "Rock Samples";
-    querySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Rock Sample'";
-    showDatabaseLayer("Project/Map/map", "Rock Samples", isEntity, queryName, querySql, ps, ls, pos, ts);
-    querySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Note'";
-    showDatabaseLayer("Project/Map/map", "Shape Notes", isEntity, queryName, querySql, ps, ls, pos, ts);
+    waterQueryName = "Water Samples";
+    waterQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Water Sample'";
+    waterps = createPointStyle(10, Color.BLUE, 0.2f, 0.5f);
+    showDatabaseLayer("Project/Map/map", "Water Samples", isEntity, waterQueryName, waterQuerySql, waterps, ls, pos, ts);
+    
+    
+    plantQueryName = "Plant Samples";
+    plantQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Plant Sample'";
+    plantps = createPointStyle(10, Color.GREEN, 0.2f, 0.5f);
+    showDatabaseLayer("Project/Map/map", "Plant Samples", isEntity, plantQueryName, plantQuerySql, plantps, ls, pos, ts);
+    
+    soilQueryName = "Soil Samples";
+    soilQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Soil Sample'";
+    soilps = createPointStyle(10, Color.BLACK, 0.2f, 0.5f);
+    showDatabaseLayer("Project/Map/map", "Soil Samples", isEntity, soilQueryName, soilQuerySql, soilps, ls, pos, ts);
+    
+    rockQueryName = "Rock Samples";
+    rockQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Rock Sample'";
+    rockps = createPointStyle(10, Color.RED, 0.2f, 0.5f);   
+    showDatabaseLayer("Project/Map/map", "Rock Samples", isEntity, rockQueryName, rockQuerySql, rockps, ls, pos, ts);
+    
+    notesQueryName = "Notes";
+    notesQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Note'";
+    notesps = createPointStyle(10, Color.YELLOW, 0.2f, 0.5f);
+    showDatabaseLayer("Project/Map/map", "Shape Notes", isEntity, notesQueryName, notesQuerySql, notesps, ls, pos, ts);
     // Canvas layers
     dataEntryLayerID = createCanvasLayer("Project/Map/map", "Data Entry Layer");
     setSelectedLayer("Project/Map/map", "Data Entry Layer");
     loadMapSettings();
+    print("[initMap()] Finished Initialising the Map.");
 }
 
 /* Centres the map on the current position. */
@@ -827,6 +842,7 @@ saveShape() {
 /* Saves drawn shapes with an attatched note. */
 createShape() {
     shapeUUID = null;
+    print("[createShape()] DataEntryLayer ID: " + dataEntryLayerID);
     List geolist = getGeometryList("Project/Map/map", dataEntryLayerID);
     print("[createShape()] geolist: " + geolist);
     if (geolist == null || geolist.size() == 0) {
