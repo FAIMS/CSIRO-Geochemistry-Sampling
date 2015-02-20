@@ -321,9 +321,6 @@ newSample() {
         return;
     }
 
-    // Perform any initialisation required.
-    initValidationGlobals();
-
     // Set the sample prefix and starting ID in-case the user changed them.
     setSamplePrefix(getFieldValue("Project/Start/Sample_Prefix"));
     setSampleStartingID(getFieldValue("Project/Start/Sample_Starting_ID"));
@@ -331,8 +328,11 @@ newSample() {
     // Determine the type of sample required.
     String tabgroup = getSampleTypePath();
 
-    // Populate sample field values.
+    // Populate sample field values and perform any initialisation required.
     newTabGroup(tabgroup);
+    if (tabgroup == "Water_Sample") {
+        initWaterValidationGlobals();
+    }
     fetchOne("select vocabid from vocabulary join attributekey using (attributeid) where attributename = 'Observation Type' and vocabname =  '{Sampling_Location}';", 
      new FetchCallback() {
         onFetch(result) {
@@ -606,9 +606,8 @@ loadSample() {
          new FetchCallback() {
             onFetch(result) {
                 // Perform any sample initialisation 
-                initValidationGlobals();
                 currentSampleUUID = sampleID;
-                
+
                 print("[loadSample()] Loading a sample, currentSampleUUID = " + currentSampleUUID);
                 if (result.get(0).get(0).equals("Water Sample")) {
                     setFieldValue("Project/Start/Sample_Types", "Water Sample");
@@ -736,15 +735,13 @@ initMap() {
     pos = createPolygonStyle(10, Color.parseColor("#440000FF"), createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
     ts = createTextStyle(10, Color.BLACK, 40, Typeface.SANS_SERIF);
     
-    
     isEntity = true;
     // Database layers
     waterQueryName = "Water Samples";
     waterQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Water Sample'";
     waterps = createPointStyle(10, Color.BLUE, 0.2f, 0.5f);
     showDatabaseLayer("Project/Map/map", "Water Samples", isEntity, waterQueryName, waterQuerySql, waterps, ls, pos, ts);
-    
-    
+        
     plantQueryName = "Plant Samples";
     plantQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Plant Sample'";
     plantps = createPointStyle(10, Color.GREEN, 0.2f, 0.5f);
@@ -763,7 +760,9 @@ initMap() {
     notesQueryName = "Notes";
     notesQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Note'";
     notesps = createPointStyle(10, Color.YELLOW, 0.2f, 0.5f);
-    showDatabaseLayer("Project/Map/map", "Shape Notes", isEntity, notesQueryName, notesQuerySql, notesps, ls, pos, ts);
+    notesls = createLineStyle(10, Color.YELLOW, 0.05f, 0.3f, null);
+    notespos = createPolygonStyle(10, Color.YELLOW, createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
+    showDatabaseLayer("Project/Map/map", "Shape Notes", isEntity, notesQueryName, notesQuerySql, notesps, notesls, notespos, ts);
     // Canvas layers
     dataEntryLayerID = createCanvasLayer("Project/Map/map", "Data Entry Layer");
     setSelectedLayer("Project/Map/map", "Data Entry Layer");
@@ -944,19 +943,21 @@ boolean overrideTempCond = false;
 boolean seenPhEhTab = false;
 
 /* Initialises the globals used for temp and conductivity validation. */
-initValidationGlobals() {
+initWaterValidationGlobals() {
     overrideTempCond = false;
-    storedOverride = getFieldValue("Water_Sample/Hidden/Validation_Override");
-    if (!isNull(storedOverride)) {
-        overrideTempCond = Boolean.parseBoolean(storedOverride);
-        // overrideTempCond = storedOverride;
-    }
     seenPhEhTab = false;
+    if (getSampleType() == "Water Sample") {
+        storedOverride = getFieldValue("Water_Sample/Hidden/Validation_Override");
+        if (!isNull(storedOverride)) {
+            print("[initWaterValidationGlobals()] setting overrideTempCond to storedOverride: " + storedOverride);
+            overrideTempCond = Boolean.parseBoolean(storedOverride);
+        }
+    }   
+    
 }
 
 overrideTempValidation() {
     overrideTempCond = true;
-    // setFieldValue("Water_Sample/Hidden/Validation_Override", overrideTempCond);
     setFieldValue("Water_Sample/Hidden/Validation_Override", String.valueOf(overrideTempCond));
 }
 
@@ -966,7 +967,10 @@ validateTempConduct() {
     cond = getFieldValue("Water_Sample/pH_Eh/Conductivity");
     // generate a prompt if the fields are empty and the user hasn't overriden the prompt previously.
     if (seenPhEhTab && !overrideTempCond && (isNull(temp) || isNull(cond))) {
+        print("[validateTempConduct()] Showing temperature and conductivity validation message.");
         showAlert("Alert", "There is no value entered for Temperature/Conductivity.", "overrideTempValidation()", "overrideTempValidation()");
+    } else {
+        print("[validateTempConduct()] seenPhEhTab: " + seenPhEhTab + "\n overrideTempCond: " + overrideTempCond + "\n temperature: " + temp + "\n conductivity: " + cond);
     }
 }
 
@@ -978,6 +982,9 @@ loadWaterSampleFrom(archentid) {
     }
     showTabGroup("Water_Sample", archentid, new FetchCallback() {
         onFetch(result) {
+            // perform initialisation that is dependent on the loaded field values
+            initWaterValidationGlobals();
+            
             fetchOne("select createdBy from createdModifiedAtBy where uuid = '" + archentid + "';", new FetchCallback() {
                 onFetch(username) {
                     setFieldValue("Water_Sample/Basic_Info/Author_Name", username.get(0));
@@ -1463,7 +1470,6 @@ loadSoilSampleAttributes() {
     makeVocab("RadioGroup", "Soil_Sample/Basic_Info/Contamination", "Contamination");
     populateHierarchicalDropDown("Soil_Sample/Basic_Info/Regolith_Type", "Regolith Type");
     populateHierarchicalDropDown("Soil_Sample/Basic_Info/Landform", "Landform");
-    makeVocab("CheckBoxGroup", "Soil_Sample/Basic_Info/Samples_Collected", "Samples Collected");
 }
 
 /*** ROCK SAMPLE ***/
