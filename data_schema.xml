@@ -260,9 +260,6 @@
     <property name="Conductivity" type="freetext">
       <description>Description TBD</description>
     </property>
-    <property name="Validation Override" type="measure">
-      <description>Description TBD</description>
-    </property>
     <property name="Sketch" type="file" file="true" thumbnail="true">
       <description>Description TBD</description>
     </property>

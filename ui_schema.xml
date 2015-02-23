@@ -171,7 +171,6 @@
             <Hidden>
               <Preferred_pH_Time/>
               <Preferred_Eh_Time/>
-              <Validation_Override/>
             </Hidden>
           </Water_Sample>
           <Plant_Sample>
@@ -973,9 +972,6 @@
           <label/>
         </input>
         <input ref="Preferred_Eh_Time" faims_attribute_name="Preferred Eh Time" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
-          <label/>
-        </input>
-        <input ref="Validation_Override" faims_attribute_name="Validation Override" faims_attribute_type="measure" faims_read_only="true">
           <label/>
         </input>
       </group>

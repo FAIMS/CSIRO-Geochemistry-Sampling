@@ -329,10 +329,10 @@ newSample() {
     String tabgroup = getSampleTypePath();
 
     // Populate sample field values and perform any initialisation required.
-    newTabGroup(tabgroup);
     if (tabgroup == "Water_Sample") {
         initWaterValidationGlobals();
     }
+    newTabGroup(tabgroup);
     fetchOne("select vocabid from vocabulary join attributekey using (attributeid) where attributename = 'Observation Type' and vocabname =  '{Sampling_Location}';", 
      new FetchCallback() {
         onFetch(result) {
@@ -936,29 +936,23 @@ onEvent("Water_Sample/Photolog/Photolog_List", "click", "loadPhotolog();");
 
 onEvent("Water_Sample/Basic_Info", "show", "validateTempConduct()");
 onEvent("Water_Sample/Codes", "show", "validateTempConduct()");
-onEvent("Water_Sample/pH_Eh", "show", "seenPhEhTab=true;");
 onEvent("Water_Sample/Photolog", "show", "validateTempConduct()");
+onEvent("Water_Sample/pH_Eh", "show", "seenPhEhTab=true;");
+onEvent("Water_Sample", "load", "overrideTempCond=false;");
+
+onEvent("Water_Sample/pH_Eh/Temperature" , "click" , "print(\"Temperature view clicked. Arming validation\");overrideTempCond=false;");
+onEvent("Water_Sample/pH_Eh/Conductivity", "click", "print(\"Conductivity view clicked. Arming validation\");overrideTempCond=false;");
+/* BUG: click events not always firing on first click*/
 
 boolean overrideTempCond = false;
 boolean seenPhEhTab = false;
-
+ 
 /* Initialises the globals used for temp and conductivity validation. */
 initWaterValidationGlobals() {
     overrideTempCond = false;
     seenPhEhTab = false;
-    if (getSampleType() == "Water Sample") {
-        storedOverride = getFieldValue("Water_Sample/Hidden/Validation_Override");
-        if (!isNull(storedOverride)) {
-            print("[initWaterValidationGlobals()] setting overrideTempCond to storedOverride: " + storedOverride);
-            overrideTempCond = Boolean.parseBoolean(storedOverride);
-        }
-    }   
-    
-}
-
-overrideTempValidation() {
-    overrideTempCond = true;
-    setFieldValue("Water_Sample/Hidden/Validation_Override", String.valueOf(overrideTempCond));
+    /* BUG: the global flag 'seenPhEhTab' isnt registering as being changed to false before the new sample 
+            is created or loaded, if user just left ph tab of another sample before validation message was shown */    
 }
 
 /* Validates the temperature and conductivity fields. */
@@ -967,8 +961,15 @@ validateTempConduct() {
     cond = getFieldValue("Water_Sample/pH_Eh/Conductivity");
     // generate a prompt if the fields are empty and the user hasn't overriden the prompt previously.
     if (seenPhEhTab && !overrideTempCond && (isNull(temp) || isNull(cond))) {
-        print("[validateTempConduct()] Showing temperature and conductivity validation message.");
-        showAlert("Alert", "There is no value entered for Temperature/Conductivity.", "overrideTempValidation()", "overrideTempValidation()");
+        print("[validateTempConduct()] Showing temperature and conductivity validation message. overrideTempCond: " + overrideTempCond + " seenPhEhTab: " + seenPhEhTab);
+        String message = "Temperature or Conductivity";
+        if (isNull(temp) && !isNull(cond)) {
+            message = "Temperature";
+        } else if (!isNull(temp) && isNull(cond)){
+            message = "Conductivity";
+        }
+        // showAlert("Alert", "There is no value entered for " + message, "overrideTempValidation()", "overrideTempValidation()");
+        showAlert("Alert", "There is no value entered for " + message, "overrideTempCond=true;", "overrideTempCond=true;showTab(\"Water_Sample/pH_Eh\");");
     } else {
         print("[validateTempConduct()] seenPhEhTab: " + seenPhEhTab + "\n overrideTempCond: " + overrideTempCond + "\n temperature: " + temp + "\n conductivity: " + cond);
     }
@@ -980,11 +981,10 @@ loadWaterSampleFrom(archentid) {
         showToast("No Water Sample selected");
         return;
     }
+    // Perform neccessary initialisation
+    initWaterValidationGlobals();
     showTabGroup("Water_Sample", archentid, new FetchCallback() {
         onFetch(result) {
-            // perform initialisation that is dependent on the loaded field values
-            initWaterValidationGlobals();
-            
             fetchOne("select createdBy from createdModifiedAtBy where uuid = '" + archentid + "';", new FetchCallback() {
                 onFetch(username) {
                     setFieldValue("Water_Sample/Basic_Info/Author_Name", username.get(0));
