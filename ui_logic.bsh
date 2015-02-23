@@ -332,6 +332,8 @@ newSample() {
     if (tabgroup == "Water_Sample") {
         initWaterValidationGlobals();
     }
+    photolog_id = null;
+
     newTabGroup(tabgroup);
     fetchOne("select vocabid from vocabulary join attributekey using (attributeid) where attributename = 'Observation Type' and vocabname =  '{Sampling_Location}';", 
      new FetchCallback() {
@@ -535,7 +537,7 @@ addSampleNavigation() {
             if(!isNull(currentSampleUUID)) {
                 duplicateSample();
             } else {
-                showWarning("Warning", "The current sample is empty");
+                showWarning("Warning", "The current sample cannot be duplicated until it is modified");
             }
         }
     }, "primary");
@@ -607,6 +609,7 @@ loadSample() {
             onFetch(result) {
                 // Perform any sample initialisation 
                 currentSampleUUID = sampleID;
+                photolog_id = null;
 
                 print("[loadSample()] Loading a sample, currentSampleUUID = " + currentSampleUUID);
                 if (result.get(0).get(0).equals("Water Sample")) {
@@ -663,6 +666,7 @@ duplicateSample() {
 
     // show the tabgroup for the new sample, which enables autosave by event handling.
     showTabGroup(tabgroup);
+    showToast(getSampleType() + " duplicated");
 }
 
 /** Map GPS **/
@@ -1550,6 +1554,7 @@ newPhotolog() {
 loadPhotolog() {
     photolog_id = getListItemValue();
     if (!isNull(photolog_id)) {
+        print("[loadPhotolog()] Using photolog list item value as photolog_id: " + photolog_id);
         loadPhotologFrom(photolog_id);
     }
 }
