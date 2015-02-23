@@ -417,6 +417,11 @@ onEvent("Plant_Sample/Basic_Info", "show", "print(\"render on show\");renderLoca
 onEvent("Soil_Sample/Basic_Info", "show", "print(\"render on show\");renderLocationNumber();");
 onEvent("Rock_Sample/Basic_Info", "show", "print(\"render on show\");renderLocationNumber();");
 
+onEvent("Water_Sample", "load", "locationNumberRendered=false;");
+onEvent("Plant_Sample", "load", "locationNumberRendered=false;");
+onEvent("Soil_Sample", "load", "locationNumberRendered=false;");
+onEvent("Rock_Sample", "load", "locationNumberRendered=false;");
+
 Boolean locationNumberRendered = false;
 Boolean mapButtonRendered = false;
 
@@ -989,6 +994,7 @@ loadWaterSampleFrom(archentid) {
     initWaterValidationGlobals();
     showTabGroup("Water_Sample", archentid, new FetchCallback() {
         onFetch(result) {
+            renderLocationNumber();
             fetchOne("select createdBy from createdModifiedAtBy where uuid = '" + archentid + "';", new FetchCallback() {
                 onFetch(username) {
                     setFieldValue("Water_Sample/Basic_Info/Author_Name", username.get(0));
@@ -1402,9 +1408,9 @@ loadPlantSampleFrom(archentid) {
         showToast("No {Plant Sample} selected");
         return;
     }
-
     showTabGroup("Plant_Sample", archentid, new FetchCallback() {
         onFetch(result) {
+            renderLocationNumber();
             fetchOne("select createdBy from createdModifiedAtBy where uuid = '" + archentid + "';", new FetchCallback() {
                 onFetch(username) {
                     setFieldValue("Plant_Sample/Basic_Info/Author_Name", username.get(0));
@@ -1446,9 +1452,9 @@ loadSoilSampleFrom(archentid) {
         showToast("No {Soil Sample} selected");
         return;
     }
-
     showTabGroup("Soil_Sample", archentid, new FetchCallback() {
         onFetch(result) {
+            renderLocationNumber();
             fetchOne("select createdBy from createdModifiedAtBy where uuid = '" + archentid + "';", new FetchCallback() {
                 onFetch(username) {
                     setFieldValue("Soil_Sample/Basic_Info/Author_Name", username.get(0));
@@ -1495,9 +1501,9 @@ loadRockSampleFrom(archentid) {
         showToast("No {Rock_Sample} selected");
         return;
     }
-
     showTabGroup("Rock_Sample", archentid, new FetchCallback() {
         onFetch(result) {
+            renderLocationNumber();
             fetchOne("select createdBy from createdModifiedAtBy where uuid = '" + archentid + "';", new FetchCallback() {
                 onFetch(username) {
                     setFieldValue("Rock_Sample/Basic_Info/Author_Name", username.get(0));
@@ -1553,8 +1559,9 @@ newPhotolog() {
 /* Loads a photolog based on the most recent list item selected. */
 loadPhotolog() {
     photolog_id = getListItemValue();
+    print("[loadPhotolog()] photolog list item value null status: " + isNull(photolog_id));
+    print("[loadPhotolog()] Using photolog list item value as photolog_id: " + photolog_id);
     if (!isNull(photolog_id)) {
-        print("[loadPhotolog()] Using photolog list item value as photolog_id: " + photolog_id);
         loadPhotologFrom(photolog_id);
     }
 }
@@ -1661,7 +1668,7 @@ loadRelatedPhotologs(String related_sample_id, String type) {
                 onFetch(result) {
                     if(isNull(result)) {
                         result = new ArrayList();
-                        result.add(new NameValuePair("{No_records_found}", " "));
+                        result.add(new NameValuePair("{No_records_found}", ""));
                     }
                     populateList(type + "/Photolog/Photolog_List", result);
                 }
