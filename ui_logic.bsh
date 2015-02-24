@@ -172,6 +172,7 @@ loadSamplePrefix() {
             if (!isNull(result)) {
                 samplePrefix = result.get(0);
                 setFieldValue("Project/Start/Sample_Prefix", samplePrefix);
+                print("[loadSamplePrefix()] set sample prefix to: " + samplePrefix);
             }
         }
     });
@@ -318,8 +319,12 @@ Boolean newSampleFlag = false;
 /* Creates a new sample based on selected type. */
 newSample() {
     // Validate the entered sample prefix and ID before making a new sample.
-    if (!validSamplePrefix() || !validStartingSampleID()) {
+    if (!validSamplePrefix() || !validStartingSampleID()) {       
+        print("[newSample()] sample prefix or starting id not valid");
+        showTab("Project/Start");
         return;
+    } else {
+        print("[newSample()] sample prefix and starting id are valid");
     }
 
     // Set the sample prefix and starting ID in-case the user changed them.
@@ -373,6 +378,7 @@ newSample() {
     // Increment the sample starting ID for the next sample.
     setSampleStartingID(Integer.toString(Integer.parseInt(sampleID) + 1));
     newSampleFlag = true;
+    showToast("New " + getSampleType() + " created");
 }
 
 /* Generates and returns the date attribute for the current sample type. */
@@ -559,17 +565,11 @@ addSampleNavigation() {
             "{New_" + tabgroup + "}";
         }
         actionOn() {
+            print("[Sidebar New Sample] Attempting to make a new sample");
             if(!isNull(currentSampleUUID)) {
                 newSample();
-                autoSaveSample();
-                print("[Sidebar New Sample] Saved a new sample: " + currentSampleUUID);
-                showToast("New " + getSampleType() + " created");
             } else {
-                String newSampleLogic = "" + 
-                "newSample();" + 
-                "autoSaveSample();" + 
-                "print(\"[Sidebar New Sample] Saved a new sample: \" + currentSampleUUID);" + 
-                "showToast(\"New \" + getSampleType() + \" created\");";
+                String newSampleLogic = "newSample();";
                 showAlert("Warning", "You will lose any unsaved changes!", newSampleLogic, "");
             }
         }
