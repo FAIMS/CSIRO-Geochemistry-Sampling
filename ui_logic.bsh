@@ -168,6 +168,7 @@ setSampleStartingID(String sampleStartingID) {
 loadSamplePrefix() {
     fetchOne("SELECT value FROM localSettings WHERE key = 'Sample Prefix';", new FetchCallback() {
         onFetch(result) {
+            print("[loadSamplePrefix()] fetched sample prefix from localSettings: " + samplePrefix);
             if (!isNull(result)) {
                 samplePrefix = result.get(0);
                 setFieldValue("Project/Start/Sample_Prefix", samplePrefix);
@@ -367,11 +368,10 @@ newSample() {
     setFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_Prefix", samplePrefix);
     setFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_ID", sampleID);
     print("[newSample()] Making a new sample.\nPrefix: "+samplePrefix+"\nID: "+sampleID+"\nTimestamp: "+getFieldValue(tabgroup+"/Basic_Info/Timestamp"));
-    
+    keepTabGroupChanges(tabgroup);
+
     // Increment the sample starting ID for the next sample.
     setSampleStartingID(Integer.toString(Integer.parseInt(sampleID) + 1));
-    
-    keepTabGroupChanges(tabgroup);
     newSampleFlag = true;
 }
 
@@ -524,7 +524,7 @@ autoSaveSample(attributeList) {
             currentSampleUUID = uuid;
             print("[autoSaveSample(attributeList)] Autosaved sample uuid: "+currentSampleUUID);
             if (newRecord) {
-                 print("[autoSaveSample()] new record created");
+                 print("[autoSaveSample(attributeList)] new record created");
             }
             attributeList = null;
         }
@@ -536,7 +536,15 @@ autoSaveSample(attributeList) {
 
 /* Autosaves the current sample. */
 autoSaveSample() {
-    autoSaveSample(null);
+    /* If the sample is a new record then the current sample uuid would have been set to null to generate a new record. 
+        If that is the case, then generate the date attribute for the sample. However if an existing sample is being saved, 
+        then don't overrite any previous date attributes. */
+    print("[autoSaveSample()] Saving sample id: " + currentSampleUUID);
+    if (isNull(currentSampleUUID)) {
+        autoSaveSample(getSampleDateAttributeList());
+    } else {
+        autoSaveSample(null);
+    }   
 }
 
 /* Creates sidebar navigation for the sample. */
@@ -553,13 +561,13 @@ addSampleNavigation() {
         actionOn() {
             if(!isNull(currentSampleUUID)) {
                 newSample();
-                autoSaveSample(getSampleDateAttributeList());
+                autoSaveSample();
                 print("[Sidebar New Sample] Saved a new sample: " + currentSampleUUID);
                 showToast("New " + getSampleType() + " created");
             } else {
                 String newSampleLogic = "" + 
                 "newSample();" + 
-                "autoSaveSample(getSampleDateAttributeList());" + 
+                "autoSaveSample();" + 
                 "print(\"[Sidebar New Sample] Saved a new sample: \" + currentSampleUUID);" + 
                 "showToast(\"New \" + getSampleType() + \" created\");";
                 showAlert("Warning", "You will lose any unsaved changes!", newSampleLogic, "");
@@ -575,7 +583,7 @@ addSampleNavigation() {
             if(!isNull(currentSampleUUID)) {
                 duplicateSample();
             } else {
-                showWarning("Warning", "The current sample cannot be duplicated until it is modified");
+                showWarning("Warning", "The current sample could not be duplicated");
             }
         }
     }, "primary");
@@ -963,7 +971,7 @@ initMap();
 
 
 /*** WATER SAMPLE ***/
-onEvent("Water_Sample", "show", "addSampleNavigation();autoSaveSample(getSampleDateAttributeList());");
+onEvent("Water_Sample", "show", "addSampleNavigation();autoSaveSample();");
 
 onEvent("Water_Sample/Basic_Info/Take_GPS", "click", "takePoint()");
 onEvent("Water_Sample/Basic_Info/Take_Photo", "click", "attachPictureTo(\"Water_Sample/Basic_Info/Photos\")");
@@ -982,8 +990,8 @@ onEvent("Water_Sample/Photolog", "show", "validateTempConduct()");
 onEvent("Water_Sample/pH_Eh", "show", "seenPhEhTab=true;");
 onEvent("Water_Sample", "load", "overrideTempCond=false;");
 
-onEvent("Water_Sample/pH_Eh/Temperature" , "click" , "print(\"Temperature view clicked. Arming validation\");overrideTempCond=false;");
-onEvent("Water_Sample/pH_Eh/Conductivity", "click", "print(\"Conductivity view clicked. Arming validation\");overrideTempCond=false;");
+onEvent("Water_Sample/pH_Eh/Temperature" , "click" , "showToast(\"Temperature view clicked.\");print(\"Temperature view clicked. Arming validation\");overrideTempCond=false;");
+onEvent("Water_Sample/pH_Eh/Conductivity", "click", "showToast(\"Conductivity view clicked.\");print(\"Conductivity view clicked. Arming validation\");overrideTempCond=false;");
 /* BUG: click events not always firing on first click*/
 
 boolean overrideTempCond = false;
@@ -1084,6 +1092,7 @@ loadWaterSampleFrom(archentid) {
                     }
                 }
             });
+            keepTabGroupChanges("Water_Sample");
         }
 
             onError(message) {
@@ -1424,7 +1433,7 @@ reallyDeleteEh(String eh_id) {
 
 /*** PLANT SAMPLE ***/
 
-onEvent("Plant_Sample", "show", "addSampleNavigation();autoSaveSample(getSampleDateAttributeList());");
+onEvent("Plant_Sample", "show", "addSampleNavigation();autoSaveSample();");
 
 onEvent("Plant_Sample/Basic_Info/Take_GPS", "click", "takePoint()");
 onEvent("Plant_Sample/Basic_Info/Take_Photo", "click", "attachPictureTo(\"Plant_Sample/Basic_Info/Photos\")");
@@ -1454,6 +1463,7 @@ loadPlantSampleFrom(archentid) {
                     setFieldValue("Plant_Sample/Basic_Info/Timestamp", timestamp.get(0));
                 }
             });
+            keepTabGroupChanges("Plant_Sample");
         }
     });
 }
@@ -1468,7 +1478,7 @@ loadPlantSampleAttributes() {
 
 /*** SOIL SAMPLE ***/
 
-onEvent("Soil_Sample", "show", "addSampleNavigation();autoSaveSample(getSampleDateAttributeList());");
+onEvent("Soil_Sample", "show", "addSampleNavigation();autoSaveSample();");
 
 onEvent("Soil_Sample/Basic_Info/Take_GPS", "click", "takePoint()");
 onEvent("Soil_Sample/Basic_Info/Take_Photo", "click", "attachPictureTo(\"Soil_Sample/Basic_Info/Photos\")");
@@ -1498,6 +1508,7 @@ loadSoilSampleFrom(archentid) {
                     setFieldValue("Soil_Sample/Basic_Info/Timestamp", timestamp.get(0));
                 }
             });
+            keepTabGroupChanges("Soil_Sample");
         }
     });
 }
@@ -1517,7 +1528,7 @@ loadSoilSampleAttributes() {
 
 /*** ROCK SAMPLE ***/
 
-onEvent("Rock_Sample", "show", "addSampleNavigation();autoSaveSample(getSampleDateAttributeList());");
+onEvent("Rock_Sample", "show", "addSampleNavigation();autoSaveSample();");
 
 onEvent("Rock_Sample/Basic_Info/Take_GPS", "click", "takePoint()");
 onEvent("Rock_Sample/Lithological_Info/Take_Photo", "click", "attachPictureTo(\"Rock_Sample/Lithological_Info/Photos\")");
@@ -1547,6 +1558,7 @@ loadRockSampleFrom(archentid) {
                     setFieldValue("Rock_Sample/Basic_Info/Timestamp", timestamp.get(0));
                 }
             });
+            keepTabGroupChanges("Rock_Sample");
         }
     });
 }
