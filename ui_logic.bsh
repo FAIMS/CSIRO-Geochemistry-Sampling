@@ -412,20 +412,42 @@ onEvent("Plant_Sample/Basic_Info/Observation_Type", "click", "print(\"render on 
 onEvent("Soil_Sample/Basic_Info/Observation_Type", "click", "print(\"render on click\");renderLocationNumber()");
 onEvent("Rock_Sample/Basic_Info/Observation_Type", "click", "print(\"render on click\");renderLocationNumber()");
 
-onEvent("Water_Sample/Basic_Info", "show", "print(\"render on show\");renderLocationNumber();");
-onEvent("Plant_Sample/Basic_Info", "show", "print(\"render on show\");renderLocationNumber();");
-onEvent("Soil_Sample/Basic_Info", "show", "print(\"render on show\");renderLocationNumber();");
-onEvent("Rock_Sample/Basic_Info", "show", "print(\"render on show\");renderLocationNumber();");
+// onEvent("Water_Sample/Basic_Info", "show", "print(\"render on show\");renderLocationNumber();");
+// onEvent("Plant_Sample/Basic_Info", "show", "print(\"render on show\");renderLocationNumber();");
+// onEvent("Soil_Sample/Basic_Info", "show", "print(\"render on show\");renderLocationNumber();");
+// onEvent("Rock_Sample/Basic_Info", "show", "print(\"render on show\");renderLocationNumber();");
 
-onEvent("Water_Sample", "load", "locationNumberRendered=false;");
-onEvent("Plant_Sample", "load", "locationNumberRendered=false;");
-onEvent("Soil_Sample", "load", "locationNumberRendered=false;");
-onEvent("Rock_Sample", "load", "locationNumberRendered=false;");
+onEvent("Water_Sample", "load", "waterLocationNumberRendered=false;");
+onEvent("Plant_Sample", "load", "plantLocationNumberRendered=false;");
+onEvent("Soil_Sample", "load", "soilLocationNumberRendered=false;");
+onEvent("Rock_Sample", "load", "rockLocationNumberRendered=false;");
 
-Boolean locationNumberRendered = false;
+Boolean waterLocationNumberRendered = false;
+Boolean plantLocationNumberRendered = false;
+Boolean soilLocationNumberRendered = false;
+Boolean rockLocationNumberRendered = false;
 Boolean mapButtonRendered = false;
 
-/* Renders the location number dynamic view if obervation only is selected for the current sample. */ 
+/* Renders the location number dynamic view for the specified tabgroup. */
+renderTabGroupLocationNumber(String tabgroup) {
+    print("[renderTabGroupLocationNumber()] Dynamically creating the Location Number view.");
+    // fetch any saved value for location number and set the field value to that.
+    fetchOne ("select measure from latestnondeletedaentvalue join attributekey using (attributeid) where attributename = 'Location Number' and uuid = '" + currentSampleUUID + "';", 
+     new FetchCallback() {
+        onFetch(result) {
+            if (!isNull(result)) {
+                print("[renderTabGroupLocationNumber()] fetched saved location number value: " + result);
+                setFieldValue(tabgroup + "/Basic_Info/Location_Number", result.get(0));
+            }
+        }
+    });
+
+    // render the view
+    textDef = createViewDef().createTextField().setLabel("{Location_Number}").setAttributeName("Location Number").setAttributeType("measure");
+    createView(tabgroup + "/Basic_Info/Location_Number", textDef, tabgroup + "/Basic_Info/Location_Number_Container");
+}
+
+/* Renders the location number dynamic view if obervation only is selected for the current sample and the view isn't already rendered. */ 
 renderLocationNumber() {
     fetchOne("select vocabid from vocabulary join attributekey using (attributeid) where attributename = 'Observation Type' and vocabname =  '{Observation_Only}';", 
      new FetchCallback() {
@@ -437,29 +459,40 @@ renderLocationNumber() {
             executeViewTask(new ViewTask() {
                 doTask() {
                     if (selectedObservationType.equals(observationOnly)) {
-                        if (!locationNumberRendered) {
-                            print("[renderLocationNumber()] Dynamically creating the Location Number view.");
-                            // fetch any saved value for location number and set the field value to that.
-                            fetchOne ("select measure from latestnondeletedaentvalue join attributekey using (attributeid) where attributename = 'Location Number' and uuid = '" + currentSampleUUID + "';", 
-                             new FetchCallback() {
-                                onFetch(result) {
-                                    if (!isNull(result)) {
-                                        print("[renderLocationNumber()] fetched saved location number value: " + result);
-                                        setFieldValue(tabgroup + "/Basic_Info/Location_Number", result.get(0));
-                                    }
-                                }
-                            });
-
-                            // render the view
-                            textDef = createViewDef().createTextField().setLabel("{Location_Number}").setAttributeName("Location Number").setAttributeType("measure");
-                            createView(tabgroup + "/Basic_Info/Location_Number", textDef, tabgroup + "/Basic_Info/Location_Number_Container");
-                            locationNumberRendered = true;
+                        if (tabgroup.equals("Water_Sample")) {
+                            if (!waterLocationNumberRendered) {
+                                renderTabGroupLocationNumber(tabgroup);
+                                waterLocationNumberRendered = true;
+                            }
+                        } else if (tabgroup.equals("Plant_Sample")) {
+                            if (!plantLocationNumberRendered) {
+                                renderTabGroupLocationNumber(tabgroup);
+                                plantLocationNumberRendered = true;
+                            }
+                        } else if (tabgroup.equals("Soil_Sample")) {
+                            if (!soilLocationNumberRendered) {
+                                renderTabGroupLocationNumber(tabgroup);
+                                soilLocationNumberRendered = true;
+                            }
+                        } else if (tabgroup.equals("Rock_Sample")) {
+                            if (!rockLocationNumberRendered) {
+                                renderTabGroupLocationNumber(tabgroup);
+                                rockLocationNumberRendered = true;
+                            }
                         }
                     } else {
                         print("[renderLocationNumber()] Dynamically removing all views for the tabgroup.");
                         //removeView(tabgroup + "/Basic_Info/Location_Number");
                         removeAllViewsAndContainers(tabgroup);
-                        locationNumberRendered = false;
+                         if (tabgroup.equals("Water_Sample")) {
+                            waterLocationNumberRendered = false;
+                        } else if (tabgroup.equals("Plant_Sample")) {
+                            plantLocationNumberRendered = false;
+                        } else if (tabgroup.equals("Soil_Sample")) {
+                            soilLocationNumberRendered = false;
+                        } else if (tabgroup.equals("Rock_Sample")) {
+                            rockLocationNumberRendered = false;
+                        }
                         mapButtonRendered = false;
                     }
                     // render the map button after the location number, due to issues with view removal and timing/ordering.
