@@ -335,6 +335,7 @@
               <Area/>
               <Observation_Type/>
               <Location_Number_Container/>
+              <Core_ID/>
               <container2>
                 <child1>
                   <Latitude/>
@@ -1373,7 +1374,7 @@
           <group ref="child2" faims_style="even">
             <label></label>
             <input ref="Rock_Sample_ID" faims_attribute_name="Rock Sample ID" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
-              <label>{Core_ID}</label>
+              <label>{Rock_Sample_ID}</label>
             </input>
           </group>
         </group>
@@ -1411,6 +1412,9 @@
         <group ref="Location_Number_Container">
           <label/>
         </group>
+        <input ref="Core_ID" faims_attribute_name="Core ID" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
+          <label>{Core_ID}</label>
+        </input>
         <group ref="container2" faims_style="orientation">
           <label></label>
           <group ref="child1" faims_style="even">
@@ -1568,7 +1572,7 @@
             </input>
           </group>
         </group>
-        <input ref="Other_Structural_Measurements" faims_attribute_name="Other Structural Measurements" faims_attribute_type="meaure" faims_certainty="true" faims_annotation="true">
+        <input ref="Other_Structural_Measurements" faims_attribute_name="Other Structural Measurements" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>{Other_Structural_Measurements}</label>
         </input>
         <group ref="container01" faims_style="orientation">

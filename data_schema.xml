@@ -1430,6 +1430,9 @@
     <property name="Area" type="freetext">
       <description>Description TBD</description>
     </property>
+    <property name="Core ID" type="measure">
+      <description>Fill in if sample is obtained from core</description>
+    </property>
     <property name="Latitude" type="freetext">
       <description>Description TBD</description>
     </property>
