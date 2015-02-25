@@ -38,63 +38,63 @@ makeLocalID();
 
 addActionBarItem("sync", new ToggleActionButtonCallback() {
     actionOnLabel() {
-        "Sync enabled";
+        "{Sync_Enabled}";
     }
     actionOn() {
         setSyncEnabled(false);
         setFileSyncEnabled(false);
-        showToast("Sync disabled.");
+        showToast("{Sync_Disabled}");
     }
     isActionOff() {
         isSyncEnabled();
     }
     actionOffLabel() {
-        "Sync disabled";
+        "{Sync_Disabled}";
     }
     actionOff() {
         setSyncEnabled(true);
         setFileSyncEnabled(true);
-        showToast("Sync enabled.");
+        showToast("{Sync_Enabled}");
     }
 });
 
 addActionBarItem("internal_gps", new ToggleActionButtonCallback() {
     actionOnLabel() {
-        "Internal GPS enabled";
+        "{Internal_GPS_Enabled}";
     }
     actionOn() {
         stopGPS();
-        showToast("GPS disabled.");
+        showToast("{GPS_Disabled}");
     }
     isActionOff() {
         isInternalGPSOn();
     }
     actionOffLabel() {
-        "Internal GPS disabled";
+        "{Internal_GPS_Disabled}";
     }
     actionOff() {
         if(isExternalGPSOn()) {
             stopGPS();
         }
         startInternalGPS();
-        showToast("GPS enabled.");
+        showToast("{GPS_Enabled}");
     }
 });
 
 addActionBarItem("external_gps", new ToggleActionButtonCallback() {
     actionOnLabel() {
-        "External GPS enabled";
+        "{External_GPS_Enabled}";
     }
     actionOn() {
         stopGPS();
-        showToast("GPS disabled.");
+        showToast("{GPS_Disabled}");
 
     }
     isActionOff() {
         isExternalGPSOn();
     }
     actionOffLabel() {
-        "External GPS disabled";
+        "{External_GPS_Disabled}";
     }
     actionOff() {
         if(isInternalGPSOn()) {
@@ -102,9 +102,9 @@ addActionBarItem("external_gps", new ToggleActionButtonCallback() {
         }
         startExternalGPS();
         if(isBluetoothConnected()) {
-            showToast("GPS enabled.");
+            showToast("{GPS_Enabled}");
         } else {
-            showToast("Please enable bluetooth.");
+            showToast("{Please_Enable_Bluetooth}");
             this.isActionOff();
         }
     }
@@ -247,11 +247,11 @@ checkForDuplicates() {
     fetchAll(query, new FetchCallback() {
         onFetch(result) {
             if (isNull(result)) {
-                showToast("Starting sample ID is valid.");
+                showToast("{Valid_Starting_Sample_ID}");
                 result = new ArrayList();
                 result.add(new NameValuePair("{No_Duplicates_Found}", ""));
             } else {
-                showToast(result.size() + " Duplicate IDs found.");
+                showToast(result.size() + " {Duplicate_IDs_Found}");
             }
             print("[checkForDuplicates()] Checking for duplicates: " + result);
             populateList("Project/Start/Duplicate_ID_List", result);
@@ -264,11 +264,11 @@ checkForDuplicates() {
 boolean validSamplePrefix() {
     prefix = getFieldValue("Project/Start/Sample_Prefix");
     if (isNull(prefix)) {
-        showWarning("Warning", "A sample cannot be created until a sample prefix is entered.");
+        showWarning("{Warning}", "{Error_New_Sample_No_Prefix}");
         return false;
     } 
     if (prefix.length() > 5) {
-        showWarning("Warning", "The sample prefix must be at most 5 characters.");
+        showWarning("{Warning}", "{Error_Prefix_Too_Long}");
         return false;
     }
     return true;
@@ -278,7 +278,7 @@ boolean validSamplePrefix() {
 boolean validStartingSampleID() {
     String sampleID = getFieldValue("Project/Start/Sample_Starting_ID");
     if (isNull(sampleID)) {
-        showWarning("Warning", "A sample cannot be created until a sample starting ID is entered.");
+        showWarning("{Warning}", "{Error_New_Sample_No_ID}");
         return false;
     }
     return true;
@@ -387,7 +387,7 @@ newSample() {
     // Increment the sample starting ID for the next sample.
     setSampleStartingID(Integer.toString(Integer.parseInt(sampleID) + 1));
     newSampleFlag = true;
-    showToast("New " + getSampleType() + " created");
+    showToast("{New} " + getSampleType() + " {Created}");
 }
 
 /* Generates and returns the date attribute for the current sample type. */
@@ -419,7 +419,7 @@ List getSampleDateAttributeList() {
 
 /* Saves the sample archent with geometry equal to the single point drawn on the map. */
 getPointFromMap() {
-    showToast("Not implemented yet.");
+    showToast("{Not_Implemented}");
 }
 
 onEvent("Water_Sample/Basic_Info/Observation_Type", "click", "print(\"render on click\");renderLocationNumber()");
@@ -579,7 +579,7 @@ addSampleNavigation() {
                 newSample();
             } else {
                 String newSampleLogic = "newSample();";
-                showAlert("Warning", "You will lose any unsaved changes!", newSampleLogic, "");
+                showAlert("{Warning}", "{Lose_Unsaved_Changes}!", newSampleLogic, "");
             }
         }
     }, "success");
@@ -592,7 +592,7 @@ addSampleNavigation() {
             if(!isNull(currentSampleUUID)) {
                 duplicateSample();
             } else {
-                showWarning("Warning", "The current sample could not be duplicated");
+                showWarning("{Warning}", "{Sample_Not_Duplicated}");
             }
         }
     }, "primary");
@@ -614,7 +614,7 @@ deleteSample() {
     print("[deleteSample()] Prompting a sample deletion, currentSampleUUID = " + currentSampleUUID);
     if (!isNull(currentSampleUUID)) {
         print("[deleteSample()] Confirming a sample deletion");
-        showAlert("Confirm Deletion", "Press OK to Delete this {" + tabgroup + "}!", "reallyDeleteSample()", "doNotDelete()");
+        showAlert("{Confirm_Deletion}", "{Press_To_Delete} {" + tabgroup + "}!", "reallyDeleteSample()", "doNotDelete()");
     } else {
         cancelTabGroup(tabgroup, true);
         print("[deleteSample()] Cancelling a sample deletion.");
@@ -751,7 +751,7 @@ duplicateSample() {
             // show the tabgroup for the new sample to enable autosaving through existing event listeners.
             newSampleFlag = false;
             showTabGroup(tabgroup);
-            showToast(getSampleType() + " duplicated");
+            showToast(getSampleType() + " {Duplicated}");
             
             print("[duplicateSample()] Keeping tabgroup changes");
             keepTabGroupChanges(tabgroup); 
@@ -775,7 +775,7 @@ onEvent("Rock_Sample/Basic_Info/SRID", "click", "fillInGPS();");
 takePoint() {
     Object position = getGPSPosition();
     if (position == null) {
-        showToast("GPS Not initialised");
+        showToast("{GPS_Not_Initialised}");
         return;
     }
     Object projPosition = getGPSPositionProjected();
@@ -867,7 +867,7 @@ initMap() {
 /* Centres the map on the current position. */
 centreMap() {
     if(!isExternalGPSOn() && !isInternalGPSOn()) {
-        showToast("GPS is not initialised.");
+        showToast("{GPS_Not_Initialised}");
     } else {
         centerOnCurrentPosition("Project/Map/map");
     }
@@ -877,14 +877,14 @@ centreMap() {
 loadMapSettings() {
    jsonFile = getAttachedFilePath("files/data/saved_config.json");
     if(new File(jsonFile).exists()) {
-        loadMapViewConfiguration("Project/Map/map", jsonFile, "showToast(\"Loaded map configuration\")");
+        loadMapViewConfiguration("Project/Map/map", jsonFile, "showToast(\"{Loaded_Map_Configuration}\")");
     }
 }
 
 /* Saves the current map configuration. */
 saveMapSettings() {
     file = getAttachedFilePath("files/data/saved_config.json");
-    saveMapViewConfiguration("Project/Map/map", file, "showToast(\"Saved map configuration\")");
+    saveMapViewConfiguration("Project/Map/map", file, "showToast(\"{Saved_Map_Configuration}\")");
 }
 
 shapeUUID = null;
@@ -892,7 +892,7 @@ onEvent("Shape/Shape_Note", "show", "saveShape();");
 
 /* Generates a confirmation prompt to delete the given shape note. */
 deleteShape(String shapeID) {
-    showAlert("Confirm Deletion", "Press OK to Delete this {Shape_Note}!", "reallyDeleteShape(\"" + shapeID + "\")", "doNotDelete()");
+    showAlert("{Confirm_Deletion}", "{Press_To_Delete} {Shape_Note}!", "reallyDeleteShape(\"" + shapeID + "\")", "doNotDelete()");
 }
 
 /* Deletes the given Shape. */
@@ -901,7 +901,7 @@ reallyDeleteShape(String shapeID) {
         onDelete(uuid) {
             shapeID = null;
             shapeUUID = shapeID;
-            showToast("Shape Note deleted");
+            showToast("{Shape_Note_Deleted}");
             navigateToMap();
         }
     });
@@ -939,7 +939,7 @@ createShape() {
     List geolist = getGeometryList("Project/Map/map", dataEntryLayerID);
     print("[createShape()] geolist: " + geolist);
     if (geolist == null || geolist.size() == 0) {
-        showWarning("Warning", "At least one shape must be present on the data entry layer.");
+        showWarning("{Warning}", "{Error_No_Shapes_Present}");
     } else {
         newTabGroup("Shape");
         print("[createShape()] new shape tab group");
@@ -983,7 +983,7 @@ returnToSample() {
     List geolist = getGeometryList("Project/Map/map", dataEntryLayerID);
     print("[returnToSample()] Gemoetry List: " + geolist);
     if (geolist.size() != 1) {
-        showAlert("alert", "Only 1 point can be created. Please remove any other points or shapes before saving, or press Cancel to return to data recording without saving.", "", "showTabGroup(\""+tabgroup+"\");");
+        showAlert("{Alert}", "{Only_One_Point_Allowed}", "", "showTabGroup(\""+tabgroup+"\");");
         return;
     }
     boolean isPoint = false;
@@ -1034,8 +1034,8 @@ onEvent("Water_Sample/Photolog", "show", "validateTempConduct()");
 onEvent("Water_Sample/pH_Eh", "show", "seenPhEhTab=true;");
 onEvent("Water_Sample", "load", "overrideTempCond=false;");
 
-onEvent("Water_Sample/pH_Eh/Temperature" , "click" , "showToast(\"Temperature view clicked.\");print(\"Temperature view clicked. Arming validation\");overrideTempCond=false;");
-onEvent("Water_Sample/pH_Eh/Conductivity", "click", "showToast(\"Conductivity view clicked.\");print(\"Conductivity view clicked. Arming validation\");overrideTempCond=false;");
+onEvent("Water_Sample/pH_Eh/Temperature" , "click" , "print(\"Temperature view clicked. Arming validation\");overrideTempCond=false;");
+onEvent("Water_Sample/pH_Eh/Conductivity", "click", "print(\"Conductivity view clicked. Arming validation\");overrideTempCond=false;");
 /* BUG: click events not always firing on first click*/
 
 boolean overrideTempCond = false;
@@ -1063,7 +1063,7 @@ validateTempConduct() {
             message = "Conductivity";
         }
         // showAlert("Alert", "There is no value entered for " + message, "overrideTempValidation()", "overrideTempValidation()");
-        showAlert("Alert", "There is no value entered for " + message, "overrideTempCond=true;", "overrideTempCond=true;showTab(\"Water_Sample/pH_Eh\");");
+        showAlert("{Alert}", "{No_Value_Entered} " + message, "overrideTempCond=true;", "overrideTempCond=true;showTab(\"Water_Sample/pH_Eh\");");
     } else {
         print("[validateTempConduct()] seenPhEhTab: " + seenPhEhTab + "\n overrideTempCond: " + overrideTempCond + "\n temperature: " + temp + "\n conductivity: " + cond);
     }
@@ -1072,7 +1072,7 @@ validateTempConduct() {
 /* Loads a specific water sample based on the given ID. */
 loadWaterSampleFrom(archentid) {
     if (isNull(archentid)) {
-        showToast("No Water Sample selected");
+        showToast("{No_Water_Sample_Selected}");
         return;
     }
     // Perform neccessary initialisation
@@ -1310,7 +1310,7 @@ renderpHEhPage() {
 /* Adds a new pH value, saves the entity and updates the dynamic UI. */
 addNewpH(String ph_value) {
     if(isNull(ph_value)) {
-        showToast("Please fill in an pH value");
+        showToast("{Please_Fill_In_PH}");
         return;
     }
     List attributes = createAttributeList();
@@ -1349,7 +1349,7 @@ addNewpH(String ph_value) {
 /* Adds a new Eh value, saves the entity and updates the dynamic UI. */
 addNewEh(String eh_value) {
     if(isNull(eh_value)) {
-        showToast("Please fill in an Eh value");
+        showToast("{Please_Fill_In_EH}");
         return;
     }
     List attributes = createAttributeList();
@@ -1435,7 +1435,7 @@ setPreferredEh(String eh_id, String eh_value, String eh_time, int index) {
 
 /* Generates a confirmation prompt to delete the given pH. */
 deletepH(String ph_id) {
-    showAlert("Confirm Deletion", "Press OK to Delete this {pH}!", "reallyDeletepH(\"" + ph_id + "\")", "doNotDelete()");
+    showAlert("{Confirm_Deletion}", "{Press_To_Delete} {pH}!", "reallyDeletepH(\"" + ph_id + "\")", "doNotDelete()");
 }
 
 /* Deletes the given pH. */
@@ -1456,7 +1456,7 @@ reallyDeletepH(String ph_id) {
 
 /* Generates a confirmation prompt to delete the given pH. */
 deleteEh(String eh_id) {
-    showAlert("Confirm Deletion", "Press OK to Delete this {Eh}!", "reallyDeleteEh(\"" + eh_id + "\")", "doNotDelete()");
+    showAlert("{Confirm_Deletion}", "{Press_To_Delete} {Eh}!", "reallyDeleteEh(\"" + eh_id + "\")", "doNotDelete()");
 }
 
 /* Deletes the given Eh. */
@@ -1491,7 +1491,7 @@ onEvent("Plant_Sample/Photolog/Photolog_List", "click", "loadPhotolog();");
 /* Loads a specific plant sample based on the given ID. */
 loadPlantSampleFrom(archentid) {
     if (isNull(archentid)) {
-        showToast("No {Plant Sample} selected");
+        showToast("{No_Plant_Sample_Selected}");
         return;
     }
     showTabGroup("Plant_Sample", archentid, new FetchCallback() {
@@ -1536,7 +1536,7 @@ onEvent("Soil_Sample/Photolog/Photolog_List", "click", "loadPhotolog();");
 /* Loads a specific soil sample based on the given ID. */
 loadSoilSampleFrom(archentid) {
     if (isNull(archentid)) {
-        showToast("No {Soil Sample} selected");
+        showToast("{No_Soil_Sample_Selected}");
         return;
     }
     showTabGroup("Soil_Sample", archentid, new FetchCallback() {
@@ -1586,7 +1586,7 @@ onEvent("Rock_Sample/Photolog/Photolog_List", "click", "loadPhotolog();");
 /* Loads a rock sample based on the given ID. */
 loadRockSampleFrom(archentid) {
     if (isNull(archentid)) {
-        showToast("No {Rock_Sample} selected");
+        showToast("{No_Rock_Sample_Selected}");
         return;
     }
     showTabGroup("Rock_Sample", archentid, new FetchCallback() {
@@ -1658,7 +1658,7 @@ loadPhotolog() {
 /* Loads a photolog based on the given ID. */
 loadPhotologFrom(archentid) {
     if (isNull(archentid)) {
-        showToast("No {Photolog} selected");
+        showToast("{No_Photolog_Selected}");
         return;
     }
 
@@ -1694,7 +1694,7 @@ activateAutoSavePhotolog() {
 /* Generates a confirmation to delete the current photolog */
 deletePhotolog() {
     if (!isNull(photolog_id)) {
-        showAlert("Confirm Deletion", "Press OK to Delete this {Photolog}!", "reallyDeletePhotolog()", "doNotDelete()");
+        showAlert("{Confirm_Deletion}", "{Press_To_Delete} {Photolog}!", "reallyDeletePhotolog()", "doNotDelete()");
     } else {
         cancelTabGroup("Photolog", true);
     }
@@ -1724,7 +1724,7 @@ addPhotologNavigation() {
             if(!isNull(photolog_id)) {
                 newPhotolog();
             } else {
-                showAlert("Warning", "You will lose any unsaved changes!", "newPhotolog()", "");
+                showAlert("{Warning}", "{Lose_Unsaved_Changes}!", "newPhotolog()", "");
             }
         }
     }, "success");
@@ -1841,7 +1841,7 @@ setTimestamp(String path) {
 
 /* Informs the user that the delete operation was cancelled. */
 doNotDelete() {
-    showToast("Delete Cancelled.");
+    showToast("{Delete_Cancelled}");
 }
 
 /*** Uneditable - you can edit the code below with extreme precaution ***/
