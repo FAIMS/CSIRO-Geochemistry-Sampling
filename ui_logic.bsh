@@ -128,7 +128,7 @@ onEvent("Shape/Shape_Note/shape_delete", "click", "deleteShape(shapeUUID);");
 onEvent("Project", "show", "removeNavigationButtons();");
 onEvent("Project", "load", "populateList(\"Project/Start/Duplicate_ID_List\", new ArrayList());");
 
-onEvent("Project/Start", "show", "loadSamplePrefix(); loadSampleStartingID(); updateGPSStatus();");
+onEvent("Project/Start", "show", "loadSamplePrefix(); loadSampleStartingID(); updateGPSStatus(); clearDuplicatesList();");
 onEvent("Project/Start/New_Sample", "delayclick", "newSample();");
 onEvent("Project/Start/Check_For_Duplicates", "click", "checkForDuplicates();");
 onEvent("Project/Start/Duplicate_ID_List", "click", "loadSample();");
@@ -229,6 +229,12 @@ updateGPSStatus() {
     }
     print("[updateGPSStatus()] GPS status: " + status);
     setFieldValue("Project/Start/GPS_Status", status);
+}
+
+/* Clears the duplicate sample ID list. */
+clearDuplicatesList() {
+    populateList("Project/Start/Duplicate_ID_List", new ArrayList());
+    refreshTabgroupCSS("Project");
 }
 
 /* Checks the db for duplicate sample ID duplicates */
@@ -636,17 +642,23 @@ removeNavigationButtons() {
 /* Loads a list view of existing samples. */
 loadSearch() {
     String type = getFieldValue("Project/Search/Sample_Types");
-    fetchAll("select uuid, response from latestNonDeletedArchEntFormattedIdentifiers where aenttypename like '%" + type + "%';", 
+    
+    /*
+    fetchAll("select uuid, response from latestNonDeletedArchEntFormattedIdentifiers where aenttypename like '%" + type + "%' limit ? offset ?;", 
         new FetchCallback() {
             onFetch(result) {
                 if (isNull(result)) {
                     result = new ArrayList();
                     result.add(new NameValuePair("{No_records_found}", ""));
                 }
-                populateList("Project/Search/Sample_List", result);
+                populateCursorList("Project/Search/Sample_List", result, 10);
                 print("[loadSearch()]" + result);
             }
         });
+        
+        */
+        
+    populateCursorList("Project/Search/Sample_List", "select uuid, response from latestNonDeletedArchEntFormattedIdentifiers where aenttypename like '%" + type + "%' limit ? offset ?;", 25);
 }
 
 /* Loads the most recetly clicked on existing sample for editing. */
