@@ -1478,10 +1478,10 @@
       <description>Description TBD</description>
     </property>
     <property name="Strike Of Bedding" type="measure">
-      <description>Description TBD</description>
+      <description>Fill in degrees 0-360</description>
     </property>
     <property name="Dip Of Bedding" type="measure">
-      <description>Description TBD</description>
+      <description>Fill in degrees 0-360</description>
     </property>
     <property name="Strike Of Cleavage" type="measure">
       <description>Description TBD</description>
