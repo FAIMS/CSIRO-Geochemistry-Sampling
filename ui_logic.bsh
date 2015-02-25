@@ -168,7 +168,7 @@ setSampleStartingID(String sampleStartingID) {
 loadSamplePrefix() {
     fetchOne("SELECT value FROM localSettings WHERE key = 'Sample Prefix';", new FetchCallback() {
         onFetch(result) {
-            print("[loadSamplePrefix()] fetched sample prefix from localSettings: " + samplePrefix);
+            print("[loadSamplePrefix()] fetched sample prefix from localSettings: " + result);
             if (!isNull(result)) {
                 samplePrefix = result.get(0);
                 setFieldValue("Project/Start/Sample_Prefix", samplePrefix);
@@ -182,12 +182,14 @@ loadSamplePrefix() {
 loadSampleStartingID() {
     fetchOne("SELECT value FROM localSettings WHERE key = 'Sample Starting ID';", new FetchCallback() {
         onFetch(result) {
+            print("[loadSampleStartingID()] fetched sample ID from localSettings: " + result);
             if (isNull(result)) {
                 sampleStartingID = "1";
                 setSampleStartingID(sampleStartingID);
             } else {
                 sampleStartingID = result.get(0);
                 setFieldValue("Project/Start/Sample_Starting_ID", sampleStartingID);
+                print("[loadSampleStartingID()] set sample starting ID to: " + sampleStartingID);
             }
         }
     });
@@ -256,7 +258,7 @@ checkForDuplicates() {
 boolean validSamplePrefix() {
     prefix = getFieldValue("Project/Start/Sample_Prefix");
     if (isNull(prefix)) {
-        showWarning("Warning", "A sample prefix needs to be entered.");
+        showWarning("Warning", "A sample cannot be created until a sample prefix is entered.");
         return false;
     } 
     if (prefix.length() > 5) {
@@ -270,7 +272,7 @@ boolean validSamplePrefix() {
 boolean validStartingSampleID() {
     String sampleID = getFieldValue("Project/Start/Sample_Starting_ID");
     if (isNull(sampleID)) {
-        showWarning("Warning", "A sample starting ID needs to be entered.");
+        showWarning("Warning", "A sample cannot be created until a sample starting ID is entered.");
         return false;
     }
     return true;
@@ -321,6 +323,7 @@ newSample() {
     // Validate the entered sample prefix and ID before making a new sample.
     if (!validSamplePrefix() || !validStartingSampleID()) {       
         print("[newSample()] sample prefix or starting id not valid");
+        showTabGroup("Project");
         showTab("Project/Start");
         return;
     } else {
@@ -517,7 +520,7 @@ autoSaveSample(attributeList) {
     enable_autosave = true;
     tabgroup = getSampleTypePath();
     // check if a new sample was made, and if so then add the workaround fix for the location number view save
-    if (newSampleFlag) {
+    if (newSampleFlag) {                                                                                // BUG: when new sample button is sidebar is the location number value is not saved as an attribute
         print("[autoSaveSample(attributeList)] Autosaving with attributes: " + attributeList);
         workaround = createEntityAttribute("Location Number", null, null, null, null);
         attributeList.add(workaround);
@@ -687,32 +690,61 @@ copyAttribute(String attrib) {
 
 /* Duplicates the current sample excluding any attachments or pictures */
 duplicateSample() {
-    // save the sample with a null ID to duplicate the sample, but with autosave off.
+    // Validate the entered sample prefix and ID before duplicating the sample and using the prefix and ID from the project start tab.
+    if (!validSamplePrefix() || !validStartingSampleID()) {       
+        print("[duplicateSample()] sample prefix or starting id not valid");
+        showTabGroup("Project");
+        showTab("Project/Start");
+        return;
+    } 
+
     tabgroup = getSampleTypePath();
     cancelTabGroup(tabgroup, false);
     currentSampleUUID = null;
-    print("[duplicateSample] Before initial save of new duplicate sample.");
+    print("[duplicateSample] Before changing values for duplicate sample.");
     
     // Update any required fields and reset any undesired duplicate attributes.
+    
     setSampleStartingID(getFieldValue("Project/Start/Sample_Starting_ID"));
-    sampleID = getFieldValue("Project/Start/Sample_Starting_ID");
-    setFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_ID", sampleID);
-    setSampleStartingID(Integer.toString(Integer.parseInt(sampleID) + 1));
+    // String sampleID = getFieldValue("Project/Start/Sample_Starting_ID");
+    // setFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_ID", sampleID);
+    setSampleStartingID(Integer.toString(Integer.parseInt(getFieldValue("Project/Start/Sample_Starting_ID")) + 1));
+    print("[duplicateSample()] new ID value: " + getFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_ID"));
+    
+    setSamplePrefix(getFieldValue("Project/Start/Sample_Prefix"));
+    // String samplePrefix = getFieldValue("Project/Start/Sample_Prefix");
+    // setFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_Prefix", samplePrefix);
+    print("[duplicateSample()] new prefix value: " + getFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_Prefix"));
+    
     if (!tabgroup.equals("Rock_Sample")) {
         setFieldValue(tabgroup + "/Basic_Info/Photos", new ArrayList());
         setFieldValue(tabgroup + "/Basic_Info/Sketches", new ArrayList()); 
-        print("[duplicateSample()] Photos value: " + getFieldValue(tabgroup + "/Basic_Info/Photos"));
-        print("[duplicateSample()] Sketches value: " + getFieldValue(tabgroup + "/Basic_Info/Sketches"));
+        print("[duplicateSample()] new Photos value: " + getFieldValue(tabgroup + "/Basic_Info/Photos"));       // BUG: field value not reset properly, shows old data, should show empty list
+        print("[duplicateSample()] new Sketches value: " + getFieldValue(tabgroup + "/Basic_Info/Sketches"));   // BUG: field value not reset properly, shows old data, should show empty list
     } else {
         setFieldValue("Rock_Sample/Lithological_Info/Photos", new ArrayList());
         setFieldValue("Rock_Sample/Lithological_Info/Sketches", new ArrayList());
-        print("[duplicateSample()] Photos value: " + getFieldValue("Rock_Sample/Lithological_Info/Photos"));
-        print("[duplicateSample()] Sketches value: " + getFieldValue("Rock_Sample/Lithological_Info/Sketches"));
-    }
+        print("[duplicateSample()] new Photos value: " + getFieldValue("Rock_Sample/Lithological_Info/Photos"));
+        print("[duplicateSample()] new Sketches value: " + getFieldValue("Rock_Sample/Lithological_Info/Sketches"));
+    }    
 
-    // show the tabgroup for the new sample, which enables autosave by event handling.
-    showTabGroup(tabgroup);
-    showToast(getSampleType() + " duplicated");
+    // force an initial save of the duplicate sample
+    attributeList = getSampleDateAttributeList();
+    attributeList.add(createEntityAttribute("Location Number", null, null, getFieldValue(tabgroup+"/Basic_Info/Location_Number"), null));
+    saveArchEnt(currentSampleUUID, getSampleType(), null, attributeList, new SaveCallback() {
+        onSave(uuid, newRecord) {
+            currentSampleUUID = uuid;
+            print("[duplicateSample()] Saved sample uuid: "+currentSampleUUID);
+
+            // show the tabgroup for the new sample to enable autosaving through existing event listeners.
+            newSampleFlag = false;
+            showTabGroup(tabgroup);
+            showToast(getSampleType() + " duplicated");
+            
+            print("[duplicateSample()] Keeping tabgroup changes");
+            keepTabGroupChanges(tabgroup); 
+        }
+    });
 }
 
 /** Map GPS **/
