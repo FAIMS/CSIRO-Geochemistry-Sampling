@@ -527,10 +527,12 @@ autoSaveSample(attributeList) {
     tabgroup = getSampleTypePath();
     // check if a new sample was made, and if so then add the workaround fix for the location number view save
     if (newSampleFlag) {                                                                                // BUG: when new sample button is sidebar is the location number value is not saved as an attribute
-        print("[autoSaveSample(attributeList)] Autosaving with attributes: " + attributeList);
-        workaround = createEntityAttribute("Location Number", null, null, null, null);
-        attributeList.add(workaround);
-        print("[autoSaveSample(attributeList)] Autosaving with attributes: " + attributeList);
+        if (attributeList != null) {
+            print("[autoSaveSample(attributeList)] Autosaving with attributes: " + attributeList);
+            workaround = createEntityAttribute("Location Number", null, null, null, null);
+            attributeList.add(workaround);
+            print("[autoSaveSample(attributeList)] Autosaving with attributes: " + attributeList);
+        } else {print("[autoSaveSample(attributeList)] Attribute list is null.");}
         newSampleFlag = false;
     }
     print("[autoSaveSample(attributeList)] Autosaving uuid " + currentSampleUUID + "with the attributes: " + attributeList);
@@ -577,8 +579,10 @@ addSampleNavigation() {
             print("[Sidebar New Sample] Attempting to make a new sample");
             if(!isNull(currentSampleUUID)) {
                 newSample();
+                autoSaveSample();
+
             } else {
-                String newSampleLogic = "newSample();";
+                String newSampleLogic = "newSample();" + "autoSaveSample();";
                 showAlert("{Warning}", "{Lose_Unsaved_Changes}!", newSampleLogic, "");
             }
         }
