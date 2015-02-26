@@ -867,39 +867,185 @@ dupeSample3() {
 
     // add the value of all static views to the attribute list
     if (tabgroup.equals("Water_Sample")) {
-        attributes.add(createEntityAttribute("Water Sample Prefix", getFieldAnnotation("Water_Sample/Basic_Info/Water_Sample_Prefix"), null, getFieldValue("Water_Sample/Basic_Info/Water_Sample_Prefix"), getFieldCertainty("Water_Sample/Basic_Info/Water_Sample_Prefix")));
-        attributes.add(createEntityAttribute("Water Sample ID", getFieldAnnotation("Water_Sample/Basic_Info/Water_Sample_ID"), null, getFieldValue("Water_Sample/Basic_Info/Water_Sample_ID"), getFieldCertainty("Water_Sample/Basic_Info/Water_Sample_ID")));
-        attributes.add(createEntityAttribute("Station", getFieldAnnotation("Water_Sample/Basic_Info/Station_Deposit"), null, getFieldValue("Water_Sample/Basic_Info/Station_Deposit"), getFieldCertainty("Water_Sample/Basic_Info/Station_Deposit")));
-        attributes.add(createEntityAttribute("Project", getFieldAnnotation("Water_Sample/Basic_Info/Project"), null, getFieldValue("Water_Sample/Basic_Info/Project"), getFieldCertainty("Water_Sample/Basic_Info/Project")));
-        attributes.add(createEntityAttribute("Area", getFieldAnnotation("Water_Sample/Basic_Info/Area"), null, getFieldValue("Water_Sample/Basic_Info/Area"), getFieldCertainty("Water_Sample/Basic_Info/Area")));
-        attributes.add(createEntityAttribute("Site Name", getFieldAnnotation("Water_Sample/Basic_Info/Site_Name"), null, getFieldValue("Water_Sample/Basic_Info/Site_Name"), getFieldCertainty("Water_Sample/Basic_Info/Site_Name")));
-        attributes.add(createEntityAttribute("Observation Type", getFieldAnnotation("Water_Sample/Basic_Info/Observation_Type"), getFieldValue("Water_Sample/Basic_Info/Observation_Type"), null, getFieldCertainty("Water_Sample/Basic_Info/Observation_Type")));
-        attributes.add(createEntityAttribute("Latitude", getFieldAnnotation("Water_Sample/Basic_Info/Latitude"), null, getFieldValue("Water_Sample/Basic_Info/Latitude"), getFieldCertainty("Water_Sample/Basic_Info/Latitude")));
-        attributes.add(createEntityAttribute("Longitude", getFieldAnnotation("Water_Sample/Basic_Info/Longitude"), null, getFieldValue("Water_Sample/Basic_Info/Longitude"), getFieldCertainty("Water_Sample/Basic_Info/Longitude")));
-        attributes.add(createEntityAttribute("Northing", getFieldAnnotation("Water_Sample/Basic_Info/Northing"), null, getFieldValue("Water_Sample/Basic_Info/Northing"), getFieldCertainty("Water_Sample/Basic_Info/Northing")));
-        attributes.add(createEntityAttribute("Easting", getFieldAnnotation("Water_Sample/Basic_Info/Easting"), null, getFieldValue("Water_Sample/Basic_Info/Easting"), getFieldCertainty("Water_Sample/Basic_Info/Easting")));
-        attributes.add(createEntityAttribute("Elevation", getFieldAnnotation("Water_Sample/Basic_Info/Elevation"), null, getFieldValue("Water_Sample/Basic_Info/Elevation"), getFieldCertainty("Water_Sample/Basic_Info/Elevation")));
-        attributes.add(createEntityAttribute("Water Table", getFieldAnnotation("Water_Sample/Basic_Info/Water_Table"), null, getFieldValue("Water_Sample/Basic_Info/Water_Table"), getFieldCertainty("Water_Sample/Basic_Info/Water_Table")));
-        attributes.add(createEntityAttribute("Sample Depth", getFieldAnnotation("Water_Sample/Basic_Info/Sample_Depth"), null, getFieldValue("Water_Sample/Basic_Info/Sample_Depth"), getFieldCertainty("Water_Sample/Basic_Info/Sample_Depth")));
-        attributes.add(createEntityAttribute("Bottom of Hole", getFieldAnnotation("Water_Sample/Basic_Info/Bottom_Of_Hole"), null, getFieldValue("Water_Sample/Basic_Info/Bottom_Of_Hole"), getFieldCertainty("Water_Sample/Basic_Info/Bottom_Of_Hole")));
-        attributes.add(createEntityAttribute("Notes", getFieldAnnotation("Water_Sample/Basic_Info/Notes"), null, getFieldValue("Water_Sample/Basic_Info/Notes"), getFieldCertainty("Water_Sample/Basic_Info/Notes")));
-        attributes.add(createEntityAttribute("Samples Collected", getFieldAnnotation("Water_Sample/Basic_Info/Samples_Collected"), getFieldValue("Water_Sample/Basic_Info/Samples_Collected"), null, getFieldCertainty("Water_Sample/Basic_Info/Samples_Collected")));
-        attributes.add(createEntityAttribute("Photos", getFieldAnnotation("Water_Sample/Basic_Info/Photos"), getFieldValue("Water_Sample/Basic_Info/Photos"), null, getFieldCertainty("Water_Sample/Basic_Info/Photos")));
-        attributes.add(createEntityAttribute("Sketch", getFieldAnnotation("Water_Sample/Basic_Info/Sketches"), getFieldValue("Water_Sample/Basic_Info/Sketches"), null, getFieldCertainty("Water_Sample/Basic_Info/Sketches")));
-        attributes.add(createEntityAttribute("Hole Type", getFieldAnnotation("Water_Sample/Codes/Hole_Type"), getFieldValue("Water_Sample/Codes/Hole_Type"), null, getFieldCertainty("Water_Sample/Codes/Hole_Type")));
-        attributes.add(createEntityAttribute("Hole Lining", getFieldAnnotation("Water_Sample/Codes/Hole_Lining"), getFieldValue("Water_Sample/Codes/Hole_Lining"), null, getFieldCertainty("Water_Sample/Codes/Hole_Lining")));
-        attributes.add(createEntityAttribute("Hole Open or Closed", getFieldAnnotation("Water_Sample/Codes/Hole_Open_Closed"), getFieldValue("Water_Sample/Codes/Hole_Open_Closed"), null, getFieldCertainty("Water_Sample/Codes/Hole_Open_Closed")));
-        attributes.add(createEntityAttribute("Pipes In Hole", getFieldAnnotation("Water_Sample/Codes/Pipes_In_Hole"), getFieldValue("Water_Sample/Codes/Pipes_In_Hole"), null, getFieldCertainty("Water_Sample/Codes/Pipes_In_Hole")));
-        attributes.add(createEntityAttribute("Hole Angle", getFieldAnnotation("Water_Sample/Codes/Hole_Angle"), getFieldValue("Water_Sample/Codes/Hole_Angle"), null, getFieldCertainty("Water_Sample/Codes/Hole_Angle")));
-        attributes.add(createEntityAttribute("Estimated Angle", getFieldAnnotation("Water_Sample/Codes/Estimated_Angle"), null, getFieldValue("Water_Sample/Codes/Estimated_Angle"), getFieldCertainty("Water_Sample/Codes/Estimated_Angle")));
-        attributes.add(createEntityAttribute("Outflow Present", getFieldAnnotation("Water_Sample/Codes/Outflow_Present"), getFieldValue("Water_Sample/Codes/Outflow_Present"), null, getFieldCertainty("Water_Sample/Codes/Outflow_Present")));
-        attributes.add(createEntityAttribute("Sampling Issues", getFieldAnnotation("Water_Sample/Codes/Sampling_Issues"), getFieldValue("Water_Sample/Codes/Sampling_Issues"), null, getFieldCertainty("Water_Sample/Codes/Sampling_Issues")));
-        attributes.add(createEntityAttribute("Temperature", getFieldAnnotation("Water_Sample/pH_Eh/Temperature"), null, getFieldValue("Water_Sample/pH_Eh/Temperature"), getFieldCertainty("Water_Sample/pH_Eh/Temperature")));
-        attributes.add(createEntityAttribute("Conductivity", getFieldAnnotation("Water_Sample/pH_Eh/Conductivity"), null, getFieldValue("Water_Sample/pH_Eh/Conductivity"), getFieldCertainty("Water_Sample/pH_Eh/Conductivity")));
-        attributes.add(createEntityAttribute("Preferred pH", getFieldAnnotation("Water_Sample/pH_Eh/Preferred_pH"), null, getFieldValue("Water_Sample/pH_Eh/Preferred_pH"), getFieldCertainty("Water_Sample/pH_Eh/Preferred_pH")));
-        attributes.add(createEntityAttribute("Preferred Eh", getFieldAnnotation("Water_Sample/pH_Eh/Preferred_Eh"), null, getFieldValue("Water_Sample/pH_Eh/Preferred_Eh"), getFieldCertainty("Water_Sample/pH_Eh/Preferred_Eh")));
-        attributes.add(createEntityAttribute("Preferred pH Time", getFieldAnnotation("Water_Sample/Hidden/Preferred_pH_Time"), null, getFieldValue("Water_Sample/Hidden/Preferred_pH_Time"), getFieldCertainty("Water_Sample/Hidden/Preferred_pH_Time")));
-        attributes.add(createEntityAttribute("Preferred Eh Time", getFieldAnnotation("Water_Sample/Hidden/Preferred_Eh_Time"), null, getFieldValue("Water_Sample/Hidden/Preferred_Eh_Time"), getFieldCertainty("Water_Sample/Hidden/Preferred_Eh_Time")));
+
+if (!isNull(getFieldValue("Shape/Shape_Note/label"))){
+    print(getFieldValue("Shape/Shape_Note/label")); 
+    attributes.add(createEntityAttribute("Label", getFieldAnnotation("Shape/Shape_Note/label"), null, getFieldValue("Shape/Shape_Note/label"), getFieldCertainty("Shape/Shape_Note/label")));
+}
+
+if (!isNull(getFieldValue("Shape/Shape_Note/note"))){
+    print(getFieldValue("Shape/Shape_Note/note")); 
+    attributes.add(createEntityAttribute("Note", getFieldAnnotation("Shape/Shape_Note/note"), null, getFieldValue("Shape/Shape_Note/note"), getFieldCertainty("Shape/Shape_Note/note")));
+}
+
+if (!isNull(getFieldValue("Water_Sample/Basic_Info/Water_Sample_Prefix"))){
+    print(getFieldValue("Water_Sample/Basic_Info/Water_Sample_Prefix")); 
+    attributes.add(createEntityAttribute("Water Sample Prefix", getFieldAnnotation("Water_Sample/Basic_Info/Water_Sample_Prefix"), null, getFieldValue("Water_Sample/Basic_Info/Water_Sample_Prefix"), getFieldCertainty("Water_Sample/Basic_Info/Water_Sample_Prefix")));
+}
+
+if (!isNull(getFieldValue("Water_Sample/Basic_Info/Water_Sample_ID"))){
+    print(getFieldValue("Water_Sample/Basic_Info/Water_Sample_ID")); 
+    attributes.add(createEntityAttribute("Water Sample ID", getFieldAnnotation("Water_Sample/Basic_Info/Water_Sample_ID"), null, getFieldValue("Water_Sample/Basic_Info/Water_Sample_ID"), getFieldCertainty("Water_Sample/Basic_Info/Water_Sample_ID")));
+}
+
+if (!isNull(getFieldValue("Water_Sample/Basic_Info/Station_Deposit"))){
+    print(getFieldValue("Water_Sample/Basic_Info/Station_Deposit")); 
+    attributes.add(createEntityAttribute("Station", getFieldAnnotation("Water_Sample/Basic_Info/Station_Deposit"), null, getFieldValue("Water_Sample/Basic_Info/Station_Deposit"), getFieldCertainty("Water_Sample/Basic_Info/Station_Deposit")));
+}
+
+if (!isNull(getFieldValue("Water_Sample/Basic_Info/Project"))){
+    print(getFieldValue("Water_Sample/Basic_Info/Project")); 
+    attributes.add(createEntityAttribute("Project", getFieldAnnotation("Water_Sample/Basic_Info/Project"), null, getFieldValue("Water_Sample/Basic_Info/Project"), getFieldCertainty("Water_Sample/Basic_Info/Project")));
+}
+
+if (!isNull(getFieldValue("Water_Sample/Basic_Info/Area"))){
+    print(getFieldValue("Water_Sample/Basic_Info/Area")); 
+    attributes.add(createEntityAttribute("Area", getFieldAnnotation("Water_Sample/Basic_Info/Area"), null, getFieldValue("Water_Sample/Basic_Info/Area"), getFieldCertainty("Water_Sample/Basic_Info/Area")));
+}
+
+if (!isNull(getFieldValue("Water_Sample/Basic_Info/Site_Name"))){
+    print(getFieldValue("Water_Sample/Basic_Info/Site_Name")); 
+    attributes.add(createEntityAttribute("Site Name", getFieldAnnotation("Water_Sample/Basic_Info/Site_Name"), null, getFieldValue("Water_Sample/Basic_Info/Site_Name"), getFieldCertainty("Water_Sample/Basic_Info/Site_Name")));
+}
+
+if (!isNull(getFieldValue("Water_Sample/Basic_Info/Observation_Type"))){
+    print(getFieldValue("Water_Sample/Basic_Info/Observation_Type")); 
+    attributes.add(createEntityAttribute("Observation Type", getFieldAnnotation("Water_Sample/Basic_Info/Observation_Type"), getFieldValue("Water_Sample/Basic_Info/Observation_Type"), null, getFieldCertainty("Water_Sample/Basic_Info/Observation_Type")));
+}
+
+if (!isNull(getFieldValue("Water_Sample/Basic_Info/Latitude"))){
+    print(getFieldValue("Water_Sample/Basic_Info/Latitude")); 
+    attributes.add(createEntityAttribute("Latitude", getFieldAnnotation("Water_Sample/Basic_Info/Latitude"), null, getFieldValue("Water_Sample/Basic_Info/Latitude"), getFieldCertainty("Water_Sample/Basic_Info/Latitude")));
+}
+
+if (!isNull(getFieldValue("Water_Sample/Basic_Info/Longitude"))){
+    print(getFieldValue("Water_Sample/Basic_Info/Longitude")); 
+    attributes.add(createEntityAttribute("Longitude", getFieldAnnotation("Water_Sample/Basic_Info/Longitude"), null, getFieldValue("Water_Sample/Basic_Info/Longitude"), getFieldCertainty("Water_Sample/Basic_Info/Longitude")));
+}
+
+if (!isNull(getFieldValue("Water_Sample/Basic_Info/Northing"))){
+    print(getFieldValue("Water_Sample/Basic_Info/Northing")); 
+    attributes.add(createEntityAttribute("Northing", getFieldAnnotation("Water_Sample/Basic_Info/Northing"), null, getFieldValue("Water_Sample/Basic_Info/Northing"), getFieldCertainty("Water_Sample/Basic_Info/Northing")));
+}
+
+if (!isNull(getFieldValue("Water_Sample/Basic_Info/Easting"))){
+    print(getFieldValue("Water_Sample/Basic_Info/Easting")); 
+    attributes.add(createEntityAttribute("Easting", getFieldAnnotation("Water_Sample/Basic_Info/Easting"), null, getFieldValue("Water_Sample/Basic_Info/Easting"), getFieldCertainty("Water_Sample/Basic_Info/Easting")));
+}
+
+if (!isNull(getFieldValue("Water_Sample/Basic_Info/Elevation"))){
+    print(getFieldValue("Water_Sample/Basic_Info/Elevation")); 
+    attributes.add(createEntityAttribute("Elevation", getFieldAnnotation("Water_Sample/Basic_Info/Elevation"), null, getFieldValue("Water_Sample/Basic_Info/Elevation"), getFieldCertainty("Water_Sample/Basic_Info/Elevation")));
+}
+
+if (!isNull(getFieldValue("Water_Sample/Basic_Info/Water_Table"))){
+    print(getFieldValue("Water_Sample/Basic_Info/Water_Table")); 
+    attributes.add(createEntityAttribute("Water Table", getFieldAnnotation("Water_Sample/Basic_Info/Water_Table"), null, getFieldValue("Water_Sample/Basic_Info/Water_Table"), getFieldCertainty("Water_Sample/Basic_Info/Water_Table")));
+}
+
+if (!isNull(getFieldValue("Water_Sample/Basic_Info/Sample_Depth"))){
+    print(getFieldValue("Water_Sample/Basic_Info/Sample_Depth")); 
+    attributes.add(createEntityAttribute("Sample Depth", getFieldAnnotation("Water_Sample/Basic_Info/Sample_Depth"), null, getFieldValue("Water_Sample/Basic_Info/Sample_Depth"), getFieldCertainty("Water_Sample/Basic_Info/Sample_Depth")));
+}
+
+if (!isNull(getFieldValue("Water_Sample/Basic_Info/Bottom_Of_Hole"))){
+    print(getFieldValue("Water_Sample/Basic_Info/Bottom_Of_Hole")); 
+    attributes.add(createEntityAttribute("Bottom of Hole", getFieldAnnotation("Water_Sample/Basic_Info/Bottom_Of_Hole"), null, getFieldValue("Water_Sample/Basic_Info/Bottom_Of_Hole"), getFieldCertainty("Water_Sample/Basic_Info/Bottom_Of_Hole")));
+}
+
+if (!isNull(getFieldValue("Water_Sample/Basic_Info/Notes"))){
+    print(getFieldValue("Water_Sample/Basic_Info/Notes")); 
+    attributes.add(createEntityAttribute("Notes", getFieldAnnotation("Water_Sample/Basic_Info/Notes"), null, getFieldValue("Water_Sample/Basic_Info/Notes"), getFieldCertainty("Water_Sample/Basic_Info/Notes")));
+}
+
+if (!isNull(getFieldValue("Water_Sample/Basic_Info/Samples_Collected"))){
+    print(getFieldValue("Water_Sample/Basic_Info/Samples_Collected")); 
+
+    for (listItem : getFieldValue("Water_Sample/Basic_Info/Samples_Collected")){
+        print(listItem.getName());
+        attributes.add(createEntityAttribute("Samples Collected", null, listItem.getName(), null, null));
+    }       
+
+}
+
+if (!isNull(getFieldValue("Water_Sample/Basic_Info/Photos"))){
+    print(getFieldValue("Water_Sample/Basic_Info/Photos")); 
+}
+
+if (!isNull(getFieldValue("Water_Sample/Basic_Info/Sketches"))){
+    print(getFieldValue("Water_Sample/Basic_Info/Sketches")); 
+}
+
+if (!isNull(getFieldValue("Water_Sample/Codes/Hole_Type"))){
+    print(getFieldValue("Water_Sample/Codes/Hole_Type")); 
+    attributes.add(createEntityAttribute("Hole Type", getFieldAnnotation("Water_Sample/Codes/Hole_Type"), getFieldValue("Water_Sample/Codes/Hole_Type"), null, getFieldCertainty("Water_Sample/Codes/Hole_Type")));
+}
+
+if (!isNull(getFieldValue("Water_Sample/Codes/Hole_Lining"))){
+    print(getFieldValue("Water_Sample/Codes/Hole_Lining")); 
+    attributes.add(createEntityAttribute("Hole Lining", getFieldAnnotation("Water_Sample/Codes/Hole_Lining"), getFieldValue("Water_Sample/Codes/Hole_Lining"), null, getFieldCertainty("Water_Sample/Codes/Hole_Lining")));
+}
+
+if (!isNull(getFieldValue("Water_Sample/Codes/Hole_Open_Closed"))){
+    print(getFieldValue("Water_Sample/Codes/Hole_Open_Closed")); 
+    attributes.add(createEntityAttribute("Hole Open or Closed", getFieldAnnotation("Water_Sample/Codes/Hole_Open_Closed"), getFieldValue("Water_Sample/Codes/Hole_Open_Closed"), null, getFieldCertainty("Water_Sample/Codes/Hole_Open_Closed")));
+}
+
+if (!isNull(getFieldValue("Water_Sample/Codes/Pipes_In_Hole"))){
+    print(getFieldValue("Water_Sample/Codes/Pipes_In_Hole")); 
+    attributes.add(createEntityAttribute("Pipes In Hole", getFieldAnnotation("Water_Sample/Codes/Pipes_In_Hole"), getFieldValue("Water_Sample/Codes/Pipes_In_Hole"), null, getFieldCertainty("Water_Sample/Codes/Pipes_In_Hole")));
+}
+
+if (!isNull(getFieldValue("Water_Sample/Codes/Hole_Angle"))){
+    print(getFieldValue("Water_Sample/Codes/Hole_Angle")); 
+    attributes.add(createEntityAttribute("Hole Angle", getFieldAnnotation("Water_Sample/Codes/Hole_Angle"), getFieldValue("Water_Sample/Codes/Hole_Angle"), null, getFieldCertainty("Water_Sample/Codes/Hole_Angle")));
+}
+
+if (!isNull(getFieldValue("Water_Sample/Codes/Estimated_Angle"))){
+    print(getFieldValue("Water_Sample/Codes/Estimated_Angle")); 
+    attributes.add(createEntityAttribute("Estimated Angle", getFieldAnnotation("Water_Sample/Codes/Estimated_Angle"), null, getFieldValue("Water_Sample/Codes/Estimated_Angle"), getFieldCertainty("Water_Sample/Codes/Estimated_Angle")));
+}
+
+if (!isNull(getFieldValue("Water_Sample/Codes/Outflow_Present"))){
+    print(getFieldValue("Water_Sample/Codes/Outflow_Present")); 
+    attributes.add(createEntityAttribute("Outflow Present", getFieldAnnotation("Water_Sample/Codes/Outflow_Present"), getFieldValue("Water_Sample/Codes/Outflow_Present"), null, getFieldCertainty("Water_Sample/Codes/Outflow_Present")));
+}
+
+if (!isNull(getFieldValue("Water_Sample/Codes/Sampling_Issues"))){
+    print(getFieldValue("Water_Sample/Codes/Sampling_Issues")); 
+    attributes.add(createEntityAttribute("Sampling Issues", getFieldAnnotation("Water_Sample/Codes/Sampling_Issues"), getFieldValue("Water_Sample/Codes/Sampling_Issues"), null, getFieldCertainty("Water_Sample/Codes/Sampling_Issues")));
+}
+
+if (!isNull(getFieldValue("Water_Sample/pH_Eh/Temperature"))){
+    print(getFieldValue("Water_Sample/pH_Eh/Temperature")); 
+    attributes.add(createEntityAttribute("Temperature", getFieldAnnotation("Water_Sample/pH_Eh/Temperature"), null, getFieldValue("Water_Sample/pH_Eh/Temperature"), getFieldCertainty("Water_Sample/pH_Eh/Temperature")));
+}
+
+if (!isNull(getFieldValue("Water_Sample/pH_Eh/Conductivity"))){
+    print(getFieldValue("Water_Sample/pH_Eh/Conductivity")); 
+    attributes.add(createEntityAttribute("Conductivity", getFieldAnnotation("Water_Sample/pH_Eh/Conductivity"), null, getFieldValue("Water_Sample/pH_Eh/Conductivity"), getFieldCertainty("Water_Sample/pH_Eh/Conductivity")));
+}
+
+if (!isNull(getFieldValue("Water_Sample/pH_Eh/Preferred_pH"))){
+    print(getFieldValue("Water_Sample/pH_Eh/Preferred_pH")); 
+    attributes.add(createEntityAttribute("Preferred pH", getFieldAnnotation("Water_Sample/pH_Eh/Preferred_pH"), null, getFieldValue("Water_Sample/pH_Eh/Preferred_pH"), getFieldCertainty("Water_Sample/pH_Eh/Preferred_pH")));
+}
+
+if (!isNull(getFieldValue("Water_Sample/pH_Eh/Preferred_Eh"))){
+    print(getFieldValue("Water_Sample/pH_Eh/Preferred_Eh")); 
+    attributes.add(createEntityAttribute("Preferred Eh", getFieldAnnotation("Water_Sample/pH_Eh/Preferred_Eh"), null, getFieldValue("Water_Sample/pH_Eh/Preferred_Eh"), getFieldCertainty("Water_Sample/pH_Eh/Preferred_Eh")));
+}
+
+if (!isNull(getFieldValue("Water_Sample/Hidden/Preferred_pH_Time"))){
+    print(getFieldValue("Water_Sample/Hidden/Preferred_pH_Time")); 
+    attributes.add(createEntityAttribute("Preferred pH Time", getFieldAnnotation("Water_Sample/Hidden/Preferred_pH_Time"), null, getFieldValue("Water_Sample/Hidden/Preferred_pH_Time"), getFieldCertainty("Water_Sample/Hidden/Preferred_pH_Time")));
+}
+
+if (!isNull(getFieldValue("Water_Sample/Hidden/Preferred_Eh_Time"))){
+    print(getFieldValue("Water_Sample/Hidden/Preferred_Eh_Time")); 
+    attributes.add(createEntityAttribute("Preferred Eh Time", getFieldAnnotation("Water_Sample/Hidden/Preferred_Eh_Time"), null, getFieldValue("Water_Sample/Hidden/Preferred_Eh_Time"), getFieldCertainty("Water_Sample/Hidden/Preferred_Eh_Time")));
+}
+
     } else if (tabgroup.equals("Plant_Sample")) {
         attributes.add(createEntityAttribute("Plant Sample Prefix", getFieldAnnotation("Plant_Sample/Basic_Info/Plant_Sample_Prefix"), null, getFieldValue("Plant_Sample/Basic_Info/Plant_Sample_Prefix"), getFieldCertainty("Plant_Sample/Basic_Info/Plant_Sample_Prefix")));
         attributes.add(createEntityAttribute("Plant Sample ID", getFieldAnnotation("Plant_Sample/Basic_Info/Plant_Sample_ID"), null, getFieldValue("Plant_Sample/Basic_Info/Plant_Sample_ID"), getFieldCertainty("Plant_Sample/Basic_Info/Plant_Sample_ID")));
