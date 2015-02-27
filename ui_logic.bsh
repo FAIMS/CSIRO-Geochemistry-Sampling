@@ -705,137 +705,6 @@ copyAttribute(String attrib) {
     return pair;   
 }
 
-// /* Duplicates the current sample excluding any attachments or pictures */
-// duplicateSample() {
-//     // Validate the entered sample prefix and ID before duplicating the sample and using the prefix and ID from the project start tab.
-//     if (!validSamplePrefix() || !validStartingSampleID()) {       
-//         print("[duplicateSample()] sample prefix or starting id not valid");
-//         showTabGroup("Project");
-//         showTab("Project/Start");
-//         return;
-//     } 
-
-//     tabgroup = getSampleTypePath();
-//     cancelTabGroup(tabgroup, false);
-//     currentSampleUUID = null;
-//     print("[duplicateSample] Before changing values for duplicate sample.");
-    
-//     // Update any required fields and reset any undesired duplicate attributes.
-    
-//     setSampleStartingID(getFieldValue("Project/Start/Sample_Starting_ID"));
-//     // String sampleID = getFieldValue("Project/Start/Sample_Starting_ID");
-//     // setFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_ID", sampleID);
-//     setSampleStartingID(Integer.toString(Integer.parseInt(getFieldValue("Project/Start/Sample_Starting_ID")) + 1));
-//     print("[duplicateSample()] new ID value: " + getFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_ID"));
-    
-//     setSamplePrefix(getFieldValue("Project/Start/Sample_Prefix"));
-//     // String samplePrefix = getFieldValue("Project/Start/Sample_Prefix");
-//     // setFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_Prefix", samplePrefix);
-//     print("[duplicateSample()] new prefix value: " + getFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_Prefix"));
-    
-//     if (!tabgroup.equals("Rock_Sample")) {
-//         setFieldValue(tabgroup + "/Basic_Info/Photos", new ArrayList());
-//         setFieldValue(tabgroup + "/Basic_Info/Sketches", new ArrayList()); 
-//         // setFieldValue(tabgroup + "/Basic_Info/Photos", null);
-//         // setFieldValue(tabgroup + "/Basic_Info/Sketches", null); 
-//         print("[duplicateSample()] new Photos value: " + getFieldValue(tabgroup + "/Basic_Info/Photos"));       // BUG: field value not reset properly, shows old data, should show empty list
-//         print("[duplicateSample()] new Sketches value: " + getFieldValue(tabgroup + "/Basic_Info/Sketches"));   // BUG: field value not reset properly, shows old data, should show empty list
-//     } else {
-//         setFieldValue("Rock_Sample/Lithological_Info/Photos", new ArrayList());
-//         setFieldValue("Rock_Sample/Lithological_Info/Sketches", new ArrayList());
-//         print("[duplicateSample()] new Photos value: " + getFieldValue("Rock_Sample/Lithological_Info/Photos"));
-//         print("[duplicateSample()] new Sketches value: " + getFieldValue("Rock_Sample/Lithological_Info/Sketches"));
-//     }    
-
-//     // force an initial save of the duplicate sample
-//     attributeList = getSampleDateAttributeList();
-//     String locationNumberValue = null;
-//     if ( (tabgroup.equals("Water_Sample") && waterLocationNumberRendered) || 
-//          (tabgroup.equals("Plant_Sample") && plantLocationNumberRendered) ||
-//          (tabgroup.equals("Soil_Sample") && soilLocationNumberRendered) ||
-//          (tabgroup.equals("Rock_Sample") && rockLocationNumberRendered)
-//         ) {
-//         locationNumberValue = getFieldValue(tabgroup+"/Basic_Info/Location_Number");
-//     }
-//     attributeList.add(createEntityAttribute("Location Number", null, null, locationNumberValue, null));
-//     saveArchEnt(currentSampleUUID, getSampleType(), null, attributeList, new SaveCallback() {
-//         onSave(uuid, newRecord) {
-//             currentSampleUUID = uuid;
-//             print("[duplicateSample()] Saved sample uuid: "+currentSampleUUID);
-
-//             // show the tabgroup for the new sample to enable autosaving through existing event listeners.
-//             newSampleFlag = false;
-//             showTabGroup(tabgroup);
-//             showToast(getSampleType() + " {Duplicated}");
-            
-//             print("[duplicateSample()] Keeping tabgroup changes");
-//             keepTabGroupChanges(tabgroup); 
-//         }
-//     });
-// }
-
-// /* Duplicates the current sample excluding any attachments or pictures */
-// dupeSample2() {
-//     // Validate the entered sample prefix and ID before duplicating the sample and using the prefix and ID from the project start tab.
-//     if (!validSamplePrefix() || !validStartingSampleID()) {       
-//         print("[dupeSample2()] sample prefix or starting id not valid");
-//         showTabGroup("Project");
-//         showTab("Project/Start");
-//         return;
-//     } 
-
-//     // cancel the tabgroup and gather neccessary data before proceeding
-//     tabgroup = getSampleTypePath();
-//     cancelTabGroup(tabgroup, false);
-//     currentSampleUUID = null;
-//     newSampleFlag = false;
-//     print("[dupeSample2()] Cancelled tabgroup and set currentSampleUUID to null");
-
-//     // set the values of any dynamic views using an attribute list
-//     attributeList = getSampleDateAttributeList();
-//     String locationNumberValue = null;
-//     if ( (tabgroup.equals("Water_Sample") && waterLocationNumberRendered) || 
-//          (tabgroup.equals("Plant_Sample") && plantLocationNumberRendered) ||
-//          (tabgroup.equals("Soil_Sample") && soilLocationNumberRendered) ||
-//          (tabgroup.equals("Rock_Sample") && rockLocationNumberRendered)
-//         ) {
-//         locationNumberValue = getFieldValue(tabgroup+"/Basic_Info/Location_Number");
-//     }
-//     attributeList.add(createEntityAttribute("Location Number", null, null, locationNumberValue, null));
-
-//     // reset or remove the value of any views that are not intended for duplication
-//     if (!tabgroup.equals("Rock_Sample")) {
-//         setFieldValue(tabgroup + "/Basic_Info/Photos", new ArrayList());
-//         setFieldValue(tabgroup + "/Basic_Info/Sketches", new ArrayList()); 
-//     } else {
-//         setFieldValue("Rock_Sample/Lithological_Info/Photos", new ArrayList());
-//         setFieldValue("Rock_Sample/Lithological_Info/Sketches", new ArrayList());
-//     }    
-
-//     // update the values of any static views (such as autoincrementing ID)
-//     String newID = getFieldValue("Project/Start/Sample_Starting_ID");
-//     String newPrefix = getFieldValue("Project/Start/Sample_Prefix");
-//     setFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_ID", Integer.parseInt(newID));
-//     setFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_Prefix", newPrefix);
-//     setFieldValue("Project/Start/Sample_Starting_ID", Integer.parseInt(newID) + 1); // Increment the starting sample ID
-
-//     // duplicate any database entity relationships (such as sample and photolog, water sample and ph/eh relationship)
-
-
-//     // force an initial save of the duplicate sample
-//     saveArchEnt(currentSampleUUID, getSampleType(), null, attributeList, new SaveCallback() {
-//         onSave(uuid, newRecord) {
-//             currentSampleUUID = uuid;
-//             print("[dupeSample2()] Saved sample uuid: "+currentSampleUUID);
-//             keepTabGroupChanges(tabgroup); 
-
-//             // show the tabgroup of the newly duplicated sample
-//             showTabGroup(tabgroup);
-//             showToast(getSampleType() + " {Duplicated}");
-//         }
-//     });
-// }
-
 /* Adds the field value of a view as an attribute to the given attribute list. 
    isMeasure differentiates between vocab and measure views.
    Not for use with checkboxes. */
@@ -1726,31 +1595,41 @@ renderpHEhPage() {
             ArrayList ph_list = new ArrayList();
             ArrayList eh_list = new ArrayList();
             fetchAll("select uuid, group_concat(measure,'|') " +
+                    "from ( " +
+                    "select uuid, measure, attributename, aentcountorder " +
                     "from latestnondeletedaentvalue " +
                     "join latestnondeletedarchent using (uuid) " +
                     "join aenttype using (aenttypeid) " +
-                    "join attributekey using (attributeid) " +
+                    "join idealaent using (aenttypeid, attributeid) " +
+                    "join attributekey using (attributeid)  " +
                     "where aenttypename = 'pH' " +
+                    "and attributename in ('pH', 'Time') " +
                     "and uuid in (select a.uuid " +
                     "from latestnondeletedaentreln a join latestnondeletedaentreln b using (relationshipid) " +
                     "where a.uuid != b.uuid " +
                     "and b.uuid = "+ currentSampleUUID +") " +
-                    "group by uuid " + 
-                    "order by uuid, attributename desc; ",  new FetchCallback() {
+                    "order by uuid, aentcountorder) " +
+                    "group by uuid  " +
+                    "order by uuid; ", new FetchCallback() {
                     onFetch(ph_list) {
                         print("[renderpHEhPage()] ph list: " + ph_list);
                         fetchAll("select uuid, group_concat(measure,'|') " +
+                                "from ( " +
+                                "select uuid, measure, attributename, aentcountorder " +
                                 "from latestnondeletedaentvalue " +
                                 "join latestnondeletedarchent using (uuid) " +
-                                "join aenttype using (aenttypeid)  " +
-                                "join attributekey using (attributeid) " +
+                                "join aenttype using (aenttypeid) " +
+                                "join idealaent using (aenttypeid, attributeid) " +
+                                "join attributekey using (attributeid)  " +
                                 "where aenttypename = 'Eh' " +
+                                "and attributename in ('Eh', 'Time') " +
                                 "and uuid in (select a.uuid " +
                                 "from latestnondeletedaentreln a join latestnondeletedaentreln b using (relationshipid) " +
                                 "where a.uuid != b.uuid " +
                                 "and b.uuid = "+ currentSampleUUID +") " +
-                                "group by uuid " + 
-                                "order by uuid, attributename desc;",  new FetchCallback() {
+                                "order by uuid, aentcountorder) " +
+                                "group by uuid " +
+                                "order by uuid, aentcountorder; ",  new FetchCallback() {
                             onFetch(eh_list) {
                                 print("[renderpHEhPage()] eh list: " + eh_list);
                                 for(ph : ph_list) {
