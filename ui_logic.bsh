@@ -1141,7 +1141,17 @@ dupeSample3() {
             keepTabGroupChanges(tabgroup); 
 
             // show the tabgroup of the newly duplicated sample
-            showTabGroup(tabgroup);
+            // newTabGroup(tabgroup);
+            // showTabGroup(tabgroup, currentSampleUUID);
+            if (tabgroup.equals("Water_Sample")) {
+                loadWaterSampleFrom(currentSampleUUID);
+            } else if (tabgroup.equals("Plant_Sample")) {
+                loadPlantSampleFrom(currentSampleUUID);
+            } else if (tabgroup.equals("Soil_Sample")) {
+                loadSoilSampleFrom(currentSampleUUID);
+            } else if (tabgroup.equals("Rock_Sample")) {
+                loadRockSampleFrom(currentSampleUUID);
+            }
             showToast(getSampleType() + " {Duplicated}");
         }
     });
