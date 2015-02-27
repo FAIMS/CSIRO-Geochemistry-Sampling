@@ -516,9 +516,12 @@
       <bind nodeset="/faims/Project/Start/container1/child2/Sample_Starting_ID" type="decimal"/>
       <bind nodeset="/faims/Water_Sample/Basic_Info/Elevation" type="decimal"/>
       <bind nodeset="/faims/Water_Sample/Codes/container1/child2/Estimated_Angle" type="decimal"/>
+      <bind nodeset="/faims/Plant_Sample/Basic_Info/Elevation" type="decimal"/>
       <bind nodeset="/faims/Plant_Sample/Basic_Info/container4/child1/Plant_Height" type="decimal"/>
       <bind nodeset="/faims/Plant_Sample/Basic_Info/container4/child2/Plant_Width" type="decimal"/>
       <bind nodeset="/faims/Soil_Sample/Basic_Info/Depth" type="decimal"/>
+      <bind nodeset="/faims/Soil_Sample/Basic_Info/Elevation" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Basic_Info/Elevation" type="decimal"/>
       <bind nodeset="/faims/Rock_Sample/Measurements/container0/child1/Strike_Of_Bedding" type="decimal"/>
       <bind nodeset="/faims/Rock_Sample/Measurements/container0/child2/Dip_Of_Bedding" type="decimal"/>
       <bind nodeset="/faims/Rock_Sample/Measurements/container1/child1/Strike_Of_Cleavage" type="decimal"/>
