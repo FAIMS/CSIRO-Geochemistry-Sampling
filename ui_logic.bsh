@@ -487,7 +487,7 @@ getPointFromMap() {
 onEvent("Water_Sample/Basic_Info/Observation_Type", "click", "print(\"render on click\");renderLocationNumber()");
 onEvent("Plant_Sample/Basic_Info/Observation_Type", "click", "print(\"render on click\");renderLocationNumber()");
 onEvent("Soil_Sample/Basic_Info/Observation_Type", "click", "print(\"render on click\");renderLocationNumber()");
-onEvent("Rock_Sample/Basic_Info/Observation_Type", "click", "print(\"render on click\");renderLocationNumber()");
+// onEvent("Rock_Sample/Basic_Info/Observation_Type", "click", "print(\"render on click\");renderLocationNumber()");
 
 // onEvent("Water_Sample/Basic_Info", "show", "print(\"render on show\");renderLocationNumber();");
 // onEvent("Plant_Sample/Basic_Info", "show", "print(\"render on show\");renderLocationNumber();");
@@ -497,12 +497,12 @@ onEvent("Rock_Sample/Basic_Info/Observation_Type", "click", "print(\"render on c
 onEvent("Water_Sample", "load", "waterLocationNumberRendered=false;");
 onEvent("Plant_Sample", "load", "plantLocationNumberRendered=false;");
 onEvent("Soil_Sample", "load", "soilLocationNumberRendered=false;");
-onEvent("Rock_Sample", "load", "rockLocationNumberRendered=false;");
+// onEvent("Rock_Sample", "load", "rockLocationNumberRendered=false;");
 
 Boolean waterLocationNumberRendered = false;
 Boolean plantLocationNumberRendered = false;
 Boolean soilLocationNumberRendered = false;
-Boolean rockLocationNumberRendered = false;
+// Boolean rockLocationNumberRendered = false;
 Boolean mapButtonRendered = false;
 
 /* Renders the location number dynamic view for the specified tabgroup. */
@@ -551,12 +551,13 @@ renderLocationNumber() {
                                 renderTabGroupLocationNumber(tabgroup);
                                 soilLocationNumberRendered = true;
                             }
-                        } else if (tabgroup.equals("Rock_Sample")) {
-                            if (!rockLocationNumberRendered) {
-                                renderTabGroupLocationNumber(tabgroup);
-                                rockLocationNumberRendered = true;
-                            }
-                        }
+                        } 
+                        // else if (tabgroup.equals("Rock_Sample")) {
+                        //     if (!rockLocationNumberRendered) {
+                        //         renderTabGroupLocationNumber(tabgroup);
+                        //         rockLocationNumberRendered = true;
+                        //     }
+                        // }
                     } else {
                         print("[renderLocationNumber()] Dynamically removing all views for the tabgroup.");
                         //removeView(tabgroup + "/Basic_Info/Location_Number");
@@ -567,9 +568,10 @@ renderLocationNumber() {
                             plantLocationNumberRendered = false;
                         } else if (tabgroup.equals("Soil_Sample")) {
                             soilLocationNumberRendered = false;
-                        } else if (tabgroup.equals("Rock_Sample")) {
-                            rockLocationNumberRendered = false;
-                        }
+                        } 
+                        // else if (tabgroup.equals("Rock_Sample")) {
+                        //     rockLocationNumberRendered = false;
+                        // }
                         mapButtonRendered = false;
                     }
                     // render the map button after the location number, due to issues with view removal and timing/ordering.
@@ -589,7 +591,7 @@ autoSaveSample(attributeList) {
     tabgroup = getSampleTypePath();
     // check if a new sample was made, and if so then add the workaround fix for the location number view save
     if (newSampleFlag) {                                                                                // BUG: when new sample button is sidebar is the location number value is not saved as an attribute
-        if (attributeList != null) {
+        if (attributeList != null && !tabgroup.equals("Rock_Sample")) {
             print("[autoSaveSample(attributeList)] Autosaving with attributes: " + attributeList);
             workaround = createEntityAttribute("Location Number", null, null, null, null);
             attributeList.add(workaround);
@@ -821,8 +823,8 @@ dupeSample3() {
     String locationNumberValue = null;
     if ( (tabgroup.equals("Water_Sample") && waterLocationNumberRendered) || 
          (tabgroup.equals("Plant_Sample") && plantLocationNumberRendered) ||
-         (tabgroup.equals("Soil_Sample") && soilLocationNumberRendered) ||
-         (tabgroup.equals("Rock_Sample") && rockLocationNumberRendered)
+         (tabgroup.equals("Soil_Sample") && soilLocationNumberRendered) 
+         // || (tabgroup.equals("Rock_Sample") && rockLocationNumberRendered)
         ) {
         locationNumberValue = getFieldValue(tabgroup+"/Basic_Info/Location_Number");
     }
@@ -1072,6 +1074,7 @@ dupeSample3() {
         addAttribute(attributes, "Project", "Project/Start/Project", true);
         addAttribute(attributes, "Area", "Project/Start/Area", true);
 
+        addAttribute(attributes, "Location Number", "Rock_Sample/Basic_Info/Location_Number", true);
         addAttribute(attributes, "Observation Type", "Rock_Sample/Basic_Info/Observation_Type", false);
         addAttribute(attributes, "Core ID", "Rock_Sample/Basic_Info/Core_ID", true);
         addAttribute(attributes, "Latitude", "Rock_Sample/Basic_Info/Latitude", true);
@@ -1986,7 +1989,7 @@ loadRockSampleFrom(archentid) {
     }
     showTabGroup("Rock_Sample", archentid, new FetchCallback() {
         onFetch(result) {
-            renderLocationNumber();
+            // renderLocationNumber();
             fetchOne("select createdBy from createdModifiedAtBy where uuid = '" + archentid + "';", new FetchCallback() {
                 onFetch(username) {
                     setFieldValue("Rock_Sample/Basic_Info/Author_Name", username.get(0));

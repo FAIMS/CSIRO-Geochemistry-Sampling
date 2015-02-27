@@ -333,8 +333,8 @@
               <Station_Deposit/>
               <Project/>
               <Area/>
+              <Location_Number/>
               <Observation_Type/>
-              <Location_Number_Container/>
               <Core_ID/>
               <container2>
                 <child1>
@@ -1393,6 +1393,9 @@
         <input ref="Area" faims_attribute_name="Area" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
           <label>{Area}</label>
         </input>
+        <input ref="Location_Number" faims_attribute_name="Location Number" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+          <label>{Location_Number}</label>
+        </input>
         <select1 appearance="full" ref="Observation_Type" faims_attribute_name="Observation Type" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="false" faims_read_only="false">
           <label>{Observation_Type}</label>
           <item>
@@ -1400,9 +1403,6 @@
             <value>placeholder</value>
           </item>
         </select1>
-        <group ref="Location_Number_Container">
-          <label/>
-        </group>
         <input ref="Core_ID" faims_attribute_name="Core ID" faims_attribute_type="measure" faims_certainty="false" faims_annotation="true">
           <label>{Core_ID}</label>
         </input>
