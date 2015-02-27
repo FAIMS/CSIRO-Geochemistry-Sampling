@@ -406,15 +406,26 @@
               </container2>
               <container3>
                 <child0>
-                  <Web_Veins/>
+                  <Web_Veins_1/>
                 </child0>
                 <child1>
-                  <Strike_Of_Veins/>
+                  <Strike_Of_Veins_1/>
                 </child1>
                 <child2>
-                  <Dip_Of_Veins/>
+                  <Dip_Of_Veins_1/>
                 </child2>
-              </container3> 
+              </container3>
+              <container3_2>
+                <child0>
+                  <Web_Veins_2/>
+                </child0>
+                <child1>
+                  <Strike_Of_Veins_2/>
+                </child1>
+                <child2>
+                  <Dip_Of_Veins_2/>
+                </child2>
+              </container3_2>  
               <Other_Structural_Measurements/>
               <container01>
                 <child0/>
@@ -491,6 +502,7 @@
               <Stratigraphic_Unit/>
               <Large_Scale_Structure/>
               <Alteration/>
+              <Veining/>
               <Notes/>
               <Photos/>
               <Take_Photo/>
@@ -528,8 +540,10 @@
       <bind nodeset="/faims/Rock_Sample/Measurements/container1/child2/Dip_Of_Cleavage" type="decimal"/>
       <bind nodeset="/faims/Rock_Sample/Measurements/container2/child1/Strike_Of_Foliation" type="decimal"/>
       <bind nodeset="/faims/Rock_Sample/Measurements/container2/child2/Dip_Of_Foliation" type="decimal"/>
-      <bind nodeset="/faims/Rock_Sample/Measurements/container3/child1/Strike_Of_Veins" type="decimal"/>
-      <bind nodeset="/faims/Rock_Sample/Measurements/container3/child2/Dip_Of_Veins" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/container3/child1/Strike_Of_Veins_1" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/container3/child2/Dip_Of_Veins_1" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/container3_2/child1/Strike_Of_Veins_2" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/container3_2/child2/Dip_Of_Veins_2" type="decimal"/>
       <bind nodeset="/faims/Rock_Sample/Measurements/container4/child1/Plunge_Of_Fold_Axis_1" type="decimal"/>
       <bind nodeset="/faims/Rock_Sample/Measurements/container4/child2/Azimuth_Of_Fold_Axis_1" type="decimal"/>
       <bind nodeset="/faims/Rock_Sample/Measurements/container5/child1/Plunge_Of_Fold_Axis_2" type="decimal"/>
@@ -1558,19 +1572,40 @@
           <label/>
           <group ref="child0" faims_style="even">
             <label/>
-            <input ref="Web_Veins" faims_web="true">
+            <input ref="Web_Veins_1" faims_web="true">
               <label/>
             </input>
           </group>
           <group ref="child1" faims_style="even">
             <label/>
-            <input ref="Strike_Of_Veins" faims_attribute_name="Strike Of Veins" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+            <input ref="Strike_Of_Veins_1" faims_attribute_name="Strike Of Veins 1" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
               <label>{Blank_Label}</label>
             </input>
           </group>
           <group ref="child2" faims_style="even">
             <label/>
-            <input ref="Dip_Of_Veins" faims_attribute_name="Dip Of Veins" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+            <input ref="Dip_Of_Veins_1" faims_attribute_name="Dip Of Veins 1" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label>{Blank_Label}</label>
+            </input>
+          </group>
+        </group>
+        <group ref="container3_2" faims_style="orientation">
+          <label/>
+          <group ref="child0" faims_style="even">
+            <label/>
+            <input ref="Web_Veins_2" faims_web="true">
+              <label/>
+            </input>
+          </group>
+          <group ref="child1" faims_style="even">
+            <label/>
+            <input ref="Strike_Of_Veins_2" faims_attribute_name="Strike Of Veins 2" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+              <label>{Blank_Label}</label>
+            </input>
+          </group>
+          <group ref="child2" faims_style="even">
+            <label/>
+            <input ref="Dip_Of_Veins_2" faims_attribute_name="Dip Of Veins 2" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
               <label>{Blank_Label}</label>
             </input>
           </group>
@@ -1746,6 +1781,9 @@
         </input>
         <input ref="Alteration" faims_attribute_name="Alteration" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Alteration}</label>
+        </input>
+         <input ref="Veining" faims_attribute_name="Veining" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Veining}</label>
         </input>
         <input ref="Notes" faims_attribute_name="Notes" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Notes}</label>

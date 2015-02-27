@@ -1086,8 +1086,10 @@ dupeSample3() {
         addAttribute(attributes, "Dip Of Cleavage", "Rock_Sample/Measurements/Dip_Of_Cleavage", true);
         addAttribute(attributes, "Strike Of Foliation", "Rock_Sample/Measurements/Strike_Of_Foliation", true);
         addAttribute(attributes, "Dip Of Foliation", "Rock_Sample/Measurements/Dip_Of_Foliation", true);
-        addAttribute(attributes, "Strike Of Veins", "Rock_Sample/Measurements/Strike_Of_Veins", true);
-        addAttribute(attributes, "Dip Of Veins", "Rock_Sample/Measurements/Dip_Of_Veins", true);
+        addAttribute(attributes, "Strike Of Veins 1", "Rock_Sample/Measurements/Strike_Of_Veins_1", true);
+        addAttribute(attributes, "Dip Of Veins 1", "Rock_Sample/Measurements/Dip_Of_Veins_1", true);
+        addAttribute(attributes, "Strike Of Veins 2", "Rock_Sample/Measurements/Strike_Of_Veins_2", true);
+        addAttribute(attributes, "Dip Of Veins 2", "Rock_Sample/Measurements/Dip_Of_Veins_2", true);
         addAttribute(attributes, "Other Structural Measurements", "Rock_Sample/Measurements/Other_Structural_Measurements", true);
         addAttribute(attributes, "Plunge Of Fold Axis 1", "Rock_Sample/Measurements/Plunge_Of_Fold_Axis_1", true);
         addAttribute(attributes, "Azimuth Of Fold Axis 1", "Rock_Sample/Measurements/Azimuth_Of_Fold_Axis_1", true);
@@ -1108,6 +1110,7 @@ dupeSample3() {
         addAttribute(attributes, "Stratigraphic unit", "Rock_Sample/Lithological_Info/Stratigraphic_Unit", true);
         addAttribute(attributes, "Large-scale Structure", "Rock_Sample/Lithological_Info/Large_Scale_Structure", true);
         addAttribute(attributes, "Alteration", "Rock_Sample/Lithological_Info/Alteration", true);
+        addAttribute(attributes, "Veining", "Rock_Sample/Lithological_Info/Veining", true);
         addAttribute(attributes, "Notes", "Rock_Sample/Lithological_Info/Notes", true);
 
     }
@@ -2016,7 +2019,8 @@ loadRockSampleAttributes() {
     populateWebViewHtml("Rock_Sample/Measurements/Web_Bedding", "Bedding");
     populateWebViewHtml("Rock_Sample/Measurements/Web_Cleavage", "Cleavage");
     populateWebViewHtml("Rock_Sample/Measurements/Web_Foliation", "Foliation");
-    populateWebViewHtml("Rock_Sample/Measurements/Web_Veins", "Veins");
+    populateWebViewHtml("Rock_Sample/Measurements/Web_Veins_1", "Veins 1");
+    populateWebViewHtml("Rock_Sample/Measurements/Web_Veins_2", "Veins 2");
     populateWebViewHtml("Rock_Sample/Measurements/Web_Plunge", "Plunge");
     populateWebViewHtml("Rock_Sample/Measurements/Web_Azimuth", "Azimuth");                                                
     populateWebViewHtml("Rock_Sample/Measurements/Web_Fold_Axis_1", "Fold Axis 1");

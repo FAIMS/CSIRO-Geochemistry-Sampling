@@ -1495,12 +1495,18 @@
     <property name="Dip Of Foliation" type="measure">
       <description>Description TBD</description>
     </property>
-    <property name="Strike Of Veins" type="measure">
+    <property name="Strike Of Veins 1" type="measure">
       <description>Description TBD</description>
     </property>
-    <property name="Dip Of Veins" type="measure">
+    <property name="Dip Of Veins 1" type="measure">
       <description>Description TBD</description>
     </property>
+    <property name="Strike Of Veins 2" type="measure">
+      <description>Description TBD</description>
+    </property>
+    <property name="Dip Of Veins 2" type="measure">
+      <description>Description TBD</description>
+    </property>    
     <property name="Other Structural Measurements" type="measure">
       <description>Description TBD</description>
     </property>
@@ -1601,6 +1607,9 @@
     </property>
     <property name="Alteration" type="freetext">
       <description>Any signs of obvious alteration, e.g., pervasive epidote, silicification around veins, etc.</description>
+    </property>
+    <property name="Veining" type="measure">
+      <description>Description TBD</description>
     </property>
     <property name="Notes" type="freetext">
       <description>For anything else....</description>
