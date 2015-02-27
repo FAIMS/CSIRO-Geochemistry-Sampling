@@ -126,11 +126,16 @@ onEvent("Shape/Shape_Note/shape_delete", "click", "deleteShape(shapeUUID);");
 
 /* Event Handling */
 onEvent("Project", "show", "removeNavigationButtons();");
-onEvent("Project", "load", "populateList(\"Project/Start/Duplicate_ID_List\", new ArrayList());");
+onEvent("Project", "load", "populateList(\"Project/Start/Duplicate_ID_List\", new ArrayList()); loadStationDeposit(); loadProject(); loadArea(); loadSamplePrefix(); loadSampleStartingID();");
 
-onEvent("Project/Start", "show", "loadSamplePrefix(); loadSampleStartingID(); updateGPSStatus(); clearDuplicatesList();");
+onEvent("Project/Start", "show", "updateGPSStatus(); clearDuplicatesList();");
+
+onFocus("Project/Start/Station_Deposit", "", "setStationDeposit(getFieldValue(\"Project/Start/Station_Deposit\"));");
+onFocus("Project/Start/Project", "", "setProject(getFieldValue(\"Project/Start/Project\"));");
+onFocus("Project/Start/Area", "", "setArea(getFieldValue(\"Project/Start/Area\"));");
 onFocus("Project/Start/Sample_Prefix", "", "setSamplePrefix(getFieldValue(\"Project/Start/Sample_Prefix\"));");
 onFocus("Project/Start/Sample_Starting_ID", "", "setSampleStartingID(getFieldValue(\"Project/Start/Sample_Starting_ID\"));");
+
 onEvent("Project/Start/New_Sample", "delayclick", "newSample();");
 onEvent("Project/Start/Check_For_Duplicates", "click", "checkForDuplicates();");
 onEvent("Project/Start/Duplicate_ID_List", "click", "loadSample();");
@@ -154,16 +159,64 @@ populateDropDown("Project/Start/Sample_Types", sample_types);
 sample_types.add(0, new NameValuePair("{All}", "Sample"));
 populateDropDown("Project/Search/Sample_Types", sample_types);
 
+setStationDeposit(String value) {
+    setFieldValue("Project/Start/Station_Deposit", value);
+    fetchOne("REPLACE INTO localSettings(key, value) VALUES('Station_Deposit', '" + value + "');", null);
+}
+
+loadStationDeposit() {
+    fetchOne("SELECT value FROM localSettings WHERE key = 'Station_Deposit';", new FetchCallback() {
+        onFetch(result) {
+            print("[loadStationDeposit()] fetched Station_Deposit from localSettings: " + result);
+            if (!isNull(result)) {
+                value = result.get(0);
+                setFieldValue("Project/Start/Station_Deposit", value);
+                print("[loadStationDeposit()] set Station_Deposit to: " + value);
+            }
+        }
+    });
+}
+
+setProject(String value) {
+    setFieldValue("Project/Start/Project", value);
+    fetchOne("REPLACE INTO localSettings(key, value) VALUES('Project', '" + value + "');", null);
+}
+
+loadProject() {
+    fetchOne("SELECT value FROM localSettings WHERE key = 'Project';", new FetchCallback() {
+        onFetch(result) {
+            print("[loadProject()] fetched Project from localSettings: " + result);
+            if (!isNull(result)) {
+                value = result.get(0);
+                setFieldValue("Project/Start/Project", value);
+                print("[loadProject()] set Project to: " + value);
+            }
+        }
+    });
+}
+
+setArea(String value) {
+    setFieldValue("Project/Start/Area", value);
+    fetchOne("REPLACE INTO localSettings(key, value) VALUES('Area', '" + value + "');", null);
+}
+
+loadArea() {
+    fetchOne("SELECT value FROM localSettings WHERE key = 'Area';", new FetchCallback() {
+        onFetch(result) {
+            print("[loadArea()] fetched Area from localSettings: " + result);
+            if (!isNull(result)) {
+                value = result.get(0);
+                setFieldValue("Project/Start/Area", value);
+                print("[loadArea()] set Area to: " + value);
+            }
+        }
+    });
+}
+
 /* Sets the sample prefix to the given value. */
 setSamplePrefix(String samplePrefix) {
     setFieldValue("Project/Start/Sample_Prefix", samplePrefix);
     fetchOne("REPLACE INTO localSettings(key, value) VALUES('Sample Prefix', '" + samplePrefix + "');", null);
-}
-
-/* Sets the sample starting ID to the given value. */
-setSampleStartingID(String sampleStartingID) {
-    setFieldValue("Project/Start/Sample_Starting_ID", sampleStartingID);
-    fetchOne("REPLACE INTO localSettings(key, value) VALUES('Sample Starting ID', '" + sampleStartingID + "');", null);
 }
 
 /* Loads the sample prefix if one exists. */
@@ -178,6 +231,12 @@ loadSamplePrefix() {
             }
         }
     });
+}
+
+/* Sets the sample starting ID to the given value. */
+setSampleStartingID(String sampleStartingID) {
+    setFieldValue("Project/Start/Sample_Starting_ID", sampleStartingID);
+    fetchOne("REPLACE INTO localSettings(key, value) VALUES('Sample Starting ID', '" + sampleStartingID + "');", null);
 }
 
 /* Loads the sample starting ID if one exists, otherwise defaults to '1'. */
@@ -196,6 +255,7 @@ loadSampleStartingID() {
         }
     });
 }
+
 
 /* Updates the GPS_Status view on the Start tab of the Project tabgroup. */
 updateGPSStatus() {
@@ -339,8 +399,8 @@ newSample() {
     }
 
     // Set the sample prefix and starting ID in-case the user changed them.
-    setSamplePrefix(getFieldValue("Project/Start/Sample_Prefix"));
-    setSampleStartingID(getFieldValue("Project/Start/Sample_Starting_ID"));
+    // setSamplePrefix(getFieldValue("Project/Start/Sample_Prefix"));
+    // setSampleStartingID(getFieldValue("Project/Start/Sample_Starting_ID"));
 
     // Determine the type of sample required.
     String tabgroup = getSampleTypePath();
