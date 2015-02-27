@@ -1516,18 +1516,6 @@
     <property name="Azimuth Of Fold Axis 1" type="measure">
       <description>Description TBD</description>
     </property>
-    <property name="Plunge Of Fold Axis 2" type="measure">
-      <description>Description TBD</description>
-    </property>
-    <property name="Azimuth Of Fold Axis 2" type="measure">
-      <description>Description TBD</description>
-    </property>
-    <property name="Plunge Of Fold Axis 3" type="measure">
-      <description>Description TBD</description>
-    </property>
-    <property name="Azimuth Of Fold Axis 3" type="measure">
-      <description>Description TBD</description>
-    </property>
     <property name="Plunge Of Mineral Lineation" type="measure">
       <description>Description TBD</description>
     </property>

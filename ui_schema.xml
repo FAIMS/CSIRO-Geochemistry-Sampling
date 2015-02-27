@@ -446,29 +446,7 @@
                 <child2>
                   <Azimuth_Of_Fold_Axis_1/>
                 </child2>
-              </container4>
-              <container5>
-                <child0>
-                  <Web_Fold_Axis_2/>
-                </child0>
-                <child1>
-                  <Plunge_Of_Fold_Axis_2/>
-                </child1>
-                <child2>
-                  <Azimuth_Of_Fold_Axis_2/>
-                </child2>
-              </container5> 
-              <container6>
-                <child0>
-                  <Web_Fold_Axis_3/>
-                </child0>
-                <child1>
-                  <Plunge_Of_Fold_Axis_3/>
-                </child1>
-                <child2>
-                  <Azimuth_Of_Fold_Axis_3/>
-                </child2>
-              </container6> 
+              </container4> 
               <container7>
                 <child0>
                   <Web_Mineral_Lineation/>
@@ -546,10 +524,6 @@
       <bind nodeset="/faims/Rock_Sample/Measurements/container3_2/child2/Dip_Of_Veins_2" type="decimal"/>
       <bind nodeset="/faims/Rock_Sample/Measurements/container4/child1/Plunge_Of_Fold_Axis_1" type="decimal"/>
       <bind nodeset="/faims/Rock_Sample/Measurements/container4/child2/Azimuth_Of_Fold_Axis_1" type="decimal"/>
-      <bind nodeset="/faims/Rock_Sample/Measurements/container5/child1/Plunge_Of_Fold_Axis_2" type="decimal"/>
-      <bind nodeset="/faims/Rock_Sample/Measurements/container5/child2/Azimuth_Of_Fold_Axis_2" type="decimal"/>
-      <bind nodeset="/faims/Rock_Sample/Measurements/container6/child1/Plunge_Of_Fold_Axis_3" type="decimal"/>
-      <bind nodeset="/faims/Rock_Sample/Measurements/container6/child2/Azimuth_Of_Fold_Axis_3" type="decimal"/>
       <bind nodeset="/faims/Rock_Sample/Measurements/container7/child1/Plunge_Of_Mineral_Lineation" type="decimal"/>
       <bind nodeset="/faims/Rock_Sample/Measurements/container7/child2/Azimuth_Of_Mineral_Lineation" type="decimal"/>
       <bind nodeset="/faims/Rock_Sample/Measurements/container8/child1/Plunge_Of_Stretching_Lineation" type="decimal"/>
@@ -1648,48 +1622,6 @@
           <group ref="child2" faims_style="even">
             <label/>
             <input ref="Azimuth_Of_Fold_Axis_1" faims_attribute_name="Azimuth Of Fold Axis 1" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-              <label>{Blank_Label}</label>
-            </input>
-          </group>
-        </group>
-        <group ref="container5" faims_style="orientation">
-          <label/>
-          <group ref="child0" faims_style="even">
-            <label/>
-            <input ref="Web_Fold_Axis_2" faims_web="true">
-              <label/>
-            </input>
-          </group>
-          <group ref="child1" faims_style="even">
-            <label/>
-            <input ref="Plunge_Of_Fold_Axis_2" faims_attribute_name="Plunge Of Fold Axis 2" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-              <label>{Blank_Label}</label>
-            </input>
-          </group>
-          <group ref="child2" faims_style="even">
-            <label/>
-            <input ref="Azimuth_Of_Fold_Axis_2" faims_attribute_name="Azimuth Of Fold Axis 2" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-              <label>{Blank_Label}</label>
-            </input>
-          </group>
-        </group>
-        <group ref="container6" faims_style="orientation">
-          <label/>
-          <group ref="child0" faims_style="even">
-            <label/>
-            <input ref="Web_Fold_Axis_3" faims_web="true">
-              <label/>
-            </input>
-          </group>
-          <group ref="child1" faims_style="even">
-            <label/>
-            <input ref="Plunge_Of_Fold_Axis_3" faims_attribute_name="Plunge Of Fold Axis 3" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-              <label>{Blank_Label}</label>
-            </input>
-          </group>
-          <group ref="child2" faims_style="even">
-            <label/>
-            <input ref="Azimuth_Of_Fold_Axis_3" faims_attribute_name="Azimuth Of Fold Axis 3" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
               <label>{Blank_Label}</label>
             </input>
           </group>
