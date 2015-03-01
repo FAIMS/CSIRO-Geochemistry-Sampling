@@ -110,6 +110,13 @@ addActionBarItem("external_gps", new ToggleActionButtonCallback() {
     }
 });
 
+/*** Module Initialisation ***/
+// Turn on internal GPS and Sync by default
+startInternalGPS();
+setSyncEnabled(true);
+setFileSyncEnabled(true);
+
+
 // Flag used for onShow tab redirects
 Boolean redirectFlag = false;
 navigateToMap() {
