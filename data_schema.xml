@@ -1404,9 +1404,10 @@
       <formatString><![CDATA[$2]]></formatString>
     </property>
 
-    <property name="Observation Type" type="vocab" isIdentifier="true">
+    <property name="Rock Observation Type" type="vocab" isIdentifier="true">
       <description>Description TBD</description>
-      <formatString><![CDATA[{{if equal($1, "Observation Only") then " - Observation ") }}]]></formatString>
+      <!-- <formatString><![CDATA[{{ if equal($1, "Observation Only") then " - Observation " }}]]></formatString> -->
+      <formatString><![CDATA[{{ if in($1, ["{Observation_Only}", "Observation Only"]) then " - Observation " }}]]></formatString>
       <lookup>
         <term> {Sampling_Location}
           <description>Description TBD</description>
@@ -1416,9 +1417,9 @@
         </term>
       </lookup>
     </property>
-    <property name="Location Number" type="measure" isIdentifier="true">
+    <property name="Rock Location Number" type="measure" isIdentifier="true">
       <description>Description TBD</description>
-      <formatString><![CDATA[ - Location {{if $2 then "$2" else "<empty>" }}]]></formatString>
+      <formatString><![CDATA[ {{ if $2 then " - Location $2" else " - Location <empty>" }} ]]></formatString>
 
     </property>
     <property name="Rock Sample Date" type="measure" isIdentifier="true">
@@ -1426,7 +1427,7 @@
       <formatString><![CDATA[ - Rock - $2]]></formatString>
     </property>
     <property name="Station" type="freetext">
-      <description>Description TBD</description>
+      <description>Description TBD</description>      
     </property>
     <property name="Project" type="freetext">
       <description>Description TBD</description>

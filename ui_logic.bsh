@@ -1081,8 +1081,8 @@ dupeSample3() {
         addAttribute(attributes, "Project", "Project/Start/Project", true);
         addAttribute(attributes, "Area", "Project/Start/Area", true);
 
-        addAttribute(attributes, "Location Number", "Rock_Sample/Basic_Info/Location_Number", true);
-        addAttribute(attributes, "Observation Type", "Rock_Sample/Basic_Info/Observation_Type", false);
+        addAttribute(attributes, "Rock Location Number", "Rock_Sample/Basic_Info/Location_Number", true);
+        addAttribute(attributes, "Rock Observation Type", "Rock_Sample/Basic_Info/Observation_Type", false);
         addAttribute(attributes, "Core ID", "Rock_Sample/Basic_Info/Core_ID", true);
         addAttribute(attributes, "Latitude", "Rock_Sample/Basic_Info/Latitude", true);
         addAttribute(attributes, "Longitude", "Rock_Sample/Basic_Info/Longitude", true);
@@ -2014,7 +2014,7 @@ loadRockSampleFrom(archentid) {
 
 /* Populates all auto-generated fields for the rock sample. */
 loadRockSampleAttributes() {
-    makeVocab("RadioGroup", "Rock_Sample/Basic_Info/Observation_Type", "Observation Type");
+    makeVocab("RadioGroup", "Rock_Sample/Basic_Info/Observation_Type", "Rock Observation Type");
     makeVocab("DropDown", "Rock_Sample/Basic_Info/SRID", "SRID");
     makeVocab("DropDown", "Rock_Sample/Lithological_Info/Lithology", "Lithology");
     makeVocab("DropDown", "Rock_Sample/Lithological_Info/Fineness_Inclusion_Size", "Fineness or Inclusion size");

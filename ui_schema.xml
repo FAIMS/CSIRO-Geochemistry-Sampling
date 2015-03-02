@@ -1393,10 +1393,10 @@
         <input ref="Area" faims_attribute_name="Area" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="true">
           <label>{Area}</label>
         </input>
-        <input ref="Location_Number" faims_attribute_name="Location Number" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+        <input ref="Location_Number" faims_attribute_name="Rock Location Number" faims_attribute_type="measure" faims_certainty="false" faims_annotation="false" faims_read_only="false">
           <label>{Location_Number}</label>
         </input>
-        <select1 appearance="full" ref="Observation_Type" faims_attribute_name="Observation Type" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="false" faims_read_only="false">
+        <select1 appearance="full" ref="Observation_Type" faims_attribute_name="Rock Observation Type" faims_attribute_type="vocab" faims_certainty="false" faims_annotation="false" faims_read_only="false">
           <label>{Observation_Type}</label>
           <item>
             <label>placeholder</label>
