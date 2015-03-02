@@ -1406,8 +1406,7 @@
 
     <property name="Rock Observation Type" type="vocab" isIdentifier="true">
       <description>Description TBD</description>
-      <!-- <formatString><![CDATA[{{ if equal($1, "Observation Only") then " - Observation " }}]]></formatString> -->
-      <formatString><![CDATA[{{ if in($1, ["{Observation_Only}", "Observation Only"]) then " - Observation " }}]]></formatString>
+      <formatString><![CDATA[{{ if equal($1, "{Observation_Only}") then " - Observation" }}]]></formatString>
       <lookup>
         <term> {Sampling_Location}
           <description>Description TBD</description>
@@ -1419,7 +1418,7 @@
     </property>
     <property name="Rock Location Number" type="measure" isIdentifier="true">
       <description>Description TBD</description>
-      <formatString><![CDATA[ {{ if $2 then " - Location $2" else " - Location <empty>" }} ]]></formatString>
+      <formatString><![CDATA[{{ if $2 then " - Location $2" else " - Location <empty>" }}]]></formatString>
 
     </property>
     <property name="Rock Sample Date" type="measure" isIdentifier="true">

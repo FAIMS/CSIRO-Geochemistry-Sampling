@@ -118,8 +118,8 @@
               <Water_Table/>
               <Sample_Depth/>
               <Bottom_Of_Hole/>
-              <Notes/>
               <Samples_Collected/>
+              <Notes/>
               <Photos/>
               <Take_Photo/>
               <Sketches/>
@@ -793,10 +793,7 @@
         </input>
         <input ref="Bottom_Of_Hole" faims_attribute_name="Bottom of Hole">
           <label>{Bottom_Of_Hole}</label>
-        </input>
-        <input ref="Notes" faims_attribute_name="Notes" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
-          <label>{Notes}</label>
-        </input>
+        </input> 
         <select ref="Samples_Collected" faims_attribute_name="Samples Collected" faims_attribute_type="vocab" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Samples_Collected}</label>
           <item>
@@ -804,6 +801,9 @@
             <value>placeholder</value>
           </item>
         </select>
+        <input ref="Notes" faims_attribute_name="Notes" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
+          <label>{Notes}</label>
+        </input>
         <select type="camera" faims_sync="true" ref="Photos" faims_attribute_name="Photos" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Photos}</label>
           <item>

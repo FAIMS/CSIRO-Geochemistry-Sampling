@@ -65,6 +65,7 @@ addActionBarItem("internal_gps", new ToggleActionButtonCallback() {
     actionOn() {
         stopGPS();
         showToast("{GPS_Disabled}");
+        updateGPSStatus();
     }
     isActionOff() {
         isInternalGPSOn();
@@ -78,6 +79,7 @@ addActionBarItem("internal_gps", new ToggleActionButtonCallback() {
         }
         startInternalGPS();
         showToast("{GPS_Enabled}");
+        updateGPSStatus();
     }
 });
 
@@ -88,6 +90,7 @@ addActionBarItem("external_gps", new ToggleActionButtonCallback() {
     actionOn() {
         stopGPS();
         showToast("{GPS_Disabled}");
+        updateGPSStatus();
 
     }
     isActionOff() {
@@ -107,6 +110,7 @@ addActionBarItem("external_gps", new ToggleActionButtonCallback() {
             showToast("{Please_Enable_Bluetooth}");
             this.isActionOff();
         }
+        updateGPSStatus();
     }
 });
 
@@ -274,7 +278,14 @@ updateGPSStatus() {
     if (!isExternalGPSOn() && !isInternalGPSOn()) {
         if (!isNull(previousStatus) && !previousStatus.equals(notInitialised)) {
             // previous gps status is some last valid coordinate.
-            status = "GPS is no longer initailised. Previous status: \n" + previousStatus;
+            String error = "GPS is no longer initailised. Previous status:";
+            // check that error message wasn't previously appended to the previous status message.
+            if (previousStatus.subSequence(0, error.length()).equals(error)) {
+                status = previousStatus;
+            } else {
+                print("[updateGPSStatus] Previous status subSequence: " + previousStatus.subSequence(0, error.length()-1));
+                status = error + "\n" + previousStatus;
+            }
         } else {
             status = notInitialised;
         }
