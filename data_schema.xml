@@ -27,6 +27,9 @@
     <property name="Observation Type" type="vocab">
       <description>Description TBD</description>
       <lookup>
+        <term> {No_Observation}
+          <description>Description TBD</description>
+        </term>
         <term> {Sampling_Location}
           <description>Description TBD</description>
         </term>
@@ -196,6 +199,9 @@
     <property name="Samples Collected" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {No_Observation}
+          <description>Description TBD</description>
+        </term>
         <term> {Cations}
           <description>Description TBD</description>
         </term>
@@ -320,6 +326,9 @@
     <property name="Observation Type" type="vocab">
       <description>Description TBD</description>
       <lookup>
+        <term> {No_Observation}
+          <description>Description TBD</description>
+        </term>
         <term> {Sampling_Location}
           <description>Description TBD</description>
         </term>
@@ -396,6 +405,9 @@
     <property name="Soil Description" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {No_Observation}
+          <description>Description TBD</description>
+        </term>
         <term> {Clay}
           <description>Description TBD</description>
         </term>
@@ -629,6 +641,9 @@
     <property name="Observation Type" type="vocab">
       <description>Description TBD</description>
       <lookup>
+        <term> {No_Observation}
+          <description>Description TBD</description>
+        </term>
         <term> {Sampling_Location}
           <description>Description TBD</description>
         </term>
@@ -716,6 +731,9 @@
     <property name="Soil Texture" type="enum">
       <description>Check all that apply</description>
       <lookup>
+        <term> {No_Observation}
+          <description>Description TBD</description>
+        </term>
         <term> {Clay}
           <description>Description TBD</description>
         </term>
@@ -1408,6 +1426,9 @@
       <description>Description TBD</description>
       <formatString><![CDATA[{{ if equal($1, "{Observation_Only}") then " - Observation" }}]]></formatString>
       <lookup>
+        <term> {No_Observation}
+          <description>Description TBD</description>
+        </term>
         <term> {Sampling_Location}
           <description>Description TBD</description>
         </term>
@@ -1538,6 +1559,9 @@
     <property name="Lithology" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {No_Observation}
+          <description>Description TBD</description>
+        </term>
         <term> {Basalt}
           <description>Description TBD</description>
         </term>
@@ -1549,6 +1573,9 @@
     <property name="Fineness or Inclusion size" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {No_Observation}
+          <description>Description TBD</description>
+        </term>
         <term> {Fine}
           <description>Description TBD</description>
         </term>
@@ -1563,6 +1590,9 @@
     <property name="Grain Size" type="vocab">
       <description>Description TBD</description>
       <lookup>
+        <term> {No_Observation}
+          <description>Description TBD</description>
+        </term>
         <term> {Fine}
           <description>Description TBD</description>
         </term>
@@ -1577,6 +1607,9 @@
     <property name="Sorting" type="enum">
       <description>Description TBD</description>
       <lookup>
+        <term> {No_Observation}
+          <description>Description TBD</description>
+        </term>
         <term> {Poor}
           <description>Description TBD</description>
         </term>
