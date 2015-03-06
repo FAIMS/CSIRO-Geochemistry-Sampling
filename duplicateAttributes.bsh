@@ -1,629 +1,130 @@
 <?xml version="1.0"?>
-
-if (!isNull(getFieldValue("Shape/Shape_Note/label"))){
-	print(getFieldValue("Shape/Shape_Note/label")); 
-	attributes.add(createEntityAttribute("Label", getFieldAnnotation("Shape/Shape_Note/label"), null, getFieldValue("Shape/Shape_Note/label"), getFieldCertainty("Shape/Shape_Note/label")));
-}
-
-if (!isNull(getFieldValue("Shape/Shape_Note/note"))){
-	print(getFieldValue("Shape/Shape_Note/note")); 
-	attributes.add(createEntityAttribute("Note", getFieldAnnotation("Shape/Shape_Note/note"), null, getFieldValue("Shape/Shape_Note/note"), getFieldCertainty("Shape/Shape_Note/note")));
-}
-
-if (!isNull(getFieldValue("Water_Sample/Basic_Info/Water_Sample_Prefix"))){
-	print(getFieldValue("Water_Sample/Basic_Info/Water_Sample_Prefix")); 
-	attributes.add(createEntityAttribute("Water Sample Prefix", getFieldAnnotation("Water_Sample/Basic_Info/Water_Sample_Prefix"), null, getFieldValue("Water_Sample/Basic_Info/Water_Sample_Prefix"), getFieldCertainty("Water_Sample/Basic_Info/Water_Sample_Prefix")));
-}
-
-if (!isNull(getFieldValue("Water_Sample/Basic_Info/Water_Sample_ID"))){
-	print(getFieldValue("Water_Sample/Basic_Info/Water_Sample_ID")); 
-	attributes.add(createEntityAttribute("Water Sample ID", getFieldAnnotation("Water_Sample/Basic_Info/Water_Sample_ID"), null, getFieldValue("Water_Sample/Basic_Info/Water_Sample_ID"), getFieldCertainty("Water_Sample/Basic_Info/Water_Sample_ID")));
-}
-
-if (!isNull(getFieldValue("Water_Sample/Basic_Info/Station_Deposit"))){
-	print(getFieldValue("Water_Sample/Basic_Info/Station_Deposit")); 
-	attributes.add(createEntityAttribute("Station", getFieldAnnotation("Water_Sample/Basic_Info/Station_Deposit"), null, getFieldValue("Water_Sample/Basic_Info/Station_Deposit"), getFieldCertainty("Water_Sample/Basic_Info/Station_Deposit")));
-}
-
-if (!isNull(getFieldValue("Water_Sample/Basic_Info/Project"))){
-	print(getFieldValue("Water_Sample/Basic_Info/Project")); 
-	attributes.add(createEntityAttribute("Project", getFieldAnnotation("Water_Sample/Basic_Info/Project"), null, getFieldValue("Water_Sample/Basic_Info/Project"), getFieldCertainty("Water_Sample/Basic_Info/Project")));
-}
-
-if (!isNull(getFieldValue("Water_Sample/Basic_Info/Area"))){
-	print(getFieldValue("Water_Sample/Basic_Info/Area")); 
-	attributes.add(createEntityAttribute("Area", getFieldAnnotation("Water_Sample/Basic_Info/Area"), null, getFieldValue("Water_Sample/Basic_Info/Area"), getFieldCertainty("Water_Sample/Basic_Info/Area")));
-}
-
-if (!isNull(getFieldValue("Water_Sample/Basic_Info/Site_Name"))){
-	print(getFieldValue("Water_Sample/Basic_Info/Site_Name")); 
-	attributes.add(createEntityAttribute("Site Name", getFieldAnnotation("Water_Sample/Basic_Info/Site_Name"), null, getFieldValue("Water_Sample/Basic_Info/Site_Name"), getFieldCertainty("Water_Sample/Basic_Info/Site_Name")));
-}
-
-if (!isNull(getFieldValue("Water_Sample/Basic_Info/Observation_Type"))){
-	print(getFieldValue("Water_Sample/Basic_Info/Observation_Type")); 
-	attributes.add(createEntityAttribute("Observation Type", getFieldAnnotation("Water_Sample/Basic_Info/Observation_Type"), getFieldValue("Water_Sample/Basic_Info/Observation_Type"), null, getFieldCertainty("Water_Sample/Basic_Info/Observation_Type")));
-}
-
-if (!isNull(getFieldValue("Water_Sample/Basic_Info/Latitude"))){
-	print(getFieldValue("Water_Sample/Basic_Info/Latitude")); 
-	attributes.add(createEntityAttribute("Latitude", getFieldAnnotation("Water_Sample/Basic_Info/Latitude"), null, getFieldValue("Water_Sample/Basic_Info/Latitude"), getFieldCertainty("Water_Sample/Basic_Info/Latitude")));
-}
-
-if (!isNull(getFieldValue("Water_Sample/Basic_Info/Longitude"))){
-	print(getFieldValue("Water_Sample/Basic_Info/Longitude")); 
-	attributes.add(createEntityAttribute("Longitude", getFieldAnnotation("Water_Sample/Basic_Info/Longitude"), null, getFieldValue("Water_Sample/Basic_Info/Longitude"), getFieldCertainty("Water_Sample/Basic_Info/Longitude")));
-}
-
-if (!isNull(getFieldValue("Water_Sample/Basic_Info/Northing"))){
-	print(getFieldValue("Water_Sample/Basic_Info/Northing")); 
-	attributes.add(createEntityAttribute("Northing", getFieldAnnotation("Water_Sample/Basic_Info/Northing"), null, getFieldValue("Water_Sample/Basic_Info/Northing"), getFieldCertainty("Water_Sample/Basic_Info/Northing")));
-}
-
-if (!isNull(getFieldValue("Water_Sample/Basic_Info/Easting"))){
-	print(getFieldValue("Water_Sample/Basic_Info/Easting")); 
-	attributes.add(createEntityAttribute("Easting", getFieldAnnotation("Water_Sample/Basic_Info/Easting"), null, getFieldValue("Water_Sample/Basic_Info/Easting"), getFieldCertainty("Water_Sample/Basic_Info/Easting")));
-}
-
-if (!isNull(getFieldValue("Water_Sample/Basic_Info/Elevation"))){
-	print(getFieldValue("Water_Sample/Basic_Info/Elevation")); 
-	attributes.add(createEntityAttribute("Elevation", getFieldAnnotation("Water_Sample/Basic_Info/Elevation"), null, getFieldValue("Water_Sample/Basic_Info/Elevation"), getFieldCertainty("Water_Sample/Basic_Info/Elevation")));
-}
-
-if (!isNull(getFieldValue("Water_Sample/Basic_Info/Water_Table"))){
-	print(getFieldValue("Water_Sample/Basic_Info/Water_Table")); 
-	attributes.add(createEntityAttribute("Water Table", getFieldAnnotation("Water_Sample/Basic_Info/Water_Table"), null, getFieldValue("Water_Sample/Basic_Info/Water_Table"), getFieldCertainty("Water_Sample/Basic_Info/Water_Table")));
-}
-
-if (!isNull(getFieldValue("Water_Sample/Basic_Info/Sample_Depth"))){
-	print(getFieldValue("Water_Sample/Basic_Info/Sample_Depth")); 
-	attributes.add(createEntityAttribute("Sample Depth", getFieldAnnotation("Water_Sample/Basic_Info/Sample_Depth"), null, getFieldValue("Water_Sample/Basic_Info/Sample_Depth"), getFieldCertainty("Water_Sample/Basic_Info/Sample_Depth")));
-}
-
-if (!isNull(getFieldValue("Water_Sample/Basic_Info/Bottom_Of_Hole"))){
-	print(getFieldValue("Water_Sample/Basic_Info/Bottom_Of_Hole")); 
-	attributes.add(createEntityAttribute("Bottom of Hole", getFieldAnnotation("Water_Sample/Basic_Info/Bottom_Of_Hole"), null, getFieldValue("Water_Sample/Basic_Info/Bottom_Of_Hole"), getFieldCertainty("Water_Sample/Basic_Info/Bottom_Of_Hole")));
-}
-
-if (!isNull(getFieldValue("Water_Sample/Basic_Info/Notes"))){
-	print(getFieldValue("Water_Sample/Basic_Info/Notes")); 
-	attributes.add(createEntityAttribute("Notes", getFieldAnnotation("Water_Sample/Basic_Info/Notes"), null, getFieldValue("Water_Sample/Basic_Info/Notes"), getFieldCertainty("Water_Sample/Basic_Info/Notes")));
-}
-
-if (!isNull(getFieldValue("Water_Sample/Basic_Info/Samples_Collected"))){
-	print(getFieldValue("Water_Sample/Basic_Info/Samples_Collected")); 
-
-	for (listItem : getFieldValue("Water_Sample/Basic_Info/Samples_Collected")){
-		print(listItem.getName());
-		attributes.add(createEntityAttribute("Samples Collected", null, listItem.getName(), null, null));
-	}		
-
-}
-
-if (!isNull(getFieldValue("Water_Sample/Basic_Info/Photos"))){
-	print(getFieldValue("Water_Sample/Basic_Info/Photos")); 
-}
-
-if (!isNull(getFieldValue("Water_Sample/Basic_Info/Sketches"))){
-	print(getFieldValue("Water_Sample/Basic_Info/Sketches")); 
-}
-
-if (!isNull(getFieldValue("Water_Sample/Codes/Hole_Type"))){
-	print(getFieldValue("Water_Sample/Codes/Hole_Type")); 
-	attributes.add(createEntityAttribute("Hole Type", getFieldAnnotation("Water_Sample/Codes/Hole_Type"), getFieldValue("Water_Sample/Codes/Hole_Type"), null, getFieldCertainty("Water_Sample/Codes/Hole_Type")));
-}
-
-if (!isNull(getFieldValue("Water_Sample/Codes/Hole_Lining"))){
-	print(getFieldValue("Water_Sample/Codes/Hole_Lining")); 
-	attributes.add(createEntityAttribute("Hole Lining", getFieldAnnotation("Water_Sample/Codes/Hole_Lining"), getFieldValue("Water_Sample/Codes/Hole_Lining"), null, getFieldCertainty("Water_Sample/Codes/Hole_Lining")));
-}
-
-if (!isNull(getFieldValue("Water_Sample/Codes/Hole_Open_Closed"))){
-	print(getFieldValue("Water_Sample/Codes/Hole_Open_Closed")); 
-	attributes.add(createEntityAttribute("Hole Open or Closed", getFieldAnnotation("Water_Sample/Codes/Hole_Open_Closed"), getFieldValue("Water_Sample/Codes/Hole_Open_Closed"), null, getFieldCertainty("Water_Sample/Codes/Hole_Open_Closed")));
-}
-
-if (!isNull(getFieldValue("Water_Sample/Codes/Pipes_In_Hole"))){
-	print(getFieldValue("Water_Sample/Codes/Pipes_In_Hole")); 
-	attributes.add(createEntityAttribute("Pipes In Hole", getFieldAnnotation("Water_Sample/Codes/Pipes_In_Hole"), getFieldValue("Water_Sample/Codes/Pipes_In_Hole"), null, getFieldCertainty("Water_Sample/Codes/Pipes_In_Hole")));
-}
-
-if (!isNull(getFieldValue("Water_Sample/Codes/Hole_Angle"))){
-	print(getFieldValue("Water_Sample/Codes/Hole_Angle")); 
-	attributes.add(createEntityAttribute("Hole Angle", getFieldAnnotation("Water_Sample/Codes/Hole_Angle"), getFieldValue("Water_Sample/Codes/Hole_Angle"), null, getFieldCertainty("Water_Sample/Codes/Hole_Angle")));
-}
-
-if (!isNull(getFieldValue("Water_Sample/Codes/Estimated_Angle"))){
-	print(getFieldValue("Water_Sample/Codes/Estimated_Angle")); 
-	attributes.add(createEntityAttribute("Estimated Angle", getFieldAnnotation("Water_Sample/Codes/Estimated_Angle"), null, getFieldValue("Water_Sample/Codes/Estimated_Angle"), getFieldCertainty("Water_Sample/Codes/Estimated_Angle")));
-}
-
-if (!isNull(getFieldValue("Water_Sample/Codes/Outflow_Present"))){
-	print(getFieldValue("Water_Sample/Codes/Outflow_Present")); 
-	attributes.add(createEntityAttribute("Outflow Present", getFieldAnnotation("Water_Sample/Codes/Outflow_Present"), getFieldValue("Water_Sample/Codes/Outflow_Present"), null, getFieldCertainty("Water_Sample/Codes/Outflow_Present")));
-}
-
-if (!isNull(getFieldValue("Water_Sample/Codes/Sampling_Issues"))){
-	print(getFieldValue("Water_Sample/Codes/Sampling_Issues")); 
-	attributes.add(createEntityAttribute("Sampling Issues", getFieldAnnotation("Water_Sample/Codes/Sampling_Issues"), getFieldValue("Water_Sample/Codes/Sampling_Issues"), null, getFieldCertainty("Water_Sample/Codes/Sampling_Issues")));
-}
-
-if (!isNull(getFieldValue("Water_Sample/pH_Eh/Temperature"))){
-	print(getFieldValue("Water_Sample/pH_Eh/Temperature")); 
-	attributes.add(createEntityAttribute("Temperature", getFieldAnnotation("Water_Sample/pH_Eh/Temperature"), null, getFieldValue("Water_Sample/pH_Eh/Temperature"), getFieldCertainty("Water_Sample/pH_Eh/Temperature")));
-}
-
-if (!isNull(getFieldValue("Water_Sample/pH_Eh/Conductivity"))){
-	print(getFieldValue("Water_Sample/pH_Eh/Conductivity")); 
-	attributes.add(createEntityAttribute("Conductivity", getFieldAnnotation("Water_Sample/pH_Eh/Conductivity"), null, getFieldValue("Water_Sample/pH_Eh/Conductivity"), getFieldCertainty("Water_Sample/pH_Eh/Conductivity")));
-}
-
-if (!isNull(getFieldValue("Water_Sample/pH_Eh/Preferred_pH"))){
-	print(getFieldValue("Water_Sample/pH_Eh/Preferred_pH")); 
-	attributes.add(createEntityAttribute("Preferred pH", getFieldAnnotation("Water_Sample/pH_Eh/Preferred_pH"), null, getFieldValue("Water_Sample/pH_Eh/Preferred_pH"), getFieldCertainty("Water_Sample/pH_Eh/Preferred_pH")));
-}
-
-if (!isNull(getFieldValue("Water_Sample/pH_Eh/Preferred_Eh"))){
-	print(getFieldValue("Water_Sample/pH_Eh/Preferred_Eh")); 
-	attributes.add(createEntityAttribute("Preferred Eh", getFieldAnnotation("Water_Sample/pH_Eh/Preferred_Eh"), null, getFieldValue("Water_Sample/pH_Eh/Preferred_Eh"), getFieldCertainty("Water_Sample/pH_Eh/Preferred_Eh")));
-}
-
-if (!isNull(getFieldValue("Water_Sample/Hidden/Preferred_pH_Time"))){
-	print(getFieldValue("Water_Sample/Hidden/Preferred_pH_Time")); 
-	attributes.add(createEntityAttribute("Preferred pH Time", getFieldAnnotation("Water_Sample/Hidden/Preferred_pH_Time"), null, getFieldValue("Water_Sample/Hidden/Preferred_pH_Time"), getFieldCertainty("Water_Sample/Hidden/Preferred_pH_Time")));
-}
-
-if (!isNull(getFieldValue("Water_Sample/Hidden/Preferred_Eh_Time"))){
-	print(getFieldValue("Water_Sample/Hidden/Preferred_Eh_Time")); 
-	attributes.add(createEntityAttribute("Preferred Eh Time", getFieldAnnotation("Water_Sample/Hidden/Preferred_Eh_Time"), null, getFieldValue("Water_Sample/Hidden/Preferred_Eh_Time"), getFieldCertainty("Water_Sample/Hidden/Preferred_Eh_Time")));
-}
-
-if (!isNull(getFieldValue("Plant_Sample/Basic_Info/Plant_Sample_Prefix"))){
-	print(getFieldValue("Plant_Sample/Basic_Info/Plant_Sample_Prefix")); 
-	attributes.add(createEntityAttribute("Plant Sample Prefix", getFieldAnnotation("Plant_Sample/Basic_Info/Plant_Sample_Prefix"), null, getFieldValue("Plant_Sample/Basic_Info/Plant_Sample_Prefix"), getFieldCertainty("Plant_Sample/Basic_Info/Plant_Sample_Prefix")));
-}
-
-if (!isNull(getFieldValue("Plant_Sample/Basic_Info/Plant_Sample_ID"))){
-	print(getFieldValue("Plant_Sample/Basic_Info/Plant_Sample_ID")); 
-	attributes.add(createEntityAttribute("Plant Sample ID", getFieldAnnotation("Plant_Sample/Basic_Info/Plant_Sample_ID"), null, getFieldValue("Plant_Sample/Basic_Info/Plant_Sample_ID"), getFieldCertainty("Plant_Sample/Basic_Info/Plant_Sample_ID")));
-}
-
-if (!isNull(getFieldValue("Plant_Sample/Basic_Info/Station_Deposit"))){
-	print(getFieldValue("Plant_Sample/Basic_Info/Station_Deposit")); 
-	attributes.add(createEntityAttribute("Station", getFieldAnnotation("Plant_Sample/Basic_Info/Station_Deposit"), null, getFieldValue("Plant_Sample/Basic_Info/Station_Deposit"), getFieldCertainty("Plant_Sample/Basic_Info/Station_Deposit")));
-}
-
-if (!isNull(getFieldValue("Plant_Sample/Basic_Info/Project"))){
-	print(getFieldValue("Plant_Sample/Basic_Info/Project")); 
-	attributes.add(createEntityAttribute("Project", getFieldAnnotation("Plant_Sample/Basic_Info/Project"), null, getFieldValue("Plant_Sample/Basic_Info/Project"), getFieldCertainty("Plant_Sample/Basic_Info/Project")));
-}
-
-if (!isNull(getFieldValue("Plant_Sample/Basic_Info/Area"))){
-	print(getFieldValue("Plant_Sample/Basic_Info/Area")); 
-	attributes.add(createEntityAttribute("Area", getFieldAnnotation("Plant_Sample/Basic_Info/Area"), null, getFieldValue("Plant_Sample/Basic_Info/Area"), getFieldCertainty("Plant_Sample/Basic_Info/Area")));
-}
-
-if (!isNull(getFieldValue("Plant_Sample/Basic_Info/Observation_Type"))){
-	print(getFieldValue("Plant_Sample/Basic_Info/Observation_Type")); 
-	attributes.add(createEntityAttribute("Observation Type", getFieldAnnotation("Plant_Sample/Basic_Info/Observation_Type"), getFieldValue("Plant_Sample/Basic_Info/Observation_Type"), null, getFieldCertainty("Plant_Sample/Basic_Info/Observation_Type")));
-}
-
-if (!isNull(getFieldValue("Plant_Sample/Basic_Info/Plant_Species"))){
-	print(getFieldValue("Plant_Sample/Basic_Info/Plant_Species")); 
-	attributes.add(createEntityAttribute("Plant Species", getFieldAnnotation("Plant_Sample/Basic_Info/Plant_Species"), null, getFieldValue("Plant_Sample/Basic_Info/Plant_Species"), getFieldCertainty("Plant_Sample/Basic_Info/Plant_Species")));
-}
-
-if (!isNull(getFieldValue("Plant_Sample/Basic_Info/Latitude"))){
-	print(getFieldValue("Plant_Sample/Basic_Info/Latitude")); 
-	attributes.add(createEntityAttribute("Latitude", getFieldAnnotation("Plant_Sample/Basic_Info/Latitude"), null, getFieldValue("Plant_Sample/Basic_Info/Latitude"), getFieldCertainty("Plant_Sample/Basic_Info/Latitude")));
-}
-
-if (!isNull(getFieldValue("Plant_Sample/Basic_Info/Longitude"))){
-	print(getFieldValue("Plant_Sample/Basic_Info/Longitude")); 
-	attributes.add(createEntityAttribute("Longitude", getFieldAnnotation("Plant_Sample/Basic_Info/Longitude"), null, getFieldValue("Plant_Sample/Basic_Info/Longitude"), getFieldCertainty("Plant_Sample/Basic_Info/Longitude")));
-}
-
-if (!isNull(getFieldValue("Plant_Sample/Basic_Info/Northing"))){
-	print(getFieldValue("Plant_Sample/Basic_Info/Northing")); 
-	attributes.add(createEntityAttribute("Northing", getFieldAnnotation("Plant_Sample/Basic_Info/Northing"), null, getFieldValue("Plant_Sample/Basic_Info/Northing"), getFieldCertainty("Plant_Sample/Basic_Info/Northing")));
-}
-
-if (!isNull(getFieldValue("Plant_Sample/Basic_Info/Easting"))){
-	print(getFieldValue("Plant_Sample/Basic_Info/Easting")); 
-	attributes.add(createEntityAttribute("Easting", getFieldAnnotation("Plant_Sample/Basic_Info/Easting"), null, getFieldValue("Plant_Sample/Basic_Info/Easting"), getFieldCertainty("Plant_Sample/Basic_Info/Easting")));
-}
-
-if (!isNull(getFieldValue("Plant_Sample/Basic_Info/Elevation"))){
-	print(getFieldValue("Plant_Sample/Basic_Info/Elevation")); 
-	attributes.add(createEntityAttribute("Elevation", getFieldAnnotation("Plant_Sample/Basic_Info/Elevation"), null, getFieldValue("Plant_Sample/Basic_Info/Elevation"), getFieldCertainty("Plant_Sample/Basic_Info/Elevation")));
-}
-
-if (!isNull(getFieldValue("Plant_Sample/Basic_Info/Plant_Height"))){
-	print(getFieldValue("Plant_Sample/Basic_Info/Plant_Height")); 
-	attributes.add(createEntityAttribute("Plant Height", getFieldAnnotation("Plant_Sample/Basic_Info/Plant_Height"), null, getFieldValue("Plant_Sample/Basic_Info/Plant_Height"), getFieldCertainty("Plant_Sample/Basic_Info/Plant_Height")));
-}
-
-if (!isNull(getFieldValue("Plant_Sample/Basic_Info/Plant_Width"))){
-	print(getFieldValue("Plant_Sample/Basic_Info/Plant_Width")); 
-	attributes.add(createEntityAttribute("Plant Width", getFieldAnnotation("Plant_Sample/Basic_Info/Plant_Width"), null, getFieldValue("Plant_Sample/Basic_Info/Plant_Width"), getFieldCertainty("Plant_Sample/Basic_Info/Plant_Width")));
-}
-
-if (!isNull(getFieldValue("Plant_Sample/Basic_Info/Soil_Description"))){
-	print(getFieldValue("Plant_Sample/Basic_Info/Soil_Description")); 
-
-	for (listItem : getFieldValue("Plant_Sample/Basic_Info/Soil_Description")){
-		print(listItem.getName());
-		attributes.add(createEntityAttribute("Soil Description", null, listItem.getName(), null, null));
-	}		
-
-}
-
-if (!isNull(getFieldValue("Plant_Sample/Basic_Info/Landform_Description"))){
-	print(getFieldValue("Plant_Sample/Basic_Info/Landform_Description")); 
-	attributes.add(createEntityAttribute("Landform Description", getFieldAnnotation("Plant_Sample/Basic_Info/Landform_Description"), getFieldValue("Plant_Sample/Basic_Info/Landform_Description"), null, getFieldCertainty("Plant_Sample/Basic_Info/Landform_Description")));
-}
-
-if (!isNull(getFieldValue("Plant_Sample/Basic_Info/Notes"))){
-	print(getFieldValue("Plant_Sample/Basic_Info/Notes")); 
-	attributes.add(createEntityAttribute("Notes", getFieldAnnotation("Plant_Sample/Basic_Info/Notes"), null, getFieldValue("Plant_Sample/Basic_Info/Notes"), getFieldCertainty("Plant_Sample/Basic_Info/Notes")));
-}
-
-if (!isNull(getFieldValue("Plant_Sample/Basic_Info/Photos"))){
-	print(getFieldValue("Plant_Sample/Basic_Info/Photos")); 
-}
-
-if (!isNull(getFieldValue("Plant_Sample/Basic_Info/Sketches"))){
-	print(getFieldValue("Plant_Sample/Basic_Info/Sketches")); 
-}
-
-if (!isNull(getFieldValue("Soil_Sample/Basic_Info/Soil_Sample_Prefix"))){
-	print(getFieldValue("Soil_Sample/Basic_Info/Soil_Sample_Prefix")); 
-	attributes.add(createEntityAttribute("Soil Sample Prefix", getFieldAnnotation("Soil_Sample/Basic_Info/Soil_Sample_Prefix"), null, getFieldValue("Soil_Sample/Basic_Info/Soil_Sample_Prefix"), getFieldCertainty("Soil_Sample/Basic_Info/Soil_Sample_Prefix")));
-}
-
-if (!isNull(getFieldValue("Soil_Sample/Basic_Info/Soil_Sample_ID"))){
-	print(getFieldValue("Soil_Sample/Basic_Info/Soil_Sample_ID")); 
-	attributes.add(createEntityAttribute("Soil Sample ID", getFieldAnnotation("Soil_Sample/Basic_Info/Soil_Sample_ID"), null, getFieldValue("Soil_Sample/Basic_Info/Soil_Sample_ID"), getFieldCertainty("Soil_Sample/Basic_Info/Soil_Sample_ID")));
-}
-
-if (!isNull(getFieldValue("Soil_Sample/Basic_Info/Station_Deposit"))){
-	print(getFieldValue("Soil_Sample/Basic_Info/Station_Deposit")); 
-	attributes.add(createEntityAttribute("Station", getFieldAnnotation("Soil_Sample/Basic_Info/Station_Deposit"), null, getFieldValue("Soil_Sample/Basic_Info/Station_Deposit"), getFieldCertainty("Soil_Sample/Basic_Info/Station_Deposit")));
-}
-
-if (!isNull(getFieldValue("Soil_Sample/Basic_Info/Project"))){
-	print(getFieldValue("Soil_Sample/Basic_Info/Project")); 
-	attributes.add(createEntityAttribute("Project", getFieldAnnotation("Soil_Sample/Basic_Info/Project"), null, getFieldValue("Soil_Sample/Basic_Info/Project"), getFieldCertainty("Soil_Sample/Basic_Info/Project")));
-}
-
-if (!isNull(getFieldValue("Soil_Sample/Basic_Info/Area"))){
-	print(getFieldValue("Soil_Sample/Basic_Info/Area")); 
-	attributes.add(createEntityAttribute("Area", getFieldAnnotation("Soil_Sample/Basic_Info/Area"), null, getFieldValue("Soil_Sample/Basic_Info/Area"), getFieldCertainty("Soil_Sample/Basic_Info/Area")));
-}
-
-if (!isNull(getFieldValue("Soil_Sample/Basic_Info/Observation_Type"))){
-	print(getFieldValue("Soil_Sample/Basic_Info/Observation_Type")); 
-	attributes.add(createEntityAttribute("Observation Type", getFieldAnnotation("Soil_Sample/Basic_Info/Observation_Type"), getFieldValue("Soil_Sample/Basic_Info/Observation_Type"), null, getFieldCertainty("Soil_Sample/Basic_Info/Observation_Type")));
-}
-
-if (!isNull(getFieldValue("Soil_Sample/Basic_Info/Latitude"))){
-	print(getFieldValue("Soil_Sample/Basic_Info/Latitude")); 
-	attributes.add(createEntityAttribute("Latitude", getFieldAnnotation("Soil_Sample/Basic_Info/Latitude"), null, getFieldValue("Soil_Sample/Basic_Info/Latitude"), getFieldCertainty("Soil_Sample/Basic_Info/Latitude")));
-}
-
-if (!isNull(getFieldValue("Soil_Sample/Basic_Info/Longitude"))){
-	print(getFieldValue("Soil_Sample/Basic_Info/Longitude")); 
-	attributes.add(createEntityAttribute("Longitude", getFieldAnnotation("Soil_Sample/Basic_Info/Longitude"), null, getFieldValue("Soil_Sample/Basic_Info/Longitude"), getFieldCertainty("Soil_Sample/Basic_Info/Longitude")));
-}
-
-if (!isNull(getFieldValue("Soil_Sample/Basic_Info/Northing"))){
-	print(getFieldValue("Soil_Sample/Basic_Info/Northing")); 
-	attributes.add(createEntityAttribute("Northing", getFieldAnnotation("Soil_Sample/Basic_Info/Northing"), null, getFieldValue("Soil_Sample/Basic_Info/Northing"), getFieldCertainty("Soil_Sample/Basic_Info/Northing")));
-}
-
-if (!isNull(getFieldValue("Soil_Sample/Basic_Info/Easting"))){
-	print(getFieldValue("Soil_Sample/Basic_Info/Easting")); 
-	attributes.add(createEntityAttribute("Easting", getFieldAnnotation("Soil_Sample/Basic_Info/Easting"), null, getFieldValue("Soil_Sample/Basic_Info/Easting"), getFieldCertainty("Soil_Sample/Basic_Info/Easting")));
-}
-
-if (!isNull(getFieldValue("Soil_Sample/Basic_Info/Elevation"))){
-	print(getFieldValue("Soil_Sample/Basic_Info/Elevation")); 
-	attributes.add(createEntityAttribute("Elevation", getFieldAnnotation("Soil_Sample/Basic_Info/Elevation"), null, getFieldValue("Soil_Sample/Basic_Info/Elevation"), getFieldCertainty("Soil_Sample/Basic_Info/Elevation")));
-}
-
-if (!isNull(getFieldValue("Soil_Sample/Basic_Info/Depth"))){
-	print(getFieldValue("Soil_Sample/Basic_Info/Depth")); 
-	attributes.add(createEntityAttribute("Depth", getFieldAnnotation("Soil_Sample/Basic_Info/Depth"), null, getFieldValue("Soil_Sample/Basic_Info/Depth"), getFieldCertainty("Soil_Sample/Basic_Info/Depth")));
-}
-
-if (!isNull(getFieldValue("Soil_Sample/Basic_Info/Colour"))){
-	print(getFieldValue("Soil_Sample/Basic_Info/Colour")); 
-	attributes.add(createEntityAttribute("Colour", getFieldAnnotation("Soil_Sample/Basic_Info/Colour"), null, getFieldValue("Soil_Sample/Basic_Info/Colour"), getFieldCertainty("Soil_Sample/Basic_Info/Colour")));
-}
-
-if (!isNull(getFieldValue("Soil_Sample/Basic_Info/Lag"))){
-	print(getFieldValue("Soil_Sample/Basic_Info/Lag")); 
-	attributes.add(createEntityAttribute("Lag", getFieldAnnotation("Soil_Sample/Basic_Info/Lag"), getFieldValue("Soil_Sample/Basic_Info/Lag"), null, getFieldCertainty("Soil_Sample/Basic_Info/Lag")));
-}
-
-if (!isNull(getFieldValue("Soil_Sample/Basic_Info/Soil_Texture"))){
-	print(getFieldValue("Soil_Sample/Basic_Info/Soil_Texture")); 
-
-	for (listItem : getFieldValue("Soil_Sample/Basic_Info/Soil_Texture")){
-		print(listItem.getName());
-		attributes.add(createEntityAttribute("Soil Texture", null, listItem.getName(), null, null));
-	}		
-
-}
-
-if (!isNull(getFieldValue("Soil_Sample/Basic_Info/Geology"))){
-	print(getFieldValue("Soil_Sample/Basic_Info/Geology")); 
-	attributes.add(createEntityAttribute("Geology", getFieldAnnotation("Soil_Sample/Basic_Info/Geology"), getFieldValue("Soil_Sample/Basic_Info/Geology"), null, getFieldCertainty("Soil_Sample/Basic_Info/Geology")));
-}
-
-if (!isNull(getFieldValue("Soil_Sample/Basic_Info/Drainage"))){
-	print(getFieldValue("Soil_Sample/Basic_Info/Drainage")); 
-	attributes.add(createEntityAttribute("Drainage", getFieldAnnotation("Soil_Sample/Basic_Info/Drainage"), getFieldValue("Soil_Sample/Basic_Info/Drainage"), null, getFieldCertainty("Soil_Sample/Basic_Info/Drainage")));
-}
-
-if (!isNull(getFieldValue("Soil_Sample/Basic_Info/Contamination"))){
-	print(getFieldValue("Soil_Sample/Basic_Info/Contamination")); 
-	attributes.add(createEntityAttribute("Contamination", getFieldAnnotation("Soil_Sample/Basic_Info/Contamination"), getFieldValue("Soil_Sample/Basic_Info/Contamination"), null, getFieldCertainty("Soil_Sample/Basic_Info/Contamination")));
-}
-
-if (!isNull(getFieldValue("Soil_Sample/Basic_Info/Regolith_Type"))){
-	print(getFieldValue("Soil_Sample/Basic_Info/Regolith_Type")); 
-	attributes.add(createEntityAttribute("Regolith Type", getFieldAnnotation("Soil_Sample/Basic_Info/Regolith_Type"), getFieldValue("Soil_Sample/Basic_Info/Regolith_Type"), null, getFieldCertainty("Soil_Sample/Basic_Info/Regolith_Type")));
-}
-
-if (!isNull(getFieldValue("Soil_Sample/Basic_Info/Landform"))){
-	print(getFieldValue("Soil_Sample/Basic_Info/Landform")); 
-	attributes.add(createEntityAttribute("Landform", getFieldAnnotation("Soil_Sample/Basic_Info/Landform"), getFieldValue("Soil_Sample/Basic_Info/Landform"), null, getFieldCertainty("Soil_Sample/Basic_Info/Landform")));
-}
-
-if (!isNull(getFieldValue("Soil_Sample/Basic_Info/Vegetation"))){
-	print(getFieldValue("Soil_Sample/Basic_Info/Vegetation")); 
-	attributes.add(createEntityAttribute("Vegetation", getFieldAnnotation("Soil_Sample/Basic_Info/Vegetation"), null, getFieldValue("Soil_Sample/Basic_Info/Vegetation"), getFieldCertainty("Soil_Sample/Basic_Info/Vegetation")));
-}
-
-if (!isNull(getFieldValue("Soil_Sample/Basic_Info/Notes"))){
-	print(getFieldValue("Soil_Sample/Basic_Info/Notes")); 
-	attributes.add(createEntityAttribute("Notes", getFieldAnnotation("Soil_Sample/Basic_Info/Notes"), null, getFieldValue("Soil_Sample/Basic_Info/Notes"), getFieldCertainty("Soil_Sample/Basic_Info/Notes")));
-}
-
-if (!isNull(getFieldValue("Soil_Sample/Basic_Info/Photos"))){
-	print(getFieldValue("Soil_Sample/Basic_Info/Photos")); 
-}
-
-if (!isNull(getFieldValue("Soil_Sample/Basic_Info/Sketches"))){
-	print(getFieldValue("Soil_Sample/Basic_Info/Sketches")); 
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Basic_Info/Rock_Sample_Prefix"))){
-	print(getFieldValue("Rock_Sample/Basic_Info/Rock_Sample_Prefix")); 
-	attributes.add(createEntityAttribute("Rock Sample Prefix", getFieldAnnotation("Rock_Sample/Basic_Info/Rock_Sample_Prefix"), null, getFieldValue("Rock_Sample/Basic_Info/Rock_Sample_Prefix"), getFieldCertainty("Rock_Sample/Basic_Info/Rock_Sample_Prefix")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Basic_Info/Rock_Sample_ID"))){
-	print(getFieldValue("Rock_Sample/Basic_Info/Rock_Sample_ID")); 
-	attributes.add(createEntityAttribute("Rock Sample ID", getFieldAnnotation("Rock_Sample/Basic_Info/Rock_Sample_ID"), null, getFieldValue("Rock_Sample/Basic_Info/Rock_Sample_ID"), getFieldCertainty("Rock_Sample/Basic_Info/Rock_Sample_ID")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Basic_Info/Station_Deposit"))){
-	print(getFieldValue("Rock_Sample/Basic_Info/Station_Deposit")); 
-	attributes.add(createEntityAttribute("Station", getFieldAnnotation("Rock_Sample/Basic_Info/Station_Deposit"), null, getFieldValue("Rock_Sample/Basic_Info/Station_Deposit"), getFieldCertainty("Rock_Sample/Basic_Info/Station_Deposit")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Basic_Info/Project"))){
-	print(getFieldValue("Rock_Sample/Basic_Info/Project")); 
-	attributes.add(createEntityAttribute("Project", getFieldAnnotation("Rock_Sample/Basic_Info/Project"), null, getFieldValue("Rock_Sample/Basic_Info/Project"), getFieldCertainty("Rock_Sample/Basic_Info/Project")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Basic_Info/Area"))){
-	print(getFieldValue("Rock_Sample/Basic_Info/Area")); 
-	attributes.add(createEntityAttribute("Area", getFieldAnnotation("Rock_Sample/Basic_Info/Area"), null, getFieldValue("Rock_Sample/Basic_Info/Area"), getFieldCertainty("Rock_Sample/Basic_Info/Area")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Basic_Info/Observation_Type"))){
-	print(getFieldValue("Rock_Sample/Basic_Info/Observation_Type")); 
-	attributes.add(createEntityAttribute("Observation Type", getFieldAnnotation("Rock_Sample/Basic_Info/Observation_Type"), getFieldValue("Rock_Sample/Basic_Info/Observation_Type"), null, getFieldCertainty("Rock_Sample/Basic_Info/Observation_Type")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Basic_Info/Core_ID"))){
-	print(getFieldValue("Rock_Sample/Basic_Info/Core_ID")); 
-	attributes.add(createEntityAttribute("Core ID", getFieldAnnotation("Rock_Sample/Basic_Info/Core_ID"), null, getFieldValue("Rock_Sample/Basic_Info/Core_ID"), getFieldCertainty("Rock_Sample/Basic_Info/Core_ID")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Basic_Info/Latitude"))){
-	print(getFieldValue("Rock_Sample/Basic_Info/Latitude")); 
-	attributes.add(createEntityAttribute("Latitude", getFieldAnnotation("Rock_Sample/Basic_Info/Latitude"), null, getFieldValue("Rock_Sample/Basic_Info/Latitude"), getFieldCertainty("Rock_Sample/Basic_Info/Latitude")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Basic_Info/Longitude"))){
-	print(getFieldValue("Rock_Sample/Basic_Info/Longitude")); 
-	attributes.add(createEntityAttribute("Longitude", getFieldAnnotation("Rock_Sample/Basic_Info/Longitude"), null, getFieldValue("Rock_Sample/Basic_Info/Longitude"), getFieldCertainty("Rock_Sample/Basic_Info/Longitude")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Basic_Info/Northing"))){
-	print(getFieldValue("Rock_Sample/Basic_Info/Northing")); 
-	attributes.add(createEntityAttribute("Northing", getFieldAnnotation("Rock_Sample/Basic_Info/Northing"), null, getFieldValue("Rock_Sample/Basic_Info/Northing"), getFieldCertainty("Rock_Sample/Basic_Info/Northing")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Basic_Info/Easting"))){
-	print(getFieldValue("Rock_Sample/Basic_Info/Easting")); 
-	attributes.add(createEntityAttribute("Easting", getFieldAnnotation("Rock_Sample/Basic_Info/Easting"), null, getFieldValue("Rock_Sample/Basic_Info/Easting"), getFieldCertainty("Rock_Sample/Basic_Info/Easting")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Basic_Info/Elevation"))){
-	print(getFieldValue("Rock_Sample/Basic_Info/Elevation")); 
-	attributes.add(createEntityAttribute("Elevation", getFieldAnnotation("Rock_Sample/Basic_Info/Elevation"), null, getFieldValue("Rock_Sample/Basic_Info/Elevation"), getFieldCertainty("Rock_Sample/Basic_Info/Elevation")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Measurements/Strike_Of_Bedding"))){
-	print(getFieldValue("Rock_Sample/Measurements/Strike_Of_Bedding")); 
-	attributes.add(createEntityAttribute("Strike Of Bedding", getFieldAnnotation("Rock_Sample/Measurements/Strike_Of_Bedding"), null, getFieldValue("Rock_Sample/Measurements/Strike_Of_Bedding"), getFieldCertainty("Rock_Sample/Measurements/Strike_Of_Bedding")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Measurements/Dip_Of_Bedding"))){
-	print(getFieldValue("Rock_Sample/Measurements/Dip_Of_Bedding")); 
-	attributes.add(createEntityAttribute("Dip Of Bedding", getFieldAnnotation("Rock_Sample/Measurements/Dip_Of_Bedding"), null, getFieldValue("Rock_Sample/Measurements/Dip_Of_Bedding"), getFieldCertainty("Rock_Sample/Measurements/Dip_Of_Bedding")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Measurements/Strike_Of_Cleavage"))){
-	print(getFieldValue("Rock_Sample/Measurements/Strike_Of_Cleavage")); 
-	attributes.add(createEntityAttribute("Strike Of Cleavage", getFieldAnnotation("Rock_Sample/Measurements/Strike_Of_Cleavage"), null, getFieldValue("Rock_Sample/Measurements/Strike_Of_Cleavage"), getFieldCertainty("Rock_Sample/Measurements/Strike_Of_Cleavage")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Measurements/Dip_Of_Cleavage"))){
-	print(getFieldValue("Rock_Sample/Measurements/Dip_Of_Cleavage")); 
-	attributes.add(createEntityAttribute("Dip Of Cleavage", getFieldAnnotation("Rock_Sample/Measurements/Dip_Of_Cleavage"), null, getFieldValue("Rock_Sample/Measurements/Dip_Of_Cleavage"), getFieldCertainty("Rock_Sample/Measurements/Dip_Of_Cleavage")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Measurements/Strike_Of_Foliation"))){
-	print(getFieldValue("Rock_Sample/Measurements/Strike_Of_Foliation")); 
-	attributes.add(createEntityAttribute("Strike Of Foliation", getFieldAnnotation("Rock_Sample/Measurements/Strike_Of_Foliation"), null, getFieldValue("Rock_Sample/Measurements/Strike_Of_Foliation"), getFieldCertainty("Rock_Sample/Measurements/Strike_Of_Foliation")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Measurements/Dip_Of_Foliation"))){
-	print(getFieldValue("Rock_Sample/Measurements/Dip_Of_Foliation")); 
-	attributes.add(createEntityAttribute("Dip Of Foliation", getFieldAnnotation("Rock_Sample/Measurements/Dip_Of_Foliation"), null, getFieldValue("Rock_Sample/Measurements/Dip_Of_Foliation"), getFieldCertainty("Rock_Sample/Measurements/Dip_Of_Foliation")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Measurements/Strike_Of_Veins"))){
-	print(getFieldValue("Rock_Sample/Measurements/Strike_Of_Veins")); 
-	attributes.add(createEntityAttribute("Strike Of Veins", getFieldAnnotation("Rock_Sample/Measurements/Strike_Of_Veins"), null, getFieldValue("Rock_Sample/Measurements/Strike_Of_Veins"), getFieldCertainty("Rock_Sample/Measurements/Strike_Of_Veins")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Measurements/Dip_Of_Veins"))){
-	print(getFieldValue("Rock_Sample/Measurements/Dip_Of_Veins")); 
-	attributes.add(createEntityAttribute("Dip Of Veins", getFieldAnnotation("Rock_Sample/Measurements/Dip_Of_Veins"), null, getFieldValue("Rock_Sample/Measurements/Dip_Of_Veins"), getFieldCertainty("Rock_Sample/Measurements/Dip_Of_Veins")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Measurements/Other_Structural_Measurements"))){
-	print(getFieldValue("Rock_Sample/Measurements/Other_Structural_Measurements")); 
-	attributes.add(createEntityAttribute("Other Structural Measurements", getFieldAnnotation("Rock_Sample/Measurements/Other_Structural_Measurements"), null, getFieldValue("Rock_Sample/Measurements/Other_Structural_Measurements"), getFieldCertainty("Rock_Sample/Measurements/Other_Structural_Measurements")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Measurements/Plunge_Of_Fold_Axis_1"))){
-	print(getFieldValue("Rock_Sample/Measurements/Plunge_Of_Fold_Axis_1")); 
-	attributes.add(createEntityAttribute("Plunge Of Fold Axis 1", getFieldAnnotation("Rock_Sample/Measurements/Plunge_Of_Fold_Axis_1"), null, getFieldValue("Rock_Sample/Measurements/Plunge_Of_Fold_Axis_1"), getFieldCertainty("Rock_Sample/Measurements/Plunge_Of_Fold_Axis_1")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Measurements/Azimuth_Of_Fold_Axis_1"))){
-	print(getFieldValue("Rock_Sample/Measurements/Azimuth_Of_Fold_Axis_1")); 
-	attributes.add(createEntityAttribute("Azimuth Of Fold Axis 1", getFieldAnnotation("Rock_Sample/Measurements/Azimuth_Of_Fold_Axis_1"), null, getFieldValue("Rock_Sample/Measurements/Azimuth_Of_Fold_Axis_1"), getFieldCertainty("Rock_Sample/Measurements/Azimuth_Of_Fold_Axis_1")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Measurements/Plunge_Of_Fold_Axis_2"))){
-	print(getFieldValue("Rock_Sample/Measurements/Plunge_Of_Fold_Axis_2")); 
-	attributes.add(createEntityAttribute("Plunge Of Fold Axis 2", getFieldAnnotation("Rock_Sample/Measurements/Plunge_Of_Fold_Axis_2"), null, getFieldValue("Rock_Sample/Measurements/Plunge_Of_Fold_Axis_2"), getFieldCertainty("Rock_Sample/Measurements/Plunge_Of_Fold_Axis_2")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Measurements/Azimuth_Of_Fold_Axis_2"))){
-	print(getFieldValue("Rock_Sample/Measurements/Azimuth_Of_Fold_Axis_2")); 
-	attributes.add(createEntityAttribute("Azimuth Of Fold Axis 2", getFieldAnnotation("Rock_Sample/Measurements/Azimuth_Of_Fold_Axis_2"), null, getFieldValue("Rock_Sample/Measurements/Azimuth_Of_Fold_Axis_2"), getFieldCertainty("Rock_Sample/Measurements/Azimuth_Of_Fold_Axis_2")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Measurements/Plunge_Of_Fold_Axis_3"))){
-	print(getFieldValue("Rock_Sample/Measurements/Plunge_Of_Fold_Axis_3")); 
-	attributes.add(createEntityAttribute("Plunge Of Fold Axis 3", getFieldAnnotation("Rock_Sample/Measurements/Plunge_Of_Fold_Axis_3"), null, getFieldValue("Rock_Sample/Measurements/Plunge_Of_Fold_Axis_3"), getFieldCertainty("Rock_Sample/Measurements/Plunge_Of_Fold_Axis_3")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Measurements/Azimuth_Of_Fold_Axis_3"))){
-	print(getFieldValue("Rock_Sample/Measurements/Azimuth_Of_Fold_Axis_3")); 
-	attributes.add(createEntityAttribute("Azimuth Of Fold Axis 3", getFieldAnnotation("Rock_Sample/Measurements/Azimuth_Of_Fold_Axis_3"), null, getFieldValue("Rock_Sample/Measurements/Azimuth_Of_Fold_Axis_3"), getFieldCertainty("Rock_Sample/Measurements/Azimuth_Of_Fold_Axis_3")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Measurements/Plunge_Of_Mineral_Lineation"))){
-	print(getFieldValue("Rock_Sample/Measurements/Plunge_Of_Mineral_Lineation")); 
-	attributes.add(createEntityAttribute("Plunge Of Mineral Lineation", getFieldAnnotation("Rock_Sample/Measurements/Plunge_Of_Mineral_Lineation"), null, getFieldValue("Rock_Sample/Measurements/Plunge_Of_Mineral_Lineation"), getFieldCertainty("Rock_Sample/Measurements/Plunge_Of_Mineral_Lineation")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Measurements/Azimuth_Of_Mineral_Lineation"))){
-	print(getFieldValue("Rock_Sample/Measurements/Azimuth_Of_Mineral_Lineation")); 
-	attributes.add(createEntityAttribute("Azimuth Of Mineral Lineation", getFieldAnnotation("Rock_Sample/Measurements/Azimuth_Of_Mineral_Lineation"), null, getFieldValue("Rock_Sample/Measurements/Azimuth_Of_Mineral_Lineation"), getFieldCertainty("Rock_Sample/Measurements/Azimuth_Of_Mineral_Lineation")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Measurements/Plunge_Of_Stretching_Lineation"))){
-	print(getFieldValue("Rock_Sample/Measurements/Plunge_Of_Stretching_Lineation")); 
-	attributes.add(createEntityAttribute("Plunge Of Stretching Lineation", getFieldAnnotation("Rock_Sample/Measurements/Plunge_Of_Stretching_Lineation"), null, getFieldValue("Rock_Sample/Measurements/Plunge_Of_Stretching_Lineation"), getFieldCertainty("Rock_Sample/Measurements/Plunge_Of_Stretching_Lineation")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Measurements/Azimuth_Of_Stretching_Lineation"))){
-	print(getFieldValue("Rock_Sample/Measurements/Azimuth_Of_Stretching_Lineation")); 
-	attributes.add(createEntityAttribute("Azimuth Of Stretching Lineation", getFieldAnnotation("Rock_Sample/Measurements/Azimuth_Of_Stretching_Lineation"), null, getFieldValue("Rock_Sample/Measurements/Azimuth_Of_Stretching_Lineation"), getFieldCertainty("Rock_Sample/Measurements/Azimuth_Of_Stretching_Lineation")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Measurements/Other_Lineation"))){
-	print(getFieldValue("Rock_Sample/Measurements/Other_Lineation")); 
-	attributes.add(createEntityAttribute("Other Lineation", getFieldAnnotation("Rock_Sample/Measurements/Other_Lineation"), null, getFieldValue("Rock_Sample/Measurements/Other_Lineation"), getFieldCertainty("Rock_Sample/Measurements/Other_Lineation")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Lithological_Info/Lithology"))){
-	print(getFieldValue("Rock_Sample/Lithological_Info/Lithology")); 
-	attributes.add(createEntityAttribute("Lithology", getFieldAnnotation("Rock_Sample/Lithological_Info/Lithology"), getFieldValue("Rock_Sample/Lithological_Info/Lithology"), null, getFieldCertainty("Rock_Sample/Lithological_Info/Lithology")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Lithological_Info/Fineness_Inclusion_Size"))){
-	print(getFieldValue("Rock_Sample/Lithological_Info/Fineness_Inclusion_Size")); 
-	attributes.add(createEntityAttribute("Fineness or Inclusion size", getFieldAnnotation("Rock_Sample/Lithological_Info/Fineness_Inclusion_Size"), getFieldValue("Rock_Sample/Lithological_Info/Fineness_Inclusion_Size"), null, getFieldCertainty("Rock_Sample/Lithological_Info/Fineness_Inclusion_Size")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Lithological_Info/Grain_Size"))){
-	print(getFieldValue("Rock_Sample/Lithological_Info/Grain_Size")); 
-	attributes.add(createEntityAttribute("Grain Size", getFieldAnnotation("Rock_Sample/Lithological_Info/Grain_Size"), getFieldValue("Rock_Sample/Lithological_Info/Grain_Size"), null, getFieldCertainty("Rock_Sample/Lithological_Info/Grain_Size")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Lithological_Info/Sorting"))){
-	print(getFieldValue("Rock_Sample/Lithological_Info/Sorting")); 
-	attributes.add(createEntityAttribute("Sorting", getFieldAnnotation("Rock_Sample/Lithological_Info/Sorting"), getFieldValue("Rock_Sample/Lithological_Info/Sorting"), null, getFieldCertainty("Rock_Sample/Lithological_Info/Sorting")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Lithological_Info/Other_Lithological_Descriptors"))){
-	print(getFieldValue("Rock_Sample/Lithological_Info/Other_Lithological_Descriptors")); 
-	attributes.add(createEntityAttribute("Other lithological descriptors", getFieldAnnotation("Rock_Sample/Lithological_Info/Other_Lithological_Descriptors"), null, getFieldValue("Rock_Sample/Lithological_Info/Other_Lithological_Descriptors"), getFieldCertainty("Rock_Sample/Lithological_Info/Other_Lithological_Descriptors")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Lithological_Info/Stratigraphic_Unit"))){
-	print(getFieldValue("Rock_Sample/Lithological_Info/Stratigraphic_Unit")); 
-	attributes.add(createEntityAttribute("Stratigraphic unit", getFieldAnnotation("Rock_Sample/Lithological_Info/Stratigraphic_Unit"), null, getFieldValue("Rock_Sample/Lithological_Info/Stratigraphic_Unit"), getFieldCertainty("Rock_Sample/Lithological_Info/Stratigraphic_Unit")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Lithological_Info/Large_Scale_Structure"))){
-	print(getFieldValue("Rock_Sample/Lithological_Info/Large_Scale_Structure")); 
-	attributes.add(createEntityAttribute("Large-scale Structure", getFieldAnnotation("Rock_Sample/Lithological_Info/Large_Scale_Structure"), null, getFieldValue("Rock_Sample/Lithological_Info/Large_Scale_Structure"), getFieldCertainty("Rock_Sample/Lithological_Info/Large_Scale_Structure")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Lithological_Info/Alteration"))){
-	print(getFieldValue("Rock_Sample/Lithological_Info/Alteration")); 
-	attributes.add(createEntityAttribute("Alteration", getFieldAnnotation("Rock_Sample/Lithological_Info/Alteration"), null, getFieldValue("Rock_Sample/Lithological_Info/Alteration"), getFieldCertainty("Rock_Sample/Lithological_Info/Alteration")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Lithological_Info/Notes"))){
-	print(getFieldValue("Rock_Sample/Lithological_Info/Notes")); 
-	attributes.add(createEntityAttribute("Notes", getFieldAnnotation("Rock_Sample/Lithological_Info/Notes"), null, getFieldValue("Rock_Sample/Lithological_Info/Notes"), getFieldCertainty("Rock_Sample/Lithological_Info/Notes")));
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Lithological_Info/Photos"))){
-	print(getFieldValue("Rock_Sample/Lithological_Info/Photos")); 
-}
-
-if (!isNull(getFieldValue("Rock_Sample/Lithological_Info/Sketches"))){
-	print(getFieldValue("Rock_Sample/Lithological_Info/Sketches")); 
-}
-
-if (!isNull(getFieldValue("Photolog/Photolog/Photo_ID"))){
-	print(getFieldValue("Photolog/Photolog/Photo_ID")); 
-	attributes.add(createEntityAttribute("Photo ID", getFieldAnnotation("Photolog/Photolog/Photo_ID"), null, getFieldValue("Photolog/Photolog/Photo_ID"), getFieldCertainty("Photolog/Photolog/Photo_ID")));
-}
-
-if (!isNull(getFieldValue("Photolog/Photolog/Photo_Timestamp"))){
-	print(getFieldValue("Photolog/Photolog/Photo_Timestamp")); 
-	attributes.add(createEntityAttribute("Photo Timestamp", getFieldAnnotation("Photolog/Photolog/Photo_Timestamp"), null, getFieldValue("Photolog/Photolog/Photo_Timestamp"), getFieldCertainty("Photolog/Photolog/Photo_Timestamp")));
-}
-
-if (!isNull(getFieldValue("Photolog/Photolog/Photo_Note"))){
-	print(getFieldValue("Photolog/Photolog/Photo_Note")); 
-	attributes.add(createEntityAttribute("Photo Note", getFieldAnnotation("Photolog/Photolog/Photo_Note"), null, getFieldValue("Photolog/Photolog/Photo_Note"), getFieldCertainty("Photolog/Photolog/Photo_Note")));
-}
+addAttribute(attributes, "Label", "Shape/Shape_Note/label", true);
+addAttribute(attributes, "Note", "Shape/Shape_Note/note", true);
+addAttribute(attributes, "Water Sample Prefix", "Water_Sample/Basic_Info/Water_Sample_Prefix", true);
+addAttribute(attributes, "Water Sample ID", "Water_Sample/Basic_Info/Water_Sample_ID", true);
+addAttribute(attributes, "Station", "Water_Sample/Basic_Info/Station_Deposit", true);
+addAttribute(attributes, "Project", "Water_Sample/Basic_Info/Project", true);
+addAttribute(attributes, "Area", "Water_Sample/Basic_Info/Area", true);
+addAttribute(attributes, "Site Name", "Water_Sample/Basic_Info/Site_Name", true);
+addAttribute(attributes, "Observation Type", "Water_Sample/Basic_Info/Observation_Type", false);
+addAttribute(attributes, "Latitude", "Water_Sample/Basic_Info/Latitude", true);
+addAttribute(attributes, "Longitude", "Water_Sample/Basic_Info/Longitude", true);
+addAttribute(attributes, "Northing", "Water_Sample/Basic_Info/Northing", true);
+addAttribute(attributes, "Easting", "Water_Sample/Basic_Info/Easting", true);
+addAttribute(attributes, "SRID", "Water_Sample/Basic_Info/SRID", false);
+addAttribute(attributes, "Elevation", "Water_Sample/Basic_Info/Elevation", true);
+addAttribute(attributes, "Water Table", "Water_Sample/Basic_Info/Water_Table", true);
+addAttribute(attributes, "Sample Depth", "Water_Sample/Basic_Info/Sample_Depth", true);
+addAttribute(attributes, "Bottom of Hole", "Water_Sample/Basic_Info/Bottom_Of_Hole", true);
+addMultSelectionAttribute(attributes,"Samples Collected", "Water_Sample/Basic_Info/Samples_Collected");
+addAttribute(attributes, "Notes", "Water_Sample/Basic_Info/Notes", true);
+addAttribute(attributes, "Hole Type", "Water_Sample/Codes/Hole_Type", false);
+addAttribute(attributes, "Hole Lining", "Water_Sample/Codes/Hole_Lining", false);
+addAttribute(attributes, "Hole Open or Closed", "Water_Sample/Codes/Hole_Open_Closed", false);
+addAttribute(attributes, "Pipes In Hole", "Water_Sample/Codes/Pipes_In_Hole", false);
+addAttribute(attributes, "Hole Angle", "Water_Sample/Codes/Hole_Angle", false);
+addAttribute(attributes, "Estimated Angle", "Water_Sample/Codes/Estimated_Angle", true);
+addAttribute(attributes, "Outflow Present", "Water_Sample/Codes/Outflow_Present", false);
+addAttribute(attributes, "Sampling Issues", "Water_Sample/Codes/Sampling_Issues", false);
+addAttribute(attributes, "Temperature", "Water_Sample/pH_Eh/Temperature", true);
+addAttribute(attributes, "Conductivity", "Water_Sample/pH_Eh/Conductivity", true);
+addAttribute(attributes, "Preferred pH", "Water_Sample/pH_Eh/Preferred_pH", true);
+addAttribute(attributes, "Preferred Eh", "Water_Sample/pH_Eh/Preferred_Eh", true);
+addAttribute(attributes, "Preferred pH Time", "Water_Sample/Hidden/Preferred_pH_Time", true);
+addAttribute(attributes, "Preferred Eh Time", "Water_Sample/Hidden/Preferred_Eh_Time", true);
+
+addAttribute(attributes, "Plant Sample Prefix", "Plant_Sample/Basic_Info/Plant_Sample_Prefix", true);
+addAttribute(attributes, "Plant Sample ID", "Plant_Sample/Basic_Info/Plant_Sample_ID", true);
+addAttribute(attributes, "Station", "Plant_Sample/Basic_Info/Station_Deposit", true);
+addAttribute(attributes, "Project", "Plant_Sample/Basic_Info/Project", true);
+addAttribute(attributes, "Area", "Plant_Sample/Basic_Info/Area", true);
+addAttribute(attributes, "Observation Type", "Plant_Sample/Basic_Info/Observation_Type", false);
+addAttribute(attributes, "Plant Species", "Plant_Sample/Basic_Info/Plant_Species", true);
+addAttribute(attributes, "Latitude", "Plant_Sample/Basic_Info/Latitude", true);
+addAttribute(attributes, "Longitude", "Plant_Sample/Basic_Info/Longitude", true);
+addAttribute(attributes, "Northing", "Plant_Sample/Basic_Info/Northing", true);
+addAttribute(attributes, "Easting", "Plant_Sample/Basic_Info/Easting", true);
+addAttribute(attributes, "SRID", "Plant_Sample/Basic_Info/SRID", false);
+addAttribute(attributes, "Elevation", "Plant_Sample/Basic_Info/Elevation", true);
+addAttribute(attributes, "Plant Height", "Plant_Sample/Basic_Info/Plant_Height", true);
+addAttribute(attributes, "Plant Width", "Plant_Sample/Basic_Info/Plant_Width", true);
+addMultSelectionAttribute(attributes,"Soil Description", "Plant_Sample/Basic_Info/Soil_Description");
+addAttribute(attributes, "Landform Description", "Plant_Sample/Basic_Info/Landform_Description", false);
+addAttribute(attributes, "Notes", "Plant_Sample/Basic_Info/Notes", true);
+
+
+
+addAttribute(attributes, "Soil Sample Prefix", "Soil_Sample/Basic_Info/Soil_Sample_Prefix", true);
+addAttribute(attributes, "Soil Sample ID", "Soil_Sample/Basic_Info/Soil_Sample_ID", true);
+addAttribute(attributes, "Station", "Soil_Sample/Basic_Info/Station_Deposit", true);
+addAttribute(attributes, "Project", "Soil_Sample/Basic_Info/Project", true);
+addAttribute(attributes, "Area", "Soil_Sample/Basic_Info/Area", true);
+addAttribute(attributes, "Observation Type", "Soil_Sample/Basic_Info/Observation_Type", false);
+addAttribute(attributes, "Latitude", "Soil_Sample/Basic_Info/Latitude", true);
+addAttribute(attributes, "Longitude", "Soil_Sample/Basic_Info/Longitude", true);
+addAttribute(attributes, "Northing", "Soil_Sample/Basic_Info/Northing", true);
+addAttribute(attributes, "Easting", "Soil_Sample/Basic_Info/Easting", true);
+addAttribute(attributes, "SRID", "Soil_Sample/Basic_Info/SRID", false);
+addAttribute(attributes, "Elevation", "Soil_Sample/Basic_Info/Elevation", true);
+addAttribute(attributes, "Depth", "Soil_Sample/Basic_Info/Depth", true);
+addAttribute(attributes, "Colour", "Soil_Sample/Basic_Info/Colour", true);
+addAttribute(attributes, "Lag", "Soil_Sample/Basic_Info/Lag", false);
+addMultSelectionAttribute(attributes,"Soil Texture", "Soil_Sample/Basic_Info/Soil_Texture");
+addAttribute(attributes, "Geology", "Soil_Sample/Basic_Info/Geology", false);
+addAttribute(attributes, "Drainage", "Soil_Sample/Basic_Info/Drainage", false);
+addAttribute(attributes, "Contamination", "Soil_Sample/Basic_Info/Contamination", false);
+addAttribute(attributes, "Regolith Type", "Soil_Sample/Basic_Info/Regolith_Type", false);
+addAttribute(attributes, "Landform", "Soil_Sample/Basic_Info/Landform", false);
+addAttribute(attributes, "Vegetation", "Soil_Sample/Basic_Info/Vegetation", true);
+addAttribute(attributes, "Notes", "Soil_Sample/Basic_Info/Notes", true);
+
+
+addAttribute(attributes, "Rock Sample Prefix", "Rock_Sample/Basic_Info/Rock_Sample_Prefix", true);
+addAttribute(attributes, "Rock Sample ID", "Rock_Sample/Basic_Info/Rock_Sample_ID", true);
+addAttribute(attributes, "Station", "Rock_Sample/Basic_Info/Station_Deposit", true);
+addAttribute(attributes, "Project", "Rock_Sample/Basic_Info/Project", true);
+addAttribute(attributes, "Area", "Rock_Sample/Basic_Info/Area", true);
+addAttribute(attributes, "Rock Location Number", "Rock_Sample/Basic_Info/Location_Number", true);
+addAttribute(attributes, "Rock Observation Type", "Rock_Sample/Basic_Info/Observation_Type", false);
+addAttribute(attributes, "Core ID", "Rock_Sample/Basic_Info/Core_ID", true);
+addAttribute(attributes, "Latitude", "Rock_Sample/Basic_Info/Latitude", true);
+addAttribute(attributes, "Longitude", "Rock_Sample/Basic_Info/Longitude", true);
+addAttribute(attributes, "Northing", "Rock_Sample/Basic_Info/Northing", true);
+addAttribute(attributes, "Easting", "Rock_Sample/Basic_Info/Easting", true);
+addAttribute(attributes, "SRID", "Rock_Sample/Basic_Info/SRID", false);
+addAttribute(attributes, "Elevation", "Rock_Sample/Basic_Info/Elevation", true);
+addAttribute(attributes, "Strike Of Bedding", "Rock_Sample/Measurements/Strike_Of_Bedding", true);
+addAttribute(attributes, "Dip Of Bedding", "Rock_Sample/Measurements/Dip_Of_Bedding", true);
+addAttribute(attributes, "Strike Of Cleavage", "Rock_Sample/Measurements/Strike_Of_Cleavage", true);
+addAttribute(attributes, "Dip Of Cleavage", "Rock_Sample/Measurements/Dip_Of_Cleavage", true);
+addAttribute(attributes, "Strike Of Foliation", "Rock_Sample/Measurements/Strike_Of_Foliation", true);
+addAttribute(attributes, "Dip Of Foliation", "Rock_Sample/Measurements/Dip_Of_Foliation", true);
+addAttribute(attributes, "Strike Of Veins 1", "Rock_Sample/Measurements/Strike_Of_Veins_1", true);
+addAttribute(attributes, "Dip Of Veins 1", "Rock_Sample/Measurements/Dip_Of_Veins_1", true);
+addAttribute(attributes, "Strike Of Veins 2", "Rock_Sample/Measurements/Strike_Of_Veins_2", true);
+addAttribute(attributes, "Dip Of Veins 2", "Rock_Sample/Measurements/Dip_Of_Veins_2", true);
+addAttribute(attributes, "Other Structural Measurements", "Rock_Sample/Measurements/Other_Structural_Measurements", true);
+addAttribute(attributes, "Plunge Of Fold Axis 1", "Rock_Sample/Measurements/Plunge_Of_Fold_Axis_1", true);
+addAttribute(attributes, "Azimuth Of Fold Axis 1", "Rock_Sample/Measurements/Azimuth_Of_Fold_Axis_1", true);
+addAttribute(attributes, "Plunge Of Mineral Lineation", "Rock_Sample/Measurements/Plunge_Of_Mineral_Lineation", true);
+addAttribute(attributes, "Azimuth Of Mineral Lineation", "Rock_Sample/Measurements/Azimuth_Of_Mineral_Lineation", true);
+addAttribute(attributes, "Plunge Of Stretching Lineation", "Rock_Sample/Measurements/Plunge_Of_Stretching_Lineation", true);
+addAttribute(attributes, "Azimuth Of Stretching Lineation", "Rock_Sample/Measurements/Azimuth_Of_Stretching_Lineation", true);
+addAttribute(attributes, "Other Lineation", "Rock_Sample/Measurements/Other_Lineation", true);
+addAttribute(attributes, "Lithology", "Rock_Sample/Lithological_Info/Lithology", false);
+addAttribute(attributes, "Fineness or Inclusion size", "Rock_Sample/Lithological_Info/Fineness_Inclusion_Size", false);
+addAttribute(attributes, "Grain Size", "Rock_Sample/Lithological_Info/Grain_Size", false);
+addAttribute(attributes, "Sorting", "Rock_Sample/Lithological_Info/Sorting", false);
+addAttribute(attributes, "Other lithological descriptors", "Rock_Sample/Lithological_Info/Other_Lithological_Descriptors", true);
+addAttribute(attributes, "Stratigraphic unit", "Rock_Sample/Lithological_Info/Stratigraphic_Unit", true);
+addAttribute(attributes, "Large-scale Structure", "Rock_Sample/Lithological_Info/Large_Scale_Structure", true);
+addAttribute(attributes, "Alteration", "Rock_Sample/Lithological_Info/Alteration", true);
+addAttribute(attributes, "Veining", "Rock_Sample/Lithological_Info/Veining", true);
+addAttribute(attributes, "Notes", "Rock_Sample/Lithological_Info/Notes", true);
+
+
+addAttribute(attributes, "Photo ID", "Photolog/Photolog/Photo_ID", true);
+addAttribute(attributes, "Photo Timestamp", "Photolog/Photolog/Photo_Timestamp", true);
+addAttribute(attributes, "Photo Note", "Photolog/Photolog/Photo_Note", true);
 

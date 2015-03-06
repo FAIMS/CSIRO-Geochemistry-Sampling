@@ -820,6 +820,8 @@ addMultSelectionAttribute(attributeList, String propertyName, String viewRef) {
 }
 
 /* Duplicates the current sample excluding any attachments or pictures */
+oldSampleUUID = null;
+
 dupeSample3() {
     // Validate the entered sample prefix and ID before duplicating the sample and using the prefix and ID from the project start tab.
     if (!validSamplePrefix() || !validStartingSampleID()) {       
@@ -832,6 +834,7 @@ dupeSample3() {
     // cancel the tabgroup and gather neccessary data before proceeding
     tabgroup = getSampleTypePath();
     cancelTabGroup(tabgroup, false);
+    oldSampleUUID = currentSampleUUID;
     currentSampleUUID = null;
     newSampleFlag = false;
     print("[dupeSample2()] Cancelled tabgroup and set currentSampleUUID to null");
@@ -845,8 +848,9 @@ dupeSample3() {
          // || (tabgroup.equals("Rock_Sample") && rockLocationNumberRendered)
         ) {
         locationNumberValue = getFieldValue(tabgroup+"/Basic_Info/Location_Number");
+        attributes.add(createEntityAttribute("Location Number", null, null, locationNumberValue, null));
     }
-    attributes.add(createEntityAttribute("Location Number", null, null, locationNumberValue, null));
+    
 
     // add the value of all static views to the attribute list
     if (tabgroup.equals("Water_Sample")) {
@@ -892,151 +896,34 @@ dupeSample3() {
         addAttribute(attributes, "Station", "Project/Start/Station_Deposit", true);
         addAttribute(attributes, "Project", "Project/Start/Project", true);
         addAttribute(attributes, "Area", "Project/Start/Area", true);
-
-        if (!isNull(getFieldValue("Water_Sample/Basic_Info/Site_Name"))){
-            print(getFieldValue("Water_Sample/Basic_Info/Site_Name")); 
-            attributes.add(createEntityAttribute("Site Name", getFieldAnnotation("Water_Sample/Basic_Info/Site_Name"), null, getFieldValue("Water_Sample/Basic_Info/Site_Name"), getFieldCertainty("Water_Sample/Basic_Info/Site_Name")));
-        }
-
-        if (!isNull(getFieldValue("Water_Sample/Basic_Info/Observation_Type"))){
-            print(getFieldValue("Water_Sample/Basic_Info/Observation_Type")); 
-            attributes.add(createEntityAttribute("Observation Type", getFieldAnnotation("Water_Sample/Basic_Info/Observation_Type"), getFieldValue("Water_Sample/Basic_Info/Observation_Type"), null, getFieldCertainty("Water_Sample/Basic_Info/Observation_Type")));
-        }
-
-        if (!isNull(getFieldValue("Water_Sample/Basic_Info/Latitude"))){
-            print(getFieldValue("Water_Sample/Basic_Info/Latitude")); 
-            attributes.add(createEntityAttribute("Latitude", getFieldAnnotation("Water_Sample/Basic_Info/Latitude"), null, getFieldValue("Water_Sample/Basic_Info/Latitude"), getFieldCertainty("Water_Sample/Basic_Info/Latitude")));
-        }
-
-        if (!isNull(getFieldValue("Water_Sample/Basic_Info/Longitude"))){
-            print(getFieldValue("Water_Sample/Basic_Info/Longitude")); 
-            attributes.add(createEntityAttribute("Longitude", getFieldAnnotation("Water_Sample/Basic_Info/Longitude"), null, getFieldValue("Water_Sample/Basic_Info/Longitude"), getFieldCertainty("Water_Sample/Basic_Info/Longitude")));
-        }
-
-        if (!isNull(getFieldValue("Water_Sample/Basic_Info/Northing"))){
-            print(getFieldValue("Water_Sample/Basic_Info/Northing")); 
-            attributes.add(createEntityAttribute("Northing", getFieldAnnotation("Water_Sample/Basic_Info/Northing"), null, getFieldValue("Water_Sample/Basic_Info/Northing"), getFieldCertainty("Water_Sample/Basic_Info/Northing")));
-        }
-
-        if (!isNull(getFieldValue("Water_Sample/Basic_Info/Easting"))){
-            print(getFieldValue("Water_Sample/Basic_Info/Easting")); 
-            attributes.add(createEntityAttribute("Easting", getFieldAnnotation("Water_Sample/Basic_Info/Easting"), null, getFieldValue("Water_Sample/Basic_Info/Easting"), getFieldCertainty("Water_Sample/Basic_Info/Easting")));
-        }
-
+        addAttribute(attributes, "Site Name", "Water_Sample/Basic_Info/Site_Name", true);
+        addAttribute(attributes, "Observation Type", "Water_Sample/Basic_Info/Observation_Type", false);
+        addAttribute(attributes, "Latitude", "Water_Sample/Basic_Info/Latitude", true);
+        addAttribute(attributes, "Longitude", "Water_Sample/Basic_Info/Longitude", true);
+        addAttribute(attributes, "Northing", "Water_Sample/Basic_Info/Northing", true);
+        addAttribute(attributes, "Easting", "Water_Sample/Basic_Info/Easting", true);
         addAttribute(attributes, "SRID", "Water_Sample/Basic_Info/SRID", false);
+        addAttribute(attributes, "Elevation", "Water_Sample/Basic_Info/Elevation", true);
+        addAttribute(attributes, "Water Table", "Water_Sample/Basic_Info/Water_Table", true);
+        addAttribute(attributes, "Sample Depth", "Water_Sample/Basic_Info/Sample_Depth", true);
+        addAttribute(attributes, "Bottom of Hole", "Water_Sample/Basic_Info/Bottom_Of_Hole", true);
+        addMultSelectionAttribute(attributes,"Samples Collected", "Water_Sample/Basic_Info/Samples_Collected");
+        addAttribute(attributes, "Notes", "Water_Sample/Basic_Info/Notes", true);
+        addAttribute(attributes, "Hole Type", "Water_Sample/Codes/Hole_Type", false);
+        addAttribute(attributes, "Hole Lining", "Water_Sample/Codes/Hole_Lining", false);
+        addAttribute(attributes, "Hole Open or Closed", "Water_Sample/Codes/Hole_Open_Closed", false);
+        addAttribute(attributes, "Pipes In Hole", "Water_Sample/Codes/Pipes_In_Hole", false);
+        addAttribute(attributes, "Hole Angle", "Water_Sample/Codes/Hole_Angle", false);
+        addAttribute(attributes, "Estimated Angle", "Water_Sample/Codes/Estimated_Angle", true);
+        addAttribute(attributes, "Outflow Present", "Water_Sample/Codes/Outflow_Present", false);
+        addAttribute(attributes, "Sampling Issues", "Water_Sample/Codes/Sampling_Issues", false);
+        addAttribute(attributes, "Temperature", "Water_Sample/pH_Eh/Temperature", true);
+        addAttribute(attributes, "Conductivity", "Water_Sample/pH_Eh/Conductivity", true);
+        addAttribute(attributes, "Preferred pH", "Water_Sample/pH_Eh/Preferred_pH", true);
+        addAttribute(attributes, "Preferred Eh", "Water_Sample/pH_Eh/Preferred_Eh", true);
+        addAttribute(attributes, "Preferred pH Time", "Water_Sample/Hidden/Preferred_pH_Time", true);
+        addAttribute(attributes, "Preferred Eh Time", "Water_Sample/Hidden/Preferred_Eh_Time", true);
 
-        if (!isNull(getFieldValue("Water_Sample/Basic_Info/Elevation"))){
-            print(getFieldValue("Water_Sample/Basic_Info/Elevation")); 
-            attributes.add(createEntityAttribute("Elevation", getFieldAnnotation("Water_Sample/Basic_Info/Elevation"), null, getFieldValue("Water_Sample/Basic_Info/Elevation"), getFieldCertainty("Water_Sample/Basic_Info/Elevation")));
-        }
-
-        if (!isNull(getFieldValue("Water_Sample/Basic_Info/Water_Table"))){
-            print(getFieldValue("Water_Sample/Basic_Info/Water_Table")); 
-            attributes.add(createEntityAttribute("Water Table", getFieldAnnotation("Water_Sample/Basic_Info/Water_Table"), null, getFieldValue("Water_Sample/Basic_Info/Water_Table"), getFieldCertainty("Water_Sample/Basic_Info/Water_Table")));
-        }
-
-        if (!isNull(getFieldValue("Water_Sample/Basic_Info/Sample_Depth"))){
-            print(getFieldValue("Water_Sample/Basic_Info/Sample_Depth")); 
-            attributes.add(createEntityAttribute("Sample Depth", getFieldAnnotation("Water_Sample/Basic_Info/Sample_Depth"), null, getFieldValue("Water_Sample/Basic_Info/Sample_Depth"), getFieldCertainty("Water_Sample/Basic_Info/Sample_Depth")));
-        }
-
-        if (!isNull(getFieldValue("Water_Sample/Basic_Info/Bottom_Of_Hole"))){
-            print(getFieldValue("Water_Sample/Basic_Info/Bottom_Of_Hole")); 
-            attributes.add(createEntityAttribute("Bottom of Hole", getFieldAnnotation("Water_Sample/Basic_Info/Bottom_Of_Hole"), null, getFieldValue("Water_Sample/Basic_Info/Bottom_Of_Hole"), getFieldCertainty("Water_Sample/Basic_Info/Bottom_Of_Hole")));
-        }
-
-        if (!isNull(getFieldValue("Water_Sample/Basic_Info/Notes"))){
-            print(getFieldValue("Water_Sample/Basic_Info/Notes")); 
-            attributes.add(createEntityAttribute("Notes", getFieldAnnotation("Water_Sample/Basic_Info/Notes"), null, getFieldValue("Water_Sample/Basic_Info/Notes"), getFieldCertainty("Water_Sample/Basic_Info/Notes")));
-        }
-
-        if (!isNull(getFieldValue("Water_Sample/Basic_Info/Samples_Collected"))){
-            print(getFieldValue("Water_Sample/Basic_Info/Samples_Collected")); 
-
-            for (listItem : getFieldValue("Water_Sample/Basic_Info/Samples_Collected")){
-                print(listItem.getName());
-                attributes.add(createEntityAttribute("Samples Collected", null, listItem.getName(), null, null));
-            }       
-
-        }
-
-        if (!isNull(getFieldValue("Water_Sample/Basic_Info/Photos"))){
-            print(getFieldValue("Water_Sample/Basic_Info/Photos")); 
-        }
-
-        if (!isNull(getFieldValue("Water_Sample/Basic_Info/Sketches"))){
-            print(getFieldValue("Water_Sample/Basic_Info/Sketches")); 
-        }
-
-        if (!isNull(getFieldValue("Water_Sample/Codes/Hole_Type"))){
-            print(getFieldValue("Water_Sample/Codes/Hole_Type")); 
-            attributes.add(createEntityAttribute("Hole Type", getFieldAnnotation("Water_Sample/Codes/Hole_Type"), getFieldValue("Water_Sample/Codes/Hole_Type"), null, getFieldCertainty("Water_Sample/Codes/Hole_Type")));
-        }
-
-        if (!isNull(getFieldValue("Water_Sample/Codes/Hole_Lining"))){
-            print(getFieldValue("Water_Sample/Codes/Hole_Lining")); 
-            attributes.add(createEntityAttribute("Hole Lining", getFieldAnnotation("Water_Sample/Codes/Hole_Lining"), getFieldValue("Water_Sample/Codes/Hole_Lining"), null, getFieldCertainty("Water_Sample/Codes/Hole_Lining")));
-        }
-
-        if (!isNull(getFieldValue("Water_Sample/Codes/Hole_Open_Closed"))){
-            print(getFieldValue("Water_Sample/Codes/Hole_Open_Closed")); 
-            attributes.add(createEntityAttribute("Hole Open or Closed", getFieldAnnotation("Water_Sample/Codes/Hole_Open_Closed"), getFieldValue("Water_Sample/Codes/Hole_Open_Closed"), null, getFieldCertainty("Water_Sample/Codes/Hole_Open_Closed")));
-        }
-
-        if (!isNull(getFieldValue("Water_Sample/Codes/Pipes_In_Hole"))){
-            print(getFieldValue("Water_Sample/Codes/Pipes_In_Hole")); 
-            attributes.add(createEntityAttribute("Pipes In Hole", getFieldAnnotation("Water_Sample/Codes/Pipes_In_Hole"), getFieldValue("Water_Sample/Codes/Pipes_In_Hole"), null, getFieldCertainty("Water_Sample/Codes/Pipes_In_Hole")));
-        }
-
-        if (!isNull(getFieldValue("Water_Sample/Codes/Hole_Angle"))){
-            print(getFieldValue("Water_Sample/Codes/Hole_Angle")); 
-            attributes.add(createEntityAttribute("Hole Angle", getFieldAnnotation("Water_Sample/Codes/Hole_Angle"), getFieldValue("Water_Sample/Codes/Hole_Angle"), null, getFieldCertainty("Water_Sample/Codes/Hole_Angle")));
-        }
-
-        if (!isNull(getFieldValue("Water_Sample/Codes/Estimated_Angle"))){
-            print(getFieldValue("Water_Sample/Codes/Estimated_Angle")); 
-            attributes.add(createEntityAttribute("Estimated Angle", getFieldAnnotation("Water_Sample/Codes/Estimated_Angle"), null, getFieldValue("Water_Sample/Codes/Estimated_Angle"), getFieldCertainty("Water_Sample/Codes/Estimated_Angle")));
-        }
-
-        if (!isNull(getFieldValue("Water_Sample/Codes/Outflow_Present"))){
-            print(getFieldValue("Water_Sample/Codes/Outflow_Present")); 
-            attributes.add(createEntityAttribute("Outflow Present", getFieldAnnotation("Water_Sample/Codes/Outflow_Present"), getFieldValue("Water_Sample/Codes/Outflow_Present"), null, getFieldCertainty("Water_Sample/Codes/Outflow_Present")));
-        }
-
-        if (!isNull(getFieldValue("Water_Sample/Codes/Sampling_Issues"))){
-            print(getFieldValue("Water_Sample/Codes/Sampling_Issues")); 
-            attributes.add(createEntityAttribute("Sampling Issues", getFieldAnnotation("Water_Sample/Codes/Sampling_Issues"), getFieldValue("Water_Sample/Codes/Sampling_Issues"), null, getFieldCertainty("Water_Sample/Codes/Sampling_Issues")));
-        }
-
-        if (!isNull(getFieldValue("Water_Sample/pH_Eh/Temperature"))){
-            print(getFieldValue("Water_Sample/pH_Eh/Temperature")); 
-            attributes.add(createEntityAttribute("Temperature", getFieldAnnotation("Water_Sample/pH_Eh/Temperature"), null, getFieldValue("Water_Sample/pH_Eh/Temperature"), getFieldCertainty("Water_Sample/pH_Eh/Temperature")));
-        }
-
-        if (!isNull(getFieldValue("Water_Sample/pH_Eh/Conductivity"))){
-            print(getFieldValue("Water_Sample/pH_Eh/Conductivity")); 
-            attributes.add(createEntityAttribute("Conductivity", getFieldAnnotation("Water_Sample/pH_Eh/Conductivity"), null, getFieldValue("Water_Sample/pH_Eh/Conductivity"), getFieldCertainty("Water_Sample/pH_Eh/Conductivity")));
-        }
-
-        if (!isNull(getFieldValue("Water_Sample/pH_Eh/Preferred_pH"))){
-            print(getFieldValue("Water_Sample/pH_Eh/Preferred_pH")); 
-            attributes.add(createEntityAttribute("Preferred pH", getFieldAnnotation("Water_Sample/pH_Eh/Preferred_pH"), null, getFieldValue("Water_Sample/pH_Eh/Preferred_pH"), getFieldCertainty("Water_Sample/pH_Eh/Preferred_pH")));
-        }
-
-        if (!isNull(getFieldValue("Water_Sample/pH_Eh/Preferred_Eh"))){
-            print(getFieldValue("Water_Sample/pH_Eh/Preferred_Eh")); 
-            attributes.add(createEntityAttribute("Preferred Eh", getFieldAnnotation("Water_Sample/pH_Eh/Preferred_Eh"), null, getFieldValue("Water_Sample/pH_Eh/Preferred_Eh"), getFieldCertainty("Water_Sample/pH_Eh/Preferred_Eh")));
-        }
-
-        if (!isNull(getFieldValue("Water_Sample/Hidden/Preferred_pH_Time"))){
-            print(getFieldValue("Water_Sample/Hidden/Preferred_pH_Time")); 
-            attributes.add(createEntityAttribute("Preferred pH Time", getFieldAnnotation("Water_Sample/Hidden/Preferred_pH_Time"), null, getFieldValue("Water_Sample/Hidden/Preferred_pH_Time"), getFieldCertainty("Water_Sample/Hidden/Preferred_pH_Time")));
-        }
-
-        if (!isNull(getFieldValue("Water_Sample/Hidden/Preferred_Eh_Time"))){
-            print(getFieldValue("Water_Sample/Hidden/Preferred_Eh_Time")); 
-            attributes.add(createEntityAttribute("Preferred Eh Time", getFieldAnnotation("Water_Sample/Hidden/Preferred_Eh_Time"), null, getFieldValue("Water_Sample/Hidden/Preferred_Eh_Time"), getFieldCertainty("Water_Sample/Hidden/Preferred_Eh_Time")));
-        }
 
     } else if (tabgroup.equals("Plant_Sample")) {
         addAttribute(attributes, "Plant Sample Prefix", "Project/Start/Sample_Prefix", true);
@@ -1055,7 +942,7 @@ dupeSample3() {
         addAttribute(attributes, "Elevation", "Plant_Sample/Basic_Info/Elevation", true);
         addAttribute(attributes, "Plant Height", "Plant_Sample/Basic_Info/Plant_Height", true);
         addAttribute(attributes, "Plant Width", "Plant_Sample/Basic_Info/Plant_Width", true);
-        addMultSelectionAttribute(attributes, "Soil Description", "Plant_Sample/Basic_Info/Soil_Description");
+        addMultSelectionAttribute(attributes,"Soil Description", "Plant_Sample/Basic_Info/Soil_Description");
         addAttribute(attributes, "Landform Description", "Plant_Sample/Basic_Info/Landform_Description", false);
         addAttribute(attributes, "Notes", "Plant_Sample/Basic_Info/Notes", true);
 
@@ -1076,7 +963,7 @@ dupeSample3() {
         addAttribute(attributes, "Depth", "Soil_Sample/Basic_Info/Depth", true);
         addAttribute(attributes, "Colour", "Soil_Sample/Basic_Info/Colour", true);
         addAttribute(attributes, "Lag", "Soil_Sample/Basic_Info/Lag", false);
-        addMultSelectionAttribute(attributes, "Soil Texture", "Soil_Sample/Basic_Info/Soil_Texture");
+        addMultSelectionAttribute(attributes,"Soil Texture", "Soil_Sample/Basic_Info/Soil_Texture");
         addAttribute(attributes, "Geology", "Soil_Sample/Basic_Info/Geology", false);
         addAttribute(attributes, "Drainage", "Soil_Sample/Basic_Info/Drainage", false);
         addAttribute(attributes, "Contamination", "Soil_Sample/Basic_Info/Contamination", false);
@@ -1084,6 +971,7 @@ dupeSample3() {
         addAttribute(attributes, "Landform", "Soil_Sample/Basic_Info/Landform", false);
         addAttribute(attributes, "Vegetation", "Soil_Sample/Basic_Info/Vegetation", true);
         addAttribute(attributes, "Notes", "Soil_Sample/Basic_Info/Notes", true);
+
     
     } else if (tabgroup.equals("Rock_Sample")) {
         addAttribute(attributes, "Rock Sample Prefix", "Project/Start/Sample_Prefix", true);
@@ -1149,7 +1037,8 @@ dupeSample3() {
             // show the tabgroup of the newly duplicated sample
             // newTabGroup(tabgroup);
             // showTabGroup(tabgroup, currentSampleUUID);
-            if (tabgroup.equals("Water_Sample")) {
+            duplicateRelns();
+            if (tabgroup.equals("Water_Sample")) {                
                 loadWaterSampleFrom(currentSampleUUID);
             } else if (tabgroup.equals("Plant_Sample")) {
                 loadPlantSampleFrom(currentSampleUUID);
@@ -1164,6 +1053,54 @@ dupeSample3() {
         }
     });
 }
+
+
+
+
+
+duplicateRelns(){
+    fetchAll("select a.uuid "+
+"from latestnondeletedaentreln a join latestnondeletedaentreln b using (relationshipid) join latestnondeletedarchent ae on (a.uuid = ae.uuid)"+
+"where a.uuid != b.uuid "+
+"and b.uuid = "+ oldSampleUUID +";", new FetchCallback() {
+            onFetch(uuid_list) {
+                print("[duplicatePhEh()] pheh attribute list: " + uuid_list);
+
+                for (uuids : uuid_list){
+                    print("[duplicatePhEh()] pheh attribute list: " + uuids);
+                    // So, passing uuids into this REALLY doesn't work. WTF. 
+                    fetchAll("select attributename, freetext, vocabid, measure, certainty, aenttypename, relntypename  "+ 
+                            "  from latestnondeletedaentvalue  " +
+                            "  join attributekey using (attributeid)  " +
+                            "  join latestnondeletedarchent using (uuid) " +
+                            "  join latestnondeletedaentreln using (uuid) " +
+                            "  join latestnondeletedrelationship using (relationshipid) " +
+                            "  join relntype using (relntypeid) " +
+                            "  join aenttype using (aenttypeid) " +
+                            "  where uuid = '"+uuids.get(0)+"';", 
+                             new FetchCallback() {
+                                onFetch(duplicate_list) {
+                                    print("[duplicatePhEh()] pheh duplicate list: " + duplicate_list);
+                                    List dupedAttributes = createAttributeList();
+                                    for (attribute : duplicate_list){
+                                        print(attribute.get(6) + " -- " + attribute.get(5) + " -- " + attribute);
+                                        dupedAttributes.add(createEntityAttribute(attribute.get(0), attribute.get(1), attribute.get(2), attribute.get(3), attribute.get(4)));
+
+                                    }
+                                    saveArchEnt(null, duplicate_list.get(0).get(5), null, dupedAttributes, new SaveCallback() {
+                                        onSave(uuid, newRecord) {
+                                            print("[duplicated] " + uuid + dupedAttributes);
+                                            saveEntitiesToRel(duplicate_list.get(0).get(6), currentSampleUUID, uuid);
+                                        }  
+                                    });   
+
+                             }});
+                }
+                
+            }});
+   
+}
+
 
 /** Map GPS **/
 
