@@ -86,6 +86,9 @@
         <term> {Flowing_Well}
           <description>Description TBD</description>
         </term>
+        <term> {Other}
+          <description>Description TBD</description>
+        </term>
       </lookup>
     </property>
     <property name="Hole Lining" type="enum">
@@ -110,6 +113,9 @@
           <description>Description TBD</description>
         </term>
         <term> {Dirt}
+          <description>Description TBD</description>
+        </term>
+        <term> {Other}
           <description>Description TBD</description>
         </term>
       </lookup>
@@ -146,6 +152,9 @@
         <term> {No_pipes}
           <description>Description TBD</description>
         </term>
+        <term> {Other}
+          <description>Description TBD</description>
+        </term>
       </lookup>
     </property>
     <property name="Hole Angle" type="enum">
@@ -158,6 +167,9 @@
           <description>Description TBD</description>
         </term>
         <term> {Angled}
+          <description>Description TBD</description>
+        </term>
+        <term> {Other}
           <description>Description TBD</description>
         </term>
       </lookup>
@@ -192,6 +204,9 @@
           <description>Description TBD</description>
         </term>
         <term> {Pumped}
+          <description>Description TBD</description>
+        </term>
+        <term> {Other}
           <description>Description TBD</description>
         </term>
       </lookup>
@@ -420,6 +435,9 @@
         <term> {Loam}
           <description>Description TBD</description>
         </term>
+        <term> {Other}
+          <description>Description TBD</description>
+        </term>
       </lookup>
     </property>
     <property name="Landform Description" type="enum">
@@ -611,6 +629,9 @@
         <term> {t}
           <description>Description TBD</description>
         </term>
+        <term> {Other}
+          <description>Description TBD</description>
+        </term>
       </lookup>
     </property>
     <property name="Notes" type="freetext">
@@ -744,6 +765,9 @@
           <description>Description TBD</description>
         </term>
         <term> {Loam}
+          <description>Description TBD</description>
+        </term>
+        <term> {Other}
           <description>Description TBD</description>
         </term>
       </lookup>
@@ -1066,6 +1090,9 @@
             <description>Description TBD</description>
           </term>
         </term>
+        <term> {Other}
+          <description>Description TBD</description>
+        </term>
       </lookup>
     </property>
     <property name="Drainage" type="enum">
@@ -1203,6 +1230,9 @@
               <description>Description TBD</description>
             </term>
           </term>
+        </term>
+        <term> {Other}
+          <description>Description TBD</description>
         </term>
       </lookup>
     </property>
@@ -1395,6 +1425,9 @@
         <term> {t}
           <description>Description TBD</description>
         </term>
+        <term> {Other}
+          <description>Description TBD</description>
+        </term>
       </lookup>
     </property>
     <property name="Vegetation" type="freetext">
@@ -1568,6 +1601,9 @@
         <term> {Sandstone}
           <description>Description TBD</description>
         </term>
+        <term> {Other}
+          <description>Description TBD</description>
+        </term>
       </lookup>
     </property>
     <property name="Fineness or Inclusion size" type="enum">
@@ -1583,6 +1619,9 @@
           <description>Description TBD</description>
         </term>
         <term> {Coarse}
+          <description>Description TBD</description>
+        </term>
+        <term> {Other}
           <description>Description TBD</description>
         </term>
       </lookup>
@@ -1602,6 +1641,9 @@
         <term> {Coarse}
           <description>Description TBD</description>
         </term>
+        <term> {Other}
+          <description>Description TBD</description>
+        </term>
       </lookup>
     </property>
     <property name="Sorting" type="enum">
@@ -1617,6 +1659,9 @@
           <description>Description TBD</description>
         </term>
         <term> {Well_Sorted}
+          <description>Description TBD</description>
+        </term>
+        <term> {Other}
           <description>Description TBD</description>
         </term>
       </lookup>
