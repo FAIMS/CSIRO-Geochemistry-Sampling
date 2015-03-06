@@ -848,7 +848,7 @@ dupeSample3() {
          // || (tabgroup.equals("Rock_Sample") && rockLocationNumberRendered)
         ) {
         locationNumberValue = getFieldValue(tabgroup+"/Basic_Info/Location_Number");
-        attributes.add(createEntityAttribute("Location Number", null, null, locationNumberValue, null));
+    attributes.add(createEntityAttribute("Location Number", null, null, locationNumberValue, null));
     }
     
 

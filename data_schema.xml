@@ -26,6 +26,7 @@
     </property>
     <property name="Observation Type" type="vocab">
       <description>Description TBD</description>
+      <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
           <description>Description TBD</description>
@@ -40,36 +41,47 @@
     </property>
     <property name="Location Number" type="measure">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Station" type="freetext">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Project" type="freetext">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Area" type="freetext">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Site Name" type="freetext">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Water Table" type="freetext">
       <description>Metres below surface</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Sample Depth" type="freetext">
       <description>Metres below surface</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Bottom of Hole" type="freetext">
       <description>Metres below surface if known</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Notes" type="freetext">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Photos" type="file" file="true" thumbnail="true">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Hole Type" type="enum">
       <description>Flowing or not when you arrive</description>
+      <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
           <description>Description TBD</description>
@@ -93,6 +105,7 @@
     </property>
     <property name="Hole Lining" type="enum">
       <description>Bore/well construction material</description>
+      <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
           <description>Description TBD</description>
@@ -122,6 +135,7 @@
     </property>
     <property name="Hole Open or Closed" type="enum">
       <description>If a kangaroo could fall in a well or if a bore is not capped</description>
+      <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
           <description>Description TBD</description>
@@ -136,6 +150,7 @@
     </property>
     <property name="Pipes In Hole" type="enum">
       <description>Are pipes present and what are they made of?</description>
+      <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
           <description>Description TBD</description>
@@ -159,6 +174,7 @@
     </property>
     <property name="Hole Angle" type="enum">
       <description>If left blank, assume vertical</description>
+      <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
           <description>Description TBD</description>
@@ -176,9 +192,11 @@
     </property>
     <property name="Estimated Angle" type="freetext">
       <description>Degrees</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Outflow Present" type="enum">
       <description>Does flow of water go back into the same hole as it came out?</description>
+      <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
           <description>Description TBD</description>
@@ -193,6 +211,7 @@
     </property>
     <property name="Sampling Issues" type="enum">
       <description>When you cant get a clean sample from a flowing bore/well</description>
+      <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
           <description>Description TBD</description>
@@ -213,6 +232,7 @@
     </property>
     <property name="Samples Collected" type="enum">
       <description>Description TBD</description>
+      <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
           <description>Description TBD</description>
@@ -233,18 +253,23 @@
     </property>
     <property name="Latitude" type="freetext">
       <description>Decimal degrees</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Longitude" type="freetext">
       <description>Decimal degrees</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Northing" type="freetext">
       <description>Metres</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Easting" type="freetext">
       <description>Metres</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="SRID" type="enum">
       <description>Coordinate system</description>
+      <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> 28349
           <description>Description TBD</description>
@@ -274,27 +299,35 @@
     </property>
     <property name="Elevation" type="freetext">
       <description>Metres</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Temperature" type="freetext">
       <description>Degrees celcius</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Conductivity" type="freetext">
       <description>uS/cm</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Sketch" type="file" file="true" thumbnail="true">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Preferred pH" type="freetext">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Preferred pH Time" type="freetext">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Preferred Eh" type="freetext">
       <description>mV</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Preferred Eh Time" type="freetext">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
   </ArchaeologicalElement>
 
@@ -302,12 +335,15 @@
     <description></description>
     <property name="pH" type="freetext" isIdentifier="true">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Time" type="freetext" isIdentifier="true">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Preferred" type="freetext">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
   </ArchaeologicalElement>
 
@@ -315,12 +351,15 @@
     <description></description>
     <property name="Eh" type="freetext" isIdentifier="true">
       <description>mV</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Time" type="freetext" isIdentifier="true">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Preferred" type="freetext">
       <description>Eh value for output</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
   </ArchaeologicalElement>
   
@@ -340,6 +379,7 @@
     </property>
     <property name="Observation Type" type="vocab">
       <description>Description TBD</description>
+      <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
           <description>Description TBD</description>
@@ -354,33 +394,43 @@
     </property>
     <property name="Location Number" type="measure">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Station" type="freetext">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Project" type="freetext">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Area" type="freetext">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Plant Species" type="freetext">
       <description>If known, or common name. Take a photo to check later.</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Latitude" type="freetext">
       <description>Decimal degrees</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Longitude" type="freetext">
       <description>Decimal degrees</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Northing" type="freetext">
       <description>Metres</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Easting" type="freetext">
       <description>Metres</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="SRID" type="enum">
       <description>Coordinate system</description>
+      <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> 28349
           <description>Description TBD</description>
@@ -410,15 +460,19 @@
     </property>
     <property name="Elevation" type="freetext">
       <description>Metres</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Plant Height" type="freetext">
       <description>Metres (closest 0.5 m)</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Plant Width" type="freetext">
       <description>Metres (closest 0.5 m)</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Soil Description" type="enum">
       <description>What does the surrounding soil look like?</description>
+      <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
           <description>Description TBD</description>
@@ -442,6 +496,7 @@
     </property>
     <property name="Landform Description" type="enum">
       <description>What is the plant growing in?</description>
+      <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
           <description>Description TBD</description>
@@ -636,12 +691,15 @@
     </property>
     <property name="Notes" type="freetext">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Photos" type="file" file="true" thumbnail="true">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Sketch" type="file" file="true" thumbnail="true">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
   </ArchaeologicalElement>
 
@@ -661,6 +719,7 @@
     </property>
     <property name="Observation Type" type="vocab">
       <description>If no sample taken.</description>
+      <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
           <description>Description TBD</description>
@@ -675,30 +734,39 @@
     </property>
     <property name="Location Number" type="measure">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Station" type="freetext">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Project" type="freetext">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Area" type="freetext">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Latitude" type="freetext">
       <description>Decimal degrees</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Longitude" type="freetext">
       <description>Decimal degrees</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Northing" type="freetext">
       <description>Metres</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Easting" type="freetext">
       <description>Metres</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="SRID" type="enum">
       <description>Coordinate system</description>
+      <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> 28349
           <description>Description TBD</description>
@@ -728,15 +796,19 @@
     </property>
     <property name="Elevation" type="freetext">
       <description>Metres</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Depth" type="freetext">
       <description>Metres</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Colour">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Lag" type="enum">
       <description>Coarse surface material</description>
+      <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
           <description>Description TBD</description>
@@ -751,6 +823,7 @@
     </property>
     <property name="Soil Texture" type="enum">
       <description>Check all that apply</description>
+      <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
           <description>Description TBD</description>
@@ -774,6 +847,7 @@
     </property>
     <property name="Geology" type="enum">
       <description>Dominant surface visible</description>
+      <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
           <description>Description TBD</description>
@@ -1097,6 +1171,7 @@
     </property>
     <property name="Drainage" type="enum">
       <description>Presence</description>
+      <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
           <description>Description TBD</description>
@@ -1111,6 +1186,7 @@
     </property>
     <property name="Contamination" type="enum">
       <description>Anthropogenic</description>
+      <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
           <description>Description TBD</description>
@@ -1125,6 +1201,7 @@
     </property>
     <property name="Regolith Type" type="enum">
       <description>Description TBD</description>
+      <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
           <description>Description TBD</description>
@@ -1238,6 +1315,7 @@
     </property>
     <property name="Landform" type="enum">
       <description>Description TBD</description>
+      <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
           <description>Description TBD</description>
@@ -1432,15 +1510,19 @@
     </property>
     <property name="Vegetation" type="freetext">
       <description>Dominant community</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Notes" type="freetext">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Photos" type="file" file="true" thumbnail="true">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Sketch" type="file" file="true" thumbnail="true">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
   </ArchaeologicalElement>
 
@@ -1481,30 +1563,39 @@
     </property>
     <property name="Station" type="freetext">
       <description>Station/Deposit name</description>      
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Project" type="freetext">
       <description>Overall project name</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Area" type="freetext">
       <description>Area within station/deposit</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Core ID" type="measure">
       <description>Drill core ID</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Latitude" type="freetext">
       <description>Decimal degrees</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Longitude" type="freetext">
       <description>Decimal degrees</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Northing" type="freetext">
       <description>Metres</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Easting" type="freetext">
       <description>Metres</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="SRID" type="enum">
       <description>Coordinate System</description>
+      <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> 28349
           <description>Description TBD</description>
@@ -1534,63 +1625,83 @@
     </property>
     <property name="Elevation" type="freetext">
       <description>Metres above sea-level</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Strike Of Bedding" type="measure">
       <description>Degrees (000 - 360)</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Dip Of Bedding" type="measure">
       <description>Degrees (00 - 90)</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Strike Of Cleavage" type="measure">
       <description>Degrees (000 - 360)</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Dip Of Cleavage" type="measure">
       <description>Degrees (00 - 90)</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Strike Of Foliation" type="measure">
       <description>Degrees (000 - 360)</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Dip Of Foliation" type="measure">
       <description>Degrees (00 - 90)</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Strike Of Veins 1" type="measure">
       <description>Degrees (000 - 360)</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Dip Of Veins 1" type="measure">
       <description>Degrees (00 - 90)</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Strike Of Veins 2" type="measure">
       <description>Degrees (000 - 360)</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Dip Of Veins 2" type="measure">
       <description>Degrees (00 - 90)</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>    
     <property name="Other Structural Measurements" type="measure">
       <description>Any other structural measurements</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Plunge Of Fold Axis 1" type="measure">
       <description>Degrees (00 - 90)</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Azimuth Of Fold Axis 1" type="measure">
       <description>Degrees (000 - 360)</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Plunge Of Mineral Lineation" type="measure">
       <description>Degrees (00 - 90)</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Azimuth Of Mineral Lineation" type="measure">
       <description>Degrees (000 - 360)</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Plunge Of Stretching Lineation" type="measure">
       <description>Degrees (00 - 90)</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Azimuth Of Stretching Lineation" type="measure">
       <description>Degrees (000 - 360)</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Other Lineation" type="measure">
       <description>Any other lithological descriptions</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Lithology" type="enum">
       <description>Rock type</description>
+      <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
           <description>Description TBD</description>
@@ -1608,6 +1719,7 @@
     </property>
     <property name="Fineness or Inclusion size" type="enum">
       <description>Particle size</description>
+      <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
           <description>Description TBD</description>
@@ -1628,6 +1740,7 @@
     </property>
     <property name="Grain Size" type="vocab">
       <description>Grain size</description>
+      <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
           <description>Description TBD</description>
@@ -1648,6 +1761,7 @@
     </property>
     <property name="Sorting" type="enum">
       <description>Degree of grain sorting</description>
+      <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
           <description>Description TBD</description>
@@ -1668,27 +1782,35 @@
     </property>
     <property name="Other lithological descriptors" type="freetext">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Stratigraphic unit" type="freetext">
       <description>Name of geologic formation</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Large-scale Structure" type="freetext">
       <description>Overall structure of the outcrop (e.g. 'massive', 'thinly bedded', 'pillows', etc.)</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Alteration" type="freetext">
       <description>Presence and type.</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Veining" type="measure">
       <description>Visible veins</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Notes" type="freetext">
       <description>Any other notes</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Photos" type="file" file="true" thumbnail="true">
       <description>Photographs</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Sketch" type="file" file="true" thumbnail="true">
       <description>Sketch</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
   </ArchaeologicalElement>
 
@@ -1696,12 +1818,15 @@
     <description>Other camera photos</description>
     <property name="Photo ID" isIdentifier= "true" type="freetext">
       <description>Other camera photos</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Photo Timestamp" type="freetext">
       <description>Time at which the photo was taken</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Photo Note" type="freetext">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
   </ArchaeologicalElement>
 
@@ -1709,9 +1834,11 @@
     <description>Description TBD</description>
     <property name="Label" isIdentifier= "true" type="freetext">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Note" type="freetext">
       <description>Description TBD</description>
+    <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
   </ArchaeologicalElement>
 </dataSchema>
