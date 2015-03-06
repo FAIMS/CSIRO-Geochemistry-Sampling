@@ -794,13 +794,11 @@ copyAttribute(String attrib) {
    isMeasure differentiates between vocab and measure views.
    */
 addAttribute(attributeList, String propertyName, String viewRef, boolean isMeasure) {
-    if (!isNull(getFieldValue(viewRef))) {
-        print("[addAttribute()]" + getFieldValue(viewRef));
-        if (isMeasure) { 
-            attributeList.add(createEntityAttribute(propertyName, getFieldAnnotation(viewRef), null, getFieldValue(viewRef), getFieldCertainty(viewRef)));
-        } else {
-            attributeList.add(createEntityAttribute(propertyName, getFieldAnnotation(viewRef), getFieldValue(viewRef), null, getFieldCertainty(viewRef)));
-        }
+    print("[addAttribute()]" + getFieldValue(viewRef));
+    if (isMeasure) { 
+        attributeList.add(createEntityAttribute(propertyName, getFieldAnnotation(viewRef), null, getFieldValue(viewRef), getFieldCertainty(viewRef)));
+    } else {
+        attributeList.add(createEntityAttribute(propertyName, getFieldAnnotation(viewRef), getFieldValue(viewRef), null, getFieldCertainty(viewRef)));
     }
 }
 
@@ -810,13 +808,11 @@ addAttribute(attributeList, String propertyName, String viewRef, boolean isMeasu
    viewRef is the path to the field to duplicate.
    */
 addMultSelectionAttribute(attributeList, String propertyName, String viewRef) {
-    if (!isNull(getFieldValue(viewRef))) {
-        print("[addCheckboxAttribute()]" + getFieldValue(viewRef)); 
-        for (listItem : getFieldValue(viewRef)) {
-            print(listItem.getName());
-            attributeList.add(createEntityAttribute(propertyName, null, listItem.getName(), null, null));
-        }       
-    }
+    print("[addCheckboxAttribute()]" + getFieldValue(viewRef)); 
+    for (listItem : getFieldValue(viewRef)) {
+        print(listItem.getName());
+        attributeList.add(createEntityAttribute(propertyName, null, listItem.getName(), null, null));
+    }       
 }
 
 /* Duplicates the current sample excluding any attachments or pictures */
