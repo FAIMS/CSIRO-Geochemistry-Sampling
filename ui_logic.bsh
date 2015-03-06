@@ -292,19 +292,19 @@ updateGPSStatus() {
     } else {
         status += "Internal GPS: ";
         if (isInternalGPSOn()) {status += "on";} else {status += "off";}
-        status += "\n External GPS: ";
+        status += "\nExternal GPS: ";
         if (isExternalGPSOn()) {if (isBluetoothConnected()) {status += "on and bluetooth connected";} else {status += "on and bluetooth disconnected";}} else {status += "off";}
         Object position = getGPSPosition();
         if (position != null) {
             Object projPosition = getGPSPositionProjected();
-            status += "\n Latitude: " + position.getLatitude();
+            status += "\nLatitude: " + position.getLatitude();
             status += "   Longitude: " + position.getLongitude();
-            status += "\n Northing: " + projPosition.getLatitude();
+            status += "\nNorthing: " + projPosition.getLatitude();
             status += "   Easting: " + projPosition.getLongitude();
-            status += "\n Accuracy: " + getGPSEstimatedAccuracy();
+            status += "\nAccuracy: " + getGPSEstimatedAccuracy();
             // status += "\n Heading: " + getGPSHeading();
         } else {
-            status += "\n Position: no GPS position could be found";
+            status += "\nPosition: no GPS position could be found";
         }
     }
     print("[updateGPSStatus()] GPS status: " + status);
