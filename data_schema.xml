@@ -1696,7 +1696,7 @@
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Other Lineation" type="measure">
-      <description>Any other lithological descriptions</description>
+      <description>Any other lineation measurements</description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Lithology" type="enum">
@@ -1781,7 +1781,7 @@
       </lookup>
     </property>
     <property name="Other lithological descriptors" type="freetext">
-      <description>Description TBD</description>
+      <description>Any other lithological descriptions</description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Stratigraphic unit" type="freetext">
