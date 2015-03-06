@@ -19,7 +19,7 @@ makeLocalID(){
                     "JOIN aenttype using (aenttypeid) " +
                     "JOIN (select * from idealaent where isIdentifier='true') using (aenttypeid) " +
                     "join attributekey  using (attributeid) " +
-                    "join latestNonDeletedAentValue using (uuid, attributeid) " +
+                    "left outer join latestNonDeletedAentValue using (uuid, attributeid) " +
                     "left outer join vocabulary using (attributeid, vocabid) " +
                   "order by uuid, aentcountorder, vocabcountorder " +
                 ") " +
@@ -848,7 +848,7 @@ dupeSample3() {
          // || (tabgroup.equals("Rock_Sample") && rockLocationNumberRendered)
         ) {
         locationNumberValue = getFieldValue(tabgroup+"/Basic_Info/Location_Number");
-    attributes.add(createEntityAttribute("Location Number", null, null, locationNumberValue, null));
+        attributes.add(createEntityAttribute("Location Number", null, null, locationNumberValue, null));
     }
     
 
