@@ -1165,9 +1165,17 @@ dataEntryLayerID = null;
 /* Initialises the map. */
 initMap() {
     // Base map layer
-    setMapZoom("Project/Map/map", 15.0f);
+    setMapZoom("Project/Map/map", 13.0f);
     // showBaseMap("Project/Map/map", "base map", "files/data/maps/SydneyStreetmap.tif");
-    showBaseMap("Project/Map/map", "base map", "files/data/maps/Capricorn.tif");
+    // showBaseMap("Project/Map/map", "base map", "files/data/maps/Capricorn.tif");
+
+    showBaseMap("Project/Map/map", "base map", "files/data/maps/Topo_Syd_3857.3857.Tiled.tif");
+    showRasterMap("Project/Map/map", "dem syd", "files/data/maps/dem_syd_3857.3857.Tiled.tif");
+    showRasterMap("Project/Map/map", "mag map syd", "files/data/maps/magmap_syd_3857.3857.Tiled.tif");  
+    showRasterMap("Project/Map/map", "rad map pctk syd", "files/data/maps/radmap_pctk_syd_3857.3857.Tiled.tif");
+    showRasterMap("Project/Map/map", "rad ppmu syd", "files/data/maps/rad_ppmu_syd_3857.3857.Tiled.tif");
+    showRasterMap("Project/Map/map", "rad ppmth syd", "files/data/maps/rad_ppmth_syd_3857.3857.Tiled.tif");
+
     ps = createPointStyle(10, Color.BLUE, 0.2f, 0.5f);
     ls = createLineStyle(10, Color.GREEN, 0.05f, 0.3f, null);
     pos = createPolygonStyle(10, Color.parseColor("#440000FF"), createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
