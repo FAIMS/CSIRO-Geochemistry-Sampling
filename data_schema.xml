@@ -13,50 +13,50 @@
   <ArchaeologicalElement name="Water Sample">
     <description></description>
     <property name="Water Sample Prefix" type="freetext" isIdentifier="true">
-      <description>Description TBD</description>
+      <description></description>
       <formatString><![CDATA[$2]]></formatString>
     </property>
     <property name="Water Sample ID" type="measure" isIdentifier="true">
-      <description>Description TBD</description>
+      <description></description>
       <formatString><![CDATA[$2 - Water - ]]></formatString>
     </property>
     <property name="Water Sample Date" type="measure" isIdentifier="true">
-      <description>Description TBD</description>
+      <description></description>
       <formatString><![CDATA[$2]]></formatString>
     </property>
     <property name="Observation Type" type="vocab">
-      <description>Description TBD</description>
+      <description></description>
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Sampling_Location}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Observation_Only}
-          <description>Description TBD</description>
+          <description></description>
         </term>
       </lookup>
     </property>
     <property name="Location Number" type="measure">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Station" type="freetext">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Project" type="freetext">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Area" type="freetext">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Site Name" type="freetext">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Water Table" type="freetext">
@@ -72,11 +72,11 @@
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Notes" type="freetext">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Photos" type="file" file="true" thumbnail="true">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Hole Type" type="enum">
@@ -84,22 +84,22 @@
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Still_Bore}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Still_Well}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Flowing_Bore}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Flowing_Well}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Other}
-          <description>Description TBD</description>
+          <description></description>
         </term>
       </lookup>
     </property>
@@ -108,28 +108,28 @@
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Metal}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Rusty}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Poly}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Cement}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Wood}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Dirt}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Other}
-          <description>Description TBD</description>
+          <description></description>
         </term>
       </lookup>
     </property>
@@ -138,13 +138,13 @@
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Open}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Closed}
-          <description>Description TBD</description>
+          <description></description>
         </term>
       </lookup>
     </property>
@@ -153,22 +153,22 @@
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Metal_Pipes}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Poly_Pipes}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Fibreglass_Pipes}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {No_pipes}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Other}
-          <description>Description TBD</description>
+          <description></description>
         </term>
       </lookup>
     </property>
@@ -177,16 +177,16 @@
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Vertical}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Angled}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Other}
-          <description>Description TBD</description>
+          <description></description>
         </term>
       </lookup>
     </property>
@@ -199,13 +199,13 @@
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Yes}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {No}
-          <description>Description TBD</description>
+          <description></description>
         </term>
       </lookup>
     </property>
@@ -214,40 +214,40 @@
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Sample_from_outflow}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Bailed_From_Flowing_Windmill}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Pumped}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Other}
-          <description>Description TBD</description>
+          <description></description>
         </term>
       </lookup>
     </property>
     <property name="Samples Collected" type="enum">
-      <description>Description TBD</description>
+      <description></description>
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Cations}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Anions}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Alkalinity}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Carbon}
-          <description>Description TBD</description>
+          <description></description>
         </term>
       </lookup>
     </property>
@@ -272,28 +272,28 @@
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> 28349
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> 28350
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> 28351
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> 28352
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> 28353
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> 28354
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> 28355
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> 28356
-          <description>Description TBD</description>
+          <description></description>
         </term>
       </lookup>
     </property>
@@ -310,15 +310,15 @@
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Sketch" type="file" file="true" thumbnail="true">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Preferred pH" type="freetext">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Preferred pH Time" type="freetext">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Preferred Eh" type="freetext">
@@ -326,7 +326,7 @@
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Preferred Eh Time" type="freetext">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
   </ArchaeologicalElement>
@@ -334,15 +334,15 @@
   <ArchaeologicalElement name="pH">
     <description></description>
     <property name="pH" type="freetext" isIdentifier="true">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Time" type="freetext" isIdentifier="true">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Preferred" type="freetext">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
   </ArchaeologicalElement>
@@ -354,7 +354,7 @@
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Time" type="freetext" isIdentifier="true">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Preferred" type="freetext">
@@ -366,46 +366,46 @@
   <ArchaeologicalElement name="Plant Sample">
     <description></description>
     <property name="Plant Sample Prefix" type="freetext" isIdentifier="true">
-      <description>Description TBD</description>
+      <description></description>
       <formatString><![CDATA[$2]]></formatString>
     </property>
     <property name="Plant Sample ID" type="measure" isIdentifier="true">
-      <description>Description TBD</description>
+      <description></description>
       <formatString><![CDATA[$2 - Plant - ]]></formatString>
     </property>
     <property name="Plant Sample Date" type="measure" isIdentifier="true">
-      <description>Description TBD</description>
+      <description></description>
       <formatString><![CDATA[$2]]></formatString>
     </property>
     <property name="Observation Type" type="vocab">
-      <description>Description TBD</description>
+      <description></description>
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Sampling_Location}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Observation_Only}
-          <description>Description TBD</description>
+          <description></description>
         </term>
       </lookup>
     </property>
     <property name="Location Number" type="measure">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Station" type="freetext">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Project" type="freetext">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Area" type="freetext">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Plant Species" type="freetext">
@@ -433,28 +433,28 @@
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> 28349
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> 28350
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> 28351
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> 28352
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> 28353
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> 28354
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> 28355
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> 28356
-          <description>Description TBD</description>
+          <description></description>
         </term>
       </lookup>
     </property>
@@ -463,11 +463,11 @@
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Plant Height" type="freetext">
-      <description>Metres (closest 0.5 m)</description>
+      <description>Please list the maximum height of the plant in metres (closest 0.5 m)</description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Plant Width" type="freetext">
-      <description>Metres (closest 0.5 m)</description>
+      <description>Please list the maximum width of the plant in metres (closest 0.5 m)</description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Soil Description" type="enum">
@@ -475,22 +475,22 @@
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Clay}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Sandy}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Silty}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Loam}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Other}
-          <description>Description TBD</description>
+          <description></description>
         </term>
       </lookup>
     </property>
@@ -499,222 +499,222 @@
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {a}
-          <description>Description TBD</description>
+          <description></description>
           <term> {ap}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {af}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {aa}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {ab}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {ac}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {am}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {ao}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {at}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {as}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {aw}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {al}
-            <description>Description TBD</description>
+            <description></description>
           </term>
         </term>
         <term> {u}
-          <description>Description TBD</description>
+          <description></description>
           <term> {ul}
-            <description>Description TBD</description>
+            <description></description>
           </term>
         </term>
         <term> {f}
-          <description>Description TBD</description>
+          <description></description>
           <term> {fa}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {fc}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {fs}
-            <description>Description TBD</description>
+            <description></description>
           </term>
         </term>
         <term> {p}
-          <description>Description TBD</description>
+          <description></description>
           <term> {pd}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {pi}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {pp}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {ps}
-            <description>Description TBD</description>
+            <description></description>
           </term>
         </term>
         <term> {g}
-          <description>Description TBD</description>
+          <description></description>
           <term> {gd}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {ge}
-            <description>Description TBD</description>
+            <description></description>
           </term>
         </term>
         <term> {d}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {c}
-          <description>Description TBD</description>
+          <description></description>
           <term> {cb}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {chp}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {cr}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {cm}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {ct}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {cd}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {cp}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {cc}
-            <description>Description TBD</description>
+            <description></description>
           </term>
         </term>
         <term> {e}
-          <description>Description TBD</description>
+          <description></description>
           <term> {ep}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {ei}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {ea}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {en}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {ec}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {er}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {eu}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {el}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {eh}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {em}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {ee}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {eb}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {ed}
-            <description>Description TBD</description>
+            <description></description>
           </term>
         </term>
         <term> {k}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {i}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {v}
-          <description>Description TBD</description>
+          <description></description>
           <term> {vc}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {w}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {vi}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {va}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {vf}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {vp}
-            <description>Description TBD</description>
+            <description></description>
           </term>
         </term>
         <term> {m}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {t}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Other}
-          <description>Description TBD</description>
+          <description></description>
         </term>
       </lookup>
     </property>
     <property name="Notes" type="freetext">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Photos" type="file" file="true" thumbnail="true">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Sketch" type="file" file="true" thumbnail="true">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
   </ArchaeologicalElement>
 
   <ArchaeologicalElement name="Soil Sample">
-    <description>Description TBD</description>
+    <description></description>
     <property name="Soil Sample Prefix" type="freetext" isIdentifier="true">
-      <description>Description TBD</description>
+      <description></description>
       <formatString><![CDATA[$2]]></formatString>
     </property>
     <property name="Soil Sample ID" type="measure" isIdentifier="true">
-      <description>Description TBD</description>
+      <description></description>
       <formatString><![CDATA[$2 - Soil - ]]></formatString>
     </property>
     <property name="Soil Sample Date" type="measure" isIdentifier="true">
-      <description>Description TBD</description>
+      <description></description>
       <formatString><![CDATA[$2]]></formatString>
     </property>
     <property name="Observation Type" type="vocab">
@@ -722,30 +722,30 @@
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Sampling_Location}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Observation_Only}
-          <description>Description TBD</description>
+          <description></description>
         </term>
       </lookup>
     </property>
     <property name="Location Number" type="measure">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Station" type="freetext">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Project" type="freetext">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Area" type="freetext">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Latitude" type="freetext">
@@ -769,28 +769,28 @@
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> 28349
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> 28350
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> 28351
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> 28352
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> 28353
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> 28354
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> 28355
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> 28356
-          <description>Description TBD</description>
+          <description></description>
         </term>
       </lookup>
     </property>
@@ -803,7 +803,7 @@
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Colour">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Lag" type="enum">
@@ -811,13 +811,13 @@
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Yes}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {No}
-          <description>Description TBD</description>
+          <description></description>
         </term>
       </lookup>
     </property>
@@ -826,22 +826,22 @@
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Clay}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Sandy}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Silty}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Loam}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Other}
-          <description>Description TBD</description>
+          <description></description>
         </term>
       </lookup>
     </property>
@@ -850,322 +850,322 @@
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Sedimentary}
-          <description>Description TBD</description>
+          <description></description>
           <term> {VAG}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {TAL}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {ARNT}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {AGLT}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SA}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {LC}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SHCS}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {CHCS}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {CBR}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {CHT}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SHC}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {CY}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SCY}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {TC}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SCO}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SCM}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SCP}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SDS}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SHD}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SDI}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {DRC}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {DCTL}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {FRC}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {FER}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SLG}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {GR}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {NG}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {GYW}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {IFE}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {KAO}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {LMZ}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {LPZ}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SL}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SLS}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {MDS}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SLM}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SLP}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {NS}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SS_(geology)}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SSA}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SSC}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {CSS}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SSD}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SSL}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SSM}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SSQ}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SST}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SR}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {LS}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {US}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SN}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SH_(geology)}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SI}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SIC}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SID}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {MSI}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SLT}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SLW}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {SLC}
-            <description>Description TBD</description>
+            <description></description>
           </term>
         </term>
         <term> {Metamorphic}
-          <description>Description TBD</description>
+          <description></description>
           <term> {MCS}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {MGN}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {MLS}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {M}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {MGM}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {MMY}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {MSC}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {MQZ}
-            <description>Description TBD</description>
+            <description></description>
           </term>
         </term>
         <term> {Igneous}
-          <description>Description TBD</description>
+          <description></description>
           <term> {MAM}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {VAN}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {GAN}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {BAS}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {VXY}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {VXV}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {VDA}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {GDI}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {DOL}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {GAB}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {GGN}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {GGT}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {GGD}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {GNI}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {VTG}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {KIM}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {GMD}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {GMO}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {GNO}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {GOG}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {GPE}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {GPO}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {VRD}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {VRH}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {GSY}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {GTO}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {VTR}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {GTC}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {VTU}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {VTX}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {VTP}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {VTK}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {VTL}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {VNO}
-            <description>Description TBD</description>
+            <description></description>
           </term>
         </term>
         <term> {Other}
-          <description>Description TBD</description>
+          <description></description>
         </term>
       </lookup>
     </property>
@@ -1174,337 +1174,337 @@
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Yes}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {No}
-          <description>Description TBD</description>
+          <description></description>
         </term>
       </lookup>
     </property>
     <property name="Contamination" type="enum">
-      <description>Anthropogenic</description>
+      <description>If you have selected 'Yes' please provide a description in the Annotation</description>
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Yes}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {No}
-          <description>Description TBD</description>
+          <description></description>
         </term>
       </lookup>
     </property>
     <property name="Regolith Type" type="enum">
-      <description>Description TBD</description>
+      <description></description>
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Transported_Regolith}
-          <description>Description TBD</description>
+          <description></description>
           <term> {A}
-            <description>Description TBD</description>
+            <description></description>
             <term> {AC}
-              <description>Description TBD</description>
+              <description></description>
             </term>
             <term> {AO}
-              <description>Description TBD</description>
+              <description></description>
             </term>
           </term>
           <term> {I}
-            <description>Description TBD</description>
+            <description></description>
             <term> {IS}
-              <description>Description TBD</description>
+              <description></description>
             </term>
             <term> {IL}
-              <description>Description TBD</description>
+              <description></description>
             </term>
             <term> {IP}
-              <description>Description TBD</description>
+              <description></description>
             </term>
           </term>
           <term> {C}
-            <description>Description TBD</description>
+            <description></description>
             <term> {CM}
-              <description>Description TBD</description>
+              <description></description>
             </term>
             <term> {CH}
-              <description>Description TBD</description>
+              <description></description>
             </term>
             <term> {CF}
-              <description>Description TBD</description>
+              <description></description>
             </term>
           </term>
           <term> {E}
-            <description>Description TBD</description>
+            <description></description>
             <term> {EH}
-              <description>Description TBD</description>
+              <description></description>
             </term>
             <term> {EG}
-              <description>Description TBD</description>
+              <description></description>
             </term>
           </term>
           <term> {L}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {G}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {V}
-            <description>Description TBD</description>
+            <description></description>
             <term> {VT}
-              <description>Description TBD</description>
+              <description></description>
             </term>
           </term>
           <term> {F}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {O}
-            <description>Description TBD</description>
+            <description></description>
             <term> {OB}
-              <description>Description TBD</description>
+              <description></description>
             </term>
             <term> {OE}
-              <description>Description TBD</description>
+              <description></description>
             </term>
             <term> {OC}
-              <description>Description TBD</description>
+              <description></description>
             </term>
             <term> {OM}
-              <description>Description TBD</description>
+              <description></description>
             </term>
           </term>
         </term>
         <term> {In_Situ_Regolith}
-          <description>Description TBD</description>
+          <description></description>
           <term> {W}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {R}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {S}
-            <description>Description TBD</description>
+            <description></description>
             <term> {SC}
-              <description>Description TBD</description>
+              <description></description>
             </term>
             <term> {SV}
-              <description>Description TBD</description>
+              <description></description>
             </term>
             <term> {SH_(regolith)}
-              <description>Description TBD</description>
+              <description></description>
             </term>
             <term> {SM}
-              <description>Description TBD</description>
+              <description></description>
             </term>
             <term> {SS_(regolith)}
-              <description>Description TBD</description>
+              <description></description>
             </term>
           </term>
         </term>
         <term> {Other}
-          <description>Description TBD</description>
+          <description></description>
         </term>
       </lookup>
     </property>
     <property name="Landform" type="enum">
-      <description>Description TBD</description>
+      <description></description>
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {a}
-          <description>Description TBD</description>
+          <description></description>
           <term> {ap}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {af}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {aa}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {ab}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {ac}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {am}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {ao}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {at}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {as}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {aw}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {al}
-            <description>Description TBD</description>
+            <description></description>
           </term>
         </term>
         <term> {u}
-          <description>Description TBD</description>
+          <description></description>
           <term> {ul}
-            <description>Description TBD</description>
+            <description></description>
           </term>
         </term>
         <term> {f}
-          <description>Description TBD</description>
+          <description></description>
           <term> {fa}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {fc}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {fs}
-            <description>Description TBD</description>
+            <description></description>
           </term>
         </term>
         <term> {p}
-          <description>Description TBD</description>
+          <description></description>
           <term> {pd}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {pi}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {pp}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {ps}
-            <description>Description TBD</description>
+            <description></description>
           </term>
         </term>
         <term> {g}
-          <description>Description TBD</description>
+          <description></description>
           <term> {gd}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {ge}
-            <description>Description TBD</description>
+            <description></description>
           </term>
         </term>
         <term> {d}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {c}
-          <description>Description TBD</description>
+          <description></description>
           <term> {cb}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {chp}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {cr}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {cm}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {ct}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {cd}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {cp}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {cc}
-            <description>Description TBD</description>
+            <description></description>
           </term>
         </term>
         <term> {e}
-          <description>Description TBD</description>
+          <description></description>
           <term> {ep}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {ei}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {ea}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {en}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {ec}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {er}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {eu}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {el}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {eh}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {em}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {ee}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {eb}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {ed}
-            <description>Description TBD</description>
+            <description></description>
           </term>
         </term>
         <term> {k}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {i}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {v}
-          <description>Description TBD</description>
+          <description></description>
           <term> {vc}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {w}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {vi}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {va}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {vf}
-            <description>Description TBD</description>
+            <description></description>
           </term>
           <term> {vp}
-            <description>Description TBD</description>
+            <description></description>
           </term>
         </term>
         <term> {m}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {t}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Other}
-          <description>Description TBD</description>
+          <description></description>
         </term>
       </lookup>
     </property>
@@ -1513,23 +1513,23 @@
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Notes" type="freetext">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Photos" type="file" file="true" thumbnail="true">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Sketch" type="file" file="true" thumbnail="true">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
   </ArchaeologicalElement>
 
   <ArchaeologicalElement name="Rock Sample">
-    <description>Description TBD</description>
+    <description></description>
     <property name="Rock Sample Prefix" type="freetext" isIdentifier="true">
-      <description>Description TBD</description>
+      <description></description>
       <formatString><![CDATA[$2]]></formatString>
     </property>
     <property name="Rock Sample ID" type="measure" isIdentifier="true">
@@ -1542,13 +1542,13 @@
       <formatString><![CDATA[{{ if equal($1, "{Observation_Only}") then " - Observation" }}]]></formatString>
       <lookup>
         <term> {No_Observation}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Sampling_Location}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Observation_Only}
-          <description>Description TBD</description>
+          <description></description>
         </term>
       </lookup>
     </property>
@@ -1558,7 +1558,7 @@
 
     </property>
     <property name="Rock Sample Date" type="measure" isIdentifier="true">
-      <description>Description TBD</description>
+      <description></description>
       <formatString><![CDATA[ - Rock - $2]]></formatString>
     </property>
     <property name="Station" type="freetext">
@@ -1574,7 +1574,7 @@
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Core ID" type="measure">
-      <description>Drill core ID</description>
+      <description>Drill core ID. Fill in if sample is obtained from core</description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Latitude" type="freetext">
@@ -1598,28 +1598,28 @@
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> 28349
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> 28350
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> 28351
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> 28352
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> 28353
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> 28354
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> 28355
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> 28356
-          <description>Description TBD</description>
+          <description></description>
         </term>
       </lookup>
     </property>
@@ -1704,16 +1704,16 @@
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Basalt}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Sandstone}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Other}
-          <description>Description TBD</description>
+          <description></description>
         </term>
       </lookup>
     </property>
@@ -1722,19 +1722,19 @@
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Fine}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Medium}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Coarse}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Other}
-          <description>Description TBD</description>
+          <description></description>
         </term>
       </lookup>
     </property>
@@ -1743,19 +1743,19 @@
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Fine}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Medium}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Coarse}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Other}
-          <description>Description TBD</description>
+          <description></description>
         </term>
       </lookup>
     </property>
@@ -1764,19 +1764,19 @@
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
         <term> {No_Observation}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Poor}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Moderate}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Well_Sorted}
-          <description>Description TBD</description>
+          <description></description>
         </term>
         <term> {Other}
-          <description>Description TBD</description>
+          <description></description>
         </term>
       </lookup>
     </property>
@@ -1785,15 +1785,15 @@
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Stratigraphic unit" type="freetext">
-      <description>Name of geologic formation</description>
+      <description>Name of geologic formation. Optional if known from maps.</description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Large-scale Structure" type="freetext">
-      <description>Overall structure of the outcrop (e.g. 'massive', 'thinly bedded', 'pillows', etc.)</description>
+      <description>Basic description of what the rocks are like, e.g., massive, thickly bedded, laminated, pillow structures, etc.</description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Alteration" type="freetext">
-      <description>Presence and type.</description>
+      <description>Any signs of obvious alteration, e.g., pervasive epidote, silicification around veins, etc.</description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Veining" type="measure">
@@ -1817,7 +1817,7 @@
   <ArchaeologicalElement name="Photolog">
     <description>Other camera photos</description>
     <property name="Photo ID" isIdentifier= "true" type="freetext">
-      <description>Other camera photos</description>
+      <description>Unique number or code allocated by creator of the image. It could be a filename or a reference number</description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Photo Timestamp" type="freetext">
@@ -1825,19 +1825,19 @@
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Photo Note" type="freetext">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
   </ArchaeologicalElement>
 
   <ArchaeologicalElement name="Note">
-    <description>Description TBD</description>
+    <description></description>
     <property name="Label" isIdentifier= "true" type="freetext">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
     <property name="Note" type="freetext">
-      <description>Description TBD</description>
+      <description></description>
     <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
     </property>
   </ArchaeologicalElement>

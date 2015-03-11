@@ -15,6 +15,12 @@
               <layout_weight/>
             </large>
           </style>
+          <logo>
+            <logo_tab>
+              <csiro_logo/>
+              <login_button/>
+            </logo_tab>
+          </logo>
           <user>
             <usertab>
               <users/>
@@ -546,6 +552,18 @@
         </input>
       </group>
     </group>
+    <group ref="logo">
+      <label/>
+      <group ref="logo_tab">
+        <label/>
+         <input ref="csiro_logo" faims_web="true">
+          <label/>
+        </input>
+        <trigger ref="login_button" faims_style_class="faims-blue">
+          <label>Login</label>
+        </trigger>
+      </group>
+    </group>
     <group ref="user">
       <label>{User_List}</label>
       <group ref="usertab" faims_scrollable="false">
@@ -597,13 +615,13 @@
             </input>
           </group>
         </group>
-        <trigger ref="New_Sample">
+        <trigger ref="New_Sample"  faims_style_class="faims-blue">
           <label>{New_Sample}</label>
         </trigger>
         <input ref="GPS_Status" faims_web="false" faims_certainty="false" faims_annotation="false" faims_read_only="true" faims_style_class="gps-status">
           <label>{GPS_Status}</label>
         </input>
-        <trigger ref="Check_For_Duplicates">
+        <trigger ref="Check_For_Duplicates" faims_style_class="faims-blue">
           <label>{Check_For_Duplicates}</label>
         </trigger>
         <select1 appearance="compact" ref="Duplicate_ID_List" faims_certainty="false" faims_annotation="false" faims_style_class="duplicate-id-list">
@@ -640,19 +658,19 @@
           <label/>
           <group faims_style="even" ref="child1">
             <label/>
-            <trigger ref="Centre_Map">
+            <trigger ref="Centre_Map" faims_style_class="faims-blue">
               <label>{Centre_Map}</label>
             </trigger>
           </group>
           <group faims_style="even" ref="child2">
             <label/>
-            <trigger ref="Save_Map_Settings">
+            <trigger ref="Save_Map_Settings" faims_style_class="faims-blue">
               <label>{Save_Map_Settings}</label>
             </trigger>
           </group>
           <group faims_style="even" ref="child3">
             <label/>
-            <trigger ref="Create_Shape">
+            <trigger ref="Create_Shape" faims_style_class="faims-blue">
               <label>{Create_Shape}</label>
             </trigger>
           </group>
@@ -669,10 +687,10 @@
         <input ref="note" faims_attribute_name="Note" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true">
           <label>{Shape_Note_Note}</label>
         </input>
-        <trigger ref="shape_return">
+        <trigger ref="shape_return" faims_style_class="faims-blue">
           <label>{Shape_Return}</label>
         </trigger>
-        <trigger ref="shape_delete">
+        <trigger ref="shape_delete" faims_style_class="faims-blue">
           <label>{Shape_Delete}</label>
         </trigger>
       </group>
@@ -774,7 +792,7 @@
           <label/>
           <group ref="child1" faims_style="even">
             <label/>
-              <trigger ref="Take_GPS">
+              <trigger ref="Take_GPS" faims_style_class="faims-blue">
                 <label>{Take_GPS}</label>
               </trigger>
           </group>
@@ -811,7 +829,7 @@
             <value>placeholder</value>
           </item>
         </select>
-        <trigger ref="Take_Photo">
+        <trigger ref="Take_Photo" faims_style_class="faims-blue">
           <label>{Take_Photo}</label>
         </trigger>
         <select type="file" faims_sync="true" ref="Sketches" faims_attribute_name="Sketch" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
@@ -821,10 +839,10 @@
             <value>placeholder</value>
           </item>
         </select>
-        <trigger ref="Attach_Sketch">
+        <trigger ref="Attach_Sketch" faims_style_class="faims-blue">
           <label>{Attach_Sketch}</label>
         </trigger>
-        <trigger ref="View_Sketch">
+        <trigger ref="View_Sketch" faims_style_class="faims-blue">
           <label>{View_Sketch}</label>
         </trigger>
       </group>
@@ -947,7 +965,7 @@
       </group>
       <group ref="Photolog" faims_scrollable="false">
         <label>{Photolog}</label>
-        <trigger ref="New_Photolog">
+        <trigger ref="New_Photolog" faims_style_class="faims-blue">
           <label>{New_Photolog}</label>
         </trigger>
         <select1 appearance="compact" ref="Photolog_List">
@@ -1065,7 +1083,7 @@
           <label/>
           <group ref="child1" faims_style="even">
             <label/>
-              <trigger ref="Take_GPS">
+              <trigger ref="Take_GPS" faims_style_class="faims-blue">
                 <label>{Take_GPS}</label>
               </trigger>
           </group>
@@ -1115,7 +1133,7 @@
             <value>placeholder</value>
           </item>
         </select>
-        <trigger ref="Take_Photo">
+        <trigger ref="Take_Photo" faims_style_class="faims-blue">
           <label>{Take_Photo}</label>
         </trigger>
         <select type="file" faims_sync="true" ref="Sketches" faims_attribute_name="Sketch" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
@@ -1125,16 +1143,16 @@
             <value>placeholder</value>
           </item>
         </select>
-        <trigger ref="Attach_Sketch">
+        <trigger ref="Attach_Sketch" faims_style_class="faims-blue">
           <label>{Attach_Sketch}</label>
         </trigger>
-        <trigger ref="View_Sketch">
+        <trigger ref="View_Sketch" faims_style_class="faims-blue">
           <label>{View_Sketch}</label>
         </trigger>
       </group>
       <group ref="Photolog" faims_scrollable="false">
         <label>{Photolog}</label>
-        <trigger ref="New_Photolog">
+        <trigger ref="New_Photolog" faims_style_class="faims-blue">
           <label>{New_Photolog}</label>
         </trigger>
         <select1 appearance="compact" ref="Photolog_List">
@@ -1240,7 +1258,7 @@
           <label/>
           <group ref="child1" faims_style="even">
             <label/>
-              <trigger ref="Take_GPS">
+              <trigger ref="Take_GPS" faims_style_class="faims-blue">
                 <label>{Take_GPS}</label>
               </trigger>
           </group>
@@ -1319,7 +1337,7 @@
             <value>placeholder</value>
           </item>
         </select>
-        <trigger ref="Take_Photo">
+        <trigger ref="Take_Photo" faims_style_class="faims-blue">
           <label>{Take_Photo}</label>
         </trigger>
         <select type="file" faims_sync="true" ref="Sketches" faims_attribute_name="Sketch" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
@@ -1329,16 +1347,16 @@
             <value>placeholder</value>
           </item>
         </select>
-        <trigger ref="Attach_Sketch">
+        <trigger ref="Attach_Sketch" faims_style_class="faims-blue">
           <label>{Attach_Sketch}</label>
         </trigger>
-        <trigger ref="View_Sketch">
+        <trigger ref="View_Sketch" faims_style_class="faims-blue">
           <label>{View_Sketch}</label>
         </trigger>
       </group>
       <group ref="Photolog" faims_scrollable="false">
         <label>{Photolog}</label>
-        <trigger ref="New_Photolog">
+        <trigger ref="New_Photolog" faims_style_class="faims-blue">
           <label>{New_Photolog}</label>
         </trigger>
         <select1 appearance="compact" ref="Photolog_List">
@@ -1447,7 +1465,7 @@
           <label/>
           <group ref="child1" faims_style="even">
             <label/>
-              <trigger ref="Take_GPS">
+              <trigger ref="Take_GPS" faims_style_class="faims-blue">
                 <label>{Take_GPS}</label>
               </trigger>
           </group>
@@ -1727,7 +1745,7 @@
             <value>placeholder</value>
           </item>
         </select>
-        <trigger ref="Take_Photo">
+        <trigger ref="Take_Photo" faims_style_class="faims-blue">
           <label>{Take_Photo}</label>
         </trigger>
         <select type="file" faims_sync="true" ref="Sketches" faims_attribute_name="Sketch" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
@@ -1737,16 +1755,16 @@
             <value>placeholder</value>
           </item>
         </select>
-        <trigger ref="Attach_Sketch">
+        <trigger ref="Attach_Sketch" faims_style_class="faims-blue">
           <label>{Attach_Sketch}</label>
         </trigger>
-        <trigger ref="View_Sketch">
+        <trigger ref="View_Sketch" faims_style_class="faims-blue">
           <label>{View_Sketch}</label>
         </trigger>
       </group>
       <group ref="Photolog" faims_scrollable="false">
         <label>{Photolog}</label>
-        <trigger ref="New_Photolog">
+        <trigger ref="New_Photolog" faims_style_class="faims-blue">
           <label>{New_Photolog}</label>
         </trigger>
         <select1 appearance="compact" ref="Photolog_List">
@@ -1771,7 +1789,7 @@
         <input ref="Photo_Note" faims_attribute_name="Photo Note" faims_attribute_type="measure" faims_certainty="true" faims_annotation="true" faims_read_only="false">
           <label>{Photo_Note}</label>
         </input>
-        <trigger ref="Photo_Back">
+        <trigger ref="Photo_Back" faims_style_class="faims-blue">
           <label>{Back}</label>
         </trigger>
       </group>
