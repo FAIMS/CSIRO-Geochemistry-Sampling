@@ -27,10 +27,7 @@
     <property name="Observation Type" type="vocab">
       <description></description>
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
-      <lookup>
-        <term> {No_Observation}
-          <description></description>
-        </term>
+      <lookup>        
         <term> {Sampling_Location}
           <description></description>
         </term>
@@ -234,9 +231,7 @@
       <description></description>
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
-        <term> {No_Observation}
-          <description></description>
-        </term>
+        
         <term> {Cations}
           <description></description>
         </term>
@@ -381,9 +376,6 @@
       <description></description>
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
-        <term> {No_Observation}
-          <description></description>
-        </term>
         <term> {Sampling_Location}
           <description></description>
         </term>
@@ -474,9 +466,6 @@
       <description>What does the surrounding soil look like?</description>
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
-        <term> {No_Observation}
-          <description></description>
-        </term>
         <term> {Clay}
           <description></description>
         </term>
@@ -721,9 +710,6 @@
       <description>If no sample taken.</description>
       <formatString><![CDATA[{{if $1 then "$1 "}}{{if $2 then "$2 "}}{{if $3 then "{$3} "}}{{if lessThan($4, 1.0) then "[$4] "}}]]></formatString>
       <lookup>
-        <term> {No_Observation}
-          <description></description>
-        </term>
         <term> {Sampling_Location}
           <description></description>
         </term>
@@ -1539,11 +1525,8 @@
 
     <property name="Rock Observation Type" type="vocab" isIdentifier="true">
       <description>Sample location or observation only</description>
-      <formatString><![CDATA[{{ if equal($1, "{Observation_Only}") then " - Observation" }}]]></formatString>
+      <formatString><![CDATA[{{ if equal($1, "{Observation_Only}") then " - Observation" }}{{if not(in($1, ["{Sampling_Location}","{Observation_Only}"])) then "$1"}}]]></formatString>
       <lookup>
-        <term> {No_Observation}
-          <description></description>
-        </term>
         <term> {Sampling_Location}
           <description></description>
         </term>
@@ -1706,11 +1689,317 @@
         <term> {No_Observation}
           <description></description>
         </term>
-        <term> {Basalt}
+        <term> {Sedimentary}
           <description></description>
+          <term> {VAG}
+            <description></description>
+          </term>
+          <term> {TAL}
+            <description></description>
+          </term>
+          <term> {ARNT}
+            <description></description>
+          </term>
+          <term> {AGLT}
+            <description></description>
+          </term>
+          <term> {SA}
+            <description></description>
+          </term>
+          <term> {LC}
+            <description></description>
+          </term>
+          <term> {SHCS}
+            <description></description>
+          </term>
+          <term> {CHCS}
+            <description></description>
+          </term>
+          <term> {CBR}
+            <description></description>
+          </term>
+          <term> {CHT}
+            <description></description>
+          </term>
+          <term> {SHC}
+            <description></description>
+          </term>
+          <term> {CY}
+            <description></description>
+          </term>
+          <term> {SCY}
+            <description></description>
+          </term>
+          <term> {TC}
+            <description></description>
+          </term>
+          <term> {SCO}
+            <description></description>
+          </term>
+          <term> {SCM}
+            <description></description>
+          </term>
+          <term> {SCP}
+            <description></description>
+          </term>
+          <term> {SDS}
+            <description></description>
+          </term>
+          <term> {SHD}
+            <description></description>
+          </term>
+          <term> {SDI}
+            <description></description>
+          </term>
+          <term> {DRC}
+            <description></description>
+          </term>
+          <term> {DCTL}
+            <description></description>
+          </term>
+          <term> {FRC}
+            <description></description>
+          </term>
+          <term> {FER}
+            <description></description>
+          </term>
+          <term> {SLG}
+            <description></description>
+          </term>
+          <term> {GR}
+            <description></description>
+          </term>
+          <term> {NG}
+            <description></description>
+          </term>
+          <term> {GYW}
+            <description></description>
+          </term>
+          <term> {IFE}
+            <description></description>
+          </term>
+          <term> {KAO}
+            <description></description>
+          </term>
+          <term> {LMZ}
+            <description></description>
+          </term>
+          <term> {LPZ}
+            <description></description>
+          </term>
+          <term> {SL}
+            <description></description>
+          </term>
+          <term> {SLS}
+            <description></description>
+          </term>
+          <term> {MDS}
+            <description></description>
+          </term>
+          <term> {SLM}
+            <description></description>
+          </term>
+          <term> {SLP}
+            <description></description>
+          </term>
+          <term> {NS}
+            <description></description>
+          </term>
+          <term> {SS_(geology)}
+            <description></description>
+          </term>
+          <term> {SSA}
+            <description></description>
+          </term>
+          <term> {SSC}
+            <description></description>
+          </term>
+          <term> {CSS}
+            <description></description>
+          </term>
+          <term> {SSD}
+            <description></description>
+          </term>
+          <term> {SSL}
+            <description></description>
+          </term>
+          <term> {SSM}
+            <description></description>
+          </term>
+          <term> {SSQ}
+            <description></description>
+          </term>
+          <term> {SST}
+            <description></description>
+          </term>
+          <term> {SR}
+            <description></description>
+          </term>
+          <term> {LS}
+            <description></description>
+          </term>
+          <term> {US}
+            <description></description>
+          </term>
+          <term> {SN}
+            <description></description>
+          </term>
+          <term> {SH_(geology)}
+            <description></description>
+          </term>
+          <term> {SI}
+            <description></description>
+          </term>
+          <term> {SIC}
+            <description></description>
+          </term>
+          <term> {SID}
+            <description></description>
+          </term>
+          <term> {MSI}
+            <description></description>
+          </term>
+          <term> {SLT}
+            <description></description>
+          </term>
+          <term> {SLW}
+            <description></description>
+          </term>
+          <term> {SLC}
+            <description></description>
+          </term>
         </term>
-        <term> {Sandstone}
+        <term> {Metamorphic}
           <description></description>
+          <term> {MCS}
+            <description></description>
+          </term>
+          <term> {MGN}
+            <description></description>
+          </term>
+          <term> {MLS}
+            <description></description>
+          </term>
+          <term> {M}
+            <description></description>
+          </term>
+          <term> {MGM}
+            <description></description>
+          </term>
+          <term> {MMY}
+            <description></description>
+          </term>
+          <term> {MSC}
+            <description></description>
+          </term>
+          <term> {MQZ}
+            <description></description>
+          </term>
+        </term>
+        <term> {Igneous}
+          <description></description>
+          <term> {MAM}
+            <description></description>
+          </term>
+          <term> {VAN}
+            <description></description>
+          </term>
+          <term> {GAN}
+            <description></description>
+          </term>
+          <term> {BAS}
+            <description></description>
+          </term>
+          <term> {VXY}
+            <description></description>
+          </term>
+          <term> {VXV}
+            <description></description>
+          </term>
+          <term> {VDA}
+            <description></description>
+          </term>
+          <term> {GDI}
+            <description></description>
+          </term>
+          <term> {DOL}
+            <description></description>
+          </term>
+          <term> {GAB}
+            <description></description>
+          </term>
+          <term> {GGN}
+            <description></description>
+          </term>
+          <term> {GGT}
+            <description></description>
+          </term>
+          <term> {GGD}
+            <description></description>
+          </term>
+          <term> {GNI}
+            <description></description>
+          </term>
+          <term> {VTG}
+            <description></description>
+          </term>
+          <term> {KIM}
+            <description></description>
+          </term>
+          <term> {GMD}
+            <description></description>
+          </term>
+          <term> {GMO}
+            <description></description>
+          </term>
+          <term> {GNO}
+            <description></description>
+          </term>
+          <term> {GOG}
+            <description></description>
+          </term>
+          <term> {GPE}
+            <description></description>
+          </term>
+          <term> {GPO}
+            <description></description>
+          </term>
+          <term> {VRD}
+            <description></description>
+          </term>
+          <term> {VRH}
+            <description></description>
+          </term>
+          <term> {GSY}
+            <description></description>
+          </term>
+          <term> {GTO}
+            <description></description>
+          </term>
+          <term> {VTR}
+            <description></description>
+          </term>
+          <term> {GTC}
+            <description></description>
+          </term>
+          <term> {VTU}
+            <description></description>
+          </term>
+          <term> {VTX}
+            <description></description>
+          </term>
+          <term> {VTP}
+            <description></description>
+          </term>
+          <term> {VTK}
+            <description></description>
+          </term>
+          <term> {VTL}
+            <description></description>
+          </term>
+          <term> {VNO}
+            <description></description>
+          </term>
         </term>
         <term> {Other}
           <description></description>

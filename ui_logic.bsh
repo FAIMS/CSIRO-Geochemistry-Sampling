@@ -1131,7 +1131,12 @@ takePoint() {
     samplePoint = new Point(new MapPos(easting, northing), null, (PointStyle) null, null);
     ArrayList geolist = new ArrayList();
     geolist.add(samplePoint);
-    saveArchEnt(currentSampleUUID, getSampleType(), geolist, null, new SaveCallback() {
+
+    attributes = createAttributeList();
+    attributes.add(createEntityAttribute("Latitude", "Accuracy: "+getGPSEstimatedAccuracy(), null, null, null));
+
+
+    saveArchEnt(currentSampleUUID, getSampleType(), geolist, attributes, new SaveCallback() {
         onSave(uuid, newRecord) {
             print("[takePoint()] Added geometry: " + geolist);
             fillInGPS();
@@ -1170,11 +1175,35 @@ initMap() {
     // showBaseMap("Project/Map/map", "base map", "files/data/maps/Capricorn.tif");
 
     showBaseMap("Project/Map/map", "base map", "files/data/maps/Topo_Syd_3857.3857.Tiled.tif");
-    showRasterMap("Project/Map/map", "dem syd", "files/data/maps/dem_syd_3857.3857.Tiled.tif");
+
+
+ /*   showRasterMap("Project/Map/map", "dem syd", "files/data/maps/dem_syd_3857.3857.Tiled.tif");
     showRasterMap("Project/Map/map", "mag map syd", "files/data/maps/magmap_syd_3857.3857.Tiled.tif");  
     showRasterMap("Project/Map/map", "rad map pctk syd", "files/data/maps/radmap_pctk_syd_3857.3857.Tiled.tif");
     showRasterMap("Project/Map/map", "rad ppmu syd", "files/data/maps/rad_ppmu_syd_3857.3857.Tiled.tif");
-    showRasterMap("Project/Map/map", "rad ppmth syd", "files/data/maps/rad_ppmth_syd_3857.3857.Tiled.tif");
+    showRasterMap("Project/Map/map", "rad ppmth syd", "files/data/maps/rad_ppmth_syd_3857.3857.Tiled.tif");*/
+
+/*
+
+
+*/
+
+
+    ps = createPointStyle(0, Color.BLUE, 0.2f, 0.5f);
+    ls = createLineStyle(0, Color.parseColor("#FFFF00FF"), 0.05f, 0.3f, null);
+    pos = createPolygonStyle(0, Color.parseColor("#ffffff00"), createLineStyle(0, Color.parseColor("#AA0000ff"), 0.01f, 0.3f, null));
+    ts = createTextStyle(0, Color.BLACK, 40, Typeface.SANS_SERIF);
+
+    showSpatialLayer("Project/Map/map", "Syd_250InterpFault_3857", "files/data/maps/vectors.sqlite", "Syd_250InterpFault_3857", "PK_UID", "PK_UID", ps, ls, pos, ts); 
+    //showSpatialLayer("Project/Map/map", "Syd_250RockUnit_3857", "files/data/maps/vectors.sqlite", "Syd_250RockUnit_3857", "PK_UID", "PK_UID", ps, ls, pos, ts); 
+    showSpatialLayer("Project/Map/map", "Syd_250RockUnit_3857_Dis", "files/data/maps/vectors.sqlite", "Syd_250RockUnit_3857_Dis", "PK_UID", "PK_UID", ps, ls, pos, ts); 
+    showSpatialLayer("Project/Map/map", "Syd_250UnitBndy_3857", "files/data/maps/vectors.sqlite", "Syd_250UnitBndy_3857", "PK_UID", "PK_UID", ps, ls, pos, ts); 
+    //showSpatialLayer("Project/Map/map", "SydneyArea", "files/data/maps/vectors.sqlite", "SydneyArea", "PK_UID", "PK_UID", ps, ls, pos, ts); 
+
+    
+
+
+
 
     ps = createPointStyle(10, Color.BLUE, 0.2f, 0.5f);
     ls = createLineStyle(10, Color.GREEN, 0.05f, 0.3f, null);
@@ -1973,7 +2002,8 @@ loadRockSampleFrom(archentid) {
 loadRockSampleAttributes() {
     makeVocab("RadioGroup", "Rock_Sample/Basic_Info/Observation_Type", "Rock Observation Type");
     makeVocab("DropDown", "Rock_Sample/Basic_Info/SRID", "SRID");
-    makeVocab("DropDown", "Rock_Sample/Lithological_Info/Lithology", "Lithology");
+    populateHierarchicalDropDown("Rock_Sample/Lithological_Info/Lithology", "Lithology");
+
     makeVocab("DropDown", "Rock_Sample/Lithological_Info/Fineness_Inclusion_Size", "Fineness or Inclusion size");
     makeVocab("DropDown", "Rock_Sample/Lithological_Info/Grain_Size", "Grain Size");
     makeVocab("DropDown", "Rock_Sample/Lithological_Info/Sorting", "Sorting");
