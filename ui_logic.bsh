@@ -1,5 +1,6 @@
 /*** 'Editable' - you can edit the code below based on the needs ***/
 import java.util.concurrent.Callable;
+import android.util.Log;
 
 print("Very first line of logic after the import lines");
 
@@ -40,7 +41,14 @@ populateWebViewHtml("logo/logo_tab/csiro_logo", logo);
 onEvent("logo/logo_tab/login_button", "click", "showTabGroup(\"user\");");
 
 /** Action Bar **/
-
+addActionBarItem("clean_synced_files", new ActionButtonCallback() {
+    actionOnLabel() {
+      "Clean Synced Files";
+    }
+    actionOn() {
+      cleanSyncedFiles();
+    }
+});
 addActionBarItem("sync", new ToggleActionButtonCallback() {
     actionOnLabel() {
         "{Sync_Enabled}";
@@ -156,9 +164,11 @@ onEvent("Project/Start/New_Sample", "delayclick", "newSample();");
 onEvent("Project/Start/Check_For_Duplicates", "click", "checkForDuplicates();");
 onEvent("Project/Start/Duplicate_ID_List", "click", "loadSample();");
 
-onEvent("Project/Search", "show", "loadSearch();");
-onEvent("Project/Search/Sample_Types", "click", "loadSearch();");
-onEvent("Project/Search/Sample_List", "click", "loadSample();");
+onEvent("Project/Search",               "show",         "loadSearch();");
+onEvent("Project/Search/searchButton",  "click",        "loadSearch();");
+onEvent("Project/Search/Sample_Types",  "click",        "loadSearch();");
+onEvent("Project/Search/users",         "click",        "loadSearch();");
+onEvent("Project/Search/Sample_List",   "click",        "loadSample();");
 
 onEvent("Project/Map", "show", "renderDynamicMapViews();");
 onEvent("Project/Map/Centre_Map", "click", "centreMap();");
@@ -174,6 +184,7 @@ sample_types.add(new NameValuePair("{Rock_Sample}", "Rock Sample"));
 populateDropDown("Project/Start/Sample_Types", sample_types);
 sample_types.add(0, new NameValuePair("{All}", "Sample"));
 populateDropDown("Project/Search/Sample_Types", sample_types);
+
 
 setStationDeposit(String value) {
     setFieldValue("Project/Start/Station_Deposit", value);
@@ -467,7 +478,7 @@ newSample() {
     setFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_Prefix", samplePrefix);
     setFieldValue(tabgroup + "/Basic_Info/" + tabgroup + "_ID", sampleID);
     print("[newSample()] Making a new sample.\nPrefix: "+samplePrefix+"\nID: "+sampleID+"\nTimestamp: "+getFieldValue(tabgroup+"/Basic_Info/Timestamp"));
-    keepTabGroupChanges(tabgroup);
+    //keepTabGroupChanges(tabgroup);
 
     // Increment the sample starting ID for the next sample.
     setSampleStartingID(Integer.toString(Integer.parseInt(sampleID) + 1));
@@ -734,7 +745,8 @@ removeNavigationButtons() {
 /* Loads a list view of existing samples. */
 loadSearch() {
     String type = getFieldValue("Project/Search/Sample_Types");
-    
+    String searchUser = getFieldValue("Project/Search/users");
+    String searchString = getFieldValue("Project/Search/Search");
     /*
     fetchAll("select uuid, response from latestNonDeletedArchEntFormattedIdentifiers where aenttypename like '%" + type + "%' limit ? offset ?;", 
         new FetchCallback() {
@@ -749,8 +761,19 @@ loadSearch() {
         });
         
         */
-        
-    populateCursorList("Project/Search/Sample_List", "select uuid, response from latestNonDeletedArchEntFormattedIdentifiers where aenttypename like '%" + type + "%' limit ? offset ?;", 25);
+    String searchQuery = "select uuid, response "+
+                         "  from latestNonDeletedArchEntFormattedIdentifiers join createdModifiedAtBy using (uuid) "+
+                         " where aenttypename like '%" + type + "%' "+
+                         "   and uuid in (select uuid "+
+                                          " from latestNonDeletedArchEntIdentifiers   "+ 
+                                          " where (measure like '"+searchString+"%'    "+
+                                          "    or vocabname like '{"+searchString+"%') "+
+                                          "   and (userid = '" + searchUser +"' or 'null'='"+searchUser+"')) "+
+                         " order by createdat desc "+
+                         " limit ? offset ?;";
+    Log.d("CSIRO Module", "Search query: " + searchQuery);
+
+    populateCursorList("Project/Search/Sample_List", searchQuery, 50);
 }
 
 /* Loads the most recetly clicked on existing sample for editing. */
@@ -1135,13 +1158,16 @@ takePoint() {
     attributes = createAttributeList();
     attributes.add(createEntityAttribute("Latitude", "Accuracy: "+getGPSEstimatedAccuracy(), null, null, null));
 
-
-    saveArchEnt(currentSampleUUID, getSampleType(), geolist, attributes, new SaveCallback() {
-        onSave(uuid, newRecord) {
-            print("[takePoint()] Added geometry: " + geolist);
-            fillInGPS();
-        }  
-    });    
+    if (!isNull(currentSampleUUID)){
+        saveArchEnt(currentSampleUUID, getSampleType(), geolist, attributes, new SaveCallback() {
+            onSave(uuid, newRecord) {
+                print("[takePoint()] Added geometry: " + geolist);
+                fillInGPS();
+            }  
+        });    
+    } else {
+        showToast("Please enter data first and let a save occur.");
+    }
 }
 
 /* Sets the value of GPS views for the given tab path. */
@@ -1173,8 +1199,9 @@ initMap() {
     setMapZoom("Project/Map/map", 13.0f);
     // showBaseMap("Project/Map/map", "base map", "files/data/maps/SydneyStreetmap.tif");
     // showBaseMap("Project/Map/map", "base map", "files/data/maps/Capricorn.tif");
+    showBaseMap("Project/Map/map", "base map", "files/data/maps/Tiny_SF3310.tif");
 
-    showBaseMap("Project/Map/map", "base map", "files/data/maps/Topo_Syd_3857.3857.Tiled.tif");
+    //showBaseMap("Project/Map/map", "base map", "files/data/maps/Topo_Syd_3857.3857.Tiled.tif");
 
 
  /*   showRasterMap("Project/Map/map", "dem syd", "files/data/maps/dem_syd_3857.3857.Tiled.tif");
@@ -1194,10 +1221,10 @@ initMap() {
     pos = createPolygonStyle(0, Color.parseColor("#ffffff00"), createLineStyle(0, Color.parseColor("#AA0000ff"), 0.01f, 0.3f, null));
     ts = createTextStyle(0, Color.BLACK, 40, Typeface.SANS_SERIF);
 
-    showSpatialLayer("Project/Map/map", "Syd_250InterpFault_3857", "files/data/maps/vectors.sqlite", "Syd_250InterpFault_3857", "PK_UID", "PK_UID", ps, ls, pos, ts); 
+    //showSpatialLayer("Project/Map/map", "Syd_250InterpFault_3857", "files/data/maps/vectors.sqlite", "Syd_250InterpFault_3857", "PK_UID", "PK_UID", ps, ls, pos, ts); 
     //showSpatialLayer("Project/Map/map", "Syd_250RockUnit_3857", "files/data/maps/vectors.sqlite", "Syd_250RockUnit_3857", "PK_UID", "PK_UID", ps, ls, pos, ts); 
-    showSpatialLayer("Project/Map/map", "Syd_250RockUnit_3857_Dis", "files/data/maps/vectors.sqlite", "Syd_250RockUnit_3857_Dis", "PK_UID", "PK_UID", ps, ls, pos, ts); 
-    showSpatialLayer("Project/Map/map", "Syd_250UnitBndy_3857", "files/data/maps/vectors.sqlite", "Syd_250UnitBndy_3857", "PK_UID", "PK_UID", ps, ls, pos, ts); 
+    //showSpatialLayer("Project/Map/map", "Syd_250RockUnit_3857_Dis", "files/data/maps/vectors.sqlite", "Syd_250RockUnit_3857_Dis", "PK_UID", "PK_UID", ps, ls, pos, ts); 
+    //showSpatialLayer("Project/Map/map", "Syd_250UnitBndy_3857", "files/data/maps/vectors.sqlite", "Syd_250UnitBndy_3857", "PK_UID", "PK_UID", ps, ls, pos, ts); 
     //showSpatialLayer("Project/Map/map", "SydneyArea", "files/data/maps/vectors.sqlite", "SydneyArea", "PK_UID", "PK_UID", ps, ls, pos, ts); 
 
     
@@ -2242,6 +2269,7 @@ loadUsers() {
     fetchAll("select userid, fname || ' ' || lname from user where userdeleted is null;", new FetchCallback() {
         onFetch(result) {
             populateList("user/usertab/users", result);
+            populateDropDown("Project/Search/users", result, true);
         }
     });
 }
@@ -2257,6 +2285,7 @@ login() {
             username = result.get(1) + " " + result.get(2);
             showTabGroup("Project");
             setFieldValue("Project/Start/Author_Name", username);
+            setFieldValue("Project/Search/users", getListItemValue());
         }
     });
 }

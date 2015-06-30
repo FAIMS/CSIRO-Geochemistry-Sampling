@@ -47,7 +47,23 @@
               <Duplicate_ID_List/>
             </Start>
             <Search>
-              <Sample_Types/>
+              <container1>
+                <child1>
+                  <Search/>
+                </child1>
+                <child2>
+                  <searchButton/>
+                </child2>
+              </container1>
+              <container2>
+                <child1>
+                  <Sample_Types/>
+                </child1>
+                <child2>
+                  <users/>
+                </child2>
+              </container2>
+
               <Sample_List/>
             </Search>
             <Map>
@@ -551,6 +567,12 @@
           <label>1</label>
         </input>
       </group>
+      <group ref="large">
+        <label/>
+        <input ref="layout_weight">
+          <label>3</label>
+        </input>
+      </group>
     </group>
     <group ref="logo">
       <label/>
@@ -634,13 +656,45 @@
       </group>
       <group ref="Search" faims_scrollable="false">
         <label>{Search}</label>
-        <select1 ref="Sample_Types" faims_certainty="false" faims_annotation="false">
-          <label>{Sample_Types}</label>
-          <item>
-            <label>placeholder</label>
-            <value>placeholder</value>
-          </item>
-        </select1>
+        <group faims_style="orientation" ref="container1">
+          <label/>
+          <group faims_style="even" ref="child1">
+            <label/>
+            <input faims_certainty="false" faims_read_only="false" faims_annotation="false" ref="Search">
+              <label>Search Identifier:</label>
+            </input>
+          </group>
+          <group faims_style="large" ref="child2">
+            <label/>
+            <trigger ref="searchButton">
+              <label>Search</label>
+            </trigger>
+          </group>
+        </group>        
+        <group ref="container2" faims_style="orientation">
+          <label/>
+          <group ref="child1" faims_style="even">
+            <label/>
+            <select1 ref="Sample_Types" faims_certainty="false" faims_annotation="false">
+              <label>{Sample_Types}</label>
+              <item>
+                <label>placeholder</label>
+                <value>placeholder</value>
+              </item>
+            </select1>
+            </group>
+            <group ref="child2" faims_style="even">
+                <label/>
+            <select1 ref="users" faims_certainty="false" faims_annotation="false">
+              <label>Restrict to User</label>
+              <item>
+                <label>placeholder</label>
+                <value>placeholder</value>
+              </item>
+            </select1>
+          </group>
+        </group>
+
         <select1 appearance="compact" ref="Sample_List" faims_certainty="false" faims_annotation="false">
           <label>{Sample_List}</label>
           <item>
