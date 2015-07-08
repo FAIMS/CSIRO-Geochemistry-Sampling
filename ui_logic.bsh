@@ -1198,9 +1198,9 @@ initMap() {
     // Base map layer
     setMapZoom("Project/Map/map", 13.0f);
     // showBaseMap("Project/Map/map", "base map", "files/data/maps/SydneyStreetmap.tif");
-    // showBaseMap("Project/Map/map", "base map", "files/data/maps/Capricorn.tif");
-    showBaseMap("Project/Map/map", "base map", "files/data/maps/Tiny_SF3310.tif");
-
+    showBaseMap("Project/Map/map", "wCapricorn Tiled", "files/data/maps/WCapricorn4283TILED.tif");
+    //showBaseMap("Project/Map/map", "base map", "files/data/maps/Tiny_SF3310.tif");
+    showRasterMap("Project/Map/map", "Capricorn Tiled", "files/data/maps/Capricorn4283TILED.tif");
     //showBaseMap("Project/Map/map", "base map", "files/data/maps/Topo_Syd_3857.3857.Tiled.tif");
 
 
