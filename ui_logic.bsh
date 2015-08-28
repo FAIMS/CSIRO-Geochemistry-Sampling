@@ -1183,10 +1183,10 @@ fillInGPS() {
     fetchOne(query, new FetchCallback() {
         onFetch(result) {
             print("[fillInGPS()] Fetched DB transformed geometry: " + result);
-            setFieldValue(tabgroup + "/Basic_Info/Latitude", result.get(0));
-            setFieldValue(tabgroup + "/Basic_Info/Longitude", result.get(1));
-            setFieldValue(tabgroup + "/Basic_Info/Northing", result.get(2));
-            setFieldValue(tabgroup + "/Basic_Info/Easting", result.get(3));
+            setFieldValue(tabgroup + "/Basic_Info/Latitude", result.get(1));
+            setFieldValue(tabgroup + "/Basic_Info/Longitude", result.get(0));
+            setFieldValue(tabgroup + "/Basic_Info/Northing", result.get(3));
+            setFieldValue(tabgroup + "/Basic_Info/Easting", result.get(2));
         }
     });
 }
