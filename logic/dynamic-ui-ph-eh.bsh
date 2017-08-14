@@ -1,0 +1,362 @@
+/*** pH/Eh ***/
+
+ph_count = 0;
+eh_count = 0;
+preferred_ph = null;
+preferred_eh = null;
+
+onEvent("Water_Sample/pH_Eh", "show", "renderpHEhPage();");
+
+/*********************************************************************************\
+ *                                                                               *
+ * WARNING: Do NOT re-use the following renderpHEhPage() code in future modules. *
+ *                                                                               *
+\*********************************************************************************/
+
+/* Renders the pH/Eh tab using dynamic UI. */
+renderpHEhPage() {
+    executeViewTask(new ViewTask() {
+        doTask() {
+            removeAllViewsAndContainers("Water_Sample");
+            style1 = "orientation";
+            style2 = "even";
+            createContainer("Water_Sample/pH_Eh/container3", "orientation");
+            createContainer("Water_Sample/pH_Eh/child1", "even", "Water_Sample/pH_Eh/container3");
+            createContainer("Water_Sample/pH_Eh/pH_Container", "even", "Water_Sample/pH_Eh/child1");
+
+            createContainer("Water_Sample/pH_Eh/child2", "even", "Water_Sample/pH_Eh/container3");
+            createContainer("Water_Sample/pH_Eh/Eh_Container", "even", "Water_Sample/pH_Eh/child2");
+            
+            ph_count = 0;
+            eh_count = 0;
+            ArrayList ph_list = new ArrayList();
+            ArrayList eh_list = new ArrayList();
+            fetchAll("select uuid, group_concat(measure,'|') " +
+                    "from ( " +
+                    "select uuid, measure, attributename, aentcountorder " +
+                    "from latestnondeletedaentvalue " +
+                    "join latestnondeletedarchent using (uuid) " +
+                    "join aenttype using (aenttypeid) " +
+                    "join idealaent using (aenttypeid, attributeid) " +
+                    "join attributekey using (attributeid)  " +
+                    "where aenttypename = 'pH' " +
+                    "and attributename in ('pH', 'Time') " +
+                    "and uuid in (select a.uuid " +
+                    "from latestnondeletedaentreln a join latestnondeletedaentreln b using (relationshipid) " +
+                    "where a.uuid != b.uuid " +
+                    "and b.uuid = "+ getUuid("Water_Sample") +") " +
+                    "order by uuid, aentcountorder) " +
+                    "group by uuid  " +
+                    "order by uuid; ", new FetchCallback() {
+                    onFetch(ph_list) {
+                        print("[renderpHEhPage()] ph list: " + ph_list);
+                        fetchAll("select uuid, group_concat(measure,'|') " +
+                                "from ( " +
+                                "select uuid, measure, attributename, aentcountorder " +
+                                "from latestnondeletedaentvalue " +
+                                "join latestnondeletedarchent using (uuid) " +
+                                "join aenttype using (aenttypeid) " +
+                                "join idealaent using (aenttypeid, attributeid) " +
+                                "join attributekey using (attributeid)  " +
+                                "where aenttypename = 'Eh' " +
+                                "and attributename in ('Eh', 'Time') " +
+                                "and uuid in (select a.uuid " +
+                                "from latestnondeletedaentreln a join latestnondeletedaentreln b using (relationshipid) " +
+                                "where a.uuid != b.uuid " +
+                                "and b.uuid = "+ getUuid("Water_Sample") +") " +
+                                "order by uuid, aentcountorder) " +
+                                "group by uuid " +
+                                "order by uuid, aentcountorder; ",  new FetchCallback() {
+                            onFetch(eh_list) {
+                                print("[renderpHEhPage()] eh list: " + eh_list);
+                                for(ph : ph_list) {
+                                    createContainer("Water_Sample/pH_Eh/pH_Row_" + ph_count, "orientation", "Water_Sample/pH_Eh/pH_Container");
+                                    createContainer("Water_Sample/pH_Eh/Check_pH_Container_" + ph_count, "even", "Water_Sample/pH_Eh/pH_Row_" + ph_count);
+                                    createContainer("Water_Sample/pH_Eh/pH_Value_Container_" + ph_count, "even", "Water_Sample/pH_Eh/pH_Row_" + ph_count);
+                                    createContainer("Water_Sample/pH_Eh/Delete_pH_Container_" + ph_count, "even", "Water_Sample/pH_Eh/pH_Row_" + ph_count);
+                                    createView("Water_Sample/pH_Eh/Check_pH_" + ph_count, createViewDef().createRadioGroup().addChoice("", "1"), "Water_Sample/pH_Eh/Check_pH_Container_" + ph_count);
+                                    createView("Water_Sample/pH_Eh/pH_Value_" + ph_count, createViewDef().createTextField("decimal").setReadOnly(true), "Water_Sample/pH_Eh/pH_Value_Container_" + ph_count);
+                                    createView("Water_Sample/pH_Eh/Delete_pH_" + ph_count, createViewDef().createButton().setLabel("X").setStyleCss("faims-danger"), "Water_Sample/pH_Eh/Delete_pH_Container_" + ph_count);
+
+                                    String ph_value = ph.get(1).split("[|]")[0];
+                                    String ph_time = ph.get(1).split("[|]")[1];
+                                    String ph_id = ph.get(0);
+                                    int index = ph_count;
+
+                                    if(ph_id.equals(preferred_ph)) {
+                                        setFieldValue("Water_Sample/pH_Eh/Check_pH_" + ph_count, "1");
+                                    }
+                                    setFieldValue("Water_Sample/pH_Eh/pH_Value_" + ph_count, ph_value);
+                                    
+                                    onEvent("Water_Sample/pH_Eh/Check_pH_" + ph_count, "click", "setPreferredpH(\"" + ph_id + "\", \"" + ph_value + "\", \"" + ph_time + "\", " + ph_count + ");");
+                                    onEvent("Water_Sample/pH_Eh/Delete_pH_" + ph_count, "click", "deletepH(\"" + ph_id + "\");");
+                                    ph_count++;
+                                }
+                                for(eh : eh_list) {
+                                    createContainer("Water_Sample/pH_Eh/Eh_Row_" + eh_count, "orientation", "Water_Sample/pH_Eh/Eh_Container");
+                                    createContainer("Water_Sample/pH_Eh/Check_Eh_Container_" + eh_count, "even", "Water_Sample/pH_Eh/Eh_Row_" + eh_count);
+                                    createContainer("Water_Sample/pH_Eh/Eh_Value_Container_" + eh_count, "even", "Water_Sample/pH_Eh/Eh_Row_" + eh_count);
+                                    createContainer("Water_Sample/pH_Eh/Delete_Eh_Container_" + eh_count, "even", "Water_Sample/pH_Eh/Eh_Row_" + eh_count);
+                                    createView("Water_Sample/pH_Eh/Check_Eh_" + eh_count, createViewDef().createRadioGroup().addChoice("", ""), "Water_Sample/pH_Eh/Check_Eh_Container_" + eh_count);
+                                    createView("Water_Sample/pH_Eh/Eh_Value_" + eh_count, createViewDef().createTextField("decimal").setReadOnly(true), "Water_Sample/pH_Eh/Eh_Value_Container_" + eh_count);
+                                    createView("Water_Sample/pH_Eh/Delete_Eh_" + eh_count, createViewDef().createButton().setLabel("X").setStyleCss("faims-danger"), "Water_Sample/pH_Eh/Delete_Eh_Container_" + eh_count);
+                                    String eh_value = eh.get(1).split("[|]")[0];
+                                    String eh_time = eh.get(1).split("[|]")[1];
+                                    String eh_id = eh.get(0);
+                                    int index = eh_count;
+
+                                    if(eh_id.equals(preferred_eh)) {
+                                        setFieldValue("Water_Sample/pH_Eh/Check_Eh_" + eh_count, "");
+                                    }
+                                    setFieldValue("Water_Sample/pH_Eh/Eh_Value_" + eh_count, eh_value);
+
+                                    onEvent("Water_Sample/pH_Eh/Check_Eh_" + eh_count, "click", "setPreferredEh(\"" + eh_id + "\", \"" + eh_value + "\", \"" + eh_time + "\", " + eh_count + ");");
+                                    onEvent("Water_Sample/pH_Eh/Delete_Eh_" + eh_count, "click", "deleteEh(\"" + eh_id + "\");");
+                                    eh_count++;
+                                }
+                                createView("Water_Sample/pH_Eh/pH_Value_" + ph_count, createViewDef().createTextField("decimal").setAttributeType("measure").setLabel("{pH}"), "Water_Sample/pH_Eh/child1");
+                                createView("Water_Sample/pH_Eh/Eh_Value_" + eh_count, createViewDef().createTextField("decimal").setAttributeType("measure").setLabel("{Eh}"), "Water_Sample/pH_Eh/child2");
+                                
+                                createView("Water_Sample/pH_Eh/New_pH", createViewDef().createButton().setLabel("{Add_New_pH}"), "Water_Sample/pH_Eh/child1");
+                                createView("Water_Sample/pH_Eh/New_Eh", createViewDef().createButton().setLabel("{Add_New_Eh}"), "Water_Sample/pH_Eh/child2");
+                                onEvent("Water_Sample/pH_Eh/New_pH", "delayclick", "addNewpH(getFieldValue(\"Water_Sample/pH_Eh/pH_Value_\" + ph_count));");
+                                onEvent("Water_Sample/pH_Eh/New_Eh", "delayclick", "addNewEh(getFieldValue(\"Water_Sample/pH_Eh/Eh_Value_\" + eh_count));");
+                                refreshTabgroupCSS("Water_Sample");
+                            }
+                            onError(message) {
+                                showToast(message);
+                            }
+                        });
+                    }
+                    onError(message) {
+                        showToast(message);
+                    }
+                });
+        }
+    });
+}
+
+/********************************************************************************\
+ *                                                                              *
+ * WARNING: Do NOT re-use the previous renderpHEhPage() code in future modules. *
+ *                                                                              *
+\********************************************************************************/
+
+/* Adds a new pH value, saves the entity and updates the dynamic UI. */
+addNewpH(String ph_value) {
+    if(isNull(ph_value)) {
+        showToast("{Please_Fill_In_PH}");
+        return;
+    }
+    List attributes = createAttributeList();
+    ph_time = new java.text.SimpleDateFormat("d-MMM-yy HH:mm:ss z").format(new Date());
+    attributes.add(createEntityAttribute("pH", null, null, ph_value, null));
+    attributes.add(createEntityAttribute("Time", null, null, ph_time, null));
+
+    saveArchEnt(null, "pH", null, attributes, new SaveCallback() {
+        onSave(ph_id, newRecord) {
+            saveEntitiesToRel("Water Sample pH", getUuid("Water_Sample"), ph_id);
+            removeView("Water_Sample/pH_Eh/pH_Value_" + ph_count);
+            removeView("Water_Sample/pH_Eh/New_pH");
+
+            createContainer("Water_Sample/pH_Eh/pH_Row_" + ph_count, "orientation", "Water_Sample/pH_Eh/pH_Container");
+            createContainer("Water_Sample/pH_Eh/Check_pH_Container_" + ph_count, "even", "Water_Sample/pH_Eh/pH_Row_" + ph_count);
+            createContainer("Water_Sample/pH_Eh/pH_Value_Container_" + ph_count, "even", "Water_Sample/pH_Eh/pH_Row_" + ph_count);
+            createContainer("Water_Sample/pH_Eh/Delete_pH_Container_" + ph_count, "even", "Water_Sample/pH_Eh/pH_Row_" + ph_count);
+            createView("Water_Sample/pH_Eh/Check_pH_" + ph_count, createViewDef().createRadioGroup().addChoice("", ""), "Water_Sample/pH_Eh/Check_pH_Container_" + ph_count);
+            createView("Water_Sample/pH_Eh/pH_Value_" + ph_count, createViewDef().createTextField("decimal").setReadOnly(true), "Water_Sample/pH_Eh/pH_Value_Container_" + ph_count);
+            createView("Water_Sample/pH_Eh/Delete_pH_" + ph_count, createViewDef().createButton().setLabel("X").setStyleCss("faims-danger"), "Water_Sample/pH_Eh/Delete_pH_Container_" + ph_count);
+            setFieldValue("Water_Sample/pH_Eh/pH_Value_" + ph_count, ph_value);
+
+            int index = ph_count;
+            onEvent("Water_Sample/pH_Eh/Check_pH_" + ph_count, "click", "setPreferredpH(\"" + ph_id + "\", \"" + ph_value + "\", \"" + ph_time + "\", " + ph_count + ");");
+            onEvent("Water_Sample/pH_Eh/Delete_pH_" + ph_count, "click", "deletepH(\"" + ph_id + "\");");
+            ph_count++;
+
+            createView("Water_Sample/pH_Eh/pH_Value_" + ph_count, createViewDef().createTextField("decimal").setAttributeType("measure").setLabel("{pH}"), "Water_Sample/pH_Eh/child1");
+            createView("Water_Sample/pH_Eh/New_pH", createViewDef().createButton().setLabel("{Add_New_pH}"), "Water_Sample/pH_Eh/child1");
+            onEvent("Water_Sample/pH_Eh/New_pH", "delayclick", "addNewpH(getFieldValue(\"Water_Sample/pH_Eh/pH_Value_\" + ph_count));");
+            refreshTabgroupCSS("Water_Sample");
+        }
+    });
+}
+
+/* Adds a new Eh value, saves the entity and updates the dynamic UI. */
+addNewEh(String eh_value) {
+    if(isNull(eh_value)) {
+        showToast("{Please_Fill_In_EH}");
+        return;
+    }
+    List attributes = createAttributeList();
+    eh_time = new java.text.SimpleDateFormat("d-MMM-yy HH:mm:ss z").format(new Date());
+    attributes.add(createEntityAttribute("Eh", null, null, eh_value, null));
+    attributes.add(createEntityAttribute("Time", null, null, eh_time, null));
+
+    saveArchEnt(null, "Eh", null, attributes, new SaveCallback() {
+        onSave(eh_id, newRecord) {
+            saveEntitiesToRel("Water Sample Eh", getUuid("Water_Sample"), eh_id);
+            removeView("Water_Sample/pH_Eh/Eh_Value_" + eh_count);
+            removeView("Water_Sample/pH_Eh/New_Eh");
+
+            createContainer("Water_Sample/pH_Eh/Eh_Row_" + eh_count, "orientation", "Water_Sample/pH_Eh/Eh_Container");
+            createContainer("Water_Sample/pH_Eh/Check_Eh_Container_" + eh_count, "even", "Water_Sample/pH_Eh/Eh_Row_" + eh_count);
+            createContainer("Water_Sample/pH_Eh/Eh_Value_Container_" + eh_count, "even", "Water_Sample/pH_Eh/Eh_Row_" + eh_count);
+            createContainer("Water_Sample/pH_Eh/Delete_Eh_Container_" + eh_count, "even", "Water_Sample/pH_Eh/Eh_Row_" + eh_count);
+            createView("Water_Sample/pH_Eh/Check_Eh_" + eh_count, createViewDef().createRadioGroup().addChoice("", ""), "Water_Sample/pH_Eh/Check_Eh_Container_" + eh_count);
+            createView("Water_Sample/pH_Eh/Eh_Value_" + eh_count, createViewDef().createTextField("decimal").setReadOnly(true), "Water_Sample/pH_Eh/Eh_Value_Container_" + eh_count);
+            createView("Water_Sample/pH_Eh/Delete_Eh_" + eh_count, createViewDef().createButton().setLabel("X").setStyleCss("faims-danger"), "Water_Sample/pH_Eh/Delete_Eh_Container_" + eh_count);
+            setFieldValue("Water_Sample/pH_Eh/Eh_Value_" + eh_count, eh_value);
+
+            int index = eh_count;
+            onEvent("Water_Sample/pH_Eh/Check_Eh_" + eh_count, "click", "setPreferredEh(\"" + eh_id + "\", \"" + eh_value + "\", \"" + eh_time + "\", " + eh_count + ");");
+            onEvent("Water_Sample/pH_Eh/Delete_Eh_" + eh_count, "click", "deleteEh(\"" + eh_id + "\");");
+            eh_count++;
+
+            createView("Water_Sample/pH_Eh/Eh_Value_" + eh_count, createViewDef().createTextField("decimal").setAttributeType("measure").setLabel("{Eh}"), "Water_Sample/pH_Eh/child2");
+            createView("Water_Sample/pH_Eh/New_Eh", createViewDef().createButton().setLabel("{Add_New_Eh}"), "Water_Sample/pH_Eh/child2");
+            onEvent("Water_Sample/pH_Eh/New_Eh", "delayclick", "addNewEh(getFieldValue(\"Water_Sample/pH_Eh/Eh_Value_\" + eh_count));");
+            refreshTabgroupCSS("Water_Sample");
+        }
+    });
+}
+
+/* Sets the preferred pH and time for the given pH ID and saves to the database. */
+setPreferredpH(String ph_id, String ph_value, String ph_time, int index) {
+    if(ph_id == preferred_ph) return;
+    List attributes = createAttributeList();
+    attributes.add(createEntityAttribute("Preferred", null, null, null, null));
+    saveArchEnt(preferred_ph, "pH", null, attributes, null);
+
+    attributes = createAttributeList();
+    attributes.add(createEntityAttribute("Preferred", null, null, "1", null));
+    saveArchEnt(ph_id, "pH", null, attributes, null);
+
+    preferred_ph = ph_id;
+    for(int i = 0; i < ph_count; i++) {
+        if(i == index) continue;
+        setFieldValue("Water_Sample/pH_Eh/Check_pH_" + i, (String) null);
+    }
+    fromFormat = new java.text.SimpleDateFormat("d-MMM-yy HH:mm:ss z");
+    toFormat = new java.text.SimpleDateFormat("HH:mm");
+    Date preferred_ph_time = fromFormat.parse(ph_time);
+    setFieldValue("Water_Sample/pH_Eh/Preferred_pH", ph_value);
+    setFieldValue("Water_Sample/pH_Eh/Preferred_pH_Time", toFormat.format(preferred_ph_time));
+    setFieldValue("Water_Sample/Hidden/Preferred_pH_Time", ph_time);
+}
+
+/* Sets the preferred Eh and time for the given Eh ID and saves to the database. */
+setPreferredEh(String eh_id, String eh_value, String eh_time, int index) {
+    if(eh_id == preferred_eh) return;
+    List attributes = createAttributeList();
+    attributes.add(createEntityAttribute("Preferred", null, null, null, null));
+    saveArchEnt(preferred_eh, "Eh", null, attributes, null);
+
+    attributes = createAttributeList();
+    attributes.add(createEntityAttribute("Preferred", null, null, "1", null));
+    saveArchEnt(eh_id, "Eh", null, attributes, null);
+
+    preferred_eh = eh_id;
+    for(int i = 0; i < eh_count; i++) {
+        if(i == index) continue;
+        setFieldValue("Water_Sample/pH_Eh/Check_Eh_" + i, (String) null);
+    }
+    fromFormat = new java.text.SimpleDateFormat("d-MMM-yy HH:mm:ss z");
+    toFormat = new java.text.SimpleDateFormat("HH:mm");
+    Date preferred_eh_time = fromFormat.parse(eh_time);
+    setFieldValue("Water_Sample/pH_Eh/Preferred_Eh", eh_value);
+    setFieldValue("Water_Sample/pH_Eh/Preferred_Eh_Time", toFormat.format(preferred_eh_time));
+    setFieldValue("Water_Sample/Hidden/Preferred_Eh_Time", eh_time);
+}
+
+/* Generates a confirmation prompt to delete the given pH. */
+deletepH(String ph_id) {
+    showAlert("{Confirm_Deletion}", "{Press_To_Delete} {pH}!", "reallyDeletepH(\"" + ph_id + "\")", "doNotDelete()");
+}
+
+/* Deletes the given pH. */
+reallyDeletepH(String ph_id) {
+    deleteArchEnt(ph_id, new DeleteCallback() {
+        onDelete(uuid) {
+            if(ph_id == preferred_ph) {
+                preferred_ph = null;
+                setFieldValue("Water_Sample/pH_Eh/Preferred_pH", "");
+                setFieldValue("Water_Sample/pH_Eh/Preferred_pH_Time", "");
+                setFieldValue("Water_Sample/Hidden/Preferred_pH_Time", "");
+            }
+            showTab("Water_Sample/Codes");
+            showTab("Water_Sample/pH_Eh");
+        }
+    });
+}
+
+/* Generates a confirmation prompt to delete the given pH. */
+deleteEh(String eh_id) {
+    showAlert("{Confirm_Deletion}", "{Press_To_Delete} {Eh}!", "reallyDeleteEh(\"" + eh_id + "\")", "doNotDelete()");
+}
+
+/* Deletes the given Eh. */
+reallyDeleteEh(String eh_id) {
+    deleteArchEnt(eh_id, new DeleteCallback() {
+        onDelete(uuid) {
+            if(eh_id == preferred_eh) {
+                preferred_eh = null;
+                setFieldValue("Water_Sample/pH_Eh/Preferred_Eh", "");
+                setFieldValue("Water_Sample/pH_Eh/Preferred_Eh_Time", "");
+                setFieldValue("Water_Sample/Hidden/Preferred_Eh_Time", "");
+            }
+            showTab("Water_Sample/Codes");
+            showTab("Water_Sample/pH_Eh");
+        }
+    });
+}
+
+void onFetchWaterSample() {
+    fromFormat = new java.text.SimpleDateFormat("d-MMM-yy HH:mm:ss z");
+    toFormat = new java.text.SimpleDateFormat("HH:mm");
+    if(!isNull(getFieldValue("Water_Sample/Hidden/Preferred_pH_Time"))) {
+        Date preferred_ph_time = fromFormat.parse(getFieldValue("Water_Sample/Hidden/Preferred_pH_Time"));
+        setFieldValue("Water_Sample/pH_Eh/Preferred_pH_Time", toFormat.format(preferred_ph_time));
+    }
+    if(!isNull(getFieldValue("Water_Sample/Hidden/Preferred_Eh_Time"))) {
+        Date preferred_eh_time = fromFormat.parse(getFieldValue("Water_Sample/Hidden/Preferred_Eh_Time"));
+        setFieldValue("Water_Sample/pH_Eh/Preferred_Eh_Time", toFormat.format(preferred_eh_time));
+    }           
+    fetchOne("select uuid " + 
+            "from latestnondeletedaentvalue " +
+            "join latestnondeletedarchent using (uuid) " +
+            "join aenttype using (aenttypeid) " +
+            "join attributekey using (attributeid)  " +
+            "where attributename = 'Preferred'  " +
+            "and aenttypename = 'pH' " +
+            "and measure=1 " +
+            "and uuid in (select a.uuid " +
+            "from latestnondeletedaentreln a join latestnondeletedaentreln b using (relationshipid) " +
+            "where a.uuid != b.uuid " +
+            "and b.uuid = " + getUuid("Water_Sample") + ");", new FetchCallback() {
+        onFetch(result) {
+            if(!isNull(result)) {
+                preferred_ph = result.get(0);
+            }
+        }
+    });
+    fetchOne("select uuid " +
+            "from latestnondeletedaentvalue " +
+            "join latestnondeletedarchent using (uuid) " +
+            "join aenttype using (aenttypeid) " +
+            "join attributekey using (attributeid)  " +
+            "where attributename = 'Preferred'  " +
+            "and aenttypename = 'Eh' " +
+            "and measure=1 " +
+            "and uuid in (select a.uuid " +
+            "from latestnondeletedaentreln a join latestnondeletedaentreln b using (relationshipid) " +
+            "where a.uuid != b.uuid " +
+            "and b.uuid = " + getUuid("Water_Sample") + ") ;", new FetchCallback() {
+        onFetch(result) {
+            if(!isNull(result)) { 
+                preferred_eh = result.get(0);
+            }
+        }
+    });
+}
+
+addOnEvent("Water_Sample", "fetch", "onFetchWaterSample()");

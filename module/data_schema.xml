@@ -1,14 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
 <dataSchema>
-  <RelationshipElement name="Water Sample - pH" type="hierarchical">
-    <description>A 1-to-n relationship between the parent and its children, respectively.</description>
-    <parent>Parent Of</parent>
-    <child>Child Of</child>
+  <RelationshipElement name="Water Sample pH" type="bidirectional">
+    <description>Implements a 1:N relationship between Water Samples and pH</description>
   </RelationshipElement>
-  <RelationshipElement name="Water Sample - Eh" type="hierarchical">
-    <description>A 1-to-n relationship between the parent and its children, respectively.</description>
-    <parent>Parent Of</parent>
-    <child>Child Of</child>
+  <RelationshipElement name="Water Sample Eh" type="bidirectional">
+    <description>Implements a 1:N relationship between Water Samples and Eh</description>
   </RelationshipElement>
   <RelationshipElement name="Water Sample - Photolog" type="hierarchical">
     <description>A 1-to-n relationship between the parent and its children, respectively.</description>
@@ -80,6 +76,29 @@
         <term>{Sampling_Location}
 <description></description></term>
         <term>{Observation_Only}
+<description></description></term>
+      </lookup>
+    </property>
+    <property name="SRID" type="vocab">
+      <description></description>
+      <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
+      <appendCharacterString> - </appendCharacterString>
+      <lookup>
+        <term>{28349}
+<description></description></term>
+        <term>{28350}
+<description></description></term>
+        <term>{28351}
+<description></description></term>
+        <term>{28352}
+<description></description></term>
+        <term>{28353}
+<description></description></term>
+        <term>{28354}
+<description></description></term>
+        <term>{28355}
+<description></description></term>
+        <term>{28356}
 <description></description></term>
       </lookup>
     </property>
@@ -282,6 +301,36 @@
       <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
+    <property name="Preferred pH" type="measure">
+      <description></description>
+      <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
+      <appendCharacterString> - </appendCharacterString>
+    </property>
+    <property name="addNewpHText" type="vocab">
+      <description></description>
+      <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
+      <appendCharacterString> - </appendCharacterString>
+    </property>
+    <property name="Preferred Eh" type="measure">
+      <description></description>
+      <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
+      <appendCharacterString> - </appendCharacterString>
+    </property>
+    <property name="addNewEhText" type="vocab">
+      <description></description>
+      <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
+      <appendCharacterString> - </appendCharacterString>
+    </property>
+    <property name="Preferred pH Time" type="measure">
+      <description></description>
+      <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
+      <appendCharacterString> - </appendCharacterString>
+    </property>
+    <property name="Preferred Eh Time" type="measure">
+      <description></description>
+      <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
+      <appendCharacterString> - </appendCharacterString>
+    </property>
   </ArchaeologicalElement>
   <ArchaeologicalElement name="Plant Sample">
     <description></description>
@@ -333,6 +382,29 @@
         <term>{Sampling_Location}
 <description></description></term>
         <term>{Observation_Only}
+<description></description></term>
+      </lookup>
+    </property>
+    <property name="SRID" type="vocab">
+      <description></description>
+      <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
+      <appendCharacterString> - </appendCharacterString>
+      <lookup>
+        <term>{28349}
+<description></description></term>
+        <term>{28350}
+<description></description></term>
+        <term>{28351}
+<description></description></term>
+        <term>{28352}
+<description></description></term>
+        <term>{28353}
+<description></description></term>
+        <term>{28354}
+<description></description></term>
+        <term>{28355}
+<description></description></term>
+        <term>{28356}
 <description></description></term>
       </lookup>
     </property>
@@ -471,6 +543,29 @@
         <term>{Sampling_Location}
 <description></description></term>
         <term>{Observation_Only}
+<description></description></term>
+      </lookup>
+    </property>
+    <property name="SRID" type="vocab">
+      <description></description>
+      <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
+      <appendCharacterString> - </appendCharacterString>
+      <lookup>
+        <term>{28349}
+<description></description></term>
+        <term>{28350}
+<description></description></term>
+        <term>{28351}
+<description></description></term>
+        <term>{28352}
+<description></description></term>
+        <term>{28353}
+<description></description></term>
+        <term>{28354}
+<description></description></term>
+        <term>{28355}
+<description></description></term>
+        <term>{28356}
 <description></description></term>
       </lookup>
     </property>
@@ -890,6 +985,29 @@
       <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
+    <property name="SRID" type="vocab">
+      <description></description>
+      <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
+      <appendCharacterString> - </appendCharacterString>
+      <lookup>
+        <term>{28349}
+<description></description></term>
+        <term>{28350}
+<description></description></term>
+        <term>{28351}
+<description></description></term>
+        <term>{28352}
+<description></description></term>
+        <term>{28353}
+<description></description></term>
+        <term>{28354}
+<description></description></term>
+        <term>{28355}
+<description></description></term>
+        <term>{28356}
+<description></description></term>
+      </lookup>
+    </property>
     <property name="Latitude" type="measure">
       <description></description>
       <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
@@ -1219,9 +1337,9 @@
       <formatString>$2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
-    <property name="pH timestamp" type="measure" isIdentifier="true">
+    <property name="Time" type="measure">
       <description></description>
-      <formatString> $2</formatString>
+      <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
     <property name="Preferred" type="measure">
@@ -1237,9 +1355,9 @@
       <formatString>$2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
-    <property name="Eh timestamp" type="measure" isIdentifier="true">
+    <property name="Time" type="measure">
       <description></description>
-      <formatString> $2</formatString>
+      <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
     <property name="Preferred" type="measure">

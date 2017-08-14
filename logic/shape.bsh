@@ -31,3 +31,4 @@ addOnEvent(
     "setAutoSaveGeometry(getGeometryList(MAP_REF, DATA_ENTRY_LAYER_ID))",
     Integer.MAX_VALUE
 );
+addOnEvent("Shape", "save", "clearGeometry()");

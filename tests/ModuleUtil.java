@@ -268,6 +268,15 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: tab
+        Ref:  Water_Sample/Hidden
+     */
+    public static View get_WaterSample_Hidden(Solo solo) {
+        String ref = "Water_Sample/Hidden";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: tab
         Ref:  Water_Sample/Photolog
      */
     public static View get_WaterSample_Photolog(Solo solo) {
@@ -527,24 +536,6 @@ public class ModuleUtil extends ModuleHelper {
     }
 
     /*
-        Type: button
-        Ref:  Water_Sample/pH_Eh/Add_Eh
-     */
-    public static View get_WaterSample_pHEh_AddEh(Solo solo) {
-        String ref = "Water_Sample/pH_Eh/Add_Eh";
-        return (android.view.View) solo.getView((Object) ref);
-    }
-
-    /*
-        Type: button
-        Ref:  Water_Sample/pH_Eh/Add_pH
-     */
-    public static View get_WaterSample_pHEh_AddpH(Solo solo) {
-        String ref = "Water_Sample/pH_Eh/Add_pH";
-        return (android.view.View) solo.getView((Object) ref);
-    }
-
-    /*
         Type: camera
         Ref:  Plant_Sample/Basic_Info/Photos
      */
@@ -609,6 +600,15 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: dropdown
+        Ref:  Plant_Sample/Basic_Info/SRID
+     */
+    public static View get_PlantSample_BasicInfo_SRID(Solo solo) {
+        String ref = "Plant_Sample/Basic_Info/SRID";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: dropdown
         Ref:  Project/Search/Entity_Types
      */
     public static View get_Project_Search_EntityTypes(Solo solo) {
@@ -622,6 +622,15 @@ public class ModuleUtil extends ModuleHelper {
      */
     public static View get_Project_Start_SampleType(Solo solo) {
         String ref = "Project/Start/Sample_Type";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: dropdown
+        Ref:  Rock_Sample/Basic_Info/SRID
+     */
+    public static View get_RockSample_BasicInfo_SRID(Solo solo) {
+        String ref = "Rock_Sample/Basic_Info/SRID";
         return (android.view.View) solo.getView((Object) ref);
     }
 
@@ -690,6 +699,24 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: dropdown
+        Ref:  Soil_Sample/Basic_Info/SRID
+     */
+    public static View get_SoilSample_BasicInfo_SRID(Solo solo) {
+        String ref = "Soil_Sample/Basic_Info/SRID";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: dropdown
+        Ref:  Water_Sample/Basic_Info/SRID
+     */
+    public static View get_WaterSample_BasicInfo_SRID(Solo solo) {
+        String ref = "Water_Sample/Basic_Info/SRID";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: dropdown
         Ref:  Water_Sample/Codes/Hole_Angle
      */
     public static View get_WaterSample_Codes_HoleAngle(Solo solo) {
@@ -730,24 +757,6 @@ public class ModuleUtil extends ModuleHelper {
      */
     public static View get_WaterSample_Codes_SamplingIssues(Solo solo) {
         String ref = "Water_Sample/Codes/Sampling_Issues";
-        return (android.view.View) solo.getView((Object) ref);
-    }
-
-    /*
-        Type: dropdown
-        Ref:  Water_Sample/pH_Eh/Existing_Eh_Records
-     */
-    public static View get_WaterSample_pHEh_ExistingEhRecords(Solo solo) {
-        String ref = "Water_Sample/pH_Eh/Existing_Eh_Records";
-        return (android.view.View) solo.getView((Object) ref);
-    }
-
-    /*
-        Type: dropdown
-        Ref:  Water_Sample/pH_Eh/Existing_pH_Records
-     */
-    public static View get_WaterSample_pHEh_ExistingpHRecords(Solo solo) {
-        String ref = "Water_Sample/pH_Eh/Existing_pH_Records";
         return (android.view.View) solo.getView((Object) ref);
     }
 
@@ -811,6 +820,15 @@ public class ModuleUtil extends ModuleHelper {
      */
     public static EditText get_Eh_Eh_Preferred(Solo solo) {
         String ref = "Eh/Eh/Preferred";
+        return (android.widget.EditText) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Eh/Eh/Time
+     */
+    public static EditText get_Eh_Eh_Time(Solo solo) {
+        String ref = "Eh/Eh/Time";
         return (android.widget.EditText) solo.getView((Object) ref);
     }
 
@@ -1716,11 +1734,65 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: input
+        Ref:  Water_Sample/Hidden/Preferred_Eh_Time
+     */
+    public static EditText get_WaterSample_Hidden_PreferredEhTime(Solo solo) {
+        String ref = "Water_Sample/Hidden/Preferred_Eh_Time";
+        return (android.widget.EditText) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Water_Sample/Hidden/Preferred_pH_Time
+     */
+    public static EditText get_WaterSample_Hidden_PreferredpHTime(Solo solo) {
+        String ref = "Water_Sample/Hidden/Preferred_pH_Time";
+        return (android.widget.EditText) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
         Ref:  Water_Sample/pH_Eh/Conductivity
      */
     public static EditText get_WaterSample_pHEh_Conductivity(Solo solo) {
         String ref = "Water_Sample/pH_Eh/Conductivity";
         return (android.widget.EditText) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Water_Sample/pH_Eh/Preferred_Eh
+     */
+    public static View get_WaterSample_pHEh_PreferredEh(Solo solo) {
+        String ref = "Water_Sample/pH_Eh/Preferred_Eh";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Water_Sample/pH_Eh/Preferred_Eh_Time
+     */
+    public static View get_WaterSample_pHEh_PreferredEhTime(Solo solo) {
+        String ref = "Water_Sample/pH_Eh/Preferred_Eh_Time";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Water_Sample/pH_Eh/Preferred_pH
+     */
+    public static View get_WaterSample_pHEh_PreferredpH(Solo solo) {
+        String ref = "Water_Sample/pH_Eh/Preferred_pH";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Water_Sample/pH_Eh/Preferred_pH_Time
+     */
+    public static View get_WaterSample_pHEh_PreferredpHTime(Solo solo) {
+        String ref = "Water_Sample/pH_Eh/Preferred_pH_Time";
+        return (android.view.View) solo.getView((Object) ref);
     }
 
     /*
@@ -1738,6 +1810,15 @@ public class ModuleUtil extends ModuleHelper {
      */
     public static EditText get_pH_pH_Preferred(Solo solo) {
         String ref = "pH/pH/Preferred";
+        return (android.widget.EditText) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  pH/pH/Time
+     */
+    public static EditText get_pH_pH_Time(Solo solo) {
+        String ref = "pH/pH/Time";
         return (android.widget.EditText) solo.getView((Object) ref);
     }
 
@@ -1810,6 +1891,24 @@ public class ModuleUtil extends ModuleHelper {
      */
     public static View get_WaterSample_Photolog_ExistingPhotologs(Solo solo) {
         String ref = "Water_Sample/Photolog/Existing_Photologs";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: list
+        Ref:  Water_Sample/pH_Eh/addNewEhText
+     */
+    public static View get_WaterSample_pHEh_addNewEhText(Solo solo) {
+        String ref = "Water_Sample/pH_Eh/addNewEhText";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: list
+        Ref:  Water_Sample/pH_Eh/addNewpHText
+     */
+    public static View get_WaterSample_pHEh_addNewpHText(Solo solo) {
+        String ref = "Water_Sample/pH_Eh/addNewpHText";
         return (android.view.View) solo.getView((Object) ref);
     }
 

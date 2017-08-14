@@ -109,6 +109,7 @@
               <Site_Name/>
               <Observation_Type/>
               <Location_Number_Group/>
+              <SRID/>
               <Colgroup_3>
                 <Col_1>
                   <Latitude/>
@@ -166,15 +167,27 @@
                   <Conductivity/>
                 </Col_2>
               </Colgroup_1>
-              <Add_pH/>
-              <Existing_pH_Records/>
-              <Add_Eh/>
-              <Existing_Eh_Records/>
+              <Colgroup_2>
+                <Col_1>
+                  <Preferred_pH/>
+                  <Preferred_pH_Time/>
+                  <addNewpHText/>
+                </Col_1>
+                <Col_2>
+                  <Preferred_Eh/>
+                  <Preferred_Eh_Time/>
+                  <addNewEhText/>
+                </Col_2>
+              </Colgroup_2>
             </pH_Eh>
             <Photolog>
               <New_Photolog/>
               <Existing_Photologs/>
             </Photolog>
+            <Hidden>
+              <Preferred_pH_Time/>
+              <Preferred_Eh_Time/>
+            </Hidden>
           </Water_Sample>
           <Plant_Sample>
             <Basic_Info>
@@ -200,6 +213,7 @@
               <Site_Name/>
               <Observation_Type/>
               <Location_Number_Group/>
+              <SRID/>
               <Colgroup_3>
                 <Col_1>
                   <Latitude/>
@@ -268,6 +282,7 @@
               <Site_Name/>
               <Observation_Type/>
               <Location_Number_Group/>
+              <SRID/>
               <Colgroup_3>
                 <Col_1>
                   <Latitude/>
@@ -335,6 +350,7 @@
               <Site_Name/>
               <Observation_Type/>
               <Location_Number_Group/>
+              <SRID/>
               <Colgroup_3>
                 <Col_1>
                   <Latitude/>
@@ -414,14 +430,14 @@
           <pH>
             <pH>
               <pH/>
-              <pH_timestamp/>
+              <Time/>
               <Preferred/>
             </pH>
           </pH>
           <Eh>
             <Eh>
               <Eh/>
-              <Eh_timestamp/>
+              <Time/>
               <Preferred/>
             </Eh>
           </Eh>
@@ -719,6 +735,13 @@
         <group ref="Location_Number_Group">
           <label/>
         </group>
+        <select1 faims_attribute_name="SRID" faims_attribute_type="vocab" ref="SRID">
+          <label>{SRID}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
         <group ref="Colgroup_3" faims_style="orientation">
           <label/>
           <group ref="Col_1" faims_style="even">
@@ -885,26 +908,41 @@
             </input>
           </group>
         </group>
-        <trigger ref="Add_pH">
-          <label>{Add_pH}</label>
-        </trigger>
-        <select1 ref="Existing_pH_Records">
-          <label>{Existing_pH_Records}</label>
-          <item>
-            <label>Options not loaded</label>
-            <value>Options not loaded</value>
-          </item>
-        </select1>
-        <trigger ref="Add_Eh">
-          <label>{Add_Eh}</label>
-        </trigger>
-        <select1 ref="Existing_Eh_Records">
-          <label>{Existing_Eh_Records}</label>
-          <item>
-            <label>Options not loaded</label>
-            <value>Options not loaded</value>
-          </item>
-        </select1>
+        <group ref="Colgroup_2" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Preferred pH" faims_attribute_type="measure" ref="Preferred_pH" faims_read_only="true">
+              <label>{Preferred_pH}</label>
+            </input>
+            <input ref="Preferred_pH_Time" faims_read_only="true">
+              <label>{Preferred_pH_Time}</label>
+            </input>
+            <select1 appearance="compact" faims_attribute_name="addNewpHText" faims_attribute_type="vocab" ref="addNewpHText">
+              <label>{pH}</label>
+              <item>
+                <label>Options not loaded</label>
+                <value>Options not loaded</value>
+              </item>
+            </select1>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Preferred Eh" faims_attribute_type="measure" ref="Preferred_Eh" faims_read_only="true">
+              <label>{Preferred_Eh}</label>
+            </input>
+            <input ref="Preferred_Eh_Time" faims_read_only="true">
+              <label>{Preferred_Eh_Time}</label>
+            </input>
+            <select1 appearance="compact" faims_attribute_name="addNewEhText" faims_attribute_type="vocab" ref="addNewEhText">
+              <label>{Eh__mV_}</label>
+              <item>
+                <label>Options not loaded</label>
+                <value>Options not loaded</value>
+              </item>
+            </select1>
+          </group>
+        </group>
       </group>
       <group ref="Photolog" faims_scrollable="false">
         <label>{Photolog}</label>
@@ -918,6 +956,15 @@
             <value>Options not loaded</value>
           </item>
         </select1>
+      </group>
+      <group ref="Hidden" faims_hidden="true">
+        <label>{Hidden}</label>
+        <input faims_attribute_name="Preferred pH Time" faims_attribute_type="measure" ref="Preferred_pH_Time">
+          <label>{Preferred_pH_Time}</label>
+        </input>
+        <input faims_attribute_name="Preferred Eh Time" faims_attribute_type="measure" ref="Preferred_Eh_Time">
+          <label>{Preferred_Eh_Time}</label>
+        </input>
       </group>
     </group>
     <group ref="Plant_Sample" faims_archent_type="Plant Sample">
@@ -976,6 +1023,13 @@
         <group ref="Location_Number_Group">
           <label/>
         </group>
+        <select1 faims_attribute_name="SRID" faims_attribute_type="vocab" ref="SRID">
+          <label>{SRID}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
         <group ref="Colgroup_3" faims_style="orientation">
           <label/>
           <group ref="Col_1" faims_style="even">
@@ -1143,6 +1197,13 @@
         <group ref="Location_Number_Group">
           <label/>
         </group>
+        <select1 faims_attribute_name="SRID" faims_attribute_type="vocab" ref="SRID">
+          <label>{SRID}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
         <group ref="Colgroup_3" faims_style="orientation">
           <label/>
           <group ref="Col_1" faims_style="even">
@@ -1340,6 +1401,13 @@
         <group ref="Location_Number_Group">
           <label/>
         </group>
+        <select1 faims_attribute_name="SRID" faims_attribute_type="vocab" ref="SRID">
+          <label>{SRID}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
         <group ref="Colgroup_3" faims_style="orientation">
           <label/>
           <group ref="Col_1" faims_style="even">
@@ -1551,8 +1619,8 @@
         <input faims_attribute_name="pH" faims_attribute_type="measure" ref="pH">
           <label>{pH}</label>
         </input>
-        <input faims_attribute_name="pH timestamp" faims_attribute_type="measure" ref="pH_timestamp" faims_read_only="true">
-          <label>{Timestamp}</label>
+        <input faims_attribute_name="Time" faims_attribute_type="measure" ref="Time">
+          <label>{Time}</label>
         </input>
         <input faims_attribute_name="Preferred" faims_attribute_type="measure" ref="Preferred">
           <label>{Preferred}</label>
@@ -1566,8 +1634,8 @@
         <input faims_attribute_name="Eh" faims_attribute_type="measure" ref="Eh">
           <label>{Eh}</label>
         </input>
-        <input faims_attribute_name="Eh timestamp" faims_attribute_type="measure" ref="Eh_timestamp" faims_read_only="true">
-          <label>{Timestamp}</label>
+        <input faims_attribute_name="Time" faims_attribute_type="measure" ref="Time">
+          <label>{Time}</label>
         </input>
         <input faims_attribute_name="Preferred" faims_attribute_type="measure" ref="Preferred">
           <label>{Preferred}</label>

@@ -1,0 +1,49 @@
+void fillInGPS(String tabgroup) {
+  Map tabgroupToTabRef = getTakeFromGpsMappings();
+  String currentUuid = getUuid(tabgroup);
+  if (isNull(currentUuid)) {
+    return;
+  }
+  
+  String query = "SELECT x(transform(geospatialcolumn,          4326)) as longtiude, " +
+                 "       y(transform(geospatialcolumn,          4326)) as latitude, " +
+                 "       x(transform(geospatialcolumn, "+getSrid()+")) as easting, " +
+                 "       y(transform(geospatialcolumn, "+getSrid()+")) as northing " +
+                 "  FROM latestnondeletedarchent " +
+                 " WHERE uuid = '" + currentUuid + "';";
+
+  fetchOne(query, new FetchCallback() {
+    onFetch(result) {
+      print("[fillInGPS()] Fetched DB transformed geometry: " + result);
+      setFieldValue(tabgroupToTabRef.get(tabgroup) + "/Longitude" , result.get(0));
+      setFieldValue(tabgroupToTabRef.get(tabgroup) + "/Latitude"  , result.get(1));
+      setFieldValue(tabgroupToTabRef.get(tabgroup) + "/Easting"   , result.get(2));
+      setFieldValue(tabgroupToTabRef.get(tabgroup) + "/Northing"  , result.get(3));
+    }
+  });
+}
+
+void setSrid() {
+  String ref = getDisplayedTabGroup() + "/Basic_Info/SRID";
+  String sridTarget   = getArch16nKeyFromVal(getModuleSrid());
+  String sridFallback = getArch16nKeyFromVal("28350");
+  if (!setMenuValue(ref, sridTarget))
+    setMenuValue(ref, sridFallback);
+}
+
+String getSrid() {
+  String ref = getDisplayedTabGroup() + "/Basic_Info/SRID";
+  String key = getMenuValue(ref);
+  if (isNull(key)) {
+    setSrid(); 
+    key = getMenuValue(ref);
+  }
+ 
+  key = guessArch16nValFromKey(key);
+  return key;
+}
+
+addOnEvent("Water_Sample", "create", "setSrid()");
+addOnEvent("Soil_Sample",  "create", "setSrid()");
+addOnEvent("Plant_Sample", "create", "setSrid()");
+addOnEvent("Rock_Sample",  "create", "setSrid()");

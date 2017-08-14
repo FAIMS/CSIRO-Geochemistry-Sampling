@@ -62,6 +62,14 @@ Create_Record=Create Record
 No_Duplicates_Found=No Duplicates Found
 Select_User=Select User
 Valid_Starting_Sample_ID=Valid Starting Sample ID
+Eh=Eh
+pH=pH
+Add_New_Eh=Add New Eh
+Add_New_pH=Add New pH
+Please_Fill_In_PH=Please fill in an pH value
+Please_Fill_In_EH=Please fill in an Eh value
+Duplicate_IDs_Found=Duplicate IDs found
+Press_To_Delete=Press OK to Delete this
 EOF
 
 echo ".fixedheightfive { height: 250px; }" >> ui_styling.css

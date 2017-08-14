@@ -167,3 +167,15 @@ showFieldIfEqual(
     "Water_Sample/Basic_Info/Observation_Type",
     "'Observation Only'"
 );
+
+showFieldIfEqual(
+    "Plant_Sample/Basic_Info/Location_Number",
+    "Plant_Sample/Basic_Info/Observation_Type",
+    "'Observation Only'"
+);
+
+showFieldIfEqual(
+    "Soil_Sample/Basic_Info/Location_Number",
+    "Soil_Sample/Basic_Info/Observation_Type",
+    "'Observation Only'"
+);

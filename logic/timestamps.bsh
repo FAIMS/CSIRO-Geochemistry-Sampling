@@ -11,6 +11,7 @@ String getTimestampNow(String fmt) {
   date    = new Date();
   dateFmt = new java.text.SimpleDateFormat(fmt);
   dateStr = dateFmt.format(date);
+  dateStr = replaceFirst(dateStr, ".", "");
 
   return dateStr;
 }
