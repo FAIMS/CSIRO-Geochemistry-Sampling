@@ -1,0 +1,15 @@
+/************************************ MAP *************************************/
+
+void centreMe() {
+  if(!isExternalGPSOn() && !isInternalGPSOn()) {
+    showToast("{GPS_Not_Initialised}");
+  } else {
+    centerOnCurrentPosition(MAP_REF);
+  }
+}
+
+void refreshMap() {
+  refreshMap(MAP_REF);
+}
+
+addOnEvent("Project/Map", "show",  "refreshMap()");

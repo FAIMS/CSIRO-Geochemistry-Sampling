@@ -1,0 +1,26 @@
+/***************************** DUPLICATE CHECKING *****************************/
+
+void checkForDuplicates() {
+  String query = "select uuid, response || ' created at: ' || datetime(createdAt, 'localtime') || ' created by: '||createdBy " + 
+      "from latestNonDeletedArchEntFormattedIdentifiers join createdModifiedAtBy using (uuid) " +
+      "where response in ( " +
+      "select response from latestNonDeletedArchEntFormattedIdentifiers group by response having count(response) > 1) " +
+      " and aenttypename like '%Sample';";
+  fetchAll(query, new FetchCallback() {
+    onFetch(result) {
+      if (isNull(result)) {
+        showToast("{Valid_Starting_Sample_ID}");
+        result = new ArrayList();
+        result.add(new NameValuePair("{No_Duplicates_Found}", ""));
+      } else {
+        showToast(result.size() + " {Duplicate_IDs_Found}");
+      }
+      print("[checkForDuplicates()] Checking for duplicates: " + result);
+      populateList("Project/Start/Duplicate_ID_List", result);
+      refreshTabgroupCSS("Project");
+    }
+  });
+}
+
+populateMenu("Project/Start/Duplicate_ID_List", new ArrayList());
+addOnEvent("Project/Start/Check_for_Duplicates", "click", "checkForDuplicates();");

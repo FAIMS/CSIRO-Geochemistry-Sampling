@@ -1,0 +1,6 @@
+/******************************* PROJECT AUTHOR *******************************/
+populateProjectAuthorAndTimestamp() {
+  populateAuthorAndTimestamp("Project");
+}
+
+addOnEvent("Project", "show", "populateProjectAuthorAndTimestamp()");

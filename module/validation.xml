@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ValidationSchema>
+  <ArchaeologicalElement name="Water Sample">
+    <property name="Temperature">
+      <validator type="blankchecker">
+        <param type="field" value="measure"/>
+      </validator>
+    </property>
+    <property name="Conductivity">
+      <validator type="blankchecker">
+        <param type="field" value="measure"/>
+      </validator>
+    </property>
+  </ArchaeologicalElement>
+</ValidationSchema>

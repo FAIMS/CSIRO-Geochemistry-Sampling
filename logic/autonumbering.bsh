@@ -1,0 +1,9 @@
+/******************************* AUTONUMBERING ********************************/
+final String AUTONUM_SOURCE = "Project/Start/Sample_Starting_ID";
+
+assert(isValidRef(AUTONUM_SOURCE));
+
+for (k : AUTONUM_DEST_TO_SOURCE.keySet())
+  AUTONUM_DEST_TO_SOURCE.put(k, AUTONUM_SOURCE);
+
+persistOverSessions(AUTONUM_SOURCE, "1");

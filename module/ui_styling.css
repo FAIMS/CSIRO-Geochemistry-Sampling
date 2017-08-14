@@ -1,0 +1,10 @@
+.required {
+}
+
+.required-label {
+  color: red;
+}
+.readonly {
+  color: #B2B2B2;
+}
+.fixedheightfive { height: 250px; }

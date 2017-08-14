@@ -1,0 +1,33 @@
+/*********************************** SHAPE ************************************/
+void clearGeometry() {
+  List geometry = getGeometryList(MAP_REF, DATA_ENTRY_LAYER_ID);
+
+  if (geometry == null)     return;
+  if (geometry.size() == 0) return;
+
+  for (geom : geometry) {
+    print("Geometry cleared:" + geom.userData.geomId);
+    clearGeometry(MAP_REF, geom.userData.geomId);
+  }
+}
+
+boolean checkForGeometry() {
+  List geometry = getGeometryList(MAP_REF, DATA_ENTRY_LAYER_ID);
+  if (geometry == null || geometry.size() == 0) {
+    String head = "Cannot Create Shape";
+    String body = "At least one shape must be present on the data entry layer.";
+    showWarning(head, body);
+
+    return false;
+  } else {
+    return true;
+  }
+}
+
+addOnEventCond("Project/Map/Create_Shape", "click", "checkForGeometry()");
+addOnEvent(
+    "Project/Map/Create_Shape",
+    "click",
+    "setAutoSaveGeometry(getGeometryList(MAP_REF, DATA_ENTRY_LAYER_ID))",
+    Integer.MAX_VALUE
+);

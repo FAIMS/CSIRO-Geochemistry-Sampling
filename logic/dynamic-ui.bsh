@@ -1,0 +1,169 @@
+/********************************* DYNAMIC UI *********************************/
+// TODO: Put into autogen
+getFieldValue(String ref, Boolean doConvertVocabIds) {
+  if (!doConvertVocabIds) {
+    return getFieldValue(ref);
+  }
+
+  val = getFieldValue(ref);
+  vocabName = null;
+
+  if (val instanceof String) {
+    vocabName = VOCABID_TO_VOCABNAME.get(val);
+  } else if (val instanceof List) {
+    vocabName = new ArrayList();
+    for (NameValuePair pair : pairs) {
+      String name = pair.getName();
+      name = VOCABID_TO_VOCABNAME.get(name);
+
+      vocabName.add(name);
+    }
+  }
+
+  if (val       == null) return "";
+  if (vocabName == null) return "";
+  return vocabName;
+}
+
+boolean hasValueInField(List vals, String ref) {
+  // Get field value(s)
+  fieldVals = null;
+  if (hasMenuType(ref)) fieldVals = getMenuValue (ref);
+  else                  fieldVals = getFieldValue(ref);
+
+  // Convert field value into a list
+  if (!(fieldVals instanceof List)) {
+    List fieldVals_ = new ArrayList();
+    fieldVals_.add(fieldVals);
+    fieldVals = fieldVals_;
+  }
+
+  // Check if `vals` and `fieldVals` are intersecting sets
+  for (String fieldVal : fieldVals) {
+    for (String val : vals) {
+      if (fieldVal.equals(val))
+        return true;
+    }
+  }
+
+  return false;
+}
+
+void hideDynamicField(String ref) {
+  String uuid       = getUuid(getTabGroupRef(ref));
+  String attribName = getAttributeName(ref);
+  String valView;
+
+  if (hasView(ref)) {
+    valView = getFieldValue(ref);
+    removeView(ref);
+  }
+
+  if (!isNull(valView)) {
+    // Flag Feature Type as `deleted`.
+    q  = " INSERT INTO aentvalue (UUID, UserID, AttributeID, Deleted)";
+    q += " SELECT '{uuid}', {userid}, attributeid, 1";
+    q += " FROM  attributekey";
+    q += " WHERE attributename = '{attributename}'";
+    q  = replaceFirst(q, "{uuid}", uuid);
+    q  = replaceFirst(q, "{userid}", userid);
+    q  = replaceFirst(q, "{attributename}", attribName);
+
+    fetchOne(q);
+  }
+}
+
+void showDynamicField(String ref) {
+  String refGroup = ref + "_Group";
+
+  if (hasView(ref)) return;
+
+  String label      = guessArch16nVal (ref);
+  String attribName = getAttributeName(ref);
+
+  // Create view
+  FormInputDef viewDef = createViewDef();
+  viewDef.createTextField     ("decimal");
+  viewDef.setLabel            (label);
+  viewDef.setAttributeName    (attribName);
+  viewDef.setAttributeType    ("measure");
+  viewDef.setAnnotationEnabled(true);
+  viewDef.setCertaintyEnabled (true);
+  viewDef.setInfoEnabled      (true);
+
+  createView(ref, viewDef, refGroup);
+}
+
+void updateDynamicField(String refToUpdate, String refToCheck, List vals) {
+  if (hasValueInField(vals, refToCheck))
+    showDynamicField(refToUpdate);
+  else
+    hideDynamicField(refToUpdate);
+}
+
+Callable showDynamicFieldCallable(String ref) {
+  void call() {
+    showDynamicField(ref);
+  }
+  return this;
+}
+
+Callable updateDynamicFieldCallable(
+    String refToUpdate, String refToCheck, List vals
+) {
+  void call() {
+    updateDynamicField(refToUpdate, refToCheck, vals);
+  }
+  return this;
+}
+
+// TODO: Add to autogen
+List parseList(String listString) {
+  Matcher m = Pattern.compile("(?<!\\\\)'(.*?)(?<!\\\\)'").matcher(listString);
+
+  List matches = new ArrayList();
+  while(m.find())
+    matches.add(m.group(1));
+
+  return matches;
+}
+
+// TODO: Add to autogen
+String getArch16nKeyFromVal(String val, boolean doAddCurlies) {
+  if (isNull(val)) return "";
+  val = val.replaceAll("[^0-9a-zA-Z]", "_");
+  if (doAddCurlies)
+    val = "{" + val + "}";
+  return val;
+}
+
+// TODO: Add to autogen
+String getArch16nKeyFromVal(String val) {
+  return getArch16nKeyFromVal(val, true);
+}
+
+void showFieldIfEqual(String refToShow, String refToCheck, List vals) {
+  Callable update = updateDynamicFieldCallable(refToShow, refToCheck, vals);
+  Callable show   = showDynamicFieldCallable  (refToShow);
+
+  addOnEvent(getTabGroupRef(refToShow), "prefetch", show);
+  addOnEvent(getTabGroupRef(refToShow), "fetch",    update);
+  addOnEvent(refToCheck,                "click",    update);
+}
+
+void showFieldIfEqual(String refToShow, String refToCheck, String vals) {
+  List valsList = parseList(vals);
+  for (int i = 0; i < valsList.size(); i++) {
+    String val = valsList.get(i);
+    val = getArch16nKeyFromVal(val);
+    valsList.set(i, val);
+  }
+
+  showFieldIfEqual(refToShow, refToCheck, valsList);
+}
+
+showFieldIfEqual(
+    "Water_Sample/Basic_Info/Location_Number",
+    "Water_Sample/Basic_Info/Observation_Type",
+    "'Observation Only'"
+);

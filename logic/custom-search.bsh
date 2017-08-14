@@ -1,0 +1,60 @@
+/****************************** SEARCH EXTENSION ******************************/
+/* Implements an extension to the search page which allows users to           */
+/* constrain their searches by user.                                          */
+/******************************************************************************/
+delOnEvent("Project/Search", "show", "search()");
+addOnEvent("Project/Search", "show", "populateSelectUser()");
+
+addOnEvent("Project/Search/Select_User", "click", "search()");
+
+void populateSelectUser(){
+  String refSearchUsers = "Project/Search/Select_User";
+  String getNonDeletedUsersQuery = "SELECT userid, fname || ' ' || lname "+
+                                   "  FROM user "+
+                                   " WHERE userdeleted is null "+
+                                   " UNION " +
+                                   "SELECT -1, '{All}'";
+
+  fetchAll(getNonDeletedUsersQuery, new FetchCallback() {
+    onFetch(result) {
+      populateDropDown(refSearchUsers, result, false);
+      search();
+    }
+  });
+}
+
+
+// Overrides auto-generated definition
+void search(){
+  String tabgroup = "Project";
+  String refEntityList  = tabgroup + "/Search/Entity_List";
+  String refSearchTerm  = tabgroup + "/Search/Search_Term";
+  String refEntityTypes = tabgroup + "/Search/Entity_Types";
+  String refSelectUser  = tabgroup + "/Search/Select_User";
+
+  String type = getFieldValue(refEntityTypes);
+  String term = getFieldValue(refSearchTerm);
+  String user = getFieldValue(refSelectUser);
+  if (isNull(user)) return;
+  String searchQuery = "SELECT uuid, response " +
+                       "  FROM latestNonDeletedArchEntFormattedIdentifiers  " +
+                       " WHERE uuid in (SELECT uuid " +
+                       "                  FROM latestNonDeletedArchEntIdentifiers " +
+                       "                 WHERE measure LIKE '{term}%'  " +
+                       "                   AND ( aenttypename LIKE '{type}' OR '' = '{type}' ) " +
+                       "                   AND ( userid = {user} OR -1 = {user}) " +
+                       "                ) " +
+                       " ORDER BY response " +
+                       " LIMIT ? " +
+                       "OFFSET ? ";
+  searchQuery = replaceFirst(searchQuery, "{term}", term);
+  searchQuery = replaceFirst(searchQuery, "{type}", type);
+  searchQuery = replaceFirst(searchQuery, "{type}", type);
+  searchQuery = replaceFirst(searchQuery, "{user}", user);
+  searchQuery = replaceFirst(searchQuery, "{user}", user);
+
+  populateCursorList(refEntityList, searchQuery, 25);
+  refreshTabgroupCSS(tabgroup);
+
+  Log.d("Module", "Search query: " + searchQuery);
+}

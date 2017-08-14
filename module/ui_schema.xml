@@ -1,0 +1,1605 @@
+<?xml version='1.0' encoding='utf-8'?>
+<h:html xmlns:h="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:jr="http://openrosa.org/javarosa" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>FILL THIS IN</h:title>
+    <model>
+      <instance>
+        <faims id="FILL_THIS_IN">
+          <!--START: Style-->
+          <style>
+            <orientation>
+              <orientation/>
+            </orientation>
+            <even>
+              <layout_weight/>
+            </even>
+            <large>
+              <layout_weight/>
+            </large>
+          </style>
+          <!--END: Style-->
+          <Logo>
+            <Logo_Tab>
+              <CSIRO_Logo/>
+              <Login/>
+            </Logo_Tab>
+          </Logo>
+          <User>
+            <User>
+              <Users/>
+            </User>
+          </User>
+          <Project>
+            <Start>
+              <Project_author/>
+              <Station_Deposit/>
+              <Project/>
+              <Area/>
+              <Sample_Type/>
+              <Colgroup_1>
+                <Col_1>
+                  <Sample_Prefix/>
+                </Col_1>
+                <Col_2>
+                  <Sample_Starting_ID/>
+                </Col_2>
+              </Colgroup_1>
+              <Create_New_Sample/>
+              <GPS_Status/>
+              <Check_for_Duplicates/>
+              <Duplicate_ID_List/>
+            </Start>
+            <Search>
+              <Colgroup_0>
+                <Col_0>
+                  <Search_Term/>
+                </Col_0>
+                <Col_1>
+                  <Search_Button/>
+                </Col_1>
+              </Colgroup_0>
+              <Colgroup_1>
+                <Col_0>
+                  <Entity_Types/>
+                </Col_0>
+                <Col_1>
+                  <Select_User/>
+                </Col_1>
+              </Colgroup_1>
+              <Select_User/>
+              <Entity_List/>
+            </Search>
+            <Map>
+              <Map/>
+              <Center_Me_1/>
+              <Create_Shape/>
+            </Map>
+            <Vars>
+              <Next_Water_Sample_ID/>
+              <Next_Plant_Sample_ID/>
+              <Next_Soil_Sample_ID/>
+              <Next_Rock_Sample_ID/>
+              <New_Water_Sample/>
+              <New_Plant_Sample/>
+              <New_Soil_Sample/>
+              <New_Rock_Sample/>
+            </Vars>
+          </Project>
+          <Water_Sample>
+            <Basic_Info>
+              <Colgroup_1>
+                <Col_1>
+                  <Water_Sample_Prefix/>
+                </Col_1>
+                <Col_2>
+                  <Water_Sample_ID/>
+                </Col_2>
+              </Colgroup_1>
+              <Colgroup_2>
+                <Col_1>
+                  <Water_Sample_timestamp/>
+                </Col_1>
+                <Col_2>
+                  <Water_Sample_author/>
+                </Col_2>
+              </Colgroup_2>
+              <Station_Deposit/>
+              <Project/>
+              <Area/>
+              <Site_Name/>
+              <Observation_Type/>
+              <Location_Number_Group/>
+              <Colgroup_3>
+                <Col_1>
+                  <Latitude/>
+                </Col_1>
+                <Col_2>
+                  <Longitude/>
+                </Col_2>
+              </Colgroup_3>
+              <Colgroup_4>
+                <Col_1>
+                  <Northing/>
+                </Col_1>
+                <Col_2>
+                  <Easting/>
+                </Col_2>
+                <Col_3>
+                  <Accuracy/>
+                </Col_3>
+              </Colgroup_4>
+              <Take_From_GPS_1/>
+              <Elevation_Metres_above_Sea_Level/>
+              <Water_Table/>
+              <Sample_Depth/>
+              <Bottom_Of_Hole/>
+              <Samples_Collected/>
+              <Notes/>
+              <Photos/>
+              <Photos_Button_1/>
+              <Sketches/>
+              <Sketches_Button_1/>
+              <View_Sketch/>
+            </Basic_Info>
+            <Codes>
+              <Hole_Type/>
+              <Hole_Lining/>
+              <Hole_Open_Closed/>
+              <Pipes_In_Hole/>
+              <Colgroup_1>
+                <Col_1>
+                  <Hole_Angle/>
+                </Col_1>
+                <Col_2>
+                  <Estimated_Angle/>
+                </Col_2>
+              </Colgroup_1>
+              <Outflow_Present/>
+              <Sampling_Issues/>
+            </Codes>
+            <pH_Eh>
+              <Colgroup_1>
+                <Col_1>
+                  <Temperature/>
+                </Col_1>
+                <Col_2>
+                  <Conductivity/>
+                </Col_2>
+              </Colgroup_1>
+              <Add_pH/>
+              <Existing_pH_Records/>
+              <Add_Eh/>
+              <Existing_Eh_Records/>
+            </pH_Eh>
+            <Photolog>
+              <New_Photolog/>
+              <Existing_Photologs/>
+            </Photolog>
+          </Water_Sample>
+          <Plant_Sample>
+            <Basic_Info>
+              <Colgroup_1>
+                <Col_1>
+                  <Plant_Sample_Prefix/>
+                </Col_1>
+                <Col_2>
+                  <Plant_Sample_ID/>
+                </Col_2>
+              </Colgroup_1>
+              <Colgroup_2>
+                <Col_1>
+                  <Plant_Sample_timestamp/>
+                </Col_1>
+                <Col_2>
+                  <Plant_Sample_author/>
+                </Col_2>
+              </Colgroup_2>
+              <Station_Deposit/>
+              <Project/>
+              <Area/>
+              <Site_Name/>
+              <Observation_Type/>
+              <Location_Number_Group/>
+              <Colgroup_3>
+                <Col_1>
+                  <Latitude/>
+                </Col_1>
+                <Col_2>
+                  <Longitude/>
+                </Col_2>
+              </Colgroup_3>
+              <Colgroup_4>
+                <Col_1>
+                  <Northing/>
+                </Col_1>
+                <Col_2>
+                  <Easting/>
+                </Col_2>
+                <Col_3>
+                  <Accuracy/>
+                </Col_3>
+              </Colgroup_4>
+              <Take_From_GPS_1/>
+              <Elevation_Metres_above_Sea_Level/>
+              <Plant_Species/>
+              <Colgroup_5>
+                <Col_1>
+                  <Plant_Height/>
+                </Col_1>
+                <Col_2>
+                  <Plant_Width/>
+                </Col_2>
+              </Colgroup_5>
+              <Soil_Description/>
+              <Landform_Description/>
+              <Notes/>
+              <Photos/>
+              <Photos_Button_1/>
+              <Sketches/>
+              <Sketches_Button_1/>
+              <View_Sketch/>
+            </Basic_Info>
+            <Photolog>
+              <New_Photolog/>
+              <Existing_Photologs/>
+            </Photolog>
+          </Plant_Sample>
+          <Soil_Sample>
+            <Basic_Info>
+              <Colgroup_1>
+                <Col_1>
+                  <Soil_Sample_Prefix/>
+                </Col_1>
+                <Col_2>
+                  <Soil_Sample_ID/>
+                </Col_2>
+              </Colgroup_1>
+              <Colgroup_2>
+                <Col_1>
+                  <Soil_Sample_timestamp/>
+                </Col_1>
+                <Col_2>
+                  <Soil_Sample_author/>
+                </Col_2>
+              </Colgroup_2>
+              <Station_Deposit/>
+              <Project/>
+              <Area/>
+              <Site_Name/>
+              <Observation_Type/>
+              <Location_Number_Group/>
+              <Colgroup_3>
+                <Col_1>
+                  <Latitude/>
+                </Col_1>
+                <Col_2>
+                  <Longitude/>
+                </Col_2>
+              </Colgroup_3>
+              <Colgroup_4>
+                <Col_1>
+                  <Northing/>
+                </Col_1>
+                <Col_2>
+                  <Easting/>
+                </Col_2>
+                <Col_3>
+                  <Accuracy/>
+                </Col_3>
+              </Colgroup_4>
+              <Take_From_GPS_1/>
+              <Elevation_Metres_above_Sea_Level/>
+              <Depth/>
+              <Colour/>
+              <Lag/>
+              <Soil_Texture/>
+              <Geology/>
+              <Drainage/>
+              <Contamination/>
+              <Regolith_Type/>
+              <Landform/>
+              <Vegetation/>
+              <Notes/>
+              <Photos/>
+              <Photos_Button_1/>
+              <Sketches/>
+              <Sketches_Button_1/>
+              <View_Sketch/>
+            </Basic_Info>
+            <Photolog>
+              <New_Photolog/>
+              <Existing_Photologs/>
+            </Photolog>
+          </Soil_Sample>
+          <Rock_Sample>
+            <Basic_Info>
+              <Colgroup_1>
+                <Col_1>
+                  <Rock_Sample_Prefix/>
+                </Col_1>
+                <Col_2>
+                  <Rock_Sample_ID/>
+                </Col_2>
+              </Colgroup_1>
+              <Colgroup_2>
+                <Col_1>
+                  <Rock_Sample_timestamp/>
+                </Col_1>
+                <Col_2>
+                  <Rock_Sample_author/>
+                </Col_2>
+              </Colgroup_2>
+              <Station_Deposit/>
+              <Project/>
+              <Area/>
+              <Site_Name/>
+              <Observation_Type/>
+              <Location_Number_Group/>
+              <Colgroup_3>
+                <Col_1>
+                  <Latitude/>
+                </Col_1>
+                <Col_2>
+                  <Longitude/>
+                </Col_2>
+              </Colgroup_3>
+              <Colgroup_4>
+                <Col_1>
+                  <Northing/>
+                </Col_1>
+                <Col_2>
+                  <Easting/>
+                </Col_2>
+                <Col_3>
+                  <Accuracy/>
+                </Col_3>
+              </Colgroup_4>
+              <Take_From_GPS_1/>
+              <Elevation_Metres_above_Sea_Level/>
+            </Basic_Info>
+            <Measurements>
+              <Colgroup_1>
+                <Col_1>
+                  <Bedding_Strike/>
+                  <Cleavage_Strike/>
+                  <Foliation_Strike/>
+                  <Veins_1_Strike/>
+                  <Veins_2_Strike/>
+                </Col_1>
+                <Col_2>
+                  <Bedding_Dip/>
+                  <Cleavage_Dip/>
+                  <Foliation_Dip/>
+                  <Veins_1_Dip/>
+                  <Veins_2_Dip/>
+                </Col_2>
+              </Colgroup_1>
+              <Other_Structural_Measurements/>
+              <Colgroup_2>
+                <Col_1>
+                  <Fold_Axis_Plunge/>
+                  <Mineral_Lineation_Plunge/>
+                  <Stretching_Lineation_Plunge/>
+                </Col_1>
+                <Col_2>
+                  <Fold_Axis_Azimuth/>
+                  <Mineral_Lineation_Azimuth/>
+                  <Stretching_Lineation_Azimuth/>
+                </Col_2>
+              </Colgroup_2>
+              <Other_Lineation/>
+            </Measurements>
+            <Lithological_Info>
+              <Lithology/>
+              <Fineness_Inclusion_Size/>
+              <Grain_Size/>
+              <Sorting/>
+              <Other_Lithological_Descriptors/>
+              <Stratigraphic_Unit/>
+              <Large-Scale_Structure/>
+              <Alteration/>
+              <Veining/>
+              <Notes/>
+              <Photos/>
+              <Photos_Button_1/>
+              <Sketches/>
+              <Sketches_Button_1/>
+              <View_Sketch/>
+            </Lithological_Info>
+            <Photolog>
+              <New_Photolog/>
+              <Existing_Photologs/>
+            </Photolog>
+          </Rock_Sample>
+          <pH>
+            <pH>
+              <pH/>
+              <pH_timestamp/>
+              <Preferred/>
+            </pH>
+          </pH>
+          <Eh>
+            <Eh>
+              <Eh/>
+              <Eh_timestamp/>
+              <Preferred/>
+            </Eh>
+          </Eh>
+          <Photolog>
+            <Photolog>
+              <Photo_ID/>
+              <Photolog_timestamp/>
+              <Photo_Note/>
+            </Photolog>
+          </Photolog>
+          <Shape>
+            <Shape_Note>
+              <Label/>
+              <Note/>
+            </Shape_Note>
+          </Shape>
+        </faims>
+      </instance>
+      <bind nodeset="/faims/Project/Start/Colgroup_1/Col_2/Sample_Starting_ID" type="decimal"/>
+      <bind nodeset="/faims/Project/Vars/Next_Water_Sample_ID" type="decimal"/>
+      <bind nodeset="/faims/Project/Vars/Next_Plant_Sample_ID" type="decimal"/>
+      <bind nodeset="/faims/Project/Vars/Next_Soil_Sample_ID" type="decimal"/>
+      <bind nodeset="/faims/Project/Vars/Next_Rock_Sample_ID" type="decimal"/>
+      <bind nodeset="/faims/Water_Sample/Basic_Info/Elevation_Metres_above_Sea_Level" type="decimal"/>
+      <bind nodeset="/faims/Water_Sample/Codes/Colgroup_1/Col_2/Estimated_Angle" type="decimal"/>
+      <bind nodeset="/faims/Plant_Sample/Basic_Info/Elevation_Metres_above_Sea_Level" type="decimal"/>
+      <bind nodeset="/faims/Plant_Sample/Basic_Info/Colgroup_5/Col_1/Plant_Height" type="decimal"/>
+      <bind nodeset="/faims/Plant_Sample/Basic_Info/Colgroup_5/Col_2/Plant_Width" type="decimal"/>
+      <bind nodeset="/faims/Soil_Sample/Basic_Info/Elevation_Metres_above_Sea_Level" type="decimal"/>
+      <bind nodeset="/faims/Soil_Sample/Basic_Info/Depth" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Basic_Info/Elevation_Metres_above_Sea_Level" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/Colgroup_1/Col_1/Bedding_Strike" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/Colgroup_1/Col_1/Cleavage_Strike" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/Colgroup_1/Col_1/Foliation_Strike" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/Colgroup_1/Col_1/Veins_1_Strike" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/Colgroup_1/Col_1/Veins_2_Strike" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/Colgroup_1/Col_2/Bedding_Dip" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/Colgroup_1/Col_2/Cleavage_Dip" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/Colgroup_1/Col_2/Foliation_Dip" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/Colgroup_1/Col_2/Veins_1_Dip" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/Colgroup_1/Col_2/Veins_2_Dip" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/Colgroup_2/Col_1/Fold_Axis_Plunge" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/Colgroup_2/Col_1/Mineral_Lineation_Plunge" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/Colgroup_2/Col_1/Stretching_Lineation_Plunge" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/Colgroup_2/Col_2/Fold_Axis_Azimuth" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/Colgroup_2/Col_2/Mineral_Lineation_Azimuth" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Measurements/Colgroup_2/Col_2/Stretching_Lineation_Azimuth" type="decimal"/>
+    </model>
+  </h:head>
+  <h:body>
+    <!--START: Style-->
+    <group ref="style">
+      <label/>
+      <group ref="orientation">
+        <label/>
+        <input ref="orientation">
+          <label>horizontal</label>
+        </input>
+      </group>
+      <group ref="even">
+        <label/>
+        <input ref="layout_weight">
+          <label>1</label>
+        </input>
+      </group>
+      <group ref="large">
+        <label/>
+        <input ref="layout_weight">
+          <label>3</label>
+        </input>
+      </group>
+    </group>
+    <!--END: Style-->
+    <group ref="Logo">
+      <label>{Logo}</label>
+      <group ref="Logo_Tab" faims_scrollable="false">
+        <label>{Logo_Tab}</label>
+        <input faims_web="true" ref="CSIRO_Logo">
+          <label>{CSIRO_Logo}</label>
+        </input>
+        <trigger ref="Login">
+          <label>{Login}</label>
+        </trigger>
+      </group>
+    </group>
+    <group ref="User">
+      <label>{User}</label>
+      <group ref="User" faims_scrollable="false">
+        <label>{User}</label>
+        <select1 appearance="compact" ref="Users">
+          <label>{Users}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+      </group>
+    </group>
+    <group ref="Project">
+      <label>{Project}</label>
+      <group ref="Start">
+        <label>{Start}</label>
+        <input ref="Project_author" faims_read_only="true">
+          <label>{Author}</label>
+        </input>
+        <input ref="Station_Deposit">
+          <label>{Station_Deposit}</label>
+        </input>
+        <input ref="Project">
+          <label>{Project}</label>
+        </input>
+        <input ref="Area">
+          <label>{Area}</label>
+        </input>
+        <select1 ref="Sample_Type">
+          <label>{Sample_Type}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <group ref="Colgroup_1" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <input ref="Sample_Prefix">
+              <label>{Sample_Prefix}</label>
+            </input>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <input ref="Sample_Starting_ID">
+              <label>{Sample_Starting_ID}</label>
+            </input>
+          </group>
+        </group>
+        <trigger ref="Create_New_Sample">
+          <label>{Create_New_Sample}</label>
+        </trigger>
+        <input faims_read_only="true" ref="GPS_Status">
+          <label>{GPS_Status}</label>
+        </input>
+        <trigger ref="Check_for_Duplicates">
+          <label>{Check_for_Duplicates}</label>
+        </trigger>
+        <select1 appearance="compact" ref="Duplicate_ID_List" faims_style_class="fixedheightfive">
+          <label>{Duplicate_ID_List}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+      </group>
+      <group ref="Search" faims_scrollable="false">
+        <label>{Search}</label>
+        <group ref="Colgroup_0" faims_style="orientation">
+          <label/>
+          <group ref="Col_0" faims_style="even">
+            <label/>
+            <input ref="Search_Term">
+              <label>{Search_Term}</label>
+            </input>
+          </group>
+          <group ref="Col_1" faims_style="large">
+            <label/>
+            <trigger ref="Search_Button">
+              <label>{Search}</label>
+            </trigger>
+          </group>
+        </group>
+        <group ref="Colgroup_1" faims_style="orientation">
+          <label/>
+          <group ref="Col_0" faims_style="even">
+            <label/>
+            <select1 ref="Entity_Types">
+              <label>{Entity_Types}</label>
+              <item>
+                <label>Options not loaded</label>
+                <value>Options not loaded</value>
+              </item>
+            </select1>
+          </group>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <select1 ref="Select_User">
+              <label>{Select_User}</label>
+              <item>
+                <label>Options not loaded</label>
+                <value>Options not loaded</value>
+              </item>
+            </select1>
+          </group>
+        </group>
+        <select1 appearance="compact" ref="Entity_List">
+          <label>{Entity_List}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+      </group>
+      <group ref="Map" faims_scrollable="false">
+        <label>{Map}</label>
+        <input faims_map="true" ref="Map">
+          <label>{Map}</label>
+        </input>
+        <trigger ref="Center_Me_1">
+          <label>{Center_Me}</label>
+        </trigger>
+        <trigger ref="Create_Shape">
+          <label>{Create_Shape}</label>
+        </trigger>
+      </group>
+      <group ref="Vars" faims_hidden="true">
+        <label>{Vars}</label>
+        <input ref="Next_Water_Sample_ID" faims_style_class="required">
+          <label>{Next_Water_Sample_ID}</label>
+        </input>
+        <input ref="Next_Plant_Sample_ID" faims_style_class="required">
+          <label>{Next_Plant_Sample_ID}</label>
+        </input>
+        <input ref="Next_Soil_Sample_ID" faims_style_class="required">
+          <label>{Next_Soil_Sample_ID}</label>
+        </input>
+        <input ref="Next_Rock_Sample_ID" faims_style_class="required">
+          <label>{Next_Rock_Sample_ID}</label>
+        </input>
+        <trigger ref="New_Water_Sample">
+          <label>{New_Water_Sample}</label>
+        </trigger>
+        <trigger ref="New_Plant_Sample">
+          <label>{New_Plant_Sample}</label>
+        </trigger>
+        <trigger ref="New_Soil_Sample">
+          <label>{New_Soil_Sample}</label>
+        </trigger>
+        <trigger ref="New_Rock_Sample">
+          <label>{New_Rock_Sample}</label>
+        </trigger>
+      </group>
+    </group>
+    <group ref="Water_Sample" faims_archent_type="Water Sample">
+      <label>{Water_Sample}</label>
+      <group ref="Basic_Info">
+        <label>{Basic_Info}</label>
+        <group ref="Colgroup_1" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Water Sample Prefix" faims_attribute_type="measure" ref="Water_Sample_Prefix" faims_read_only="true">
+              <label>{Water_Sample_Prefix}</label>
+            </input>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Water Sample ID" faims_attribute_type="measure" ref="Water_Sample_ID" faims_read_only="true">
+              <label>{Water_Sample_ID}</label>
+            </input>
+          </group>
+        </group>
+        <group ref="Colgroup_2" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Water Sample timestamp" faims_attribute_type="measure" ref="Water_Sample_timestamp" faims_read_only="true">
+              <label>{Timestamp}</label>
+            </input>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Water Sample author" faims_attribute_type="measure" ref="Water_Sample_author" faims_read_only="true">
+              <label>{Author}</label>
+            </input>
+          </group>
+        </group>
+        <input faims_attribute_name="Station Deposit" faims_attribute_type="measure" ref="Station_Deposit" faims_read_only="true">
+          <label>{Station_Deposit}</label>
+        </input>
+        <input faims_attribute_name="Project" faims_attribute_type="measure" ref="Project" faims_read_only="true">
+          <label>{Project}</label>
+        </input>
+        <input faims_attribute_name="Area" faims_attribute_type="measure" ref="Area" faims_read_only="true">
+          <label>{Area}</label>
+        </input>
+        <input faims_attribute_name="Site Name" faims_attribute_type="measure" ref="Site_Name">
+          <label>{Site_Name}</label>
+        </input>
+        <select1 appearance="full" faims_attribute_name="Water Sample Observation Type" faims_attribute_type="vocab" ref="Observation_Type">
+          <label>{Observation_Type}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <group ref="Location_Number_Group">
+          <label/>
+        </group>
+        <group ref="Colgroup_3" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Latitude" faims_attribute_type="measure" ref="Latitude" faims_read_only="true">
+              <label>{Latitude}</label>
+            </input>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Longitude" faims_attribute_type="measure" ref="Longitude" faims_read_only="true">
+              <label>{Longitude}</label>
+            </input>
+          </group>
+        </group>
+        <group ref="Colgroup_4" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Northing" faims_attribute_type="measure" ref="Northing" faims_read_only="true">
+              <label>{Northing}</label>
+            </input>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Easting" faims_attribute_type="measure" ref="Easting" faims_read_only="true">
+              <label>{Easting}</label>
+            </input>
+          </group>
+          <group ref="Col_3" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Accuracy" faims_attribute_type="measure" ref="Accuracy" faims_read_only="true">
+              <label>{Accuracy}</label>
+            </input>
+          </group>
+        </group>
+        <trigger ref="Take_From_GPS_1">
+          <label>{Take_From_GPS}</label>
+        </trigger>
+        <input faims_attribute_name="Elevation Metres above Sea Level" faims_attribute_type="measure" ref="Elevation_Metres_above_Sea_Level">
+          <label>{Elevation__Metres_above_Sea_Level_}</label>
+        </input>
+        <input faims_attribute_name="Water Table" faims_attribute_type="measure" ref="Water_Table">
+          <label>{Water_Table}</label>
+        </input>
+        <input faims_attribute_name="Sample Depth" faims_attribute_type="measure" ref="Sample_Depth">
+          <label>{Sample_Depth}</label>
+        </input>
+        <input faims_attribute_name="Bottom Of Hole" faims_attribute_type="measure" ref="Bottom_Of_Hole">
+          <label>{Bottom_Of_Hole}</label>
+        </input>
+        <select faims_attribute_name="Samples Collected" faims_attribute_type="vocab" ref="Samples_Collected">
+          <label>{Samples_Collected}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select>
+        <input faims_attribute_name="Notes" faims_attribute_type="measure" ref="Notes">
+          <label>{Notes}</label>
+        </input>
+        <select faims_sync="true" type="camera" faims_attribute_name="Photos" faims_attribute_type="measure" ref="Photos">
+          <label>{Photos}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select>
+        <trigger ref="Photos_Button_1">
+          <label>{Photos}</label>
+        </trigger>
+        <select faims_sync="true" type="file" faims_attribute_name="Sketches" faims_attribute_type="measure" ref="Sketches">
+          <label>{Sketches}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select>
+        <trigger ref="Sketches_Button_1">
+          <label>{Sketches}</label>
+        </trigger>
+        <trigger ref="View_Sketch">
+          <label>{View_Sketch}</label>
+        </trigger>
+      </group>
+      <group ref="Codes">
+        <label>{Codes}</label>
+        <select1 faims_attribute_name="Hole Type" faims_attribute_type="vocab" ref="Hole_Type">
+          <label>{Hole_Type}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <select1 faims_attribute_name="Hole Lining" faims_attribute_type="vocab" ref="Hole_Lining">
+          <label>{Hole_Lining}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <select1 appearance="full" faims_attribute_name="Hole Open Closed" faims_attribute_type="vocab" ref="Hole_Open_Closed">
+          <label>{Hole_Open_Closed}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <select1 faims_attribute_name="Pipes In Hole" faims_attribute_type="vocab" ref="Pipes_In_Hole">
+          <label>{Pipes_In_Hole}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <group ref="Colgroup_1" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <select1 faims_attribute_name="Hole Angle" faims_attribute_type="vocab" ref="Hole_Angle">
+              <label>{Hole_Angle}</label>
+              <item>
+                <label>Options not loaded</label>
+                <value>Options not loaded</value>
+              </item>
+            </select1>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Estimated Angle" faims_attribute_type="measure" ref="Estimated_Angle">
+              <label>{Estimated_Angle}</label>
+            </input>
+          </group>
+        </group>
+        <select1 appearance="full" faims_attribute_name="Outflow Present" faims_attribute_type="vocab" ref="Outflow_Present">
+          <label>{Outflow_Present}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <select1 faims_attribute_name="Sampling Issues" faims_attribute_type="vocab" ref="Sampling_Issues">
+          <label>{Sampling_Issues}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+      </group>
+      <group ref="pH_Eh" faims_scrollable="false">
+        <label>{pH_Eh}</label>
+        <group ref="Colgroup_1" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Temperature" faims_attribute_type="measure" ref="Temperature" faims_style_class="required">
+              <label>{Temperature}</label>
+            </input>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Conductivity" faims_attribute_type="measure" ref="Conductivity" faims_style_class="required">
+              <label>{Conductivity}</label>
+            </input>
+          </group>
+        </group>
+        <trigger ref="Add_pH">
+          <label>{Add_pH}</label>
+        </trigger>
+        <select1 ref="Existing_pH_Records">
+          <label>{Existing_pH_Records}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <trigger ref="Add_Eh">
+          <label>{Add_Eh}</label>
+        </trigger>
+        <select1 ref="Existing_Eh_Records">
+          <label>{Existing_Eh_Records}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+      </group>
+      <group ref="Photolog" faims_scrollable="false">
+        <label>{Photolog}</label>
+        <trigger ref="New_Photolog">
+          <label>{New_Photolog}</label>
+        </trigger>
+        <select1 appearance="compact" ref="Existing_Photologs">
+          <label>{Existing_Photologs}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+      </group>
+    </group>
+    <group ref="Plant_Sample" faims_archent_type="Plant Sample">
+      <label>{Plant_Sample}</label>
+      <group ref="Basic_Info">
+        <label>{Basic_Info}</label>
+        <group ref="Colgroup_1" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Plant Sample Prefix" faims_attribute_type="measure" ref="Plant_Sample_Prefix" faims_read_only="true">
+              <label>{Plant_Sample_Prefix}</label>
+            </input>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Plant Sample ID" faims_attribute_type="measure" ref="Plant_Sample_ID" faims_read_only="true">
+              <label>{Plant_Sample_ID}</label>
+            </input>
+          </group>
+        </group>
+        <group ref="Colgroup_2" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Plant Sample timestamp" faims_attribute_type="measure" ref="Plant_Sample_timestamp" faims_read_only="true">
+              <label>{Timestamp}</label>
+            </input>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Plant Sample author" faims_attribute_type="measure" ref="Plant_Sample_author" faims_read_only="true">
+              <label>{Author}</label>
+            </input>
+          </group>
+        </group>
+        <input faims_attribute_name="Station Deposit" faims_attribute_type="measure" ref="Station_Deposit" faims_read_only="true">
+          <label>{Station_Deposit}</label>
+        </input>
+        <input faims_attribute_name="Project" faims_attribute_type="measure" ref="Project" faims_read_only="true">
+          <label>{Project}</label>
+        </input>
+        <input faims_attribute_name="Area" faims_attribute_type="measure" ref="Area" faims_read_only="true">
+          <label>{Area}</label>
+        </input>
+        <input faims_attribute_name="Site Name" faims_attribute_type="measure" ref="Site_Name">
+          <label>{Site_Name}</label>
+        </input>
+        <select1 appearance="full" faims_attribute_name="Plant Sample Observation Type" faims_attribute_type="vocab" ref="Observation_Type">
+          <label>{Observation_Type}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <group ref="Location_Number_Group">
+          <label/>
+        </group>
+        <group ref="Colgroup_3" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Latitude" faims_attribute_type="measure" ref="Latitude" faims_read_only="true">
+              <label>{Latitude}</label>
+            </input>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Longitude" faims_attribute_type="measure" ref="Longitude" faims_read_only="true">
+              <label>{Longitude}</label>
+            </input>
+          </group>
+        </group>
+        <group ref="Colgroup_4" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Northing" faims_attribute_type="measure" ref="Northing" faims_read_only="true">
+              <label>{Northing}</label>
+            </input>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Easting" faims_attribute_type="measure" ref="Easting" faims_read_only="true">
+              <label>{Easting}</label>
+            </input>
+          </group>
+          <group ref="Col_3" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Accuracy" faims_attribute_type="measure" ref="Accuracy" faims_read_only="true">
+              <label>{Accuracy}</label>
+            </input>
+          </group>
+        </group>
+        <trigger ref="Take_From_GPS_1">
+          <label>{Take_From_GPS}</label>
+        </trigger>
+        <input faims_attribute_name="Elevation Metres above Sea Level" faims_attribute_type="measure" ref="Elevation_Metres_above_Sea_Level">
+          <label>{Elevation__Metres_above_Sea_Level_}</label>
+        </input>
+        <input faims_attribute_name="Plant Species" faims_attribute_type="measure" ref="Plant_Species">
+          <label>{Plant_Species}</label>
+        </input>
+        <group ref="Colgroup_5" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Plant Height" faims_attribute_type="measure" ref="Plant_Height">
+              <label>{Plant_Height}</label>
+            </input>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Plant Width" faims_attribute_type="measure" ref="Plant_Width">
+              <label>{Plant_Width}</label>
+            </input>
+          </group>
+        </group>
+        <select faims_attribute_name="Soil Description" faims_attribute_type="vocab" ref="Soil_Description">
+          <label>{Soil_Description}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select>
+        <input faims_attribute_name="Landform Description" faims_attribute_type="measure" ref="Landform_Description">
+          <label>{Landform_Description}</label>
+        </input>
+        <input faims_attribute_name="Notes" faims_attribute_type="measure" ref="Notes">
+          <label>{Notes}</label>
+        </input>
+        <select faims_sync="true" type="camera" faims_attribute_name="Photos" faims_attribute_type="measure" ref="Photos">
+          <label>{Photos}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select>
+        <trigger ref="Photos_Button_1">
+          <label>{Photos}</label>
+        </trigger>
+        <select faims_sync="true" type="file" faims_attribute_name="Sketches" faims_attribute_type="measure" ref="Sketches">
+          <label>{Sketches}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select>
+        <trigger ref="Sketches_Button_1">
+          <label>{Sketches}</label>
+        </trigger>
+        <trigger ref="View_Sketch">
+          <label>{View_Sketch}</label>
+        </trigger>
+      </group>
+      <group ref="Photolog" faims_scrollable="false">
+        <label>{Photolog}</label>
+        <trigger ref="New_Photolog">
+          <label>{New_Photolog}</label>
+        </trigger>
+        <select1 appearance="compact" ref="Existing_Photologs">
+          <label>{Existing_Photologs}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+      </group>
+    </group>
+    <group ref="Soil_Sample" faims_archent_type="Soil Sample">
+      <label>{Soil_Sample}</label>
+      <group ref="Basic_Info">
+        <label>{Basic_Info}</label>
+        <group ref="Colgroup_1" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Soil Sample Prefix" faims_attribute_type="measure" ref="Soil_Sample_Prefix" faims_read_only="true">
+              <label>{Soil_Sample_Prefix}</label>
+            </input>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Soil Sample ID" faims_attribute_type="measure" ref="Soil_Sample_ID" faims_read_only="true">
+              <label>{Soil_Sample_ID}</label>
+            </input>
+          </group>
+        </group>
+        <group ref="Colgroup_2" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Soil Sample timestamp" faims_attribute_type="measure" ref="Soil_Sample_timestamp" faims_read_only="true">
+              <label>{Timestamp}</label>
+            </input>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Soil Sample author" faims_attribute_type="measure" ref="Soil_Sample_author" faims_read_only="true">
+              <label>{Author}</label>
+            </input>
+          </group>
+        </group>
+        <input faims_attribute_name="Station Deposit" faims_attribute_type="measure" ref="Station_Deposit" faims_read_only="true">
+          <label>{Station_Deposit}</label>
+        </input>
+        <input faims_attribute_name="Project" faims_attribute_type="measure" ref="Project" faims_read_only="true">
+          <label>{Project}</label>
+        </input>
+        <input faims_attribute_name="Area" faims_attribute_type="measure" ref="Area" faims_read_only="true">
+          <label>{Area}</label>
+        </input>
+        <input faims_attribute_name="Site Name" faims_attribute_type="measure" ref="Site_Name">
+          <label>{Site_Name}</label>
+        </input>
+        <select1 appearance="full" faims_attribute_name="Soil Sample Observation Type" faims_attribute_type="vocab" ref="Observation_Type">
+          <label>{Observation_Type}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <group ref="Location_Number_Group">
+          <label/>
+        </group>
+        <group ref="Colgroup_3" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Latitude" faims_attribute_type="measure" ref="Latitude" faims_read_only="true">
+              <label>{Latitude}</label>
+            </input>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Longitude" faims_attribute_type="measure" ref="Longitude" faims_read_only="true">
+              <label>{Longitude}</label>
+            </input>
+          </group>
+        </group>
+        <group ref="Colgroup_4" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Northing" faims_attribute_type="measure" ref="Northing" faims_read_only="true">
+              <label>{Northing}</label>
+            </input>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Easting" faims_attribute_type="measure" ref="Easting" faims_read_only="true">
+              <label>{Easting}</label>
+            </input>
+          </group>
+          <group ref="Col_3" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Accuracy" faims_attribute_type="measure" ref="Accuracy" faims_read_only="true">
+              <label>{Accuracy}</label>
+            </input>
+          </group>
+        </group>
+        <trigger ref="Take_From_GPS_1">
+          <label>{Take_From_GPS}</label>
+        </trigger>
+        <input faims_attribute_name="Elevation Metres above Sea Level" faims_attribute_type="measure" ref="Elevation_Metres_above_Sea_Level">
+          <label>{Elevation__Metres_above_Sea_Level_}</label>
+        </input>
+        <input faims_attribute_name="Depth" faims_attribute_type="measure" ref="Depth">
+          <label>{Depth}</label>
+        </input>
+        <input faims_attribute_name="Colour" faims_attribute_type="measure" ref="Colour">
+          <label>{Colour}</label>
+        </input>
+        <select1 appearance="full" faims_attribute_name="Lag" faims_attribute_type="vocab" ref="Lag">
+          <label>{Lag}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <select faims_attribute_name="Soil Texture" faims_attribute_type="vocab" ref="Soil_Texture">
+          <label>{Soil_Texture}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select>
+        <select1 faims_attribute_name="Geology" faims_attribute_type="vocab" ref="Geology">
+          <label>{Geology}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <select1 appearance="full" faims_attribute_name="Drainage" faims_attribute_type="vocab" ref="Drainage">
+          <label>{Drainage}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <select1 appearance="full" faims_attribute_name="Contamination" faims_attribute_type="vocab" ref="Contamination">
+          <label>{Contamination}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <select1 faims_attribute_name="Regolith Type" faims_attribute_type="vocab" ref="Regolith_Type">
+          <label>{Regolith_Type}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <select1 faims_attribute_name="Landform" faims_attribute_type="vocab" ref="Landform">
+          <label>{Landform}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <input faims_attribute_name="Vegetation" faims_attribute_type="measure" ref="Vegetation">
+          <label>{Vegetation}</label>
+        </input>
+        <input faims_attribute_name="Notes" faims_attribute_type="measure" ref="Notes">
+          <label>{Notes}</label>
+        </input>
+        <select faims_sync="true" type="camera" faims_attribute_name="Photos" faims_attribute_type="measure" ref="Photos">
+          <label>{Photos}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select>
+        <trigger ref="Photos_Button_1">
+          <label>{Photos}</label>
+        </trigger>
+        <select faims_sync="true" type="file" faims_attribute_name="Sketches" faims_attribute_type="measure" ref="Sketches">
+          <label>{Sketches}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select>
+        <trigger ref="Sketches_Button_1">
+          <label>{Sketches}</label>
+        </trigger>
+        <trigger ref="View_Sketch">
+          <label>{View_Sketch}</label>
+        </trigger>
+      </group>
+      <group ref="Photolog" faims_scrollable="false">
+        <label>{Photolog}</label>
+        <trigger ref="New_Photolog">
+          <label>{New_Photolog}</label>
+        </trigger>
+        <select1 appearance="compact" ref="Existing_Photologs">
+          <label>{Existing_Photologs}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+      </group>
+    </group>
+    <group ref="Rock_Sample" faims_archent_type="Rock Sample">
+      <label>{Rock_Sample}</label>
+      <group ref="Basic_Info">
+        <label>{Basic_Info}</label>
+        <group ref="Colgroup_1" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Rock Sample Prefix" faims_attribute_type="measure" ref="Rock_Sample_Prefix" faims_read_only="true">
+              <label>{Rock_Sample_Prefix}</label>
+            </input>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Rock Sample ID" faims_attribute_type="measure" ref="Rock_Sample_ID" faims_read_only="true">
+              <label>{Rock_Sample_ID}</label>
+            </input>
+          </group>
+        </group>
+        <group ref="Colgroup_2" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Rock Sample timestamp" faims_attribute_type="measure" ref="Rock_Sample_timestamp" faims_read_only="true">
+              <label>{Timestamp}</label>
+            </input>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Rock Sample author" faims_attribute_type="measure" ref="Rock_Sample_author" faims_read_only="true">
+              <label>{Author}</label>
+            </input>
+          </group>
+        </group>
+        <input faims_attribute_name="Station Deposit" faims_attribute_type="measure" ref="Station_Deposit" faims_read_only="true">
+          <label>{Station_Deposit}</label>
+        </input>
+        <input faims_attribute_name="Project" faims_attribute_type="measure" ref="Project" faims_read_only="true">
+          <label>{Project}</label>
+        </input>
+        <input faims_attribute_name="Area" faims_attribute_type="measure" ref="Area" faims_read_only="true">
+          <label>{Area}</label>
+        </input>
+        <input faims_attribute_name="Site Name" faims_attribute_type="measure" ref="Site_Name">
+          <label>{Site_Name}</label>
+        </input>
+        <select1 appearance="full" faims_attribute_name="Rock Sample Observation Type" faims_attribute_type="vocab" ref="Observation_Type">
+          <label>{Observation_Type}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <group ref="Location_Number_Group">
+          <label/>
+        </group>
+        <group ref="Colgroup_3" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Latitude" faims_attribute_type="measure" ref="Latitude" faims_read_only="true">
+              <label>{Latitude}</label>
+            </input>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Longitude" faims_attribute_type="measure" ref="Longitude" faims_read_only="true">
+              <label>{Longitude}</label>
+            </input>
+          </group>
+        </group>
+        <group ref="Colgroup_4" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Northing" faims_attribute_type="measure" ref="Northing" faims_read_only="true">
+              <label>{Northing}</label>
+            </input>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Easting" faims_attribute_type="measure" ref="Easting" faims_read_only="true">
+              <label>{Easting}</label>
+            </input>
+          </group>
+          <group ref="Col_3" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Accuracy" faims_attribute_type="measure" ref="Accuracy" faims_read_only="true">
+              <label>{Accuracy}</label>
+            </input>
+          </group>
+        </group>
+        <trigger ref="Take_From_GPS_1">
+          <label>{Take_From_GPS}</label>
+        </trigger>
+        <input faims_attribute_name="Elevation Metres above Sea Level" faims_attribute_type="measure" ref="Elevation_Metres_above_Sea_Level">
+          <label>{Elevation__Metres_above_Sea_Level_}</label>
+        </input>
+      </group>
+      <group ref="Measurements">
+        <label>{Measurements}</label>
+        <group ref="Colgroup_1" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Bedding Strike" faims_attribute_type="measure" ref="Bedding_Strike">
+              <label>{Bedding_Strike}</label>
+            </input>
+            <input faims_attribute_name="Cleavage Strike" faims_attribute_type="measure" ref="Cleavage_Strike">
+              <label>{Cleavage_Strike}</label>
+            </input>
+            <input faims_attribute_name="Foliation Strike" faims_attribute_type="measure" ref="Foliation_Strike">
+              <label>{Foliation_Strike}</label>
+            </input>
+            <input faims_attribute_name="Veins 1 Strike" faims_attribute_type="measure" ref="Veins_1_Strike">
+              <label>{Veins_1_Strike}</label>
+            </input>
+            <input faims_attribute_name="Veins 2 Strike" faims_attribute_type="measure" ref="Veins_2_Strike">
+              <label>{Veins_2_Strike}</label>
+            </input>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Bedding Dip" faims_attribute_type="measure" ref="Bedding_Dip">
+              <label>{Bedding_Dip}</label>
+            </input>
+            <input faims_attribute_name="Cleavage Dip" faims_attribute_type="measure" ref="Cleavage_Dip">
+              <label>{Cleavage_Dip}</label>
+            </input>
+            <input faims_attribute_name="Foliation Dip" faims_attribute_type="measure" ref="Foliation_Dip">
+              <label>{Foliation_Dip}</label>
+            </input>
+            <input faims_attribute_name="Veins 1 Dip" faims_attribute_type="measure" ref="Veins_1_Dip">
+              <label>{Veins_1_Dip}</label>
+            </input>
+            <input faims_attribute_name="Veins 2 Dip" faims_attribute_type="measure" ref="Veins_2_Dip">
+              <label>{Veins_2_Dip}</label>
+            </input>
+          </group>
+        </group>
+        <input faims_attribute_name="Other Structural Measurements" faims_attribute_type="measure" ref="Other_Structural_Measurements">
+          <label>{Other_Structural_Measurements}</label>
+        </input>
+        <group ref="Colgroup_2" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Fold Axis Plunge" faims_attribute_type="measure" ref="Fold_Axis_Plunge">
+              <label>{Fold_Axis_Plunge}</label>
+            </input>
+            <input faims_attribute_name="Mineral Lineation Plunge" faims_attribute_type="measure" ref="Mineral_Lineation_Plunge">
+              <label>{Mineral_Lineation_Plunge}</label>
+            </input>
+            <input faims_attribute_name="Stretching Lineation Plunge" faims_attribute_type="measure" ref="Stretching_Lineation_Plunge">
+              <label>{Stretching_Lineation_Plunge}</label>
+            </input>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Fold Axis Azimuth" faims_attribute_type="measure" ref="Fold_Axis_Azimuth">
+              <label>{Fold_Axis_Azimuth}</label>
+            </input>
+            <input faims_attribute_name="Mineral Lineation Azimuth" faims_attribute_type="measure" ref="Mineral_Lineation_Azimuth">
+              <label>{Mineral_Lineation_Azimuth}</label>
+            </input>
+            <input faims_attribute_name="Stretching Lineation Azimuth" faims_attribute_type="measure" ref="Stretching_Lineation_Azimuth">
+              <label>{Stretching_Lineation_Azimuth}</label>
+            </input>
+          </group>
+        </group>
+        <input faims_attribute_name="Other Lineation" faims_attribute_type="measure" ref="Other_Lineation">
+          <label>{Other_Lineation}</label>
+        </input>
+      </group>
+      <group ref="Lithological_Info">
+        <label>{Lithological_Info}</label>
+        <select1 faims_attribute_name="Lithology" faims_attribute_type="vocab" ref="Lithology">
+          <label>{Lithology}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <select1 faims_attribute_name="Fineness Inclusion Size" faims_attribute_type="vocab" ref="Fineness_Inclusion_Size">
+          <label>{Fineness_Inclusion_Size}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <select1 faims_attribute_name="Grain Size" faims_attribute_type="vocab" ref="Grain_Size">
+          <label>{Grain_Size}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <select1 faims_attribute_name="Sorting" faims_attribute_type="vocab" ref="Sorting">
+          <label>{Sorting}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <input faims_attribute_name="Other Lithological Descriptors" faims_attribute_type="measure" ref="Other_Lithological_Descriptors">
+          <label>{Other_Lithological_Descriptors}</label>
+        </input>
+        <input faims_attribute_name="Stratigraphic Unit" faims_attribute_type="measure" ref="Stratigraphic_Unit">
+          <label>{Stratigraphic_Unit}</label>
+        </input>
+        <input faims_attribute_name="Large-Scale Structure" faims_attribute_type="measure" ref="Large-Scale_Structure">
+          <label>{Large_Scale_Structure}</label>
+        </input>
+        <input faims_attribute_name="Alteration" faims_attribute_type="measure" ref="Alteration">
+          <label>{Alteration}</label>
+        </input>
+        <input faims_attribute_name="Veining" faims_attribute_type="measure" ref="Veining">
+          <label>{Veining}</label>
+        </input>
+        <input faims_attribute_name="Notes" faims_attribute_type="measure" ref="Notes">
+          <label>{Notes}</label>
+        </input>
+        <select faims_sync="true" type="camera" faims_attribute_name="Photos" faims_attribute_type="measure" ref="Photos">
+          <label>{Photos}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select>
+        <trigger ref="Photos_Button_1">
+          <label>{Photos}</label>
+        </trigger>
+        <select faims_sync="true" type="file" faims_attribute_name="Sketches" faims_attribute_type="measure" ref="Sketches">
+          <label>{Sketches}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select>
+        <trigger ref="Sketches_Button_1">
+          <label>{Sketches}</label>
+        </trigger>
+        <trigger ref="View_Sketch">
+          <label>{View_Sketch}</label>
+        </trigger>
+      </group>
+      <group ref="Photolog" faims_scrollable="false">
+        <label>{Photolog}</label>
+        <trigger ref="New_Photolog">
+          <label>{New_Photolog}</label>
+        </trigger>
+        <select1 appearance="compact" ref="Existing_Photologs">
+          <label>{Existing_Photologs}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+      </group>
+    </group>
+    <group ref="pH" faims_archent_type="pH">
+      <label>{pH}</label>
+      <group ref="pH">
+        <label>{pH}</label>
+        <input faims_attribute_name="pH" faims_attribute_type="measure" ref="pH">
+          <label>{pH}</label>
+        </input>
+        <input faims_attribute_name="pH timestamp" faims_attribute_type="measure" ref="pH_timestamp" faims_read_only="true">
+          <label>{Timestamp}</label>
+        </input>
+        <input faims_attribute_name="Preferred" faims_attribute_type="measure" ref="Preferred">
+          <label>{Preferred}</label>
+        </input>
+      </group>
+    </group>
+    <group ref="Eh" faims_archent_type="Eh">
+      <label>{Eh}</label>
+      <group ref="Eh">
+        <label>{Eh}</label>
+        <input faims_attribute_name="Eh" faims_attribute_type="measure" ref="Eh">
+          <label>{Eh}</label>
+        </input>
+        <input faims_attribute_name="Eh timestamp" faims_attribute_type="measure" ref="Eh_timestamp" faims_read_only="true">
+          <label>{Timestamp}</label>
+        </input>
+        <input faims_attribute_name="Preferred" faims_attribute_type="measure" ref="Preferred">
+          <label>{Preferred}</label>
+        </input>
+      </group>
+    </group>
+    <group ref="Photolog" faims_archent_type="Photolog">
+      <label>{Photolog}</label>
+      <group ref="Photolog">
+        <label>{Photolog}</label>
+        <input faims_attribute_name="Photo ID" faims_attribute_type="measure" ref="Photo_ID">
+          <label>{Photo_ID}</label>
+        </input>
+        <input faims_attribute_name="Photolog timestamp" faims_attribute_type="measure" ref="Photolog_timestamp" faims_read_only="true">
+          <label>{Timestamp}</label>
+        </input>
+        <input faims_attribute_name="Photo Note" faims_attribute_type="measure" ref="Photo_Note">
+          <label>{Photo_Note}</label>
+        </input>
+      </group>
+    </group>
+    <group ref="Shape" faims_archent_type="Shape">
+      <label>{Shape}</label>
+      <group ref="Shape_Note">
+        <label>{Shape_Note}</label>
+        <input faims_attribute_name="Label" faims_attribute_type="measure" ref="Label">
+          <label>{Label}</label>
+        </input>
+        <input faims_attribute_name="Note" faims_attribute_type="measure" ref="Note">
+          <label>{Note}</label>
+        </input>
+      </group>
+    </group>
+  </h:body>
+</h:html>
