@@ -1,5 +1,5 @@
 /*
- * GENERATED WITH FAIMS-TOOLS, SHA1: ad14a4b50e5dcfaaaa3c3deeaf47717f384e4011
+ * GENERATED WITH FAIMS-TOOLS, SHA1: 0efee94b495fa8fd66fb45c242897ace0396feb5
  */
 import android.util.Log;
 import android.os.Build.MODEL;
@@ -19,7 +19,7 @@ String parentTabgroup;  // Used to allow entities to be saved as children
 String parentTabgroup__;// The tab group which was previously displayed
 String redirectTab;     // makes newTab work as expected
 String username = "";
-String userid   = "";
+String userId   = "";
 List   autoSaveGeo = null;
 List   autoSaveAttrs = null;
 
@@ -457,6 +457,7 @@ DATA_REFS.add("Water_Sample/Basic_Info/Project");
 DATA_REFS.add("Water_Sample/Basic_Info/Area");
 DATA_REFS.add("Water_Sample/Basic_Info/Site_Name");
 DATA_REFS.add("Water_Sample/Basic_Info/Observation_Type");
+DATA_REFS.add("Water_Sample/Basic_Info/Location_Number");
 DATA_REFS.add("Water_Sample/Basic_Info/SRID");
 DATA_REFS.add("Water_Sample/Basic_Info/Latitude");
 DATA_REFS.add("Water_Sample/Basic_Info/Longitude");
@@ -497,6 +498,7 @@ DATA_REFS.add("Plant_Sample/Basic_Info/Project");
 DATA_REFS.add("Plant_Sample/Basic_Info/Area");
 DATA_REFS.add("Plant_Sample/Basic_Info/Site_Name");
 DATA_REFS.add("Plant_Sample/Basic_Info/Observation_Type");
+DATA_REFS.add("Plant_Sample/Basic_Info/Location_Number");
 DATA_REFS.add("Plant_Sample/Basic_Info/SRID");
 DATA_REFS.add("Plant_Sample/Basic_Info/Latitude");
 DATA_REFS.add("Plant_Sample/Basic_Info/Longitude");
@@ -522,6 +524,7 @@ DATA_REFS.add("Soil_Sample/Basic_Info/Project");
 DATA_REFS.add("Soil_Sample/Basic_Info/Area");
 DATA_REFS.add("Soil_Sample/Basic_Info/Site_Name");
 DATA_REFS.add("Soil_Sample/Basic_Info/Observation_Type");
+DATA_REFS.add("Soil_Sample/Basic_Info/Location_Number");
 DATA_REFS.add("Soil_Sample/Basic_Info/SRID");
 DATA_REFS.add("Soil_Sample/Basic_Info/Latitude");
 DATA_REFS.add("Soil_Sample/Basic_Info/Longitude");
@@ -552,6 +555,7 @@ DATA_REFS.add("Rock_Sample/Basic_Info/Project");
 DATA_REFS.add("Rock_Sample/Basic_Info/Area");
 DATA_REFS.add("Rock_Sample/Basic_Info/Site_Name");
 DATA_REFS.add("Rock_Sample/Basic_Info/Observation_Type");
+DATA_REFS.add("Rock_Sample/Basic_Info/Location_Number");
 DATA_REFS.add("Rock_Sample/Basic_Info/SRID");
 DATA_REFS.add("Rock_Sample/Basic_Info/Latitude");
 DATA_REFS.add("Rock_Sample/Basic_Info/Longitude");
@@ -987,7 +991,13 @@ String getArchEntTypePascalCased(String ref) {
 //     Only one synchronous job is counted, and that's loading this script; that
 // is why this variable is initialised to 1.
 AtomicInteger NUM_JOBS_TILL_LOADED = new AtomicInteger(1);
+AtomicInteger NUM_FETCHES_OCCURING = new AtomicInteger(0);
 
+final int PRECEDENCE_MIN = 0;
+final int PRECEDENCE_MID = Integer.MAX_VALUE/2;
+final int PRECEDENCE_MAX = Integer.MAX_VALUE;
+
+int NUM_EVTS = 0;
 Map ON_EVT_CONDS  = new HashMap(); // (ref, event type) -> callback statement
 Map ON_EVT_STMTS  = new HashMap(); // (ref, event type) -> callback statement
 Set CUSTOM_EVENTS = new HashSet(); // Events not handled by `onEvent`
@@ -1002,20 +1012,51 @@ CUSTOM_EVENTS.add("leave");
 CUSTOM_EVENTS.add("prefetch");
 CUSTOM_EVENTS.add("save");
 
+Prioritised(o, int priority) {
+  int i = NUM_EVTS++;
+  return this;
+}
+
+Comparator PrioritisedComparator() {
+  int compare(a, b) {
+    if (a.priority > b.priority) return -1;
+    if (a.priority < b.priority) return +1;
+    if (a.i        > b.i       ) return +1;
+    if (a.i        < b.i       ) return -1;
+    return 0;
+  }
+  boolean equals(a, b) { return compare(a, b) == 0; }
+  return this;
+}
+
 String getOnEventKey(String ref, String event) {
   return ref + SEP + event;
 }
 
-/* Returns the set of statements bound to an element at `ref` and occuring on
+TreeSet getOnEventPriorities(String ref, String event, Map map) {
+  String  key = getOnEventKey(ref, event);
+  TreeSet val = (TreeSet) map.get(key);
+
+  if (val == null) return new TreeSet(PrioritisedComparator());
+  else             return val;
+}
+
+/* Returns the set of statements bound to an element at `ref` and occurring on
  * `event`.
  */
-
 ArrayList getOnEventVal(String ref, String event, Map map) {
-  String    key = getOnEventKey(ref, event);
-  ArrayList val = (ArrayList) map.get(key);
+  String    key  = getOnEventKey(ref, event);
+  TreeSet   val  = (TreeSet) map.get(key);
+  ArrayList val_ = new ArrayList();
 
-  if (val == null) return new ArrayList();
-  else             return val;
+  // Unpack the inner objects (Strings) from the `Prioritised` objects, put them
+  // in `val_`.
+  if (val == null)
+    val = new TreeSet();
+  for (v : val)
+    val_.add(v.o);
+
+  return val_;
 }
 
 ArrayList getConds(String ref, String event) {
@@ -1026,7 +1067,7 @@ ArrayList getStatements(String ref, String event) {
   return getOnEventVal(ref, event, ON_EVT_STMTS);
 }
 
-void addToOnEventVal(
+void addToOnEventPriorities(
     String ref,
     String event,
     String statement,
@@ -1043,17 +1084,15 @@ void addToOnEventVal(
   // `precedence` controls the order that statements are executed. Roughly,
   // a statement with a higher precedence is executed before a statement with
   // a lower precedence.
+  assert(precedence >= 0);
+  assert(precedence <= Integer.MAX_VALUE);
 
-  String    key = getOnEventKey(ref, event);
-  ArrayList val = getOnEventVal(ref, event, map);
+  String  key = getOnEventKey       (ref, event);
+  TreeSet val = getOnEventPriorities(ref, event, map);
 
-  ArrayList statements = val;
+  TreeSet statements = val;
 
-  precedence = Math.max(precedence, 0);
-  precedence = Math.min(precedence, statements.size());
-  precedence = statements.size() - precedence;
-
-  statements.add(precedence, statement);
+  statements.add(Prioritised(statement, precedence));
   map.put(key, statements);
 }
 
@@ -1098,25 +1137,31 @@ boolean hasOnEvent(String ref, String event, String statement) {
 }
 
 void delOnEvent(String ref, String event, String statement) {
-  while(getStatements(ref, event).remove(statement));
+  String  key = getOnEventKey(ref, event);
+  TreeSet val = (TreeSet) ON_EVT_STMTS.get(key);
+
+  if (val == null)
+    return;
+
+  for (Iterator i = val.iterator(); i.hasNext(); ) {
+    obj = i.next();
+    if (statement.equals(obj.o))
+      i.remove();
+  }
 }
 
 void addOnEvent(String ref, String event, String statement, int precedence) {
   validateRef(ref);
-
-  // Calling `delOnEvent()` first ensures statement occurs once in the list, at
-  // the end.
-  delOnEvent     (ref, event, statement);
-  addToOnEventVal(ref, event, statement, precedence, ON_EVT_STMTS);
+  addToOnEventPriorities(ref, event, statement, precedence, ON_EVT_STMTS);
 }
 
 void addOnEventCond(String ref, String event, String check) {
   validateRef    (ref);
-  addToOnEventVal(ref, event, check, 0, ON_EVT_CONDS);
+  addToOnEventPriorities(ref, event, check, PRECEDENCE_MID, ON_EVT_CONDS);
 }
 
 void addOnEvent(String ref, String event, String statement) {
-  addOnEvent(ref, event, statement, 0);
+  addOnEvent(ref, event, statement, PRECEDENCE_MID);
 }
 
 void addOnEvent(String ref, String event, Callable statement, int precedence) {
@@ -1125,7 +1170,7 @@ void addOnEvent(String ref, String event, Callable statement, int precedence) {
 }
 
 void addOnEvent(String ref, String event, Callable statement) {
-  addOnEvent(ref, event, statement, 0);
+  addOnEvent(ref, event, statement, PRECEDENCE_MID);
 }
 
 void addOnEventCond(String ref, String event, Callable check) {
@@ -1192,6 +1237,10 @@ void decAndExecIfModuleLoaded() {
     executeOnEvent("module", "load");
 }
 
+boolean isDoingFetchEvent() {
+  return NUM_FETCHES_OCCURING.get() > 0;
+}
+
 /* Establishes `onEvent` bindings necessary to make the "leave" event work. The
  * "leave" event is really triggered upon "show" of another tab.
  */
@@ -1202,11 +1251,29 @@ for (tg : getTabGroups()) {
 
   // Update (previously) displayed tab group
   callback = fun2str("updateDisplayedTabGroup", ref);
-  addOnEvent(ref, event, callback);
+  addOnEvent(ref, event, callback, PRECEDENCE_MAX);
 
   // Trigger on leave tab group event
   callback = "onLeaveTabGroup()";
-  addOnEvent(ref, event, callback);
+  addOnEvent(ref, event, callback, PRECEDENCE_MAX);
+}
+
+for (tg : getTabGroups()) {
+  if (isFlaggedNodata(tg))
+    continue;
+
+  addOnEvent(
+      tg,
+      "prefetch",
+      "NUM_FETCHES_OCCURING.incrementAndGet()",
+      Integer.MAX_VALUE
+  );
+  addOnEvent(
+      tg,
+      "fetch",
+      "NUM_FETCHES_OCCURING.decrementAndGet()",
+      0
+  );
 }
 
 /******************************************************************************/
@@ -1554,38 +1621,38 @@ void setUpTypeHierarchy() {
   //- 
   //  - Water Sample
   //    - Photolog
-  //  - Rock Sample
-  //    - Photolog
   //  - Soil Sample
+  //    - Photolog
+  //  - Shape
+  //  - Rock Sample
   //    - Photolog
   //  - Plant Sample
   //    - Photolog
-  //  - Shape
 
   n0 = Tree("", 1);
   n1 = Tree("Water Sample", 1);
   n2 = Tree("Photolog", 1);
-  n3 = Tree("Rock Sample", 1);
+  n3 = Tree("Soil Sample", 1);
   n4 = Tree("Photolog", 1);
-  n5 = Tree("Soil Sample", 1);
-  n6 = Tree("Photolog", 1);
-  n7 = Tree("Plant Sample", 1);
-  n8 = Tree("Photolog", 1);
-  n9 = Tree("Shape", 1);
+  n5 = Tree("Shape", 1);
+  n6 = Tree("Rock Sample", 1);
+  n7 = Tree("Photolog", 1);
+  n8 = Tree("Plant Sample", 1);
+  n9 = Tree("Photolog", 1);
 
   n0.addChild(n1);
   n0.addChild(n3);
   n0.addChild(n5);
-  n0.addChild(n7);
-  n0.addChild(n9);
+  n0.addChild(n6);
+  n0.addChild(n8);
 
   n1.addChild(n2);
 
   n3.addChild(n4);
 
-  n5.addChild(n6);
+  n6.addChild(n7);
 
-  n7.addChild(n8);
+  n8.addChild(n9);
 
 
   PERF_TYPE_TREE = n0;
@@ -5060,6 +5127,7 @@ boolean hasValueInField(List vals, String ref) {
 }
 
 void hideDynamicField(String ref) {
+  print("hiding...");
   String uuid       = getUuid(getTabGroupRef(ref));
   String attribName = getAttributeName(ref);
   String valView;
@@ -5072,11 +5140,11 @@ void hideDynamicField(String ref) {
   if (!isNull(valView)) {
     // Flag Feature Type as `deleted`.
     q  = " INSERT INTO aentvalue (UUID, UserID, AttributeID, Deleted)";
-    q += " SELECT '{uuid}', {userid}, attributeid, 1";
+    q += " SELECT '{uuid}', {userId}, attributeid, 1";
     q += " FROM  attributekey";
     q += " WHERE attributename = '{attributename}'";
     q  = replaceFirst(q, "{uuid}", uuid);
-    q  = replaceFirst(q, "{userid}", userid);
+    q  = replaceFirst(q, "{userId}", userId);
     q  = replaceFirst(q, "{attributename}", attribName);
 
     fetchOne(q);
@@ -5084,6 +5152,7 @@ void hideDynamicField(String ref) {
 }
 
 void showDynamicField(String ref) {
+  print("showing...");
   String refGroup = ref + "_Group";
 
   if (hasView(ref)) return;
@@ -5118,11 +5187,26 @@ Callable ShowDynamicField(String ref) {
   return this;
 }
 
-Callable UpdateDynamicField(String refToUpdate, String refToCheck, List vals) {
+Callable UpdateDynamicField(
+    String refToUpdate,
+    String refToCheck,
+    List vals,
+    boolean enableDuringFetchEvent
+) {
   void call() {
-    updateDynamicField(refToUpdate, refToCheck, vals);
+    print("is doing: " + isDoingFetchEvent());
+    if (!isDoingFetchEvent() || enableDuringFetchEvent)
+      updateDynamicField(refToUpdate, refToCheck, vals);
   }
   return this;
+}
+
+Callable UpdateDynamicField(
+    String refToUpdate,
+    String refToCheck,
+    List vals
+) {
+  return UpdateDynamicField(refToUpdate, refToCheck, vals, true);
 }
 
 // TODO: Add to autogen
@@ -5151,12 +5235,13 @@ String getArch16nKeyFromVal(String val) {
 }
 
 void showFieldIfEqual(String refToShow, String refToCheck, List vals) {
-  Callable update = UpdateDynamicField(refToShow, refToCheck, vals);
-  Callable show   = ShowDynamicField  (refToShow);
+  Callable fetchUpdate = UpdateDynamicField(refToShow, refToCheck, vals);
+  Callable clickUpdate = UpdateDynamicField(refToShow, refToCheck, vals, false);
+  Callable show        = ShowDynamicField  (refToShow);
 
   addOnEvent(getTabGroupRef(refToShow), "prefetch", show);
-  addOnEvent(getTabGroupRef(refToShow), "fetch",    update);
-  addOnEvent(refToCheck,                "click",    update);
+  addOnEvent(getTabGroupRef(refToShow), "fetch",    fetchUpdate);
+  addOnEvent(refToCheck,                "click",    clickUpdate);
 }
 
 void showFieldIfEqual(String refToShow, String refToCheck, String vals) {

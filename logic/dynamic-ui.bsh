@@ -50,6 +50,7 @@ boolean hasValueInField(List vals, String ref) {
 }
 
 void hideDynamicField(String ref) {
+  print("hiding...");
   String uuid       = getUuid(getTabGroupRef(ref));
   String attribName = getAttributeName(ref);
   String valView;
@@ -62,11 +63,11 @@ void hideDynamicField(String ref) {
   if (!isNull(valView)) {
     // Flag Feature Type as `deleted`.
     q  = " INSERT INTO aentvalue (UUID, UserID, AttributeID, Deleted)";
-    q += " SELECT '{uuid}', {userid}, attributeid, 1";
+    q += " SELECT '{uuid}', {userId}, attributeid, 1";
     q += " FROM  attributekey";
     q += " WHERE attributename = '{attributename}'";
     q  = replaceFirst(q, "{uuid}", uuid);
-    q  = replaceFirst(q, "{userid}", userid);
+    q  = replaceFirst(q, "{userId}", userId);
     q  = replaceFirst(q, "{attributename}", attribName);
 
     fetchOne(q);
@@ -74,6 +75,7 @@ void hideDynamicField(String ref) {
 }
 
 void showDynamicField(String ref) {
+  print("showing...");
   String refGroup = ref + "_Group";
 
   if (hasView(ref)) return;
@@ -108,11 +110,25 @@ Callable ShowDynamicField(String ref) {
   return this;
 }
 
-Callable UpdateDynamicField(String refToUpdate, String refToCheck, List vals) {
+Callable UpdateDynamicField(
+    String refToUpdate,
+    String refToCheck,
+    List vals,
+    boolean enableDuringFetchEvent
+) {
   void call() {
-    updateDynamicField(refToUpdate, refToCheck, vals);
+    if (!isDoingFetchEvent() || enableDuringFetchEvent)
+      updateDynamicField(refToUpdate, refToCheck, vals);
   }
   return this;
+}
+
+Callable UpdateDynamicField(
+    String refToUpdate,
+    String refToCheck,
+    List vals
+) {
+  return UpdateDynamicField(refToUpdate, refToCheck, vals, true);
 }
 
 // TODO: Add to autogen
@@ -141,12 +157,13 @@ String getArch16nKeyFromVal(String val) {
 }
 
 void showFieldIfEqual(String refToShow, String refToCheck, List vals) {
-  Callable update = UpdateDynamicField(refToShow, refToCheck, vals);
-  Callable show   = ShowDynamicField  (refToShow);
+  Callable fetchUpdate = UpdateDynamicField(refToShow, refToCheck, vals);
+  Callable clickUpdate = UpdateDynamicField(refToShow, refToCheck, vals, false);
+  Callable show        = ShowDynamicField  (refToShow);
 
   addOnEvent(getTabGroupRef(refToShow), "prefetch", show);
-  addOnEvent(getTabGroupRef(refToShow), "fetch",    update);
-  addOnEvent(refToCheck,                "click",    update);
+  addOnEvent(getTabGroupRef(refToShow), "fetch",    fetchUpdate);
+  addOnEvent(refToCheck,                "click",    clickUpdate);
 }
 
 void showFieldIfEqual(String refToShow, String refToCheck, String vals) {
