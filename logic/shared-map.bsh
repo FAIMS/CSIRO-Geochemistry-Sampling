@@ -1,5 +1,0 @@
-/******************************** SHARED: MAP *********************************/
-final String MAP_REF = "Project/Map/Map";
-
-DATA_ENTRY_LAYER    = "Data Entry Layer";
-DATA_ENTRY_LAYER_ID = createCanvasLayer(MAP_REF, DATA_ENTRY_LAYER);

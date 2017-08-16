@@ -151,6 +151,15 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: tab
+        Ref:  Plant_Sample/Vars
+     */
+    public static View get_PlantSample_Vars(Solo solo) {
+        String ref = "Plant_Sample/Vars";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: tab
         Ref:  Project/Map
      */
     public static View get_Project_Map(Solo solo) {
@@ -214,6 +223,15 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: tab
+        Ref:  Rock_Sample/Vars
+     */
+    public static View get_RockSample_Vars(Solo solo) {
+        String ref = "Rock_Sample/Vars";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: tab
         Ref:  Shape/Shape_Note
      */
     public static View get_Shape_ShapeNote(Solo solo) {
@@ -236,6 +254,15 @@ public class ModuleUtil extends ModuleHelper {
      */
     public static View get_SoilSample_Photolog(Solo solo) {
         String ref = "Soil_Sample/Photolog";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: tab
+        Ref:  Soil_Sample/Vars
+     */
+    public static View get_SoilSample_Vars(Solo solo) {
+        String ref = "Soil_Sample/Vars";
         return (android.view.View) solo.getView((Object) ref);
     }
 
@@ -281,6 +308,15 @@ public class ModuleUtil extends ModuleHelper {
      */
     public static View get_WaterSample_Photolog(Solo solo) {
         String ref = "Water_Sample/Photolog";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: tab
+        Ref:  Water_Sample/Vars
+     */
+    public static View get_WaterSample_Vars(Solo solo) {
+        String ref = "Water_Sample/Vars";
         return (android.view.View) solo.getView((Object) ref);
     }
 
@@ -1005,6 +1041,24 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: input
+        Ref:  Plant_Sample/Basic_Info/Timestamp_Field
+     */
+    public static View get_PlantSample_BasicInfo_TimestampField(Solo solo) {
+        String ref = "Plant_Sample/Basic_Info/Timestamp_Field";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Plant_Sample/Vars/Timestamp
+     */
+    public static EditText get_PlantSample_Vars_Timestamp(Solo solo) {
+        String ref = "Plant_Sample/Vars/Timestamp";
+        return (android.widget.EditText) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
         Ref:  Project/Search/Search_Term
      */
     public static EditText get_Project_Search_SearchTerm(Solo solo) {
@@ -1198,6 +1252,15 @@ public class ModuleUtil extends ModuleHelper {
      */
     public static View get_RockSample_BasicInfo_StationDeposit(Solo solo) {
         String ref = "Rock_Sample/Basic_Info/Station_Deposit";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Rock_Sample/Basic_Info/Timestamp_Field
+     */
+    public static View get_RockSample_BasicInfo_TimestampField(Solo solo) {
+        String ref = "Rock_Sample/Basic_Info/Timestamp_Field";
         return (android.view.View) solo.getView((Object) ref);
     }
 
@@ -1419,6 +1482,15 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: input
+        Ref:  Rock_Sample/Vars/Timestamp
+     */
+    public static EditText get_RockSample_Vars_Timestamp(Solo solo) {
+        String ref = "Rock_Sample/Vars/Timestamp";
+        return (android.widget.EditText) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
         Ref:  Shape/Shape_Note/Label
      */
     public static EditText get_Shape_ShapeNote_Label(Solo solo) {
@@ -1572,10 +1644,28 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: input
+        Ref:  Soil_Sample/Basic_Info/Timestamp_Field
+     */
+    public static View get_SoilSample_BasicInfo_TimestampField(Solo solo) {
+        String ref = "Soil_Sample/Basic_Info/Timestamp_Field";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
         Ref:  Soil_Sample/Basic_Info/Vegetation
      */
     public static EditText get_SoilSample_BasicInfo_Vegetation(Solo solo) {
         String ref = "Soil_Sample/Basic_Info/Vegetation";
+        return (android.widget.EditText) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Soil_Sample/Vars/Timestamp
+     */
+    public static EditText get_SoilSample_Vars_Timestamp(Solo solo) {
+        String ref = "Soil_Sample/Vars/Timestamp";
         return (android.widget.EditText) solo.getView((Object) ref);
     }
 
@@ -1698,6 +1788,15 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: input
+        Ref:  Water_Sample/Basic_Info/Timestamp_Field
+     */
+    public static View get_WaterSample_BasicInfo_TimestampField(Solo solo) {
+        String ref = "Water_Sample/Basic_Info/Timestamp_Field";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
         Ref:  Water_Sample/Basic_Info/Water_Sample_ID
      */
     public static View get_WaterSample_BasicInfo_WaterSampleID(Solo solo) {
@@ -1747,6 +1846,15 @@ public class ModuleUtil extends ModuleHelper {
      */
     public static EditText get_WaterSample_Hidden_PreferredpHTime(Solo solo) {
         String ref = "Water_Sample/Hidden/Preferred_pH_Time";
+        return (android.widget.EditText) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Water_Sample/Vars/Timestamp
+     */
+    public static EditText get_WaterSample_Vars_Timestamp(Solo solo) {
+        String ref = "Water_Sample/Vars/Timestamp";
         return (android.widget.EditText) solo.getView((Object) ref);
     }
 

@@ -24,3 +24,4 @@ void checkForDuplicates() {
 
 populateMenu("Project/Start/Duplicate_ID_List", new ArrayList());
 addOnEvent("Project/Start/Check_for_Duplicates", "click", "checkForDuplicates();");
+onEvent("Project/Start/Duplicate_ID_List", "click", "loadEntity();");

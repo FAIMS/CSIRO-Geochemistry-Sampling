@@ -4,11 +4,13 @@ void fillInGPS(String tabgroup) {
   if (isNull(currentUuid)) {
     return;
   }
-  
-  String query = "SELECT x(transform(geospatialcolumn,          4326)) as longtiude, " +
-                 "       y(transform(geospatialcolumn,          4326)) as latitude, " +
-                 "       x(transform(geospatialcolumn, "+getSrid()+")) as easting, " +
-                 "       y(transform(geospatialcolumn, "+getSrid()+")) as northing " +
+
+  String srid = getSrid(tabgroup);
+
+  String query = "SELECT x(transform(geospatialcolumn,     4326)) as longtiude, " +
+                 "       y(transform(geospatialcolumn,     4326)) as latitude, " +
+                 "       x(transform(geospatialcolumn, "+srid+")) as easting, " +
+                 "       y(transform(geospatialcolumn, "+srid+")) as northing " +
                  "  FROM latestnondeletedarchent " +
                  " WHERE uuid = '" + currentUuid + "';";
 
@@ -23,27 +25,32 @@ void fillInGPS(String tabgroup) {
   });
 }
 
-void setSrid() {
-  String ref = getDisplayedTabGroup() + "/Basic_Info/SRID";
+void setSrid(String tabgroup) {
+  String ref = tabgroup + "/Basic_Info/SRID";
   String sridTarget   = getArch16nKeyFromVal(getModuleSrid());
   String sridFallback = getArch16nKeyFromVal("28350");
   if (!setMenuValue(ref, sridTarget))
     setMenuValue(ref, sridFallback);
 }
 
-String getSrid() {
-  String ref = getDisplayedTabGroup() + "/Basic_Info/SRID";
+Callable SetSrid(String tabgroup) {
+  void call() { setSrid(tabgroup); }
+  return this;
+}
+
+String getSrid(String tabgroup) {
+  String ref = tabgroup + "/Basic_Info/SRID";
   String key = getMenuValue(ref);
   if (isNull(key)) {
-    setSrid(); 
+    setSrid(tabgroup);
     key = getMenuValue(ref);
   }
- 
+
   key = guessArch16nValFromKey(key);
   return key;
 }
 
-addOnEvent("Water_Sample", "create", "setSrid()");
-addOnEvent("Soil_Sample",  "create", "setSrid()");
-addOnEvent("Plant_Sample", "create", "setSrid()");
-addOnEvent("Rock_Sample",  "create", "setSrid()");
+addOnEvent("Water_Sample", "create", SetSrid("Water_Sample"));
+addOnEvent("Soil_Sample",  "create", SetSrid("Soil_Sample"));
+addOnEvent("Plant_Sample", "create", SetSrid("Plant_Sample"));
+addOnEvent("Rock_Sample",  "create", SetSrid("Rock_Sample"));

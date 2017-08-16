@@ -7,4 +7,6 @@
 .readonly {
   color: #B2B2B2;
 }
-.fixedheightfive { height: 250px; }
+.fixedheightfive {
+  height: 250px;
+}

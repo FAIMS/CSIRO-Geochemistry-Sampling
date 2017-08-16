@@ -1,12 +1,18 @@
 /************************************ MAP *************************************/
+DATA_ENTRY_LAYER    = "Data Entry Layer";
+DATA_ENTRY_LAYER_ID = createCanvasLayer(MAP_REF, DATA_ENTRY_LAYER);
 
-void centreMe() {
-  if(!isExternalGPSOn() && !isInternalGPSOn()) {
-    showToast("{GPS_Not_Initialised}");
-  } else {
-    centerOnCurrentPosition(MAP_REF);
-  }
-}
+setSelectedLayer(MAP_REF, DATA_ENTRY_LAYER);
+setMapZoom(MAP_REF, 15.0f);
+
+isEntity = true;
+queryName = "Shape";
+querySQL = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Shape'";
+ps = createPointStyle(10, Color.YELLOW, 0.2f, 0.5f);
+ls = createLineStyle(10, Color.YELLOW, 0.05f, 0.3f, null);
+pos = createPolygonStyle(10, Color.parseColor("#440000FF"), createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
+ts = createTextStyle(10, Color.YELLOW, 30, Typeface.SANS_SERIF);
+showDatabaseLayer(MAP_REF, "Shape Layer", isEntity, queryName, querySQL, ps, ls, pos, ts);
 
 void refreshMap() {
   refreshMap(MAP_REF);

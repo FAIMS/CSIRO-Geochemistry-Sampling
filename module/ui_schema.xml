@@ -97,7 +97,7 @@
               </Colgroup_1>
               <Colgroup_2>
                 <Col_1>
-                  <Water_Sample_timestamp/>
+                  <Timestamp_Field/>
                 </Col_1>
                 <Col_2>
                   <Water_Sample_author/>
@@ -188,6 +188,9 @@
               <Preferred_pH_Time/>
               <Preferred_Eh_Time/>
             </Hidden>
+            <Vars>
+              <Timestamp/>
+            </Vars>
           </Water_Sample>
           <Plant_Sample>
             <Basic_Info>
@@ -201,7 +204,7 @@
               </Colgroup_1>
               <Colgroup_2>
                 <Col_1>
-                  <Plant_Sample_timestamp/>
+                  <Timestamp_Field/>
                 </Col_1>
                 <Col_2>
                   <Plant_Sample_author/>
@@ -257,6 +260,9 @@
               <New_Photolog/>
               <Existing_Photologs/>
             </Photolog>
+            <Vars>
+              <Timestamp/>
+            </Vars>
           </Plant_Sample>
           <Soil_Sample>
             <Basic_Info>
@@ -270,7 +276,7 @@
               </Colgroup_1>
               <Colgroup_2>
                 <Col_1>
-                  <Soil_Sample_timestamp/>
+                  <Timestamp_Field/>
                 </Col_1>
                 <Col_2>
                   <Soil_Sample_author/>
@@ -325,6 +331,9 @@
               <New_Photolog/>
               <Existing_Photologs/>
             </Photolog>
+            <Vars>
+              <Timestamp/>
+            </Vars>
           </Soil_Sample>
           <Rock_Sample>
             <Basic_Info>
@@ -338,7 +347,7 @@
               </Colgroup_1>
               <Colgroup_2>
                 <Col_1>
-                  <Rock_Sample_timestamp/>
+                  <Timestamp_Field/>
                 </Col_1>
                 <Col_2>
                   <Rock_Sample_author/>
@@ -426,6 +435,9 @@
               <New_Photolog/>
               <Existing_Photologs/>
             </Photolog>
+            <Vars>
+              <Timestamp/>
+            </Vars>
           </Rock_Sample>
           <pH>
             <pH>
@@ -516,7 +528,7 @@
       <group ref="Logo_Tab" faims_scrollable="false">
         <label>{Logo_Tab}</label>
         <input faims_web="true" ref="CSIRO_Logo">
-          <label>{CSIRO_Logo}</label>
+          <label/>
         </input>
         <trigger ref="Login">
           <label>{Login}</label>
@@ -642,7 +654,7 @@
       <group ref="Map" faims_scrollable="false">
         <label>{Map}</label>
         <input faims_map="true" ref="Map">
-          <label>{Map}</label>
+          <label/>
         </input>
         <trigger ref="Center_Me_1">
           <label>{Center_Me}</label>
@@ -702,7 +714,7 @@
           <label/>
           <group ref="Col_1" faims_style="even">
             <label/>
-            <input faims_attribute_name="Water Sample timestamp" faims_attribute_type="measure" ref="Water_Sample_timestamp" faims_read_only="true">
+            <input faims_attribute_name="Timestamp Field" faims_attribute_type="measure" ref="Timestamp_Field" faims_read_only="true">
               <label>{Timestamp}</label>
             </input>
           </group>
@@ -966,6 +978,12 @@
           <label>{Preferred_Eh_Time}</label>
         </input>
       </group>
+      <group ref="Vars" faims_hidden="true">
+        <label>{Vars}</label>
+        <input faims_attribute_name="Water Sample Timestamp" faims_attribute_type="measure" ref="Timestamp">
+          <label>{Timestamp}</label>
+        </input>
+      </group>
     </group>
     <group ref="Plant_Sample" faims_archent_type="Plant Sample">
       <label>{Plant_Sample}</label>
@@ -990,7 +1008,7 @@
           <label/>
           <group ref="Col_1" faims_style="even">
             <label/>
-            <input faims_attribute_name="Plant Sample timestamp" faims_attribute_type="measure" ref="Plant_Sample_timestamp" faims_read_only="true">
+            <input faims_attribute_name="Timestamp Field" faims_attribute_type="measure" ref="Timestamp_Field" faims_read_only="true">
               <label>{Timestamp}</label>
             </input>
           </group>
@@ -1140,6 +1158,12 @@
           </item>
         </select1>
       </group>
+      <group ref="Vars" faims_hidden="true">
+        <label>{Vars}</label>
+        <input faims_attribute_name="Plant Sample Timestamp" faims_attribute_type="measure" ref="Timestamp">
+          <label>{Timestamp}</label>
+        </input>
+      </group>
     </group>
     <group ref="Soil_Sample" faims_archent_type="Soil Sample">
       <label>{Soil_Sample}</label>
@@ -1164,7 +1188,7 @@
           <label/>
           <group ref="Col_1" faims_style="even">
             <label/>
-            <input faims_attribute_name="Soil Sample timestamp" faims_attribute_type="measure" ref="Soil_Sample_timestamp" faims_read_only="true">
+            <input faims_attribute_name="Timestamp Field" faims_attribute_type="measure" ref="Timestamp_Field" faims_read_only="true">
               <label>{Timestamp}</label>
             </input>
           </group>
@@ -1344,6 +1368,12 @@
           </item>
         </select1>
       </group>
+      <group ref="Vars" faims_hidden="true">
+        <label>{Vars}</label>
+        <input faims_attribute_name="Soil Sample Timestamp" faims_attribute_type="measure" ref="Timestamp">
+          <label>{Timestamp}</label>
+        </input>
+      </group>
     </group>
     <group ref="Rock_Sample" faims_archent_type="Rock Sample">
       <label>{Rock_Sample}</label>
@@ -1368,7 +1398,7 @@
           <label/>
           <group ref="Col_1" faims_style="even">
             <label/>
-            <input faims_attribute_name="Rock Sample timestamp" faims_attribute_type="measure" ref="Rock_Sample_timestamp" faims_read_only="true">
+            <input faims_attribute_name="Timestamp Field" faims_attribute_type="measure" ref="Timestamp_Field" faims_read_only="true">
               <label>{Timestamp}</label>
             </input>
           </group>
@@ -1610,6 +1640,12 @@
             <value>Options not loaded</value>
           </item>
         </select1>
+      </group>
+      <group ref="Vars" faims_hidden="true">
+        <label>{Vars}</label>
+        <input faims_attribute_name="Rock Sample Timestamp" faims_attribute_type="measure" ref="Timestamp">
+          <label>{Timestamp}</label>
+        </input>
       </group>
     </group>
     <group ref="pH" faims_archent_type="pH">

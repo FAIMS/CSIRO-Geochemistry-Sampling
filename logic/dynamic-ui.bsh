@@ -101,16 +101,14 @@ void updateDynamicField(String refToUpdate, String refToCheck, List vals) {
     hideDynamicField(refToUpdate);
 }
 
-Callable showDynamicFieldCallable(String ref) {
+Callable ShowDynamicField(String ref) {
   void call() {
     showDynamicField(ref);
   }
   return this;
 }
 
-Callable updateDynamicFieldCallable(
-    String refToUpdate, String refToCheck, List vals
-) {
+Callable UpdateDynamicField(String refToUpdate, String refToCheck, List vals) {
   void call() {
     updateDynamicField(refToUpdate, refToCheck, vals);
   }
@@ -143,8 +141,8 @@ String getArch16nKeyFromVal(String val) {
 }
 
 void showFieldIfEqual(String refToShow, String refToCheck, List vals) {
-  Callable update = updateDynamicFieldCallable(refToShow, refToCheck, vals);
-  Callable show   = showDynamicFieldCallable  (refToShow);
+  Callable update = UpdateDynamicField(refToShow, refToCheck, vals);
+  Callable show   = ShowDynamicField  (refToShow);
 
   addOnEvent(getTabGroupRef(refToShow), "prefetch", show);
   addOnEvent(getTabGroupRef(refToShow), "fetch",    update);

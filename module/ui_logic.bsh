@@ -239,13 +239,14 @@ REF_TO_TYPE.put("Project/Vars/New_Soil_Sample", "button");
 REF_TO_TYPE.put("Project/Vars/New_Rock_Sample", "button");
 REF_TO_TYPE.put("Water_Sample/Basic_Info/Water_Sample_Prefix", "input");
 REF_TO_TYPE.put("Water_Sample/Basic_Info/Water_Sample_ID", "input");
-REF_TO_TYPE.put("Water_Sample/Basic_Info/Water_Sample_timestamp", "input");
+REF_TO_TYPE.put("Water_Sample/Basic_Info/Timestamp_Field", "input");
 REF_TO_TYPE.put("Water_Sample/Basic_Info/Water_Sample_author", "input");
 REF_TO_TYPE.put("Water_Sample/Basic_Info/Station_Deposit", "input");
 REF_TO_TYPE.put("Water_Sample/Basic_Info/Project", "input");
 REF_TO_TYPE.put("Water_Sample/Basic_Info/Area", "input");
 REF_TO_TYPE.put("Water_Sample/Basic_Info/Site_Name", "input");
 REF_TO_TYPE.put("Water_Sample/Basic_Info/Observation_Type", "radio");
+REF_TO_TYPE.put("Water_Sample/Basic_Info/Location_Number", "");
 REF_TO_TYPE.put("Water_Sample/Basic_Info/SRID", "dropdown");
 REF_TO_TYPE.put("Water_Sample/Basic_Info/Latitude", "input");
 REF_TO_TYPE.put("Water_Sample/Basic_Info/Longitude", "input");
@@ -284,15 +285,17 @@ REF_TO_TYPE.put("Water_Sample/Photolog/New_Photolog", "button");
 REF_TO_TYPE.put("Water_Sample/Photolog/Existing_Photologs", "list");
 REF_TO_TYPE.put("Water_Sample/Hidden/Preferred_pH_Time", "input");
 REF_TO_TYPE.put("Water_Sample/Hidden/Preferred_Eh_Time", "input");
+REF_TO_TYPE.put("Water_Sample/Vars/Timestamp", "input");
 REF_TO_TYPE.put("Plant_Sample/Basic_Info/Plant_Sample_Prefix", "input");
 REF_TO_TYPE.put("Plant_Sample/Basic_Info/Plant_Sample_ID", "input");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/Plant_Sample_timestamp", "input");
+REF_TO_TYPE.put("Plant_Sample/Basic_Info/Timestamp_Field", "input");
 REF_TO_TYPE.put("Plant_Sample/Basic_Info/Plant_Sample_author", "input");
 REF_TO_TYPE.put("Plant_Sample/Basic_Info/Station_Deposit", "input");
 REF_TO_TYPE.put("Plant_Sample/Basic_Info/Project", "input");
 REF_TO_TYPE.put("Plant_Sample/Basic_Info/Area", "input");
 REF_TO_TYPE.put("Plant_Sample/Basic_Info/Site_Name", "input");
 REF_TO_TYPE.put("Plant_Sample/Basic_Info/Observation_Type", "radio");
+REF_TO_TYPE.put("Plant_Sample/Basic_Info/Location_Number", "");
 REF_TO_TYPE.put("Plant_Sample/Basic_Info/SRID", "dropdown");
 REF_TO_TYPE.put("Plant_Sample/Basic_Info/Latitude", "input");
 REF_TO_TYPE.put("Plant_Sample/Basic_Info/Longitude", "input");
@@ -314,15 +317,17 @@ REF_TO_TYPE.put("Plant_Sample/Basic_Info/Sketches_Button_1", "button");
 REF_TO_TYPE.put("Plant_Sample/Basic_Info/View_Sketch", "viewfiles");
 REF_TO_TYPE.put("Plant_Sample/Photolog/New_Photolog", "button");
 REF_TO_TYPE.put("Plant_Sample/Photolog/Existing_Photologs", "list");
+REF_TO_TYPE.put("Plant_Sample/Vars/Timestamp", "input");
 REF_TO_TYPE.put("Soil_Sample/Basic_Info/Soil_Sample_Prefix", "input");
 REF_TO_TYPE.put("Soil_Sample/Basic_Info/Soil_Sample_ID", "input");
-REF_TO_TYPE.put("Soil_Sample/Basic_Info/Soil_Sample_timestamp", "input");
+REF_TO_TYPE.put("Soil_Sample/Basic_Info/Timestamp_Field", "input");
 REF_TO_TYPE.put("Soil_Sample/Basic_Info/Soil_Sample_author", "input");
 REF_TO_TYPE.put("Soil_Sample/Basic_Info/Station_Deposit", "input");
 REF_TO_TYPE.put("Soil_Sample/Basic_Info/Project", "input");
 REF_TO_TYPE.put("Soil_Sample/Basic_Info/Area", "input");
 REF_TO_TYPE.put("Soil_Sample/Basic_Info/Site_Name", "input");
 REF_TO_TYPE.put("Soil_Sample/Basic_Info/Observation_Type", "radio");
+REF_TO_TYPE.put("Soil_Sample/Basic_Info/Location_Number", "");
 REF_TO_TYPE.put("Soil_Sample/Basic_Info/SRID", "dropdown");
 REF_TO_TYPE.put("Soil_Sample/Basic_Info/Latitude", "input");
 REF_TO_TYPE.put("Soil_Sample/Basic_Info/Longitude", "input");
@@ -349,15 +354,17 @@ REF_TO_TYPE.put("Soil_Sample/Basic_Info/Sketches_Button_1", "button");
 REF_TO_TYPE.put("Soil_Sample/Basic_Info/View_Sketch", "viewfiles");
 REF_TO_TYPE.put("Soil_Sample/Photolog/New_Photolog", "button");
 REF_TO_TYPE.put("Soil_Sample/Photolog/Existing_Photologs", "list");
+REF_TO_TYPE.put("Soil_Sample/Vars/Timestamp", "input");
 REF_TO_TYPE.put("Rock_Sample/Basic_Info/Rock_Sample_Prefix", "input");
 REF_TO_TYPE.put("Rock_Sample/Basic_Info/Rock_Sample_ID", "input");
-REF_TO_TYPE.put("Rock_Sample/Basic_Info/Rock_Sample_timestamp", "input");
+REF_TO_TYPE.put("Rock_Sample/Basic_Info/Timestamp_Field", "input");
 REF_TO_TYPE.put("Rock_Sample/Basic_Info/Rock_Sample_author", "input");
 REF_TO_TYPE.put("Rock_Sample/Basic_Info/Station_Deposit", "input");
 REF_TO_TYPE.put("Rock_Sample/Basic_Info/Project", "input");
 REF_TO_TYPE.put("Rock_Sample/Basic_Info/Area", "input");
 REF_TO_TYPE.put("Rock_Sample/Basic_Info/Site_Name", "input");
 REF_TO_TYPE.put("Rock_Sample/Basic_Info/Observation_Type", "radio");
+REF_TO_TYPE.put("Rock_Sample/Basic_Info/Location_Number", "");
 REF_TO_TYPE.put("Rock_Sample/Basic_Info/SRID", "dropdown");
 REF_TO_TYPE.put("Rock_Sample/Basic_Info/Latitude", "input");
 REF_TO_TYPE.put("Rock_Sample/Basic_Info/Longitude", "input");
@@ -401,6 +408,7 @@ REF_TO_TYPE.put("Rock_Sample/Lithological_Info/Sketches_Button_1", "button");
 REF_TO_TYPE.put("Rock_Sample/Lithological_Info/View_Sketch", "viewfiles");
 REF_TO_TYPE.put("Rock_Sample/Photolog/New_Photolog", "button");
 REF_TO_TYPE.put("Rock_Sample/Photolog/Existing_Photologs", "list");
+REF_TO_TYPE.put("Rock_Sample/Vars/Timestamp", "input");
 REF_TO_TYPE.put("pH/pH/pH", "input");
 REF_TO_TYPE.put("pH/pH/Time", "input");
 REF_TO_TYPE.put("pH/pH/Preferred", "input");
@@ -423,14 +431,18 @@ REF_TO_TYPE.put("Water_Sample/Codes", "tab");
 REF_TO_TYPE.put("Water_Sample/pH_Eh", "tab");
 REF_TO_TYPE.put("Water_Sample/Photolog", "tab");
 REF_TO_TYPE.put("Water_Sample/Hidden", "tab");
+REF_TO_TYPE.put("Water_Sample/Vars", "tab");
 REF_TO_TYPE.put("Plant_Sample/Basic_Info", "tab");
 REF_TO_TYPE.put("Plant_Sample/Photolog", "tab");
+REF_TO_TYPE.put("Plant_Sample/Vars", "tab");
 REF_TO_TYPE.put("Soil_Sample/Basic_Info", "tab");
 REF_TO_TYPE.put("Soil_Sample/Photolog", "tab");
+REF_TO_TYPE.put("Soil_Sample/Vars", "tab");
 REF_TO_TYPE.put("Rock_Sample/Basic_Info", "tab");
 REF_TO_TYPE.put("Rock_Sample/Measurements", "tab");
 REF_TO_TYPE.put("Rock_Sample/Lithological_Info", "tab");
 REF_TO_TYPE.put("Rock_Sample/Photolog", "tab");
+REF_TO_TYPE.put("Rock_Sample/Vars", "tab");
 REF_TO_TYPE.put("pH/pH", "tab");
 REF_TO_TYPE.put("Eh/Eh", "tab");
 REF_TO_TYPE.put("Photolog/Photolog", "tab");
@@ -438,7 +450,7 @@ REF_TO_TYPE.put("Shape/Shape_Note", "tab");
 
 DATA_REFS.add("Water_Sample/Basic_Info/Water_Sample_Prefix");
 DATA_REFS.add("Water_Sample/Basic_Info/Water_Sample_ID");
-DATA_REFS.add("Water_Sample/Basic_Info/Water_Sample_timestamp");
+DATA_REFS.add("Water_Sample/Basic_Info/Timestamp_Field");
 DATA_REFS.add("Water_Sample/Basic_Info/Water_Sample_author");
 DATA_REFS.add("Water_Sample/Basic_Info/Station_Deposit");
 DATA_REFS.add("Water_Sample/Basic_Info/Project");
@@ -475,9 +487,10 @@ DATA_REFS.add("Water_Sample/pH_Eh/Preferred_Eh");
 DATA_REFS.add("Water_Sample/pH_Eh/addNewEhText");
 DATA_REFS.add("Water_Sample/Hidden/Preferred_pH_Time");
 DATA_REFS.add("Water_Sample/Hidden/Preferred_Eh_Time");
+DATA_REFS.add("Water_Sample/Vars/Timestamp");
 DATA_REFS.add("Plant_Sample/Basic_Info/Plant_Sample_Prefix");
 DATA_REFS.add("Plant_Sample/Basic_Info/Plant_Sample_ID");
-DATA_REFS.add("Plant_Sample/Basic_Info/Plant_Sample_timestamp");
+DATA_REFS.add("Plant_Sample/Basic_Info/Timestamp_Field");
 DATA_REFS.add("Plant_Sample/Basic_Info/Plant_Sample_author");
 DATA_REFS.add("Plant_Sample/Basic_Info/Station_Deposit");
 DATA_REFS.add("Plant_Sample/Basic_Info/Project");
@@ -499,9 +512,10 @@ DATA_REFS.add("Plant_Sample/Basic_Info/Landform_Description");
 DATA_REFS.add("Plant_Sample/Basic_Info/Notes");
 DATA_REFS.add("Plant_Sample/Basic_Info/Photos");
 DATA_REFS.add("Plant_Sample/Basic_Info/Sketches");
+DATA_REFS.add("Plant_Sample/Vars/Timestamp");
 DATA_REFS.add("Soil_Sample/Basic_Info/Soil_Sample_Prefix");
 DATA_REFS.add("Soil_Sample/Basic_Info/Soil_Sample_ID");
-DATA_REFS.add("Soil_Sample/Basic_Info/Soil_Sample_timestamp");
+DATA_REFS.add("Soil_Sample/Basic_Info/Timestamp_Field");
 DATA_REFS.add("Soil_Sample/Basic_Info/Soil_Sample_author");
 DATA_REFS.add("Soil_Sample/Basic_Info/Station_Deposit");
 DATA_REFS.add("Soil_Sample/Basic_Info/Project");
@@ -528,9 +542,10 @@ DATA_REFS.add("Soil_Sample/Basic_Info/Vegetation");
 DATA_REFS.add("Soil_Sample/Basic_Info/Notes");
 DATA_REFS.add("Soil_Sample/Basic_Info/Photos");
 DATA_REFS.add("Soil_Sample/Basic_Info/Sketches");
+DATA_REFS.add("Soil_Sample/Vars/Timestamp");
 DATA_REFS.add("Rock_Sample/Basic_Info/Rock_Sample_Prefix");
 DATA_REFS.add("Rock_Sample/Basic_Info/Rock_Sample_ID");
-DATA_REFS.add("Rock_Sample/Basic_Info/Rock_Sample_timestamp");
+DATA_REFS.add("Rock_Sample/Basic_Info/Timestamp_Field");
 DATA_REFS.add("Rock_Sample/Basic_Info/Rock_Sample_author");
 DATA_REFS.add("Rock_Sample/Basic_Info/Station_Deposit");
 DATA_REFS.add("Rock_Sample/Basic_Info/Project");
@@ -574,6 +589,7 @@ DATA_REFS.add("Rock_Sample/Lithological_Info/Veining");
 DATA_REFS.add("Rock_Sample/Lithological_Info/Notes");
 DATA_REFS.add("Rock_Sample/Lithological_Info/Photos");
 DATA_REFS.add("Rock_Sample/Lithological_Info/Sketches");
+DATA_REFS.add("Rock_Sample/Vars/Timestamp");
 DATA_REFS.add("pH/pH/pH");
 DATA_REFS.add("pH/pH/Time");
 DATA_REFS.add("pH/pH/Preferred");
@@ -586,7 +602,10 @@ DATA_REFS.add("Photolog/Photolog/Photo_Note");
 DATA_REFS.add("Shape/Shape_Note/Label");
 DATA_REFS.add("Shape/Shape_Note/Note");
 
-
+NO_UI_REFS.add("Water_Sample/Basic_Info/Location_Number");
+NO_UI_REFS.add("Plant_Sample/Basic_Info/Location_Number");
+NO_UI_REFS.add("Soil_Sample/Basic_Info/Location_Number");
+NO_UI_REFS.add("Rock_Sample/Basic_Info/Location_Number");
 
 
 
@@ -618,23 +637,31 @@ TABS_AS_LIST.add("Water_Sample/Codes");
 TABS_AS_LIST.add("Water_Sample/pH_Eh");
 TABS_AS_LIST.add("Water_Sample/Photolog");
 TABS_AS_LIST.add("Water_Sample/Hidden");
+TABS_AS_LIST.add("Water_Sample/Vars");
 TABS_AS_LIST.add("Plant_Sample/Basic_Info");
 TABS_AS_LIST.add("Plant_Sample/Photolog");
+TABS_AS_LIST.add("Plant_Sample/Vars");
 TABS_AS_LIST.add("Soil_Sample/Basic_Info");
 TABS_AS_LIST.add("Soil_Sample/Photolog");
+TABS_AS_LIST.add("Soil_Sample/Vars");
 TABS_AS_LIST.add("Rock_Sample/Basic_Info");
 TABS_AS_LIST.add("Rock_Sample/Measurements");
 TABS_AS_LIST.add("Rock_Sample/Lithological_Info");
 TABS_AS_LIST.add("Rock_Sample/Photolog");
+TABS_AS_LIST.add("Rock_Sample/Vars");
 TABS_AS_LIST.add("pH/pH");
 TABS_AS_LIST.add("Eh/Eh");
 TABS_AS_LIST.add("Photolog/Photolog");
 TABS_AS_LIST.add("Shape/Shape_Note");
 
 ATTRIB_NAMES_NON_STANDARD.put("Water_Sample/Basic_Info/Observation_Type", "Water Sample Observation Type");
+ATTRIB_NAMES_NON_STANDARD.put("Water_Sample/Vars/Timestamp", "Water Sample Timestamp");
 ATTRIB_NAMES_NON_STANDARD.put("Plant_Sample/Basic_Info/Observation_Type", "Plant Sample Observation Type");
+ATTRIB_NAMES_NON_STANDARD.put("Plant_Sample/Vars/Timestamp", "Plant Sample Timestamp");
 ATTRIB_NAMES_NON_STANDARD.put("Soil_Sample/Basic_Info/Observation_Type", "Soil Sample Observation Type");
+ATTRIB_NAMES_NON_STANDARD.put("Soil_Sample/Vars/Timestamp", "Soil Sample Timestamp");
 ATTRIB_NAMES_NON_STANDARD.put("Rock_Sample/Basic_Info/Observation_Type", "Rock Sample Observation Type");
+ATTRIB_NAMES_NON_STANDARD.put("Rock_Sample/Vars/Timestamp", "Rock Sample Timestamp");
 
 String getType(String ref) {
   String type = REF_TO_TYPE.get(ref);
@@ -1525,40 +1552,40 @@ void timedPopulateCursorList(String ref, String q, int limit) {
 
 void setUpTypeHierarchy() {
   //- 
-  //  - Shape
-  //  - Plant Sample
+  //  - Water Sample
   //    - Photolog
   //  - Rock Sample
   //    - Photolog
   //  - Soil Sample
   //    - Photolog
-  //  - Water Sample
+  //  - Plant Sample
   //    - Photolog
+  //  - Shape
 
   n0 = Tree("", 1);
-  n1 = Tree("Shape", 1);
-  n2 = Tree("Plant Sample", 1);
-  n3 = Tree("Photolog", 1);
-  n4 = Tree("Rock Sample", 1);
-  n5 = Tree("Photolog", 1);
-  n6 = Tree("Soil Sample", 1);
-  n7 = Tree("Photolog", 1);
-  n8 = Tree("Water Sample", 1);
-  n9 = Tree("Photolog", 1);
+  n1 = Tree("Water Sample", 1);
+  n2 = Tree("Photolog", 1);
+  n3 = Tree("Rock Sample", 1);
+  n4 = Tree("Photolog", 1);
+  n5 = Tree("Soil Sample", 1);
+  n6 = Tree("Photolog", 1);
+  n7 = Tree("Plant Sample", 1);
+  n8 = Tree("Photolog", 1);
+  n9 = Tree("Shape", 1);
 
   n0.addChild(n1);
-  n0.addChild(n2);
-  n0.addChild(n4);
-  n0.addChild(n6);
-  n0.addChild(n8);
+  n0.addChild(n3);
+  n0.addChild(n5);
+  n0.addChild(n7);
+  n0.addChild(n9);
 
-  n2.addChild(n3);
+  n1.addChild(n2);
 
-  n4.addChild(n5);
+  n3.addChild(n4);
 
-  n6.addChild(n7);
+  n5.addChild(n6);
 
-  n8.addChild(n9);
+  n7.addChild(n8);
 
 
   PERF_TYPE_TREE = n0;
@@ -2802,7 +2829,8 @@ void updateGPSDiagnostics() {
   setFieldValue(diagnosticsRef, status);
 }
 
-void centerMe() { centerOnCurrentPosition("Project/Map/Map"); }
+final String MAP_REF = "Project/Map/Map";
+void centerMe() { centerOnCurrentPosition(MAP_REF); }
 addOnEvent("Project/Map/Center_Me_1", "click", "centerMe()");
 
 /******************************************************************************/
@@ -3153,19 +3181,25 @@ String getTimestampNow() {
   return getTimestampNow(fmt);
 }
 
-String getTimestampNow(String fmt) {
+String getTimestampNow(String fmt, boolean doInsertColon) {
   date    = new Date();
   dateFmt = new java.text.SimpleDateFormat(fmt);
   dateStr = dateFmt.format(date);
 
   // Insert colon into timezone (e.g. +1000 -> +10:00)
-  String left; String right;
+  if (doInsertColon) {
+    String left; String right;
 
-  left    = dateStr.substring(0, dateStr.length() - 2);
-  right   = dateStr.substring(   dateStr.length() - 2);
-  dateStr = left + ":" + right;
+    left    = dateStr.substring(0, dateStr.length() - 2);
+    right   = dateStr.substring(   dateStr.length() - 2);
+    dateStr = left + ":" + right;
+  }
 
   return dateStr;
+}
+
+String getTimestampNow(String fmt) {
+  return getTimestampNow(fmt, true);
 }
 
 void populateAuthorAndTimestamp(String tabgroup) {
@@ -3176,10 +3210,6 @@ void populateAuthorAndTimestamp(String tabgroup) {
   tabgroupToAuthor.put("Plant_Sample", "Plant_Sample/Basic_Info/Plant_Sample_author");
   tabgroupToAuthor.put("Soil_Sample", "Soil_Sample/Basic_Info/Soil_Sample_author");
   tabgroupToAuthor.put("Rock_Sample", "Rock_Sample/Basic_Info/Rock_Sample_author");
-  tabgroupToTimestamp.put("Water_Sample", "Water_Sample/Basic_Info/Water_Sample_timestamp");
-  tabgroupToTimestamp.put("Plant_Sample", "Plant_Sample/Basic_Info/Plant_Sample_timestamp");
-  tabgroupToTimestamp.put("Soil_Sample", "Soil_Sample/Basic_Info/Soil_Sample_timestamp");
-  tabgroupToTimestamp.put("Rock_Sample", "Rock_Sample/Basic_Info/Rock_Sample_timestamp");
   tabgroupToTimestamp.put("Photolog", "Photolog/Photolog/Photolog_timestamp");
   String authorPath    = tabgroupToAuthor.get(tabgroup);
   String timestampPath = tabgroupToTimestamp.get(tabgroup);
@@ -4748,11 +4778,27 @@ addOnEvent("Rock_Sample/Photolog/Existing_Photologs", "click", "loadEntity()");
 /*                             HANDWRITTEN LOGIC                              */
 /******************************************************************************/
 
-/******************************** SHARED: MAP *********************************/
-final String MAP_REF = "Project/Map/Map";
-
+/************************************ MAP *************************************/
 DATA_ENTRY_LAYER    = "Data Entry Layer";
 DATA_ENTRY_LAYER_ID = createCanvasLayer(MAP_REF, DATA_ENTRY_LAYER);
+
+setSelectedLayer(MAP_REF, DATA_ENTRY_LAYER);
+setMapZoom(MAP_REF, 15.0f);
+
+isEntity = true;
+queryName = "Shape";
+querySQL = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Shape'";
+ps = createPointStyle(10, Color.YELLOW, 0.2f, 0.5f);
+ls = createLineStyle(10, Color.YELLOW, 0.05f, 0.3f, null);
+pos = createPolygonStyle(10, Color.parseColor("#440000FF"), createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
+ts = createTextStyle(10, Color.YELLOW, 30, Typeface.SANS_SERIF);
+showDatabaseLayer(MAP_REF, "Shape Layer", isEntity, queryName, querySQL, ps, ls, pos, ts);
+
+void refreshMap() {
+  refreshMap(MAP_REF);
+}
+
+addOnEvent("Project/Map", "show",  "refreshMap()");
 /*********************************** SHAPE ************************************/
 void clearGeometry() {
   List geometry = getGeometryList(MAP_REF, DATA_ENTRY_LAYER_ID);
@@ -4787,21 +4833,6 @@ addOnEvent(
     Integer.MAX_VALUE
 );
 addOnEvent("Shape", "save", "clearGeometry()");
-/************************************ MAP *************************************/
-
-void centreMe() {
-  if(!isExternalGPSOn() && !isInternalGPSOn()) {
-    showToast("{GPS_Not_Initialised}");
-  } else {
-    centerOnCurrentPosition(MAP_REF);
-  }
-}
-
-void refreshMap() {
-  refreshMap(MAP_REF);
-}
-
-addOnEvent("Project/Map", "show",  "refreshMap()");
 /****************************** SEARCH EXTENSION ******************************/
 /* Implements an extension to the search page which allows users to           */
 /* constrain their searches by user.                                          */
@@ -4888,6 +4919,7 @@ void checkForDuplicates() {
 
 populateMenu("Project/Start/Duplicate_ID_List", new ArrayList());
 addOnEvent("Project/Start/Check_for_Duplicates", "click", "checkForDuplicates();");
+onEvent("Project/Start/Duplicate_ID_List", "click", "loadEntity();");
 /************************** CREATE NEW SAMPLE BUTTON **************************/
 void onClickCreateNewSample() {
   String refType = "Project/Start/Sample_Type";
@@ -4947,21 +4979,35 @@ populateProjectAuthorAndTimestamp() {
 addOnEvent("Project", "show", "populateProjectAuthorAndTimestamp()");
 /********************************* TIMESTAMPS *********************************/
 
-// Overrides autogenerated function
-String getTimestampNow() {
-  String fmt = "ddMMMyy";
-  return getTimestampNow(fmt);
-}
-
-// Overrides autogenerated function
-String getTimestampNow(String fmt) {
-  date    = new Date();
-  dateFmt = new java.text.SimpleDateFormat(fmt);
-  dateStr = dateFmt.format(date);
+String getFmtStrTimestamp() {
+  String dateStr = getTimestampNow("ddMMMyy", false);
   dateStr = replaceFirst(dateStr, ".", "");
-
   return dateStr;
 }
+
+String getFieldTimestamp() {
+  String dateStr = getTimestampNow("yyyy-MM-dd HH:mm:ss z", false);
+  dateStr = replaceFirst(dateStr, ".", "");
+  return dateStr;
+}
+
+void setTimestamps(String tabgroup) {
+  String refField  = tabgroup + "/Basic_Info/Timestamp_Field";
+  String refFmtStr = tabgroup + "/Vars/Timestamp";
+
+  setFieldValue(refField,  getFieldTimestamp());
+  setFieldValue(refFmtStr, getFmtStrTimestamp());
+}
+
+Callable SetTimestamps(String tabgroup) {
+  void call() { setTimestamps(tabgroup); }
+  return this;
+}
+
+addOnEvent("Water_Sample", "create", SetTimestamps("Water_Sample"));
+addOnEvent("Soil_Sample",  "create", SetTimestamps("Soil_Sample"));
+addOnEvent("Plant_Sample", "create", SetTimestamps("Plant_Sample"));
+addOnEvent("Rock_Sample",  "create", SetTimestamps("Rock_Sample"));
 /********************************* DYNAMIC UI *********************************/
 // TODO: Put into autogen
 getFieldValue(String ref, Boolean doConvertVocabIds) {
@@ -5065,16 +5111,14 @@ void updateDynamicField(String refToUpdate, String refToCheck, List vals) {
     hideDynamicField(refToUpdate);
 }
 
-Callable showDynamicFieldCallable(String ref) {
+Callable ShowDynamicField(String ref) {
   void call() {
     showDynamicField(ref);
   }
   return this;
 }
 
-Callable updateDynamicFieldCallable(
-    String refToUpdate, String refToCheck, List vals
-) {
+Callable UpdateDynamicField(String refToUpdate, String refToCheck, List vals) {
   void call() {
     updateDynamicField(refToUpdate, refToCheck, vals);
   }
@@ -5107,8 +5151,8 @@ String getArch16nKeyFromVal(String val) {
 }
 
 void showFieldIfEqual(String refToShow, String refToCheck, List vals) {
-  Callable update = updateDynamicFieldCallable(refToShow, refToCheck, vals);
-  Callable show   = showDynamicFieldCallable  (refToShow);
+  Callable update = UpdateDynamicField(refToShow, refToCheck, vals);
+  Callable show   = ShowDynamicField  (refToShow);
 
   addOnEvent(getTabGroupRef(refToShow), "prefetch", show);
   addOnEvent(getTabGroupRef(refToShow), "fetch",    update);
@@ -5511,11 +5555,13 @@ void fillInGPS(String tabgroup) {
   if (isNull(currentUuid)) {
     return;
   }
-  
-  String query = "SELECT x(transform(geospatialcolumn,          4326)) as longtiude, " +
-                 "       y(transform(geospatialcolumn,          4326)) as latitude, " +
-                 "       x(transform(geospatialcolumn, "+getSrid()+")) as easting, " +
-                 "       y(transform(geospatialcolumn, "+getSrid()+")) as northing " +
+
+  String srid = getSrid(tabgroup);
+
+  String query = "SELECT x(transform(geospatialcolumn,     4326)) as longtiude, " +
+                 "       y(transform(geospatialcolumn,     4326)) as latitude, " +
+                 "       x(transform(geospatialcolumn, "+srid+")) as easting, " +
+                 "       y(transform(geospatialcolumn, "+srid+")) as northing " +
                  "  FROM latestnondeletedarchent " +
                  " WHERE uuid = '" + currentUuid + "';";
 
@@ -5530,30 +5576,35 @@ void fillInGPS(String tabgroup) {
   });
 }
 
-void setSrid() {
-  String ref = getDisplayedTabGroup() + "/Basic_Info/SRID";
+void setSrid(String tabgroup) {
+  String ref = tabgroup + "/Basic_Info/SRID";
   String sridTarget   = getArch16nKeyFromVal(getModuleSrid());
   String sridFallback = getArch16nKeyFromVal("28350");
   if (!setMenuValue(ref, sridTarget))
     setMenuValue(ref, sridFallback);
 }
 
-String getSrid() {
-  String ref = getDisplayedTabGroup() + "/Basic_Info/SRID";
+Callable SetSrid(String tabgroup) {
+  void call() { setSrid(tabgroup); }
+  return this;
+}
+
+String getSrid(String tabgroup) {
+  String ref = tabgroup + "/Basic_Info/SRID";
   String key = getMenuValue(ref);
   if (isNull(key)) {
-    setSrid(); 
+    setSrid(tabgroup);
     key = getMenuValue(ref);
   }
- 
+
   key = guessArch16nValFromKey(key);
   return key;
 }
 
-addOnEvent("Water_Sample", "create", "setSrid()");
-addOnEvent("Soil_Sample",  "create", "setSrid()");
-addOnEvent("Plant_Sample", "create", "setSrid()");
-addOnEvent("Rock_Sample",  "create", "setSrid()");
+addOnEvent("Water_Sample", "create", SetSrid("Water_Sample"));
+addOnEvent("Soil_Sample",  "create", SetSrid("Soil_Sample"));
+addOnEvent("Plant_Sample", "create", SetSrid("Plant_Sample"));
+addOnEvent("Rock_Sample",  "create", SetSrid("Rock_Sample"));
 
 
 /******************************************************************************/

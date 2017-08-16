@@ -72,6 +72,10 @@ Duplicate_IDs_Found=Duplicate IDs found
 Press_To_Delete=Press OK to Delete this
 EOF
 
-echo ".fixedheightfive { height: 250px; }" >> ui_styling.css
+cat << EOF >> ui_styling.css
+.fixedheightfive {
+  height: 250px;
+}
+EOF
 
 rm ui_schema.xml.original
