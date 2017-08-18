@@ -33,11 +33,6 @@ void setSrid(String tabgroup) {
     setMenuValue(ref, sridFallback);
 }
 
-Callable SetSrid(String tabgroup) {
-  void call() { setSrid(tabgroup); }
-  return this;
-}
-
 String getSrid(String tabgroup) {
   String ref = tabgroup + "/Basic_Info/SRID";
   String key = getMenuValue(ref);
@@ -50,7 +45,7 @@ String getSrid(String tabgroup) {
   return key;
 }
 
-addOnEvent("Water_Sample", "create", SetSrid("Water_Sample"));
-addOnEvent("Soil_Sample",  "create", SetSrid("Soil_Sample"));
-addOnEvent("Plant_Sample", "create", SetSrid("Plant_Sample"));
-addOnEvent("Rock_Sample",  "create", SetSrid("Rock_Sample"));
+addOnEvent("Water_Sample", "create", "setSrid", new Object[]{"Water_Sample"});
+addOnEvent("Soil_Sample",  "create", "setSrid", new Object[]{"Soil_Sample"});
+addOnEvent("Plant_Sample", "create", "setSrid", new Object[]{"Plant_Sample"});
+addOnEvent("Rock_Sample",  "create", "setSrid", new Object[]{"Rock_Sample"});

@@ -2,6 +2,14 @@
 /* Implements an extension to the search page which allows users to           */
 /* constrain their searches by user.                                          */
 /******************************************************************************/
+entityTypes = new ArrayList();
+entityTypes.add(new NameValuePair("{All}", ""));
+entityTypes.add(new NameValuePair("{Water_Sample}", "Water Sample"));
+entityTypes.add(new NameValuePair("{Plant_Sample}", "Plant Sample"));
+entityTypes.add(new NameValuePair("{Soil_Sample}", "Soil Sample"));
+entityTypes.add(new NameValuePair("{Rock_Sample}", "Rock Sample"));
+populateDropDown("Project/Search/Entity_Types", entityTypes);
+
 delOnEvent("Project/Search", "show", "search()");
 addOnEvent("Project/Search", "show", "populateSelectUser()");
 

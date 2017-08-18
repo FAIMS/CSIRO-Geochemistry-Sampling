@@ -50,7 +50,6 @@ boolean hasValueInField(List vals, String ref) {
 }
 
 void hideDynamicField(String ref) {
-  print("hiding...");
   String uuid       = getUuid(getTabGroupRef(ref));
   String attribName = getAttributeName(ref);
   String valView;
@@ -75,7 +74,6 @@ void hideDynamicField(String ref) {
 }
 
 void showDynamicField(String ref) {
-  print("showing...");
   String refGroup = ref + "_Group";
 
   if (hasView(ref)) return;
@@ -85,7 +83,7 @@ void showDynamicField(String ref) {
 
   // Create view
   FormInputDef viewDef = createViewDef();
-  viewDef.createTextField     ("decimal");
+  viewDef.createTextField     ("string");
   viewDef.setLabel            (label);
   viewDef.setAttributeName    (attribName);
   viewDef.setAttributeType    ("measure");
@@ -96,39 +94,25 @@ void showDynamicField(String ref) {
   createView(ref, viewDef, refGroup);
 }
 
-void updateDynamicField(String refToUpdate, String refToCheck, List vals) {
-  if (hasValueInField(vals, refToCheck))
-    showDynamicField(refToUpdate);
-  else
-    hideDynamicField(refToUpdate);
-}
-
-Callable ShowDynamicField(String ref) {
-  void call() {
-    showDynamicField(ref);
-  }
-  return this;
-}
-
-Callable UpdateDynamicField(
-    String refToUpdate,
-    String refToCheck,
-    List vals,
+void updateDynamicField(
+    String  refToUpdate,
+    String  refToCheck,
+    List    vals,
     boolean enableDuringFetchEvent
 ) {
-  void call() {
-    if (!isDoingFetchEvent() || enableDuringFetchEvent)
-      updateDynamicField(refToUpdate, refToCheck, vals);
-  }
-  return this;
+  if (!isDoingFetchEvent() || enableDuringFetchEvent)
+    if (hasValueInField(vals, refToCheck))
+      showDynamicField(refToUpdate);
+    else
+      hideDynamicField(refToUpdate);
 }
 
-Callable UpdateDynamicField(
-    String refToUpdate,
-    String refToCheck,
-    List vals
+void updateDynamicField(
+    String  refToUpdate,
+    String  refToCheck,
+    List    vals
 ) {
-  return UpdateDynamicField(refToUpdate, refToCheck, vals, true);
+  updateDynamicField(refToUpdate, refToCheck, vals, true);
 }
 
 // TODO: Add to autogen
@@ -157,13 +141,33 @@ String getArch16nKeyFromVal(String val) {
 }
 
 void showFieldIfEqual(String refToShow, String refToCheck, List vals) {
-  Callable fetchUpdate = UpdateDynamicField(refToShow, refToCheck, vals);
-  Callable clickUpdate = UpdateDynamicField(refToShow, refToCheck, vals, false);
-  Callable show        = ShowDynamicField  (refToShow);
+  addOnEvent(
+      refToCheck,
+      "click",
+      "updateDynamicField",
+      new Object[]{refToShow, refToCheck, vals, false}
+  );
 
-  addOnEvent(getTabGroupRef(refToShow), "prefetch", show);
-  addOnEvent(getTabGroupRef(refToShow), "fetch",    fetchUpdate);
-  addOnEvent(refToCheck,                "click",    clickUpdate);
+  addOnEvent(
+      getTabGroupRef(refToShow),
+      "create",
+      "updateDynamicField",
+      new Object[]{refToShow, refToCheck, vals}
+  );
+
+  addOnEvent(
+      getTabGroupRef(refToShow),
+      "fetch",
+      "updateDynamicField",
+      new Object[]{refToShow, refToCheck, vals}
+  );
+
+  addOnEvent(
+      getTabGroupRef(refToShow),
+      "prefetch",
+      "showDynamicField",
+      new Object[]{refToShow}
+  );
 }
 
 void showFieldIfEqual(String refToShow, String refToCheck, String vals) {

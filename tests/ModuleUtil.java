@@ -672,19 +672,19 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: dropdown
-        Ref:  Rock_Sample/Lithological_Info/Fineness_Inclusion_Size
+        Ref:  Rock_Sample/Lithological_Info/Grain_Size
      */
-    public static View get_RockSample_LithologicalInfo_FinenessInclusionSize(Solo solo) {
-        String ref = "Rock_Sample/Lithological_Info/Fineness_Inclusion_Size";
+    public static View get_RockSample_LithologicalInfo_GrainSize(Solo solo) {
+        String ref = "Rock_Sample/Lithological_Info/Grain_Size";
         return (android.view.View) solo.getView((Object) ref);
     }
 
     /*
         Type: dropdown
-        Ref:  Rock_Sample/Lithological_Info/Grain_Size
+        Ref:  Rock_Sample/Lithological_Info/Inclusion_Size
      */
-    public static View get_RockSample_LithologicalInfo_GrainSize(Solo solo) {
-        String ref = "Rock_Sample/Lithological_Info/Grain_Size";
+    public static View get_RockSample_LithologicalInfo_InclusionSize(Solo solo) {
+        String ref = "Rock_Sample/Lithological_Info/Inclusion_Size";
         return (android.view.View) solo.getView((Object) ref);
     }
 
@@ -1023,15 +1023,6 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: input
-        Ref:  Plant_Sample/Basic_Info/Site_Name
-     */
-    public static EditText get_PlantSample_BasicInfo_SiteName(Solo solo) {
-        String ref = "Plant_Sample/Basic_Info/Site_Name";
-        return (android.widget.EditText) solo.getView((Object) ref);
-    }
-
-    /*
-        Type: input
         Ref:  Plant_Sample/Basic_Info/Station_Deposit
      */
     public static View get_PlantSample_BasicInfo_StationDeposit(Solo solo) {
@@ -1167,6 +1158,15 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: input
+        Ref:  Rock_Sample/Basic_Info/Core_ID
+     */
+    public static EditText get_RockSample_BasicInfo_CoreID(Solo solo) {
+        String ref = "Rock_Sample/Basic_Info/Core_ID";
+        return (android.widget.EditText) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
         Ref:  Rock_Sample/Basic_Info/Easting
      */
     public static View get_RockSample_BasicInfo_Easting(Solo solo) {
@@ -1190,6 +1190,15 @@ public class ModuleUtil extends ModuleHelper {
     public static View get_RockSample_BasicInfo_Latitude(Solo solo) {
         String ref = "Rock_Sample/Basic_Info/Latitude";
         return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Rock_Sample/Basic_Info/Location_Number
+     */
+    public static EditText get_RockSample_BasicInfo_LocationNumber(Solo solo) {
+        String ref = "Rock_Sample/Basic_Info/Location_Number";
+        return (android.widget.EditText) solo.getView((Object) ref);
     }
 
     /*
@@ -1235,15 +1244,6 @@ public class ModuleUtil extends ModuleHelper {
     public static View get_RockSample_BasicInfo_RockSamplePrefix(Solo solo) {
         String ref = "Rock_Sample/Basic_Info/Rock_Sample_Prefix";
         return (android.view.View) solo.getView((Object) ref);
-    }
-
-    /*
-        Type: input
-        Ref:  Rock_Sample/Basic_Info/Site_Name
-     */
-    public static EditText get_RockSample_BasicInfo_SiteName(Solo solo) {
-        String ref = "Rock_Sample/Basic_Info/Site_Name";
-        return (android.widget.EditText) solo.getView((Object) ref);
     }
 
     /*
@@ -1604,15 +1604,6 @@ public class ModuleUtil extends ModuleHelper {
     public static View get_SoilSample_BasicInfo_Project(Solo solo) {
         String ref = "Soil_Sample/Basic_Info/Project";
         return (android.view.View) solo.getView((Object) ref);
-    }
-
-    /*
-        Type: input
-        Ref:  Soil_Sample/Basic_Info/Site_Name
-     */
-    public static EditText get_SoilSample_BasicInfo_SiteName(Solo solo) {
-        String ref = "Soil_Sample/Basic_Info/Site_Name";
-        return (android.widget.EditText) solo.getView((Object) ref);
     }
 
     /*
@@ -2003,24 +1994,6 @@ public class ModuleUtil extends ModuleHelper {
     }
 
     /*
-        Type: list
-        Ref:  Water_Sample/pH_Eh/addNewEhText
-     */
-    public static View get_WaterSample_pHEh_addNewEhText(Solo solo) {
-        String ref = "Water_Sample/pH_Eh/addNewEhText";
-        return (android.view.View) solo.getView((Object) ref);
-    }
-
-    /*
-        Type: list
-        Ref:  Water_Sample/pH_Eh/addNewpHText
-     */
-    public static View get_WaterSample_pHEh_addNewpHText(Solo solo) {
-        String ref = "Water_Sample/pH_Eh/addNewpHText";
-        return (android.view.View) solo.getView((Object) ref);
-    }
-
-    /*
         Type: map
         Ref:  Project/Map/Map
      */
@@ -2152,6 +2125,24 @@ public class ModuleUtil extends ModuleHelper {
      */
     public static View get_Logo_LogoTab_CSIROLogo(Solo solo) {
         String ref = "Logo/Logo_Tab/CSIRO_Logo";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: webview
+        Ref:  Water_Sample/pH_Eh/addNewEhText
+     */
+    public static View get_WaterSample_pHEh_addNewEhText(Solo solo) {
+        String ref = "Water_Sample/pH_Eh/addNewEhText";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: webview
+        Ref:  Water_Sample/pH_Eh/addNewpHText
+     */
+    public static View get_WaterSample_pHEh_addNewpHText(Solo solo) {
+        String ref = "Water_Sample/pH_Eh/addNewpHText";
         return (android.view.View) solo.getView((Object) ref);
     }
 }

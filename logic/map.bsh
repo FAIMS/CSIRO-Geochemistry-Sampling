@@ -5,6 +5,9 @@ DATA_ENTRY_LAYER_ID = createCanvasLayer(MAP_REF, DATA_ENTRY_LAYER);
 setSelectedLayer(MAP_REF, DATA_ENTRY_LAYER);
 setMapZoom(MAP_REF, 15.0f);
 
+showBaseMap(MAP_REF, "wCapricorn Tiled", "files/data/maps/WCapricorn4283TILED.tif");
+showRasterMap(MAP_REF, "Capricorn Tiled", "files/data/maps/Capricorn4283TILED.tif");
+
 isEntity = true;
 queryName = "Shape";
 querySQL = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Shape'";
@@ -14,8 +17,30 @@ pos = createPolygonStyle(10, Color.parseColor("#440000FF"), createLineStyle(10, 
 ts = createTextStyle(10, Color.YELLOW, 30, Typeface.SANS_SERIF);
 showDatabaseLayer(MAP_REF, "Shape Layer", isEntity, queryName, querySQL, ps, ls, pos, ts);
 
+isEntity = true;
+// Database layers
+waterQueryName = "Water Samples";
+waterQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Water Sample'";
+waterps = createPointStyle(10, Color.BLUE, 0.2f, 0.5f);
+showDatabaseLayer(MAP_REF, "Water Samples", isEntity, waterQueryName, waterQuerySql, waterps, ls, pos, ts);
+
+plantQueryName = "Plant Samples";
+plantQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Plant Sample'";
+plantps = createPointStyle(10, Color.GREEN, 0.2f, 0.5f);
+showDatabaseLayer(MAP_REF, "Plant Samples", isEntity, plantQueryName, plantQuerySql, plantps, ls, pos, ts);
+
+soilQueryName = "Soil Samples";
+soilQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Soil Sample'";
+soilps = createPointStyle(10, Color.BLACK, 0.2f, 0.5f);
+showDatabaseLayer(MAP_REF, "Soil Samples", isEntity, soilQueryName, soilQuerySql, soilps, ls, pos, ts);
+
+rockQueryName = "Rock Samples";
+rockQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Rock Sample'";
+rockps = createPointStyle(10, Color.RED, 0.2f, 0.5f);
+showDatabaseLayer(MAP_REF, "Rock Samples", isEntity, rockQueryName, rockQuerySql, rockps, ls, pos, ts);
+
 void refreshMap() {
   refreshMap(MAP_REF);
 }
 
-addOnEvent("Project/Map", "show",  "refreshMap()");
+addOnEvent(getTabRef(MAP_REF), "show",  "refreshMap()");

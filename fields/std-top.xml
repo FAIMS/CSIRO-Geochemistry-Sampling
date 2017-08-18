@@ -1,0 +1,5 @@
+<cols> <Timestamp_Field f="readonly">Timestamp</Timestamp_Field> <author/> </cols> <Station_Deposit f="readonly" i="Project/Start/Station_Deposit"> Station/Deposit </Station_Deposit> <Project f="readonly" i="Project/Start/Project"/> <Area f="readonly" i="Project/Start/Area"/> <Site_Name/>
+
+<Observation_Type t="radio"> <opts> <opt>Sampling Location</opt> <opt>Observation Only</opt> </opts> </Observation_Type> <Location_Number_Group t="group"/> <Location_Number f="noui"/>
+
+<SRID><opts><opt>28349</opt><opt>28350</opt><opt>28351</opt><opt>28352</opt><opt>28353</opt><opt>28354</opt><opt>28355</opt><opt>28356</opt></opts></SRID> <gps/> <Elevation_Metres_above_Sea_Level b="decimal"> Elevation (Metres above Sea Level) </Elevation_Metres_above_Sea_Level>

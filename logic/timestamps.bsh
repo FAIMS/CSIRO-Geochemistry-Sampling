@@ -20,12 +20,30 @@ void setTimestamps(String tabgroup) {
   setFieldValue(refFmtStr, getFmtStrTimestamp());
 }
 
-Callable SetTimestamps(String tabgroup) {
-  void call() { setTimestamps(tabgroup); }
-  return this;
-}
+addOnEvent(
+    "Water_Sample",
+    "create",
+    "setTimestamps",
+    new Object[]{"Water_Sample"}
+);
 
-addOnEvent("Water_Sample", "create", SetTimestamps("Water_Sample"));
-addOnEvent("Soil_Sample",  "create", SetTimestamps("Soil_Sample"));
-addOnEvent("Plant_Sample", "create", SetTimestamps("Plant_Sample"));
-addOnEvent("Rock_Sample",  "create", SetTimestamps("Rock_Sample"));
+addOnEvent(
+    "Soil_Sample",
+    "create",
+    "setTimestamps",
+    new Object[]{"Soil_Sample"}
+);
+
+addOnEvent(
+    "Plant_Sample",
+    "create",
+    "setTimestamps",
+    new Object[]{"Plant_Sample"}
+);
+
+addOnEvent(
+    "Rock_Sample",
+    "create",
+    "setTimestamps",
+    new Object[]{"Rock_Sample"}
+);

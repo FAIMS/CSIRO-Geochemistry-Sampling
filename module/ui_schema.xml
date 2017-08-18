@@ -213,9 +213,9 @@
               <Station_Deposit/>
               <Project/>
               <Area/>
-              <Site_Name/>
               <Observation_Type/>
               <Location_Number_Group/>
+              <Plant_Species/>
               <SRID/>
               <Colgroup_3>
                 <Col_1>
@@ -238,7 +238,6 @@
               </Colgroup_4>
               <Take_From_GPS_1/>
               <Elevation_Metres_above_Sea_Level/>
-              <Plant_Species/>
               <Colgroup_5>
                 <Col_1>
                   <Plant_Height/>
@@ -285,7 +284,6 @@
               <Station_Deposit/>
               <Project/>
               <Area/>
-              <Site_Name/>
               <Observation_Type/>
               <Location_Number_Group/>
               <SRID/>
@@ -356,9 +354,9 @@
               <Station_Deposit/>
               <Project/>
               <Area/>
-              <Site_Name/>
+              <Location_Number/>
               <Observation_Type/>
-              <Location_Number_Group/>
+              <Core_ID/>
               <SRID/>
               <Colgroup_3>
                 <Col_1>
@@ -416,7 +414,7 @@
             </Measurements>
             <Lithological_Info>
               <Lithology/>
-              <Fineness_Inclusion_Size/>
+              <Inclusion_Size/>
               <Grain_Size/>
               <Sorting/>
               <Other_Lithological_Descriptors/>
@@ -903,7 +901,7 @@
           </item>
         </select1>
       </group>
-      <group ref="pH_Eh" faims_scrollable="false">
+      <group ref="pH_Eh">
         <label>{pH_Eh}</label>
         <group ref="Colgroup_1" faims_style="orientation">
           <label/>
@@ -930,13 +928,9 @@
             <input ref="Preferred_pH_Time" faims_read_only="true">
               <label>{Preferred_pH_Time}</label>
             </input>
-            <select1 appearance="compact" faims_attribute_name="addNewpHText" faims_attribute_type="vocab" ref="addNewpHText">
-              <label>{pH}</label>
-              <item>
-                <label>Options not loaded</label>
-                <value>Options not loaded</value>
-              </item>
-            </select1>
+            <input faims_web="true" ref="addNewpHText">
+              <label/>
+            </input>
           </group>
           <group ref="Col_2" faims_style="even">
             <label/>
@@ -946,13 +940,9 @@
             <input ref="Preferred_Eh_Time" faims_read_only="true">
               <label>{Preferred_Eh_Time}</label>
             </input>
-            <select1 appearance="compact" faims_attribute_name="addNewEhText" faims_attribute_type="vocab" ref="addNewEhText">
-              <label>{Eh__mV_}</label>
-              <item>
-                <label>Options not loaded</label>
-                <value>Options not loaded</value>
-              </item>
-            </select1>
+            <input faims_web="true" ref="addNewEhText">
+              <label/>
+            </input>
           </group>
         </group>
       </group>
@@ -1028,9 +1018,6 @@
         <input faims_attribute_name="Area" faims_attribute_type="measure" ref="Area" faims_read_only="true">
           <label>{Area}</label>
         </input>
-        <input faims_attribute_name="Site Name" faims_attribute_type="measure" ref="Site_Name">
-          <label>{Site_Name}</label>
-        </input>
         <select1 appearance="full" faims_attribute_name="Plant Sample Observation Type" faims_attribute_type="vocab" ref="Observation_Type">
           <label>{Observation_Type}</label>
           <item>
@@ -1041,6 +1028,9 @@
         <group ref="Location_Number_Group">
           <label/>
         </group>
+        <input faims_attribute_name="Plant Species" faims_attribute_type="measure" ref="Plant_Species">
+          <label>{Plant_Species}</label>
+        </input>
         <select1 faims_attribute_name="SRID" faims_attribute_type="vocab" ref="SRID">
           <label>{SRID}</label>
           <item>
@@ -1089,9 +1079,6 @@
         </trigger>
         <input faims_attribute_name="Elevation Metres above Sea Level" faims_attribute_type="measure" ref="Elevation_Metres_above_Sea_Level">
           <label>{Elevation__Metres_above_Sea_Level_}</label>
-        </input>
-        <input faims_attribute_name="Plant Species" faims_attribute_type="measure" ref="Plant_Species">
-          <label>{Plant_Species}</label>
         </input>
         <group ref="Colgroup_5" faims_style="orientation">
           <label/>
@@ -1207,9 +1194,6 @@
         </input>
         <input faims_attribute_name="Area" faims_attribute_type="measure" ref="Area" faims_read_only="true">
           <label>{Area}</label>
-        </input>
-        <input faims_attribute_name="Site Name" faims_attribute_type="measure" ref="Site_Name">
-          <label>{Site_Name}</label>
         </input>
         <select1 appearance="full" faims_attribute_name="Soil Sample Observation Type" faims_attribute_type="vocab" ref="Observation_Type">
           <label>{Observation_Type}</label>
@@ -1418,8 +1402,8 @@
         <input faims_attribute_name="Area" faims_attribute_type="measure" ref="Area" faims_read_only="true">
           <label>{Area}</label>
         </input>
-        <input faims_attribute_name="Site Name" faims_attribute_type="measure" ref="Site_Name">
-          <label>{Site_Name}</label>
+        <input faims_attribute_name="Rock Sample Location Number" faims_attribute_type="measure" ref="Location_Number">
+          <label>{Location_Number}</label>
         </input>
         <select1 appearance="full" faims_attribute_name="Rock Sample Observation Type" faims_attribute_type="vocab" ref="Observation_Type">
           <label>{Observation_Type}</label>
@@ -1428,9 +1412,9 @@
             <value>Options not loaded</value>
           </item>
         </select1>
-        <group ref="Location_Number_Group">
-          <label/>
-        </group>
+        <input faims_attribute_name="Core ID" faims_attribute_type="measure" ref="Core_ID">
+          <label>{Core_ID}</label>
+        </input>
         <select1 faims_attribute_name="SRID" faims_attribute_type="vocab" ref="SRID">
           <label>{SRID}</label>
           <item>
@@ -1565,8 +1549,8 @@
             <value>Options not loaded</value>
           </item>
         </select1>
-        <select1 faims_attribute_name="Fineness Inclusion Size" faims_attribute_type="vocab" ref="Fineness_Inclusion_Size">
-          <label>{Fineness_Inclusion_Size}</label>
+        <select1 faims_attribute_name="Inclusion Size" faims_attribute_type="vocab" ref="Inclusion_Size">
+          <label>{Inclusion_Size}</label>
           <item>
             <label>Options not loaded</label>
             <value>Options not loaded</value>
@@ -1682,7 +1666,7 @@
       <label>{Photolog}</label>
       <group ref="Photolog">
         <label>{Photolog}</label>
-        <input faims_attribute_name="Photo ID" faims_attribute_type="measure" ref="Photo_ID">
+        <input faims_attribute_name="Photo ID" faims_attribute_type="measure" ref="Photo_ID" faims_style_class="required">
           <label>{Photo_ID}</label>
         </input>
         <input faims_attribute_name="Photolog timestamp" faims_attribute_type="measure" ref="Photolog_timestamp" faims_read_only="true">

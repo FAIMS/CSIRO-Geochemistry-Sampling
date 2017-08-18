@@ -12,4 +12,11 @@
       </validator>
     </property>
   </ArchaeologicalElement>
+  <ArchaeologicalElement name="Photolog">
+    <property name="Photo ID">
+      <validator type="blankchecker">
+        <param type="field" value="measure"/>
+      </validator>
+    </property>
+  </ArchaeologicalElement>
 </ValidationSchema>
