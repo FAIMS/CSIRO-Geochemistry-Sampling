@@ -37,3 +37,6 @@ This module is part of the **FAIMS Demo library** on our publicly accessible Dem
 For more details about the **Capricorn Distal Footprints project**, please visit http://www.sief.org.au/FundingActivities/RP/Distal.html. If you have any questions about the CSIRO Geochemistry sampling, contact nathan.reid@csiro.au.
 
 If you have any questions about the module, please contact the FAIMS team at **enquiries@fedarch.org** and we will get back to you within one business day.
+
+## Screenshots:
+
