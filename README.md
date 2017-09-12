@@ -41,20 +41,20 @@ If you have any questions about the module, please contact the FAIMS team at **e
 ## Screenshots:
 
 <p align="left">
-  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-105946.png" width="300"/>
-  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-110105.png" width="300"/>
-  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-110117.png" width="300"/>
+  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-105946.png" width="250"/>
+  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-110105.png" width="250"/>
+  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-110117.png" width="250"/>
 </p>
 
 <p align="left">
-  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-110130.png" width="300"/>
-  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-110226.png" width="300"/>
-  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-110231.png" width="300"/>
+  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-110130.png" width="250"/>
+  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-110226.png" width="250"/>
+  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-110231.png" width="250"/>
 </p>
 
 <p align="left">
-  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-110235.png" width="300"/>
-  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-110241.png" width="300"/>
-  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-110355.png" width="300"/>
+  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-110235.png" width="250"/>
+  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-110241.png" width="250"/>
+  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-110355.png" width="250"/>
 </p>
 
