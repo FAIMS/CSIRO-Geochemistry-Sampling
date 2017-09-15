@@ -8,7 +8,7 @@ This module was co-developed by Dr. Jens Klump and Dr. Nathan Reid at Mineral Re
 Development of this module was funded by CSIRO Mineral Resources, Kensington, WA
 
 ## Date of release:
-March 2014
+March 2014, updated 2016
 
 ## FAIMS Mobile version
 FAIMS **v2.2** (Android 5+)
