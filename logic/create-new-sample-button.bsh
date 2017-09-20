@@ -1,29 +1,47 @@
 /************************** CREATE NEW SAMPLE BUTTON **************************/
+boolean digLen(String s, int n) {
+  return s.matches("\\d{" + n + "}");
+}
+
+boolean isValidSampleType      (String s) { return !isNull(s); }
+boolean isValidSamplePrefix1   (String s) { return !isNull(s) && digLen(s, 2); }
+boolean isValidSamplePrefix2   (String s) { return !isNull(s) && digLen(s, 3); }
+boolean isValidSampleStartingId(String s) { return !isNull(s) && digLen(s, 4); }
+
 void onClickCreateNewSample() {
   String refType = "Project/Start/Sample_Type";
-  String refPre  = "Project/Start/Sample_Prefix";
+  String refPre1 = "Project/Start/Sample_Prefix_1";
+  String refPre2 = "Project/Start/Sample_Prefix_2";
   String refId   = "Project/Start/Sample_Starting_ID";
 
   String valType = getFieldValue(refType);
-  String valPre  = getFieldValue(refPre );
+  String valPre1 = getFieldValue(refPre1);
+  String valPre2 = getFieldValue(refPre2);
   String valId   = getFieldValue(refId  );
 
-  if (isNull(valType)) {
-    String head = "'Sample Type' Must Be Selected to Proceed";
+  if (!isValidSampleType(valType)) {
+    String head = "Invalid 'Sample Type'";
     String body = "Please select a Sample Type.";
     showWarning(head, body);
     return;
   }
 
-  if (isNull(valPre)) {
-    String head = "'Sample Prefix' Must Be Entered to Proceed";
+  if (!isValidSamplePrefix1(valPre1)) {
+    String head = "Invalid 'Sample Prefix 1'";
     String body = "Please enter a Sample Prefix.";
     showWarning(head, body);
     return;
   }
 
-  if (isNull(valId)) {
-    String head = "'Sample Starting ID' Must Be Entered to Proceed";
+  if (!isValidSamplePrefix2(valPre2)) {
+    String head = "Invalid 'Sample Prefix 2'";
+    String body = "Please enter a Sample Prefix.";
+    showWarning(head, body);
+    return;
+  }
+
+  if (!isValidSampleStartingId(valId)) {
+    String head = "Invalid 'Sample Starting ID'";
     String body = "Please enter a Sample Starting ID.";
     showWarning(head, body);
     return;
