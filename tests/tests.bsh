@@ -10,30 +10,30 @@ assert(!isInRange("1",    "0",        "0"));
 assert(!isInRange("0002", "0000",  "0001"));
 assert( isInRange("0042", "0000",  "0100"));
 
+Map FIELD_VALUES;
+void initFieldValues() {
+  FIELD_VALUES = new HashMap();
+  FIELD_VALUES.put("Project/Sample_ID_Ranges/Minimum_Sample_ID", "0000");
+  FIELD_VALUES.put("Project/Sample_ID_Ranges/Maximum_Sample_ID", "0000");
+  FIELD_VALUES.put("Project/Start/Sample_Type",                  "0");
+  FIELD_VALUES.put("Project/Start/Sample_Prefix_1",              "00");
+  FIELD_VALUES.put("Project/Start/Sample_Prefix_2",              "000");
+  FIELD_VALUES.put("Project/Start/Sample_Starting_ID",           "0000");
+}
+
+String getFieldValue(String ref) {
+  String out = FIELD_VALUES.get(ref);
+  if (out == null)
+    return "";
+  else
+    return out;
+}
+
+void setFieldValue(String ref, Object val) {
+  FIELD_VALUES.put(ref, "" + val);
+}
+
 {
-  Map FIELD_VALUES;
-  void initFieldValues() {
-    FIELD_VALUES = new HashMap();
-    FIELD_VALUES.put("Project/Sample_ID_Ranges/Minimum_Sample_ID", "0000");
-    FIELD_VALUES.put("Project/Sample_ID_Ranges/Maximum_Sample_ID", "0000");
-    FIELD_VALUES.put("Project/Start/Sample_Type",                  "0");
-    FIELD_VALUES.put("Project/Start/Sample_Prefix_1",              "00");
-    FIELD_VALUES.put("Project/Start/Sample_Prefix_2",              "000");
-    FIELD_VALUES.put("Project/Start/Sample_Starting_ID",           "0000");
-  }
-
-  String getFieldValue(String ref) {
-    String out = FIELD_VALUES.get(ref);
-    if (out == null)
-      return "";
-    else
-      return out;
-  }
-
-  void setFieldValue(String ref, Object val) {
-    FIELD_VALUES.put(ref, "" + val);
-  }
-
   print("TEST: VALIDATION OF SAMPLE ID RANGES (SHOULD SHOW 2 WARNINGS):");
   initFieldValues();
   setFieldValue("Project/Sample_ID_Ranges/Minimum_Sample_ID", "0000");
@@ -125,6 +125,18 @@ assert( isInRange("0042", "0000",  "0100"));
   setFieldValue("Project/Start/Sample_Prefix_2", "000");
   executeOnEvent(
       "Project/Start/Create_New_Sample",
+      "click"
+  );
+  print("");
+}
+
+{
+  print("TEST: printLabel():");
+  String getDisplayedTabGroup() { return "Water_Sample"; }
+  setFieldValue("Water_Sample/Vars/Timestamp", "03Nov2017");
+  setUuid("Water_Sample", "1234567890123456789");
+  executeOnEvent(
+      "Water_Sample/Basic_Info/Print_Label",
       "click"
   );
   print("");

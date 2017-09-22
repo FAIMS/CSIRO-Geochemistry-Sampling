@@ -376,3 +376,4 @@ void newTabGroup(String ref) { return; }
 boolean hasView(String ref) { return true; }
 void removeView(String ref) { return; }
 String getModuleSrid() { return ""; }
+void triggerAutoSave() { return; }

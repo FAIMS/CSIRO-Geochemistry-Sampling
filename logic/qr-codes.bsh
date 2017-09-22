@@ -1,6 +1,6 @@
 /*************** LOADING AND CREATION OF RECORDS FROM QR CODES ****************/
 void printLabel() {
-  triggerAutoSave(); // TODO: Does this really work?
+  triggerAutoSave();
 
   String tabGroup = getDisplayedTabGroup();
 
@@ -11,6 +11,7 @@ void printLabel() {
   String uuid = getUuid(tabGroup);
 
   // TODO: Print label
+  Log.d("printLabel", igsn + " " + materialType + " " + date + " " + uuid);
 }
 
 void loadEntityFromScannedUuid() {
