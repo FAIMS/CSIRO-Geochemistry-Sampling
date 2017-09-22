@@ -1,5 +1,5 @@
 /*
- * GENERATED WITH FAIMS-TOOLS, SHA1: 2471f5c8dce7b93542de81b0608f43fbdc4191f4
+ * GENERATED WITH FAIMS-TOOLS, SHA1: a9bfa28d5b88f52b704e2054d2c63b891d4e3771
  */
 import android.util.Log;
 import android.os.Build.MODEL;
@@ -221,18 +221,23 @@ REF_TO_TYPE.put("Project/Start/Station_Deposit", "input");
 REF_TO_TYPE.put("Project/Start/Project", "input");
 REF_TO_TYPE.put("Project/Start/Area", "input");
 REF_TO_TYPE.put("Project/Start/Sample_Type", "dropdown");
-REF_TO_TYPE.put("Project/Start/Sample_Prefix", "input");
+REF_TO_TYPE.put("Project/Start/Sample_Prefix_1", "input");
+REF_TO_TYPE.put("Project/Start/Sample_Prefix_2", "input");
 REF_TO_TYPE.put("Project/Start/Sample_Starting_ID", "input");
+REF_TO_TYPE.put("Project/Start/Scan_Label", "button");
 REF_TO_TYPE.put("Project/Start/Create_New_Sample", "button");
 REF_TO_TYPE.put("Project/Start/GPS_Status", "gpsdiag");
 REF_TO_TYPE.put("Project/Start/Check_for_Duplicates", "button");
 REF_TO_TYPE.put("Project/Start/Duplicate_ID_List", "list");
+REF_TO_TYPE.put("Project/Sample_ID_Ranges/Minimum_Sample_ID", "input");
+REF_TO_TYPE.put("Project/Sample_ID_Ranges/Maximum_Sample_ID", "input");
 REF_TO_TYPE.put("Project/Search/Search_Term", "input");
 REF_TO_TYPE.put("Project/Search/Search_Button", "button");
 REF_TO_TYPE.put("Project/Search/Entity_Types", "dropdown");
 REF_TO_TYPE.put("Project/Search/Entity_List", "list");
 REF_TO_TYPE.put("Project/Map/Map", "map");
 REF_TO_TYPE.put("Project/Map/Center_Me_1", "button");
+REF_TO_TYPE.put("Project/Map/Save_Map_Settings_1", "button");
 REF_TO_TYPE.put("Project/Map/Create_Shape", "button");
 REF_TO_TYPE.put("Project/Vars/Next_Water_Sample_ID", "input");
 REF_TO_TYPE.put("Project/Vars/Next_Plant_Sample_ID", "input");
@@ -242,8 +247,10 @@ REF_TO_TYPE.put("Project/Vars/New_Water_Sample", "button");
 REF_TO_TYPE.put("Project/Vars/New_Plant_Sample", "button");
 REF_TO_TYPE.put("Project/Vars/New_Soil_Sample", "button");
 REF_TO_TYPE.put("Project/Vars/New_Rock_Sample", "button");
-REF_TO_TYPE.put("Water_Sample/Basic_Info/Water_Sample_Prefix", "input");
+REF_TO_TYPE.put("Water_Sample/Basic_Info/Sample_Prefix_1", "input");
+REF_TO_TYPE.put("Water_Sample/Basic_Info/Sample_Prefix_2", "input");
 REF_TO_TYPE.put("Water_Sample/Basic_Info/Water_Sample_ID", "input");
+REF_TO_TYPE.put("Water_Sample/Basic_Info/Print_Label", "button");
 REF_TO_TYPE.put("Water_Sample/Basic_Info/Timestamp_Field", "input");
 REF_TO_TYPE.put("Water_Sample/Basic_Info/Water_Sample_author", "input");
 REF_TO_TYPE.put("Water_Sample/Basic_Info/Station_Deposit", "input");
@@ -291,8 +298,10 @@ REF_TO_TYPE.put("Water_Sample/Photolog/Existing_Photologs", "list");
 REF_TO_TYPE.put("Water_Sample/Hidden/Preferred_pH_Time", "input");
 REF_TO_TYPE.put("Water_Sample/Hidden/Preferred_Eh_Time", "input");
 REF_TO_TYPE.put("Water_Sample/Vars/Timestamp", "input");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/Plant_Sample_Prefix", "input");
+REF_TO_TYPE.put("Plant_Sample/Basic_Info/Sample_Prefix_1", "input");
+REF_TO_TYPE.put("Plant_Sample/Basic_Info/Sample_Prefix_2", "input");
 REF_TO_TYPE.put("Plant_Sample/Basic_Info/Plant_Sample_ID", "input");
+REF_TO_TYPE.put("Plant_Sample/Basic_Info/Print_Label", "button");
 REF_TO_TYPE.put("Plant_Sample/Basic_Info/Timestamp_Field", "input");
 REF_TO_TYPE.put("Plant_Sample/Basic_Info/Plant_Sample_author", "input");
 REF_TO_TYPE.put("Plant_Sample/Basic_Info/Station_Deposit", "input");
@@ -322,8 +331,10 @@ REF_TO_TYPE.put("Plant_Sample/Basic_Info/View_Sketch", "viewfiles");
 REF_TO_TYPE.put("Plant_Sample/Photolog/New_Photolog", "button");
 REF_TO_TYPE.put("Plant_Sample/Photolog/Existing_Photologs", "list");
 REF_TO_TYPE.put("Plant_Sample/Vars/Timestamp", "input");
-REF_TO_TYPE.put("Soil_Sample/Basic_Info/Soil_Sample_Prefix", "input");
+REF_TO_TYPE.put("Soil_Sample/Basic_Info/Sample_Prefix_1", "input");
+REF_TO_TYPE.put("Soil_Sample/Basic_Info/Sample_Prefix_2", "input");
 REF_TO_TYPE.put("Soil_Sample/Basic_Info/Soil_Sample_ID", "input");
+REF_TO_TYPE.put("Soil_Sample/Basic_Info/Print_Label", "button");
 REF_TO_TYPE.put("Soil_Sample/Basic_Info/Timestamp_Field", "input");
 REF_TO_TYPE.put("Soil_Sample/Basic_Info/Soil_Sample_author", "input");
 REF_TO_TYPE.put("Soil_Sample/Basic_Info/Station_Deposit", "input");
@@ -358,8 +369,10 @@ REF_TO_TYPE.put("Soil_Sample/Basic_Info/View_Sketch", "viewfiles");
 REF_TO_TYPE.put("Soil_Sample/Photolog/New_Photolog", "button");
 REF_TO_TYPE.put("Soil_Sample/Photolog/Existing_Photologs", "list");
 REF_TO_TYPE.put("Soil_Sample/Vars/Timestamp", "input");
-REF_TO_TYPE.put("Rock_Sample/Basic_Info/Rock_Sample_Prefix", "input");
+REF_TO_TYPE.put("Rock_Sample/Basic_Info/Sample_Prefix_1", "input");
+REF_TO_TYPE.put("Rock_Sample/Basic_Info/Sample_Prefix_2", "input");
 REF_TO_TYPE.put("Rock_Sample/Basic_Info/Rock_Sample_ID", "input");
+REF_TO_TYPE.put("Rock_Sample/Basic_Info/Print_Label", "button");
 REF_TO_TYPE.put("Rock_Sample/Basic_Info/Timestamp_Field", "input");
 REF_TO_TYPE.put("Rock_Sample/Basic_Info/Rock_Sample_author", "input");
 REF_TO_TYPE.put("Rock_Sample/Basic_Info/Station_Deposit", "input");
@@ -426,6 +439,7 @@ REF_TO_TYPE.put("Shape/Shape_Note/Note", "input");
 REF_TO_TYPE.put("Logo/Logo_Tab", "tab");
 REF_TO_TYPE.put("User/User", "tab");
 REF_TO_TYPE.put("Project/Start", "tab");
+REF_TO_TYPE.put("Project/Sample_ID_Ranges", "tab");
 REF_TO_TYPE.put("Project/Search", "tab");
 REF_TO_TYPE.put("Project/Map", "tab");
 REF_TO_TYPE.put("Project/Vars", "tab");
@@ -451,7 +465,8 @@ REF_TO_TYPE.put("Eh/Eh", "tab");
 REF_TO_TYPE.put("Photolog/Photolog", "tab");
 REF_TO_TYPE.put("Shape/Shape_Note", "tab");
 
-DATA_REFS.add("Water_Sample/Basic_Info/Water_Sample_Prefix");
+DATA_REFS.add("Water_Sample/Basic_Info/Sample_Prefix_1");
+DATA_REFS.add("Water_Sample/Basic_Info/Sample_Prefix_2");
 DATA_REFS.add("Water_Sample/Basic_Info/Water_Sample_ID");
 DATA_REFS.add("Water_Sample/Basic_Info/Timestamp_Field");
 DATA_REFS.add("Water_Sample/Basic_Info/Water_Sample_author");
@@ -490,7 +505,8 @@ DATA_REFS.add("Water_Sample/pH_Eh/Preferred_Eh");
 DATA_REFS.add("Water_Sample/Hidden/Preferred_pH_Time");
 DATA_REFS.add("Water_Sample/Hidden/Preferred_Eh_Time");
 DATA_REFS.add("Water_Sample/Vars/Timestamp");
-DATA_REFS.add("Plant_Sample/Basic_Info/Plant_Sample_Prefix");
+DATA_REFS.add("Plant_Sample/Basic_Info/Sample_Prefix_1");
+DATA_REFS.add("Plant_Sample/Basic_Info/Sample_Prefix_2");
 DATA_REFS.add("Plant_Sample/Basic_Info/Plant_Sample_ID");
 DATA_REFS.add("Plant_Sample/Basic_Info/Timestamp_Field");
 DATA_REFS.add("Plant_Sample/Basic_Info/Plant_Sample_author");
@@ -515,7 +531,8 @@ DATA_REFS.add("Plant_Sample/Basic_Info/Notes");
 DATA_REFS.add("Plant_Sample/Basic_Info/Photos");
 DATA_REFS.add("Plant_Sample/Basic_Info/Sketches");
 DATA_REFS.add("Plant_Sample/Vars/Timestamp");
-DATA_REFS.add("Soil_Sample/Basic_Info/Soil_Sample_Prefix");
+DATA_REFS.add("Soil_Sample/Basic_Info/Sample_Prefix_1");
+DATA_REFS.add("Soil_Sample/Basic_Info/Sample_Prefix_2");
 DATA_REFS.add("Soil_Sample/Basic_Info/Soil_Sample_ID");
 DATA_REFS.add("Soil_Sample/Basic_Info/Timestamp_Field");
 DATA_REFS.add("Soil_Sample/Basic_Info/Soil_Sample_author");
@@ -545,7 +562,8 @@ DATA_REFS.add("Soil_Sample/Basic_Info/Notes");
 DATA_REFS.add("Soil_Sample/Basic_Info/Photos");
 DATA_REFS.add("Soil_Sample/Basic_Info/Sketches");
 DATA_REFS.add("Soil_Sample/Vars/Timestamp");
-DATA_REFS.add("Rock_Sample/Basic_Info/Rock_Sample_Prefix");
+DATA_REFS.add("Rock_Sample/Basic_Info/Sample_Prefix_1");
+DATA_REFS.add("Rock_Sample/Basic_Info/Sample_Prefix_2");
 DATA_REFS.add("Rock_Sample/Basic_Info/Rock_Sample_ID");
 DATA_REFS.add("Rock_Sample/Basic_Info/Timestamp_Field");
 DATA_REFS.add("Rock_Sample/Basic_Info/Rock_Sample_author");
@@ -631,6 +649,7 @@ TAB_GROUPS_AS_LIST.add("Shape");
 TABS_AS_LIST.add("Logo/Logo_Tab");
 TABS_AS_LIST.add("User/User");
 TABS_AS_LIST.add("Project/Start");
+TABS_AS_LIST.add("Project/Sample_ID_Ranges");
 TABS_AS_LIST.add("Project/Search");
 TABS_AS_LIST.add("Project/Map");
 TABS_AS_LIST.add("Project/Vars");
@@ -1638,24 +1657,24 @@ void timedPopulateCursorList(String ref, String q, int limit) {
 
 void setUpTypeHierarchy() {
   //- 
+  //  - Water Sample
+  //    - Photolog
   //  - Rock Sample
   //    - Photolog
   //  - Plant Sample
   //    - Photolog
   //  - Soil Sample
   //    - Photolog
-  //  - Water Sample
-  //    - Photolog
   //  - Shape
 
   n0 = Tree("", 1);
-  n1 = Tree("Rock Sample", 1);
+  n1 = Tree("Water Sample", 1);
   n2 = Tree("Photolog", 1);
-  n3 = Tree("Plant Sample", 1);
+  n3 = Tree("Rock Sample", 1);
   n4 = Tree("Photolog", 1);
-  n5 = Tree("Soil Sample", 1);
+  n5 = Tree("Plant Sample", 1);
   n6 = Tree("Photolog", 1);
-  n7 = Tree("Water Sample", 1);
+  n7 = Tree("Soil Sample", 1);
   n8 = Tree("Photolog", 1);
   n9 = Tree("Shape", 1);
 
@@ -1887,7 +1906,7 @@ void enqueueTestFiles(int numFiles, String cb) {
   numPhotosToMake -= PERF_FILES.size();
   numPhotosToMake  = Math.max(0, numPhotosToMake);
   // We're going to count returns from attachFile too, hence multiplication by 2
-  PERF_NUM_CBS_TODO_FILE = new AtomicInteger(2*numPhotosToMake);
+  PERF_NUM_CBS_TODO_FILE = new AtomicInteger(numPhotosToMake + 1);
   PERF_NUM_CBS_DONE_FILE = new AtomicInteger(0);
 
   // Make records
@@ -1900,8 +1919,8 @@ void enqueueTestFiles(int numFiles, String cb) {
     );
 
     PERF_FILES.add(fileName);
-    checkEnqueueTestFilesIsDone(cb);
   }
+  checkEnqueueTestFilesIsDone(cb);
 }
 
 void checkEnqueueTestFilesIsDone(String onDone) {
@@ -2330,7 +2349,10 @@ void persistOverSessions(String ref) {
 persistOverSessions("Project/Start/Station_Deposit", false);
 persistOverSessions("Project/Start/Project", false);
 persistOverSessions("Project/Start/Area", false);
-persistOverSessions("Project/Start/Sample_Prefix", false);
+persistOverSessions("Project/Start/Sample_Prefix_1", false);
+persistOverSessions("Project/Start/Sample_Prefix_2", false);
+persistOverSessions("Project/Sample_ID_Ranges/Minimum_Sample_ID", false);
+persistOverSessions("Project/Sample_ID_Ranges/Maximum_Sample_ID", false);
 
 /******************************************************************************/
 /*                           FIELD COPYING HELPERS                            */
@@ -2445,19 +2467,23 @@ void inheritFieldValue(String src, String dst) {
   inheritFieldValue(src, dst, true);
 }
 
-inheritFieldValue("Project/Start/Sample_Prefix", "Water_Sample/Basic_Info/Water_Sample_Prefix", true);
+inheritFieldValue("Project/Start/Sample_Prefix_1", "Water_Sample/Basic_Info/Sample_Prefix_1", true);
+inheritFieldValue("Project/Start/Sample_Prefix_2", "Water_Sample/Basic_Info/Sample_Prefix_2", true);
 inheritFieldValue("Project/Start/Station_Deposit", "Water_Sample/Basic_Info/Station_Deposit", true);
 inheritFieldValue("Project/Start/Project", "Water_Sample/Basic_Info/Project", true);
 inheritFieldValue("Project/Start/Area", "Water_Sample/Basic_Info/Area", true);
-inheritFieldValue("Project/Start/Sample_Prefix", "Plant_Sample/Basic_Info/Plant_Sample_Prefix", true);
+inheritFieldValue("Project/Start/Sample_Prefix_1", "Plant_Sample/Basic_Info/Sample_Prefix_1", true);
+inheritFieldValue("Project/Start/Sample_Prefix_2", "Plant_Sample/Basic_Info/Sample_Prefix_2", true);
 inheritFieldValue("Project/Start/Station_Deposit", "Plant_Sample/Basic_Info/Station_Deposit", true);
 inheritFieldValue("Project/Start/Project", "Plant_Sample/Basic_Info/Project", true);
 inheritFieldValue("Project/Start/Area", "Plant_Sample/Basic_Info/Area", true);
-inheritFieldValue("Project/Start/Sample_Prefix", "Soil_Sample/Basic_Info/Soil_Sample_Prefix", true);
+inheritFieldValue("Project/Start/Sample_Prefix_1", "Soil_Sample/Basic_Info/Sample_Prefix_1", true);
+inheritFieldValue("Project/Start/Sample_Prefix_2", "Soil_Sample/Basic_Info/Sample_Prefix_2", true);
 inheritFieldValue("Project/Start/Station_Deposit", "Soil_Sample/Basic_Info/Station_Deposit", true);
 inheritFieldValue("Project/Start/Project", "Soil_Sample/Basic_Info/Project", true);
 inheritFieldValue("Project/Start/Area", "Soil_Sample/Basic_Info/Area", true);
-inheritFieldValue("Project/Start/Sample_Prefix", "Rock_Sample/Basic_Info/Rock_Sample_Prefix", true);
+inheritFieldValue("Project/Start/Sample_Prefix_1", "Rock_Sample/Basic_Info/Sample_Prefix_1", true);
+inheritFieldValue("Project/Start/Sample_Prefix_2", "Rock_Sample/Basic_Info/Sample_Prefix_2", true);
 inheritFieldValue("Project/Start/Station_Deposit", "Rock_Sample/Basic_Info/Station_Deposit", true);
 inheritFieldValue("Project/Start/Project", "Rock_Sample/Basic_Info/Project", true);
 inheritFieldValue("Project/Start/Area", "Rock_Sample/Basic_Info/Area", true);
@@ -2915,9 +2941,29 @@ void updateGPSDiagnostics() {
   setFieldValue(diagnosticsRef, status);
 }
 
+final String MAP_CFG_PATH = "files/data/saved_config.json";
 final String MAP_REF = "Project/Map/Map";
 void centerMe() { centerOnCurrentPosition(MAP_REF); }
 addOnEvent("Project/Map/Center_Me_1", "click", "centerMe()");
+addOnEvent("Project/Map/Save_Map_Settings_1", "click", "saveMapSettings()");
+addOnEvent("module", "load", "loadMapSettings()");
+
+void loadMapSettings() {
+  String filePath = getAttachedFilePath(MAP_CFG_PATH);
+
+  if (!new File(filePath).exists())
+    return;
+
+  String toast = "showToast(\"{Loaded_Map_Configuration}\")";
+  loadMapViewConfiguration(MAP_REF, filePath, toast);
+}
+
+void saveMapSettings() {
+  String filePath = getAttachedFilePath(MAP_CFG_PATH);
+
+  String toast = "showToast(\"{Saved_Map_Configuration}\")";
+  saveMapViewConfiguration(MAP_REF, filePath, toast);
+}
 
 /******************************************************************************/
 /*                                 ACTION BAR                                 */
@@ -5050,32 +5096,85 @@ populateMenu("Project/Start/Duplicate_ID_List", new ArrayList());
 addOnEvent("Project/Start/Check_for_Duplicates", "click", "checkForDuplicates();");
 onEvent("Project/Start/Duplicate_ID_List", "click", "loadEntity();");
 /************************** CREATE NEW SAMPLE BUTTON **************************/
+boolean digLen(String s, int n) {
+  if (s == null) return false;
+  return s.matches("\\d{" + n + "}");
+}
+
+boolean isInRange(String s, String smin, String smax) {
+  try {
+    int n   = Integer.parseInt(s);
+    int min = Integer.parseInt(smin);
+    int max = Integer.parseInt(smax);
+
+    return isInRange(n, min, max);
+  } catch (NumberFormatException e) {
+    return false;
+  }
+}
+
+boolean isInRange(int n, int min, int max) {
+  return max >= n && min <= n;
+}
+
+boolean isValidSampleType      (String s) { return !isNull(s); }
+boolean isValidSamplePrefix1   (String s) { return !isNull(s) && digLen(s, 2); }
+boolean isValidSamplePrefix2   (String s) { return !isNull(s) && digLen(s, 3); }
+boolean isValidSampleStartingId(String s) {
+  String sId    = getFieldValue("Project/Start/Sample_Starting_ID");
+  String sIdMin = getFieldValue("Project/Sample_ID_Ranges/Minimum_Sample_ID");
+  String sIdMax = getFieldValue("Project/Sample_ID_Ranges/Maximum_Sample_ID");
+
+  return !isNull(s)
+      && digLen(s, 4)
+      && isInRange(sId, sIdMin, sIdMax);
+}
+boolean isValidMinSampleId(String s) { return digLen(s, 4); }
+boolean isValidMaxSampleId(String s) { return digLen(s, 4); }
+
 void onClickCreateNewSample() {
-  String refType = "Project/Start/Sample_Type";
-  String refPre  = "Project/Start/Sample_Prefix";
-  String refId   = "Project/Start/Sample_Starting_ID";
+  String valType = getFieldValue("Project/Start/Sample_Type");
+  String valPre1 = getFieldValue("Project/Start/Sample_Prefix_1");
+  String valPre2 = getFieldValue("Project/Start/Sample_Prefix_2");
+  String valId   = getFieldValue("Project/Start/Sample_Starting_ID");
 
-  String valType = getFieldValue(refType);
-  String valPre  = getFieldValue(refPre );
-  String valId   = getFieldValue(refId  );
-
-  if (isNull(valType)) {
-    String head = "'Sample Type' Must Be Selected to Proceed";
+  if (!isValidSampleType(valType)) {
+    String head = "Invalid 'Sample Type'";
     String body = "Please select a Sample Type.";
     showWarning(head, body);
     return;
   }
 
-  if (isNull(valPre)) {
-    String head = "'Sample Prefix' Must Be Entered to Proceed";
-    String body = "Please enter a Sample Prefix.";
+  if (!isValidSamplePrefix1(valPre1)) {
+    String head = "Invalid 'Sample Prefix 1'";
+
+    String body = "";
+    body += "Please enter a number into the 'Sample Prefix 1' field. 'Sample ";
+    body += "Prefix 1' must consist of 2 digits.";
+
     showWarning(head, body);
     return;
   }
 
-  if (isNull(valId)) {
-    String head = "'Sample Starting ID' Must Be Entered to Proceed";
-    String body = "Please enter a Sample Starting ID.";
+  if (!isValidSamplePrefix2(valPre2)) {
+    String head = "Invalid 'Sample Prefix 1'";
+
+    String body = "";
+    body += "Please enter a number into the 'Sample Prefix 2' field. 'Sample ";
+    body += "Prefix 2' must consist of 3 digits.";
+
+    showWarning(head, body);
+    return;
+  }
+
+  if (!isValidSampleStartingId(valId)) {
+    String head = "Invalid 'Next Sample ID'";
+
+    String body = "";
+    body += "Please enter a number into the 'Next Sample ID' field. ";
+    body += "'Next Sample ID' must consist of 4 digits and be in the range";
+    body += " specified in the 'Sample ID Ranges' tab.";
+
     showWarning(head, body);
     return;
   }
@@ -5086,10 +5185,39 @@ void onClickCreateNewSample() {
   if ("{Soil_Sample}" .equals(valType)) onClickProjectNewSoilSample();
 }
 
+void validateSampleIdRanges() {
+  String sIdMin = getFieldValue("Project/Sample_ID_Ranges/Minimum_Sample_ID");
+  String sIdMax = getFieldValue("Project/Sample_ID_Ranges/Maximum_Sample_ID");
+
+  boolean isValid = isValidMaxSampleId(sIdMax) && isValidMaxSampleId(sIdMin);
+
+  if (!isValid) {
+    String head = "Invalid Sample ID Range";
+
+    String body = "";
+    body += "The 'Minimum Sample ID' and 'Maximum Sample ID' fields must each";
+    body += " contain numbers consisting of four digits.";
+
+    showWarning(head, body);
+  }
+}
+
 addOnEvent(
     "Project/Start/Create_New_Sample",
     "click",
     "onClickCreateNewSample()"
+);
+
+addOnEvent(
+    "Project/Sample_ID_Ranges/Minimum_Sample_ID",
+    "blur",
+    "validateSampleIdRanges()"
+);
+
+addOnEvent(
+    "Project/Sample_ID_Ranges/Maximum_Sample_ID",
+    "blur",
+    "validateSampleIdRanges()"
 );
 /******************************* AUTONUMBERING ********************************/
 final String AUTONUM_SOURCE = "Project/Start/Sample_Starting_ID";
@@ -5768,6 +5896,44 @@ addOnEvent("Water_Sample", "create", "setSrid", new Object[]{"Water_Sample"});
 addOnEvent("Soil_Sample",  "create", "setSrid", new Object[]{"Soil_Sample"});
 addOnEvent("Plant_Sample", "create", "setSrid", new Object[]{"Plant_Sample"});
 addOnEvent("Rock_Sample",  "create", "setSrid", new Object[]{"Rock_Sample"});
+/*************** LOADING AND CREATION OF RECORDS FROM QR CODES ****************/
+void printLabel() {
+  triggerAutoSave(); // TODO: Does this really work?
+
+  String tabGroup = getDisplayedTabGroup();
+
+  String igsn = "<IGSN>";
+  String materialType = tabGroup.split("_")[0];
+  String date = getFieldValue(tabGroup + "/Vars/Timestamp");
+
+  String uuid = getUuid(tabGroup);
+
+  // TODO: Print label
+}
+
+void loadEntityFromScannedUuid() {
+  String code = getLastScanContents();
+
+  String  uuidString  = "";
+  Pattern uuidPattern = Pattern.compile("(\\d{19})");
+  Matcher matcher     = uuidPattern.matcher(code);
+  while (matcher.find())
+    uuidString = matcher.group(1);
+
+  if (isNull(uuidString)) {
+    showWarning("{load_scanned_err_head}", "{load_scanned_err_body}");
+    return;
+  }
+
+  loadEntityFrom(uuidString);
+}
+
+addOnEvent("Project/Start/Scan_Label", "click", "loadEntityFromScannedUuid()");
+
+addOnEvent("Water_Sample/Basic_Info/Print_Label", "click", "printLabel()");
+addOnEvent("Soil_Sample/Basic_Info/Print_Label",  "click", "printLabel()");
+addOnEvent("Plant_Sample/Basic_Info/Print_Label", "click", "printLabel()");
+addOnEvent("Rock_Sample/Basic_Info/Print_Label",  "click", "printLabel()");
 
 
 /******************************************************************************/

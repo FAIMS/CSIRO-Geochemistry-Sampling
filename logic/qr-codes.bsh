@@ -1,0 +1,38 @@
+/*************** LOADING AND CREATION OF RECORDS FROM QR CODES ****************/
+void printLabel() {
+  triggerAutoSave(); // TODO: Does this really work?
+
+  String tabGroup = getDisplayedTabGroup();
+
+  String igsn = "<IGSN>";
+  String materialType = tabGroup.split("_")[0];
+  String date = getFieldValue(tabGroup + "/Vars/Timestamp");
+
+  String uuid = getUuid(tabGroup);
+
+  // TODO: Print label
+}
+
+void loadEntityFromScannedUuid() {
+  String code = getLastScanContents();
+
+  String  uuidString  = "";
+  Pattern uuidPattern = Pattern.compile("(\\d{19})");
+  Matcher matcher     = uuidPattern.matcher(code);
+  while (matcher.find())
+    uuidString = matcher.group(1);
+
+  if (isNull(uuidString)) {
+    showWarning("{load_scanned_err_head}", "{load_scanned_err_body}");
+    return;
+  }
+
+  loadEntityFrom(uuidString);
+}
+
+addOnEvent("Project/Start/Scan_Label", "click", "loadEntityFromScannedUuid()");
+
+addOnEvent("Water_Sample/Basic_Info/Print_Label", "click", "printLabel()");
+addOnEvent("Soil_Sample/Basic_Info/Print_Label",  "click", "printLabel()");
+addOnEvent("Plant_Sample/Basic_Info/Print_Label", "click", "printLabel()");
+addOnEvent("Rock_Sample/Basic_Info/Print_Label",  "click", "printLabel()");

@@ -1,0 +1,131 @@
+assert(digLen("0000", 4));
+assert(digLen("0001", 4));
+assert(digLen("1000", 4));
+assert(digLen("1", 1));
+assert(digLen("", 0));
+
+assert( isInRange("0",    "0",        "0"));
+assert(!isInRange("0",    "1",       "-1"));
+assert(!isInRange("1",    "0",        "0"));
+assert(!isInRange("0002", "0000",  "0001"));
+assert( isInRange("0042", "0000",  "0100"));
+
+{
+  Map FIELD_VALUES;
+  void initFieldValues() {
+    FIELD_VALUES = new HashMap();
+    FIELD_VALUES.put("Project/Sample_ID_Ranges/Minimum_Sample_ID", "0000");
+    FIELD_VALUES.put("Project/Sample_ID_Ranges/Maximum_Sample_ID", "0000");
+    FIELD_VALUES.put("Project/Start/Sample_Type",                  "0");
+    FIELD_VALUES.put("Project/Start/Sample_Prefix_1",              "00");
+    FIELD_VALUES.put("Project/Start/Sample_Prefix_2",              "000");
+    FIELD_VALUES.put("Project/Start/Sample_Starting_ID",           "0000");
+  }
+
+  String getFieldValue(String ref) {
+    String out = FIELD_VALUES.get(ref);
+    if (out == null)
+      return "";
+    else
+      return out;
+  }
+
+  void setFieldValue(String ref, Object val) {
+    FIELD_VALUES.put(ref, "" + val);
+  }
+
+  print("TEST: VALIDATION OF SAMPLE ID RANGES (SHOULD SHOW 2 WARNINGS):");
+  initFieldValues();
+  setFieldValue("Project/Sample_ID_Ranges/Minimum_Sample_ID", "0000");
+  setFieldValue("Project/Sample_ID_Ranges/Maximum_Sample_ID", "000");
+  executeOnEvent(
+      "Project/Sample_ID_Ranges/Minimum_Sample_ID",
+      "blur"
+  );
+  executeOnEvent(
+      "Project/Sample_ID_Ranges/Maximum_Sample_ID",
+      "blur"
+  );
+  print("");
+
+  print("TEST: VALIDATION OF SAMPLE ID RANGES (SHOULD SHOW 0 WARNINGS):");
+  initFieldValues();
+  setFieldValue("Project/Sample_ID_Ranges/Minimum_Sample_ID", "0000");
+  setFieldValue("Project/Sample_ID_Ranges/Maximum_Sample_ID", "0000");
+  executeOnEvent(
+      "Project/Sample_ID_Ranges/Minimum_Sample_ID",
+      "blur"
+  );
+  executeOnEvent(
+      "Project/Sample_ID_Ranges/Maximum_Sample_ID",
+      "blur"
+  );
+  print("");
+
+  print("TEST: VALIDATION OF SAMPLE ID (SHOULD SHOW 1 WARNINGS):");
+  initFieldValues();
+  setFieldValue("Project/Sample_ID_Ranges/Minimum_Sample_ID", "0000");
+  setFieldValue("Project/Sample_ID_Ranges/Maximum_Sample_ID", "0000");
+  setFieldValue("Project/Start/Sample_Starting_ID",           "0001");
+  executeOnEvent(
+      "Project/Start/Create_New_Sample",
+      "click"
+  );
+  print("");
+
+  print("TEST: VALIDATION OF SAMPLE ID (SHOULD SHOW 1 WARNINGS):");
+  initFieldValues();
+  setFieldValue("Project/Start/Sample_Starting_ID", "000");
+  executeOnEvent(
+      "Project/Start/Create_New_Sample",
+      "click"
+  );
+  print("");
+
+  print("TEST: VALIDATION OF SAMPLE ID (SHOULD SHOW 0 WARNINGS):");
+  initFieldValues();
+  setFieldValue("Project/Sample_ID_Ranges/Minimum_Sample_ID", "0000");
+  setFieldValue("Project/Sample_ID_Ranges/Maximum_Sample_ID", "0000");
+  setFieldValue("Project/Start/Sample_Starting_ID",           "0000");
+  executeOnEvent(
+      "Project/Start/Create_New_Sample",
+      "click"
+  );
+  print("");
+
+  print("TEST: VALIDATION OF SAMPLE PREFIX 1 (SHOULD SHOW 1 WARNINGS):");
+  initFieldValues();
+  setFieldValue("Project/Start/Sample_Prefix_1", "00000");
+  executeOnEvent(
+      "Project/Start/Create_New_Sample",
+      "click"
+  );
+  print("");
+
+  print("TEST: VALIDATION OF SAMPLE PREFIX 1 (SHOULD SHOW 0 WARNINGS):");
+  initFieldValues();
+  setFieldValue("Project/Start/Sample_Prefix_1", "00");
+  executeOnEvent(
+      "Project/Start/Create_New_Sample",
+      "click"
+  );
+  print("");
+
+  print("TEST: VALIDATION OF SAMPLE PREFIX 2 (SHOULD SHOW 1 WARNINGS):");
+  initFieldValues();
+  setFieldValue("Project/Start/Sample_Prefix_2", "00000");
+  executeOnEvent(
+      "Project/Start/Create_New_Sample",
+      "click"
+  );
+  print("");
+
+  print("TEST: VALIDATION OF SAMPLE PREFIX 2 (SHOULD SHOW 0 WARNINGS):");
+  initFieldValues();
+  setFieldValue("Project/Start/Sample_Prefix_2", "000");
+  executeOnEvent(
+      "Project/Start/Create_New_Sample",
+      "click"
+  );
+  print("");
+}

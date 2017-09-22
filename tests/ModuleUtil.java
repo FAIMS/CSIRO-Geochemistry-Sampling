@@ -169,6 +169,15 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: tab
+        Ref:  Project/Sample_ID_Ranges
+     */
+    public static View get_Project_SampleIDRanges(Solo solo) {
+        String ref = "Project/Sample_ID_Ranges";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: tab
         Ref:  Project/Start
      */
     public static View get_Project_Start(Solo solo) {
@@ -357,6 +366,15 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: button
+        Ref:  Plant_Sample/Basic_Info/Print_Label
+     */
+    public static View get_PlantSample_BasicInfo_PrintLabel(Solo solo) {
+        String ref = "Plant_Sample/Basic_Info/Print_Label";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: button
         Ref:  Plant_Sample/Basic_Info/Sketches_Button_1
      */
     public static View get_PlantSample_BasicInfo_SketchesButton1(Solo solo) {
@@ -402,6 +420,15 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: button
+        Ref:  Project/Map/Save_Map_Settings_1
+     */
+    public static View get_Project_Map_SaveMapSettings1(Solo solo) {
+        String ref = "Project/Map/Save_Map_Settings_1";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: button
         Ref:  Project/Search/Search_Button
      */
     public static View get_Project_Search_SearchButton(Solo solo) {
@@ -424,6 +451,15 @@ public class ModuleUtil extends ModuleHelper {
      */
     public static View get_Project_Start_CreateNewSample(Solo solo) {
         String ref = "Project/Start/Create_New_Sample";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: button
+        Ref:  Project/Start/Scan_Label
+     */
+    public static View get_Project_Start_ScanLabel(Solo solo) {
+        String ref = "Project/Start/Scan_Label";
         return (android.view.View) solo.getView((Object) ref);
     }
 
@@ -460,6 +496,15 @@ public class ModuleUtil extends ModuleHelper {
      */
     public static View get_Project_Vars_NewWaterSample(Solo solo) {
         String ref = "Project/Vars/New_Water_Sample";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: button
+        Ref:  Rock_Sample/Basic_Info/Print_Label
+     */
+    public static View get_RockSample_BasicInfo_PrintLabel(Solo solo) {
+        String ref = "Rock_Sample/Basic_Info/Print_Label";
         return (android.view.View) solo.getView((Object) ref);
     }
 
@@ -510,6 +555,15 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: button
+        Ref:  Soil_Sample/Basic_Info/Print_Label
+     */
+    public static View get_SoilSample_BasicInfo_PrintLabel(Solo solo) {
+        String ref = "Soil_Sample/Basic_Info/Print_Label";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: button
         Ref:  Soil_Sample/Basic_Info/Sketches_Button_1
      */
     public static View get_SoilSample_BasicInfo_SketchesButton1(Solo solo) {
@@ -541,6 +595,15 @@ public class ModuleUtil extends ModuleHelper {
      */
     public static View get_WaterSample_BasicInfo_PhotosButton1(Solo solo) {
         String ref = "Water_Sample/Basic_Info/Photos_Button_1";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: button
+        Ref:  Water_Sample/Basic_Info/Print_Label
+     */
+    public static View get_WaterSample_BasicInfo_PrintLabel(Solo solo) {
+        String ref = "Water_Sample/Basic_Info/Print_Label";
         return (android.view.View) solo.getView((Object) ref);
     }
 
@@ -987,15 +1050,6 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: input
-        Ref:  Plant_Sample/Basic_Info/Plant_Sample_Prefix
-     */
-    public static View get_PlantSample_BasicInfo_PlantSamplePrefix(Solo solo) {
-        String ref = "Plant_Sample/Basic_Info/Plant_Sample_Prefix";
-        return (android.view.View) solo.getView((Object) ref);
-    }
-
-    /*
-        Type: input
         Ref:  Plant_Sample/Basic_Info/Plant_Species
      */
     public static EditText get_PlantSample_BasicInfo_PlantSpecies(Solo solo) {
@@ -1018,6 +1072,24 @@ public class ModuleUtil extends ModuleHelper {
      */
     public static View get_PlantSample_BasicInfo_Project(Solo solo) {
         String ref = "Plant_Sample/Basic_Info/Project";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Plant_Sample/Basic_Info/Sample_Prefix_1
+     */
+    public static View get_PlantSample_BasicInfo_SamplePrefix1(Solo solo) {
+        String ref = "Plant_Sample/Basic_Info/Sample_Prefix_1";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Plant_Sample/Basic_Info/Sample_Prefix_2
+     */
+    public static View get_PlantSample_BasicInfo_SamplePrefix2(Solo solo) {
+        String ref = "Plant_Sample/Basic_Info/Sample_Prefix_2";
         return (android.view.View) solo.getView((Object) ref);
     }
 
@@ -1050,6 +1122,24 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: input
+        Ref:  Project/Sample_ID_Ranges/Maximum_Sample_ID
+     */
+    public static EditText get_Project_SampleIDRanges_MaximumSampleID(Solo solo) {
+        String ref = "Project/Sample_ID_Ranges/Maximum_Sample_ID";
+        return (android.widget.EditText) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Project/Sample_ID_Ranges/Minimum_Sample_ID
+     */
+    public static EditText get_Project_SampleIDRanges_MinimumSampleID(Solo solo) {
+        String ref = "Project/Sample_ID_Ranges/Minimum_Sample_ID";
+        return (android.widget.EditText) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
         Ref:  Project/Search/Search_Term
      */
     public static EditText get_Project_Search_SearchTerm(Solo solo) {
@@ -1077,10 +1167,19 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: input
-        Ref:  Project/Start/Sample_Prefix
+        Ref:  Project/Start/Sample_Prefix_1
      */
-    public static EditText get_Project_Start_SamplePrefix(Solo solo) {
-        String ref = "Project/Start/Sample_Prefix";
+    public static EditText get_Project_Start_SamplePrefix1(Solo solo) {
+        String ref = "Project/Start/Sample_Prefix_1";
+        return (android.widget.EditText) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Project/Start/Sample_Prefix_2
+     */
+    public static EditText get_Project_Start_SamplePrefix2(Solo solo) {
+        String ref = "Project/Start/Sample_Prefix_2";
         return (android.widget.EditText) solo.getView((Object) ref);
     }
 
@@ -1239,10 +1338,19 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: input
-        Ref:  Rock_Sample/Basic_Info/Rock_Sample_Prefix
+        Ref:  Rock_Sample/Basic_Info/Sample_Prefix_1
      */
-    public static View get_RockSample_BasicInfo_RockSamplePrefix(Solo solo) {
-        String ref = "Rock_Sample/Basic_Info/Rock_Sample_Prefix";
+    public static View get_RockSample_BasicInfo_SamplePrefix1(Solo solo) {
+        String ref = "Rock_Sample/Basic_Info/Sample_Prefix_1";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Rock_Sample/Basic_Info/Sample_Prefix_2
+     */
+    public static View get_RockSample_BasicInfo_SamplePrefix2(Solo solo) {
+        String ref = "Rock_Sample/Basic_Info/Sample_Prefix_2";
         return (android.view.View) solo.getView((Object) ref);
     }
 
@@ -1608,19 +1716,28 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: input
-        Ref:  Soil_Sample/Basic_Info/Soil_Sample_ID
+        Ref:  Soil_Sample/Basic_Info/Sample_Prefix_1
      */
-    public static View get_SoilSample_BasicInfo_SoilSampleID(Solo solo) {
-        String ref = "Soil_Sample/Basic_Info/Soil_Sample_ID";
+    public static View get_SoilSample_BasicInfo_SamplePrefix1(Solo solo) {
+        String ref = "Soil_Sample/Basic_Info/Sample_Prefix_1";
         return (android.view.View) solo.getView((Object) ref);
     }
 
     /*
         Type: input
-        Ref:  Soil_Sample/Basic_Info/Soil_Sample_Prefix
+        Ref:  Soil_Sample/Basic_Info/Sample_Prefix_2
      */
-    public static View get_SoilSample_BasicInfo_SoilSamplePrefix(Solo solo) {
-        String ref = "Soil_Sample/Basic_Info/Soil_Sample_Prefix";
+    public static View get_SoilSample_BasicInfo_SamplePrefix2(Solo solo) {
+        String ref = "Soil_Sample/Basic_Info/Sample_Prefix_2";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Soil_Sample/Basic_Info/Soil_Sample_ID
+     */
+    public static View get_SoilSample_BasicInfo_SoilSampleID(Solo solo) {
+        String ref = "Soil_Sample/Basic_Info/Soil_Sample_ID";
         return (android.view.View) solo.getView((Object) ref);
     }
 
@@ -1761,6 +1878,24 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: input
+        Ref:  Water_Sample/Basic_Info/Sample_Prefix_1
+     */
+    public static View get_WaterSample_BasicInfo_SamplePrefix1(Solo solo) {
+        String ref = "Water_Sample/Basic_Info/Sample_Prefix_1";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Water_Sample/Basic_Info/Sample_Prefix_2
+     */
+    public static View get_WaterSample_BasicInfo_SamplePrefix2(Solo solo) {
+        String ref = "Water_Sample/Basic_Info/Sample_Prefix_2";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
         Ref:  Water_Sample/Basic_Info/Site_Name
      */
     public static EditText get_WaterSample_BasicInfo_SiteName(Solo solo) {
@@ -1792,15 +1927,6 @@ public class ModuleUtil extends ModuleHelper {
      */
     public static View get_WaterSample_BasicInfo_WaterSampleID(Solo solo) {
         String ref = "Water_Sample/Basic_Info/Water_Sample_ID";
-        return (android.view.View) solo.getView((Object) ref);
-    }
-
-    /*
-        Type: input
-        Ref:  Water_Sample/Basic_Info/Water_Sample_Prefix
-     */
-    public static View get_WaterSample_BasicInfo_WaterSamplePrefix(Solo solo) {
-        String ref = "Water_Sample/Basic_Info/Water_Sample_Prefix";
         return (android.view.View) solo.getView((Object) ref);
     }
 

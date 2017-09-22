@@ -38,17 +38,25 @@
               <Sample_Type/>
               <Colgroup_1>
                 <Col_1>
-                  <Sample_Prefix/>
+                  <Sample_Prefix_1/>
                 </Col_1>
                 <Col_2>
-                  <Sample_Starting_ID/>
+                  <Sample_Prefix_2/>
                 </Col_2>
+                <Col_3>
+                  <Sample_Starting_ID/>
+                </Col_3>
               </Colgroup_1>
+              <Scan_Label/>
               <Create_New_Sample/>
               <GPS_Status/>
               <Check_for_Duplicates/>
               <Duplicate_ID_List/>
             </Start>
+            <Sample_ID_Ranges>
+              <Minimum_Sample_ID/>
+              <Maximum_Sample_ID/>
+            </Sample_ID_Ranges>
             <Search>
               <Colgroup_0>
                 <Col_0>
@@ -71,7 +79,14 @@
             </Search>
             <Map>
               <Map/>
-              <Center_Me_1/>
+              <Colgroup_1>
+                <Col_1>
+                  <Center_Me_1/>
+                </Col_1>
+                <Col_2>
+                  <Save_Map_Settings_1/>
+                </Col_2>
+              </Colgroup_1>
               <Create_Shape/>
             </Map>
             <Vars>
@@ -89,12 +104,16 @@
             <Basic_Info>
               <Colgroup_1>
                 <Col_1>
-                  <Water_Sample_Prefix/>
+                  <Sample_Prefix_1/>
                 </Col_1>
                 <Col_2>
-                  <Water_Sample_ID/>
+                  <Sample_Prefix_2/>
                 </Col_2>
+                <Col_3>
+                  <Water_Sample_ID/>
+                </Col_3>
               </Colgroup_1>
+              <Print_Label/>
               <Colgroup_2>
                 <Col_1>
                   <Timestamp_Field/>
@@ -196,12 +215,16 @@
             <Basic_Info>
               <Colgroup_1>
                 <Col_1>
-                  <Plant_Sample_Prefix/>
+                  <Sample_Prefix_1/>
                 </Col_1>
                 <Col_2>
-                  <Plant_Sample_ID/>
+                  <Sample_Prefix_2/>
                 </Col_2>
+                <Col_3>
+                  <Plant_Sample_ID/>
+                </Col_3>
               </Colgroup_1>
+              <Print_Label/>
               <Colgroup_2>
                 <Col_1>
                   <Timestamp_Field/>
@@ -267,12 +290,16 @@
             <Basic_Info>
               <Colgroup_1>
                 <Col_1>
-                  <Soil_Sample_Prefix/>
+                  <Sample_Prefix_1/>
                 </Col_1>
                 <Col_2>
-                  <Soil_Sample_ID/>
+                  <Sample_Prefix_2/>
                 </Col_2>
+                <Col_3>
+                  <Soil_Sample_ID/>
+                </Col_3>
               </Colgroup_1>
+              <Print_Label/>
               <Colgroup_2>
                 <Col_1>
                   <Timestamp_Field/>
@@ -337,12 +364,16 @@
             <Basic_Info>
               <Colgroup_1>
                 <Col_1>
-                  <Rock_Sample_Prefix/>
+                  <Sample_Prefix_1/>
                 </Col_1>
                 <Col_2>
-                  <Rock_Sample_ID/>
+                  <Sample_Prefix_2/>
                 </Col_2>
+                <Col_3>
+                  <Rock_Sample_ID/>
+                </Col_3>
               </Colgroup_1>
+              <Print_Label/>
               <Colgroup_2>
                 <Col_1>
                   <Timestamp_Field/>
@@ -466,7 +497,9 @@
           </Shape>
         </faims>
       </instance>
-      <bind nodeset="/faims/Project/Start/Colgroup_1/Col_2/Sample_Starting_ID" type="decimal"/>
+      <bind nodeset="/faims/Project/Start/Colgroup_1/Col_3/Sample_Starting_ID" type="decimal"/>
+      <bind nodeset="/faims/Project/Sample_ID_Ranges/Minimum_Sample_ID" type="decimal"/>
+      <bind nodeset="/faims/Project/Sample_ID_Ranges/Maximum_Sample_ID" type="decimal"/>
       <bind nodeset="/faims/Project/Vars/Next_Water_Sample_ID" type="decimal"/>
       <bind nodeset="/faims/Project/Vars/Next_Plant_Sample_ID" type="decimal"/>
       <bind nodeset="/faims/Project/Vars/Next_Soil_Sample_ID" type="decimal"/>
@@ -573,17 +606,26 @@
           <label/>
           <group ref="Col_1" faims_style="even">
             <label/>
-            <input ref="Sample_Prefix">
-              <label>{Sample_Prefix}</label>
+            <input ref="Sample_Prefix_1">
+              <label>{Sample_Prefix_1}</label>
             </input>
           </group>
           <group ref="Col_2" faims_style="even">
             <label/>
+            <input ref="Sample_Prefix_2">
+              <label>{Sample_Prefix_2}</label>
+            </input>
+          </group>
+          <group ref="Col_3" faims_style="even">
+            <label/>
             <input ref="Sample_Starting_ID">
-              <label>{Sample_Starting_ID}</label>
+              <label>{Next_Sample_ID}</label>
             </input>
           </group>
         </group>
+        <trigger ref="Scan_Label">
+          <label>{Scan_Label}</label>
+        </trigger>
         <trigger ref="Create_New_Sample">
           <label>{Create_New_Sample}</label>
         </trigger>
@@ -600,6 +642,15 @@
             <value>Options not loaded</value>
           </item>
         </select1>
+      </group>
+      <group ref="Sample_ID_Ranges">
+        <label>{Sample_ID_Ranges}</label>
+        <input ref="Minimum_Sample_ID">
+          <label>{Minimum_Sample_ID}</label>
+        </input>
+        <input ref="Maximum_Sample_ID">
+          <label>{Maximum_Sample_ID}</label>
+        </input>
       </group>
       <group ref="Search" faims_scrollable="false">
         <label>{Search}</label>
@@ -654,9 +705,21 @@
         <input faims_map="true" ref="Map">
           <label/>
         </input>
-        <trigger ref="Center_Me_1">
-          <label>{Center_Me}</label>
-        </trigger>
+        <group ref="Colgroup_1" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <trigger ref="Center_Me_1">
+              <label>{Center_Me}</label>
+            </trigger>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <trigger ref="Save_Map_Settings_1">
+              <label>{Save_Map_Settings}</label>
+            </trigger>
+          </group>
+        </group>
         <trigger ref="Create_Shape">
           <label>{Create_Shape}</label>
         </trigger>
@@ -697,17 +760,26 @@
           <label/>
           <group ref="Col_1" faims_style="even">
             <label/>
-            <input faims_attribute_name="Water Sample Prefix" faims_attribute_type="measure" ref="Water_Sample_Prefix" faims_read_only="true">
-              <label>{Water_Sample_Prefix}</label>
+            <input faims_attribute_name="Sample Prefix 1" faims_attribute_type="measure" ref="Sample_Prefix_1" faims_read_only="true">
+              <label>{Sample_Prefix_1}</label>
             </input>
           </group>
           <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Sample Prefix 2" faims_attribute_type="measure" ref="Sample_Prefix_2" faims_read_only="true">
+              <label>{Sample_Prefix_2}</label>
+            </input>
+          </group>
+          <group ref="Col_3" faims_style="even">
             <label/>
             <input faims_attribute_name="Water Sample ID" faims_attribute_type="measure" ref="Water_Sample_ID" faims_read_only="true">
               <label>{Water_Sample_ID}</label>
             </input>
           </group>
         </group>
+        <trigger ref="Print_Label">
+          <label>{Print_Label}</label>
+        </trigger>
         <group ref="Colgroup_2" faims_style="orientation">
           <label/>
           <group ref="Col_1" faims_style="even">
@@ -983,17 +1055,26 @@
           <label/>
           <group ref="Col_1" faims_style="even">
             <label/>
-            <input faims_attribute_name="Plant Sample Prefix" faims_attribute_type="measure" ref="Plant_Sample_Prefix" faims_read_only="true">
-              <label>{Plant_Sample_Prefix}</label>
+            <input faims_attribute_name="Sample Prefix 1" faims_attribute_type="measure" ref="Sample_Prefix_1" faims_read_only="true">
+              <label>{Sample_Prefix_1}</label>
             </input>
           </group>
           <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Sample Prefix 2" faims_attribute_type="measure" ref="Sample_Prefix_2" faims_read_only="true">
+              <label>{Sample_Prefix_2}</label>
+            </input>
+          </group>
+          <group ref="Col_3" faims_style="even">
             <label/>
             <input faims_attribute_name="Plant Sample ID" faims_attribute_type="measure" ref="Plant_Sample_ID" faims_read_only="true">
               <label>{Plant_Sample_ID}</label>
             </input>
           </group>
         </group>
+        <trigger ref="Print_Label">
+          <label>{Print_Label}</label>
+        </trigger>
         <group ref="Colgroup_2" faims_style="orientation">
           <label/>
           <group ref="Col_1" faims_style="even">
@@ -1160,17 +1241,26 @@
           <label/>
           <group ref="Col_1" faims_style="even">
             <label/>
-            <input faims_attribute_name="Soil Sample Prefix" faims_attribute_type="measure" ref="Soil_Sample_Prefix" faims_read_only="true">
-              <label>{Soil_Sample_Prefix}</label>
+            <input faims_attribute_name="Sample Prefix 1" faims_attribute_type="measure" ref="Sample_Prefix_1" faims_read_only="true">
+              <label>{Sample_Prefix_1}</label>
             </input>
           </group>
           <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Sample Prefix 2" faims_attribute_type="measure" ref="Sample_Prefix_2" faims_read_only="true">
+              <label>{Sample_Prefix_2}</label>
+            </input>
+          </group>
+          <group ref="Col_3" faims_style="even">
             <label/>
             <input faims_attribute_name="Soil Sample ID" faims_attribute_type="measure" ref="Soil_Sample_ID" faims_read_only="true">
               <label>{Soil_Sample_ID}</label>
             </input>
           </group>
         </group>
+        <trigger ref="Print_Label">
+          <label>{Print_Label}</label>
+        </trigger>
         <group ref="Colgroup_2" faims_style="orientation">
           <label/>
           <group ref="Col_1" faims_style="even">
@@ -1367,17 +1457,26 @@
           <label/>
           <group ref="Col_1" faims_style="even">
             <label/>
-            <input faims_attribute_name="Rock Sample Prefix" faims_attribute_type="measure" ref="Rock_Sample_Prefix" faims_read_only="true">
-              <label>{Rock_Sample_Prefix}</label>
+            <input faims_attribute_name="Sample Prefix 1" faims_attribute_type="measure" ref="Sample_Prefix_1" faims_read_only="true">
+              <label>{Sample_Prefix_1}</label>
             </input>
           </group>
           <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Sample Prefix 2" faims_attribute_type="measure" ref="Sample_Prefix_2" faims_read_only="true">
+              <label>{Sample_Prefix_2}</label>
+            </input>
+          </group>
+          <group ref="Col_3" faims_style="even">
             <label/>
             <input faims_attribute_name="Rock Sample ID" faims_attribute_type="measure" ref="Rock_Sample_ID" faims_read_only="true">
               <label>{Rock_Sample_ID}</label>
             </input>
           </group>
         </group>
+        <trigger ref="Print_Label">
+          <label>{Print_Label}</label>
+        </trigger>
         <group ref="Colgroup_2" faims_style="orientation">
           <label/>
           <group ref="Col_1" faims_style="even">

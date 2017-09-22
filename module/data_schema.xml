@@ -28,7 +28,12 @@
   </RelationshipElement>
   <ArchaeologicalElement name="Water Sample">
     <description></description>
-    <property name="Water Sample Prefix" type="measure" isIdentifier="true">
+    <property name="Sample Prefix 1" type="measure" isIdentifier="true">
+      <description></description>
+      <formatString>$2</formatString>
+      <appendCharacterString> - </appendCharacterString>
+    </property>
+    <property name="Sample Prefix 2" type="measure" isIdentifier="true">
       <description></description>
       <formatString>$2</formatString>
       <appendCharacterString> - </appendCharacterString>
@@ -334,14 +339,19 @@
   </ArchaeologicalElement>
   <ArchaeologicalElement name="Plant Sample">
     <description></description>
-    <property name="Plant Sample Prefix" type="measure" isIdentifier="true">
+    <property name="Sample Prefix 1" type="measure" isIdentifier="true">
+      <description></description>
+      <formatString>$2</formatString>
+      <appendCharacterString> - </appendCharacterString>
+    </property>
+    <property name="Sample Prefix 2" type="measure" isIdentifier="true">
       <description></description>
       <formatString>$2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
     <property name="Plant Sample ID" type="measure" isIdentifier="true">
       <description></description>
-      <formatString> $2</formatString>
+      <formatString>$2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
     <property name="Plant Sample Timestamp" type="measure" isIdentifier="true">
@@ -500,7 +510,12 @@
   </ArchaeologicalElement>
   <ArchaeologicalElement name="Soil Sample">
     <description></description>
-    <property name="Soil Sample Prefix" type="measure" isIdentifier="true">
+    <property name="Sample Prefix 1" type="measure" isIdentifier="true">
+      <description></description>
+      <formatString>$2</formatString>
+      <appendCharacterString> - </appendCharacterString>
+    </property>
+    <property name="Sample Prefix 2" type="measure" isIdentifier="true">
       <description></description>
       <formatString>$2</formatString>
       <appendCharacterString> - </appendCharacterString>
@@ -944,7 +959,12 @@
   </ArchaeologicalElement>
   <ArchaeologicalElement name="Rock Sample">
     <description></description>
-    <property name="Rock Sample Prefix" type="measure" isIdentifier="true">
+    <property name="Sample Prefix 1" type="measure" isIdentifier="true">
+      <description></description>
+      <formatString>$2</formatString>
+      <appendCharacterString> - </appendCharacterString>
+    </property>
+    <property name="Sample Prefix 2" type="measure" isIdentifier="true">
       <description></description>
       <formatString>$2</formatString>
       <appendCharacterString> - </appendCharacterString>
