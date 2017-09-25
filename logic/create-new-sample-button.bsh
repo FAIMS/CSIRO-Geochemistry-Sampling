@@ -4,6 +4,11 @@ boolean digLen(String s, int n) {
   return s.matches("\\d{" + n + "}");
 }
 
+boolean chrLen(String s, int n) {
+  if (s == null) return false;
+  return s.length() == n;
+}
+
 boolean isInRange(String s, String smin, String smax) {
   try {
     int n   = Integer.parseInt(s);
@@ -21,8 +26,8 @@ boolean isInRange(int n, int min, int max) {
 }
 
 boolean isValidSampleType      (String s) { return !isNull(s); }
-boolean isValidSamplePrefix1   (String s) { return !isNull(s) && digLen(s, 2); }
-boolean isValidSamplePrefix2   (String s) { return !isNull(s) && digLen(s, 3); }
+boolean isValidSamplePrefix1   (String s) { return !isNull(s) && chrLen(s, 2); }
+boolean isValidSamplePrefix2   (String s) { return !isNull(s) && chrLen(s, 3); }
 boolean isValidSampleStartingId(String s) {
   String sId    = getFieldValue("Project/Start/Sample_Starting_ID");
   String sIdMin = getFieldValue("Project/Sample_ID_Ranges/Minimum_Sample_ID");
@@ -53,7 +58,7 @@ void onClickCreateNewSample() {
 
     String body = "";
     body += "Please enter a number into the 'Sample Prefix 1' field. 'Sample ";
-    body += "Prefix 1' must consist of 2 digits.";
+    body += "Prefix 1' must consist of 2 characters.";
 
     showWarning(head, body);
     return;
@@ -64,7 +69,7 @@ void onClickCreateNewSample() {
 
     String body = "";
     body += "Please enter a number into the 'Sample Prefix 2' field. 'Sample ";
-    body += "Prefix 2' must consist of 3 digits.";
+    body += "Prefix 2' must consist of 3 characters.";
 
     showWarning(head, body);
     return;
