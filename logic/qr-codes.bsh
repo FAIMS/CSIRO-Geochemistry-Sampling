@@ -12,26 +12,39 @@ void printLabel() {
 
   // TODO: Print label
   Log.d("printLabel", igsn + " " + materialType + " " + date + " " + uuid);
+
+  String cmd = "";
+
+  writeBluetoothMessage(cmd);
 }
 
-void loadEntityFromScannedUuid() {
+void loadEntityFromScannedIgsn() {
   String code = getLastScanContents();
 
-  String  uuidString  = "";
-  Pattern uuidPattern = Pattern.compile("(\\d{19})");
-  Matcher matcher     = uuidPattern.matcher(code);
-  while (matcher.find())
-    uuidString = matcher.group(1);
+  int lenIgsn = 2 + 3 + 4;
+  String igsn = code.substring(code.length() - lenIgsn);
 
-  if (isNull(uuidString)) {
+  loadEntityFromIgsn(igsn);
+}
+
+void loadEntityFromIgsn(String igsn) {
+  if (isNull(lenIgsn)) {
     showWarning("{load_scanned_err_head}", "{load_scanned_err_body}");
     return;
   }
 
-  loadEntityFrom(uuidString);
+  // TODO: 
+  // IGSN is composed of:
+  //   - 'Sample Prefix 1'
+  //   - 'Sample Prefix 2'
+  //   - One of:
+  //     - 'Water Sample ID'
+  //     - 'Plant Sample ID'
+  //     - 'Soil Sample ID'
+  //     - 'Rock Sample ID'
 }
 
-addOnEvent("Project/Start/Scan_Label", "click", "loadEntityFromScannedUuid()");
+addOnEvent("Project/Start/Scan_Label", "click", "loadEntityFromScannedIgsn()");
 
 addOnEvent("Water_Sample/Basic_Info/Print_Label", "click", "printLabel()");
 addOnEvent("Soil_Sample/Basic_Info/Print_Label",  "click", "printLabel()");
