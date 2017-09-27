@@ -11,7 +11,7 @@
     <parent>Parent Of</parent>
     <child>Child Of</child>
   </RelationshipElement>
-  <RelationshipElement name="Plant Sample - Photolog" type="hierarchical">
+  <RelationshipElement name="Vegetation Sample - Photolog" type="hierarchical">
     <description>A 1-to-n relationship between the parent and its children, respectively.</description>
     <parent>Parent Of</parent>
     <child>Child Of</child>
@@ -38,14 +38,14 @@
       <formatString>$2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
-    <property name="Water Sample ID" type="measure" isIdentifier="true">
+    <property name="Sample ID" type="measure" isIdentifier="true">
       <description></description>
       <formatString>$2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
     <property name="Water Sample Timestamp" type="measure" isIdentifier="true">
       <description></description>
-      <formatString> - Water - $2</formatString>
+      <formatString> - $2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
     <property name="Timestamp Field" type="measure">
@@ -78,7 +78,7 @@
       <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
-    <property name="Water Sample Observation Type" type="vocab">
+    <property name="Observation Type" type="vocab">
       <description></description>
       <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
       <appendCharacterString> - </appendCharacterString>
@@ -337,7 +337,7 @@
       <appendCharacterString> - </appendCharacterString>
     </property>
   </ArchaeologicalElement>
-  <ArchaeologicalElement name="Plant Sample">
+  <ArchaeologicalElement name="Vegetation Sample">
     <description></description>
     <property name="Sample Prefix 1" type="measure" isIdentifier="true">
       <description></description>
@@ -349,14 +349,14 @@
       <formatString>$2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
-    <property name="Plant Sample ID" type="measure" isIdentifier="true">
+    <property name="Sample ID" type="measure" isIdentifier="true">
       <description></description>
       <formatString>$2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
-    <property name="Plant Sample Timestamp" type="measure" isIdentifier="true">
+    <property name="Vegetation Sample Timestamp" type="measure" isIdentifier="true">
       <description></description>
-      <formatString> - Plant - $2</formatString>
+      <formatString> - $2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
     <property name="Timestamp Field" type="measure">
@@ -364,7 +364,7 @@
       <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
-    <property name="Plant Sample author" type="measure">
+    <property name="Vegetation Sample author" type="measure">
       <description></description>
       <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
       <appendCharacterString> - </appendCharacterString>
@@ -384,7 +384,7 @@
       <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
-    <property name="Plant Sample Observation Type" type="vocab">
+    <property name="Observation Type" type="vocab">
       <description></description>
       <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
       <appendCharacterString> - </appendCharacterString>
@@ -395,12 +395,12 @@
 <description></description></term>
       </lookup>
     </property>
-    <property name="Plant Sample Location Number" type="">
+    <property name="Vegetation Sample Location Number" type="">
       <description></description>
       <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
-    <property name="Plant Species" type="measure">
+    <property name="Vegetation Species" type="measure">
       <description></description>
       <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
       <appendCharacterString> - </appendCharacterString>
@@ -458,12 +458,12 @@
       <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
-    <property name="Plant Height" type="measure">
+    <property name="Vegetation Height" type="measure">
       <description></description>
       <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
-    <property name="Plant Width" type="measure">
+    <property name="Vegetation Width" type="measure">
       <description></description>
       <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
       <appendCharacterString> - </appendCharacterString>
@@ -520,14 +520,25 @@
       <formatString>$2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
-    <property name="Soil Sample ID" type="measure" isIdentifier="true">
+    <property name="Sample ID" type="measure" isIdentifier="true">
       <description></description>
       <formatString>$2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
+    <property name="Suffix" type="vocab" isIdentifier="true">
+      <description></description>
+      <formatString>$1</formatString>
+      <appendCharacterString> - </appendCharacterString>
+      <lookup>
+        <term>{A}
+<description></description></term>
+        <term>{B}
+<description></description></term>
+      </lookup>
+    </property>
     <property name="Soil Sample Timestamp" type="measure" isIdentifier="true">
       <description></description>
-      <formatString> - Soil - $2</formatString>
+      <formatString> - $2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
     <property name="Timestamp Field" type="measure">
@@ -555,7 +566,7 @@
       <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
-    <property name="Soil Sample Observation Type" type="vocab">
+    <property name="Observation Type" type="vocab">
       <description></description>
       <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
       <appendCharacterString> - </appendCharacterString>
@@ -969,30 +980,14 @@
       <formatString>$2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
-    <property name="Rock Sample ID" type="measure" isIdentifier="true">
+    <property name="Sample ID" type="measure" isIdentifier="true">
       <description></description>
       <formatString>$2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
-    <property name="Rock Sample Observation Type" type="vocab" isIdentifier="true">
-      <description></description>
-      <formatString>{{ if equal($1, "{Observation_Only}") then " - Observation"}}</formatString>
-      <appendCharacterString> - </appendCharacterString>
-      <lookup>
-        <term>{Sampling_Location}
-<description></description></term>
-        <term>{Observation_Only}
-<description></description></term>
-      </lookup>
-    </property>
-    <property name="Rock Sample Location Number" type="measure" isIdentifier="true">
-      <description></description>
-      <formatString> {{ if $2 then "- Location $2" else "- Location &lt;empty&gt;" }}</formatString>
-      <appendCharacterString> - </appendCharacterString>
-    </property>
     <property name="Rock Sample Timestamp" type="measure" isIdentifier="true">
       <description></description>
-      <formatString> - Rock - $2</formatString>
+      <formatString> - $2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
     <property name="Timestamp Field" type="measure">
@@ -1019,6 +1014,22 @@
       <description></description>
       <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
       <appendCharacterString> - </appendCharacterString>
+    </property>
+    <property name="Rock Sample Location Number" type="measure">
+      <description></description>
+      <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
+      <appendCharacterString> - </appendCharacterString>
+    </property>
+    <property name="Observation Type" type="vocab">
+      <description></description>
+      <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
+      <appendCharacterString> - </appendCharacterString>
+      <lookup>
+        <term>{Sampling_Location}
+<description></description></term>
+        <term>{Observation_Only}
+<description></description></term>
+      </lookup>
     </property>
     <property name="Core ID" type="measure">
       <description></description>

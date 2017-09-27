@@ -1,52 +1,256 @@
 /*************** LOADING AND CREATION OF RECORDS FROM QR CODES ****************/
+String SCANNED_IGSN    = "";
+long   LAST_PRINT_TIME = 0;
+long   MAX_BOUNCE_TIME = 5 * 1000;
+
+String parseIgsnFromUrl(String url) {
+  String  match   = "";
+  Pattern pattern = Pattern.compile(".+\\/(.+)");
+  Matcher matcher = pattern.matcher(url);
+  while (matcher.find())
+    match = matcher.group(1);
+
+  return match;
+}
+
+String parseIgsnToLoadEntity(String igsn) {
+  return
+      parsePrefix1 (igsn)
+    + parsePrefix2 (igsn)
+    + parseSampleId(igsn)
+    + parseSuffix  (igsn);
+}
+
+String parsePrefix1(String igsn) {
+  return getFieldValue("Project/Start/Sample_Prefix_1");
+}
+
+String parsePrefix2(String igsn) {
+  int lenParsePrefix1 = parsePrefix1(igsn).length();
+
+  igsn = igsn.substring(lenParsePrefix1, igsn.length());
+
+  String  prefix2 = "";
+  Pattern pattern = Pattern.compile("([^\\d]+).+");
+  Matcher matcher = pattern.matcher(igsn);
+  while (matcher.find())
+    prefix2 = matcher.group(1);
+
+  return prefix2;
+}
+
+String parseSampleId(String igsn) {
+  int lenStuffBefore = (
+      parsePrefix1(igsn) +
+      parsePrefix2(igsn)
+  ).length();
+
+  igsn = igsn.substring(lenStuffBefore, igsn.length());
+
+  String  match = "";
+  Pattern pattern = Pattern.compile("([\\d]+).*");
+  Matcher matcher = pattern.matcher(igsn);
+  while (matcher.find())
+    match = matcher.group(1);
+
+  return match;
+}
+
+String parseSuffix(String igsn) {
+  String possibleSuffix = igsn.substring(igsn.length() - 1);
+
+  boolean isSuffix = !Character.isDigit(possibleSuffix.charAt(0));
+
+  if (isSuffix) {
+    String suffix = possibleSuffix;
+    return getVocabId("Suffix", "{" + suffix + "}");
+  } else {
+    return "";
+  }
+}
+
+String getIgsn(String tabGroup) {
+  if ("Soil_Sample".equals(tabGroup)) {
+    return
+        getFieldValue(tabGroup + "/Basic_Info/Sample_Prefix_1")
+      + getFieldValue(tabGroup + "/Basic_Info/Sample_Prefix_2")
+      + getFieldValue(tabGroup + "/Basic_Info/Sample_ID")
+      + guessArch16nValFromKey(getMenuValue(tabGroup + "/Basic_Info/Suffix"));
+  } else {
+    return
+        getFieldValue(tabGroup + "/Basic_Info/Sample_Prefix_1")
+      + getFieldValue(tabGroup + "/Basic_Info/Sample_Prefix_2")
+      + getFieldValue(tabGroup + "/Basic_Info/Sample_ID");
+  }
+}
+
+String getSampleType(String tabGroup) {
+  String type = tabGroup.split("_")[0];
+  if ("CR".equals(getFieldValue(tabGroup + "/Basic_Info/Sample_Prefix_2")))
+    type += " (Crust)";
+
+  return type;
+}
+
 void printLabel() {
+  long currentTime = System.currentTimeMillis();
+  if (LAST_PRINT_TIME + MAX_BOUNCE_TIME > currentTime) {
+    String msg = "";
+    msg = "You are doing that too much. Wait %s seconds and try again.";
+    msg = replaceFirst(msg, "" + (MAX_BOUNCE_TIME / 1000));
+    showToast(msg);
+    return;
+  }
+
   triggerAutoSave();
 
   String tabGroup = getDisplayedTabGroup();
 
-  String igsn = "<IGSN>";
-  String materialType = tabGroup.split("_")[0];
-  String date = getFieldValue(tabGroup + "/Vars/Timestamp");
+  String igsn       = getIgsn(tabGroup);
+  String sampleType = getSampleType(tabGroup);
+  String timestamp  = getFieldValue(tabGroup + "/Vars/Timestamp");
 
-  String uuid = getUuid(tabGroup);
-
-  // TODO: Print label
-  Log.d("printLabel", igsn + " " + materialType + " " + date + " " + uuid);
+  Log.d("printLabel", igsn + " " + sampleType + " " + timestamp);
 
   String cmd = "";
+  cmd += "\r\n^XA^POI";
+  cmd += "\r\n^FO15,10^A0,60,60^FDIGSN:^FS ^FO100,10^A0,60,60^FD{igsn}^FS";
+  cmd += "\r\n^FO15,70^A0,60,60^FDType:^FS ^FO100,70^A0,60,60^FD{sample_type}^FS";
+  cmd += "\r\n^FO15,140^A0,60,60^FDDate:^FS ^FO100,140^A0,60,60^FD{timestamp}^FS";
+  cmd += "\r\n^FO450,30";
+  cmd += "\r\n^BQ,2,5";
+  cmd += "\r\n^FDHA,http://igsn.org/{igsn}^FS";
+  cmd += "\r\n^FO430,5^A0,30,30^FDigsn.org/{igsn}^FS";
+  cmd += "\r\n^XZ";
+  cmd  = replaceFirst(cmd, "{igsn}", igsn);
+  cmd  = replaceFirst(cmd, "{igsn}", igsn);
+  cmd  = replaceFirst(cmd, "{igsn}", igsn);
+  cmd  = replaceFirst(cmd, "{sample_type}", sampleType);
+  cmd  = replaceFirst(cmd, "{timestamp}", timestamp);
+  Log.d("printLabel", cmd);
 
-  writeBluetoothMessage(cmd);
+  //writeBluetoothMessage(cmd); TODO: Uncomment me
+  LAST_PRINT_TIME = currentTime;
+}
+
+void scanRecordFromQrCode() {
+  scanCode("loadEntityFromScannedIgsn()");
 }
 
 void loadEntityFromScannedIgsn() {
   String code = getLastScanContents();
 
-  int lenIgsn = 2 + 3 + 4;
-  String igsn = code.substring(code.length() - lenIgsn);
+  String igsn = parseIgsnFromUrl(code);
+
+  if (!igsn.startsWith(parsePrefix1(igsn))) {
+    String head = "Please Enter 'Sample Prefix 1'";
+    String body;
+    body  = "Please enter 'Sample Prefix 1' of the sample you are trying to ";
+    body += "scan then try again.";
+
+    showWarning(head, body);
+    return;
+  }
 
   loadEntityFromIgsn(igsn);
 }
 
 void loadEntityFromIgsn(String igsn) {
-  if (isNull(lenIgsn)) {
+  if (isNull(igsn)) {
     showWarning("{load_scanned_err_head}", "{load_scanned_err_body}");
     return;
   }
 
-  // TODO: 
-  // IGSN is composed of:
-  //   - 'Sample Prefix 1'
-  //   - 'Sample Prefix 2'
-  //   - One of:
-  //     - 'Water Sample ID'
-  //     - 'Plant Sample ID'
-  //     - 'Soil Sample ID'
-  //     - 'Rock Sample ID'
+  String q = "";
+  q += " SELECT   uuid";
+  q += " FROM     latestnondeletedaentvalue";
+  q += " JOIN     attributekey USING (attributeid)";
+  q += " WHERE    attributename IN (";
+  q += "                  'Sample Prefix 1',";
+  q += "                  'Sample Prefix 2',";
+  q += "                  'Sample ID',";
+  q += "                  'Suffix'";
+  q += "          )";
+  q += " GROUP BY uuid";
+  q += " HAVING   COALESCE(GROUP_CONCAT(measure, ''), '') ||";
+  q += "          COALESCE(GROUP_CONCAT(vocabid, ''), '') = %s";
+  q  = dbReplaceFirst(q, parseIgsnToLoadEntity(igsn));
+  Log.d("", q);
+
+  FetchCallback cb = new FetchCallback() {
+    onFetch(result) {
+      print("" + result);
+      if (result == null || result.size() == 0)
+        createSampleFromIgsn(igsn);
+      else
+        loadEntityFrom(result.get(0).get(0));
+    }
+  };
+
+  fetchAll(q, cb);
 }
 
-addOnEvent("Project/Start/Scan_Label", "click", "loadEntityFromScannedIgsn()");
+void createSampleFromIgsn(String igsn) {
+  String type = getFieldValue("Project/Start/Sample_Type");
 
-addOnEvent("Water_Sample/Basic_Info/Print_Label", "click", "printLabel()");
-addOnEvent("Soil_Sample/Basic_Info/Print_Label",  "click", "printLabel()");
-addOnEvent("Plant_Sample/Basic_Info/Print_Label", "click", "printLabel()");
-addOnEvent("Rock_Sample/Basic_Info/Print_Label",  "click", "printLabel()");
+  String head;
+  String body;
+  String cbOk;
+  String cbBad;
+  if (isNull(type)) {
+    head  = "Cannot Find Record";
+
+    body  = "A record having that IGSN could not be found. You can create a ";
+    body += "new record by dismissing this message, selecting a type from the";
+    body += "'Sample Type' dropdown menu, then scanning the QR code again.";
+
+    showWarning(head, body);
+  } else {
+    head  = "New Sample";
+
+    body  = "A sample having the scanned IGSN was not found on this device. A ";
+    body += "new {sample_type} with this IGSN will be created instead. You can";
+    body += " change the type of the created sample by taping 'Cancel' and ";
+    body += "setting the 'Sample Type' field to the desired value.";
+
+    body  = replaceFirst(body, "{sample_type}", type);
+
+    cbOk  = fun2str("reallyCreateSampleFromIgsn", new Object[]{type, igsn});
+
+    showAlert(head, body, cbOk, cbBad);
+  }
+}
+
+void reallyCreateSampleFromIgsn(String type, String igsn) {
+  SCANNED_IGSN = igsn;
+  onClickProjectNewSample(type);
+}
+
+void setIgsn() {
+  if (isNull(SCANNED_IGSN))
+    return;
+
+  String tabGroup = getDisplayedTabGroup();
+
+  String prefix1  = parsePrefix1 (SCANNED_IGSN);
+  String prefix2  = parsePrefix2 (SCANNED_IGSN);
+  String sampleId = parseSampleId(SCANNED_IGSN);
+  String suffix   = parseSuffix  (SCANNED_IGSN);
+  SCANNED_IGSN = "";
+
+  setFieldValue(tabGroup + "/Basic_Info/Sample_Prefix_1", prefix1);
+  setFieldValue(tabGroup + "/Basic_Info/Sample_Prefix_2", prefix2);
+  setFieldValue(tabGroup + "/Basic_Info/Sample_ID",       sampleId);
+  if ("Soil_Sample".equals(tabGroup))
+  setFieldValue(tabGroup + "/Basic_Info/Suffix",          suffix);
+}
+
+addOnEvent("Project/Start/Scan_Label", "click", "scanRecordFromQrCode()");
+
+for (String sampleType : SAMPLE_TYPES) {
+  String ref = sampleType + "/Basic_Info/Print_Label";
+  addOnEvent(ref, "click", "printLabel()");
+}
+
+for (String sampleType : SAMPLE_TYPES)
+  addOnEvent(sampleType, "create", "setIgsn()", PRECEDENCE_MID-1);

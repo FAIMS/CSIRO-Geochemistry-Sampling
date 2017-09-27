@@ -1,0 +1,20 @@
+/****************************** PREFIX 2 SETTER *******************************/
+
+void maybeSetPrefix2() {
+  String sampleType = getFieldValue("Project/Start/Sample_Type");
+  String refPrefix  = "Project/Start/Sample_Prefix_2";
+
+  if ("{Soil_Sample}".equals(sampleType))
+    setFieldValue(refPrefix, "S");
+  else if ("{Soil_Sample__Crust_}".equals(sampleType))
+    setFieldValue(refPrefix, "CR");
+  else
+    setFieldValueFromLocalSettings(refPrefix, true);
+}
+
+void savePrefix2() {
+  insertIntoLocalSettings("Project/Start/Sample_Prefix_2");
+}
+
+addOnEvent("Project/Start/Sample_Type", "click", "maybeSetPrefix2()");
+addOnEvent("Project",                   "leave", "savePrefix2()");

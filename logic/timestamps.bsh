@@ -1,5 +1,4 @@
 /********************************* TIMESTAMPS *********************************/
-
 String getFmtStrTimestamp() {
   String dateStr = getTimestampNow("ddMMMyy", false);
   dateStr = replaceFirst(dateStr, ".", "");
@@ -7,7 +6,7 @@ String getFmtStrTimestamp() {
 }
 
 String getFieldTimestamp() {
-  String dateStr = getTimestampNow("yyyy-MM-dd HH:mm:ss z", false);
+  String dateStr = getTimestampNow("dd/MM/yyyy", false);
   dateStr = replaceFirst(dateStr, ".", "");
   return dateStr;
 }
@@ -20,30 +19,5 @@ void setTimestamps(String tabgroup) {
   setFieldValue(refFmtStr, getFmtStrTimestamp());
 }
 
-addOnEvent(
-    "Water_Sample",
-    "create",
-    "setTimestamps",
-    new Object[]{"Water_Sample"}
-);
-
-addOnEvent(
-    "Soil_Sample",
-    "create",
-    "setTimestamps",
-    new Object[]{"Soil_Sample"}
-);
-
-addOnEvent(
-    "Plant_Sample",
-    "create",
-    "setTimestamps",
-    new Object[]{"Plant_Sample"}
-);
-
-addOnEvent(
-    "Rock_Sample",
-    "create",
-    "setTimestamps",
-    new Object[]{"Rock_Sample"}
-);
+for (String sampleType : SAMPLE_TYPES)
+  addOnEvent(sampleType, "create", "setTimestamps", new Object[]{sampleType});

@@ -1,0 +1,14 @@
+/********************************* BLUETOOTH **********************************/
+{
+  ToggleActionButtonCallback enableBluetooth = new ToggleActionButtonCallback() {
+      actionOnLabel () { return "Disable Bluetooth"; }
+      actionOffLabel() { return "Enable Bluetooth"; }
+
+      actionOff() { createBluetoothConnection("", 0); }
+      actionOn () { destroyBluetoothConnection(); }
+
+      isActionOff() { return isBluetoothConnected(); }
+  };
+
+  addActionBarItem("bluetooth", enableBluetooth);
+}

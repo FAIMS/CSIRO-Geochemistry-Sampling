@@ -24,10 +24,10 @@ waterQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join ae
 waterps = createPointStyle(10, Color.BLUE, 0.2f, 0.5f);
 showDatabaseLayer(MAP_REF, "Water Samples", isEntity, waterQueryName, waterQuerySql, waterps, ls, pos, ts);
 
-plantQueryName = "Plant Samples";
-plantQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Plant Sample'";
+plantQueryName = "Vegetation Samples";
+plantQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Vegetation Sample'";
 plantps = createPointStyle(10, Color.GREEN, 0.2f, 0.5f);
-showDatabaseLayer(MAP_REF, "Plant Samples", isEntity, plantQueryName, plantQuerySql, plantps, ls, pos, ts);
+showDatabaseLayer(MAP_REF, "Vegetation Samples", isEntity, plantQueryName, plantQuerySql, plantps, ls, pos, ts);
 
 soilQueryName = "Soil Samples";
 soilQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Soil Sample'";

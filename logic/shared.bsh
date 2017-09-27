@@ -1,0 +1,17 @@
+final int LEN_PREFIX_1  = 2;
+final int LEN_PREFIX_2  = 3;
+final int LEN_SAMPLE_ID = 4;
+
+final List SAMPLE_TYPES = new ArrayList();
+SAMPLE_TYPES.add("Water_Sample");
+SAMPLE_TYPES.add("Soil_Sample");
+SAMPLE_TYPES.add("Vegetation_Sample");
+SAMPLE_TYPES.add("Rock_Sample");
+
+void onClickProjectNewSample(String type) {
+  if ("{Water_Sample}"       .equals(type)) onClickProjectNewWaterSample();
+  if ("{Vegetation_Sample}"  .equals(type)) onClickProjectNewVegetationSample();
+  if ("{Rock_Sample}"        .equals(type)) onClickProjectNewRockSample();
+  if ("{Soil_Sample}"        .equals(type)) onClickProjectNewSoilSample();
+  if ("{Soil_Sample__Crust_}".equals(type)) onClickProjectNewSoilSample();
+}

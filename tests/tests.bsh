@@ -22,7 +22,7 @@ void initFieldValues() {
 {
   print("TEST: VALIDATION OF SAMPLE ID RANGES (SHOULD SHOW 2 WARNINGS):");
   initFieldValues();
-  setFieldValue("Project/Sample_ID_Ranges/Minimum_Sample_ID", "0000");
+  setFieldValue("Project/Sample_ID_Ranges/Minimum_Sample_ID", "000");
   setFieldValue("Project/Sample_ID_Ranges/Maximum_Sample_ID", "000");
   executeOnEvent(
       "Project/Sample_ID_Ranges/Minimum_Sample_ID",
@@ -129,7 +129,6 @@ void initFieldValues() {
 }
 
 {
-  print("TEST: AUTONUMBERING: (SHOULD SHOW 0 WARNINGS)");
   setFieldValue(AUTONUM_SOURCE, "");
   executeOnEvent(
       "Project",
@@ -137,5 +136,22 @@ void initFieldValues() {
   );
   assert(getFieldValue(AUTONUM_SOURCE).equals("0001"));
   assert(incField(AUTONUM_SOURCE).equals(2));
-  print(getFieldValue(AUTONUM_SOURCE));
+}
+
+{
+  setFieldValue("Project/Start/Sample_Prefix_1", "aa");
+  updateDisplayedTabGroup("Water_Sample");
+  SCANNED_IGSN = "aaBBB1111";
+  setIgsn();
+  assert(getFieldValue("Water_Sample/Basic_Info/Sample_Prefix_1").equals("aa"));
+  assert(getFieldValue("Water_Sample/Basic_Info/Sample_Prefix_2").equals("BBB"));
+  assert(getFieldValue("Water_Sample/Basic_Info/Sample_ID")      .equals("1111"));
+}
+
+{
+  setFieldValue("Project/Start/Sample_Prefix_1", "CSMAST");
+  String igsn = "CSMASTW-AN0004B";
+  assert("CSMAST".equals(parsePrefix1 (igsn)));
+  assert("W-AN"  .equals(parsePrefix2 (igsn)));
+  assert("0004"  .equals(parseSampleId(igsn)));
 }

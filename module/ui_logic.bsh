@@ -1,5 +1,5 @@
 /*
- * GENERATED WITH FAIMS-TOOLS, SHA1: 6e164ce3a24640d3a8a2113145dc7e8639cf2528
+ * GENERATED WITH FAIMS-TOOLS, SHA1: b541fa1db2665947478dfe4fb655abdd2dc75244
  */
 import android.util.Log;
 import android.os.Build.MODEL;
@@ -239,17 +239,13 @@ REF_TO_TYPE.put("Project/Map/Map", "map");
 REF_TO_TYPE.put("Project/Map/Center_Me_1", "button");
 REF_TO_TYPE.put("Project/Map/Save_Map_Settings_1", "button");
 REF_TO_TYPE.put("Project/Map/Create_Shape", "button");
-REF_TO_TYPE.put("Project/Vars/Next_Water_Sample_ID", "input");
-REF_TO_TYPE.put("Project/Vars/Next_Plant_Sample_ID", "input");
-REF_TO_TYPE.put("Project/Vars/Next_Soil_Sample_ID", "input");
-REF_TO_TYPE.put("Project/Vars/Next_Rock_Sample_ID", "input");
 REF_TO_TYPE.put("Project/Vars/New_Water_Sample", "button");
-REF_TO_TYPE.put("Project/Vars/New_Plant_Sample", "button");
+REF_TO_TYPE.put("Project/Vars/New_Vegetation_Sample", "button");
 REF_TO_TYPE.put("Project/Vars/New_Soil_Sample", "button");
 REF_TO_TYPE.put("Project/Vars/New_Rock_Sample", "button");
 REF_TO_TYPE.put("Water_Sample/Basic_Info/Sample_Prefix_1", "input");
 REF_TO_TYPE.put("Water_Sample/Basic_Info/Sample_Prefix_2", "input");
-REF_TO_TYPE.put("Water_Sample/Basic_Info/Water_Sample_ID", "input");
+REF_TO_TYPE.put("Water_Sample/Basic_Info/Sample_ID", "input");
 REF_TO_TYPE.put("Water_Sample/Basic_Info/Print_Label", "button");
 REF_TO_TYPE.put("Water_Sample/Basic_Info/Timestamp_Field", "input");
 REF_TO_TYPE.put("Water_Sample/Basic_Info/Water_Sample_author", "input");
@@ -298,42 +294,43 @@ REF_TO_TYPE.put("Water_Sample/Photolog/Existing_Photologs", "list");
 REF_TO_TYPE.put("Water_Sample/Hidden/Preferred_pH_Time", "input");
 REF_TO_TYPE.put("Water_Sample/Hidden/Preferred_Eh_Time", "input");
 REF_TO_TYPE.put("Water_Sample/Vars/Timestamp", "input");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/Sample_Prefix_1", "input");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/Sample_Prefix_2", "input");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/Plant_Sample_ID", "input");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/Print_Label", "button");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/Timestamp_Field", "input");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/Plant_Sample_author", "input");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/Station_Deposit", "input");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/Project", "input");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/Area", "input");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/Observation_Type", "radio");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/Location_Number", "");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/Plant_Species", "input");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/SRID", "dropdown");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/Latitude", "input");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/Longitude", "input");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/Northing", "input");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/Easting", "input");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/Accuracy", "input");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/Take_From_GPS_1", "button");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/Elevation_Metres_above_Sea_Level", "input");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/Plant_Height", "input");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/Plant_Width", "input");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/Soil_Description", "checkbox");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/Landform_Description", "input");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/Notes", "input");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/Photos", "camera");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/Photos_Button_1", "button");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/Sketches", "file");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/Sketches_Button_1", "button");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info/View_Sketch", "viewfiles");
-REF_TO_TYPE.put("Plant_Sample/Photolog/New_Photolog", "button");
-REF_TO_TYPE.put("Plant_Sample/Photolog/Existing_Photologs", "list");
-REF_TO_TYPE.put("Plant_Sample/Vars/Timestamp", "input");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Sample_Prefix_1", "input");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Sample_Prefix_2", "input");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Sample_ID", "input");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Print_Label", "button");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Timestamp_Field", "input");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Vegetation_Sample_author", "input");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Station_Deposit", "input");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Project", "input");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Area", "input");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Observation_Type", "radio");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Location_Number", "");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Vegetation_Species", "input");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/SRID", "dropdown");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Latitude", "input");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Longitude", "input");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Northing", "input");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Easting", "input");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Accuracy", "input");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Take_From_GPS_1", "button");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Elevation_Metres_above_Sea_Level", "input");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Vegetation_Height", "input");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Vegetation_Width", "input");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Soil_Description", "checkbox");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Landform_Description", "input");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Notes", "input");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Photos", "camera");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Photos_Button_1", "button");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Sketches", "file");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Sketches_Button_1", "button");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/View_Sketch", "viewfiles");
+REF_TO_TYPE.put("Vegetation_Sample/Photolog/New_Photolog", "button");
+REF_TO_TYPE.put("Vegetation_Sample/Photolog/Existing_Photologs", "list");
+REF_TO_TYPE.put("Vegetation_Sample/Vars/Timestamp", "input");
 REF_TO_TYPE.put("Soil_Sample/Basic_Info/Sample_Prefix_1", "input");
 REF_TO_TYPE.put("Soil_Sample/Basic_Info/Sample_Prefix_2", "input");
-REF_TO_TYPE.put("Soil_Sample/Basic_Info/Soil_Sample_ID", "input");
+REF_TO_TYPE.put("Soil_Sample/Basic_Info/Sample_ID", "input");
+REF_TO_TYPE.put("Soil_Sample/Basic_Info/Suffix", "dropdown");
 REF_TO_TYPE.put("Soil_Sample/Basic_Info/Print_Label", "button");
 REF_TO_TYPE.put("Soil_Sample/Basic_Info/Timestamp_Field", "input");
 REF_TO_TYPE.put("Soil_Sample/Basic_Info/Soil_Sample_author", "input");
@@ -371,7 +368,7 @@ REF_TO_TYPE.put("Soil_Sample/Photolog/Existing_Photologs", "list");
 REF_TO_TYPE.put("Soil_Sample/Vars/Timestamp", "input");
 REF_TO_TYPE.put("Rock_Sample/Basic_Info/Sample_Prefix_1", "input");
 REF_TO_TYPE.put("Rock_Sample/Basic_Info/Sample_Prefix_2", "input");
-REF_TO_TYPE.put("Rock_Sample/Basic_Info/Rock_Sample_ID", "input");
+REF_TO_TYPE.put("Rock_Sample/Basic_Info/Sample_ID", "input");
 REF_TO_TYPE.put("Rock_Sample/Basic_Info/Print_Label", "button");
 REF_TO_TYPE.put("Rock_Sample/Basic_Info/Timestamp_Field", "input");
 REF_TO_TYPE.put("Rock_Sample/Basic_Info/Rock_Sample_author", "input");
@@ -449,9 +446,9 @@ REF_TO_TYPE.put("Water_Sample/pH_Eh", "tab");
 REF_TO_TYPE.put("Water_Sample/Photolog", "tab");
 REF_TO_TYPE.put("Water_Sample/Hidden", "tab");
 REF_TO_TYPE.put("Water_Sample/Vars", "tab");
-REF_TO_TYPE.put("Plant_Sample/Basic_Info", "tab");
-REF_TO_TYPE.put("Plant_Sample/Photolog", "tab");
-REF_TO_TYPE.put("Plant_Sample/Vars", "tab");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info", "tab");
+REF_TO_TYPE.put("Vegetation_Sample/Photolog", "tab");
+REF_TO_TYPE.put("Vegetation_Sample/Vars", "tab");
 REF_TO_TYPE.put("Soil_Sample/Basic_Info", "tab");
 REF_TO_TYPE.put("Soil_Sample/Photolog", "tab");
 REF_TO_TYPE.put("Soil_Sample/Vars", "tab");
@@ -467,7 +464,7 @@ REF_TO_TYPE.put("Shape/Shape_Note", "tab");
 
 DATA_REFS.add("Water_Sample/Basic_Info/Sample_Prefix_1");
 DATA_REFS.add("Water_Sample/Basic_Info/Sample_Prefix_2");
-DATA_REFS.add("Water_Sample/Basic_Info/Water_Sample_ID");
+DATA_REFS.add("Water_Sample/Basic_Info/Sample_ID");
 DATA_REFS.add("Water_Sample/Basic_Info/Timestamp_Field");
 DATA_REFS.add("Water_Sample/Basic_Info/Water_Sample_author");
 DATA_REFS.add("Water_Sample/Basic_Info/Station_Deposit");
@@ -505,35 +502,36 @@ DATA_REFS.add("Water_Sample/pH_Eh/Preferred_Eh");
 DATA_REFS.add("Water_Sample/Hidden/Preferred_pH_Time");
 DATA_REFS.add("Water_Sample/Hidden/Preferred_Eh_Time");
 DATA_REFS.add("Water_Sample/Vars/Timestamp");
-DATA_REFS.add("Plant_Sample/Basic_Info/Sample_Prefix_1");
-DATA_REFS.add("Plant_Sample/Basic_Info/Sample_Prefix_2");
-DATA_REFS.add("Plant_Sample/Basic_Info/Plant_Sample_ID");
-DATA_REFS.add("Plant_Sample/Basic_Info/Timestamp_Field");
-DATA_REFS.add("Plant_Sample/Basic_Info/Plant_Sample_author");
-DATA_REFS.add("Plant_Sample/Basic_Info/Station_Deposit");
-DATA_REFS.add("Plant_Sample/Basic_Info/Project");
-DATA_REFS.add("Plant_Sample/Basic_Info/Area");
-DATA_REFS.add("Plant_Sample/Basic_Info/Observation_Type");
-DATA_REFS.add("Plant_Sample/Basic_Info/Location_Number");
-DATA_REFS.add("Plant_Sample/Basic_Info/Plant_Species");
-DATA_REFS.add("Plant_Sample/Basic_Info/SRID");
-DATA_REFS.add("Plant_Sample/Basic_Info/Latitude");
-DATA_REFS.add("Plant_Sample/Basic_Info/Longitude");
-DATA_REFS.add("Plant_Sample/Basic_Info/Northing");
-DATA_REFS.add("Plant_Sample/Basic_Info/Easting");
-DATA_REFS.add("Plant_Sample/Basic_Info/Accuracy");
-DATA_REFS.add("Plant_Sample/Basic_Info/Elevation_Metres_above_Sea_Level");
-DATA_REFS.add("Plant_Sample/Basic_Info/Plant_Height");
-DATA_REFS.add("Plant_Sample/Basic_Info/Plant_Width");
-DATA_REFS.add("Plant_Sample/Basic_Info/Soil_Description");
-DATA_REFS.add("Plant_Sample/Basic_Info/Landform_Description");
-DATA_REFS.add("Plant_Sample/Basic_Info/Notes");
-DATA_REFS.add("Plant_Sample/Basic_Info/Photos");
-DATA_REFS.add("Plant_Sample/Basic_Info/Sketches");
-DATA_REFS.add("Plant_Sample/Vars/Timestamp");
+DATA_REFS.add("Vegetation_Sample/Basic_Info/Sample_Prefix_1");
+DATA_REFS.add("Vegetation_Sample/Basic_Info/Sample_Prefix_2");
+DATA_REFS.add("Vegetation_Sample/Basic_Info/Sample_ID");
+DATA_REFS.add("Vegetation_Sample/Basic_Info/Timestamp_Field");
+DATA_REFS.add("Vegetation_Sample/Basic_Info/Vegetation_Sample_author");
+DATA_REFS.add("Vegetation_Sample/Basic_Info/Station_Deposit");
+DATA_REFS.add("Vegetation_Sample/Basic_Info/Project");
+DATA_REFS.add("Vegetation_Sample/Basic_Info/Area");
+DATA_REFS.add("Vegetation_Sample/Basic_Info/Observation_Type");
+DATA_REFS.add("Vegetation_Sample/Basic_Info/Location_Number");
+DATA_REFS.add("Vegetation_Sample/Basic_Info/Vegetation_Species");
+DATA_REFS.add("Vegetation_Sample/Basic_Info/SRID");
+DATA_REFS.add("Vegetation_Sample/Basic_Info/Latitude");
+DATA_REFS.add("Vegetation_Sample/Basic_Info/Longitude");
+DATA_REFS.add("Vegetation_Sample/Basic_Info/Northing");
+DATA_REFS.add("Vegetation_Sample/Basic_Info/Easting");
+DATA_REFS.add("Vegetation_Sample/Basic_Info/Accuracy");
+DATA_REFS.add("Vegetation_Sample/Basic_Info/Elevation_Metres_above_Sea_Level");
+DATA_REFS.add("Vegetation_Sample/Basic_Info/Vegetation_Height");
+DATA_REFS.add("Vegetation_Sample/Basic_Info/Vegetation_Width");
+DATA_REFS.add("Vegetation_Sample/Basic_Info/Soil_Description");
+DATA_REFS.add("Vegetation_Sample/Basic_Info/Landform_Description");
+DATA_REFS.add("Vegetation_Sample/Basic_Info/Notes");
+DATA_REFS.add("Vegetation_Sample/Basic_Info/Photos");
+DATA_REFS.add("Vegetation_Sample/Basic_Info/Sketches");
+DATA_REFS.add("Vegetation_Sample/Vars/Timestamp");
 DATA_REFS.add("Soil_Sample/Basic_Info/Sample_Prefix_1");
 DATA_REFS.add("Soil_Sample/Basic_Info/Sample_Prefix_2");
-DATA_REFS.add("Soil_Sample/Basic_Info/Soil_Sample_ID");
+DATA_REFS.add("Soil_Sample/Basic_Info/Sample_ID");
+DATA_REFS.add("Soil_Sample/Basic_Info/Suffix");
 DATA_REFS.add("Soil_Sample/Basic_Info/Timestamp_Field");
 DATA_REFS.add("Soil_Sample/Basic_Info/Soil_Sample_author");
 DATA_REFS.add("Soil_Sample/Basic_Info/Station_Deposit");
@@ -564,7 +562,7 @@ DATA_REFS.add("Soil_Sample/Basic_Info/Sketches");
 DATA_REFS.add("Soil_Sample/Vars/Timestamp");
 DATA_REFS.add("Rock_Sample/Basic_Info/Sample_Prefix_1");
 DATA_REFS.add("Rock_Sample/Basic_Info/Sample_Prefix_2");
-DATA_REFS.add("Rock_Sample/Basic_Info/Rock_Sample_ID");
+DATA_REFS.add("Rock_Sample/Basic_Info/Sample_ID");
 DATA_REFS.add("Rock_Sample/Basic_Info/Timestamp_Field");
 DATA_REFS.add("Rock_Sample/Basic_Info/Rock_Sample_author");
 DATA_REFS.add("Rock_Sample/Basic_Info/Station_Deposit");
@@ -624,7 +622,7 @@ DATA_REFS.add("Shape/Shape_Note/Label");
 DATA_REFS.add("Shape/Shape_Note/Note");
 
 NO_UI_REFS.add("Water_Sample/Basic_Info/Location_Number");
-NO_UI_REFS.add("Plant_Sample/Basic_Info/Location_Number");
+NO_UI_REFS.add("Vegetation_Sample/Basic_Info/Location_Number");
 NO_UI_REFS.add("Soil_Sample/Basic_Info/Location_Number");
 
 
@@ -638,7 +636,7 @@ TAB_GROUPS_AS_LIST.add("Logo");
 TAB_GROUPS_AS_LIST.add("User");
 TAB_GROUPS_AS_LIST.add("Project");
 TAB_GROUPS_AS_LIST.add("Water_Sample");
-TAB_GROUPS_AS_LIST.add("Plant_Sample");
+TAB_GROUPS_AS_LIST.add("Vegetation_Sample");
 TAB_GROUPS_AS_LIST.add("Soil_Sample");
 TAB_GROUPS_AS_LIST.add("Rock_Sample");
 TAB_GROUPS_AS_LIST.add("pH");
@@ -659,9 +657,9 @@ TABS_AS_LIST.add("Water_Sample/pH_Eh");
 TABS_AS_LIST.add("Water_Sample/Photolog");
 TABS_AS_LIST.add("Water_Sample/Hidden");
 TABS_AS_LIST.add("Water_Sample/Vars");
-TABS_AS_LIST.add("Plant_Sample/Basic_Info");
-TABS_AS_LIST.add("Plant_Sample/Photolog");
-TABS_AS_LIST.add("Plant_Sample/Vars");
+TABS_AS_LIST.add("Vegetation_Sample/Basic_Info");
+TABS_AS_LIST.add("Vegetation_Sample/Photolog");
+TABS_AS_LIST.add("Vegetation_Sample/Vars");
 TABS_AS_LIST.add("Soil_Sample/Basic_Info");
 TABS_AS_LIST.add("Soil_Sample/Photolog");
 TABS_AS_LIST.add("Soil_Sample/Vars");
@@ -675,17 +673,13 @@ TABS_AS_LIST.add("Eh/Eh");
 TABS_AS_LIST.add("Photolog/Photolog");
 TABS_AS_LIST.add("Shape/Shape_Note");
 
-ATTRIB_NAMES_NON_STANDARD.put("Water_Sample/Basic_Info/Observation_Type", "Water Sample Observation Type");
 ATTRIB_NAMES_NON_STANDARD.put("Water_Sample/Basic_Info/Location_Number", "Water Sample Location Number");
 ATTRIB_NAMES_NON_STANDARD.put("Water_Sample/Vars/Timestamp", "Water Sample Timestamp");
-ATTRIB_NAMES_NON_STANDARD.put("Plant_Sample/Basic_Info/Observation_Type", "Plant Sample Observation Type");
-ATTRIB_NAMES_NON_STANDARD.put("Plant_Sample/Basic_Info/Location_Number", "Plant Sample Location Number");
-ATTRIB_NAMES_NON_STANDARD.put("Plant_Sample/Vars/Timestamp", "Plant Sample Timestamp");
-ATTRIB_NAMES_NON_STANDARD.put("Soil_Sample/Basic_Info/Observation_Type", "Soil Sample Observation Type");
+ATTRIB_NAMES_NON_STANDARD.put("Vegetation_Sample/Basic_Info/Location_Number", "Vegetation Sample Location Number");
+ATTRIB_NAMES_NON_STANDARD.put("Vegetation_Sample/Vars/Timestamp", "Vegetation Sample Timestamp");
 ATTRIB_NAMES_NON_STANDARD.put("Soil_Sample/Basic_Info/Location_Number", "Soil Sample Location Number");
 ATTRIB_NAMES_NON_STANDARD.put("Soil_Sample/Vars/Timestamp", "Soil Sample Timestamp");
 ATTRIB_NAMES_NON_STANDARD.put("Rock_Sample/Basic_Info/Location_Number", "Rock Sample Location Number");
-ATTRIB_NAMES_NON_STANDARD.put("Rock_Sample/Basic_Info/Observation_Type", "Rock Sample Observation Type");
 ATTRIB_NAMES_NON_STANDARD.put("Rock_Sample/Vars/Timestamp", "Rock Sample Timestamp");
 
 String getType(String ref) {
@@ -775,10 +769,7 @@ HashSet getTabsAsHashSet() {
 
 List getStartingIdRefs() {
   List l = new ArrayList();
-  l.add("Project/Vars/Next_Water_Sample_ID");
-  l.add("Project/Vars/Next_Plant_Sample_ID");
-  l.add("Project/Vars/Next_Soil_Sample_ID");
-  l.add("Project/Vars/Next_Rock_Sample_ID");
+  
   return l;
 }
 
@@ -828,6 +819,9 @@ boolean isFlaggedNodata(String tabGroup) {
 }
 
 void updateDisplayedTabGroup(String tabGroup) {
+  if (tabGroup.equals(CURRENTLY_DISPLAYED_TAB_GROUP))
+    return;
+
   PREVIOUSLY_DISPLAYED_TAB_GROUP = CURRENTLY_DISPLAYED_TAB_GROUP;
   CURRENTLY_DISPLAYED_TAB_GROUP  = tabGroup;
 }
@@ -1282,21 +1276,20 @@ boolean isDoingFetchEvent() {
 /* Establishes `onEvent` bindings necessary to make the "leave" event work. The
  * "leave" event is really triggered upon "show" of another tab.
  */
-for (tg : getTabGroups()) {
-  String ref      = tg;
-  String event    = "show";
+for (String ref : getTabGroups()) {
   String callback;
 
   // Update (previously) displayed tab group
   callback = fun2str("updateDisplayedTabGroup", ref);
-  addOnEvent(ref, event, callback, PRECEDENCE_MAX);
+  addOnEvent(ref, "show",   callback, PRECEDENCE_MAX);
+  addOnEvent(ref, "create", callback, PRECEDENCE_MAX);
 
   // Trigger on leave tab group event
   callback = "onLeaveTabGroup()";
-  addOnEvent(ref, event, callback, PRECEDENCE_MAX);
+  addOnEvent(ref, "show", callback, PRECEDENCE_MAX);
 }
 
-for (tg : getTabGroups()) {
+for (String tg : getTabGroups()) {
   if (isFlaggedNodata(tg))
     continue;
 
@@ -1304,7 +1297,7 @@ for (tg : getTabGroups()) {
       tg,
       "prefetch",
       "NUM_FETCHES_OCCURING.incrementAndGet()",
-      Integer.MAX_VALUE
+      PRECEDENCE_MAX
   );
   addOnEvent(
       tg,
@@ -1657,40 +1650,40 @@ void timedPopulateCursorList(String ref, String q, int limit) {
 
 void setUpTypeHierarchy() {
   //- 
+  //  - Vegetation Sample
+  //    - Photolog
+  //  - Shape
   //  - Water Sample
   //    - Photolog
   //  - Rock Sample
   //    - Photolog
-  //  - Plant Sample
-  //    - Photolog
   //  - Soil Sample
   //    - Photolog
-  //  - Shape
 
   n0 = Tree("", 1);
-  n1 = Tree("Water Sample", 1);
+  n1 = Tree("Vegetation Sample", 1);
   n2 = Tree("Photolog", 1);
-  n3 = Tree("Rock Sample", 1);
-  n4 = Tree("Photolog", 1);
-  n5 = Tree("Plant Sample", 1);
-  n6 = Tree("Photolog", 1);
-  n7 = Tree("Soil Sample", 1);
-  n8 = Tree("Photolog", 1);
-  n9 = Tree("Shape", 1);
+  n3 = Tree("Shape", 1);
+  n4 = Tree("Water Sample", 1);
+  n5 = Tree("Photolog", 1);
+  n6 = Tree("Rock Sample", 1);
+  n7 = Tree("Photolog", 1);
+  n8 = Tree("Soil Sample", 1);
+  n9 = Tree("Photolog", 1);
 
   n0.addChild(n1);
   n0.addChild(n3);
-  n0.addChild(n5);
-  n0.addChild(n7);
-  n0.addChild(n9);
+  n0.addChild(n4);
+  n0.addChild(n6);
+  n0.addChild(n8);
 
   n1.addChild(n2);
 
-  n3.addChild(n4);
+  n4.addChild(n5);
 
-  n5.addChild(n6);
+  n6.addChild(n7);
 
-  n7.addChild(n8);
+  n8.addChild(n9);
 
 
   PERF_TYPE_TREE = n0;
@@ -2441,7 +2434,7 @@ void inheritFieldValue(
     boolean doFindVocabId
 ) {
   String fun = "";
-  fun += "if (!{check} || getDisplayedTabGroup().equals(\"{parent}\"))";
+  fun += "if (!{check} || getPreviouslyDisplayedTabGroup().equals(\"{parent}\"))";
   fun += "  copyFieldValue(\"{src}\", \"{dst}\", {find})";
 
   fun = replaceFirst(fun, "{check}",  doCheckParent + "");
@@ -2472,11 +2465,11 @@ inheritFieldValue("Project/Start/Sample_Prefix_2", "Water_Sample/Basic_Info/Samp
 inheritFieldValue("Project/Start/Station_Deposit", "Water_Sample/Basic_Info/Station_Deposit", true);
 inheritFieldValue("Project/Start/Project", "Water_Sample/Basic_Info/Project", true);
 inheritFieldValue("Project/Start/Area", "Water_Sample/Basic_Info/Area", true);
-inheritFieldValue("Project/Start/Sample_Prefix_1", "Plant_Sample/Basic_Info/Sample_Prefix_1", true);
-inheritFieldValue("Project/Start/Sample_Prefix_2", "Plant_Sample/Basic_Info/Sample_Prefix_2", true);
-inheritFieldValue("Project/Start/Station_Deposit", "Plant_Sample/Basic_Info/Station_Deposit", true);
-inheritFieldValue("Project/Start/Project", "Plant_Sample/Basic_Info/Project", true);
-inheritFieldValue("Project/Start/Area", "Plant_Sample/Basic_Info/Area", true);
+inheritFieldValue("Project/Start/Sample_Prefix_1", "Vegetation_Sample/Basic_Info/Sample_Prefix_1", true);
+inheritFieldValue("Project/Start/Sample_Prefix_2", "Vegetation_Sample/Basic_Info/Sample_Prefix_2", true);
+inheritFieldValue("Project/Start/Station_Deposit", "Vegetation_Sample/Basic_Info/Station_Deposit", true);
+inheritFieldValue("Project/Start/Project", "Vegetation_Sample/Basic_Info/Project", true);
+inheritFieldValue("Project/Start/Area", "Vegetation_Sample/Basic_Info/Area", true);
 inheritFieldValue("Project/Start/Sample_Prefix_1", "Soil_Sample/Basic_Info/Sample_Prefix_1", true);
 inheritFieldValue("Project/Start/Sample_Prefix_2", "Soil_Sample/Basic_Info/Sample_Prefix_2", true);
 inheritFieldValue("Project/Start/Station_Deposit", "Soil_Sample/Basic_Info/Station_Deposit", true);
@@ -2863,8 +2856,9 @@ void addNodataDropdownEntry(String ref, String entryKey, String entryVal) {
 }
 
 addNodataDropdownEntry("Project/Start/Sample_Type", "{Water_Sample}", "{Water_Sample}");
-addNodataDropdownEntry("Project/Start/Sample_Type", "{Plant_Sample}", "{Plant_Sample}");
+addNodataDropdownEntry("Project/Start/Sample_Type", "{Vegetation_Sample}", "{Vegetation_Sample}");
 addNodataDropdownEntry("Project/Start/Sample_Type", "{Soil_Sample}", "{Soil_Sample}");
+addNodataDropdownEntry("Project/Start/Sample_Type", "{Soil_Sample__Crust_}", "{Soil_Sample__Crust_}");
 addNodataDropdownEntry("Project/Start/Sample_Type", "{Rock_Sample}", "{Rock_Sample}");
 
 for (entry : NODATA_DROPDOWNS.entrySet()) {
@@ -3195,16 +3189,6 @@ String validateFields(List fields, String format) {
   return out;
 }
 
-void validateProject() {
-  List f = new ArrayList(); // Fields to be validated
-  f.add(fieldPair("Project/Vars/Next_Water_Sample_ID", "{Next_Water_Sample_ID}"));
-  f.add(fieldPair("Project/Vars/Next_Plant_Sample_ID", "{Next_Plant_Sample_ID}"));
-  f.add(fieldPair("Project/Vars/Next_Soil_Sample_ID", "{Next_Soil_Sample_ID}"));
-  f.add(fieldPair("Project/Vars/Next_Rock_Sample_ID", "{Next_Rock_Sample_ID}"));
-
-  String validationMessage = validateFields(f, "PLAINTEXT");
-  showWarning("{validation_results}", validationMessage);
-}
 void validateWaterSample() {
   List f = new ArrayList(); // Fields to be validated
   f.add(fieldPair("Water_Sample/pH_Eh/Temperature", "{Temperature}"));
@@ -3346,7 +3330,7 @@ void populateAuthorAndTimestamp(String tabgroup) {
   Map tabgroupToTimestamp = new HashMap();
   tabgroupToAuthor.put("Project", "Project/Start/Project_author");
   tabgroupToAuthor.put("Water_Sample", "Water_Sample/Basic_Info/Water_Sample_author");
-  tabgroupToAuthor.put("Plant_Sample", "Plant_Sample/Basic_Info/Plant_Sample_author");
+  tabgroupToAuthor.put("Vegetation_Sample", "Vegetation_Sample/Basic_Info/Vegetation_Sample_author");
   tabgroupToAuthor.put("Soil_Sample", "Soil_Sample/Basic_Info/Soil_Sample_author");
   tabgroupToAuthor.put("Rock_Sample", "Rock_Sample/Basic_Info/Rock_Sample_author");
   tabgroupToTimestamp.put("Photolog", "Photolog/Photolog/Photolog_timestamp");
@@ -3361,8 +3345,8 @@ void onShowWaterSample () {
   saveTabGroup("Water_Sample");
 }
 
-void onShowPlantSample () {
-  saveTabGroup("Plant_Sample");
+void onShowVegetationSample () {
+  saveTabGroup("Vegetation_Sample");
 }
 
 void onShowSoilSample () {
@@ -3390,7 +3374,7 @@ void onShowShape () {
 }
 
 addOnEvent("Water_Sample", "show", "onShowWaterSample()");
-addOnEvent("Plant_Sample", "show", "onShowPlantSample()");
+addOnEvent("Vegetation_Sample", "show", "onShowVegetationSample()");
 addOnEvent("Soil_Sample", "show", "onShowSoilSample()");
 addOnEvent("Rock_Sample", "show", "onShowRockSample()");
 addOnEvent("pH", "show", "onShowpH()");
@@ -3416,9 +3400,9 @@ void onClickProjectNewWaterSample () {
   newWaterSample();
 }
 
-void onClickProjectNewPlantSample () {
+void onClickProjectNewVegetationSample () {
   parentTabgroup__ = "Project";
-  newPlantSample();
+  newVegetationSample();
 }
 
 void onClickProjectNewSoilSample () {
@@ -3441,8 +3425,8 @@ void onClickWaterSampleNewPhotolog () {
   newPhotolog("Water_Sample");
 }
 
-void onClickPlantSampleNewPhotolog () {
-  newPhotolog("Plant_Sample");
+void onClickVegetationSampleNewPhotolog () {
+  newPhotolog("Vegetation_Sample");
 }
 
 void onClickSoilSampleNewPhotolog () {
@@ -3456,11 +3440,11 @@ addOnEvent("Logo/Logo_Tab/Login", "click", "onClickLogoLogin()");
 addOnEvent("User/User/Users", "click", "onClickUserUsers()");
 addOnEvent("Project/Map/Create_Shape", "click", "onClickProjectCreateShape()");
 addOnEvent("Project/Vars/New_Water_Sample", "click", "onClickProjectNewWaterSample()");
-addOnEvent("Project/Vars/New_Plant_Sample", "click", "onClickProjectNewPlantSample()");
+addOnEvent("Project/Vars/New_Vegetation_Sample", "click", "onClickProjectNewVegetationSample()");
 addOnEvent("Project/Vars/New_Soil_Sample", "click", "onClickProjectNewSoilSample()");
 addOnEvent("Project/Vars/New_Rock_Sample", "click", "onClickProjectNewRockSample()");
 addOnEvent("Water_Sample/Photolog/New_Photolog", "click", "onClickWaterSampleNewPhotolog()");
-addOnEvent("Plant_Sample/Photolog/New_Photolog", "click", "onClickPlantSampleNewPhotolog()");
+addOnEvent("Vegetation_Sample/Photolog/New_Photolog", "click", "onClickVegetationSampleNewPhotolog()");
 addOnEvent("Soil_Sample/Photolog/New_Photolog", "click", "onClickSoilSampleNewPhotolog()");
 addOnEvent("Rock_Sample/Photolog/New_Photolog", "click", "onClickRockSampleNewPhotolog()");
 
@@ -3468,11 +3452,11 @@ addOnEvent("Rock_Sample/Photolog/New_Photolog", "click", "onClickRockSampleNewPh
 /*                   AUDIO, CAMERA, FILE AND VIDEO BINDINGS                   */
 /******************************************************************************/
 addOnEvent("Water_Sample/Basic_Info/Photos_Button_1", "click", "attachPictureTo(\"Water_Sample/Basic_Info/Photos\")");
-addOnEvent("Plant_Sample/Basic_Info/Photos_Button_1", "click", "attachPictureTo(\"Plant_Sample/Basic_Info/Photos\")");
+addOnEvent("Vegetation_Sample/Basic_Info/Photos_Button_1", "click", "attachPictureTo(\"Vegetation_Sample/Basic_Info/Photos\")");
 addOnEvent("Soil_Sample/Basic_Info/Photos_Button_1", "click", "attachPictureTo(\"Soil_Sample/Basic_Info/Photos\")");
 addOnEvent("Rock_Sample/Lithological_Info/Photos_Button_1", "click", "attachPictureTo(\"Rock_Sample/Lithological_Info/Photos\")");
 addOnEvent("Water_Sample/Basic_Info/Sketches_Button_1", "click", "attachFileTo(\"Water_Sample/Basic_Info/Sketches\")");
-addOnEvent("Plant_Sample/Basic_Info/Sketches_Button_1", "click", "attachFileTo(\"Plant_Sample/Basic_Info/Sketches\")");
+addOnEvent("Vegetation_Sample/Basic_Info/Sketches_Button_1", "click", "attachFileTo(\"Vegetation_Sample/Basic_Info/Sketches\")");
 addOnEvent("Soil_Sample/Basic_Info/Sketches_Button_1", "click", "attachFileTo(\"Soil_Sample/Basic_Info/Sketches\")");
 addOnEvent("Rock_Sample/Lithological_Info/Sketches_Button_1", "click", "attachFileTo(\"Rock_Sample/Lithological_Info/Sketches\")");
 
@@ -3480,7 +3464,7 @@ addOnEvent("Rock_Sample/Lithological_Info/Sketches_Button_1", "click", "attachFi
 /*                 BINDINGS FOR 'VIEW ATTACHED FILES' BUTTONS                 */
 /******************************************************************************/
 addOnEvent("Water_Sample/Basic_Info/View_Sketch", "click", "viewArchEntAttachedFiles(getUuid(\"Water_Sample\"))");
-addOnEvent("Plant_Sample/Basic_Info/View_Sketch", "click", "viewArchEntAttachedFiles(getUuid(\"Plant_Sample\"))");
+addOnEvent("Vegetation_Sample/Basic_Info/View_Sketch", "click", "viewArchEntAttachedFiles(getUuid(\"Vegetation_Sample\"))");
 addOnEvent("Soil_Sample/Basic_Info/View_Sketch", "click", "viewArchEntAttachedFiles(getUuid(\"Soil_Sample\"))");
 addOnEvent("Rock_Sample/Lithological_Info/View_Sketch", "click", "viewArchEntAttachedFiles(getUuid(\"Rock_Sample\"))");
 
@@ -3497,7 +3481,6 @@ void removeNavigationButtons() {
 void addNavigationButtons(String tabgroup) {
   removeNavigationButtons();
   List tabgroupsToValidate = new ArrayList();
-  tabgroupsToValidate.add("Project");
   tabgroupsToValidate.add("Water_Sample");
   tabgroupsToValidate.add("Photolog");
   addNavigationButton("new", new ActionButtonCallback() {
@@ -3775,16 +3758,13 @@ void newWaterSample(String parent){
     parentTabgroup   = parent;
     parentTabgroup__ = parent;
   }
-  if (isNull("Project/Vars/Next_Water_Sample_ID")) {
-    showWarning("{Alert}", "{A_next_ID_has_not_been_entered_please_provide_one}");
-    return;
-  }
+  
 
   setUuid(tabgroup, null);
   newTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-  incAutoNum("Water_Sample/Basic_Info/Water_Sample_ID");
+  
 
   executeOnEvent(tabgroup, "create");
 }
@@ -3793,29 +3773,26 @@ void newWaterSample (){
   newWaterSample(null);
 }
 
-void newPlantSample(String parent){
-  String tabgroup = "Plant_Sample";
+void newVegetationSample(String parent){
+  String tabgroup = "Vegetation_Sample";
   if (!isNull(parent)) {
     triggerAutoSave();
     parentTabgroup   = parent;
     parentTabgroup__ = parent;
   }
-  if (isNull("Project/Vars/Next_Plant_Sample_ID")) {
-    showWarning("{Alert}", "{A_next_ID_has_not_been_entered_please_provide_one}");
-    return;
-  }
+  
 
   setUuid(tabgroup, null);
   newTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-  incAutoNum("Plant_Sample/Basic_Info/Plant_Sample_ID");
+  
 
   executeOnEvent(tabgroup, "create");
 }
 
-void newPlantSample (){
-  newPlantSample(null);
+void newVegetationSample (){
+  newVegetationSample(null);
 }
 
 void newSoilSample(String parent){
@@ -3825,16 +3802,13 @@ void newSoilSample(String parent){
     parentTabgroup   = parent;
     parentTabgroup__ = parent;
   }
-  if (isNull("Project/Vars/Next_Soil_Sample_ID")) {
-    showWarning("{Alert}", "{A_next_ID_has_not_been_entered_please_provide_one}");
-    return;
-  }
+  
 
   setUuid(tabgroup, null);
   newTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-  incAutoNum("Soil_Sample/Basic_Info/Soil_Sample_ID");
+  
 
   executeOnEvent(tabgroup, "create");
 }
@@ -3850,16 +3824,13 @@ void newRockSample(String parent){
     parentTabgroup   = parent;
     parentTabgroup__ = parent;
   }
-  if (isNull("Project/Vars/Next_Rock_Sample_ID")) {
-    showWarning("{Alert}", "{A_next_ID_has_not_been_entered_please_provide_one}");
-    return;
-  }
+  
 
   setUuid(tabgroup, null);
   newTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-  incAutoNum("Rock_Sample/Basic_Info/Rock_Sample_ID");
+  
 
   executeOnEvent(tabgroup, "create");
 }
@@ -3960,7 +3931,7 @@ void duplicateWaterSample(){
   String uuidOld = getUuid(tabgroup);
   setUuid(tabgroup, "");
   disableAutoSave(tabgroup);
-  incAutoNum("Water_Sample/Basic_Info/Water_Sample_ID");
+  
   clearGpsInTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
@@ -4004,17 +3975,17 @@ void duplicateWaterSample(){
     }
   });
 }
-void duplicatePlantSample(){
-  String tabgroup = "Plant_Sample";
+void duplicateVegetationSample(){
+  String tabgroup = "Vegetation_Sample";
   String uuidOld = getUuid(tabgroup);
   setUuid(tabgroup, "");
   disableAutoSave(tabgroup);
-  incAutoNum("Plant_Sample/Basic_Info/Plant_Sample_ID");
+  
   clearGpsInTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-  populateCameraPictureGallery("Plant_Sample/Basic_Info/Photos", new ArrayList());
-  populateFileList("Plant_Sample/Basic_Info/Sketches", new ArrayList());
+  populateCameraPictureGallery("Vegetation_Sample/Basic_Info/Photos", new ArrayList());
+  populateFileList("Vegetation_Sample/Basic_Info/Sketches", new ArrayList());
   executeOnEvent(tabgroup, "copy");
 
   saveCallback = new SaveCallback() {
@@ -4058,7 +4029,7 @@ void duplicateSoilSample(){
   String uuidOld = getUuid(tabgroup);
   setUuid(tabgroup, "");
   disableAutoSave(tabgroup);
-  incAutoNum("Soil_Sample/Basic_Info/Soil_Sample_ID");
+  
   clearGpsInTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
@@ -4107,7 +4078,7 @@ void duplicateRockSample(){
   String uuidOld = getUuid(tabgroup);
   setUuid(tabgroup, "");
   disableAutoSave(tabgroup);
-  incAutoNum("Rock_Sample/Basic_Info/Rock_Sample_ID");
+  
   clearGpsInTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
@@ -4340,7 +4311,7 @@ void duplicateShape(){
   });
 }
 addOnEvent("Water_Sample", "save", "populateEntityListsOfArchEnt(\"Water_Sample\")");
-addOnEvent("Plant_Sample", "save", "populateEntityListsOfArchEnt(\"Plant_Sample\")");
+addOnEvent("Vegetation_Sample", "save", "populateEntityListsOfArchEnt(\"Vegetation_Sample\")");
 addOnEvent("Soil_Sample", "save", "populateEntityListsOfArchEnt(\"Soil_Sample\")");
 addOnEvent("Rock_Sample", "save", "populateEntityListsOfArchEnt(\"Rock_Sample\")");
 addOnEvent("pH", "save", "populateEntityListsOfArchEnt(\"pH\")");
@@ -4356,7 +4327,7 @@ addOnEvent("Logo", "show", "removeNavigationButtons()");
 addOnEvent("User", "show", "removeNavigationButtons()");
 addOnEvent("Project", "show", "removeNavigationButtons()");
 addOnEvent("Water_Sample", "show", "removeNavigationButtons()");
-addOnEvent("Plant_Sample", "show", "removeNavigationButtons()");
+addOnEvent("Vegetation_Sample", "show", "removeNavigationButtons()");
 addOnEvent("Soil_Sample", "show", "removeNavigationButtons()");
 addOnEvent("Rock_Sample", "show", "removeNavigationButtons()");
 addOnEvent("pH", "show", "removeNavigationButtons()");
@@ -4364,7 +4335,7 @@ addOnEvent("Eh", "show", "removeNavigationButtons()");
 addOnEvent("Photolog", "show", "removeNavigationButtons()");
 addOnEvent("Shape", "show", "removeNavigationButtons()");
 addOnEvent("Water_Sample", "show", "addNavigationButtons(\"Water_Sample\")");
-addOnEvent("Plant_Sample", "show", "addNavigationButtons(\"Plant_Sample\")");
+addOnEvent("Vegetation_Sample", "show", "addNavigationButtons(\"Vegetation_Sample\")");
 addOnEvent("Soil_Sample", "show", "addNavigationButtons(\"Soil_Sample\")");
 addOnEvent("Rock_Sample", "show", "addNavigationButtons(\"Rock_Sample\")");
 addOnEvent("pH", "show", "addNavigationButtons(\"pH\")");
@@ -4384,7 +4355,7 @@ addOnEvent("Project/Search/Entity_Types"  , "click" , "search()");
 entityTypes = new ArrayList();
 entityTypes.add(new NameValuePair("{All}", ""));
 entityTypes.add(new NameValuePair("{Water_Sample}", "Water Sample"));
-entityTypes.add(new NameValuePair("{Plant_Sample}", "Plant Sample"));
+entityTypes.add(new NameValuePair("{Vegetation_Sample}", "Vegetation Sample"));
 entityTypes.add(new NameValuePair("{Soil_Sample}", "Soil Sample"));
 entityTypes.add(new NameValuePair("{Rock_Sample}", "Rock Sample"));
 entityTypes.add(new NameValuePair("{pH}", "pH"));
@@ -4439,8 +4410,8 @@ void loadWaterSampleFrom(String uuid) {
   executeOnEvent(tabgroup, "prefetch");
   showTabGroup(tabgroup, uuid, cb);
 }
-void loadPlantSampleFrom(String uuid) {
-  String tabgroup = "Plant_Sample";
+void loadVegetationSampleFrom(String uuid) {
+  String tabgroup = "Vegetation_Sample";
   setUuid(tabgroup, uuid);
   if (isNull(uuid)) return;
 
@@ -4549,14 +4520,14 @@ void loadShapeFrom(String uuid) {
 /*                          TAKE FROM GPS BUTTON(S)                           */
 /******************************************************************************/
 addOnEvent("Water_Sample/Basic_Info/Take_From_GPS_1", "click", "takePoint(\"Water_Sample\")");
-addOnEvent("Plant_Sample/Basic_Info/Take_From_GPS_1", "click", "takePoint(\"Plant_Sample\")");
+addOnEvent("Vegetation_Sample/Basic_Info/Take_From_GPS_1", "click", "takePoint(\"Vegetation_Sample\")");
 addOnEvent("Soil_Sample/Basic_Info/Take_From_GPS_1", "click", "takePoint(\"Soil_Sample\")");
 addOnEvent("Rock_Sample/Basic_Info/Take_From_GPS_1", "click", "takePoint(\"Rock_Sample\")");
 
 Map getTakeFromGpsMappings() {
   Map tabgroupToTabRef = new HashMap();
   tabgroupToTabRef.put("Water_Sample", "Water_Sample/Basic_Info");
-tabgroupToTabRef.put("Plant_Sample", "Plant_Sample/Basic_Info");
+tabgroupToTabRef.put("Vegetation_Sample", "Vegetation_Sample/Basic_Info");
 tabgroupToTabRef.put("Soil_Sample", "Soil_Sample/Basic_Info");
 tabgroupToTabRef.put("Rock_Sample", "Rock_Sample/Basic_Info");
   return tabgroupToTabRef;
@@ -4701,10 +4672,7 @@ void loadOrCreateEntityFromScannedAttrib(
 /*                       AUTONUMBERING HELPER FUNCTIONS                       */
 /******************************************************************************/
 Map AUTONUM_DEST_TO_SOURCE = new HashMap();
-AUTONUM_DEST_TO_SOURCE.put("Water_Sample/Basic_Info/Water_Sample_ID", "Project/Vars/Next_Water_Sample_ID");
-AUTONUM_DEST_TO_SOURCE.put("Plant_Sample/Basic_Info/Plant_Sample_ID", "Project/Vars/Next_Plant_Sample_ID");
-AUTONUM_DEST_TO_SOURCE.put("Soil_Sample/Basic_Info/Soil_Sample_ID", "Project/Vars/Next_Soil_Sample_ID");
-AUTONUM_DEST_TO_SOURCE.put("Rock_Sample/Basic_Info/Rock_Sample_ID", "Project/Vars/Next_Rock_Sample_ID");
+
 
 /*
  * If value of field specified by `ref` is null, sets the field to `defaultVal`,
@@ -4880,10 +4848,10 @@ ENTITY_MENUS.add(new String[] {
     "Water Sample - Photolog"
 });
 ENTITY_MENUS.add(new String[] {
-    "Plant_Sample/Photolog/Existing_Photologs",
-    "getUuid(\"Plant_Sample\")",
+    "Vegetation_Sample/Photolog/Existing_Photologs",
+    "getUuid(\"Vegetation_Sample\")",
     "Photolog",
-    "Plant Sample - Photolog"
+    "Vegetation Sample - Photolog"
 });
 ENTITY_MENUS.add(new String[] {
     "Soil_Sample/Photolog/Existing_Photologs",
@@ -4913,13 +4881,30 @@ for (m : ENTITY_MENUS) {
 }
 
 addOnEvent("Water_Sample/Photolog/Existing_Photologs", "click", "loadEntity()");
-addOnEvent("Plant_Sample/Photolog/Existing_Photologs", "click", "loadEntity()");
+addOnEvent("Vegetation_Sample/Photolog/Existing_Photologs", "click", "loadEntity()");
 addOnEvent("Soil_Sample/Photolog/Existing_Photologs", "click", "loadEntity()");
 addOnEvent("Rock_Sample/Photolog/Existing_Photologs", "click", "loadEntity()");
 /******************************************************************************/
 /*                             HANDWRITTEN LOGIC                              */
 /******************************************************************************/
 
+final int LEN_PREFIX_1  = 2;
+final int LEN_PREFIX_2  = 3;
+final int LEN_SAMPLE_ID = 4;
+
+final List SAMPLE_TYPES = new ArrayList();
+SAMPLE_TYPES.add("Water_Sample");
+SAMPLE_TYPES.add("Soil_Sample");
+SAMPLE_TYPES.add("Vegetation_Sample");
+SAMPLE_TYPES.add("Rock_Sample");
+
+void onClickProjectNewSample(String type) {
+  if ("{Water_Sample}"       .equals(type)) onClickProjectNewWaterSample();
+  if ("{Vegetation_Sample}"  .equals(type)) onClickProjectNewVegetationSample();
+  if ("{Rock_Sample}"        .equals(type)) onClickProjectNewRockSample();
+  if ("{Soil_Sample}"        .equals(type)) onClickProjectNewSoilSample();
+  if ("{Soil_Sample__Crust_}".equals(type)) onClickProjectNewSoilSample();
+}
 /************************************ MAP *************************************/
 DATA_ENTRY_LAYER    = "Data Entry Layer";
 DATA_ENTRY_LAYER_ID = createCanvasLayer(MAP_REF, DATA_ENTRY_LAYER);
@@ -4946,10 +4931,10 @@ waterQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join ae
 waterps = createPointStyle(10, Color.BLUE, 0.2f, 0.5f);
 showDatabaseLayer(MAP_REF, "Water Samples", isEntity, waterQueryName, waterQuerySql, waterps, ls, pos, ts);
 
-plantQueryName = "Plant Samples";
-plantQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Plant Sample'";
+plantQueryName = "Vegetation Samples";
+plantQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Vegetation Sample'";
 plantps = createPointStyle(10, Color.GREEN, 0.2f, 0.5f);
-showDatabaseLayer(MAP_REF, "Plant Samples", isEntity, plantQueryName, plantQuerySql, plantps, ls, pos, ts);
+showDatabaseLayer(MAP_REF, "Vegetation Samples", isEntity, plantQueryName, plantQuerySql, plantps, ls, pos, ts);
 
 soilQueryName = "Soil Samples";
 soilQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Soil Sample'";
@@ -5006,10 +4991,10 @@ addOnEvent("Shape", "save", "clearGeometry()");
 /******************************************************************************/
 entityTypes = new ArrayList();
 entityTypes.add(new NameValuePair("{All}", ""));
-entityTypes.add(new NameValuePair("{Water_Sample}", "Water Sample"));
-entityTypes.add(new NameValuePair("{Plant_Sample}", "Plant Sample"));
-entityTypes.add(new NameValuePair("{Soil_Sample}", "Soil Sample"));
-entityTypes.add(new NameValuePair("{Rock_Sample}", "Rock Sample"));
+entityTypes.add(new NameValuePair("{Water_Sample}",      "Water Sample"));
+entityTypes.add(new NameValuePair("{Vegetation_Sample}", "Vegetation Sample"));
+entityTypes.add(new NameValuePair("{Soil_Sample}",       "Soil Sample"));
+entityTypes.add(new NameValuePair("{Rock_Sample}",       "Rock Sample"));
 populateDropDown("Project/Search/Entity_Types", entityTypes);
 
 delOnEvent("Project/Search", "show", "search()");
@@ -5123,19 +5108,19 @@ boolean isInRange(int n, int min, int max) {
 }
 
 boolean isValidSampleType      (String s) { return !isNull(s); }
-boolean isValidSamplePrefix1   (String s) { return !isNull(s) && chrLen(s, 2); }
-boolean isValidSamplePrefix2   (String s) { return !isNull(s) && chrLen(s, 3); }
+boolean isValidSamplePrefix1   (String s) { return !isNull(s); }
+boolean isValidSamplePrefix2   (String s) { return !isNull(s); }
 boolean isValidSampleStartingId(String s) {
   String sId    = getFieldValue("Project/Start/Sample_Starting_ID");
   String sIdMin = getFieldValue("Project/Sample_ID_Ranges/Minimum_Sample_ID");
   String sIdMax = getFieldValue("Project/Sample_ID_Ranges/Maximum_Sample_ID");
 
   return !isNull(s)
-      && digLen(s, 4)
+      && digLen(s, LEN_SAMPLE_ID)
       && isInRange(sId, sIdMin, sIdMax);
 }
-boolean isValidMinSampleId(String s) { return digLen(s, 4); }
-boolean isValidMaxSampleId(String s) { return digLen(s, 4); }
+boolean isValidMinSampleId(String s) { return digLen(s, LEN_SAMPLE_ID); }
+boolean isValidMaxSampleId(String s) { return digLen(s, LEN_SAMPLE_ID); }
 
 void onClickCreateNewSample() {
   String valType = getFieldValue("Project/Start/Sample_Type");
@@ -5155,7 +5140,8 @@ void onClickCreateNewSample() {
 
     String body = "";
     body += "Please enter a number into the 'Sample Prefix 1' field. 'Sample ";
-    body += "Prefix 1' must consist of 2 digits.";
+    body += "Prefix 1' must consist of %s characters.";
+    body  = replaceFirst(body, "" + LEN_PREFIX_1);
 
     showWarning(head, body);
     return;
@@ -5166,7 +5152,8 @@ void onClickCreateNewSample() {
 
     String body = "";
     body += "Please enter a number into the 'Sample Prefix 2' field. 'Sample ";
-    body += "Prefix 2' must consist of 3 digits.";
+    body += "Prefix 2' must consist of %s characters.";
+    body  = replaceFirst(body, "" + LEN_PREFIX_2);
 
     showWarning(head, body);
     return;
@@ -5177,31 +5164,42 @@ void onClickCreateNewSample() {
 
     String body = "";
     body += "Please enter a number into the 'Next Sample ID' field. ";
-    body += "'Next Sample ID' must consist of 4 digits and be in the range";
+    body += "'Next Sample ID' must consist of %s digits and be in the range";
     body += " specified in the 'Sample ID Ranges' tab.";
+    body  = replaceFirst(body, "" + LEN_SAMPLE_ID);
 
     showWarning(head, body);
     return;
   }
 
-  if ("{Water_Sample}".equals(valType)) onClickProjectNewWaterSample();
-  if ("{Plant_Sample}".equals(valType)) onClickProjectNewPlantSample();
-  if ("{Rock_Sample}" .equals(valType)) onClickProjectNewRockSample();
-  if ("{Soil_Sample}" .equals(valType)) onClickProjectNewSoilSample();
+  onClickProjectNewSample(valType);
 }
 
-void validateSampleIdRanges() {
+void validateMinimumSampleId() {
   String sIdMin = getFieldValue("Project/Sample_ID_Ranges/Minimum_Sample_ID");
-  String sIdMax = getFieldValue("Project/Sample_ID_Ranges/Maximum_Sample_ID");
 
-  boolean isValid = isValidMaxSampleId(sIdMax) && isValidMaxSampleId(sIdMin);
-
-  if (!isValid) {
-    String head = "Invalid Sample ID Range";
+  if (!isValidMinSampleId(sIdMin)) {
+    String head = "Invalid Minimum Sample ID";
 
     String body = "";
-    body += "The 'Minimum Sample ID' and 'Maximum Sample ID' fields must each";
-    body += " contain numbers consisting of four digits.";
+    body += "The 'Minimum Sample ID' field must contain a number consisting ";
+    body += " of %s digits.";
+    body  = replaceFirst(body, "" + LEN_SAMPLE_ID);
+
+    showWarning(head, body);
+  }
+}
+
+void validateMaximumSampleId() {
+  String sIdMax = getFieldValue("Project/Sample_ID_Ranges/Maximum_Sample_ID");
+
+  if (!isValidMaxSampleId(sIdMax)) {
+    String head = "Invalid Maximum Sample ID";
+
+    String body = "";
+    body += "The 'Maximum Sample ID' field must contain a number consisting ";
+    body += " of %s digits.";
+    body  = replaceFirst(body, "" + LEN_SAMPLE_ID);
 
     showWarning(head, body);
   }
@@ -5216,23 +5214,25 @@ addOnEvent(
 addOnEvent(
     "Project/Sample_ID_Ranges/Minimum_Sample_ID",
     "blur",
-    "validateSampleIdRanges()"
+    "validateMinimumSampleId()"
 );
 
 addOnEvent(
     "Project/Sample_ID_Ranges/Maximum_Sample_ID",
     "blur",
-    "validateSampleIdRanges()"
+    "validateMaximumSampleId()"
 );
 /******************************* AUTONUMBERING ********************************/
 final String AUTONUM_SOURCE = "Project/Start/Sample_Starting_ID";
 
 assert(isValidRef(AUTONUM_SOURCE));
 
-for (k : AUTONUM_DEST_TO_SOURCE.keySet())
-  AUTONUM_DEST_TO_SOURCE.put(k, AUTONUM_SOURCE);
-
 persistOverSessions(AUTONUM_SOURCE, "0001");
+
+for (String sampleType : SAMPLE_TYPES) {
+  String ref = sampleType + "/Basic_Info/Sample_ID";
+  AUTONUM_DEST_TO_SOURCE.put(ref, AUTONUM_SOURCE);
+}
 
 // Overrides autogenerated definition
 Integer incField(String ref, Integer defaultVal) {
@@ -5250,6 +5250,11 @@ Integer incField(String ref, Integer defaultVal) {
 
   return inc;
 }
+
+for (String sampleType : SAMPLE_TYPES) {
+  String ref = sampleType + "/Basic_Info/Sample_ID";
+  addOnEvent(sampleType, "create", "incAutoNum", new Object[]{ref});
+}
 /******************************* PROJECT AUTHOR *******************************/
 populateProjectAuthorAndTimestamp() {
   populateAuthorAndTimestamp("Project");
@@ -5257,7 +5262,6 @@ populateProjectAuthorAndTimestamp() {
 
 addOnEvent("Project", "show", "populateProjectAuthorAndTimestamp()");
 /********************************* TIMESTAMPS *********************************/
-
 String getFmtStrTimestamp() {
   String dateStr = getTimestampNow("ddMMMyy", false);
   dateStr = replaceFirst(dateStr, ".", "");
@@ -5265,7 +5269,7 @@ String getFmtStrTimestamp() {
 }
 
 String getFieldTimestamp() {
-  String dateStr = getTimestampNow("yyyy-MM-dd HH:mm:ss z", false);
+  String dateStr = getTimestampNow("dd/MM/yyyy", false);
   dateStr = replaceFirst(dateStr, ".", "");
   return dateStr;
 }
@@ -5278,33 +5282,8 @@ void setTimestamps(String tabgroup) {
   setFieldValue(refFmtStr, getFmtStrTimestamp());
 }
 
-addOnEvent(
-    "Water_Sample",
-    "create",
-    "setTimestamps",
-    new Object[]{"Water_Sample"}
-);
-
-addOnEvent(
-    "Soil_Sample",
-    "create",
-    "setTimestamps",
-    new Object[]{"Soil_Sample"}
-);
-
-addOnEvent(
-    "Plant_Sample",
-    "create",
-    "setTimestamps",
-    new Object[]{"Plant_Sample"}
-);
-
-addOnEvent(
-    "Rock_Sample",
-    "create",
-    "setTimestamps",
-    new Object[]{"Rock_Sample"}
-);
+for (String sampleType : SAMPLE_TYPES)
+  addOnEvent(sampleType, "create", "setTimestamps", new Object[]{sampleType});
 /********************************* DYNAMIC UI *********************************/
 // TODO: Put into autogen
 getFieldValue(String ref, Boolean doConvertVocabIds) {
@@ -5495,8 +5474,8 @@ showFieldIfEqual(
 );
 
 showFieldIfEqual(
-    "Plant_Sample/Basic_Info/Location_Number",
-    "Plant_Sample/Basic_Info/Observation_Type",
+    "Vegetation_Sample/Basic_Info/Location_Number",
+    "Vegetation_Sample/Basic_Info/Observation_Type",
     "'Observation Only'"
 );
 
@@ -5914,49 +5893,300 @@ String getSrid(String tabgroup) {
   return key;
 }
 
-addOnEvent("Water_Sample", "create", "setSrid", new Object[]{"Water_Sample"});
-addOnEvent("Soil_Sample",  "create", "setSrid", new Object[]{"Soil_Sample"});
-addOnEvent("Plant_Sample", "create", "setSrid", new Object[]{"Plant_Sample"});
-addOnEvent("Rock_Sample",  "create", "setSrid", new Object[]{"Rock_Sample"});
+for (String sampleType : SAMPLE_TYPES)
+  addOnEvent(sampleType, "create", "setSrid", new Object[]{sampleType});
 /*************** LOADING AND CREATION OF RECORDS FROM QR CODES ****************/
+// TODO: Warn the user if prefix1 isn't the same as the one in the scanned ISGN
+String SCANNED_IGSN = "";
+long LAST_PRINT_TIME = 0;
+long MAX_BOUNCE_TIME = 5 * 1000;
+
+String parseIgsnFromUrl(String url) {
+  String  match   = "";
+  Pattern pattern = Pattern.compile(".+\\/(.+)");
+  Matcher matcher = pattern.matcher(url);
+  while (matcher.find())
+    match = matcher.group(1);
+
+  return match;
+}
+
+String parseIgsnToLoadEntity(String igsn) {
+  return
+      parsePrefix1 (igsn)
+    + parsePrefix2 (igsn)
+    + parseSampleId(igsn)
+    + parseSuffix  (igsn);
+}
+
+String parsePrefix1(String igsn) {
+  return getFieldValue("Project/Start/Sample_Prefix_1");
+}
+
+String parsePrefix2(String igsn) {
+  int lenParsePrefix1 = parsePrefix1(igsn).length();
+
+  igsn = igsn.substring(lenParsePrefix1, igsn.length());
+
+  String  prefix2 = "";
+  Pattern pattern = Pattern.compile("([^\\d]+).+");
+  Matcher matcher = pattern.matcher(igsn);
+  while (matcher.find())
+    prefix2 = matcher.group(1);
+
+  return prefix2;
+}
+
+String parseSampleId(String igsn) {
+  int lenStuffBefore = (
+      parsePrefix1(igsn) +
+      parsePrefix2(igsn)
+  ).length();
+
+  igsn = igsn.substring(lenStuffBefore, igsn.length());
+
+  String  match = "";
+  Pattern pattern = Pattern.compile("([\\d]+).*");
+  Matcher matcher = pattern.matcher(igsn);
+  while (matcher.find())
+    match = matcher.group(1);
+
+  return match;
+}
+
+String parseSuffix(String igsn) {
+  String possibleSuffix = igsn.substring(igsn.length() - 1);
+
+  boolean isSuffix = !Character.isDigit(possibleSuffix.charAt(0));
+
+  if (isSuffix) {
+    String suffix = possibleSuffix;
+    return getVocabId("Suffix", "{" + suffix + "}");
+  } else {
+    return "";
+  }
+}
+
+String getIgsn(String tabGroup) {
+  if ("Soil_Sample".equals(tabGroup)) {
+    return
+        getFieldValue(tabGroup + "/Basic_Info/Sample_Prefix_1")
+      + getFieldValue(tabGroup + "/Basic_Info/Sample_Prefix_2")
+      + getFieldValue(tabGroup + "/Basic_Info/Sample_ID")
+      + guessArch16nValFromKey(getMenuValue(tabGroup + "/Basic_Info/Suffix"));
+  } else {
+    return
+        getFieldValue(tabGroup + "/Basic_Info/Sample_Prefix_1")
+      + getFieldValue(tabGroup + "/Basic_Info/Sample_Prefix_2")
+      + getFieldValue(tabGroup + "/Basic_Info/Sample_ID");
+  }
+}
+
+String getSampleType(String tabGroup) {
+  String type = tabGroup.split("_")[0];
+  if ("CR".equals(getFieldValue(tabGroup + "/Basic_Info/Sample_Prefix_2")))
+    type += " (Crust)";
+
+  return type;
+}
+
 void printLabel() {
+  long currentTime = System.currentTimeMillis();
+  if (LAST_PRINT_TIME + MAX_BOUNCE_TIME > currentTime) {
+    String msg = "";
+    msg = "You are doing that too much. Wait %s seconds and try again.";
+    msg = replaceFirst(msg, "" + (MAX_BOUNCE_TIME / 1000));
+    showToast(msg);
+    return;
+  }
+
   triggerAutoSave();
 
   String tabGroup = getDisplayedTabGroup();
 
-  String igsn = "<IGSN>";
-  String materialType = tabGroup.split("_")[0];
-  String date = getFieldValue(tabGroup + "/Vars/Timestamp");
+  String igsn       = getIgsn(tabGroup);
+  String sampleType = getSampleType(tabGroup);
+  String timestamp  = getFieldValue(tabGroup + "/Vars/Timestamp");
 
-  String uuid = getUuid(tabGroup);
+  Log.d("printLabel", igsn + " " + sampleType + " " + timestamp);
 
-  // TODO: Print label
-  Log.d("printLabel", igsn + " " + materialType + " " + date + " " + uuid);
+  String cmd = "";
+  cmd += "\r\n^XA^POI";
+  cmd += "\r\n^FO15,10^A0,60,60^FDIGSN:^FS ^FO100,10^A0,60,60^FD{igsn}^FS";
+  cmd += "\r\n^FO15,70^A0,60,60^FDType:^FS ^FO100,70^A0,60,60^FD{sample_type}^FS";
+  cmd += "\r\n^FO15,140^A0,60,60^FDDate:^FS ^FO100,140^A0,60,60^FD{timestamp}^FS";
+  cmd += "\r\n^FO450,30";
+  cmd += "\r\n^BQ,2,5";
+  cmd += "\r\n^FDHA,http://igsn.org/{igsn}^FS";
+  cmd += "\r\n^FO430,5^A0,30,30^FDigsn.org/{igsn}^FS";
+  cmd += "\r\n^XZ";
+  cmd  = replaceFirst(cmd, "{igsn}", igsn);
+  cmd  = replaceFirst(cmd, "{igsn}", igsn);
+  cmd  = replaceFirst(cmd, "{igsn}", igsn);
+  cmd  = replaceFirst(cmd, "{sample_type}", sampleType);
+  cmd  = replaceFirst(cmd, "{timestamp}", timestamp);
+  Log.d("printLabel", cmd);
+
+  //writeBluetoothMessage(cmd); TODO: Uncomment me
+  LAST_PRINT_TIME = currentTime;
 }
 
-void loadEntityFromScannedUuid() {
+void scanRecordFromQrCode() {
+  scanCode("loadEntityFromScannedIgsn()");
+}
+
+void loadEntityFromScannedIgsn() {
   String code = getLastScanContents();
 
-  String  uuidString  = "";
-  Pattern uuidPattern = Pattern.compile("(\\d{19})");
-  Matcher matcher     = uuidPattern.matcher(code);
-  while (matcher.find())
-    uuidString = matcher.group(1);
+  String igsn = parseIgsnFromUrl(code);
 
-  if (isNull(uuidString)) {
+  if (!igsn.startsWith(parsePrefix1(igsn))) {
+    String head = "Please Enter 'Sample Prefix 1'";
+    String body;
+    body  = "Please enter 'Sample Prefix 1' of the sample you are trying to ";
+    body += "scan then try again.";
+
+    showWarning(head, body);
+    return;
+  }
+
+  loadEntityFromIgsn(igsn);
+}
+
+void loadEntityFromIgsn(String igsn) {
+  if (isNull(igsn)) {
     showWarning("{load_scanned_err_head}", "{load_scanned_err_body}");
     return;
   }
 
-  loadEntityFrom(uuidString);
+  String q = "";
+  q += " SELECT   uuid";
+  q += " FROM     latestnondeletedaentvalue";
+  q += " JOIN     attributekey USING (attributeid)";
+  q += " WHERE    attributename IN (";
+  q += "                  'Sample Prefix 1',";
+  q += "                  'Sample Prefix 2',";
+  q += "                  'Sample ID',";
+  q += "                  'Suffix'";
+  q += "          )";
+  q += " GROUP BY uuid";
+  q += " HAVING   COALESCE(GROUP_CONCAT(measure, ''), '') ||";
+  q += "          COALESCE(GROUP_CONCAT(vocabid, ''), '') = %s";
+  q  = dbReplaceFirst(q, parseIgsnToLoadEntity(igsn));
+  Log.d("", q);
+
+  FetchCallback cb = new FetchCallback() {
+    onFetch(result) {
+      print("" + result);
+      if (result == null || result.size() == 0)
+        createSampleFromIgsn(igsn);
+      else
+        loadEntityFrom(result.get(0).get(0));
+    }
+  };
+
+  fetchAll(q, cb);
 }
 
-addOnEvent("Project/Start/Scan_Label", "click", "loadEntityFromScannedUuid()");
+void createSampleFromIgsn(String igsn) {
+  String type = getFieldValue("Project/Start/Sample_Type");
 
-addOnEvent("Water_Sample/Basic_Info/Print_Label", "click", "printLabel()");
-addOnEvent("Soil_Sample/Basic_Info/Print_Label",  "click", "printLabel()");
-addOnEvent("Plant_Sample/Basic_Info/Print_Label", "click", "printLabel()");
-addOnEvent("Rock_Sample/Basic_Info/Print_Label",  "click", "printLabel()");
+  String head;
+  String body;
+  String cbOk;
+  String cbBad;
+  if (isNull(type)) {
+    head  = "Cannot Find Record";
+
+    body  = "A record having that IGSN could not be found. You can create a ";
+    body += "new record by dismissing this message, selecting a type from the";
+    body += "'Sample Type' dropdown menu, then scanning the QR code again.";
+
+    showWarning(head, body);
+  } else {
+    head  = "New Sample";
+
+    // TODO: Fix spaces
+    body  = "A sample having the scanned IGSN was not found on this device. A ";
+    body += "new {sample_type} with this IGSN will be created instead. You can";
+    body += " change the type of the created sample by taping 'Cancel' and ";
+    body += "setting the 'Sample Type' field to the desired value.";
+
+    body  = replaceFirst(body, "{sample_type}", type);
+
+    cbOk  = fun2str("reallyCreateSampleFromIgsn", new Object[]{type, igsn});
+
+    showAlert(head, body, cbOk, cbBad);
+  }
+}
+
+void reallyCreateSampleFromIgsn(String type, String igsn) {
+  SCANNED_IGSN = igsn;
+  onClickProjectNewSample(type);
+}
+
+void setIgsn() {
+  if (isNull(SCANNED_IGSN))
+    return;
+
+  String tabGroup = getDisplayedTabGroup();
+
+  String prefix1  = parsePrefix1 (SCANNED_IGSN);
+  String prefix2  = parsePrefix2 (SCANNED_IGSN);
+  String sampleId = parseSampleId(SCANNED_IGSN);
+  String suffix   = parseSuffix  (SCANNED_IGSN);
+  SCANNED_IGSN = "";
+
+  setFieldValue(tabGroup + "/Basic_Info/Sample_Prefix_1", prefix1);
+  setFieldValue(tabGroup + "/Basic_Info/Sample_Prefix_2", prefix2);
+  setFieldValue(tabGroup + "/Basic_Info/Sample_ID",       sampleId);
+  if ("Soil_Sample".equals(tabGroup))
+  setFieldValue(tabGroup + "/Basic_Info/Suffix",          suffix);
+}
+
+addOnEvent("Project/Start/Scan_Label", "click", "scanRecordFromQrCode()");
+
+for (String sampleType : SAMPLE_TYPES) {
+  String ref = sampleType + "/Basic_Info/Print_Label";
+  addOnEvent(ref, "click", "printLabel()");
+}
+
+for (String sampleType : SAMPLE_TYPES)
+  addOnEvent(sampleType, "create", "setIgsn()", PRECEDENCE_MID-1);
+/********************************* BLUETOOTH **********************************/
+{
+  ToggleActionButtonCallback enableBluetooth = new ToggleActionButtonCallback() {
+      actionOnLabel () { return "Disable Bluetooth"; }
+      actionOffLabel() { return "Enable Bluetooth"; }
+
+      actionOff() { createBluetoothConnection("", 0); }
+      actionOn () { destroyBluetoothConnection(); }
+
+      isActionOff() { return isBluetoothConnected(); }
+  };
+
+  addActionBarItem("bluetooth", enableBluetooth);
+}
+/****************************** PREFIX 2 SETTER *******************************/
+
+void maybeSetPrefix2() {
+  String sampleType = getFieldValue("Project/Start/Sample_Type");
+  String refPrefix  = "Project/Start/Sample_Prefix_2";
+
+  if ("{Soil_Sample}".equals(sampleType))
+    setFieldValue(refPrefix, "S");
+  else if ("{Soil_Sample__Crust_}".equals(sampleType))
+    setFieldValue(refPrefix, "CR");
+  else
+    setFieldValueFromLocalSettings(refPrefix, true);
+}
+
+void savePrefix2() {
+  insertIntoLocalSettings("Project/Start/Sample_Prefix_2");
+}
+
+addOnEvent("Project/Start/Sample_Type", "click", "maybeSetPrefix2()");
+addOnEvent("Project",                   "leave", "savePrefix2()");
 
 
 /******************************************************************************/

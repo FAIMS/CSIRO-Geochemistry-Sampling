@@ -45,7 +45,5 @@ String getSrid(String tabgroup) {
   return key;
 }
 
-addOnEvent("Water_Sample", "create", "setSrid", new Object[]{"Water_Sample"});
-addOnEvent("Soil_Sample",  "create", "setSrid", new Object[]{"Soil_Sample"});
-addOnEvent("Plant_Sample", "create", "setSrid", new Object[]{"Plant_Sample"});
-addOnEvent("Rock_Sample",  "create", "setSrid", new Object[]{"Rock_Sample"});
+for (String sampleType : SAMPLE_TYPES)
+  addOnEvent(sampleType, "create", "setSrid", new Object[]{sampleType});

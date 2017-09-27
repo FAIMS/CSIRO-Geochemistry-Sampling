@@ -188,8 +188,8 @@ showFieldIfEqual(
 );
 
 showFieldIfEqual(
-    "Plant_Sample/Basic_Info/Location_Number",
-    "Plant_Sample/Basic_Info/Observation_Type",
+    "Vegetation_Sample/Basic_Info/Location_Number",
+    "Vegetation_Sample/Basic_Info/Observation_Type",
     "'Observation Only'"
 );
 

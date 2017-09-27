@@ -26,19 +26,19 @@ boolean isInRange(int n, int min, int max) {
 }
 
 boolean isValidSampleType      (String s) { return !isNull(s); }
-boolean isValidSamplePrefix1   (String s) { return !isNull(s) && chrLen(s, 2); }
-boolean isValidSamplePrefix2   (String s) { return !isNull(s) && chrLen(s, 3); }
+boolean isValidSamplePrefix1   (String s) { return !isNull(s); }
+boolean isValidSamplePrefix2   (String s) { return !isNull(s); }
 boolean isValidSampleStartingId(String s) {
   String sId    = getFieldValue("Project/Start/Sample_Starting_ID");
   String sIdMin = getFieldValue("Project/Sample_ID_Ranges/Minimum_Sample_ID");
   String sIdMax = getFieldValue("Project/Sample_ID_Ranges/Maximum_Sample_ID");
 
   return !isNull(s)
-      && digLen(s, 4)
+      && digLen(s, LEN_SAMPLE_ID)
       && isInRange(sId, sIdMin, sIdMax);
 }
-boolean isValidMinSampleId(String s) { return digLen(s, 4); }
-boolean isValidMaxSampleId(String s) { return digLen(s, 4); }
+boolean isValidMinSampleId(String s) { return digLen(s, LEN_SAMPLE_ID); }
+boolean isValidMaxSampleId(String s) { return digLen(s, LEN_SAMPLE_ID); }
 
 void onClickCreateNewSample() {
   String valType = getFieldValue("Project/Start/Sample_Type");
@@ -58,7 +58,8 @@ void onClickCreateNewSample() {
 
     String body = "";
     body += "Please enter a number into the 'Sample Prefix 1' field. 'Sample ";
-    body += "Prefix 1' must consist of 2 characters.";
+    body += "Prefix 1' must consist of %s characters.";
+    body  = replaceFirst(body, "" + LEN_PREFIX_1);
 
     showWarning(head, body);
     return;
@@ -69,7 +70,8 @@ void onClickCreateNewSample() {
 
     String body = "";
     body += "Please enter a number into the 'Sample Prefix 2' field. 'Sample ";
-    body += "Prefix 2' must consist of 3 characters.";
+    body += "Prefix 2' must consist of %s characters.";
+    body  = replaceFirst(body, "" + LEN_PREFIX_2);
 
     showWarning(head, body);
     return;
@@ -80,31 +82,42 @@ void onClickCreateNewSample() {
 
     String body = "";
     body += "Please enter a number into the 'Next Sample ID' field. ";
-    body += "'Next Sample ID' must consist of 4 digits and be in the range";
+    body += "'Next Sample ID' must consist of %s digits and be in the range";
     body += " specified in the 'Sample ID Ranges' tab.";
+    body  = replaceFirst(body, "" + LEN_SAMPLE_ID);
 
     showWarning(head, body);
     return;
   }
 
-  if ("{Water_Sample}".equals(valType)) onClickProjectNewWaterSample();
-  if ("{Plant_Sample}".equals(valType)) onClickProjectNewPlantSample();
-  if ("{Rock_Sample}" .equals(valType)) onClickProjectNewRockSample();
-  if ("{Soil_Sample}" .equals(valType)) onClickProjectNewSoilSample();
+  onClickProjectNewSample(valType);
 }
 
-void validateSampleIdRanges() {
+void validateMinimumSampleId() {
   String sIdMin = getFieldValue("Project/Sample_ID_Ranges/Minimum_Sample_ID");
-  String sIdMax = getFieldValue("Project/Sample_ID_Ranges/Maximum_Sample_ID");
 
-  boolean isValid = isValidMaxSampleId(sIdMax) && isValidMaxSampleId(sIdMin);
-
-  if (!isValid) {
-    String head = "Invalid Sample ID Range";
+  if (!isValidMinSampleId(sIdMin)) {
+    String head = "Invalid Minimum Sample ID";
 
     String body = "";
-    body += "The 'Minimum Sample ID' and 'Maximum Sample ID' fields must each";
-    body += " contain numbers consisting of four digits.";
+    body += "The 'Minimum Sample ID' field must contain a number consisting ";
+    body += " of %s digits.";
+    body  = replaceFirst(body, "" + LEN_SAMPLE_ID);
+
+    showWarning(head, body);
+  }
+}
+
+void validateMaximumSampleId() {
+  String sIdMax = getFieldValue("Project/Sample_ID_Ranges/Maximum_Sample_ID");
+
+  if (!isValidMaxSampleId(sIdMax)) {
+    String head = "Invalid Maximum Sample ID";
+
+    String body = "";
+    body += "The 'Maximum Sample ID' field must contain a number consisting ";
+    body += " of %s digits.";
+    body  = replaceFirst(body, "" + LEN_SAMPLE_ID);
 
     showWarning(head, body);
   }
@@ -119,11 +132,11 @@ addOnEvent(
 addOnEvent(
     "Project/Sample_ID_Ranges/Minimum_Sample_ID",
     "blur",
-    "validateSampleIdRanges()"
+    "validateMinimumSampleId()"
 );
 
 addOnEvent(
     "Project/Sample_ID_Ranges/Maximum_Sample_ID",
     "blur",
-    "validateSampleIdRanges()"
+    "validateMaximumSampleId()"
 );

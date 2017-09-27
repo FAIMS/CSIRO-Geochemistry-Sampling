@@ -90,12 +90,8 @@
               <Create_Shape/>
             </Map>
             <Vars>
-              <Next_Water_Sample_ID/>
-              <Next_Plant_Sample_ID/>
-              <Next_Soil_Sample_ID/>
-              <Next_Rock_Sample_ID/>
               <New_Water_Sample/>
-              <New_Plant_Sample/>
+              <New_Vegetation_Sample/>
               <New_Soil_Sample/>
               <New_Rock_Sample/>
             </Vars>
@@ -110,7 +106,7 @@
                   <Sample_Prefix_2/>
                 </Col_2>
                 <Col_3>
-                  <Water_Sample_ID/>
+                  <Sample_ID/>
                 </Col_3>
               </Colgroup_1>
               <Print_Label/>
@@ -211,7 +207,7 @@
               <Timestamp/>
             </Vars>
           </Water_Sample>
-          <Plant_Sample>
+          <Vegetation_Sample>
             <Basic_Info>
               <Colgroup_1>
                 <Col_1>
@@ -221,7 +217,7 @@
                   <Sample_Prefix_2/>
                 </Col_2>
                 <Col_3>
-                  <Plant_Sample_ID/>
+                  <Sample_ID/>
                 </Col_3>
               </Colgroup_1>
               <Print_Label/>
@@ -230,7 +226,7 @@
                   <Timestamp_Field/>
                 </Col_1>
                 <Col_2>
-                  <Plant_Sample_author/>
+                  <Vegetation_Sample_author/>
                 </Col_2>
               </Colgroup_2>
               <Station_Deposit/>
@@ -238,7 +234,7 @@
               <Area/>
               <Observation_Type/>
               <Location_Number_Group/>
-              <Plant_Species/>
+              <Vegetation_Species/>
               <SRID/>
               <Colgroup_3>
                 <Col_1>
@@ -263,10 +259,10 @@
               <Elevation_Metres_above_Sea_Level/>
               <Colgroup_5>
                 <Col_1>
-                  <Plant_Height/>
+                  <Vegetation_Height/>
                 </Col_1>
                 <Col_2>
-                  <Plant_Width/>
+                  <Vegetation_Width/>
                 </Col_2>
               </Colgroup_5>
               <Soil_Description/>
@@ -285,7 +281,7 @@
             <Vars>
               <Timestamp/>
             </Vars>
-          </Plant_Sample>
+          </Vegetation_Sample>
           <Soil_Sample>
             <Basic_Info>
               <Colgroup_1>
@@ -296,9 +292,10 @@
                   <Sample_Prefix_2/>
                 </Col_2>
                 <Col_3>
-                  <Soil_Sample_ID/>
+                  <Sample_ID/>
                 </Col_3>
               </Colgroup_1>
+              <Suffix/>
               <Print_Label/>
               <Colgroup_2>
                 <Col_1>
@@ -370,7 +367,7 @@
                   <Sample_Prefix_2/>
                 </Col_2>
                 <Col_3>
-                  <Rock_Sample_ID/>
+                  <Sample_ID/>
                 </Col_3>
               </Colgroup_1>
               <Print_Label/>
@@ -500,17 +497,17 @@
       <bind nodeset="/faims/Project/Start/Colgroup_1/Col_3/Sample_Starting_ID" type="decimal"/>
       <bind nodeset="/faims/Project/Sample_ID_Ranges/Minimum_Sample_ID" type="decimal"/>
       <bind nodeset="/faims/Project/Sample_ID_Ranges/Maximum_Sample_ID" type="decimal"/>
-      <bind nodeset="/faims/Project/Vars/Next_Water_Sample_ID" type="decimal"/>
-      <bind nodeset="/faims/Project/Vars/Next_Plant_Sample_ID" type="decimal"/>
-      <bind nodeset="/faims/Project/Vars/Next_Soil_Sample_ID" type="decimal"/>
-      <bind nodeset="/faims/Project/Vars/Next_Rock_Sample_ID" type="decimal"/>
+      <bind nodeset="/faims/Water_Sample/Basic_Info/Colgroup_2/Col_1/Timestamp_Field" type="date"/>
       <bind nodeset="/faims/Water_Sample/Basic_Info/Elevation_Metres_above_Sea_Level" type="decimal"/>
       <bind nodeset="/faims/Water_Sample/Codes/Colgroup_1/Col_2/Estimated_Angle" type="decimal"/>
-      <bind nodeset="/faims/Plant_Sample/Basic_Info/Elevation_Metres_above_Sea_Level" type="decimal"/>
-      <bind nodeset="/faims/Plant_Sample/Basic_Info/Colgroup_5/Col_1/Plant_Height" type="decimal"/>
-      <bind nodeset="/faims/Plant_Sample/Basic_Info/Colgroup_5/Col_2/Plant_Width" type="decimal"/>
+      <bind nodeset="/faims/Vegetation_Sample/Basic_Info/Colgroup_2/Col_1/Timestamp_Field" type="date"/>
+      <bind nodeset="/faims/Vegetation_Sample/Basic_Info/Elevation_Metres_above_Sea_Level" type="decimal"/>
+      <bind nodeset="/faims/Vegetation_Sample/Basic_Info/Colgroup_5/Col_1/Vegetation_Height" type="decimal"/>
+      <bind nodeset="/faims/Vegetation_Sample/Basic_Info/Colgroup_5/Col_2/Vegetation_Width" type="decimal"/>
+      <bind nodeset="/faims/Soil_Sample/Basic_Info/Colgroup_2/Col_1/Timestamp_Field" type="date"/>
       <bind nodeset="/faims/Soil_Sample/Basic_Info/Elevation_Metres_above_Sea_Level" type="decimal"/>
       <bind nodeset="/faims/Soil_Sample/Basic_Info/Depth" type="decimal"/>
+      <bind nodeset="/faims/Rock_Sample/Basic_Info/Colgroup_2/Col_1/Timestamp_Field" type="date"/>
       <bind nodeset="/faims/Rock_Sample/Basic_Info/Elevation_Metres_above_Sea_Level" type="decimal"/>
       <bind nodeset="/faims/Rock_Sample/Measurements/Colgroup_1/Col_1/Bedding_Strike" type="decimal"/>
       <bind nodeset="/faims/Rock_Sample/Measurements/Colgroup_1/Col_1/Cleavage_Strike" type="decimal"/>
@@ -726,23 +723,11 @@
       </group>
       <group ref="Vars" faims_hidden="true">
         <label>{Vars}</label>
-        <input ref="Next_Water_Sample_ID" faims_style_class="required">
-          <label>{Next_Water_Sample_ID}</label>
-        </input>
-        <input ref="Next_Plant_Sample_ID" faims_style_class="required">
-          <label>{Next_Plant_Sample_ID}</label>
-        </input>
-        <input ref="Next_Soil_Sample_ID" faims_style_class="required">
-          <label>{Next_Soil_Sample_ID}</label>
-        </input>
-        <input ref="Next_Rock_Sample_ID" faims_style_class="required">
-          <label>{Next_Rock_Sample_ID}</label>
-        </input>
         <trigger ref="New_Water_Sample">
           <label>{New_Water_Sample}</label>
         </trigger>
-        <trigger ref="New_Plant_Sample">
-          <label>{New_Plant_Sample}</label>
+        <trigger ref="New_Vegetation_Sample">
+          <label>{New_Vegetation_Sample}</label>
         </trigger>
         <trigger ref="New_Soil_Sample">
           <label>{New_Soil_Sample}</label>
@@ -772,8 +757,8 @@
           </group>
           <group ref="Col_3" faims_style="even">
             <label/>
-            <input faims_attribute_name="Water Sample ID" faims_attribute_type="measure" ref="Water_Sample_ID" faims_read_only="true">
-              <label>{Water_Sample_ID}</label>
+            <input faims_attribute_name="Sample ID" faims_attribute_type="measure" ref="Sample_ID" faims_read_only="true">
+              <label>{Sample_ID}</label>
             </input>
           </group>
         </group>
@@ -784,7 +769,7 @@
           <label/>
           <group ref="Col_1" faims_style="even">
             <label/>
-            <input faims_attribute_name="Timestamp Field" faims_attribute_type="measure" ref="Timestamp_Field" faims_read_only="true">
+            <input faims_attribute_name="Timestamp Field" faims_attribute_type="measure" ref="Timestamp_Field">
               <label>{Timestamp}</label>
             </input>
           </group>
@@ -807,7 +792,7 @@
         <input faims_attribute_name="Site Name" faims_attribute_type="measure" ref="Site_Name">
           <label>{Site_Name}</label>
         </input>
-        <select1 appearance="full" faims_attribute_name="Water Sample Observation Type" faims_attribute_type="vocab" ref="Observation_Type">
+        <select1 appearance="full" faims_attribute_name="Observation Type" faims_attribute_type="vocab" ref="Observation_Type">
           <label>{Observation_Type}</label>
           <item>
             <label>Options not loaded</label>
@@ -1047,8 +1032,8 @@
         </input>
       </group>
     </group>
-    <group ref="Plant_Sample" faims_archent_type="Plant Sample">
-      <label>{Plant_Sample}</label>
+    <group ref="Vegetation_Sample" faims_archent_type="Vegetation Sample">
+      <label>{Vegetation_Sample}</label>
       <group ref="Basic_Info">
         <label>{Basic_Info}</label>
         <group ref="Colgroup_1" faims_style="orientation">
@@ -1067,8 +1052,8 @@
           </group>
           <group ref="Col_3" faims_style="even">
             <label/>
-            <input faims_attribute_name="Plant Sample ID" faims_attribute_type="measure" ref="Plant_Sample_ID" faims_read_only="true">
-              <label>{Plant_Sample_ID}</label>
+            <input faims_attribute_name="Sample ID" faims_attribute_type="measure" ref="Sample_ID" faims_read_only="true">
+              <label>{Sample_ID}</label>
             </input>
           </group>
         </group>
@@ -1079,13 +1064,13 @@
           <label/>
           <group ref="Col_1" faims_style="even">
             <label/>
-            <input faims_attribute_name="Timestamp Field" faims_attribute_type="measure" ref="Timestamp_Field" faims_read_only="true">
+            <input faims_attribute_name="Timestamp Field" faims_attribute_type="measure" ref="Timestamp_Field">
               <label>{Timestamp}</label>
             </input>
           </group>
           <group ref="Col_2" faims_style="even">
             <label/>
-            <input faims_attribute_name="Plant Sample author" faims_attribute_type="measure" ref="Plant_Sample_author" faims_read_only="true">
+            <input faims_attribute_name="Vegetation Sample author" faims_attribute_type="measure" ref="Vegetation_Sample_author" faims_read_only="true">
               <label>{Author}</label>
             </input>
           </group>
@@ -1099,7 +1084,7 @@
         <input faims_attribute_name="Area" faims_attribute_type="measure" ref="Area" faims_read_only="true">
           <label>{Area}</label>
         </input>
-        <select1 appearance="full" faims_attribute_name="Plant Sample Observation Type" faims_attribute_type="vocab" ref="Observation_Type">
+        <select1 appearance="full" faims_attribute_name="Observation Type" faims_attribute_type="vocab" ref="Observation_Type">
           <label>{Observation_Type}</label>
           <item>
             <label>Options not loaded</label>
@@ -1109,8 +1094,8 @@
         <group ref="Location_Number_Group">
           <label/>
         </group>
-        <input faims_attribute_name="Plant Species" faims_attribute_type="measure" ref="Plant_Species">
-          <label>{Plant_Species}</label>
+        <input faims_attribute_name="Vegetation Species" faims_attribute_type="measure" ref="Vegetation_Species">
+          <label>{Vegetation_Species}</label>
         </input>
         <select1 faims_attribute_name="SRID" faims_attribute_type="vocab" ref="SRID">
           <label>{SRID}</label>
@@ -1165,14 +1150,14 @@
           <label/>
           <group ref="Col_1" faims_style="even">
             <label/>
-            <input faims_attribute_name="Plant Height" faims_attribute_type="measure" ref="Plant_Height">
-              <label>{Plant_Height}</label>
+            <input faims_attribute_name="Vegetation Height" faims_attribute_type="measure" ref="Vegetation_Height">
+              <label>{Vegetation_Height}</label>
             </input>
           </group>
           <group ref="Col_2" faims_style="even">
             <label/>
-            <input faims_attribute_name="Plant Width" faims_attribute_type="measure" ref="Plant_Width">
-              <label>{Plant_Width}</label>
+            <input faims_attribute_name="Vegetation Width" faims_attribute_type="measure" ref="Vegetation_Width">
+              <label>{Vegetation_Width}</label>
             </input>
           </group>
         </group>
@@ -1228,7 +1213,7 @@
       </group>
       <group ref="Vars" faims_hidden="true">
         <label>{Vars}</label>
-        <input faims_attribute_name="Plant Sample Timestamp" faims_attribute_type="measure" ref="Timestamp">
+        <input faims_attribute_name="Vegetation Sample Timestamp" faims_attribute_type="measure" ref="Timestamp">
           <label>{Timestamp}</label>
         </input>
       </group>
@@ -1253,11 +1238,18 @@
           </group>
           <group ref="Col_3" faims_style="even">
             <label/>
-            <input faims_attribute_name="Soil Sample ID" faims_attribute_type="measure" ref="Soil_Sample_ID" faims_read_only="true">
-              <label>{Soil_Sample_ID}</label>
+            <input faims_attribute_name="Sample ID" faims_attribute_type="measure" ref="Sample_ID" faims_read_only="true">
+              <label>{Sample_ID}</label>
             </input>
           </group>
         </group>
+        <select1 faims_attribute_name="Suffix" faims_attribute_type="vocab" ref="Suffix">
+          <label>{Suffix}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
         <trigger ref="Print_Label">
           <label>{Print_Label}</label>
         </trigger>
@@ -1265,7 +1257,7 @@
           <label/>
           <group ref="Col_1" faims_style="even">
             <label/>
-            <input faims_attribute_name="Timestamp Field" faims_attribute_type="measure" ref="Timestamp_Field" faims_read_only="true">
+            <input faims_attribute_name="Timestamp Field" faims_attribute_type="measure" ref="Timestamp_Field">
               <label>{Timestamp}</label>
             </input>
           </group>
@@ -1285,7 +1277,7 @@
         <input faims_attribute_name="Area" faims_attribute_type="measure" ref="Area" faims_read_only="true">
           <label>{Area}</label>
         </input>
-        <select1 appearance="full" faims_attribute_name="Soil Sample Observation Type" faims_attribute_type="vocab" ref="Observation_Type">
+        <select1 appearance="full" faims_attribute_name="Observation Type" faims_attribute_type="vocab" ref="Observation_Type">
           <label>{Observation_Type}</label>
           <item>
             <label>Options not loaded</label>
@@ -1469,8 +1461,8 @@
           </group>
           <group ref="Col_3" faims_style="even">
             <label/>
-            <input faims_attribute_name="Rock Sample ID" faims_attribute_type="measure" ref="Rock_Sample_ID" faims_read_only="true">
-              <label>{Rock_Sample_ID}</label>
+            <input faims_attribute_name="Sample ID" faims_attribute_type="measure" ref="Sample_ID" faims_read_only="true">
+              <label>{Sample_ID}</label>
             </input>
           </group>
         </group>
@@ -1481,7 +1473,7 @@
           <label/>
           <group ref="Col_1" faims_style="even">
             <label/>
-            <input faims_attribute_name="Timestamp Field" faims_attribute_type="measure" ref="Timestamp_Field" faims_read_only="true">
+            <input faims_attribute_name="Timestamp Field" faims_attribute_type="measure" ref="Timestamp_Field">
               <label>{Timestamp}</label>
             </input>
           </group>
@@ -1504,7 +1496,7 @@
         <input faims_attribute_name="Rock Sample Location Number" faims_attribute_type="measure" ref="Location_Number">
           <label>{Location_Number}</label>
         </input>
-        <select1 appearance="full" faims_attribute_name="Rock Sample Observation Type" faims_attribute_type="vocab" ref="Observation_Type">
+        <select1 appearance="full" faims_attribute_name="Observation Type" faims_attribute_type="vocab" ref="Observation_Type">
           <label>{Observation_Type}</label>
           <item>
             <label>Options not loaded</label>
