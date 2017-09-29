@@ -128,7 +128,7 @@ void printLabel() {
   cmd  = replaceFirst(cmd, "{timestamp}", timestamp);
   Log.d("printLabel", cmd);
 
-  //writeBluetoothMessage(cmd); TODO: Uncomment me
+  writeBluetoothMessage(cmd);
   LAST_PRINT_TIME = currentTime;
 }
 

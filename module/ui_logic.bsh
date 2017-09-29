@@ -242,6 +242,7 @@ REF_TO_TYPE.put("Project/Map/Create_Shape", "button");
 REF_TO_TYPE.put("Project/Vars/New_Water_Sample", "button");
 REF_TO_TYPE.put("Project/Vars/New_Vegetation_Sample", "button");
 REF_TO_TYPE.put("Project/Vars/New_Soil_Sample", "button");
+REF_TO_TYPE.put("Project/Vars/New_Soil_Crust_Sample", "button");
 REF_TO_TYPE.put("Project/Vars/New_Rock_Sample", "button");
 REF_TO_TYPE.put("Water_Sample/Basic_Info/Sample_Prefix_1", "input");
 REF_TO_TYPE.put("Water_Sample/Basic_Info/Sample_Prefix_2", "input");
@@ -853,7 +854,7 @@ HashSet getTabsAsHashSet() {
 
 List getStartingIdRefs() {
   List l = new ArrayList();
-  
+
   return l;
 }
 
@@ -1733,41 +1734,48 @@ void timedPopulateCursorList(String ref, String q, int limit) {
 }
 
 void setUpTypeHierarchy() {
-  //- 
-  //  - Rock Sample
+  //-
+  //  - Shape
+  //  - Soil Crust Sample
   //    - Photolog
   //  - Water Sample
   //    - Photolog
-  //  - Soil Sample
-  //    - Photolog
   //  - Vegetation Sample
   //    - Photolog
-  //  - Shape
+  //  - Soil Sample
+  //    - Photolog
+  //  - Rock Sample
+  //    - Photolog
 
   n0 = Tree("", 1);
-  n1 = Tree("Rock Sample", 1);
-  n2 = Tree("Photolog", 1);
-  n3 = Tree("Water Sample", 1);
-  n4 = Tree("Photolog", 1);
-  n5 = Tree("Soil Sample", 1);
-  n6 = Tree("Photolog", 1);
-  n7 = Tree("Vegetation Sample", 1);
-  n8 = Tree("Photolog", 1);
-  n9 = Tree("Shape", 1);
+  n1 = Tree("Shape", 1);
+  n2 = Tree("Soil Crust Sample", 1);
+  n3 = Tree("Photolog", 1);
+  n4 = Tree("Water Sample", 1);
+  n5 = Tree("Photolog", 1);
+  n6 = Tree("Vegetation Sample", 1);
+  n7 = Tree("Photolog", 1);
+  n8 = Tree("Soil Sample", 1);
+  n9 = Tree("Photolog", 1);
+  n10 = Tree("Rock Sample", 1);
+  n11 = Tree("Photolog", 1);
 
   n0.addChild(n1);
-  n0.addChild(n3);
-  n0.addChild(n5);
-  n0.addChild(n7);
-  n0.addChild(n9);
+  n0.addChild(n2);
+  n0.addChild(n4);
+  n0.addChild(n6);
+  n0.addChild(n8);
+  n0.addChild(n10);
 
-  n1.addChild(n2);
+  n2.addChild(n3);
 
-  n3.addChild(n4);
+  n4.addChild(n5);
 
-  n5.addChild(n6);
+  n6.addChild(n7);
 
-  n7.addChild(n8);
+  n8.addChild(n9);
+
+  n10.addChild(n11);
 
 
   PERF_TYPE_TREE = n0;
@@ -3505,6 +3513,11 @@ void onClickProjectNewSoilSample () {
   newSoilSample();
 }
 
+void onClickProjectNewSoilCrustSample () {
+  parentTabgroup__ = "Project";
+  newSoilCrustSample();
+}
+
 void onClickProjectNewRockSample () {
   parentTabgroup__ = "Project";
   newRockSample();
@@ -3541,6 +3554,7 @@ addOnEvent("Project/Map/Create_Shape", "click", "onClickProjectCreateShape()");
 addOnEvent("Project/Vars/New_Water_Sample", "click", "onClickProjectNewWaterSample()");
 addOnEvent("Project/Vars/New_Vegetation_Sample", "click", "onClickProjectNewVegetationSample()");
 addOnEvent("Project/Vars/New_Soil_Sample", "click", "onClickProjectNewSoilSample()");
+addOnEvent("Project/Vars/New_Soil_Crust_Sample", "click", "onClickProjectNewSoilCrustSample()");
 addOnEvent("Project/Vars/New_Rock_Sample", "click", "onClickProjectNewRockSample()");
 addOnEvent("Water_Sample/Photolog/New_Photolog", "click", "onClickWaterSampleNewPhotolog()");
 addOnEvent("Vegetation_Sample/Photolog/New_Photolog", "click", "onClickVegetationSampleNewPhotolog()");
@@ -3861,13 +3875,13 @@ void newWaterSample(String parent){
     parentTabgroup   = parent;
     parentTabgroup__ = parent;
   }
-  
+
 
   setUuid(tabgroup, null);
   newTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-  
+
 
   executeOnEvent(tabgroup, "create");
 }
@@ -3883,13 +3897,13 @@ void newVegetationSample(String parent){
     parentTabgroup   = parent;
     parentTabgroup__ = parent;
   }
-  
+
 
   setUuid(tabgroup, null);
   newTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-  
+
 
   executeOnEvent(tabgroup, "create");
 }
@@ -3905,13 +3919,13 @@ void newSoilSample(String parent){
     parentTabgroup   = parent;
     parentTabgroup__ = parent;
   }
-  
+
 
   setUuid(tabgroup, null);
   newTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-  
+
 
   executeOnEvent(tabgroup, "create");
 }
@@ -3927,13 +3941,13 @@ void newSoilCrustSample(String parent){
     parentTabgroup   = parent;
     parentTabgroup__ = parent;
   }
-  
+
 
   setUuid(tabgroup, null);
   newTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-  
+
 
   executeOnEvent(tabgroup, "create");
 }
@@ -3949,13 +3963,13 @@ void newRockSample(String parent){
     parentTabgroup   = parent;
     parentTabgroup__ = parent;
   }
-  
+
 
   setUuid(tabgroup, null);
   newTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-  
+
 
   executeOnEvent(tabgroup, "create");
 }
@@ -3971,13 +3985,13 @@ void newpH(String parent){
     parentTabgroup   = parent;
     parentTabgroup__ = parent;
   }
-  
+
 
   setUuid(tabgroup, null);
   newTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-  
+
 
   executeOnEvent(tabgroup, "create");
 }
@@ -3993,13 +4007,13 @@ void newEh(String parent){
     parentTabgroup   = parent;
     parentTabgroup__ = parent;
   }
-  
+
 
   setUuid(tabgroup, null);
   newTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-  
+
 
   executeOnEvent(tabgroup, "create");
 }
@@ -4015,13 +4029,13 @@ void newPhotolog(String parent){
     parentTabgroup   = parent;
     parentTabgroup__ = parent;
   }
-  
+
 
   setUuid(tabgroup, null);
   newTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-  
+
 
   executeOnEvent(tabgroup, "create");
 }
@@ -4037,13 +4051,13 @@ void newShape(String parent){
     parentTabgroup   = parent;
     parentTabgroup__ = parent;
   }
-  
+
 
   setUuid(tabgroup, null);
   newTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-  
+
 
   executeOnEvent(tabgroup, "create");
 }
@@ -4056,7 +4070,7 @@ void duplicateWaterSample(){
   String uuidOld = getUuid(tabgroup);
   setUuid(tabgroup, "");
   disableAutoSave(tabgroup);
-  
+
   clearGpsInTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
@@ -4105,7 +4119,7 @@ void duplicateVegetationSample(){
   String uuidOld = getUuid(tabgroup);
   setUuid(tabgroup, "");
   disableAutoSave(tabgroup);
-  
+
   clearGpsInTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
@@ -4154,7 +4168,7 @@ void duplicateSoilSample(){
   String uuidOld = getUuid(tabgroup);
   setUuid(tabgroup, "");
   disableAutoSave(tabgroup);
-  
+
   clearGpsInTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
@@ -4203,7 +4217,7 @@ void duplicateSoilCrustSample(){
   String uuidOld = getUuid(tabgroup);
   setUuid(tabgroup, "");
   disableAutoSave(tabgroup);
-  
+
   clearGpsInTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
@@ -4252,7 +4266,7 @@ void duplicateRockSample(){
   String uuidOld = getUuid(tabgroup);
   setUuid(tabgroup, "");
   disableAutoSave(tabgroup);
-  
+
   clearGpsInTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
@@ -4301,11 +4315,11 @@ void duplicatepH(){
   String uuidOld = getUuid(tabgroup);
   setUuid(tabgroup, "");
   disableAutoSave(tabgroup);
-  
+
   clearGpsInTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-  
+
   executeOnEvent(tabgroup, "copy");
 
   saveCallback = new SaveCallback() {
@@ -4337,7 +4351,7 @@ void duplicatepH(){
     onFetch(result) {
       excludeAttributes = new ArrayList();
 
-      
+
 
       duplicateTabGroup(tabgroup, null, getExtraAttributes(result), excludeAttributes, saveCallback);
     }
@@ -4348,11 +4362,11 @@ void duplicateEh(){
   String uuidOld = getUuid(tabgroup);
   setUuid(tabgroup, "");
   disableAutoSave(tabgroup);
-  
+
   clearGpsInTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-  
+
   executeOnEvent(tabgroup, "copy");
 
   saveCallback = new SaveCallback() {
@@ -4384,7 +4398,7 @@ void duplicateEh(){
     onFetch(result) {
       excludeAttributes = new ArrayList();
 
-      
+
 
       duplicateTabGroup(tabgroup, null, getExtraAttributes(result), excludeAttributes, saveCallback);
     }
@@ -4395,11 +4409,11 @@ void duplicatePhotolog(){
   String uuidOld = getUuid(tabgroup);
   setUuid(tabgroup, "");
   disableAutoSave(tabgroup);
-  
+
   clearGpsInTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-  
+
   executeOnEvent(tabgroup, "copy");
 
   saveCallback = new SaveCallback() {
@@ -4431,7 +4445,7 @@ void duplicatePhotolog(){
     onFetch(result) {
       excludeAttributes = new ArrayList();
 
-      
+
 
       duplicateTabGroup(tabgroup, null, getExtraAttributes(result), excludeAttributes, saveCallback);
     }
@@ -4442,11 +4456,11 @@ void duplicateShape(){
   String uuidOld = getUuid(tabgroup);
   setUuid(tabgroup, "");
   disableAutoSave(tabgroup);
-  
+
   clearGpsInTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-  
+
   executeOnEvent(tabgroup, "copy");
 
   saveCallback = new SaveCallback() {
@@ -4478,7 +4492,7 @@ void duplicateShape(){
     onFetch(result) {
       excludeAttributes = new ArrayList();
 
-      
+
 
       duplicateTabGroup(tabgroup, null, getExtraAttributes(result), excludeAttributes, saveCallback);
     }
@@ -5265,7 +5279,7 @@ void search(){
 /***************************** DUPLICATE CHECKING *****************************/
 
 void checkForDuplicates() {
-  String query = "select uuid, response || ' created at: ' || datetime(createdAt, 'localtime') || ' created by: '||createdBy " + 
+  String query = "select uuid, response || ' created at: ' || datetime(createdAt, 'localtime') || ' created by: '||createdBy " +
       "from latestNonDeletedArchEntFormattedIdentifiers join createdModifiedAtBy using (uuid) " +
       "where response in ( " +
       "select response from latestNonDeletedArchEntFormattedIdentifiers group by response having count(response) > 1) " +
@@ -5732,7 +5746,7 @@ renderpHEhPage() {
 
             createContainer("Water_Sample/pH_Eh/child2", "even", "Water_Sample/pH_Eh/container3");
             createContainer("Water_Sample/pH_Eh/Eh_Container", "even", "Water_Sample/pH_Eh/child2");
-            
+
             ph_count = 0;
             eh_count = 0;
             ArrayList ph_list = new ArrayList();
@@ -5793,7 +5807,7 @@ renderpHEhPage() {
                                         setFieldValue("Water_Sample/pH_Eh/Check_pH_" + ph_count, "1");
                                     }
                                     setFieldValue("Water_Sample/pH_Eh/pH_Value_" + ph_count, ph_value);
-                                    
+
                                     onEvent("Water_Sample/pH_Eh/Check_pH_" + ph_count, "click", "setPreferredpH(\"" + ph_id + "\", \"" + ph_value + "\", \"" + ph_time + "\", " + ph_count + ");");
                                     onEvent("Water_Sample/pH_Eh/Delete_pH_" + ph_count, "click", "deletepH(\"" + ph_id + "\");");
                                     ph_count++;
@@ -5822,7 +5836,7 @@ renderpHEhPage() {
                                 }
                                 createView("Water_Sample/pH_Eh/pH_Value_" + ph_count, createViewDef().createTextField("decimal").setAttributeType("measure").setLabel("{pH}"), "Water_Sample/pH_Eh/child1");
                                 createView("Water_Sample/pH_Eh/Eh_Value_" + eh_count, createViewDef().createTextField("decimal").setAttributeType("measure").setLabel("{Eh}"), "Water_Sample/pH_Eh/child2");
-                                
+
                                 createView("Water_Sample/pH_Eh/New_pH", createViewDef().createButton().setLabel("{Add_New_pH}"), "Water_Sample/pH_Eh/child1");
                                 createView("Water_Sample/pH_Eh/New_Eh", createViewDef().createButton().setLabel("{Add_New_Eh}"), "Water_Sample/pH_Eh/child2");
                                 onEvent("Water_Sample/pH_Eh/New_pH", "delayclick", "addNewpH(getFieldValue(\"Water_Sample/pH_Eh/pH_Value_\" + ph_count));");
@@ -6026,8 +6040,8 @@ void onFetchWaterSample() {
     if(!isNull(getFieldValue("Water_Sample/Hidden/Preferred_Eh_Time"))) {
         Date preferred_eh_time = fromFormat.parse(getFieldValue("Water_Sample/Hidden/Preferred_Eh_Time"));
         setFieldValue("Water_Sample/pH_Eh/Preferred_Eh_Time", toFormat.format(preferred_eh_time));
-    }           
-    fetchOne("select uuid " + 
+    }
+    fetchOne("select uuid " +
             "from latestnondeletedaentvalue " +
             "join latestnondeletedarchent using (uuid) " +
             "join aenttype using (aenttypeid) " +
@@ -6058,7 +6072,7 @@ void onFetchWaterSample() {
             "where a.uuid != b.uuid " +
             "and b.uuid = " + getUuid("Water_Sample") + ") ;", new FetchCallback() {
         onFetch(result) {
-            if(!isNull(result)) { 
+            if(!isNull(result)) {
                 preferred_eh = result.get(0);
             }
         }
@@ -6245,7 +6259,7 @@ void printLabel() {
   cmd  = replaceFirst(cmd, "{timestamp}", timestamp);
   Log.d("printLabel", cmd);
 
-  //writeBluetoothMessage(cmd); TODO: Uncomment me
+  writeBluetoothMessage(cmd);
   LAST_PRINT_TIME = currentTime;
 }
 

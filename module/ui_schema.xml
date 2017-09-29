@@ -93,6 +93,7 @@
               <New_Water_Sample/>
               <New_Vegetation_Sample/>
               <New_Soil_Sample/>
+              <New_Soil_Crust_Sample/>
               <New_Rock_Sample/>
             </Vars>
           </Project>
@@ -809,6 +810,9 @@
         </trigger>
         <trigger ref="New_Soil_Sample">
           <label>{New_Soil_Sample}</label>
+        </trigger>
+        <trigger ref="New_Soil_Crust_Sample">
+          <label>{New_Soil_Crust_Sample}</label>
         </trigger>
         <trigger ref="New_Rock_Sample">
           <label>{New_Rock_Sample}</label>

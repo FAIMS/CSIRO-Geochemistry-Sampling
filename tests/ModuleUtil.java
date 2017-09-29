@@ -465,6 +465,15 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: button
+        Ref:  Project/Vars/New_Soil_Crust_Sample
+     */
+    public static View get_Project_Vars_NewSoilCrustSample(Solo solo) {
+        String ref = "Project/Vars/New_Soil_Crust_Sample";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: button
         Ref:  Project/Vars/New_Soil_Sample
      */
     public static View get_Project_Vars_NewSoilSample(Solo solo) {
