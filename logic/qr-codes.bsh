@@ -113,15 +113,16 @@ void printLabel() {
 
   String cmd = "";
   cmd += "\r\n^XA^POI";
-  cmd += "\r\n^FO15,10^A0,60,60^FDIGSN:^FS ^FO100,10^A0,60,60^FD{igsn}^FS";
-  cmd += "\r\n^FO15,70^A0,60,60^FDType:^FS ^FO100,70^A0,60,60^FD{sample_type}^FS";
-  cmd += "\r\n^FO15,140^A0,60,60^FDDate:^FS ^FO100,140^A0,60,60^FD{timestamp}^FS";
-  cmd += "\r\n^FO450,30";
-  cmd += "\r\n^BQ,2,5";
-  cmd += "\r\n^FDHA,http://igsn.org/{igsn}^FS";
-  cmd += "\r\n^FO430,5^A0,30,30^FDigsn.org/{igsn}^FS";
+  cmd += "\r\n^FO500,20^A0,20,20^FDCSIRO^FS";
+  cmd += "\r\n^FO460,50";
+  cmd += "\r\n^BXN,6,200";
+  cmd += "\r\n^FDhttp://igsn.org/{igsn}^FS";
+  cmd += "\r\n^FO15,25^A0,90,50^FD{igsn}^FS";
+  cmd += "\r\n^FO15,130^A0,60,35^TBN,120,100^FD{sample_type}^FS";
+  cmd += "\r\n^FO205,130^A0,60,35^FD{timestamp}^FS";
+  cmd += "\r\n^FO0,115^GB430,0,2^FS";
+  cmd += "\r\n^FO190,115^GB0,85,2^FS";
   cmd += "\r\n^XZ";
-  cmd  = replaceFirst(cmd, "{igsn}", igsn);
   cmd  = replaceFirst(cmd, "{igsn}", igsn);
   cmd  = replaceFirst(cmd, "{igsn}", igsn);
   cmd  = replaceFirst(cmd, "{sample_type}", sampleType);
