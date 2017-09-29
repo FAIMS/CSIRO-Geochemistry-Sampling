@@ -6,7 +6,7 @@ boolean digLen(String s, int n) {
 
 boolean digLen(String s, int n, int m) {
   if (s == null) return false;
-  return s.matches("\\d{1," + n + "}");
+  return s.length() >= n && s.length() <= m;;
 }
 
 boolean chrLen(String s, int n) {
@@ -31,7 +31,7 @@ boolean isInRange(int n, int min, int max) {
 }
 
 boolean isValidSampleType      (String s) { return !isNull(s); }
-boolean isValidSamplePrefix1   (String s) { return !isNull(s); digLen(s,1,6); } // TODO: Test
+boolean isValidSamplePrefix1   (String s) { return !isNull(s) && digLen(s,1,6); } // TODO: Test
 boolean isValidSamplePrefix2   (String s) { return !isNull(s); }
 boolean isValidSampleStartingId(String s) {
   String sId    = getFieldValue("Project/Start/Sample_Starting_ID");
@@ -71,7 +71,7 @@ void onClickCreateNewSample() {
   }
 
   if (!isValidSamplePrefix2(valPre2)) {
-    String head = "Invalid 'Sample Prefix 1'";
+    String head = "Invalid 'Sample Prefix 2'";
 
     String body = "";
     body += "Please enter a number into the 'Sample Prefix 2' field. 'Sample ";

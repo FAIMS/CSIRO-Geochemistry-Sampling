@@ -1,4 +1,4 @@
-final int LEN_PREFIX_1  = 2;
+final int LEN_PREFIX_1  = 6;
 final int LEN_PREFIX_2  = 3;
 final int LEN_SAMPLE_ID = 4;
 

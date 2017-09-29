@@ -4,7 +4,7 @@
 void maybeSetEstimatedAngle() {
   String holeAngle = getMenuValue("Water_Sample/Codes/Hole_Angle");
   if ("{Vertical}".equals(holeAngle))
-    setFieldValue("Water_Sample/Codes/Hole_Angle", "90");
+    setFieldValue("Water_Sample/Codes/Estimated_Angle", "90");
 }
 
 addOnEvent(

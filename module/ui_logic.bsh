@@ -854,7 +854,7 @@ HashSet getTabsAsHashSet() {
 
 List getStartingIdRefs() {
   List l = new ArrayList();
-
+  
   return l;
 }
 
@@ -1734,7 +1734,7 @@ void timedPopulateCursorList(String ref, String q, int limit) {
 }
 
 void setUpTypeHierarchy() {
-  //-
+  //- 
   //  - Shape
   //  - Soil Crust Sample
   //    - Photolog
@@ -3875,13 +3875,13 @@ void newWaterSample(String parent){
     parentTabgroup   = parent;
     parentTabgroup__ = parent;
   }
-
+  
 
   setUuid(tabgroup, null);
   newTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-
+  
 
   executeOnEvent(tabgroup, "create");
 }
@@ -3897,13 +3897,13 @@ void newVegetationSample(String parent){
     parentTabgroup   = parent;
     parentTabgroup__ = parent;
   }
-
+  
 
   setUuid(tabgroup, null);
   newTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-
+  
 
   executeOnEvent(tabgroup, "create");
 }
@@ -3919,13 +3919,13 @@ void newSoilSample(String parent){
     parentTabgroup   = parent;
     parentTabgroup__ = parent;
   }
-
+  
 
   setUuid(tabgroup, null);
   newTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-
+  
 
   executeOnEvent(tabgroup, "create");
 }
@@ -3941,13 +3941,13 @@ void newSoilCrustSample(String parent){
     parentTabgroup   = parent;
     parentTabgroup__ = parent;
   }
-
+  
 
   setUuid(tabgroup, null);
   newTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-
+  
 
   executeOnEvent(tabgroup, "create");
 }
@@ -3963,13 +3963,13 @@ void newRockSample(String parent){
     parentTabgroup   = parent;
     parentTabgroup__ = parent;
   }
-
+  
 
   setUuid(tabgroup, null);
   newTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-
+  
 
   executeOnEvent(tabgroup, "create");
 }
@@ -3985,13 +3985,13 @@ void newpH(String parent){
     parentTabgroup   = parent;
     parentTabgroup__ = parent;
   }
-
+  
 
   setUuid(tabgroup, null);
   newTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-
+  
 
   executeOnEvent(tabgroup, "create");
 }
@@ -4007,13 +4007,13 @@ void newEh(String parent){
     parentTabgroup   = parent;
     parentTabgroup__ = parent;
   }
-
+  
 
   setUuid(tabgroup, null);
   newTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-
+  
 
   executeOnEvent(tabgroup, "create");
 }
@@ -4029,13 +4029,13 @@ void newPhotolog(String parent){
     parentTabgroup   = parent;
     parentTabgroup__ = parent;
   }
-
+  
 
   setUuid(tabgroup, null);
   newTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-
+  
 
   executeOnEvent(tabgroup, "create");
 }
@@ -4051,13 +4051,13 @@ void newShape(String parent){
     parentTabgroup   = parent;
     parentTabgroup__ = parent;
   }
-
+  
 
   setUuid(tabgroup, null);
   newTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-
+  
 
   executeOnEvent(tabgroup, "create");
 }
@@ -4070,7 +4070,7 @@ void duplicateWaterSample(){
   String uuidOld = getUuid(tabgroup);
   setUuid(tabgroup, "");
   disableAutoSave(tabgroup);
-
+  
   clearGpsInTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
@@ -4119,7 +4119,7 @@ void duplicateVegetationSample(){
   String uuidOld = getUuid(tabgroup);
   setUuid(tabgroup, "");
   disableAutoSave(tabgroup);
-
+  
   clearGpsInTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
@@ -4168,7 +4168,7 @@ void duplicateSoilSample(){
   String uuidOld = getUuid(tabgroup);
   setUuid(tabgroup, "");
   disableAutoSave(tabgroup);
-
+  
   clearGpsInTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
@@ -4217,7 +4217,7 @@ void duplicateSoilCrustSample(){
   String uuidOld = getUuid(tabgroup);
   setUuid(tabgroup, "");
   disableAutoSave(tabgroup);
-
+  
   clearGpsInTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
@@ -4266,7 +4266,7 @@ void duplicateRockSample(){
   String uuidOld = getUuid(tabgroup);
   setUuid(tabgroup, "");
   disableAutoSave(tabgroup);
-
+  
   clearGpsInTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
@@ -4315,11 +4315,11 @@ void duplicatepH(){
   String uuidOld = getUuid(tabgroup);
   setUuid(tabgroup, "");
   disableAutoSave(tabgroup);
-
+  
   clearGpsInTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-
+  
   executeOnEvent(tabgroup, "copy");
 
   saveCallback = new SaveCallback() {
@@ -4351,7 +4351,7 @@ void duplicatepH(){
     onFetch(result) {
       excludeAttributes = new ArrayList();
 
-
+      
 
       duplicateTabGroup(tabgroup, null, getExtraAttributes(result), excludeAttributes, saveCallback);
     }
@@ -4362,11 +4362,11 @@ void duplicateEh(){
   String uuidOld = getUuid(tabgroup);
   setUuid(tabgroup, "");
   disableAutoSave(tabgroup);
-
+  
   clearGpsInTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-
+  
   executeOnEvent(tabgroup, "copy");
 
   saveCallback = new SaveCallback() {
@@ -4398,7 +4398,7 @@ void duplicateEh(){
     onFetch(result) {
       excludeAttributes = new ArrayList();
 
-
+      
 
       duplicateTabGroup(tabgroup, null, getExtraAttributes(result), excludeAttributes, saveCallback);
     }
@@ -4409,11 +4409,11 @@ void duplicatePhotolog(){
   String uuidOld = getUuid(tabgroup);
   setUuid(tabgroup, "");
   disableAutoSave(tabgroup);
-
+  
   clearGpsInTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-
+  
   executeOnEvent(tabgroup, "copy");
 
   saveCallback = new SaveCallback() {
@@ -4445,7 +4445,7 @@ void duplicatePhotolog(){
     onFetch(result) {
       excludeAttributes = new ArrayList();
 
-
+      
 
       duplicateTabGroup(tabgroup, null, getExtraAttributes(result), excludeAttributes, saveCallback);
     }
@@ -4456,11 +4456,11 @@ void duplicateShape(){
   String uuidOld = getUuid(tabgroup);
   setUuid(tabgroup, "");
   disableAutoSave(tabgroup);
-
+  
   clearGpsInTabGroup(tabgroup);
   populateAuthorAndTimestamp(tabgroup);
   populateEntityListsInTabGroup(tabgroup);
-
+  
   executeOnEvent(tabgroup, "copy");
 
   saveCallback = new SaveCallback() {
@@ -4492,7 +4492,7 @@ void duplicateShape(){
     onFetch(result) {
       excludeAttributes = new ArrayList();
 
-
+      
 
       duplicateTabGroup(tabgroup, null, getExtraAttributes(result), excludeAttributes, saveCallback);
     }
@@ -5104,7 +5104,7 @@ addOnEvent("Rock_Sample/Photolog/Existing_Photologs", "click", "loadEntity()");
 /*                             HANDWRITTEN LOGIC                              */
 /******************************************************************************/
 
-final int LEN_PREFIX_1  = 2;
+final int LEN_PREFIX_1  = 6;
 final int LEN_PREFIX_2  = 3;
 final int LEN_SAMPLE_ID = 4;
 
@@ -5279,7 +5279,7 @@ void search(){
 /***************************** DUPLICATE CHECKING *****************************/
 
 void checkForDuplicates() {
-  String query = "select uuid, response || ' created at: ' || datetime(createdAt, 'localtime') || ' created by: '||createdBy " +
+  String query = "select uuid, response || ' created at: ' || datetime(createdAt, 'localtime') || ' created by: '||createdBy " + 
       "from latestNonDeletedArchEntFormattedIdentifiers join createdModifiedAtBy using (uuid) " +
       "where response in ( " +
       "select response from latestNonDeletedArchEntFormattedIdentifiers group by response having count(response) > 1) " +
@@ -5311,7 +5311,7 @@ boolean digLen(String s, int n) {
 
 boolean digLen(String s, int n, int m) {
   if (s == null) return false;
-  return s.matches("\\d{1," + n + "}");
+  return s.length() >= n && s.length() <= m;;
 }
 
 boolean chrLen(String s, int n) {
@@ -5336,7 +5336,7 @@ boolean isInRange(int n, int min, int max) {
 }
 
 boolean isValidSampleType      (String s) { return !isNull(s); }
-boolean isValidSamplePrefix1   (String s) { return !isNull(s); digLen(s,1,6); } // TODO: Test
+boolean isValidSamplePrefix1   (String s) { return !isNull(s) && digLen(s,1,6); } // TODO: Test
 boolean isValidSamplePrefix2   (String s) { return !isNull(s); }
 boolean isValidSampleStartingId(String s) {
   String sId    = getFieldValue("Project/Start/Sample_Starting_ID");
@@ -5376,7 +5376,7 @@ void onClickCreateNewSample() {
   }
 
   if (!isValidSamplePrefix2(valPre2)) {
-    String head = "Invalid 'Sample Prefix 1'";
+    String head = "Invalid 'Sample Prefix 2'";
 
     String body = "";
     body += "Please enter a number into the 'Sample Prefix 2' field. 'Sample ";
@@ -5746,7 +5746,7 @@ renderpHEhPage() {
 
             createContainer("Water_Sample/pH_Eh/child2", "even", "Water_Sample/pH_Eh/container3");
             createContainer("Water_Sample/pH_Eh/Eh_Container", "even", "Water_Sample/pH_Eh/child2");
-
+            
             ph_count = 0;
             eh_count = 0;
             ArrayList ph_list = new ArrayList();
@@ -5807,7 +5807,7 @@ renderpHEhPage() {
                                         setFieldValue("Water_Sample/pH_Eh/Check_pH_" + ph_count, "1");
                                     }
                                     setFieldValue("Water_Sample/pH_Eh/pH_Value_" + ph_count, ph_value);
-
+                                    
                                     onEvent("Water_Sample/pH_Eh/Check_pH_" + ph_count, "click", "setPreferredpH(\"" + ph_id + "\", \"" + ph_value + "\", \"" + ph_time + "\", " + ph_count + ");");
                                     onEvent("Water_Sample/pH_Eh/Delete_pH_" + ph_count, "click", "deletepH(\"" + ph_id + "\");");
                                     ph_count++;
@@ -5836,7 +5836,7 @@ renderpHEhPage() {
                                 }
                                 createView("Water_Sample/pH_Eh/pH_Value_" + ph_count, createViewDef().createTextField("decimal").setAttributeType("measure").setLabel("{pH}"), "Water_Sample/pH_Eh/child1");
                                 createView("Water_Sample/pH_Eh/Eh_Value_" + eh_count, createViewDef().createTextField("decimal").setAttributeType("measure").setLabel("{Eh}"), "Water_Sample/pH_Eh/child2");
-
+                                
                                 createView("Water_Sample/pH_Eh/New_pH", createViewDef().createButton().setLabel("{Add_New_pH}"), "Water_Sample/pH_Eh/child1");
                                 createView("Water_Sample/pH_Eh/New_Eh", createViewDef().createButton().setLabel("{Add_New_Eh}"), "Water_Sample/pH_Eh/child2");
                                 onEvent("Water_Sample/pH_Eh/New_pH", "delayclick", "addNewpH(getFieldValue(\"Water_Sample/pH_Eh/pH_Value_\" + ph_count));");
@@ -6040,8 +6040,8 @@ void onFetchWaterSample() {
     if(!isNull(getFieldValue("Water_Sample/Hidden/Preferred_Eh_Time"))) {
         Date preferred_eh_time = fromFormat.parse(getFieldValue("Water_Sample/Hidden/Preferred_Eh_Time"));
         setFieldValue("Water_Sample/pH_Eh/Preferred_Eh_Time", toFormat.format(preferred_eh_time));
-    }
-    fetchOne("select uuid " +
+    }           
+    fetchOne("select uuid " + 
             "from latestnondeletedaentvalue " +
             "join latestnondeletedarchent using (uuid) " +
             "join aenttype using (aenttypeid) " +
@@ -6072,7 +6072,7 @@ void onFetchWaterSample() {
             "where a.uuid != b.uuid " +
             "and b.uuid = " + getUuid("Water_Sample") + ") ;", new FetchCallback() {
         onFetch(result) {
-            if(!isNull(result)) {
+            if(!isNull(result)) { 
                 preferred_eh = result.get(0);
             }
         }
@@ -6421,6 +6421,20 @@ void savePrefix2() {
 
 addOnEvent("Project/Start/Sample_Type", "click", "maybeSetPrefix2()");
 addOnEvent("Project",                   "leave", "savePrefix2()");
+/*********************************** ANGLES ***********************************/
+
+// TODO: Test
+void maybeSetEstimatedAngle() {
+  String holeAngle = getMenuValue("Water_Sample/Codes/Hole_Angle");
+  if ("{Vertical}".equals(holeAngle))
+    setFieldValue("Water_Sample/Codes/Estimated_Angle", "90");
+}
+
+addOnEvent(
+    "Water_Sample/Codes/Hole_Angle",
+    "click",
+    "maybeSetEstimatedAngle()"
+);
 
 
 /******************************************************************************/
