@@ -31,6 +31,7 @@
           </User>
           <Project>
             <Start>
+              <Scan_Label/>
               <Project_author/>
               <Station_Deposit/>
               <Project/>
@@ -47,7 +48,6 @@
                   <Sample_Starting_ID/>
                 </Col_3>
               </Colgroup_1>
-              <Scan_Label/>
               <Create_New_Sample/>
               <GPS_Status/>
               <Check_for_Duplicates/>
@@ -357,6 +357,81 @@
               <Timestamp/>
             </Vars>
           </Soil_Sample>
+          <Soil_Crust_Sample>
+            <Basic_Info>
+              <Colgroup_1>
+                <Col_1>
+                  <Sample_Prefix_1/>
+                </Col_1>
+                <Col_2>
+                  <Sample_Prefix_2/>
+                </Col_2>
+                <Col_3>
+                  <Sample_ID/>
+                </Col_3>
+              </Colgroup_1>
+              <Suffix/>
+              <Print_Label/>
+              <Colgroup_2>
+                <Col_1>
+                  <Timestamp_Field/>
+                </Col_1>
+                <Col_2>
+                  <Soil_Crust_Sample_author/>
+                </Col_2>
+              </Colgroup_2>
+              <Station_Deposit/>
+              <Project/>
+              <Area/>
+              <Observation_Type/>
+              <Location_Number_Group/>
+              <SRID/>
+              <Colgroup_3>
+                <Col_1>
+                  <Latitude/>
+                </Col_1>
+                <Col_2>
+                  <Longitude/>
+                </Col_2>
+              </Colgroup_3>
+              <Colgroup_4>
+                <Col_1>
+                  <Northing/>
+                </Col_1>
+                <Col_2>
+                  <Easting/>
+                </Col_2>
+                <Col_3>
+                  <Accuracy/>
+                </Col_3>
+              </Colgroup_4>
+              <Take_From_GPS_1/>
+              <Elevation_Metres_above_Sea_Level/>
+              <Depth/>
+              <Colour/>
+              <Lag/>
+              <Soil_Texture/>
+              <Geology/>
+              <Drainage/>
+              <Contamination/>
+              <Regolith_Type/>
+              <Landform/>
+              <Vegetation/>
+              <Notes/>
+              <Photos/>
+              <Photos_Button_1/>
+              <Sketches/>
+              <Sketches_Button_1/>
+              <View_Sketch/>
+            </Basic_Info>
+            <Photolog>
+              <New_Photolog/>
+              <Existing_Photologs/>
+            </Photolog>
+            <Vars>
+              <Timestamp/>
+            </Vars>
+          </Soil_Crust_Sample>
           <Rock_Sample>
             <Basic_Info>
               <Colgroup_1>
@@ -507,6 +582,9 @@
       <bind nodeset="/faims/Soil_Sample/Basic_Info/Colgroup_2/Col_1/Timestamp_Field" type="date"/>
       <bind nodeset="/faims/Soil_Sample/Basic_Info/Elevation_Metres_above_Sea_Level" type="decimal"/>
       <bind nodeset="/faims/Soil_Sample/Basic_Info/Depth" type="decimal"/>
+      <bind nodeset="/faims/Soil_Crust_Sample/Basic_Info/Colgroup_2/Col_1/Timestamp_Field" type="date"/>
+      <bind nodeset="/faims/Soil_Crust_Sample/Basic_Info/Elevation_Metres_above_Sea_Level" type="decimal"/>
+      <bind nodeset="/faims/Soil_Crust_Sample/Basic_Info/Depth" type="decimal"/>
       <bind nodeset="/faims/Rock_Sample/Basic_Info/Colgroup_2/Col_1/Timestamp_Field" type="date"/>
       <bind nodeset="/faims/Rock_Sample/Basic_Info/Elevation_Metres_above_Sea_Level" type="decimal"/>
       <bind nodeset="/faims/Rock_Sample/Measurements/Colgroup_1/Col_1/Bedding_Strike" type="decimal"/>
@@ -580,6 +658,9 @@
       <label>{Project}</label>
       <group ref="Start">
         <label>{Start}</label>
+        <trigger ref="Scan_Label">
+          <label>{Scan_Label}</label>
+        </trigger>
         <input ref="Project_author" faims_read_only="true">
           <label>{Author}</label>
         </input>
@@ -620,9 +701,6 @@
             </input>
           </group>
         </group>
-        <trigger ref="Scan_Label">
-          <label>{Scan_Label}</label>
-        </trigger>
         <trigger ref="Create_New_Sample">
           <label>{Create_New_Sample}</label>
         </trigger>
@@ -770,7 +848,7 @@
           <group ref="Col_1" faims_style="even">
             <label/>
             <input faims_attribute_name="Timestamp Field" faims_attribute_type="measure" ref="Timestamp_Field">
-              <label>{Timestamp}</label>
+              <label>{Date}</label>
             </input>
           </group>
           <group ref="Col_2" faims_style="even">
@@ -1065,7 +1143,7 @@
           <group ref="Col_1" faims_style="even">
             <label/>
             <input faims_attribute_name="Timestamp Field" faims_attribute_type="measure" ref="Timestamp_Field">
-              <label>{Timestamp}</label>
+              <label>{Date}</label>
             </input>
           </group>
           <group ref="Col_2" faims_style="even">
@@ -1441,6 +1519,229 @@
         </input>
       </group>
     </group>
+    <group ref="Soil_Crust_Sample" faims_archent_type="Soil Crust Sample">
+      <label>{Soil__Crust__Sample}</label>
+      <group ref="Basic_Info">
+        <label>{Basic_Info}</label>
+        <group ref="Colgroup_1" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Sample Prefix 1" faims_attribute_type="measure" ref="Sample_Prefix_1" faims_read_only="true">
+              <label>{Sample_Prefix_1}</label>
+            </input>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Sample Prefix 2" faims_attribute_type="measure" ref="Sample_Prefix_2" faims_read_only="true">
+              <label>{Sample_Prefix_2}</label>
+            </input>
+          </group>
+          <group ref="Col_3" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Sample ID" faims_attribute_type="measure" ref="Sample_ID" faims_read_only="true">
+              <label>{Sample_ID}</label>
+            </input>
+          </group>
+        </group>
+        <select1 faims_attribute_name="Suffix" faims_attribute_type="vocab" ref="Suffix">
+          <label>{Suffix}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <trigger ref="Print_Label">
+          <label>{Print_Label}</label>
+        </trigger>
+        <group ref="Colgroup_2" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Timestamp Field" faims_attribute_type="measure" ref="Timestamp_Field">
+              <label>{Timestamp}</label>
+            </input>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Soil Crust Sample author" faims_attribute_type="measure" ref="Soil_Crust_Sample_author" faims_read_only="true">
+              <label>{Author}</label>
+            </input>
+          </group>
+        </group>
+        <input faims_attribute_name="Station Deposit" faims_attribute_type="measure" ref="Station_Deposit" faims_read_only="true">
+          <label>{Station_Deposit}</label>
+        </input>
+        <input faims_attribute_name="Project" faims_attribute_type="measure" ref="Project" faims_read_only="true">
+          <label>{Project}</label>
+        </input>
+        <input faims_attribute_name="Area" faims_attribute_type="measure" ref="Area" faims_read_only="true">
+          <label>{Area}</label>
+        </input>
+        <select1 appearance="full" faims_attribute_name="Observation Type" faims_attribute_type="vocab" ref="Observation_Type">
+          <label>{Observation_Type}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <group ref="Location_Number_Group">
+          <label/>
+        </group>
+        <select1 faims_attribute_name="SRID" faims_attribute_type="vocab" ref="SRID">
+          <label>{SRID}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <group ref="Colgroup_3" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Latitude" faims_attribute_type="measure" ref="Latitude" faims_read_only="true">
+              <label>{Latitude}</label>
+            </input>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Longitude" faims_attribute_type="measure" ref="Longitude" faims_read_only="true">
+              <label>{Longitude}</label>
+            </input>
+          </group>
+        </group>
+        <group ref="Colgroup_4" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Northing" faims_attribute_type="measure" ref="Northing" faims_read_only="true">
+              <label>{Northing}</label>
+            </input>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Easting" faims_attribute_type="measure" ref="Easting" faims_read_only="true">
+              <label>{Easting}</label>
+            </input>
+          </group>
+          <group ref="Col_3" faims_style="even">
+            <label/>
+            <input faims_attribute_name="Accuracy" faims_attribute_type="measure" ref="Accuracy" faims_read_only="true">
+              <label>{Accuracy}</label>
+            </input>
+          </group>
+        </group>
+        <trigger ref="Take_From_GPS_1">
+          <label>{Take_From_GPS}</label>
+        </trigger>
+        <input faims_attribute_name="Elevation Metres above Sea Level" faims_attribute_type="measure" ref="Elevation_Metres_above_Sea_Level">
+          <label>{Elevation__Metres_above_Sea_Level_}</label>
+        </input>
+        <input faims_attribute_name="Depth" faims_attribute_type="measure" ref="Depth">
+          <label>{Depth}</label>
+        </input>
+        <input faims_attribute_name="Colour" faims_attribute_type="measure" ref="Colour">
+          <label>{Colour}</label>
+        </input>
+        <select1 appearance="full" faims_attribute_name="Lag" faims_attribute_type="vocab" ref="Lag">
+          <label>{Lag}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <select faims_attribute_name="Soil Texture" faims_attribute_type="vocab" ref="Soil_Texture">
+          <label>{Soil_Texture}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select>
+        <select1 faims_attribute_name="Geology" faims_attribute_type="vocab" ref="Geology">
+          <label>{Geology}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <select1 appearance="full" faims_attribute_name="Drainage" faims_attribute_type="vocab" ref="Drainage">
+          <label>{Drainage}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <select1 appearance="full" faims_attribute_name="Contamination" faims_attribute_type="vocab" ref="Contamination">
+          <label>{Contamination}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <select1 faims_attribute_name="Regolith Type" faims_attribute_type="vocab" ref="Regolith_Type">
+          <label>{Regolith_Type}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <select1 faims_attribute_name="Landform" faims_attribute_type="vocab" ref="Landform">
+          <label>{Landform}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+        <input faims_attribute_name="Vegetation" faims_attribute_type="measure" ref="Vegetation">
+          <label>{Vegetation}</label>
+        </input>
+        <input faims_attribute_name="Notes" faims_attribute_type="measure" ref="Notes">
+          <label>{Notes}</label>
+        </input>
+        <select faims_sync="true" type="camera" faims_attribute_name="Photos" faims_attribute_type="measure" ref="Photos">
+          <label>{Photos}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select>
+        <trigger ref="Photos_Button_1">
+          <label>{Photos}</label>
+        </trigger>
+        <select faims_sync="true" type="file" faims_attribute_name="Sketches" faims_attribute_type="measure" ref="Sketches">
+          <label>{Sketches}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select>
+        <trigger ref="Sketches_Button_1">
+          <label>{Sketches}</label>
+        </trigger>
+        <trigger ref="View_Sketch">
+          <label>{View_Sketch}</label>
+        </trigger>
+      </group>
+      <group ref="Photolog" faims_scrollable="false">
+        <label>{Photolog}</label>
+        <trigger ref="New_Photolog">
+          <label>{New_Photolog}</label>
+        </trigger>
+        <select1 appearance="compact" ref="Existing_Photologs">
+          <label>{Existing_Photologs}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
+      </group>
+      <group ref="Vars" faims_hidden="true">
+        <label>{Vars}</label>
+        <input faims_attribute_name="Soil Crust Sample Timestamp" faims_attribute_type="measure" ref="Timestamp">
+          <label>{Timestamp}</label>
+        </input>
+      </group>
+    </group>
     <group ref="Rock_Sample" faims_archent_type="Rock Sample">
       <label>{Rock_Sample}</label>
       <group ref="Basic_Info">
@@ -1474,7 +1775,7 @@
           <group ref="Col_1" faims_style="even">
             <label/>
             <input faims_attribute_name="Timestamp Field" faims_attribute_type="measure" ref="Timestamp_Field">
-              <label>{Timestamp}</label>
+              <label>{Date}</label>
             </input>
           </group>
           <group ref="Col_2" faims_style="even">

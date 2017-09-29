@@ -34,6 +34,11 @@ soilQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aen
 soilps = createPointStyle(10, Color.BLACK, 0.2f, 0.5f);
 showDatabaseLayer(MAP_REF, "Soil Samples", isEntity, soilQueryName, soilQuerySql, soilps, ls, pos, ts);
 
+soilQueryName = "Soil Crust Samples";
+soilQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Soil Crust Sample'";
+soilps = createPointStyle(10, Color.GRAY, 0.2f, 0.5f);
+showDatabaseLayer(MAP_REF, "Soil Crust Samples", isEntity, soilQueryName, soilQuerySql, soilps, ls, pos, ts);
+
 rockQueryName = "Rock Samples";
 rockQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Rock Sample'";
 rockps = createPointStyle(10, Color.RED, 0.2f, 0.5f);

@@ -4,6 +4,11 @@ boolean digLen(String s, int n) {
   return s.matches("\\d{" + n + "}");
 }
 
+boolean digLen(String s, int n, int m) {
+  if (s == null) return false;
+  return s.matches("\\d{1," + n + "}");
+}
+
 boolean chrLen(String s, int n) {
   if (s == null) return false;
   return s.length() == n;
@@ -26,7 +31,7 @@ boolean isInRange(int n, int min, int max) {
 }
 
 boolean isValidSampleType      (String s) { return !isNull(s); }
-boolean isValidSamplePrefix1   (String s) { return !isNull(s); }
+boolean isValidSamplePrefix1   (String s) { return !isNull(s); digLen(s,1,6); } // TODO: Test
 boolean isValidSamplePrefix2   (String s) { return !isNull(s); }
 boolean isValidSampleStartingId(String s) {
   String sId    = getFieldValue("Project/Start/Sample_Starting_ID");

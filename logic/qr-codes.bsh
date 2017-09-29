@@ -84,12 +84,11 @@ String getIgsn(String tabGroup) {
   }
 }
 
-String getSampleType(String tabGroup) {
-  String type = tabGroup.split("_")[0];
-  if ("CR".equals(getFieldValue(tabGroup + "/Basic_Info/Sample_Prefix_2")))
-    type += " (Crust)";
-
-  return type;
+String getSampleType(String tabGroup) { // TODO: Test
+  if ("Soil_Crust_Sample".equals(tabGroup))
+    return "Soil (Crust)";
+  else
+    return tabGroup.split("_")[0];
 }
 
 void printLabel() {

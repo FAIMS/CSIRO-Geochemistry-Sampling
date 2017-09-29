@@ -1,0 +1,14 @@
+/*********************************** ANGLES ***********************************/
+
+// TODO: Test
+void maybeSetEstimatedAngle() {
+  String holeAngle = getMenuValue("Water_Sample/Codes/Hole_Angle");
+  if ("{Vertical}".equals(holeAngle))
+    setFieldValue("Water_Sample/Codes/Hole_Angle", "90");
+}
+
+addOnEvent(
+    "Water_Sample/Codes/Hole_Angle",
+    "click",
+    "maybeSetEstimatedAngle()"
+);

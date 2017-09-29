@@ -62,6 +62,15 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: tab group
+        Ref:  Soil_Crust_Sample
+     */
+    public static View get_SoilCrustSample(Solo solo) {
+        String ref = "Soil_Crust_Sample";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: tab group
         Ref:  Soil_Sample
      */
     public static View get_SoilSample(Solo solo) {
@@ -218,6 +227,33 @@ public class ModuleUtil extends ModuleHelper {
      */
     public static View get_Shape_ShapeNote(Solo solo) {
         String ref = "Shape/Shape_Note";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: tab
+        Ref:  Soil_Crust_Sample/Basic_Info
+     */
+    public static View get_SoilCrustSample_BasicInfo(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: tab
+        Ref:  Soil_Crust_Sample/Photolog
+     */
+    public static View get_SoilCrustSample_Photolog(Solo solo) {
+        String ref = "Soil_Crust_Sample/Photolog";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: tab
+        Ref:  Soil_Crust_Sample/Vars
+     */
+    public static View get_SoilCrustSample_Vars(Solo solo) {
+        String ref = "Soil_Crust_Sample/Vars";
         return (android.view.View) solo.getView((Object) ref);
     }
 
@@ -501,6 +537,51 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: button
+        Ref:  Soil_Crust_Sample/Basic_Info/Photos_Button_1
+     */
+    public static View get_SoilCrustSample_BasicInfo_PhotosButton1(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Photos_Button_1";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: button
+        Ref:  Soil_Crust_Sample/Basic_Info/Print_Label
+     */
+    public static View get_SoilCrustSample_BasicInfo_PrintLabel(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Print_Label";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: button
+        Ref:  Soil_Crust_Sample/Basic_Info/Sketches_Button_1
+     */
+    public static View get_SoilCrustSample_BasicInfo_SketchesButton1(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Sketches_Button_1";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: button
+        Ref:  Soil_Crust_Sample/Basic_Info/Take_From_GPS_1
+     */
+    public static View get_SoilCrustSample_BasicInfo_TakeFromGPS1(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Take_From_GPS_1";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: button
+        Ref:  Soil_Crust_Sample/Photolog/New_Photolog
+     */
+    public static View get_SoilCrustSample_Photolog_NewPhotolog(Solo solo) {
+        String ref = "Soil_Crust_Sample/Photolog/New_Photolog";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: button
         Ref:  Soil_Sample/Basic_Info/Photos_Button_1
      */
     public static View get_SoilSample_BasicInfo_PhotosButton1(Solo solo) {
@@ -645,6 +726,15 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: camera
+        Ref:  Soil_Crust_Sample/Basic_Info/Photos
+     */
+    public static View get_SoilCrustSample_BasicInfo_Photos(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Photos";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: camera
         Ref:  Soil_Sample/Basic_Info/Photos
      */
     public static View get_SoilSample_BasicInfo_Photos(Solo solo) {
@@ -667,6 +757,15 @@ public class ModuleUtil extends ModuleHelper {
      */
     public static View get_WaterSample_BasicInfo_Photos(Solo solo) {
         String ref = "Water_Sample/Basic_Info/Photos";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: checkbox
+        Ref:  Soil_Crust_Sample/Basic_Info/Soil_Texture
+     */
+    public static View get_SoilCrustSample_BasicInfo_SoilTexture(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Soil_Texture";
         return (android.view.View) solo.getView((Object) ref);
     }
 
@@ -757,6 +856,51 @@ public class ModuleUtil extends ModuleHelper {
      */
     public static View get_RockSample_LithologicalInfo_Sorting(Solo solo) {
         String ref = "Rock_Sample/Lithological_Info/Sorting";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: dropdown
+        Ref:  Soil_Crust_Sample/Basic_Info/Geology
+     */
+    public static View get_SoilCrustSample_BasicInfo_Geology(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Geology";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: dropdown
+        Ref:  Soil_Crust_Sample/Basic_Info/Landform
+     */
+    public static View get_SoilCrustSample_BasicInfo_Landform(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Landform";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: dropdown
+        Ref:  Soil_Crust_Sample/Basic_Info/Regolith_Type
+     */
+    public static View get_SoilCrustSample_BasicInfo_RegolithType(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Regolith_Type";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: dropdown
+        Ref:  Soil_Crust_Sample/Basic_Info/SRID
+     */
+    public static View get_SoilCrustSample_BasicInfo_SRID(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/SRID";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: dropdown
+        Ref:  Soil_Crust_Sample/Basic_Info/Suffix
+     */
+    public static View get_SoilCrustSample_BasicInfo_Suffix(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Suffix";
         return (android.view.View) solo.getView((Object) ref);
     }
 
@@ -874,6 +1018,15 @@ public class ModuleUtil extends ModuleHelper {
      */
     public static View get_RockSample_LithologicalInfo_Sketches(Solo solo) {
         String ref = "Rock_Sample/Lithological_Info/Sketches";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: file
+        Ref:  Soil_Crust_Sample/Basic_Info/Sketches
+     */
+    public static View get_SoilCrustSample_BasicInfo_Sketches(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Sketches";
         return (android.view.View) solo.getView((Object) ref);
     }
 
@@ -1414,6 +1567,168 @@ public class ModuleUtil extends ModuleHelper {
      */
     public static EditText get_Shape_ShapeNote_Note(Solo solo) {
         String ref = "Shape/Shape_Note/Note";
+        return (android.widget.EditText) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Soil_Crust_Sample/Basic_Info/Accuracy
+     */
+    public static View get_SoilCrustSample_BasicInfo_Accuracy(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Accuracy";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Soil_Crust_Sample/Basic_Info/Area
+     */
+    public static View get_SoilCrustSample_BasicInfo_Area(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Area";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Soil_Crust_Sample/Basic_Info/Colour
+     */
+    public static EditText get_SoilCrustSample_BasicInfo_Colour(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Colour";
+        return (android.widget.EditText) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Soil_Crust_Sample/Basic_Info/Depth
+     */
+    public static EditText get_SoilCrustSample_BasicInfo_Depth(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Depth";
+        return (android.widget.EditText) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Soil_Crust_Sample/Basic_Info/Easting
+     */
+    public static View get_SoilCrustSample_BasicInfo_Easting(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Easting";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Soil_Crust_Sample/Basic_Info/Elevation_Metres_above_Sea_Level
+     */
+    public static EditText get_SoilCrustSample_BasicInfo_ElevationMetresaboveSeaLevel(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Elevation_Metres_above_Sea_Level";
+        return (android.widget.EditText) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Soil_Crust_Sample/Basic_Info/Latitude
+     */
+    public static View get_SoilCrustSample_BasicInfo_Latitude(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Latitude";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Soil_Crust_Sample/Basic_Info/Longitude
+     */
+    public static View get_SoilCrustSample_BasicInfo_Longitude(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Longitude";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Soil_Crust_Sample/Basic_Info/Northing
+     */
+    public static View get_SoilCrustSample_BasicInfo_Northing(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Northing";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Soil_Crust_Sample/Basic_Info/Notes
+     */
+    public static EditText get_SoilCrustSample_BasicInfo_Notes(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Notes";
+        return (android.widget.EditText) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Soil_Crust_Sample/Basic_Info/Project
+     */
+    public static View get_SoilCrustSample_BasicInfo_Project(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Project";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Soil_Crust_Sample/Basic_Info/Sample_ID
+     */
+    public static View get_SoilCrustSample_BasicInfo_SampleID(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Sample_ID";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Soil_Crust_Sample/Basic_Info/Sample_Prefix_1
+     */
+    public static View get_SoilCrustSample_BasicInfo_SamplePrefix1(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Sample_Prefix_1";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Soil_Crust_Sample/Basic_Info/Sample_Prefix_2
+     */
+    public static View get_SoilCrustSample_BasicInfo_SamplePrefix2(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Sample_Prefix_2";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Soil_Crust_Sample/Basic_Info/Station_Deposit
+     */
+    public static View get_SoilCrustSample_BasicInfo_StationDeposit(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Station_Deposit";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Soil_Crust_Sample/Basic_Info/Timestamp_Field
+     */
+    public static EditText get_SoilCrustSample_BasicInfo_TimestampField(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Timestamp_Field";
+        return (android.widget.EditText) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Soil_Crust_Sample/Basic_Info/Vegetation
+     */
+    public static EditText get_SoilCrustSample_BasicInfo_Vegetation(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Vegetation";
+        return (android.widget.EditText) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: input
+        Ref:  Soil_Crust_Sample/Vars/Timestamp
+     */
+    public static EditText get_SoilCrustSample_Vars_Timestamp(Solo solo) {
+        String ref = "Soil_Crust_Sample/Vars/Timestamp";
         return (android.widget.EditText) solo.getView((Object) ref);
     }
 
@@ -2058,6 +2373,15 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: list
+        Ref:  Soil_Crust_Sample/Photolog/Existing_Photologs
+     */
+    public static View get_SoilCrustSample_Photolog_ExistingPhotologs(Solo solo) {
+        String ref = "Soil_Crust_Sample/Photolog/Existing_Photologs";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: list
         Ref:  Soil_Sample/Photolog/Existing_Photologs
      */
     public static View get_SoilSample_Photolog_ExistingPhotologs(Solo solo) {
@@ -2107,6 +2431,42 @@ public class ModuleUtil extends ModuleHelper {
      */
     public static View get_RockSample_BasicInfo_ObservationType(Solo solo) {
         String ref = "Rock_Sample/Basic_Info/Observation_Type";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: radio
+        Ref:  Soil_Crust_Sample/Basic_Info/Contamination
+     */
+    public static View get_SoilCrustSample_BasicInfo_Contamination(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Contamination";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: radio
+        Ref:  Soil_Crust_Sample/Basic_Info/Drainage
+     */
+    public static View get_SoilCrustSample_BasicInfo_Drainage(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Drainage";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: radio
+        Ref:  Soil_Crust_Sample/Basic_Info/Lag
+     */
+    public static View get_SoilCrustSample_BasicInfo_Lag(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Lag";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: radio
+        Ref:  Soil_Crust_Sample/Basic_Info/Observation_Type
+     */
+    public static View get_SoilCrustSample_BasicInfo_ObservationType(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/Observation_Type";
         return (android.view.View) solo.getView((Object) ref);
     }
 
@@ -2188,6 +2548,15 @@ public class ModuleUtil extends ModuleHelper {
      */
     public static View get_RockSample_LithologicalInfo_ViewSketch(Solo solo) {
         String ref = "Rock_Sample/Lithological_Info/View_Sketch";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: viewfiles
+        Ref:  Soil_Crust_Sample/Basic_Info/View_Sketch
+     */
+    public static View get_SoilCrustSample_BasicInfo_ViewSketch(Solo solo) {
+        String ref = "Soil_Crust_Sample/Basic_Info/View_Sketch";
         return (android.view.View) solo.getView((Object) ref);
     }
 
