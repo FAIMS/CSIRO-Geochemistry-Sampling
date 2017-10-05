@@ -142,10 +142,10 @@ void loadEntityFromScannedIgsn() {
 
   String igsn = parseIgsnFromUrl(code);
 
-  if (!igsn.startsWith(parsePrefix1(igsn))) {
-    String head = "Please Enter 'Sample Prefix 1'";
+  if (isNull(igsn) || !igsn.startsWith(parsePrefix1(igsn))) {
+    String head = "Invalid 'Sample Prefix 1'";
     String body;
-    body  = "Please enter 'Sample Prefix 1' of the sample you are trying to ";
+    body  = "Please check 'Sample Prefix 1' of the sample you are trying to ";
     body += "scan then try again.";
 
     showWarning(head, body);
@@ -164,6 +164,7 @@ void loadEntityFromIgsn(String igsn) {
   String q = "";
   q += " SELECT   uuid";
   q += " FROM     latestnondeletedaentvalue";
+  q += " JOIN     latestnondeletedarchent USING (uuid)";
   q += " JOIN     attributekey USING (attributeid)";
   q += " WHERE    attributename IN (";
   q += "                  'Sample Prefix 1',";

@@ -1,0 +1,14 @@
+/******************************** DUPLICATION *********************************/
+
+void clearIgsnFields() {
+  String tabGroup = getDisplayedTabGroup();
+
+  clearField(tabGroup + "/Basic_Info/Sample_Prefix_1");
+  clearField(tabGroup + "/Basic_Info/Sample_Prefix_2");
+  clearField(tabGroup + "/Basic_Info/Sample_ID");
+  if ("Soil_Sample".equals(tabGroup))
+  clearField(tabGroup + "/Basic_Info/Suffix");
+}
+
+for (String sampleType : SAMPLE_TYPES)
+  addOnEvent(sampleType, "copy", "clearIgsnFields()");

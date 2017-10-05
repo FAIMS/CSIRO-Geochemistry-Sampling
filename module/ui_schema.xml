@@ -31,7 +31,6 @@
           </User>
           <Project>
             <Start>
-              <Scan_Label/>
               <Project_author/>
               <Station_Deposit/>
               <Project/>
@@ -49,6 +48,7 @@
                 </Col_3>
               </Colgroup_1>
               <Create_New_Sample/>
+              <Scan_Label/>
               <GPS_Status/>
               <Check_for_Duplicates/>
               <Duplicate_ID_List/>
@@ -659,9 +659,6 @@
       <label>{Project}</label>
       <group ref="Start">
         <label>{Start}</label>
-        <trigger ref="Scan_Label">
-          <label>{Scan_Label}</label>
-        </trigger>
         <input ref="Project_author" faims_read_only="true">
           <label>{Author}</label>
         </input>
@@ -704,6 +701,9 @@
         </group>
         <trigger ref="Create_New_Sample">
           <label>{Create_New_Sample}</label>
+        </trigger>
+        <trigger ref="Scan_Label">
+          <label>{Scan_Label}</label>
         </trigger>
         <input faims_read_only="true" ref="GPS_Status">
           <label>{GPS_Status}</label>
@@ -937,7 +937,7 @@
           <label>{Water_Table}</label>
         </input>
         <input faims_attribute_name="Sample Depth" faims_attribute_type="measure" ref="Sample_Depth">
-          <label>{Sample_Depth}</label>
+          <label>{Sample_Depth__m_}</label>
         </input>
         <input faims_attribute_name="Bottom Of Hole" faims_attribute_type="measure" ref="Bottom_Of_Hole">
           <label>{Bottom_Of_Hole}</label>
@@ -1419,7 +1419,7 @@
           <label>{Elevation__Metres_above_Sea_Level_}</label>
         </input>
         <input faims_attribute_name="Depth" faims_attribute_type="measure" ref="Depth">
-          <label>{Depth}</label>
+          <label>{Depth__m_}</label>
         </input>
         <input faims_attribute_name="Colour" faims_attribute_type="measure" ref="Colour">
           <label>{Colour}</label>
@@ -1642,7 +1642,7 @@
           <label>{Elevation__Metres_above_Sea_Level_}</label>
         </input>
         <input faims_attribute_name="Depth" faims_attribute_type="measure" ref="Depth">
-          <label>{Depth}</label>
+          <label>{Depth__m_}</label>
         </input>
         <input faims_attribute_name="Colour" faims_attribute_type="measure" ref="Colour">
           <label>{Colour}</label>

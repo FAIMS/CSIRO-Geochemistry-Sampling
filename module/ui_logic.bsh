@@ -216,7 +216,6 @@ HashMap ATTRIB_NAMES_NON_STANDARD      = new HashMap();
 REF_TO_TYPE.put("Logo/Logo_Tab/CSIRO_Logo", "webview");
 REF_TO_TYPE.put("Logo/Logo_Tab/Login", "button");
 REF_TO_TYPE.put("User/User/Users", "list");
-REF_TO_TYPE.put("Project/Start/Scan_Label", "button");
 REF_TO_TYPE.put("Project/Start/Project_author", "input");
 REF_TO_TYPE.put("Project/Start/Station_Deposit", "input");
 REF_TO_TYPE.put("Project/Start/Project", "input");
@@ -226,6 +225,7 @@ REF_TO_TYPE.put("Project/Start/Sample_Prefix_1", "input");
 REF_TO_TYPE.put("Project/Start/Sample_Prefix_2", "input");
 REF_TO_TYPE.put("Project/Start/Sample_Starting_ID", "input");
 REF_TO_TYPE.put("Project/Start/Create_New_Sample", "button");
+REF_TO_TYPE.put("Project/Start/Scan_Label", "button");
 REF_TO_TYPE.put("Project/Start/GPS_Status", "gpsdiag");
 REF_TO_TYPE.put("Project/Start/Check_for_Duplicates", "button");
 REF_TO_TYPE.put("Project/Start/Duplicate_ID_List", "list");
@@ -1735,43 +1735,43 @@ void timedPopulateCursorList(String ref, String q, int limit) {
 
 void setUpTypeHierarchy() {
   //- 
-  //  - Shape
-  //  - Soil Crust Sample
-  //    - Photolog
   //  - Water Sample
-  //    - Photolog
-  //  - Vegetation Sample
-  //    - Photolog
-  //  - Soil Sample
   //    - Photolog
   //  - Rock Sample
   //    - Photolog
+  //  - Vegetation Sample
+  //    - Photolog
+  //  - Shape
+  //  - Soil Crust Sample
+  //    - Photolog
+  //  - Soil Sample
+  //    - Photolog
 
   n0 = Tree("", 1);
-  n1 = Tree("Shape", 1);
-  n2 = Tree("Soil Crust Sample", 1);
-  n3 = Tree("Photolog", 1);
-  n4 = Tree("Water Sample", 1);
-  n5 = Tree("Photolog", 1);
-  n6 = Tree("Vegetation Sample", 1);
-  n7 = Tree("Photolog", 1);
-  n8 = Tree("Soil Sample", 1);
+  n1 = Tree("Water Sample", 1);
+  n2 = Tree("Photolog", 1);
+  n3 = Tree("Rock Sample", 1);
+  n4 = Tree("Photolog", 1);
+  n5 = Tree("Vegetation Sample", 1);
+  n6 = Tree("Photolog", 1);
+  n7 = Tree("Shape", 1);
+  n8 = Tree("Soil Crust Sample", 1);
   n9 = Tree("Photolog", 1);
-  n10 = Tree("Rock Sample", 1);
+  n10 = Tree("Soil Sample", 1);
   n11 = Tree("Photolog", 1);
 
   n0.addChild(n1);
-  n0.addChild(n2);
-  n0.addChild(n4);
-  n0.addChild(n6);
+  n0.addChild(n3);
+  n0.addChild(n5);
+  n0.addChild(n7);
   n0.addChild(n8);
   n0.addChild(n10);
 
-  n2.addChild(n3);
+  n1.addChild(n2);
 
-  n4.addChild(n5);
+  n3.addChild(n4);
 
-  n6.addChild(n7);
+  n5.addChild(n6);
 
   n8.addChild(n9);
 
@@ -6273,10 +6273,10 @@ void loadEntityFromScannedIgsn() {
 
   String igsn = parseIgsnFromUrl(code);
 
-  if (!igsn.startsWith(parsePrefix1(igsn))) {
-    String head = "Please Enter 'Sample Prefix 1'";
+  if (isNull(igsn) || !igsn.startsWith(parsePrefix1(igsn))) {
+    String head = "Invalid 'Sample Prefix 1'";
     String body;
-    body  = "Please enter 'Sample Prefix 1' of the sample you are trying to ";
+    body  = "Please check 'Sample Prefix 1' of the sample you are trying to ";
     body += "scan then try again.";
 
     showWarning(head, body);
@@ -6295,6 +6295,7 @@ void loadEntityFromIgsn(String igsn) {
   String q = "";
   q += " SELECT   uuid";
   q += " FROM     latestnondeletedaentvalue";
+  q += " JOIN     latestnondeletedarchent USING (uuid)";
   q += " JOIN     attributekey USING (attributeid)";
   q += " WHERE    attributename IN (";
   q += "                  'Sample Prefix 1',";
@@ -6436,6 +6437,45 @@ addOnEvent(
     "click",
     "maybeSetEstimatedAngle()"
 );
+/******************************** DUPLICATION *********************************/
+
+void clearIgsnFields() {
+  String tabGroup = getDisplayedTabGroup();
+
+  clearField(tabGroup + "/Basic_Info/Sample_Prefix_1");
+  clearField(tabGroup + "/Basic_Info/Sample_Prefix_2");
+  clearField(tabGroup + "/Basic_Info/Sample_ID");
+  if ("Soil_Sample".equals(tabGroup))
+  clearField(tabGroup + "/Basic_Info/Suffix");
+}
+
+for (String sampleType : SAMPLE_TYPES)
+  addOnEvent(sampleType, "copy", "clearIgsnFields()");
+/************************** UPDATE AND RESCAN LABEL ***************************/
+
+void updateScanNavigationButton() {
+  removeNavigationButton("scan");
+
+  if (SAMPLE_TYPES.contains(getDisplayedTabGroup())) {
+    addNavigationButton("scan", new ActionButtonCallback() {
+      actionOnLabel() {
+        return "Update & Rescan Label";
+      }
+      actionOn() {
+        // TODO: Side bar: create a 'Update & Rescan Label' button, golden colour (Brian insisted), that would enable adding a random label to the duplicated record. Please ask Brian for details
+        // Use:
+        //   parsePrefix1 (igsn)
+        //   parsePrefix2 (igsn)
+        //   parseSampleId(igsn)
+        //   parseSuffix  (igsn)
+        return;
+      }
+    }, "default");
+  }
+}
+
+for (String tabGroup : getTabGroups())
+  addOnEvent(tabGroup, "show", "updateScanNavigationButton()");
 
 
 /******************************************************************************/

@@ -1,0 +1,25 @@
+/************************** UPDATE AND RESCAN LABEL ***************************/
+
+void updateScanNavigationButton() {
+  removeNavigationButton("scan");
+
+  if (SAMPLE_TYPES.contains(getDisplayedTabGroup())) {
+    addNavigationButton("scan", new ActionButtonCallback() {
+      actionOnLabel() {
+        return "Update & Rescan Label";
+      }
+      actionOn() {
+        // TODO: Side bar: create a 'Update & Rescan Label' button, golden colour (Brian insisted), that would enable adding a random label to the duplicated record. Please ask Brian for details
+        // Use:
+        //   parsePrefix1 (igsn)
+        //   parsePrefix2 (igsn)
+        //   parseSampleId(igsn)
+        //   parseSuffix  (igsn)
+        return;
+      }
+    }, "default");
+  }
+}
+
+for (String tabGroup : getTabGroups())
+  addOnEvent(tabGroup, "show", "updateScanNavigationButton()");
