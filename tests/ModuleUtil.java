@@ -978,6 +978,15 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: dropdown
+        Ref:  Water_Sample/Basic_Info/Suffix
+     */
+    public static View get_WaterSample_BasicInfo_Suffix(Solo solo) {
+        String ref = "Water_Sample/Basic_Info/Suffix";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: dropdown
         Ref:  Water_Sample/Codes/Hole_Angle
      */
     public static View get_WaterSample_Codes_HoleAngle(Solo solo) {

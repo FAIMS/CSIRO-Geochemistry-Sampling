@@ -5,7 +5,7 @@ void maybeSetPrefix2() { // TODO: Test
   String refPrefix  = "Project/Start/Sample_Prefix_2";
 
   Map type2fix = new HashMap();
-  type2fix.put("{Water_Sample}",        "W-");
+  type2fix.put("{Water_Sample}",        "W");
   type2fix.put("{Vegetation_Sample}",   "V");
   type2fix.put("{Soil_Sample}",         "S");
   type2fix.put("{Soil__Crust__Sample}", "CR");

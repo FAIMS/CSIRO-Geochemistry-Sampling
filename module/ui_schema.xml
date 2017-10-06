@@ -110,6 +110,7 @@
                   <Sample_ID/>
                 </Col_3>
               </Colgroup_1>
+              <Suffix/>
               <Print_Label/>
               <Colgroup_2>
                 <Col_1>
@@ -844,6 +845,13 @@
             </input>
           </group>
         </group>
+        <select1 faims_attribute_name="Water Sample Suffix" faims_attribute_type="vocab" ref="Suffix">
+          <label>{Suffix}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
         <trigger ref="Print_Label">
           <label>{Print_Label}</label>
         </trigger>
@@ -1325,7 +1333,7 @@
             </input>
           </group>
         </group>
-        <select1 faims_attribute_name="Suffix" faims_attribute_type="vocab" ref="Suffix">
+        <select1 faims_attribute_name="Soil Sample Suffix" faims_attribute_type="vocab" ref="Suffix">
           <label>{Suffix}</label>
           <item>
             <label>Options not loaded</label>
@@ -1548,7 +1556,7 @@
             </input>
           </group>
         </group>
-        <select1 faims_attribute_name="Suffix" faims_attribute_type="vocab" ref="Suffix">
+        <select1 faims_attribute_name="Soil Crust Sample Suffix" faims_attribute_type="vocab" ref="Suffix">
           <label>{Suffix}</label>
           <item>
             <label>Options not loaded</label>

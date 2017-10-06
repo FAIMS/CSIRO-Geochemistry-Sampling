@@ -9,6 +9,11 @@ SAMPLE_TYPES.add("Soil_Crust_Sample");
 SAMPLE_TYPES.add("Vegetation_Sample");
 SAMPLE_TYPES.add("Rock_Sample");
 
+final List SUFFIX_TAB_GROUPS = new ArrayList();
+SUFFIX_TAB_GROUPS.add("Soil_Sample");
+SUFFIX_TAB_GROUPS.add("Soil_Crust_Sample");
+SUFFIX_TAB_GROUPS.add("Water_Sample");
+
 void onClickProjectNewSample(String type) {
   if ("{Water_Sample}"       .equals(type)) onClickProjectNewWaterSample();
   if ("{Vegetation_Sample}"  .equals(type)) onClickProjectNewVegetationSample();

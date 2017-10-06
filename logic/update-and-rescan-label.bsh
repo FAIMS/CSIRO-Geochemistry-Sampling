@@ -10,15 +10,17 @@ void updateScanNavigationButton() {
       }
       actionOn() {
         // TODO: Side bar: create a 'Update & Rescan Label' button, golden colour (Brian insisted), that would enable adding a random label to the duplicated record. Please ask Brian for details
-        // Use:
-        //   parsePrefix1 (igsn)
-        //   parsePrefix2 (igsn)
-        //   parseSampleId(igsn)
-        //   parseSuffix  (igsn)
-        return;
+        scanCode("updateAndRescanLabel()");
       }
     }, "default");
   }
+}
+
+void updateAndRescanLabel() {
+  String code = getLastScanContents();
+  String igsn = parseIgsnFromUrl(code);
+  SCANNED_IGSN = igsn;
+  setIgsn();
 }
 
 for (String tabGroup : getTabGroups())

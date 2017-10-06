@@ -40,13 +40,28 @@
     </property>
     <property name="Sample Prefix 2" type="measure" isIdentifier="true">
       <description></description>
-      <formatString>$2</formatString>
+      <formatString>-$2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
     <property name="Sample ID" type="measure" isIdentifier="true">
       <description></description>
-      <formatString>$2</formatString>
+      <formatString>-$2</formatString>
       <appendCharacterString> - </appendCharacterString>
+    </property>
+    <property name="Water Sample Suffix" type="vocab" isIdentifier="true">
+      <description></description>
+      <formatString>{{ if $1 then "-$1"}}</formatString>
+      <appendCharacterString> - </appendCharacterString>
+      <lookup>
+        <term>{AK}
+<description></description></term>
+        <term>{AN}
+<description></description></term>
+        <term>{CB}
+<description></description></term>
+        <term>{CT}
+<description></description></term>
+      </lookup>
     </property>
     <property name="Water Sample Timestamp" type="measure" isIdentifier="true">
       <description></description>
@@ -351,12 +366,12 @@
     </property>
     <property name="Sample Prefix 2" type="measure" isIdentifier="true">
       <description></description>
-      <formatString>$2</formatString>
+      <formatString>-$2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
     <property name="Sample ID" type="measure" isIdentifier="true">
       <description></description>
-      <formatString>$2</formatString>
+      <formatString>-$2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
     <property name="Vegetation Sample Timestamp" type="measure" isIdentifier="true">
@@ -522,17 +537,17 @@
     </property>
     <property name="Sample Prefix 2" type="measure" isIdentifier="true">
       <description></description>
-      <formatString>$2</formatString>
+      <formatString>-$2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
     <property name="Sample ID" type="measure" isIdentifier="true">
       <description></description>
-      <formatString>$2</formatString>
+      <formatString>-$2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
-    <property name="Suffix" type="vocab" isIdentifier="true">
+    <property name="Soil Sample Suffix" type="vocab" isIdentifier="true">
       <description></description>
-      <formatString>$1</formatString>
+      <formatString>{{ if $1 then "-$1"}}</formatString>
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{A}
@@ -982,17 +997,17 @@
     </property>
     <property name="Sample Prefix 2" type="measure" isIdentifier="true">
       <description></description>
-      <formatString>$2</formatString>
+      <formatString>-$2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
     <property name="Sample ID" type="measure" isIdentifier="true">
       <description></description>
-      <formatString>$2</formatString>
+      <formatString>-$2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
-    <property name="Suffix" type="vocab" isIdentifier="true">
+    <property name="Soil Crust Sample Suffix" type="vocab" isIdentifier="true">
       <description></description>
-      <formatString>$1</formatString>
+      <formatString>{{ if $1 then "-$1"}}</formatString>
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{A}
@@ -1442,12 +1457,12 @@
     </property>
     <property name="Sample Prefix 2" type="measure" isIdentifier="true">
       <description></description>
-      <formatString>$2</formatString>
+      <formatString>-$2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
     <property name="Sample ID" type="measure" isIdentifier="true">
       <description></description>
-      <formatString>$2</formatString>
+      <formatString>-$2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
     <property name="Rock Sample Timestamp" type="measure" isIdentifier="true">

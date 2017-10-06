@@ -247,6 +247,7 @@ REF_TO_TYPE.put("Project/Vars/New_Rock_Sample", "button");
 REF_TO_TYPE.put("Water_Sample/Basic_Info/Sample_Prefix_1", "input");
 REF_TO_TYPE.put("Water_Sample/Basic_Info/Sample_Prefix_2", "input");
 REF_TO_TYPE.put("Water_Sample/Basic_Info/Sample_ID", "input");
+REF_TO_TYPE.put("Water_Sample/Basic_Info/Suffix", "dropdown");
 REF_TO_TYPE.put("Water_Sample/Basic_Info/Print_Label", "button");
 REF_TO_TYPE.put("Water_Sample/Basic_Info/Timestamp_Field", "input");
 REF_TO_TYPE.put("Water_Sample/Basic_Info/Water_Sample_author", "input");
@@ -508,6 +509,7 @@ REF_TO_TYPE.put("Shape/Shape_Note", "tab");
 DATA_REFS.add("Water_Sample/Basic_Info/Sample_Prefix_1");
 DATA_REFS.add("Water_Sample/Basic_Info/Sample_Prefix_2");
 DATA_REFS.add("Water_Sample/Basic_Info/Sample_ID");
+DATA_REFS.add("Water_Sample/Basic_Info/Suffix");
 DATA_REFS.add("Water_Sample/Basic_Info/Timestamp_Field");
 DATA_REFS.add("Water_Sample/Basic_Info/Water_Sample_author");
 DATA_REFS.add("Water_Sample/Basic_Info/Station_Deposit");
@@ -756,12 +758,15 @@ TABS_AS_LIST.add("Eh/Eh");
 TABS_AS_LIST.add("Photolog/Photolog");
 TABS_AS_LIST.add("Shape/Shape_Note");
 
+ATTRIB_NAMES_NON_STANDARD.put("Water_Sample/Basic_Info/Suffix", "Water Sample Suffix");
 ATTRIB_NAMES_NON_STANDARD.put("Water_Sample/Basic_Info/Location_Number", "Water Sample Location Number");
 ATTRIB_NAMES_NON_STANDARD.put("Water_Sample/Vars/Timestamp", "Water Sample Timestamp");
 ATTRIB_NAMES_NON_STANDARD.put("Vegetation_Sample/Basic_Info/Location_Number", "Vegetation Sample Location Number");
 ATTRIB_NAMES_NON_STANDARD.put("Vegetation_Sample/Vars/Timestamp", "Vegetation Sample Timestamp");
+ATTRIB_NAMES_NON_STANDARD.put("Soil_Sample/Basic_Info/Suffix", "Soil Sample Suffix");
 ATTRIB_NAMES_NON_STANDARD.put("Soil_Sample/Basic_Info/Location_Number", "Soil Sample Location Number");
 ATTRIB_NAMES_NON_STANDARD.put("Soil_Sample/Vars/Timestamp", "Soil Sample Timestamp");
+ATTRIB_NAMES_NON_STANDARD.put("Soil_Crust_Sample/Basic_Info/Suffix", "Soil Crust Sample Suffix");
 ATTRIB_NAMES_NON_STANDARD.put("Soil_Crust_Sample/Basic_Info/Location_Number", "Soil Crust Sample Location Number");
 ATTRIB_NAMES_NON_STANDARD.put("Soil_Crust_Sample/Vars/Timestamp", "Soil Crust Sample Timestamp");
 ATTRIB_NAMES_NON_STANDARD.put("Rock_Sample/Basic_Info/Location_Number", "Rock Sample Location Number");
@@ -1735,37 +1740,37 @@ void timedPopulateCursorList(String ref, String q, int limit) {
 
 void setUpTypeHierarchy() {
   //- 
-  //  - Water Sample
-  //    - Photolog
-  //  - Rock Sample
-  //    - Photolog
-  //  - Vegetation Sample
-  //    - Photolog
-  //  - Shape
   //  - Soil Crust Sample
   //    - Photolog
   //  - Soil Sample
   //    - Photolog
+  //  - Water Sample
+  //    - Photolog
+  //  - Vegetation Sample
+  //    - Photolog
+  //  - Rock Sample
+  //    - Photolog
+  //  - Shape
 
   n0 = Tree("", 1);
-  n1 = Tree("Water Sample", 1);
+  n1 = Tree("Soil Crust Sample", 1);
   n2 = Tree("Photolog", 1);
-  n3 = Tree("Rock Sample", 1);
+  n3 = Tree("Soil Sample", 1);
   n4 = Tree("Photolog", 1);
-  n5 = Tree("Vegetation Sample", 1);
+  n5 = Tree("Water Sample", 1);
   n6 = Tree("Photolog", 1);
-  n7 = Tree("Shape", 1);
-  n8 = Tree("Soil Crust Sample", 1);
-  n9 = Tree("Photolog", 1);
-  n10 = Tree("Soil Sample", 1);
-  n11 = Tree("Photolog", 1);
+  n7 = Tree("Vegetation Sample", 1);
+  n8 = Tree("Photolog", 1);
+  n9 = Tree("Rock Sample", 1);
+  n10 = Tree("Photolog", 1);
+  n11 = Tree("Shape", 1);
 
   n0.addChild(n1);
   n0.addChild(n3);
   n0.addChild(n5);
   n0.addChild(n7);
-  n0.addChild(n8);
-  n0.addChild(n10);
+  n0.addChild(n9);
+  n0.addChild(n11);
 
   n1.addChild(n2);
 
@@ -1773,9 +1778,9 @@ void setUpTypeHierarchy() {
 
   n5.addChild(n6);
 
-  n8.addChild(n9);
+  n7.addChild(n8);
 
-  n10.addChild(n11);
+  n9.addChild(n10);
 
 
   PERF_TYPE_TREE = n0;
@@ -5115,6 +5120,11 @@ SAMPLE_TYPES.add("Soil_Crust_Sample");
 SAMPLE_TYPES.add("Vegetation_Sample");
 SAMPLE_TYPES.add("Rock_Sample");
 
+final List SUFFIX_TAB_GROUPS = new ArrayList();
+SUFFIX_TAB_GROUPS.add("Soil_Sample");
+SUFFIX_TAB_GROUPS.add("Soil_Crust_Sample");
+SUFFIX_TAB_GROUPS.add("Water_Sample");
+
 void onClickProjectNewSample(String type) {
   if ("{Water_Sample}"       .equals(type)) onClickProjectNewWaterSample();
   if ("{Vegetation_Sample}"  .equals(type)) onClickProjectNewVegetationSample();
@@ -6145,74 +6155,65 @@ String parseIgsnFromUrl(String url) {
 }
 
 String parseIgsnToLoadEntity(String igsn) {
-  return
-      parsePrefix1 (igsn)
-    + parsePrefix2 (igsn)
-    + parseSampleId(igsn)
-    + parseSuffix  (igsn);
+  String parsed =
+      parsePrefix1 (igsn) + "-"
+    + parsePrefix2 (igsn) + "-"
+    + parseSampleId(igsn);
+
+  String suffix = parseSuffix(igsn);
+  Log.d("suffix", suffix);
+  if (!isNull(suffix))
+    parsed += "-" + suffix;
+
+  return parsed;
+}
+
+String safeDashSplit(String s, int idx) {
+  String[] parts = s.split("-");
+  if (parts.length > idx) return parts[idx];
+  else                    return "";
 }
 
 String parsePrefix1(String igsn) {
-  return getFieldValue("Project/Start/Sample_Prefix_1");
+  return safeDashSplit(igsn, 0);
 }
 
 String parsePrefix2(String igsn) {
-  int lenParsePrefix1 = parsePrefix1(igsn).length();
-
-  igsn = igsn.substring(lenParsePrefix1, igsn.length());
-
-  String  prefix2 = "";
-  Pattern pattern = Pattern.compile("([^\\d]+).+");
-  Matcher matcher = pattern.matcher(igsn);
-  while (matcher.find())
-    prefix2 = matcher.group(1);
-
-  return prefix2;
+  Log.d("prefix2", safeDashSplit(igsn, 1));
+  return safeDashSplit(igsn, 1);
 }
 
 String parseSampleId(String igsn) {
-  int lenStuffBefore = (
-      parsePrefix1(igsn) +
-      parsePrefix2(igsn)
-  ).length();
-
-  igsn = igsn.substring(lenStuffBefore, igsn.length());
-
-  String  match = "";
-  Pattern pattern = Pattern.compile("([\\d]+).*");
-  Matcher matcher = pattern.matcher(igsn);
-  while (matcher.find())
-    match = matcher.group(1);
-
-  return match;
+  return safeDashSplit(igsn, 2);
 }
 
 String parseSuffix(String igsn) {
-  String possibleSuffix = igsn.substring(igsn.length() - 1);
+  String suffix = safeDashSplit(igsn, 3);
+  Log.d("suffix2", suffix);
+  Log.d("igsn", igsn);
+  suffix = "{" + suffix + "}";
 
-  boolean isSuffix = !Character.isDigit(possibleSuffix.charAt(0));
+  if ("W".equals(parsePrefix2(igsn)))
+    return getVocabId("Water Sample Suffix", suffix);
+  if ("S".equals(parsePrefix2(igsn)))
+    return getVocabId("Soil Sample Suffix",  suffix);
+  if ("CR".equals(parsePrefix2(igsn)))
+    return getVocabId("Soil Crust Sample Suffix",  suffix);
 
-  if (isSuffix) {
-    String suffix = possibleSuffix;
-    return getVocabId("Suffix", "{" + suffix + "}");
-  } else {
-    return "";
-  }
+  return "";
 }
 
 String getIgsn(String tabGroup) {
-  if ("Soil_Sample".equals(tabGroup)) {
-    return
-        getFieldValue(tabGroup + "/Basic_Info/Sample_Prefix_1")
-      + getFieldValue(tabGroup + "/Basic_Info/Sample_Prefix_2")
-      + getFieldValue(tabGroup + "/Basic_Info/Sample_ID")
-      + guessArch16nValFromKey(getMenuValue(tabGroup + "/Basic_Info/Suffix"));
-  } else {
-    return
-        getFieldValue(tabGroup + "/Basic_Info/Sample_Prefix_1")
-      + getFieldValue(tabGroup + "/Basic_Info/Sample_Prefix_2")
+  String igsn =
+        getFieldValue(tabGroup + "/Basic_Info/Sample_Prefix_1") + "-"
+      + getFieldValue(tabGroup + "/Basic_Info/Sample_Prefix_2") + "-"
       + getFieldValue(tabGroup + "/Basic_Info/Sample_ID");
+
+  if (SUFFIX_TAB_GROUPS.contains(tabGroup)) {
+    igsn += "-"
+      + guessArch16nValFromKey(getMenuValue(tabGroup + "/Basic_Info/Suffix"));
   }
+  return igsn;
 }
 
 String getSampleType(String tabGroup) { // TODO: Test
@@ -6220,6 +6221,21 @@ String getSampleType(String tabGroup) { // TODO: Test
     return "Soil (Crust)";
   else
     return tabGroup.split("_")[0];
+}
+
+String prefix2ToType(String prefix2) {
+  Map m = new HashMap();
+  m.put("W" , "{Water_Sample}"       );
+  m.put("V" , "{Vegetation_Sample}"  );
+  m.put("R" , "{Rock_Sample}"        );
+  m.put("S" , "{Soil_Sample}"        );
+  m.put("CR", "{Soil__Crust__Sample}");
+
+  return m.get(prefix2);
+}
+
+String getSampleTypeFromIgsn(String igsn) {
+  return prefix2ToType(parsePrefix2(igsn));
 }
 
 void printLabel() {
@@ -6248,7 +6264,7 @@ void printLabel() {
   cmd += "\r\n^FO460,50";
   cmd += "\r\n^BXN,6,200";
   cmd += "\r\n^FDhttp://igsn.org/{igsn}^FS";
-  cmd += "\r\n^FO15,25^A0,90,50^FD{igsn}^FS";
+  cmd += "\r\n^FO15,25^A0,90,40^FD{igsn}^FS";
   cmd += "\r\n^FO15,130^A0,60,35^TBN,120,100^FD{sample_type}^FS";
   cmd += "\r\n^FO205,130^A0,60,35^FD{timestamp}^FS";
   cmd += "\r\n^FO0,115^GB430,0,2^FS";
@@ -6270,19 +6286,7 @@ void scanRecordFromQrCode() {
 
 void loadEntityFromScannedIgsn() {
   String code = getLastScanContents();
-
   String igsn = parseIgsnFromUrl(code);
-
-  if (isNull(igsn) || !igsn.startsWith(parsePrefix1(igsn))) {
-    String head = "Invalid 'Sample Prefix 1'";
-    String body;
-    body  = "Please check 'Sample Prefix 1' of the sample you are trying to ";
-    body += "scan then try again.";
-
-    showWarning(head, body);
-    return;
-  }
-
   loadEntityFromIgsn(igsn);
 }
 
@@ -6292,20 +6296,28 @@ void loadEntityFromIgsn(String igsn) {
     return;
   }
 
-  String q = "";
-  q += " SELECT   uuid";
-  q += " FROM     latestnondeletedaentvalue";
-  q += " JOIN     latestnondeletedarchent USING (uuid)";
-  q += " JOIN     attributekey USING (attributeid)";
-  q += " WHERE    attributename IN (";
-  q += "                  'Sample Prefix 1',";
-  q += "                  'Sample Prefix 2',";
-  q += "                  'Sample ID',";
-  q += "                  'Suffix'";
-  q += "          )";
+  q  = "";
+  q += " SELECT  uuid";
+  q += " from (select uuid, measure, '-'||vocabid as vocabid";
+  q += "         FROM latestnondeletedaentvalue";
+  q += "         JOIN latestnondeletedarchent using (uuid)";
+  q += "         JOIN attributekey USING (attributeid)";
+  q += "        WHERE attributename IN (";
+  q += "                'Sample Prefix 1',";
+  q += "                'Sample Prefix 2',";
+  q += "                'Sample ID',";
+  q += "                'Water Sample Suffix',";
+  q += "                'Soil Sample Suffix',";
+  q += "                'Soil Crust Sample Suffix')";
+  q += "        ORDER BY CASE attributename ";
+  q += "                 WHEN 'Sample Prefix 1' THEN 1 ";
+  q += "                 WHEN 'Sample Prefix 2' THEN 2 ";
+  q += "                 WHEN 'Sample ID'       THEN 3";
+  q += "                 ELSE 4 END)";
   q += " GROUP BY uuid";
-  q += " HAVING   COALESCE(GROUP_CONCAT(measure, ''), '') ||";
-  q += "          COALESCE(GROUP_CONCAT(vocabid, ''), '') = %s";
+  q += " HAVING COALESCE(GROUP_CONCAT(measure, '-'),'') ||";
+  q += "        COALESCE(GROUP_CONCAT(vocabid, '-'),'') = %s;";
+
   q  = dbReplaceFirst(q, parseIgsnToLoadEntity(igsn));
   Log.d("", q);
 
@@ -6323,27 +6335,23 @@ void loadEntityFromIgsn(String igsn) {
 }
 
 void createSampleFromIgsn(String igsn) {
-  String type = getFieldValue("Project/Start/Sample_Type");
+  String type = getSampleTypeFromIgsn(igsn);
 
   String head;
   String body;
   String cbOk;
   String cbBad;
   if (isNull(type)) {
-    head  = "Cannot Find Record";
-
-    body  = "A record having that IGSN could not be found. You can create a ";
-    body += "new record by dismissing this message, selecting a type from the";
-    body += "'Sample Type' dropdown menu, then scanning the QR code again.";
+    head = "Invalid IGSN";
+    body = "The scanned IGSN does not have a valid type.";
 
     showWarning(head, body);
   } else {
     head  = "New Sample";
 
     body  = "A sample having the scanned IGSN was not found on this device. A ";
-    body += "new {sample_type} with this IGSN will be created instead. You can";
-    body += " change the type of the created sample by taping 'Cancel' and ";
-    body += "setting the 'Sample Type' field to the desired value.";
+    body += "new {sample_type} with this IGSN will be created instead. Tap ";
+    body += " 'OK' to proceed or 'Cancel' otherwise.";
 
     body  = replaceFirst(body, "{sample_type}", type);
 
@@ -6373,7 +6381,7 @@ void setIgsn() {
   setFieldValue(tabGroup + "/Basic_Info/Sample_Prefix_1", prefix1);
   setFieldValue(tabGroup + "/Basic_Info/Sample_Prefix_2", prefix2);
   setFieldValue(tabGroup + "/Basic_Info/Sample_ID",       sampleId);
-  if ("Soil_Sample".equals(tabGroup))
+  if (SUFFIX_TAB_GROUPS.contains(tabGroup))
   setFieldValue(tabGroup + "/Basic_Info/Suffix",          suffix);
 }
 
@@ -6407,7 +6415,7 @@ void maybeSetPrefix2() { // TODO: Test
   String refPrefix  = "Project/Start/Sample_Prefix_2";
 
   Map type2fix = new HashMap();
-  type2fix.put("{Water_Sample}",        "W-");
+  type2fix.put("{Water_Sample}",        "W");
   type2fix.put("{Vegetation_Sample}",   "V");
   type2fix.put("{Soil_Sample}",         "S");
   type2fix.put("{Soil__Crust__Sample}", "CR");
@@ -6463,15 +6471,17 @@ void updateScanNavigationButton() {
       }
       actionOn() {
         // TODO: Side bar: create a 'Update & Rescan Label' button, golden colour (Brian insisted), that would enable adding a random label to the duplicated record. Please ask Brian for details
-        // Use:
-        //   parsePrefix1 (igsn)
-        //   parsePrefix2 (igsn)
-        //   parseSampleId(igsn)
-        //   parseSuffix  (igsn)
-        return;
+        scanCode("updateAndRescanLabel()");
       }
     }, "default");
   }
+}
+
+void updateAndRescanLabel() {
+  String code = getLastScanContents();
+  String igsn = parseIgsnFromUrl(code);
+  SCANNED_IGSN = igsn;
+  setIgsn();
 }
 
 for (String tabGroup : getTabGroups())

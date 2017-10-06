@@ -139,9 +139,8 @@ void initFieldValues() {
 }
 
 {
-  setFieldValue("Project/Start/Sample_Prefix_1", "aa");
   updateDisplayedTabGroup("Water_Sample");
-  SCANNED_IGSN = "aaBBB1111";
+  SCANNED_IGSN = "aa-BBB-1111";
   setIgsn();
   assert(getFieldValue("Water_Sample/Basic_Info/Sample_Prefix_1").equals("aa"));
   assert(getFieldValue("Water_Sample/Basic_Info/Sample_Prefix_2").equals("BBB"));
@@ -150,8 +149,9 @@ void initFieldValues() {
 
 {
   setFieldValue("Project/Start/Sample_Prefix_1", "CSMAST");
-  String igsn = "CSMASTW-AN0004B";
+  String igsn = "CSMAST-W-0004-AN";
   assert("CSMAST".equals(parsePrefix1 (igsn)));
-  assert("W-AN"  .equals(parsePrefix2 (igsn)));
+  assert("W"     .equals(parsePrefix2 (igsn)));
   assert("0004"  .equals(parseSampleId(igsn)));
+  assert(parseSuffix(igsn) == null);
 }
