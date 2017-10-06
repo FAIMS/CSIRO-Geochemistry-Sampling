@@ -8,7 +8,7 @@ This module was co-developed by Dr. Jens Klump and Dr. Nathan Reid at Mineral Re
 Development of this module was funded by CSIRO Mineral Resources, Kensington, WA
 
 ## Date of release:
-March 2014
+March 2014, updated 2016
 
 ## FAIMS Mobile version
 FAIMS **v2.2** (Android 5+)
@@ -37,3 +37,24 @@ This module is part of the **FAIMS Demo library** on our publicly accessible Dem
 For more details about the **Capricorn Distal Footprints project**, please visit http://www.sief.org.au/FundingActivities/RP/Distal.html. If you have any questions about the CSIRO Geochemistry sampling, contact nathan.reid@csiro.au.
 
 If you have any questions about the module, please contact the FAIMS team at **enquiries@fedarch.org** and we will get back to you within one business day.
+
+## Screenshots:
+
+<p align="left">
+  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-105946.png" width="250"/>
+  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-110105.png" width="250"/>
+  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-110117.png" width="250"/>
+</p>
+
+<p align="left">
+  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-110130.png" width="250"/>
+  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-110226.png" width="250"/>
+  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-110231.png" width="250"/>
+</p>
+
+<p align="left">
+  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-110235.png" width="250"/>
+  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-110241.png" width="250"/>
+  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-110355.png" width="250"/>
+</p>
+
