@@ -5,7 +5,20 @@ eh_count = 0;
 preferred_ph = null;
 preferred_eh = null;
 
-onEvent("Water_Sample/pH_Eh", "show", "renderpHEhPage();");
+addOnEvent("Water_Sample/pH_Eh", "show", "renderpHEhPage();");
+addOnEvent("Water_Sample", "create", "resetXhPreferences()");
+addOnEvent("Water_Sample", "leave", "resetXhCounts()");
+addOnEvent("Water_Sample", "fetch", "onFetchWaterSample()");
+
+void resetXhCounts() {
+  ph_count = 0;
+  eh_count = 0;
+}
+
+void resetXhPreferences() {
+  preferred_ph = null;
+  preferred_eh = null;
+}
 
 /*********************************************************************************\
  *                                                                               *
@@ -153,6 +166,7 @@ addNewpH(String ph_value) {
     attributes.add(createEntityAttribute("pH", null, null, ph_value, null));
     attributes.add(createEntityAttribute("Time", null, null, ph_time, null));
 
+    triggerAutoSave();
     saveArchEnt(null, "pH", null, attributes, new SaveCallback() {
         onSave(ph_id, newRecord) {
             saveEntitiesToRel("Water Sample pH", getUuid("Water_Sample"), ph_id);
@@ -192,6 +206,7 @@ addNewEh(String eh_value) {
     attributes.add(createEntityAttribute("Eh", null, null, eh_value, null));
     attributes.add(createEntityAttribute("Time", null, null, eh_time, null));
 
+    triggerAutoSave();
     saveArchEnt(null, "Eh", null, attributes, new SaveCallback() {
         onSave(eh_id, newRecord) {
             saveEntitiesToRel("Water Sample Eh", getUuid("Water_Sample"), eh_id);
@@ -222,6 +237,7 @@ addNewEh(String eh_value) {
 
 /* Sets the preferred pH and time for the given pH ID and saves to the database. */
 setPreferredpH(String ph_id, String ph_value, String ph_time, int index) {
+    if(ph_count == 0) return;
     if(ph_id == preferred_ph) return;
     List attributes = createAttributeList();
     attributes.add(createEntityAttribute("Preferred", null, null, null, null));
@@ -246,6 +262,7 @@ setPreferredpH(String ph_id, String ph_value, String ph_time, int index) {
 
 /* Sets the preferred Eh and time for the given Eh ID and saves to the database. */
 setPreferredEh(String eh_id, String eh_value, String eh_time, int index) {
+    if(eh_count == 0) return;
     if(eh_id == preferred_eh) return;
     List attributes = createAttributeList();
     attributes.add(createEntityAttribute("Preferred", null, null, null, null));
@@ -311,6 +328,8 @@ reallyDeleteEh(String eh_id) {
 }
 
 void onFetchWaterSample() {
+    resetXhPreferences();
+
     fromFormat = new java.text.SimpleDateFormat("d-MMM-yy HH:mm:ss z");
     toFormat = new java.text.SimpleDateFormat("HH:mm");
     if(!isNull(getFieldValue("Water_Sample/Hidden/Preferred_pH_Time"))) {
@@ -358,5 +377,3 @@ void onFetchWaterSample() {
         }
     });
 }
-
-addOnEvent("Water_Sample", "fetch", "onFetchWaterSample()");
