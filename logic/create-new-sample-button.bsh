@@ -31,7 +31,7 @@ boolean isInRange(int n, int min, int max) {
 }
 
 boolean isValidSampleType      (String s) { return !isNull(s); }
-boolean isValidSamplePrefix1   (String s) { return !isNull(s) && digLen(s,1,6); } // TODO: Test
+boolean isValidSamplePrefix1   (String s) { return !isNull(s) && digLen(s,1,6); }
 boolean isValidSamplePrefix2   (String s) { return !isNull(s); }
 boolean isValidSampleStartingId(String s) {
   String sId    = getFieldValue("Project/Start/Sample_Starting_ID");

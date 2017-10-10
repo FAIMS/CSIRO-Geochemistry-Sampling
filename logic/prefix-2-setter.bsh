@@ -1,6 +1,6 @@
 /****************************** PREFIX 2 SETTER *******************************/
 
-void maybeSetPrefix2() { // TODO: Test
+void maybeSetPrefix2() {
   String sampleType = getFieldValue("Project/Start/Sample_Type");
   String refPrefix  = "Project/Start/Sample_Prefix_2";
 

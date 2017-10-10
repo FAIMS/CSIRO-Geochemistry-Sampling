@@ -75,7 +75,7 @@ String getIgsn(String tabGroup) {
   return igsn;
 }
 
-String getSampleType(String tabGroup) { // TODO: Test
+String getSampleType(String tabGroup) {
   if ("Soil_Crust_Sample".equals(tabGroup))
     return "Soil (Crust)";
   else

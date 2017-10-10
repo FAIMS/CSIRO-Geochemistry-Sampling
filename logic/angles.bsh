@@ -1,6 +1,5 @@
 /*********************************** ANGLES ***********************************/
 
-// TODO: Test
 void maybeSetEstimatedAngle() {
   String holeAngle = getMenuValue("Water_Sample/Codes/Hole_Angle");
   if ("{Vertical}".equals(holeAngle))

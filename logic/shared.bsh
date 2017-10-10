@@ -19,5 +19,5 @@ void onClickProjectNewSample(String type) {
   if ("{Vegetation_Sample}"  .equals(type)) onClickProjectNewVegetationSample();
   if ("{Rock_Sample}"        .equals(type)) onClickProjectNewRockSample();
   if ("{Soil_Sample}"        .equals(type)) onClickProjectNewSoilSample();
-  if ("{Soil__Crust__Sample}".equals(type)) onClickProjectNewSoilCrustSample(); // TODO: Test
+  if ("{Soil__Crust__Sample}".equals(type)) onClickProjectNewSoilCrustSample();
 }
