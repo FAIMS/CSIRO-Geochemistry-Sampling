@@ -51,6 +51,7 @@ void search(){
                        "                  FROM latestNonDeletedArchEntIdentifiers " +
                        "                 WHERE measure LIKE '{term}%'  " +
                        "                   AND ( aenttypename LIKE '{type}' OR '' = '{type}' ) " +
+                       "                   AND ( aenttypename NOT IN ('pH', 'Eh'))" +
                        "                   AND ( userid = {user} OR -1 = {user}) " +
                        "                ) " +
                        " ORDER BY response " +
