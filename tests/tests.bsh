@@ -155,3 +155,54 @@ void initFieldValues() {
   assert("0004"  .equals(parseSampleId(igsn)));
   assert(parseSuffix(igsn) == null);
 }
+
+Callback1(Object callfront) {
+  onFetch(result) {
+    print("sup1");
+    if (callfront != null)
+      callfront.onFetch(null);
+  }
+  return this;
+}
+
+Callback2(Object callfront) {
+  onFetch(result) {
+    print("sup2");
+    if (callfront != null)
+      callfront.onFetch(null);
+  }
+  return this;
+}
+
+orderCallbacks(callfront) {
+  if (callfront.isOrdered != void && callfront.isOrdered == true)
+    return callfront;
+
+  // Essentially reverses a linked list
+  currNode = callfront;
+  nextNode = null;
+  prevNode = null;
+
+  while(currNode!=null){
+    nextNode = currNode.callfront;
+    currNode.callfront = prevNode;
+    prevNode = currNode;
+    currNode = nextNode;
+  }
+
+  prevNode.isOrdered = true;
+  return prevNode;
+}
+
+executeCallbacks(callfront) {
+  //callfront = orderCallbacks(callfront);
+  callfront.onFetch(null);
+}
+
+cb = Callback1(null);
+cb = Callback2(cb);
+cb = orderCallbacks(cb);
+cb = orderCallbacks(cb);
+executeCallbacks(cb);
+executeCallbacks(cb);
+executeCallbacks(cb);

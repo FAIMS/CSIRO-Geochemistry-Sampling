@@ -46,9 +46,9 @@ void search(){
   String user = getFieldValue(refSelectUser);
   if (isNull(user)) return;
   String searchQuery = "SELECT uuid, response " +
-                       "  FROM latestNonDeletedArchEntFormattedIdentifiers  " +
+                       "  FROM materialisedlatestNonDeletedArchEntFormattedIdentifiers  " +
                        " WHERE uuid in (SELECT uuid " +
-                       "                  FROM latestNonDeletedArchEntIdentifiers " +
+                       "                  FROM materialisedlatestNonDeletedArchEntIdentifiers " +
                        "                 WHERE measure LIKE '{term}%'  " +
                        "                   AND ( aenttypename LIKE '{type}' OR '' = '{type}' ) " +
                        "                   AND ( userid = {user} OR -1 = {user}) " +

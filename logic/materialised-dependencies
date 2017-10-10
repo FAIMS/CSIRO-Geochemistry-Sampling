@@ -1,0 +1,27 @@
+Materialised tables:
+  igsnQuery
+  materialisedLatestNondeletedAentValueArchentAttributekey
+  materialisedlatestNonDeletedArchEntFormattedIdentifiers
+  materialisedlatestNonDeletedArchEntIdentifiers
+  materialisedlatestnondeletedaentvalue
+  materialisedparentchild
+  materialisedrelationshiprelntype
+
+Dependent fns:
+  - populateMenuWithEntities
+    - materialisedlatestNonDeletedArchEntFormattedIdentifiers
+      - materialisedlatestNonDeletedArchEntIdentifiers (1)
+    - materialisedlatestNonDeletedArchEntIdentifiers (1)
+    - materialisedparentchild
+    - materialisedrelationshiprelntype
+  - loadEntityFromIgsn
+    - igsnQuery
+      - MaterialisedLatestNondeletedAentValueArchentAttributekey
+        - materialisedlatestnondeletedaentvalue
+  - search
+    - materialisedlatestNonDeletedArchEntFormattedIdentifiers
+      - materialisedlatestNonDeletedArchEntIdentifiers (1)
+    - materialisedlatestNonDeletedArchEntIdentifiers (1)
+  - checkForDuplicates
+    - materialisedlatestNonDeletedArchEntFormattedIdentifiers
+      - materialisedlatestNonDeletedArchEntIdentifiers

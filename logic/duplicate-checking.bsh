@@ -1,11 +1,12 @@
 /***************************** DUPLICATE CHECKING *****************************/
 
 void checkForDuplicates() {
-  String query = "select uuid, response || ' created at: ' || datetime(createdAt, 'localtime') || ' created by: '||createdBy " + 
-      "from latestNonDeletedArchEntFormattedIdentifiers join createdModifiedAtBy using (uuid) " +
-      "where response in ( " +
-      "select response from latestNonDeletedArchEntFormattedIdentifiers group by response having count(response) > 1) " +
-      " and aenttypename like '%Sample';";
+  String query = " select uuid, response || ' created at: ' || datetime(createdAt, 'localtime') || ' created by: '||createdBy";
+                 " from materialisedlatestNonDeletedArchEntFormattedIdentifiers join createdModifiedAtBy using (uuid)";
+                 " where response in (";
+                 " select response from materialisedlatestNonDeletedArchEntFormattedIdentifiers group by response having count(response) > 1)";
+                 "  and aenttypename like '%Sample'";
+
   fetchAll(query, new FetchCallback() {
     onFetch(result) {
       if (isNull(result)) {

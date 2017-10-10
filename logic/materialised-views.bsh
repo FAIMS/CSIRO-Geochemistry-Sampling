@@ -1,0 +1,387 @@
+/***************************** MATERIALISED VIEWS *****************************/
+void updateRelnCount(Object callback) {
+  q = "REPLACE into localsettings (key, value) select 'relationshipCount', count(*) from relationship;";
+
+  fetchAll(q, callback);
+}
+
+void updateAentValueCount(Object callback) {
+  q = "REPLACE into localsettings (key, value) select 'aentvalueCount', count(*) from aentvalue;
+";
+
+  fetchAll(q, callback);
+}
+
+void fetchOnTableFreshness(String table, Object cbStale, Object cbFresh) {
+  Callback() {
+    onFetch(result) {
+      boolean isFresh = result.get(0).get(0).equals("0");
+
+      if (isFresh) if (cbFresh != null) cbFresh.onFetch(result);
+      else         if (cbStale != null) cbStale.onFetch(result);
+    }
+    return this;
+  }
+
+  q  = " select thisCnt - prevCnt != 0";
+  q += " from (select value as prevCnt from localsettings where key = %sCount),";
+  q += "      (SELECT count(*) as thisCnt from %s);";
+  q  = dbReplaceFirst(q, table);
+  q  = dbReplaceFirst(q, table);
+
+  fetchAll(q, Callback());
+}
+
+void fetchOnRelnFreshness(Object cbStale, Object cbFresh) {
+  UpdateRelnCount() {
+    onFetch(result) {
+      updateRelnCount(cbStale);
+    }
+    return this;
+  }
+
+  fetchOnTableFreshness("relationship", UpdateRelnCount(), cbFresh);
+}
+
+void fetchOnAentFreshness(Object cbStale, Object cbFresh) {
+  UpdateAentValueCount() {
+    onFetch(result) {
+      updateAentValueCount(cbStale);
+    }
+    return this;
+  }
+  fetchOnTableFreshness("aentvalue", updateAentValueCount, cbFresh);
+}
+
+/* Executes the list of `queries` in order they appear in the list.
+ */
+void chainQueries(Object[] queries, Object callback) {
+  chainQueries(queries, null);
+}
+
+void chainQueries(Object[] queries, Object callback) {
+  List queryList = Arrays.asList(queries);
+  chainQueries(queryList, callback);
+}
+
+void chainQueries(List queries, Object callback) {
+  chainedCallback = callback;
+  for (int i = queries.size() - 1; i >= 0; i--) {
+    String q = queries.get(i);
+
+    ChainedCallback(String q, Object chainedCallback) {
+      onFetch(result) {
+        fetchAll(q, chainedCallback);
+      }
+      return this;
+    }
+
+    chainedCallback = ChainedCallback(q, chainedCallback);
+  }
+
+  if (chainedCallback != null)
+    chainedCallback.onFetch(null);
+}
+
+void makeMaterialisedTable(
+    String tableName,
+    String materialisedTableName,
+    Object callback
+) {
+  q1 = "drop table if exists " + materialisedTableName;
+  q2 = "create table %s as select * from %s";
+  q2 = replaceFirst(materialisedTableName, tableName);
+
+  chainQueries(new Object[] {q1, q2}, callback);
+}
+
+void makeMaterialisedParentChild(Object callback) {
+  makeMaterialisedTable(
+      "materialisedparentchild", "parentchild", callback
+  );
+}
+
+void makeMaterialisedRelationshipRelnType(Object callback) {
+  makeMaterialisedTable(
+      "materialisedrelationshiprelntype",
+      "latestnondeletedrelationship JOIN relntype USING (relntypeid)",
+      callback
+  );
+}
+
+void makeMaterialisedLatestNondeletedAentValue(Object callback) {
+  makeMaterialisedTable(
+      "materialisedlatestnondeletedaentvalue",
+      "latestnondeletedaentvalue",
+      callback
+  );
+}
+
+void makeMaterialisedlatestNonDeletedArchEntIdentifiers(Object callback) {
+  makeMaterialisedTable(
+      "materialisedlatestNonDeletedArchEntIdentifiers",
+      "latestNonDeletedArchEntIdentifiers",
+      callback
+  );
+}
+
+void makeMaterialisedLatestNondeletedAentValueArchentAttributekey(
+    Object callback
+) {
+  makeMaterialisedTable(
+      "MaterialisedLatestNondeletedAentValueArchentAttributekey",
+      " materialisedlatestnondeletedaentvalue" +
+      " JOIN latestnondeletedarchent using (uuid)" +
+      " JOIN attributekey USING (attributeid)",
+      callback
+  );
+}
+
+void makeMaterialisedIgsnQuery(Object callback) {
+  q1  = "drop table if exists igsnQuery";
+  q2  = " create table igsnQuery as";
+  q2 += " select uuid, coalesce(GROUP_CONCAT(measure, '-'),'') || coalesce(GROUP_CONCAT(vocabid, '-'),'') as igsn";
+  q2 += " from (select uuid, measure, '-'||vocabid as vocabid";
+  q2 += "         FROM MaterialisedLatestNondeletedAentValueArchentAttributekey";
+  q2 += "        WHERE attributename IN (";
+  q2 += "                'Sample Prefix 1',";
+  q2 += "                'Sample Prefix 2',";
+  q2 += "                'Sample ID',";
+  q2 += "                'Water Sample Suffix',";
+  q2 += "                'Soil Sample Suffix',";
+  q2 += "                'Soil Crust Sample Suffix')";
+  q2 += "        order by case attributename ";
+  q2 += "                 when 'Sample Prefix 1' then 1 ";
+  q2 += "                 when 'Sample Prefix 2' then 2 ";
+  q2 += "                 when 'Sample ID'      then 3";
+  q2 += "                 else 4 END)";
+  q2 += " group by uuid";
+
+  chainQueries(new Object[] {q1, q2}, callback);
+}
+
+void makeMaterialisedlatestNonDeletedArchEntFormattedIdentifiers(
+    Object callback
+) {
+  q1  = "drop table if exists materialisedlatestNonDeletedArchEntFormattedIdentifiers";
+  q2  = " create table if not exists materialisedlatestNonDeletedArchEntFormattedIdentifiers as";
+  q2 += "   select uuid, aenttypeid, aenttypename, group_concat(response, '') as response, null as deleted";
+  q2 += "   from (";
+  q2 += "     select uuid, aenttypeid, aenttypename, group_concat(format(formatstring, vocabname, measure, freetext, certainty), appendcharacterstring) as response, null as deleted, aentcountorder";
+  q2 += "     from materialisedlatestNonDeletedArchEntIdentifiers";
+  q2 += "     group by uuid, attributeid";
+  q2 += "     having response is not null";
+  q2 += "     order by uuid, aentcountorder)";
+  q2 += "   group by uuid";
+  q2 += "   order by uuid;";
+
+  chainQueries(new Object[] {q1, q2}, callback);
+}
+
+void updateMaterialisedParentChild(Object callback) {
+  makeMaterialisedParentChild(callback);
+}
+
+void updateMaterialisedRelationshipRelnType(Object callback) {
+  makeMaterialisedRelationshipRelnType(callback);
+}
+
+void updateMaterialisedLatestNondeletedAentValue(Object callback) {
+  makeMaterialisedLatestNondeletedAentValue(callback);
+}
+
+void updateMaterialisedlatestNonDeletedArchEntIdentifiers(Object callback) {
+  makeMaterialisedlatestNonDeletedArchEntIdentifiers(callback);
+}
+
+void updateMaterialisedLatestNondeletedAentValueArchentAttributekey(
+    Object callback
+) {
+  MakeMaterialisedLatestNondeletedAentValueArchentAttributekey(callback) {
+    onFetch(result) {
+      makeMaterialisedLatestNondeletedAentValueArchentAttributekey(callback);
+    }
+    return this;
+  }
+  updateMaterialisedLatestNondeletedAentValue(
+      MakeMaterialisedLatestNondeletedAentValueArchentAttributekey(callback);
+  );
+}
+
+void updateMaterialisedIgsnQuery(Object callback) {
+  MakeMaterialisedIgsnQuery(callback) {
+    onFetch(result) {
+      makeMaterialisedIgsnQuery(callback);
+    }
+    return this;
+  }
+  updateMaterialisedLatestNondeletedAentValueArchentAttributekey(
+      MakeMaterialisedIgsnQuery(callback);
+  );
+}
+
+void updateMaterialisedlatestNonDeletedArchEntFormattedIdentifiers(
+    Object callback
+) {
+  MakeMaterialisedlatestNonDeletedArchEntFormattedIdentifiers(callback) {
+    onFetch(result) {
+      makeMaterialisedlatestNonDeletedArchEntFormattedIdentifiers(callback);
+    }
+    return this;
+  }
+  updateMaterialisedlatestNonDeletedArchEntIdentifiers(
+      MakeMaterialisedlatestNonDeletedArchEntFormattedIdentifiers(callback);
+  );
+}
+
+void maybeUpdateMaterialisedParentChild(Object callback) {
+  UpdateMaterialisedParentChild() {
+    onFetch(result) {
+      updateMaterialisedParentChild(callback);
+    }
+    return this;
+  }
+
+  fetchOnRelnFreshness(UpdateMaterialisedParentChild(), callback);
+}
+
+void maybeUpdateMaterialisedRelationshipRelnType(Object callback) {
+  UpdateMaterialisedRelationshipRelnType() {
+    onFetch(result) {
+      updateMaterialisedRelationshipRelnType(callback);
+    }
+    return this;
+  }
+
+  fetchOnRelnFreshness(UpdateMaterialisedRelationshipRelnType(), callback);
+}
+
+void maybeUpdateMaterialisedLatestNondeletedAentValue(Object callback) {
+  UpdateMaterialisedLatestNondeletedAentValue() {
+    onFetch(result) {
+      updateMaterialisedLatestNondeletedAentValue(callback);
+    }
+    return this;
+  }
+
+  fetchOnAentFreshness(UpdateMaterialisedLatestNondeletedAentValue(), callback);
+}
+
+void maybeUpdateMaterialisedlatestNonDeletedArchEntIdentifiers(
+    Object callback
+) {
+  UpdateMaterialisedlatestNonDeletedArchEntIdentifiers() {
+    onFetch(result) {
+      updateMaterialisedlatestNonDeletedArchEntIdentifiers(callback);
+    }
+    return this;
+  }
+
+  fetchOnAentFreshness(
+      UpdateMaterialisedlatestNonDeletedArchEntIdentifiers(),
+      callback
+  );
+}
+
+void maybeUpdateMaterialisedLatestNondeletedAentValueArchentAttributekey(
+    Object callback
+) {
+  UpdateMaterialisedLatestNondeletedAentValueArchentAttributekey() {
+    onFetch(result) {
+      updateMaterialisedLatestNondeletedAentValueArchentAttributekey(callback);
+    }
+    return this;
+  }
+
+  fetchOnAentFreshness(
+      UpdateMaterialisedLatestNondeletedAentValueArchentAttributekey(),
+      callback
+  );
+}
+
+void maybeUpdateMaterialisedIgsnQuery(Object callback) {
+  UpdateMaterialisedIgsnQuery() {
+    onFetch(result) {
+      updateMaterialisedIgsnQuery(callback);
+    }
+    return this;
+  }
+
+  fetchOnAentFreshness(UpdateMaterialisedIgsnQuery(), callback);
+}
+
+void maybeUpdateMaterialisedlatestNonDeletedArchEntFormattedIdentifiers(
+    Object callback
+) {
+  UpdateMaterialisedlatestNonDeletedArchEntFormattedIdentifiers() {
+    onFetch(result) {
+      updateMaterialisedlatestNonDeletedArchEntFormattedIdentifiers(callback);
+    }
+    return this;
+  }
+
+  fetchOnAentFreshness(
+      UpdateMaterialisedlatestNonDeletedArchEntFormattedIdentifiers(),
+      callback
+  );
+}
+
+void populateMenuWithEntities (
+  String ref,
+  String parentUuid,
+  String entType,
+  String relType
+) {
+  String viewType = getType(ref);
+
+  String limit;
+  switch (viewType) {
+    case "dropdown": limit = "";                   break;
+    case "list":     limit = " LIMIT ? OFFSET ? "; break;
+  }
+
+  // TODO: Make me work
+  String getChildEntitiesQ = "" +
+    "SELECT childuuid, response " +
+    "  FROM (select childuuid, createdat" +
+    "          from (select childuuid, createdat, relationshipid" +
+    "                    from materialisedparentchild" +
+    "                   where parentuuid = '" + parentUuid + "' " +
+    "                   and (childaenttypename = '"+entType+"')" +
+    "                   order by createdat           " +
+    "                   )" +
+    "          JOIN (SELECT relationshipid   " +
+    "                  FROM materialisedrelationshiprelntype " +
+    "                 WHERE relntypename = '"+relType+"') USING (relationshipid)" +
+    "          order by createdat desc" +
+    limit +
+    "        )  " +
+    "  JOIN materialisedlatestNonDeletedArchEntFormattedIdentifiers ON (childuuid = uuid)   " +
+    "  order by createdat desc";
+
+  // TODO: Make me work
+  String getEntitiesQ = "" +
+    "SELECT uuid, response
+    " FROM materialisedlatestNonDeletedArchEntFormattedIdentifiers
+    "WHERE uuid in (SELECT uuid
+    "                 FROM materialisedlatestNonDeletedArchEntIdentifiers
+    "                 WHERE aenttypename = '"+entType+"' OR '"+entType+"' = '' " +
+    "               )  "+
+    " ORDER BY response " +
+    limit;
+
+  FetchCallback cbPopulateDropDown = new FetchCallback() {
+    onFetch(result) {
+      populateDropDown(ref, result, true);
+    }
+  };
+
+  String q;
+  if (relType.equals("")) q = getEntitiesQ;
+  else                    q = getChildEntitiesQ;
+
+  switch (viewType) {
+    case "dropdown": fetchAll(q, cbPopulateDropDown); break;
+    case "list":     populateCursorList(ref, q, 25); break;
+  }
+}

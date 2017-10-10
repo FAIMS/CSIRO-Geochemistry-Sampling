@@ -360,3 +360,12 @@ void onFetchWaterSample() {
 }
 
 addOnEvent("Water_Sample", "fetch", "onFetchWaterSample()");
+
+void clearPhEh() {
+  clearField("Water_Sample/pH_Eh/Preferred_Eh");
+  clearField("Water_Sample/pH_Eh/Preferred_Eh_Time");
+  clearField("Water_Sample/pH_Eh/Preferred_pH");
+  clearField("Water_Sample/pH_Eh/Preferred_pH_Time");
+}
+
+addOnEvent("Water_Sample", "create", "clearPhEh()");

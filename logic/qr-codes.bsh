@@ -155,28 +155,9 @@ void loadEntityFromIgsn(String igsn) {
     return;
   }
 
-  q  = "";
-  q += " SELECT  uuid";
-  q += " from (select uuid, measure, '-'||vocabid as vocabid";
-  q += "         FROM latestnondeletedaentvalue";
-  q += "         JOIN latestnondeletedarchent using (uuid)";
-  q += "         JOIN attributekey USING (attributeid)";
-  q += "        WHERE attributename IN (";
-  q += "                'Sample Prefix 1',";
-  q += "                'Sample Prefix 2',";
-  q += "                'Sample ID',";
-  q += "                'Water Sample Suffix',";
-  q += "                'Soil Sample Suffix',";
-  q += "                'Soil Crust Sample Suffix')";
-  q += "        ORDER BY CASE attributename ";
-  q += "                 WHEN 'Sample Prefix 1' THEN 1 ";
-  q += "                 WHEN 'Sample Prefix 2' THEN 2 ";
-  q += "                 WHEN 'Sample ID'       THEN 3";
-  q += "                 ELSE 4 END)";
-  q += " GROUP BY uuid";
-  q += " HAVING COALESCE(GROUP_CONCAT(measure, '-'),'') ||";
-  q += "        COALESCE(GROUP_CONCAT(vocabid, '-'),'') = %s;";
-
+  q += " SELECT uuid";
+  q += "   FROM igsnQuery"; // TODO: Gotta populate this table, fam
+  q += "  where igsn = %s";
   q  = dbReplaceFirst(q, parseIgsnToLoadEntity(igsn));
   Log.d("", q);
 
