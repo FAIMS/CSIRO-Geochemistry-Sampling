@@ -65,7 +65,7 @@
     </property>
     <property name="Water Sample Timestamp" type="measure" isIdentifier="true">
       <description></description>
-      <formatString> - $2</formatString>
+      <formatString>-$2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
     <property name="Timestamp Field" type="measure">
@@ -376,7 +376,7 @@
     </property>
     <property name="Vegetation Sample Timestamp" type="measure" isIdentifier="true">
       <description></description>
-      <formatString> - $2</formatString>
+      <formatString>-$2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
     <property name="Timestamp Field" type="measure">
@@ -558,7 +558,7 @@
     </property>
     <property name="Soil Sample Timestamp" type="measure" isIdentifier="true">
       <description></description>
-      <formatString> - $2</formatString>
+      <formatString>-$2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
     <property name="Timestamp Field" type="measure">
@@ -1018,7 +1018,7 @@
     </property>
     <property name="Soil Crust Sample Timestamp" type="measure" isIdentifier="true">
       <description></description>
-      <formatString> - $2</formatString>
+      <formatString>-$2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
     <property name="Timestamp Field" type="measure">
@@ -1467,7 +1467,7 @@
     </property>
     <property name="Rock Sample Timestamp" type="measure" isIdentifier="true">
       <description></description>
-      <formatString> - $2</formatString>
+      <formatString>-$2</formatString>
       <appendCharacterString> - </appendCharacterString>
     </property>
     <property name="Timestamp Field" type="measure">

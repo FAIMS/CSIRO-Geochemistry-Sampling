@@ -577,6 +577,8 @@
       <bind nodeset="/faims/Water_Sample/Basic_Info/Colgroup_2/Col_1/Timestamp_Field" type="date"/>
       <bind nodeset="/faims/Water_Sample/Basic_Info/Elevation_Metres_above_Sea_Level" type="decimal"/>
       <bind nodeset="/faims/Water_Sample/Codes/Colgroup_1/Col_2/Estimated_Angle" type="decimal"/>
+      <bind nodeset="/faims/Water_Sample/pH_Eh/Colgroup_1/Col_1/Temperature" type="decimal"/>
+      <bind nodeset="/faims/Water_Sample/pH_Eh/Colgroup_1/Col_2/Conductivity" type="decimal"/>
       <bind nodeset="/faims/Vegetation_Sample/Basic_Info/Colgroup_2/Col_1/Timestamp_Field" type="date"/>
       <bind nodeset="/faims/Vegetation_Sample/Basic_Info/Elevation_Metres_above_Sea_Level" type="decimal"/>
       <bind nodeset="/faims/Vegetation_Sample/Basic_Info/Colgroup_5/Col_1/Vegetation_Height" type="decimal"/>
