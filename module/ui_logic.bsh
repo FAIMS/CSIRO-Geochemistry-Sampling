@@ -5562,6 +5562,17 @@ String getFieldTimestamp() {
   return dateStr;
 }
 
+String getFormattedTimestampField(String tabGroup) {
+  String ref = tabGroup + "/Basic_Info/Timestamp_Field";
+  String timestamp = getFieldValue(ref);
+
+  fromFormat = new java.text.SimpleDateFormat("dd/mm/yyyy");
+  toFormat = new java.text.SimpleDateFormat("ddMMMyyyy");
+
+  Date timestampDate = fromFormat.parse(timestamp);
+  return toFormat.format(timestampDate);
+}
+
 void setTimestamps(String tabgroup) {
   String refField  = tabgroup + "/Basic_Info/Timestamp_Field";
   String refFmtStr = tabgroup + "/Vars/Timestamp";
@@ -6281,7 +6292,7 @@ String getIgsn(String tabGroup) {
   String suffixRef = tabGroup + "/Basic_Info/Suffix";
   String suffix = "";
   if (isValidRef(suffixRef))
-    suffix = getFieldValue(suffixRef);
+    suffix = getMenuValue(suffixRef);
 
   if (!isNull(suffix))
     igsn += "-" + guessArch16nValFromKey(suffix);
@@ -6327,7 +6338,7 @@ void printLabel() {
 
   String igsn       = getIgsn(tabGroup);
   String sampleType = getSampleType(tabGroup);
-  String timestamp  = getFieldValue(tabGroup + "/Vars/Timestamp");
+  String timestamp  = getFormattedTimestampField(tabGroup);
 
   Log.d("printLabel", igsn + " " + sampleType + " " + timestamp);
 
@@ -6557,6 +6568,9 @@ void updateAndRescanLabel() {
 
 for (String tabGroup : getTabGroups())
   addOnEvent(tabGroup, "show", "updateScanNavigationButton()");
+/********************************** DEFAULTS **********************************/
+startInternalGPS();
+createBluetoothConnection("", 0);
 
 
 /******************************************************************************/

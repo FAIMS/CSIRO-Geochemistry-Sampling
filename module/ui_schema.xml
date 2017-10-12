@@ -862,7 +862,7 @@
           <group ref="Col_1" faims_style="even">
             <label/>
             <input faims_attribute_name="Timestamp Field" faims_attribute_type="measure" ref="Timestamp_Field">
-              <label>{Date}</label>
+              <label>{Timestamp}</label>
             </input>
           </group>
           <group ref="Col_2" faims_style="even">
@@ -1350,7 +1350,7 @@
           <group ref="Col_1" faims_style="even">
             <label/>
             <input faims_attribute_name="Timestamp Field" faims_attribute_type="measure" ref="Timestamp_Field">
-              <label>{Date}</label>
+              <label>{Timestamp}</label>
             </input>
           </group>
           <group ref="Col_2" faims_style="even">

@@ -11,6 +11,17 @@ String getFieldTimestamp() {
   return dateStr;
 }
 
+String getFormattedTimestampField(String tabGroup) {
+  String ref = tabGroup + "/Basic_Info/Timestamp_Field";
+  String timestamp = getFieldValue(ref);
+
+  fromFormat = new java.text.SimpleDateFormat("dd/mm/yyyy");
+  toFormat = new java.text.SimpleDateFormat("ddMMMyyyy");
+
+  Date timestampDate = fromFormat.parse(timestamp);
+  return toFormat.format(timestampDate);
+}
+
 void setTimestamps(String tabgroup) {
   String refField  = tabgroup + "/Basic_Info/Timestamp_Field";
   String refFmtStr = tabgroup + "/Vars/Timestamp";
