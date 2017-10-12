@@ -1,5 +1,5 @@
 /*
- * GENERATED WITH FAIMS-TOOLS, SHA1: 66befe54e8c5cfab362d38fb4b94150f38a0a5cd
+ * GENERATED WITH FAIMS-TOOLS, SHA1: fcea549a5825d280aca7f9e047d332292bb1cd66
  */
 import android.util.Log;
 import android.os.Build.MODEL;
@@ -200,6 +200,8 @@ String function2callableString(String function, Object[] args) {
 /******************************************************************************/
 String  PREVIOUSLY_DISPLAYED_TAB_GROUP = "";
 String  CURRENTLY_DISPLAYED_TAB_GROUP  = "";
+String  PREVIOUSLY_DISPLAYED_TAB       = "";
+String  CURRENTLY_DISPLAYED_TAB        = "";
 Map     REF_TO_TYPE                    = new HashMap();
 HashSet DATA_REFS                      = new HashSet();
 HashSet NO_UI_REFS                     = new HashSet();
@@ -848,7 +850,7 @@ HashSet getTabGroupsAsHashSet() {
   return TAB_GROUPS_AS_HASH_SET;
 }
 
-List getTabs() { return getTabGroupsAsList(); }
+List getTabs() { return getTabsAsList(); }
 List getTabsAsList() { return TABS_AS_LIST; }
 
 HashSet getTabsAsHashSet() {
@@ -908,6 +910,22 @@ boolean isFlaggedNodata(String tabGroup) {
   return flaggedTabGroups.contains(tabGroup);
 }
 
+void updateDisplayedTab(String tab) {
+  if (tab.equals(CURRENTLY_DISPLAYED_TAB))
+    return;
+
+  PREVIOUSLY_DISPLAYED_TAB = CURRENTLY_DISPLAYED_TAB;
+  CURRENTLY_DISPLAYED_TAB  = tab;
+}
+
+String getPreviouslyDisplayedTab() {
+  return PREVIOUSLY_DISPLAYED_TAB;
+}
+
+String getDisplayedTab() {
+  return CURRENTLY_DISPLAYED_TAB;
+}
+
 void updateDisplayedTabGroup(String tabGroup) {
   if (tabGroup.equals(CURRENTLY_DISPLAYED_TAB_GROUP))
     return;
@@ -929,7 +947,8 @@ String getDisplayedTabGroup() {
 }
 
 boolean isDisplayed(String ref) {
-  return getDisplayedTabGroup().equals(ref);
+  return getDisplayedTabGroup().equals(ref) ||
+         getDisplayedTab     ().equals(ref);
 }
 
 String getTabGroupRef(String fullRef) {
@@ -1327,6 +1346,19 @@ void bindOnEvents() {
   }
 }
 
+void onLeaveTab() {
+  onLeaveTabGroup(getPreviouslyDisplayedTab());
+}
+
+/* Execute the "leave" event for the tab group at `ref` if a callback for it
+ * exists.
+ */
+void onLeaveTabGroup(String ref) {
+  String event    = "leave";
+  String stmtsStr = getStatementsString(ref, event);
+  execute(stmtsStr);
+}
+
 void onLeaveTabGroup() {
   onLeaveTabGroup(getPreviouslyDisplayedTabGroup());
 }
@@ -1363,8 +1395,9 @@ boolean isDoingFetchEvent() {
   return NUM_FETCHES_OCCURING.get() > 0;
 }
 
-/* Establishes `onEvent` bindings necessary to make the "leave" event work. The
- * "leave" event is really triggered upon "show" of another tab.
+/* Establishes `onEvent` bindings necessary to make the "leave" event work for
+ * tab groups. The "leave" event is really triggered upon "show" of another tab
+ * group.
  */
 for (String ref : getTabGroups()) {
   String callback;
@@ -1376,6 +1409,21 @@ for (String ref : getTabGroups()) {
 
   // Trigger on leave tab group event
   callback = "onLeaveTabGroup()";
+  addOnEvent(ref, "show", callback, PRECEDENCE_MAX);
+}
+
+/* Establishes `onEvent` bindings necessary to make the "leave" event work for
+ * tabs. The "leave" event is really triggered upon "show" of another tab.
+ */
+for (String ref : getTabs()) {
+  String callback;
+
+  // Update (previously) displayed tab group
+  callback = fun2str("updateDisplayedTab", ref);
+  addOnEvent(ref, "show",   callback, PRECEDENCE_MAX);
+
+  // Trigger on leave tab group event
+  callback = "onLeaveTab()";
   addOnEvent(ref, "show", callback, PRECEDENCE_MAX);
 }
 
@@ -2487,23 +2535,24 @@ boolean copyFieldValue(String src, String dst) {
  *                 `getFieldValue` is copied, without any database accesses.
  */
 boolean copyFieldValue(String src, String dst, Boolean doFindVocabId) {
-  String vocabIdSrc   = getFieldValue(src);
-  String vocabNameSrc = getFieldValue(src, true);
-
-  String attrNameSrc = getAttributeName(src);
-  String attrNameDst = getAttributeName(dst);
-
-  if (attrNameSrc.equals(attrNameDst) || !doFindVocabId) {
-    setFieldValue(dst, vocabIdSrc);
+  if (!doFindVocabId) {
+    String valSrc = getFieldValue(src);
+    setFieldValue(dst, valSrc);
     return true;
   }
 
-  if (setMenuValue(dst, vocabNameSrc))
-    return true;
+  String valSrc;
+  if (hasMenuType(src)) valSrc = getMenuValue (src);
+  else                  valSrc = getFieldValue(src);
 
-  // Fall back to dumb field copying
-  copyFieldValue(src, dst, false);
-  return false;
+  if (hasMenuType(dst)) setMenuValue (dst, valSrc);
+  else                  setFieldValue(dst, valSrc);
+
+  String valDst;
+  if (hasMenuType(dst)) valDst = getMenuValue (dst);
+  else                  valDst = getFieldValue(dst);
+
+  return valDst.equals(valSrc);
 }
 
 void clearField(String ref) {
@@ -3795,7 +3844,10 @@ void makeDuplicateRelationships(fetchedAttributes, String newUuid){
     String parentUuid             = savedAttribute.get(3);
     String childArchEntType       = savedAttribute.get(5);
 
-    String onSaveRel              = "onSave" + childArchEntType.replaceAll(" ", "") + "__()";
+    String onSaveRel              = getStatementsString(
+        childArchEntType.replaceAll(" ", "_"),
+        "save"
+    );
 
     saveEntitiesToHierRel(
         relntypename,
@@ -6179,7 +6231,7 @@ String parseIgsnToLoadEntity(String igsn) {
     + parseSampleId(igsn);
 
   String suffix = parseSuffix(igsn);
-  Log.d("suffix", suffix);
+  Log.d("suffix", "" + suffix);
   if (!isNull(suffix))
     parsed += "-" + suffix;
 
@@ -6197,7 +6249,7 @@ String parsePrefix1(String igsn) {
 }
 
 String parsePrefix2(String igsn) {
-  Log.d("prefix2", safeDashSplit(igsn, 1));
+  Log.d("prefix2", "" + safeDashSplit(igsn, 1));
   return safeDashSplit(igsn, 1);
 }
 
@@ -6207,9 +6259,11 @@ String parseSampleId(String igsn) {
 
 String parseSuffix(String igsn) {
   String suffix = safeDashSplit(igsn, 3);
-  Log.d("suffix2", suffix);
-  Log.d("igsn", igsn);
-  suffix = "{" + suffix + "}";
+  Log.d("suffix2", "" + suffix);
+  Log.d("igsn", "" + igsn);
+  if (!isNull(suffix))
+    suffix = "{" + suffix + "}";
+  Log.d("suffix3", "" + suffix);
 
   if ("W".equals(parsePrefix2(igsn)))
     return getVocabId("Water Sample Suffix", suffix);
@@ -6227,10 +6281,14 @@ String getIgsn(String tabGroup) {
       + getFieldValue(tabGroup + "/Basic_Info/Sample_Prefix_2") + "-"
       + getFieldValue(tabGroup + "/Basic_Info/Sample_ID");
 
-  if (SUFFIX_TAB_GROUPS.contains(tabGroup)) {
-    igsn += "-"
-      + guessArch16nValFromKey(getMenuValue(tabGroup + "/Basic_Info/Suffix"));
-  }
+  String suffixRef = tabGroup + "/Basic_Info/Suffix";
+  String suffix = "";
+  if (isValidRef(suffixRef))
+    suffix = getFieldValue(suffixRef);
+
+  if (!isNull(suffix))
+    igsn += "-" + guessArch16nValFromKey(suffix);
+
   return igsn;
 }
 

@@ -20,7 +20,7 @@ String parseIgsnToLoadEntity(String igsn) {
     + parseSampleId(igsn);
 
   String suffix = parseSuffix(igsn);
-  Log.d("suffix", suffix);
+  Log.d("suffix", "" + suffix);
   if (!isNull(suffix))
     parsed += "-" + suffix;
 
@@ -38,7 +38,7 @@ String parsePrefix1(String igsn) {
 }
 
 String parsePrefix2(String igsn) {
-  Log.d("prefix2", safeDashSplit(igsn, 1));
+  Log.d("prefix2", "" + safeDashSplit(igsn, 1));
   return safeDashSplit(igsn, 1);
 }
 
@@ -48,9 +48,11 @@ String parseSampleId(String igsn) {
 
 String parseSuffix(String igsn) {
   String suffix = safeDashSplit(igsn, 3);
-  Log.d("suffix2", suffix);
-  Log.d("igsn", igsn);
-  suffix = "{" + suffix + "}";
+  Log.d("suffix2", "" + suffix);
+  Log.d("igsn", "" + igsn);
+  if (!isNull(suffix))
+    suffix = "{" + suffix + "}";
+  Log.d("suffix3", "" + suffix);
 
   if ("W".equals(parsePrefix2(igsn)))
     return getVocabId("Water Sample Suffix", suffix);
@@ -68,10 +70,14 @@ String getIgsn(String tabGroup) {
       + getFieldValue(tabGroup + "/Basic_Info/Sample_Prefix_2") + "-"
       + getFieldValue(tabGroup + "/Basic_Info/Sample_ID");
 
-  if (SUFFIX_TAB_GROUPS.contains(tabGroup)) {
-    igsn += "-"
-      + guessArch16nValFromKey(getMenuValue(tabGroup + "/Basic_Info/Suffix"));
-  }
+  String suffixRef = tabGroup + "/Basic_Info/Suffix";
+  String suffix = "";
+  if (isValidRef(suffixRef))
+    suffix = getFieldValue(suffixRef);
+
+  if (!isNull(suffix))
+    igsn += "-" + guessArch16nValFromKey(suffix);
+
   return igsn;
 }
 
