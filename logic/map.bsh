@@ -5,9 +5,6 @@ DATA_ENTRY_LAYER_ID = createCanvasLayer(MAP_REF, DATA_ENTRY_LAYER);
 setSelectedLayer(MAP_REF, DATA_ENTRY_LAYER);
 setMapZoom(MAP_REF, 15.0f);
 
-showBaseMap(MAP_REF, "wCapricorn Tiled", "files/data/maps/WCapricorn4283TILED.tif");
-showRasterMap(MAP_REF, "Capricorn Tiled", "files/data/maps/Capricorn4283TILED.tif");
-
 isEntity = true;
 queryName = "Shape";
 querySQL = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Shape'";
