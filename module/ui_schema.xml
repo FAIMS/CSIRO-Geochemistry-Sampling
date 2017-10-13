@@ -268,7 +268,7 @@
                 </Col_2>
               </Colgroup_5>
               <Soil_Description/>
-              <Landform_Description/>
+              <Landform/>
               <Notes/>
               <Photos/>
               <Photos_Button_1/>
@@ -1260,9 +1260,13 @@
             <value>Options not loaded</value>
           </item>
         </select>
-        <input faims_attribute_name="Landform Description" faims_attribute_type="measure" ref="Landform_Description">
-          <label>{Landform_Description}</label>
-        </input>
+        <select1 faims_attribute_name="Landform" faims_attribute_type="vocab" ref="Landform">
+          <label>{Landform}</label>
+          <item>
+            <label>Options not loaded</label>
+            <value>Options not loaded</value>
+          </item>
+        </select1>
         <input faims_attribute_name="Notes" faims_attribute_type="measure" ref="Notes">
           <label>{Notes}</label>
         </input>

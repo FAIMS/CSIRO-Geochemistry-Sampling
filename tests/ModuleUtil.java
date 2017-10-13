@@ -960,6 +960,15 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: dropdown
+        Ref:  Vegetation_Sample/Basic_Info/Landform
+     */
+    public static View get_VegetationSample_BasicInfo_Landform(Solo solo) {
+        String ref = "Vegetation_Sample/Basic_Info/Landform";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: dropdown
         Ref:  Vegetation_Sample/Basic_Info/SRID
      */
     public static View get_VegetationSample_BasicInfo_SRID(Solo solo) {
@@ -1945,15 +1954,6 @@ public class ModuleUtil extends ModuleHelper {
      */
     public static EditText get_VegetationSample_BasicInfo_ElevationMetresaboveSeaLevel(Solo solo) {
         String ref = "Vegetation_Sample/Basic_Info/Elevation_Metres_above_Sea_Level";
-        return (android.widget.EditText) solo.getView((Object) ref);
-    }
-
-    /*
-        Type: input
-        Ref:  Vegetation_Sample/Basic_Info/Landform_Description
-     */
-    public static EditText get_VegetationSample_BasicInfo_LandformDescription(Solo solo) {
-        String ref = "Vegetation_Sample/Basic_Info/Landform_Description";
         return (android.widget.EditText) solo.getView((Object) ref);
     }
 

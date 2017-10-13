@@ -507,10 +507,88 @@
 <description></description></term>
       </lookup>
     </property>
-    <property name="Landform Description" type="measure">
+    <property name="Landform" type="vocab">
       <description></description>
       <formatString>{{if $1 then $1}}{{if and($1, $2) then " " }}{{if $2 then $2}}{{if $3 then " ($3)"}}{{if between($4,0,0.49) then "??" elsif lessThan($4,1) then "?" }}</formatString>
       <appendCharacterString> - </appendCharacterString>
+      <lookup>
+        <term>{Alluvial_Landforms}
+<description></description><term>{Alluvial_Plain}
+<description></description></term><term>{Flood_Plain}
+<description></description></term><term>{Anastomatic_Plain}
+<description></description></term><term>{Bar_Plain}
+<description></description></term><term>{Covered_Plain}
+<description></description></term><term>{Meander_Plain}
+<description></description></term><term>{Flood_Out}
+<description></description></term><term>{Alluvial_Terrace}
+<description></description></term><term>{Stagnant_Alluvial_Plain}
+<description></description></term><term>{Alluvial_Swamp}
+<description></description></term><term>{Terraced_Land}
+<description></description></term></term>
+        <term>{Dune_Field}
+<description></description><term>{Longitudinal_Dunefield}
+<description></description></term></term>
+        <term>{Fan}
+<description></description><term>{Alluvial_Fan}
+<description></description></term><term>{Colluvial_Fan}
+<description></description></term><term>{Sheet_Flood_Fan}
+<description></description></term></term>
+        <term>{Plain}
+<description></description><term>{Depositional_Plain}
+<description></description></term><term>{Lacustrine_Plain}
+<description></description></term><term>{Playa_Plain}
+<description></description></term><term>{Sandplain}
+<description></description></term></term>
+        <term>{Glacial_Landforms}
+<description></description><term>{Depositional_Glacial_Landforms}
+<description></description></term><term>{Erosional_Glacial_Land}
+<description></description></term></term>
+        <term>{Delta}
+<description></description></term>
+        <term>{Coastal_Lands}
+<description></description><term>{Beach_Ridge_Plain}
+<description></description></term><term>{Chenier_Plain}
+<description></description></term><term>{Coral_Reef}
+<description></description></term><term>{Marine_Plain}
+<description></description></term><term>{Tidal_Flat}
+<description></description></term><term>{Coastal_Dunes}
+<description></description></term><term>{Coastal_Plain}
+<description></description></term><term>{Beach}
+<description></description></term></term>
+        <term>{Erosional_Landforms}
+<description></description><term>{Erosional_Plain}
+<description></description></term><term>{Pediment}
+<description></description></term><term>{Pediplain}
+<description></description></term><term>{Peneplain}
+<description></description></term><term>{Etchplain}
+<description></description></term><term>{Rises}
+<description></description></term><term>{Residual_Rises}
+<description></description></term><term>{Low_Hills}
+<description></description></term><term>{Hills}
+<description></description></term><term>{Mountains}
+<description></description></term><term>{Escarpment}
+<description></description></term><term>{Badlands}
+<description></description></term><term>{Drainage_Depression}
+<description></description></term></term>
+        <term>{Karst}
+<description></description></term>
+        <term>{Plateau}
+<description></description></term>
+        <term>{Volcanic_Landform}
+<description></description><term>{Caldera}
+<description></description></term><term>{Cone}
+<description></description></term><term>{Lava_Plain}
+<description></description></term><term>{Ash_Plain}
+<description></description></term><term>{Lava_Flow}
+<description></description></term><term>{Lava_Plateau}
+<description></description></term></term>
+        <term>{Made_Land}
+<description></description></term>
+        <term>{Meteor_Crater}
+<description></description></term>
+        <term>{Other}
+<description></description></term>
+      </lookup>
     </property>
     <property name="Notes" type="measure">
       <description></description>

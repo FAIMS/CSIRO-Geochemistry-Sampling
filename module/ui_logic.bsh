@@ -1,5 +1,5 @@
 /*
- * GENERATED WITH FAIMS-TOOLS, SHA1: fcea549a5825d280aca7f9e047d332292bb1cd66
+ * GENERATED WITH FAIMS-TOOLS, SHA1: 554747986cdc2c6291b31f1f0eb434d79c6cd1e7
  */
 import android.util.Log;
 import android.os.Build.MODEL;
@@ -200,8 +200,6 @@ String function2callableString(String function, Object[] args) {
 /******************************************************************************/
 String  PREVIOUSLY_DISPLAYED_TAB_GROUP = "";
 String  CURRENTLY_DISPLAYED_TAB_GROUP  = "";
-String  PREVIOUSLY_DISPLAYED_TAB       = "";
-String  CURRENTLY_DISPLAYED_TAB        = "";
 Map     REF_TO_TYPE                    = new HashMap();
 HashSet DATA_REFS                      = new HashSet();
 HashSet NO_UI_REFS                     = new HashSet();
@@ -321,7 +319,7 @@ REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Elevation_Metres_above_Sea_Level",
 REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Vegetation_Height", "input");
 REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Vegetation_Width", "input");
 REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Soil_Description", "checkbox");
-REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Landform_Description", "input");
+REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Landform", "dropdown");
 REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Notes", "input");
 REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Photos", "camera");
 REF_TO_TYPE.put("Vegetation_Sample/Basic_Info/Photos_Button_1", "button");
@@ -570,7 +568,7 @@ DATA_REFS.add("Vegetation_Sample/Basic_Info/Elevation_Metres_above_Sea_Level");
 DATA_REFS.add("Vegetation_Sample/Basic_Info/Vegetation_Height");
 DATA_REFS.add("Vegetation_Sample/Basic_Info/Vegetation_Width");
 DATA_REFS.add("Vegetation_Sample/Basic_Info/Soil_Description");
-DATA_REFS.add("Vegetation_Sample/Basic_Info/Landform_Description");
+DATA_REFS.add("Vegetation_Sample/Basic_Info/Landform");
 DATA_REFS.add("Vegetation_Sample/Basic_Info/Notes");
 DATA_REFS.add("Vegetation_Sample/Basic_Info/Photos");
 DATA_REFS.add("Vegetation_Sample/Basic_Info/Sketches");
@@ -707,6 +705,7 @@ NO_UI_REFS.add("Soil_Crust_Sample/Basic_Info/Location_Number");
 
 
 
+HIER_REFS.add("Vegetation_Sample/Basic_Info/Landform");
 HIER_REFS.add("Soil_Sample/Basic_Info/Geology");
 HIER_REFS.add("Soil_Sample/Basic_Info/Regolith_Type");
 HIER_REFS.add("Soil_Sample/Basic_Info/Landform");
@@ -850,7 +849,7 @@ HashSet getTabGroupsAsHashSet() {
   return TAB_GROUPS_AS_HASH_SET;
 }
 
-List getTabs() { return getTabsAsList(); }
+List getTabs() { return getTabGroupsAsList(); }
 List getTabsAsList() { return TABS_AS_LIST; }
 
 HashSet getTabsAsHashSet() {
@@ -910,22 +909,6 @@ boolean isFlaggedNodata(String tabGroup) {
   return flaggedTabGroups.contains(tabGroup);
 }
 
-void updateDisplayedTab(String tab) {
-  if (tab.equals(CURRENTLY_DISPLAYED_TAB))
-    return;
-
-  PREVIOUSLY_DISPLAYED_TAB = CURRENTLY_DISPLAYED_TAB;
-  CURRENTLY_DISPLAYED_TAB  = tab;
-}
-
-String getPreviouslyDisplayedTab() {
-  return PREVIOUSLY_DISPLAYED_TAB;
-}
-
-String getDisplayedTab() {
-  return CURRENTLY_DISPLAYED_TAB;
-}
-
 void updateDisplayedTabGroup(String tabGroup) {
   if (tabGroup.equals(CURRENTLY_DISPLAYED_TAB_GROUP))
     return;
@@ -947,8 +930,7 @@ String getDisplayedTabGroup() {
 }
 
 boolean isDisplayed(String ref) {
-  return getDisplayedTabGroup().equals(ref) ||
-         getDisplayedTab     ().equals(ref);
+  return getDisplayedTabGroup().equals(ref);
 }
 
 String getTabGroupRef(String fullRef) {
@@ -1346,19 +1328,6 @@ void bindOnEvents() {
   }
 }
 
-void onLeaveTab() {
-  onLeaveTabGroup(getPreviouslyDisplayedTab());
-}
-
-/* Execute the "leave" event for the tab group at `ref` if a callback for it
- * exists.
- */
-void onLeaveTabGroup(String ref) {
-  String event    = "leave";
-  String stmtsStr = getStatementsString(ref, event);
-  execute(stmtsStr);
-}
-
 void onLeaveTabGroup() {
   onLeaveTabGroup(getPreviouslyDisplayedTabGroup());
 }
@@ -1395,9 +1364,8 @@ boolean isDoingFetchEvent() {
   return NUM_FETCHES_OCCURING.get() > 0;
 }
 
-/* Establishes `onEvent` bindings necessary to make the "leave" event work for
- * tab groups. The "leave" event is really triggered upon "show" of another tab
- * group.
+/* Establishes `onEvent` bindings necessary to make the "leave" event work. The
+ * "leave" event is really triggered upon "show" of another tab.
  */
 for (String ref : getTabGroups()) {
   String callback;
@@ -1409,21 +1377,6 @@ for (String ref : getTabGroups()) {
 
   // Trigger on leave tab group event
   callback = "onLeaveTabGroup()";
-  addOnEvent(ref, "show", callback, PRECEDENCE_MAX);
-}
-
-/* Establishes `onEvent` bindings necessary to make the "leave" event work for
- * tabs. The "leave" event is really triggered upon "show" of another tab.
- */
-for (String ref : getTabs()) {
-  String callback;
-
-  // Update (previously) displayed tab group
-  callback = fun2str("updateDisplayedTab", ref);
-  addOnEvent(ref, "show",   callback, PRECEDENCE_MAX);
-
-  // Trigger on leave tab group event
-  callback = "onLeaveTab()";
   addOnEvent(ref, "show", callback, PRECEDENCE_MAX);
 }
 
@@ -1788,47 +1741,47 @@ void timedPopulateCursorList(String ref, String q, int limit) {
 
 void setUpTypeHierarchy() {
   //- 
-  //  - Soil Crust Sample
-  //    - Photolog
   //  - Soil Sample
-  //    - Photolog
-  //  - Water Sample
   //    - Photolog
   //  - Vegetation Sample
   //    - Photolog
+  //  - Shape
+  //  - Water Sample
+  //    - Photolog
   //  - Rock Sample
   //    - Photolog
-  //  - Shape
+  //  - Soil Crust Sample
+  //    - Photolog
 
   n0 = Tree("", 1);
-  n1 = Tree("Soil Crust Sample", 1);
+  n1 = Tree("Soil Sample", 1);
   n2 = Tree("Photolog", 1);
-  n3 = Tree("Soil Sample", 1);
+  n3 = Tree("Vegetation Sample", 1);
   n4 = Tree("Photolog", 1);
-  n5 = Tree("Water Sample", 1);
-  n6 = Tree("Photolog", 1);
-  n7 = Tree("Vegetation Sample", 1);
-  n8 = Tree("Photolog", 1);
-  n9 = Tree("Rock Sample", 1);
-  n10 = Tree("Photolog", 1);
-  n11 = Tree("Shape", 1);
+  n5 = Tree("Shape", 1);
+  n6 = Tree("Water Sample", 1);
+  n7 = Tree("Photolog", 1);
+  n8 = Tree("Rock Sample", 1);
+  n9 = Tree("Photolog", 1);
+  n10 = Tree("Soil Crust Sample", 1);
+  n11 = Tree("Photolog", 1);
 
   n0.addChild(n1);
   n0.addChild(n3);
   n0.addChild(n5);
-  n0.addChild(n7);
-  n0.addChild(n9);
-  n0.addChild(n11);
+  n0.addChild(n6);
+  n0.addChild(n8);
+  n0.addChild(n10);
 
   n1.addChild(n2);
 
   n3.addChild(n4);
 
-  n5.addChild(n6);
+  n6.addChild(n7);
 
-  n7.addChild(n8);
+  n8.addChild(n9);
 
-  n9.addChild(n10);
+  n10.addChild(n11);
 
 
   PERF_TYPE_TREE = n0;
@@ -2489,8 +2442,6 @@ persistOverSessions("Project/Start/Project", false);
 persistOverSessions("Project/Start/Area", false);
 persistOverSessions("Project/Start/Sample_Prefix_1", false);
 persistOverSessions("Project/Start/Sample_Prefix_2", false);
-persistOverSessions("Project/Sample_ID_Ranges/Minimum_Sample_ID", false);
-persistOverSessions("Project/Sample_ID_Ranges/Maximum_Sample_ID", false);
 
 /******************************************************************************/
 /*                           FIELD COPYING HELPERS                            */
@@ -2535,24 +2486,23 @@ boolean copyFieldValue(String src, String dst) {
  *                 `getFieldValue` is copied, without any database accesses.
  */
 boolean copyFieldValue(String src, String dst, Boolean doFindVocabId) {
-  if (!doFindVocabId) {
-    String valSrc = getFieldValue(src);
-    setFieldValue(dst, valSrc);
+  String vocabIdSrc   = getFieldValue(src);
+  String vocabNameSrc = getFieldValue(src, true);
+
+  String attrNameSrc = getAttributeName(src);
+  String attrNameDst = getAttributeName(dst);
+
+  if (attrNameSrc.equals(attrNameDst) || !doFindVocabId) {
+    setFieldValue(dst, vocabIdSrc);
     return true;
   }
 
-  String valSrc;
-  if (hasMenuType(src)) valSrc = getMenuValue (src);
-  else                  valSrc = getFieldValue(src);
+  if (setMenuValue(dst, vocabNameSrc))
+    return true;
 
-  if (hasMenuType(dst)) setMenuValue (dst, valSrc);
-  else                  setFieldValue(dst, valSrc);
-
-  String valDst;
-  if (hasMenuType(dst)) valDst = getMenuValue (dst);
-  else                  valDst = getFieldValue(dst);
-
-  return valDst.equals(valSrc);
+  // Fall back to dumb field copying
+  copyFieldValue(src, dst, false);
+  return false;
 }
 
 void clearField(String ref) {
@@ -3844,10 +3794,7 @@ void makeDuplicateRelationships(fetchedAttributes, String newUuid){
     String parentUuid             = savedAttribute.get(3);
     String childArchEntType       = savedAttribute.get(5);
 
-    String onSaveRel              = getStatementsString(
-        childArchEntType.replaceAll(" ", "_"),
-        "save"
-    );
+    String onSaveRel              = "onSave" + childArchEntType.replaceAll(" ", "") + "__()";
 
     saveEntitiesToHierRel(
         relntypename,
@@ -6571,6 +6518,9 @@ for (String tabGroup : getTabGroups())
 /********************************** DEFAULTS **********************************/
 startInternalGPS();
 createBluetoothConnection("", 0);
+/*********************** PERSISTENCE WITH DEFAULT VALS ************************/
+persistOverSessions("Project/Sample_ID_Ranges/Minimum_Sample_ID", "0001");
+persistOverSessions("Project/Sample_ID_Ranges/Maximum_Sample_ID", "9999");
 
 
 /******************************************************************************/
