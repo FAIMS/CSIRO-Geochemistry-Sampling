@@ -28,7 +28,7 @@ void fillInGPS(String tabgroup) {
 void setSrid(String tabgroup) {
   String ref = tabgroup + "/Basic_Info/SRID";
   String sridTarget   = getArch16nKeyFromVal(getModuleSrid());
-  String sridFallback = getArch16nKeyFromVal("28350");
+  String sridFallback = getArch16nKeyFromVal("28352");
   if (!setMenuValue(ref, sridTarget))
     setMenuValue(ref, sridFallback);
 }
