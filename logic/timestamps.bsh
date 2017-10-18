@@ -30,5 +30,37 @@ void setTimestamps(String tabgroup) {
   setFieldValue(refFmtStr, getFmtStrTimestamp());
 }
 
+void setHiddenTimestamps(String tabGroup) {
+  String attribName = getAttributeName(tabGroup + "/Vars/Timestamp");
+  String formattedTimestamp = getFormattedTimestampField(tabGroup);
+
+  List attribs = createAttributeList();
+  attribs.add(
+      createEntityAttribute(
+        attribName,
+        null,
+        null,
+        formattedTimestamp,
+        null
+      )
+  );
+
+  saveArchEnt(
+      getUuid(tabGroup),
+      getArchEntType(tabGroup),
+      null,
+      attribs,
+      null
+  );
+}
+
 for (String sampleType : SAMPLE_TYPES)
   addOnEvent(sampleType, "create", "setTimestamps", new Object[]{sampleType});
+
+for (String sampleType : SAMPLE_TYPES)
+  addOnEvent(
+      sampleType,
+      "save",
+      "setHiddenTimestamps",
+      new Object[]{sampleType}
+  );
