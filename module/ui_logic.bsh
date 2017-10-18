@@ -1,5 +1,5 @@
 /*
- * GENERATED WITH FAIMS-TOOLS, SHA1: 7ba330f98a64d7cb787e2d9ea88bf4d1aae50446
+ * GENERATED WITH FAIMS-TOOLS, SHA1: 8afe5be79c4ca5e49c49fda2fd293e1e7eba9aec
  */
 import android.util.Log;
 import android.os.Build.MODEL;
@@ -5183,6 +5183,45 @@ void onClickProjectNewSample(String type) {
   if ("{Soil_Sample}"        .equals(type)) onClickProjectNewSoilSample();
   if ("{Soil__Crust__Sample}".equals(type)) onClickProjectNewSoilCrustSample();
 }
+/*************************** CUSTOM `setFieldValue` ***************************/
+
+// Makes `setFieldValue` unit-testable by ensuring `linker` is mocked during
+// unit tests.
+if (isInUnitTestTime()) {
+  Linker() {
+    setFieldValue(String ref, Object val) {
+      FIELD_VALUES.put(ref, "" + val); // `FIELD_VALUES` is defined in mock.bsh
+    }
+    return this;
+  }
+  linker = Linker();
+}
+
+void setFieldValue(String ref, Object val) {
+  if (isSampleIdRef(ref))
+    val = formatSampleId(val);
+
+  linker.setFieldValue(ref, val);
+}
+
+// Left padding with zeros such that the number of characters in `val` is fixed
+// at 4. If `val.length() > 4` then `val` is returned unchanged.
+String formatSampleId(Object val) {
+  String padding     = "0000";
+  int    numPadChars = Math.min(padding.length(), val.length());
+
+  String unpadded    = val;
+  String padded      = padding.substring(numPadChars) + unpadded;
+
+  return padded;
+}
+
+boolean isSampleIdRef(String ref) {
+  return
+    ref != null &&
+    ref.endsWith("/Basic_Info/Sample_ID");
+}
+
 /************************************ MAP *************************************/
 DATA_ENTRY_LAYER    = "Data Entry Layer";
 DATA_ENTRY_LAYER_ID = createCanvasLayer(MAP_REF, DATA_ENTRY_LAYER);

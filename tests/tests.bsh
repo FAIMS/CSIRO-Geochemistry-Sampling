@@ -119,6 +119,7 @@ void initFieldValues() {
 {
   print("TEST: printLabel():");
   String getDisplayedTabGroup() { return "Water_Sample"; }
+  setFieldValue("Water_Sample/Basic_Info/Timestamp_Field", "10/10/2010");
   setFieldValue("Water_Sample/Vars/Timestamp", "03Nov2017");
   setUuid("Water_Sample", "1234567890123456789");
   executeOnEvent(
@@ -154,4 +155,28 @@ void initFieldValues() {
   assert("W"     .equals(parsePrefix2 (igsn)));
   assert("0004"  .equals(parseSampleId(igsn)));
   assert(parseSuffix(igsn) == null);
+}
+
+{
+  assert(formatSampleId("1")    .equals( "0001"));
+  assert(formatSampleId("11")   .equals( "0011"));
+  assert(formatSampleId("111")  .equals( "0111"));
+  assert(formatSampleId("1111") .equals( "1111"));
+  assert(formatSampleId("11111").equals("11111"));
+}
+
+{
+  String refSId = "Soil/Basic_Info/Sample_ID";
+  String refSp1 = "Soil/Basic_Info/Sample_Prefix_1";
+  String val;
+
+  // Setting refSId
+  setFieldValue(refSId, "1");
+  val = getFieldValue(refSId);
+  assert(val.equals("0001"));
+
+  // Setting refSp1
+  setFieldValue(refSp1, "1");
+  val = getFieldValue(refSp1);
+  assert(val.equals("1"));
 }
