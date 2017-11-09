@@ -8,10 +8,10 @@ This module was co-developed by Dr. Jens Klump and Dr. Nathan Reid at Mineral Re
 Development of this module was funded by CSIRO Mineral Resources, Kensington, WA
 
 ## Date of release:
-March 2014, updated 2016
+March 2014, updated 2016 and October 2017
 
 ## FAIMS Mobile version
-FAIMS **v2.2** (Android 5+)
+FAIMS **v2.5** (Android 6+)
 
 ## Licence
 This module is licensed under an international Creative Commons Attribution 4.0 Licence (**CC BY 4.0**).
@@ -21,16 +21,18 @@ This module is part of the **FAIMS Demo library** on our publicly accessible Dem
 
 ## This module contains the following FAIMS features:
 * dynamically growing lists for pH and Eh values in Water samples
+* custom [IGSN](https://github.com/IGSN) generation on device
+* label printing via Zebra T4 Bluetooth Printer
+* QR label scanning and loading records
 * soft validation on Temperature and Conductivity field
 * full GIS (map tab with basemaps, layers management and ability to manual create geometries)
-* concatenated auto-incremented ID with textual prefix and a number
 * dynamic UI on radiobutton selection
 * coordinates from internal GPS
 * hierarchical dropdowns
 * controlled vocabularies
 
 ## This module can be used with no or minor modification for:
-* geochemical sampling of water, rock, soil and plant samples
+* geochemical sampling of water, rock, soil and vegetation samples
 * sample data collection and mapping of sites
 
 ## Contact info:
