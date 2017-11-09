@@ -10,7 +10,7 @@ Development of this module was funded by CSIRO Mineral Resources, Kensington, WA
 ## Date of release:
 March 2014, updated 2016 and October 2017
 
-## FAIMS Mobile version
+## FAIMS Mobile version:
 FAIMS **v2.5** (Android 6+)
 
 ## Licence:
