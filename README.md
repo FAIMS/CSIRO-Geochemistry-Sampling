@@ -1,7 +1,7 @@
 # About this module:
 This module was created for the **Capricorn Distal Footprints project**, based at Mineral Resources unit of CSIRO, Perth, Australia. The module has been designed to collect geosampling data in the remote parts of rural Western Australia. Different sampling teams collect data about water, rock, soil, and plant samples as well as take pictures, and GIS points using the FAIMS Mobile app.
 
-## Authorship
+## Authorship:
 This module was co-developed by Dr Jens Klump and Dr Nathan Reid at Mineral Resources unit of CSIRO and Adela Sobotkova, Brian Ballsun-Stanton and Petra Janouchova at the FAIMS Project, Department of Ancient History, Macquarie University.
 
 ## Funding:
@@ -13,7 +13,7 @@ March 2014, updated 2016 and October 2017
 ## FAIMS Mobile version
 FAIMS **v2.5** (Android 6+)
 
-## Licence
+## Licence:
 This module is licensed under an international Creative Commons Attribution 4.0 Licence (**CC BY 4.0**).
 
 ## Access:
