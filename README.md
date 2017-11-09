@@ -55,8 +55,10 @@ If you have any questions about the module, please contact the FAIMS team at **e
 </p>
 
 <p align="left">
-  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-110235.png" width="250"/>
-  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-110241.png" width="250"/>
-  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-110355.png" width="250"/>
+  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20171109-122809[1].png" width="250"/>
+  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20171109-122821[1].png" width="250"/>
+  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20171109-122844[1].png" width="250"/>
 </p>
-
+<p align="left">
+  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20171109-122943[1].png" width="250"/>
+  </p>
