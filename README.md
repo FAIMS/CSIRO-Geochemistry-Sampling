@@ -1,5 +1,5 @@
 # About this module:
-This module was created for the **Capricorn Distal Footprints project**, based at Mineral Resources unit of CSIRO, Perth, Australia. The module has been designed to collect geosampling data in the remote parts of rural Western Australia. Different sampling teams collect data about water, rock, soil, and plant samples as well as take pictures, and GIS points using the FAIMS Mobile app.
+This module was created for the **Capricorn Distal Footprints project**, based at Mineral Resources unit of CSIRO, Perth, Australia. The module has been designed to collect geosampling data in the remote parts of rural Western Australia. Different sampling teams collect data about water, rock, soil, soil crust, and vegetation samples as well as take pictures, and GIS points using the FAIMS Mobile app.
 
 ## Authorship:
 This module was co-developed by Dr Jens Klump and Dr Nathan Reid at Mineral Resources unit of CSIRO and Adela Sobotkova, Brian Ballsun-Stanton and Petra Janouchova at the FAIMS Project, Department of Ancient History, Macquarie University.
@@ -22,7 +22,7 @@ This module is part of the **FAIMS Demo library** on our publicly accessible Dem
 ## This module contains the following FAIMS features:
 * dynamically growing lists for pH and Eh values in Water samples
 * custom [IGSN](https://github.com/IGSN) generation on device
-* label printing via Zebra T4 Bluetooth Printer
+* label printing via the portable Zebra T4 Bluetooth Printer
 * QR label scanning and loading records
 * soft validation on Temperature and Conductivity field
 * full GIS (map tab with basemaps, layers management and ability to manual create geometries)
