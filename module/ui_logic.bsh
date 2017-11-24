@@ -5224,10 +5224,39 @@ boolean isSampleIdRef(String ref) {
 
 /************************************ MAP *************************************/
 DATA_ENTRY_LAYER    = "Data Entry Layer";
-DATA_ENTRY_LAYER_ID = createCanvasLayer(MAP_REF, DATA_ENTRY_LAYER);
 
-setSelectedLayer(MAP_REF, DATA_ENTRY_LAYER);
-setMapZoom(MAP_REF, 15.0f);
+setMapZoom(MAP_REF, 10.0f);
+
+
+
+
+//showBaseMap(MAP_REF, "orthophoto 5m", "files/data/maps/orthophoto5m.3857.tif");
+showBaseMap(MAP_REF, "orthophoto 10m", "files/data/maps/orthophoto10m.3857.tif");
+//showRasterMap(MAP_REF, "sentinel2", "files/data/maps/sentinel2.3857.tif");
+
+
+
+
+ps = createPointStyle(0, Color.CYAN, 0.2f, 1f);
+ls = createLineStyle(0, Color.GREEN, 0.05f, 0.3f, null);
+pos = createPolygonStyle(0, Color.parseColor("#440000FF"), createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
+ts = createTextStyle(0, Color.WHITE, 40, Typeface.SANS_SERIF);
+table = "extract";
+idcolumn = "FID";
+labelcolumn = "CaveNo";
+showSpatialLayer(MAP_REF, "ExtractVector", "files/data/maps/spatialite.3857.db", table, idcolumn, labelcolumn, ps, ls, pos, ts);
+//setGdalLayerShowAlways(MAP_REF, "ExtractVector", true);
+
+ps = createPointStyle(0, Color.MAGENTA, 0.2f, 1f);
+ls = createLineStyle(0, Color.GREEN, 0.05f, 0.3f, null);
+pos = createPolygonStyle(0, Color.parseColor("#440000FF"), createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
+ts = createTextStyle(0, Color.WHITE, 40, Typeface.SANS_SERIF);
+table = "Samples4km";
+idcolumn = "FID";
+labelcolumn = "ET_ID";
+showSpatialLayer(MAP_REF, "SamplesVector", "files/data/maps/spatialite.3857.db", table, idcolumn, labelcolumn, ps, ls, pos, ts);
+//setGdalLayerShowAlways(MAP_REF, "SamplesVector", true);
+//setGdalLayerShowAlways(MAP_REF, DATA_ENTRY_LAYER, true);
 
 isEntity = true;
 queryName = "Shape";
@@ -5237,6 +5266,9 @@ ls = createLineStyle(10, Color.YELLOW, 0.05f, 0.3f, null);
 pos = createPolygonStyle(10, Color.parseColor("#440000FF"), createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
 ts = createTextStyle(10, Color.YELLOW, 30, Typeface.SANS_SERIF);
 showDatabaseLayer(MAP_REF, "Shape Layer", isEntity, queryName, querySQL, ps, ls, pos, ts);
+
+
+
 
 isEntity = true;
 // Database layers
@@ -5264,6 +5296,11 @@ rockQueryName = "Rock Samples";
 rockQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Rock Sample'";
 rockps = createPointStyle(10, Color.RED, 0.2f, 0.5f);
 showDatabaseLayer(MAP_REF, "Rock Samples", isEntity, rockQueryName, rockQuerySql, rockps, ls, pos, ts);
+
+DATA_ENTRY_LAYER_ID = createCanvasLayer(MAP_REF, DATA_ENTRY_LAYER);
+
+setSelectedLayer(MAP_REF, DATA_ENTRY_LAYER);
+
 
 void refreshMap() {
   refreshMap(MAP_REF);

@@ -3,7 +3,33 @@ DATA_ENTRY_LAYER    = "Data Entry Layer";
 DATA_ENTRY_LAYER_ID = createCanvasLayer(MAP_REF, DATA_ENTRY_LAYER);
 
 setSelectedLayer(MAP_REF, DATA_ENTRY_LAYER);
-setMapZoom(MAP_REF, 15.0f);
+setMapZoom(MAP_REF, 5.0f);
+
+
+showBaseMap(MAP_REF, "sentinel2" "maps/28352test/sentinel2.tif");
+
+
+ps = createPointStyle(10, Color.BROWN, 0.2f, 0.5f);
+ls = createLineStyle(10, Color.GREEN, 0.05f, 0.3f, null);
+pos = createPolygonStyle(10, Color.parseColor("#440000FF"), createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
+ts = createTextStyle(10, Color.WHITE, 40, Typeface.SANS_SERIF);
+table = "extract"
+idcolumn = "FID"
+labelcolumn = "CaveNo"
+showSpatialLayer("tabgroup1/tab1/map", "ExtractVector", "maps/28352test/spatialite.28352.db", table, idcolumn, labelcolumn, ps, ls, pos, ts);
+setGdalLayerShowAlways(MAP_REF, "ExtractVector", true);
+
+ps = createPointStyle(10, Color.PURPLE, 0.2f, 0.5f);
+ls = createLineStyle(10, Color.GREEN, 0.05f, 0.3f, null);
+pos = createPolygonStyle(10, Color.parseColor("#440000FF"), createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
+ts = createTextStyle(10, Color.WHITE, 40, Typeface.SANS_SERIF);
+table = "Samples4km"
+idcolumn = "FID"
+labelcolumn = "ET_ID"
+showSpatialLayer("tabgroup1/tab1/map", "SamplesVector", "maps/28352test/spatialite.28352.db", table, idcolumn, labelcolumn, ps, ls, pos, ts);
+setGdalLayerShowAlways(MAP_REF, "SamplesVector", true);
+
+
 
 isEntity = true;
 queryName = "Shape";
