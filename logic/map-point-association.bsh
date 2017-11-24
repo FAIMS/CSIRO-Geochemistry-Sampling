@@ -1,0 +1,49 @@
+/************************** MAP (POINT ASSOCIATION) ***************************/
+void initTabGroupMap(String ref) {
+  setMapZoom(ref, 15.0f);
+  int id = createCanvasLayer(ref, "Data Entry Layer");
+  setSelectedLayer(ref, id);
+  DATA_ENTRY_IDS.put(ref, id);
+  showDatabaseLayers(ref);
+}
+
+String getMapRef(String tabGroupRef) {
+  return tabGroupRef + "/Map/Map";
+}
+
+void saveSelectedGeometry() {
+  String mapRef = getMapRef(getDisplayedTabGroup());
+  int    layer  = DATA_ENTRY_IDS.get(mapRef);
+  List   geom   = getGeometryList(mapRef, layer);
+
+  if (geom == null || geom.size() == 0) {
+    showToast("Select geometry first");
+    return;
+  }
+
+  SaveCallback saveCallback  = new SaveCallback() {
+    void onSave(uuid, newRecord) {
+      clearGeometry(mapRef);
+      refreshMap   (mapRef);
+    }
+  };
+
+  triggerAutoSave();
+  saveArchEnt(
+      getUuid(getDisplayedTabGroup()),
+      getArchEntType(getDisplayedTabGroup()),
+      geom,
+      null,
+      saveCallback
+  );
+}
+
+for (String sampleType : SAMPLE_TYPES) {
+  String ref = getMapRef(sampleType);
+  initTabGroupMap(ref);
+}
+
+for (String sampleType : SAMPLE_TYPES) {
+  String ref = sampleType + "/Map/Save_Selected_Geometry";
+  addOnEvent(ref, "click", "saveSelectedGeometry()");
+}

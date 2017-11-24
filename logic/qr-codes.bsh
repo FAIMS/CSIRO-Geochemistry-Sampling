@@ -34,7 +34,9 @@ String safeDashSplit(String s, int idx) {
 }
 
 String parsePrefix1(String igsn) {
-  return safeDashSplit(igsn, 0);
+  String prefix1 = safeDashSplit(igsn, 0);
+  Log.d("prefix1", "" + prefix1);
+  return prefix1;
 }
 
 String parsePrefix2(String igsn) {
@@ -90,11 +92,11 @@ String getSampleType(String tabGroup) {
 
 String prefix2ToType(String prefix2) {
   Map m = new HashMap();
-  m.put("W" , "{Water_Sample}"       );
-  m.put("V" , "{Vegetation_Sample}"  );
-  m.put("R" , "{Rock_Sample}"        );
-  m.put("S" , "{Soil_Sample}"        );
-  m.put("CR", "{Soil__Crust__Sample}");
+  m.put("W" , "Water Sample"       );
+  m.put("V" , "Vegetation Sample"  );
+  m.put("R" , "Rock Sample"        );
+  m.put("S" , "Soil Sample"        );
+  m.put("CR", "Soil (Crust) Sample");
 
   return m.get(prefix2);
 }
@@ -217,10 +219,11 @@ void createSampleFromIgsn(String igsn) {
     body  = "A sample having the scanned IGSN was not found on this device. A ";
     body += "new {sample_type} with this IGSN will be created instead. Tap ";
     body += " 'OK' to proceed or 'Cancel' otherwise.";
-
     body  = replaceFirst(body, "{sample_type}", type);
 
     cbOk  = fun2str("reallyCreateSampleFromIgsn", new Object[]{type, igsn});
+
+    cbBad = "";
 
     showAlert(head, body, cbOk, cbBad);
   }
@@ -228,6 +231,7 @@ void createSampleFromIgsn(String igsn) {
 
 void reallyCreateSampleFromIgsn(String type, String igsn) {
   SCANNED_IGSN = igsn;
+
   onClickProjectNewSample(type);
 }
 

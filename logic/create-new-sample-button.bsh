@@ -75,7 +75,7 @@ void onClickCreateNewSample() {
 
     String body = "";
     body += "Please enter a number into the 'Sample Prefix 2' field. 'Sample ";
-    body += "Prefix 2' must consist of %s characters.";
+    body += "Prefix 2' must consist of at least one character.";
     body  = replaceFirst(body, "" + LEN_PREFIX_2);
 
     showWarning(head, body);

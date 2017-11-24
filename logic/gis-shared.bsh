@@ -1,0 +1,54 @@
+/********************************* GIS SHARED *********************************/
+Map DATA_ENTRY_IDS = new HashMap();
+
+void clearGeometry(String ref) {
+  int  dataEntryLayerId = DATA_ENTRY_IDS.get(ref);
+
+  List geometry = getGeometryList(ref, dataEntryLayerId);
+
+  if (geometry == null)     return;
+  if (geometry.size() == 0) return;
+
+  for (geom : geometry) {
+    print("Geometry cleared:" + geom.userData.geomId);
+    clearGeometry(ref, geom.userData.geomId);
+  }
+}
+
+void showDatabaseLayers(String ref) {
+  isEntity = true;
+  queryName = "Shape";
+  querySQL = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Shape'";
+  ps = createPointStyle(10, Color.YELLOW, 0.2f, 0.5f);
+  ls = createLineStyle(10, Color.YELLOW, 0.05f, 0.3f, null);
+  pos = createPolygonStyle(10, Color.parseColor("#440000FF"), createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
+  ts = createTextStyle(10, Color.YELLOW, 30, Typeface.SANS_SERIF);
+  showDatabaseLayer(ref, "Shape Layer", isEntity, queryName, querySQL, ps, ls, pos, ts);
+
+  isEntity = true;
+  // Database layers
+  waterQueryName = "Water Samples";
+  waterQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Water Sample'";
+  waterps = createPointStyle(10, Color.BLUE, 0.2f, 0.5f);
+  showDatabaseLayer(ref, "Water Samples", isEntity, waterQueryName, waterQuerySql, waterps, ls, pos, ts);
+
+  plantQueryName = "Vegetation Samples";
+  plantQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Vegetation Sample'";
+  plantps = createPointStyle(10, Color.GREEN, 0.2f, 0.5f);
+  showDatabaseLayer(ref, "Vegetation Samples", isEntity, plantQueryName, plantQuerySql, plantps, ls, pos, ts);
+
+  soilQueryName = "Soil Samples";
+  soilQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Soil Sample'";
+  soilps = createPointStyle(10, Color.BLACK, 0.2f, 0.5f);
+  showDatabaseLayer(ref, "Soil Samples", isEntity, soilQueryName, soilQuerySql, soilps, ls, pos, ts);
+
+  soilQueryName = "Soil Crust Samples";
+  soilQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Soil Crust Sample'";
+  soilps = createPointStyle(10, Color.GRAY, 0.2f, 0.5f);
+  showDatabaseLayer(ref, "Soil Crust Samples", isEntity, soilQueryName, soilQuerySql, soilps, ls, pos, ts);
+
+  rockQueryName = "Rock Samples";
+  rockQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Rock Sample'";
+  rockps = createPointStyle(10, Color.RED, 0.2f, 0.5f);
+  showDatabaseLayer(ref, "Rock Samples", isEntity, rockQueryName, rockQuerySql, rockps, ls, pos, ts);
+}
