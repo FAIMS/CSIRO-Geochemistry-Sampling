@@ -196,6 +196,15 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: tab
+        Ref:  Rock_Sample/Map
+     */
+    public static View get_RockSample_Map(Solo solo) {
+        String ref = "Rock_Sample/Map";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: tab
         Ref:  Rock_Sample/Measurements
      */
     public static View get_RockSample_Measurements(Solo solo) {
@@ -241,6 +250,15 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: tab
+        Ref:  Soil_Crust_Sample/Map
+     */
+    public static View get_SoilCrustSample_Map(Solo solo) {
+        String ref = "Soil_Crust_Sample/Map";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: tab
         Ref:  Soil_Crust_Sample/Photolog
      */
     public static View get_SoilCrustSample_Photolog(Solo solo) {
@@ -263,6 +281,15 @@ public class ModuleUtil extends ModuleHelper {
      */
     public static View get_SoilSample_BasicInfo(Solo solo) {
         String ref = "Soil_Sample/Basic_Info";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: tab
+        Ref:  Soil_Sample/Map
+     */
+    public static View get_SoilSample_Map(Solo solo) {
+        String ref = "Soil_Sample/Map";
         return (android.view.View) solo.getView((Object) ref);
     }
 
@@ -299,6 +326,15 @@ public class ModuleUtil extends ModuleHelper {
      */
     public static View get_VegetationSample_BasicInfo(Solo solo) {
         String ref = "Vegetation_Sample/Basic_Info";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: tab
+        Ref:  Vegetation_Sample/Map
+     */
+    public static View get_VegetationSample_Map(Solo solo) {
+        String ref = "Vegetation_Sample/Map";
         return (android.view.View) solo.getView((Object) ref);
     }
 
@@ -344,6 +380,15 @@ public class ModuleUtil extends ModuleHelper {
      */
     public static View get_WaterSample_Hidden(Solo solo) {
         String ref = "Water_Sample/Hidden";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: tab
+        Ref:  Water_Sample/Map
+     */
+    public static View get_WaterSample_Map(Solo solo) {
+        String ref = "Water_Sample/Map";
         return (android.view.View) solo.getView((Object) ref);
     }
 
@@ -537,6 +582,33 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: button
+        Ref:  Rock_Sample/Map/Center_Me_1
+     */
+    public static View get_RockSample_Map_CenterMe1(Solo solo) {
+        String ref = "Rock_Sample/Map/Center_Me_1";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: button
+        Ref:  Rock_Sample/Map/Save_Map_Settings_1
+     */
+    public static View get_RockSample_Map_SaveMapSettings1(Solo solo) {
+        String ref = "Rock_Sample/Map/Save_Map_Settings_1";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: button
+        Ref:  Rock_Sample/Map/Save_Selected_Geometry
+     */
+    public static View get_RockSample_Map_SaveSelectedGeometry(Solo solo) {
+        String ref = "Rock_Sample/Map/Save_Selected_Geometry";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: button
         Ref:  Rock_Sample/Photolog/New_Photolog
      */
     public static View get_RockSample_Photolog_NewPhotolog(Solo solo) {
@@ -577,6 +649,33 @@ public class ModuleUtil extends ModuleHelper {
      */
     public static View get_SoilCrustSample_BasicInfo_TakeFromGPS1(Solo solo) {
         String ref = "Soil_Crust_Sample/Basic_Info/Take_From_GPS_1";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: button
+        Ref:  Soil_Crust_Sample/Map/Center_Me_1
+     */
+    public static View get_SoilCrustSample_Map_CenterMe1(Solo solo) {
+        String ref = "Soil_Crust_Sample/Map/Center_Me_1";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: button
+        Ref:  Soil_Crust_Sample/Map/Save_Map_Settings_1
+     */
+    public static View get_SoilCrustSample_Map_SaveMapSettings1(Solo solo) {
+        String ref = "Soil_Crust_Sample/Map/Save_Map_Settings_1";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: button
+        Ref:  Soil_Crust_Sample/Map/Save_Selected_Geometry
+     */
+    public static View get_SoilCrustSample_Map_SaveSelectedGeometry(Solo solo) {
+        String ref = "Soil_Crust_Sample/Map/Save_Selected_Geometry";
         return (android.view.View) solo.getView((Object) ref);
     }
 
@@ -627,6 +726,33 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: button
+        Ref:  Soil_Sample/Map/Center_Me_1
+     */
+    public static View get_SoilSample_Map_CenterMe1(Solo solo) {
+        String ref = "Soil_Sample/Map/Center_Me_1";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: button
+        Ref:  Soil_Sample/Map/Save_Map_Settings_1
+     */
+    public static View get_SoilSample_Map_SaveMapSettings1(Solo solo) {
+        String ref = "Soil_Sample/Map/Save_Map_Settings_1";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: button
+        Ref:  Soil_Sample/Map/Save_Selected_Geometry
+     */
+    public static View get_SoilSample_Map_SaveSelectedGeometry(Solo solo) {
+        String ref = "Soil_Sample/Map/Save_Selected_Geometry";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: button
         Ref:  Soil_Sample/Photolog/New_Photolog
      */
     public static View get_SoilSample_Photolog_NewPhotolog(Solo solo) {
@@ -672,6 +798,33 @@ public class ModuleUtil extends ModuleHelper {
 
     /*
         Type: button
+        Ref:  Vegetation_Sample/Map/Center_Me_1
+     */
+    public static View get_VegetationSample_Map_CenterMe1(Solo solo) {
+        String ref = "Vegetation_Sample/Map/Center_Me_1";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: button
+        Ref:  Vegetation_Sample/Map/Save_Map_Settings_1
+     */
+    public static View get_VegetationSample_Map_SaveMapSettings1(Solo solo) {
+        String ref = "Vegetation_Sample/Map/Save_Map_Settings_1";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: button
+        Ref:  Vegetation_Sample/Map/Save_Selected_Geometry
+     */
+    public static View get_VegetationSample_Map_SaveSelectedGeometry(Solo solo) {
+        String ref = "Vegetation_Sample/Map/Save_Selected_Geometry";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: button
         Ref:  Vegetation_Sample/Photolog/New_Photolog
      */
     public static View get_VegetationSample_Photolog_NewPhotolog(Solo solo) {
@@ -712,6 +865,33 @@ public class ModuleUtil extends ModuleHelper {
      */
     public static View get_WaterSample_BasicInfo_TakeFromGPS1(Solo solo) {
         String ref = "Water_Sample/Basic_Info/Take_From_GPS_1";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: button
+        Ref:  Water_Sample/Map/Center_Me_1
+     */
+    public static View get_WaterSample_Map_CenterMe1(Solo solo) {
+        String ref = "Water_Sample/Map/Center_Me_1";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: button
+        Ref:  Water_Sample/Map/Save_Map_Settings_1
+     */
+    public static View get_WaterSample_Map_SaveMapSettings1(Solo solo) {
+        String ref = "Water_Sample/Map/Save_Map_Settings_1";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: button
+        Ref:  Water_Sample/Map/Save_Selected_Geometry
+     */
+    public static View get_WaterSample_Map_SaveSelectedGeometry(Solo solo) {
+        String ref = "Water_Sample/Map/Save_Selected_Geometry";
         return (android.view.View) solo.getView((Object) ref);
     }
 
@@ -2440,6 +2620,51 @@ public class ModuleUtil extends ModuleHelper {
      */
     public static View get_Project_Map_Map(Solo solo) {
         String ref = "Project/Map/Map";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: map
+        Ref:  Rock_Sample/Map/Map
+     */
+    public static View get_RockSample_Map_Map(Solo solo) {
+        String ref = "Rock_Sample/Map/Map";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: map
+        Ref:  Soil_Crust_Sample/Map/Map
+     */
+    public static View get_SoilCrustSample_Map_Map(Solo solo) {
+        String ref = "Soil_Crust_Sample/Map/Map";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: map
+        Ref:  Soil_Sample/Map/Map
+     */
+    public static View get_SoilSample_Map_Map(Solo solo) {
+        String ref = "Soil_Sample/Map/Map";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: map
+        Ref:  Vegetation_Sample/Map/Map
+     */
+    public static View get_VegetationSample_Map_Map(Solo solo) {
+        String ref = "Vegetation_Sample/Map/Map";
+        return (android.view.View) solo.getView((Object) ref);
+    }
+
+    /*
+        Type: map
+        Ref:  Water_Sample/Map/Map
+     */
+    public static View get_WaterSample_Map_Map(Solo solo) {
+        String ref = "Water_Sample/Map/Map";
         return (android.view.View) solo.getView((Object) ref);
     }
 
