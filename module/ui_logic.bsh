@@ -1,5 +1,5 @@
 /*
- * GENERATED WITH FAIMS-TOOLS, SHA1: fb91e4618e7eb7995009f60174a9141770a20688
+ * GENERATED WITH FAIMS-TOOLS, SHA1: 3dad5b8f1030410d27fa4c13e07099859636a57f
  */
 import android.util.Log;
 import android.os.Build.MODEL;
@@ -5303,42 +5303,48 @@ void clearGeometry(String ref) {
   }
 }
 
+boolean doShowLayer(String mapRef, String archEntType) {
+  String tabGroup = getTabGroupRef(mapRef);
+  String mapArchEntType = getArchEntType(tabGroup);
+
+  return mapRef.equals(MAP_REF) || mapArchEntType.equals(archEntType);
+}
+
+void showDatabaseLayer(String mapRef, String archEntType, int color) {
+    querySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = '" + archEntType + "'";
+    ps = createPointStyle(10, color, 0.2f, 0.5f);
+    ls = createLineStyle(10, Color.YELLOW, 0.05f, 0.3f, null);
+    pos = createPolygonStyle(10, Color.parseColor("#440000FF"), createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
+    ts = createTextStyle(10, Color.YELLOW, 30, Typeface.SANS_SERIF);
+    showDatabaseLayer(mapRef, archEntType, true, archEntType, querySql, ps, ls, pos, ts);
+}
+
 void showDatabaseLayers(String ref) {
-  isEntity = true;
   queryName = "Shape";
-  querySQL = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Shape'";
-  ps = createPointStyle(10, Color.YELLOW, 0.2f, 0.5f);
-  ls = createLineStyle(10, Color.YELLOW, 0.05f, 0.3f, null);
-  pos = createPolygonStyle(10, Color.parseColor("#440000FF"), createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
-  ts = createTextStyle(10, Color.YELLOW, 30, Typeface.SANS_SERIF);
-  showDatabaseLayer(ref, "Shape Layer", isEntity, queryName, querySQL, ps, ls, pos, ts);
+  if (doShowLayer(ref, queryName)) {
+    querySQL = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Shape'";
+    ps = createPointStyle(10, Color.YELLOW, 0.2f, 0.5f);
+    ls = createLineStyle(10, Color.YELLOW, 0.05f, 0.3f, null);
+    pos = createPolygonStyle(10, Color.parseColor("#440000FF"), createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
+    ts = createTextStyle(10, Color.YELLOW, 30, Typeface.SANS_SERIF);
+    showDatabaseLayer(ref, "Shape Layer", true, queryName, querySQL, ps, ls, pos, ts);
+  }
 
-  isEntity = true;
   // Database layers
-  waterQueryName = "Water Samples";
-  waterQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Water Sample'";
-  waterps = createPointStyle(10, Color.BLUE, 0.2f, 0.5f);
-  showDatabaseLayer(ref, "Water Samples", isEntity, waterQueryName, waterQuerySql, waterps, ls, pos, ts);
+  archEnt = "Water Sample";
+  if (doShowLayer(ref, archEnt)) showDatabaseLayer(ref, archEnt, Color.BLUE);
 
-  plantQueryName = "Vegetation Samples";
-  plantQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Vegetation Sample'";
-  plantps = createPointStyle(10, Color.GREEN, 0.2f, 0.5f);
-  showDatabaseLayer(ref, "Vegetation Samples", isEntity, plantQueryName, plantQuerySql, plantps, ls, pos, ts);
+  archEnt = "Vegetation Sample";
+  if (doShowLayer(ref, archEnt)) showDatabaseLayer(ref, archEnt, Color.GREEN);
 
-  soilQueryName = "Soil Samples";
-  soilQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Soil Sample'";
-  soilps = createPointStyle(10, Color.BLACK, 0.2f, 0.5f);
-  showDatabaseLayer(ref, "Soil Samples", isEntity, soilQueryName, soilQuerySql, soilps, ls, pos, ts);
+  archEnt = "Soil Sample";
+  if (doShowLayer(ref, archEnt)) showDatabaseLayer(ref, archEnt, Color.BLACK);
 
-  soilQueryName = "Soil Crust Samples";
-  soilQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Soil Crust Sample'";
-  soilps = createPointStyle(10, Color.GRAY, 0.2f, 0.5f);
-  showDatabaseLayer(ref, "Soil Crust Samples", isEntity, soilQueryName, soilQuerySql, soilps, ls, pos, ts);
+  archEnt = "Soil Crust Sample";
+  if (doShowLayer(ref, archEnt)) showDatabaseLayer(ref, archEnt, Color.GRAY);
 
-  rockQueryName = "Rock Samples";
-  rockQuerySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = 'Rock Sample'";
-  rockps = createPointStyle(10, Color.RED, 0.2f, 0.5f);
-  showDatabaseLayer(ref, "Rock Samples", isEntity, rockQueryName, rockQuerySql, rockps, ls, pos, ts);
+  archEnt = "Rock Sample";
+  if (doShowLayer(ref, archEnt)) showDatabaseLayer(ref, archEnt, Color.RED);
 }
 /*************************** CUSTOM `setFieldValue` ***************************/
 
@@ -5395,12 +5401,41 @@ void refreshMap() {
 showDatabaseLayers(MAP_REF);
 addOnEvent(getTabRef(MAP_REF), "show",  "refreshMap()");
 /************************** MAP (POINT ASSOCIATION) ***************************/
+// TODO: User should select from displayed point
 void initTabGroupMap(String ref) {
   setMapZoom(ref, 15.0f);
   int id = createCanvasLayer(ref, "Data Entry Layer");
   setSelectedLayer(ref, id);
   DATA_ENTRY_IDS.put(ref, id);
   showDatabaseLayers(ref);
+
+  //showBaseMap(ref, "orthophoto 5m", "files/data/maps/orthophoto5m.3857.tif");
+  //showBaseMap(ref, "orthophoto 10m", "files/data/maps/orthophoto10m.3857.tif");
+  showRasterMap(ref, "sentinel2", "files/data/maps/sentinel2.3857.tif");
+
+  ps = createPointStyle(0, Color.CYAN, 0.2f, 1f);
+  ls = createLineStyle(0, Color.GREEN, 0.05f, 0.3f, null);
+  pos = createPolygonStyle(0, Color.parseColor("#440000FF"), createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
+  ts = createTextStyle(0, Color.WHITE, 40, Typeface.SANS_SERIF);
+  table = "extract";
+  idcolumn = "FID";
+  labelcolumn = "CaveNo";
+  showSpatialLayer(ref, "ExtractVector", "files/data/maps/spatialite.3857.db", table, idcolumn, labelcolumn, ps, ls, pos, ts);
+
+  ps = createPointStyle(0, Color.MAGENTA, 0.2f, 1f);
+  ls = createLineStyle(0, Color.GREEN, 0.05f, 0.3f, null);
+  pos = createPolygonStyle(0, Color.parseColor("#440000FF"), createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
+  ts = createTextStyle(0, Color.WHITE, 40, Typeface.SANS_SERIF);
+  table = "Samples4km";
+  idcolumn = "FID";
+  labelcolumn = "ET_ID";
+  showSpatialLayer(ref, "SamplesVector", "files/data/maps/spatialite.3857.db", table, idcolumn, labelcolumn, ps, ls, pos, ts);
+
+  onMapEvent(
+      ref,
+      "showToast(\"click\"  + getMapPointClicked())",
+      "showToast(\"select\" + getMapGeometrySelected())"
+  );
 }
 
 String getMapRef(String tabGroupRef) {
@@ -5408,9 +5443,14 @@ String getMapRef(String tabGroupRef) {
 }
 
 void saveSelectedGeometry() {
-  String mapRef = getMapRef(getDisplayedTabGroup());
-  int    layer  = DATA_ENTRY_IDS.get(mapRef);
-  List   geom   = getGeometryList(mapRef, layer);
+  String mapTabGroup = getDisplayedTabGroup();
+  String mapRef      = getMapRef(mapTabGroup);
+  int    layer       = DATA_ENTRY_IDS.get(mapRef);
+  List   geom        = null;
+  if (getMapGeometrySelected() != void)
+    showWarning("", "" + getMapGeometrySelected());
+  if (getMapPointClicked() != void)
+    showWarning("", "" + getMapPointClicked());
 
   if (geom == null || geom.size() == 0) {
     showToast("Select geometry first");
@@ -5419,8 +5459,10 @@ void saveSelectedGeometry() {
 
   SaveCallback saveCallback  = new SaveCallback() {
     void onSave(uuid, newRecord) {
-      clearGeometry(mapRef);
-      refreshMap   (mapRef);
+      refreshMap(mapRef);
+
+      clearGpsInTabGroup(mapTabGroup);
+      fillInGPS(mapTabGroup);
     }
   };
 
@@ -5442,6 +5484,17 @@ for (String sampleType : SAMPLE_TYPES) {
 for (String sampleType : SAMPLE_TYPES) {
   String ref = sampleType + "/Map/Save_Selected_Geometry";
   addOnEvent(ref, "click", "saveSelectedGeometry()");
+}
+
+for (String sampleType : SAMPLE_TYPES) {
+  String refBtn = sampleType + "/Map/Center_Me_1";
+  String refMap = sampleType + "/Map/Map";
+  addOnEvent(refBtn, "click", "centerOnCurrentPosition", new Object[] {refMap});
+}
+
+for (String sampleType : SAMPLE_TYPES) {
+  String refMap = sampleType + "/Map/Map";
+  addOnEvent(getTabRef(refMap), "show",  "refreshMap", new Object[] {refMap});
 }
 /*********************************** SHAPE ************************************/
 void clearGeometry() {

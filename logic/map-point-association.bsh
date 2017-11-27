@@ -1,10 +1,34 @@
 /************************** MAP (POINT ASSOCIATION) ***************************/
+// TODO: User should select from displayed point
+// TODO: Remove data entry layer
 void initTabGroupMap(String ref) {
   setMapZoom(ref, 15.0f);
   int id = createCanvasLayer(ref, "Data Entry Layer");
   setSelectedLayer(ref, id);
   DATA_ENTRY_IDS.put(ref, id);
   showDatabaseLayers(ref);
+
+  //showBaseMap(ref, "orthophoto 5m", "files/data/maps/orthophoto5m.3857.tif");
+  //showBaseMap(ref, "orthophoto 10m", "files/data/maps/orthophoto10m.3857.tif");
+  showRasterMap(ref, "sentinel2", "files/data/maps/sentinel2.3857.tif");
+
+  ps = createPointStyle(0, Color.CYAN, 0.2f, 1f);
+  ls = createLineStyle(0, Color.GREEN, 0.05f, 0.3f, null);
+  pos = createPolygonStyle(0, Color.parseColor("#440000FF"), createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
+  ts = createTextStyle(0, Color.WHITE, 40, Typeface.SANS_SERIF);
+  table = "extract";
+  idcolumn = "FID";
+  labelcolumn = "CaveNo";
+  showSpatialLayer(ref, "ExtractVector", "files/data/maps/spatialite.3857.db", table, idcolumn, labelcolumn, ps, ls, pos, ts);
+
+  ps = createPointStyle(0, Color.MAGENTA, 0.2f, 1f);
+  ls = createLineStyle(0, Color.GREEN, 0.05f, 0.3f, null);
+  pos = createPolygonStyle(0, Color.parseColor("#440000FF"), createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
+  ts = createTextStyle(0, Color.WHITE, 40, Typeface.SANS_SERIF);
+  table = "Samples4km";
+  idcolumn = "FID";
+  labelcolumn = "ET_ID";
+  showSpatialLayer(ref, "SamplesVector", "files/data/maps/spatialite.3857.db", table, idcolumn, labelcolumn, ps, ls, pos, ts);
 }
 
 String getMapRef(String tabGroupRef) {
@@ -12,9 +36,12 @@ String getMapRef(String tabGroupRef) {
 }
 
 void saveSelectedGeometry() {
-  String mapRef = getMapRef(getDisplayedTabGroup());
-  int    layer  = DATA_ENTRY_IDS.get(mapRef);
-  List   geom   = getGeometryList(mapRef, layer);
+  String mapTabGroup = getDisplayedTabGroup();
+  String mapRef      = getMapRef(mapTabGroup);
+  int    layer       = DATA_ENTRY_IDS.get(mapRef);
+  List   geom        = null;
+  if (getMapGeometrySelected() != void)
+    geom = getMapGeometrySelected();
 
   if (geom == null || geom.size() == 0) {
     showToast("Select geometry first");
@@ -23,8 +50,10 @@ void saveSelectedGeometry() {
 
   SaveCallback saveCallback  = new SaveCallback() {
     void onSave(uuid, newRecord) {
-      clearGeometry(mapRef);
-      refreshMap   (mapRef);
+      refreshMap(mapRef);
+
+      clearGpsInTabGroup(mapTabGroup);
+      fillInGPS(mapTabGroup);
     }
   };
 
@@ -46,4 +75,15 @@ for (String sampleType : SAMPLE_TYPES) {
 for (String sampleType : SAMPLE_TYPES) {
   String ref = sampleType + "/Map/Save_Selected_Geometry";
   addOnEvent(ref, "click", "saveSelectedGeometry()");
+}
+
+for (String sampleType : SAMPLE_TYPES) {
+  String refBtn = sampleType + "/Map/Center_Me_1";
+  String refMap = sampleType + "/Map/Map";
+  addOnEvent(refBtn, "click", "centerOnCurrentPosition", new Object[] {refMap});
+}
+
+for (String sampleType : SAMPLE_TYPES) {
+  String refMap = sampleType + "/Map/Map";
+  addOnEvent(getTabRef(refMap), "show",  "refreshMap", new Object[] {refMap});
 }

@@ -430,3 +430,5 @@ void fetchArchEnt(String id, FetchCallback callback) { if (callback != null) cal
 void showAlert(String title, String message, String okCallback, String cancelCallback) {
   stdout("showAlert: " + title + " | " + message + " | " + okCallback + " | " + cancelCallback);
 }
+void showSpatialLayer(String ref, String layerName, String filename, String tableName, String idColumn, String labelColumn, GeometryStyle pointStyle, GeometryStyle lineStyle, GeometryStyle polygonStyle, GeometryTextStyle textStyle) {
+}
