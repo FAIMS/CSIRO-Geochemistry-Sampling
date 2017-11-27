@@ -412,3 +412,17 @@ void initFieldValues() {
   assert("Water_Sample".equals(getDisplayedTabGroup()));
   assert(exp.equals(out));
 }
+
+{
+  SaveSelectedPoint() {
+    void run() {
+      saveSelectedPoint();
+    }
+    return this;
+  }
+
+  String out = getStdout(SaveSelectedPoint());
+  String exp = "showToast: Select exactly one point\n";
+
+  assert(exp.equals(out));
+}

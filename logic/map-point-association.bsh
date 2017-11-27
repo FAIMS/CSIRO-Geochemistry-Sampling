@@ -1,11 +1,15 @@
 /************************** MAP (POINT ASSOCIATION) ***************************/
-// TODO: User should select from displayed point
-// TODO: Remove data entry layer
 void initTabGroupMap(String ref) {
-  setMapZoom(ref, 15.0f);
-  int id = createCanvasLayer(ref, "Data Entry Layer");
-  setSelectedLayer(ref, id);
-  DATA_ENTRY_IDS.put(ref, id);
+  setMapZoom(ref, 12.0f);
+  setMapFocusPoint(
+      ref,
+      549343.384492047,
+      6555585.5887833 // Centre of points in 'spatialite.3857'
+  );
+  //int id = createCanvasLayer(ref, "Data Entry Layer");
+  //setSelectedLayer(ref, id);
+  //DATA_ENTRY_IDS.put(ref, id);
+
   showDatabaseLayers(ref);
 
   //showBaseMap(ref, "orthophoto 5m", "files/data/maps/orthophoto5m.3857.tif");
@@ -35,25 +39,40 @@ String getMapRef(String tabGroupRef) {
   return tabGroupRef + "/Map/Map";
 }
 
-void saveSelectedGeometry() {
+boolean geoListHasInstanceOf(List geometry, Class clazz) {
+  for (Geometry g : geometry)
+    if (clazz.isInstance(g))
+      return true;
+  return false;
+}
+
+// Associates the currently displayed record (i.e. tab group) with the point
+// highlighted in the map.
+void saveSelectedPoint() {
   String mapTabGroup = getDisplayedTabGroup();
   String mapRef      = getMapRef(mapTabGroup);
-  int    layer       = DATA_ENTRY_IDS.get(mapRef);
-  List   geom        = null;
-  if (getMapGeometrySelected() != void)
-    geom = getMapGeometrySelected();
+  List   geom        = getGeometryHighlights(mapRef);
 
-  if (geom == null || geom.size() == 0) {
-    showToast("Select geometry first");
+  boolean isValidGeom = true;
+  isValidGeom = isValidGeom && geom != null;
+  isValidGeom = isValidGeom && geom.size() == 1;
+  isValidGeom = isValidGeom && geoListHasInstanceOf(geom, Point.class);
+
+  if (!isValidGeom) {
+    showToast("Select exactly one point");
     return;
   }
 
   SaveCallback saveCallback  = new SaveCallback() {
     void onSave(uuid, newRecord) {
+      clearGeometryHighlights(mapRef);
+
       refreshMap(mapRef);
 
       clearGpsInTabGroup(mapTabGroup);
       fillInGPS(mapTabGroup);
+
+      showToast("Point saved");
     }
   };
 
@@ -74,16 +93,16 @@ for (String sampleType : SAMPLE_TYPES) {
 
 for (String sampleType : SAMPLE_TYPES) {
   String ref = sampleType + "/Map/Save_Selected_Geometry";
-  addOnEvent(ref, "click", "saveSelectedGeometry()");
+  addOnEvent(ref, "click", "saveSelectedPoint()");
 }
 
 for (String sampleType : SAMPLE_TYPES) {
   String refBtn = sampleType + "/Map/Center_Me_1";
-  String refMap = sampleType + "/Map/Map";
+  String refMap = getMapRef(sampleType);
   addOnEvent(refBtn, "click", "centerOnCurrentPosition", new Object[] {refMap});
 }
 
 for (String sampleType : SAMPLE_TYPES) {
-  String refMap = sampleType + "/Map/Map";
+  String refMap = getMapRef(sampleType);
   addOnEvent(getTabRef(refMap), "show",  "refreshMap", new Object[] {refMap});
 }
