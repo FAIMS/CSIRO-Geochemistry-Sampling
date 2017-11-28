@@ -23,12 +23,20 @@ boolean doShowLayer(String mapRef, String archEntType) {
 }
 
 void showDatabaseLayer(String mapRef, String archEntType, int color) {
-    querySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = '" + archEntType + "'";
-    ps = createPointStyle(10, color, 0.2f, 0.5f);
-    ls = createLineStyle(10, Color.YELLOW, 0.05f, 0.3f, null);
-    pos = createPolygonStyle(10, Color.parseColor("#440000FF"), createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
-    ts = createTextStyle(10, Color.YELLOW, 30, Typeface.SANS_SERIF);
-    showDatabaseLayer(mapRef, archEntType, true, archEntType, querySql, ps, ls, pos, ts);
+  String q = "";
+  q += " SELECT uuid, aenttimestamp";
+  q += " FROM   latestNonDeletedArchEnt";
+  q += " JOIN   aenttype using (aenttypeid)";
+  q += " WHERE (";
+  q += "           uuid  IN (SELECT value FROM localsettings WHERE key='map-uuid')";
+  q += "        OR (SELECT value FROM localsettings WHERE key='map-uuid') is null";
+  q += " ) and aenttypename = '" + archEntType + "'";
+
+  ps = createPointStyle(10, color, 0.2f, 0.5f);
+  ls = createLineStyle(10, Color.YELLOW, 0.05f, 0.3f, null);
+  pos = createPolygonStyle(10, Color.parseColor("#440000FF"), createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
+  ts = createTextStyle(10, Color.YELLOW, 30, Typeface.SANS_SERIF);
+  showDatabaseLayer(mapRef, archEntType, true, archEntType, q, ps, ls, pos, ts);
 }
 
 void showDatabaseLayers(String ref) {

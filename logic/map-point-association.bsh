@@ -1,4 +1,6 @@
 /************************** MAP (POINT ASSOCIATION) ***************************/
+// TODO: Only show point whose uuid is equal to current uuid
+
 void initTabGroupMap(String ref) {
   setMapZoom(ref, 12.0f);
   setMapFocusPoint(
@@ -33,6 +35,14 @@ void initTabGroupMap(String ref) {
   idcolumn = "FID";
   labelcolumn = "ET_ID";
   showSpatialLayer(ref, "SamplesVector", "files/data/maps/spatialite.3857.db", table, idcolumn, labelcolumn, ps, ls, pos, ts);
+}
+
+void updateMapUuid() {
+  String tabGroup = getDisplayedTabGroup();
+  if (SAMPLE_TYPES.contains(tabGroup))
+    insertIntoLocalSettings("map-uuid", getUuid());
+  else
+    deleteFromLocalSettings("map-uuid");
 }
 
 String getMapRef(String tabGroupRef) {
@@ -105,4 +115,12 @@ for (String sampleType : SAMPLE_TYPES) {
 for (String sampleType : SAMPLE_TYPES) {
   String refMap = getMapRef(sampleType);
   addOnEvent(getTabRef(refMap), "show",  "refreshMap", new Object[] {refMap});
+}
+
+for (String sampleType : SAMPLE_TYPES) {
+  addOnEvent(sampleType, "create", "updateMapUuid()");
+  addOnEvent(sampleType, "copy",   "updateMapUuid()");
+  addOnEvent(sampleType, "fetch",  "updateMapUuid()");
+  addOnEvent(sampleType, "leave",  "updateMapUuid()");
+  addOnEvent(sampleType, "save",   "updateMapUuid()");
 }

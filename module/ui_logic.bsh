@@ -1,5 +1,5 @@
 /*
- * GENERATED WITH FAIMS-TOOLS, SHA1: f0a8355f79b5ee86b27ec67f8c2a1a22f799316a
+ * GENERATED WITH FAIMS-TOOLS, SHA1: c4eb48c14ec95c4b254868d44a617c00d5169399
  */
 import android.util.Log;
 import android.os.Build.MODEL;
@@ -2465,6 +2465,13 @@ void insertIntoLocalSettings(String key, Integer val) {
   insertIntoLocalSettings(key, Integer.toString(val));
 }
 
+void deleteFromLocalSettings(String key) {
+  String q = "DELETE FROM localsettings WHERE key=%s";
+  q = dbReplaceFirst(q, key);
+
+  fetchOne(q);
+}
+
 void insertIntoLocalSettingsOnChange(String ref) {
   String val = getFieldValue(ref);
 
@@ -3466,6 +3473,10 @@ Map tabgroupToUuid = Collections.synchronizedMap(new HashMap());
 
 String getUuid(String tabgroup) {
   return tabgroupToUuid.get(tabgroup);
+}
+
+String getUuid() {
+  return getUuid(getDisplayedTabGroup());
 }
 
 void setUuid(String tabgroup, String uuid) {
@@ -5311,12 +5322,20 @@ boolean doShowLayer(String mapRef, String archEntType) {
 }
 
 void showDatabaseLayer(String mapRef, String archEntType, int color) {
-    querySql = "SELECT uuid, aenttimestamp FROM latestNonDeletedArchEnt join aenttype using (aenttypeid) where aenttypename = '" + archEntType + "'";
-    ps = createPointStyle(10, color, 0.2f, 0.5f);
-    ls = createLineStyle(10, Color.YELLOW, 0.05f, 0.3f, null);
-    pos = createPolygonStyle(10, Color.parseColor("#440000FF"), createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
-    ts = createTextStyle(10, Color.YELLOW, 30, Typeface.SANS_SERIF);
-    showDatabaseLayer(mapRef, archEntType, true, archEntType, querySql, ps, ls, pos, ts);
+  String q = "";
+  q += " SELECT uuid, aenttimestamp";
+  q += " FROM   latestNonDeletedArchEnt";
+  q += " JOIN   aenttype using (aenttypeid)";
+  q += " WHERE (";
+  q += "           uuid  IN (SELECT value FROM localsettings WHERE key='map-uuid')";
+  q += "        OR (SELECT value FROM localsettings WHERE key='map-uuid') is null";
+  q += " ) and aenttypename = '" + archEntType + "'";
+
+  ps = createPointStyle(10, color, 0.2f, 0.5f);
+  ls = createLineStyle(10, Color.YELLOW, 0.05f, 0.3f, null);
+  pos = createPolygonStyle(10, Color.parseColor("#440000FF"), createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
+  ts = createTextStyle(10, Color.YELLOW, 30, Typeface.SANS_SERIF);
+  showDatabaseLayer(mapRef, archEntType, true, archEntType, q, ps, ls, pos, ts);
 }
 
 void showDatabaseLayers(String ref) {
@@ -5401,6 +5420,8 @@ void refreshMap() {
 showDatabaseLayers(MAP_REF);
 addOnEvent(getTabRef(MAP_REF), "show",  "refreshMap()");
 /************************** MAP (POINT ASSOCIATION) ***************************/
+// TODO: Only show point whose uuid is equal to current uuid
+
 void initTabGroupMap(String ref) {
   setMapZoom(ref, 12.0f);
   setMapFocusPoint(
@@ -5435,6 +5456,14 @@ void initTabGroupMap(String ref) {
   idcolumn = "FID";
   labelcolumn = "ET_ID";
   showSpatialLayer(ref, "SamplesVector", "files/data/maps/spatialite.3857.db", table, idcolumn, labelcolumn, ps, ls, pos, ts);
+}
+
+void updateMapUuid() {
+  String tabGroup = getDisplayedTabGroup();
+  if (SAMPLE_TYPES.contains(tabGroup))
+    insertIntoLocalSettings("map-uuid", getUuid());
+  else
+    deleteFromLocalSettings("map-uuid");
 }
 
 String getMapRef(String tabGroupRef) {
@@ -5507,6 +5536,14 @@ for (String sampleType : SAMPLE_TYPES) {
 for (String sampleType : SAMPLE_TYPES) {
   String refMap = getMapRef(sampleType);
   addOnEvent(getTabRef(refMap), "show",  "refreshMap", new Object[] {refMap});
+}
+
+for (String sampleType : SAMPLE_TYPES) {
+  addOnEvent(sampleType, "create", "updateMapUuid()");
+  addOnEvent(sampleType, "copy",   "updateMapUuid()");
+  addOnEvent(sampleType, "fetch",  "updateMapUuid()");
+  addOnEvent(sampleType, "leave",  "updateMapUuid()");
+  addOnEvent(sampleType, "save",   "updateMapUuid()");
 }
 /*********************************** SHAPE ************************************/
 void clearGeometry() {
