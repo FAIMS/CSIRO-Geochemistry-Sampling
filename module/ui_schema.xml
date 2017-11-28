@@ -201,6 +201,18 @@
               <New_Photolog/>
               <Existing_Photologs/>
             </Photolog>
+            <Map>
+              <Map/>
+              <Colgroup_1>
+                <Col_1>
+                  <Center_Me_1/>
+                </Col_1>
+                <Col_2>
+                  <Save_Map_Settings_1/>
+                </Col_2>
+              </Colgroup_1>
+              <Save_Selected_Geometry/>
+            </Map>
             <Hidden>
               <Preferred_pH_Time/>
               <Preferred_Eh_Time/>
@@ -280,6 +292,18 @@
               <New_Photolog/>
               <Existing_Photologs/>
             </Photolog>
+            <Map>
+              <Map/>
+              <Colgroup_1>
+                <Col_1>
+                  <Center_Me_1/>
+                </Col_1>
+                <Col_2>
+                  <Save_Map_Settings_1/>
+                </Col_2>
+              </Colgroup_1>
+              <Save_Selected_Geometry/>
+            </Map>
             <Vars>
               <Timestamp/>
             </Vars>
@@ -355,6 +379,18 @@
               <New_Photolog/>
               <Existing_Photologs/>
             </Photolog>
+            <Map>
+              <Map/>
+              <Colgroup_1>
+                <Col_1>
+                  <Center_Me_1/>
+                </Col_1>
+                <Col_2>
+                  <Save_Map_Settings_1/>
+                </Col_2>
+              </Colgroup_1>
+              <Save_Selected_Geometry/>
+            </Map>
             <Vars>
               <Timestamp/>
             </Vars>
@@ -430,6 +466,18 @@
               <New_Photolog/>
               <Existing_Photologs/>
             </Photolog>
+            <Map>
+              <Map/>
+              <Colgroup_1>
+                <Col_1>
+                  <Center_Me_1/>
+                </Col_1>
+                <Col_2>
+                  <Save_Map_Settings_1/>
+                </Col_2>
+              </Colgroup_1>
+              <Save_Selected_Geometry/>
+            </Map>
             <Vars>
               <Timestamp/>
             </Vars>
@@ -538,6 +586,18 @@
               <New_Photolog/>
               <Existing_Photologs/>
             </Photolog>
+            <Map>
+              <Map/>
+              <Colgroup_1>
+                <Col_1>
+                  <Center_Me_1/>
+                </Col_1>
+                <Col_2>
+                  <Save_Map_Settings_1/>
+                </Col_2>
+              </Colgroup_1>
+              <Save_Selected_Geometry/>
+            </Map>
             <Vars>
               <Timestamp/>
             </Vars>
@@ -1108,6 +1168,30 @@
           </item>
         </select1>
       </group>
+      <group ref="Map" faims_scrollable="false">
+        <label>{Map}</label>
+        <input faims_map="true" ref="Map">
+          <label/>
+        </input>
+        <group ref="Colgroup_1" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <trigger ref="Center_Me_1">
+              <label>{Center_Me}</label>
+            </trigger>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <trigger ref="Save_Map_Settings_1">
+              <label>{Save_Map_Settings}</label>
+            </trigger>
+          </group>
+        </group>
+        <trigger ref="Save_Selected_Geometry">
+          <label>{Save_Selected_Geometry}</label>
+        </trigger>
+      </group>
       <group ref="Hidden" faims_hidden="true">
         <label>{Hidden}</label>
         <input faims_attribute_name="Preferred pH Time" faims_attribute_type="measure" ref="Preferred_pH_Time">
@@ -1306,6 +1390,30 @@
             <value>Options not loaded</value>
           </item>
         </select1>
+      </group>
+      <group ref="Map" faims_scrollable="false">
+        <label>{Map}</label>
+        <input faims_map="true" ref="Map">
+          <label/>
+        </input>
+        <group ref="Colgroup_1" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <trigger ref="Center_Me_1">
+              <label>{Center_Me}</label>
+            </trigger>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <trigger ref="Save_Map_Settings_1">
+              <label>{Save_Map_Settings}</label>
+            </trigger>
+          </group>
+        </group>
+        <trigger ref="Save_Selected_Geometry">
+          <label>{Save_Selected_Geometry}</label>
+        </trigger>
       </group>
       <group ref="Vars" faims_hidden="true">
         <label>{Vars}</label>
@@ -1530,6 +1638,30 @@
           </item>
         </select1>
       </group>
+      <group ref="Map" faims_scrollable="false">
+        <label>{Map}</label>
+        <input faims_map="true" ref="Map">
+          <label/>
+        </input>
+        <group ref="Colgroup_1" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <trigger ref="Center_Me_1">
+              <label>{Center_Me}</label>
+            </trigger>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <trigger ref="Save_Map_Settings_1">
+              <label>{Save_Map_Settings}</label>
+            </trigger>
+          </group>
+        </group>
+        <trigger ref="Save_Selected_Geometry">
+          <label>{Save_Selected_Geometry}</label>
+        </trigger>
+      </group>
       <group ref="Vars" faims_hidden="true">
         <label>{Vars}</label>
         <input faims_attribute_name="Soil Sample Timestamp" faims_attribute_type="measure" ref="Timestamp">
@@ -1753,6 +1885,30 @@
           </item>
         </select1>
       </group>
+      <group ref="Map" faims_scrollable="false">
+        <label>{Map}</label>
+        <input faims_map="true" ref="Map">
+          <label/>
+        </input>
+        <group ref="Colgroup_1" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <trigger ref="Center_Me_1">
+              <label>{Center_Me}</label>
+            </trigger>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <trigger ref="Save_Map_Settings_1">
+              <label>{Save_Map_Settings}</label>
+            </trigger>
+          </group>
+        </group>
+        <trigger ref="Save_Selected_Geometry">
+          <label>{Save_Selected_Geometry}</label>
+        </trigger>
+      </group>
       <group ref="Vars" faims_hidden="true">
         <label>{Vars}</label>
         <input faims_attribute_name="Soil Crust Sample Timestamp" faims_attribute_type="measure" ref="Timestamp">
@@ -1812,7 +1968,7 @@
         <input faims_attribute_name="Area" faims_attribute_type="measure" ref="Area" faims_read_only="true">
           <label>{Area}</label>
         </input>
-        <input faims_attribute_name="Rock Sample Location Number" faims_attribute_type="measure" ref="Location_Number">
+        <input faims_attribute_name="Location Number" faims_attribute_type="measure" ref="Location_Number">
           <label>{Location_Number}</label>
         </input>
         <select1 appearance="full" faims_attribute_name="Observation Type" faims_attribute_type="vocab" ref="Observation_Type">
@@ -2034,6 +2190,30 @@
             <value>Options not loaded</value>
           </item>
         </select1>
+      </group>
+      <group ref="Map" faims_scrollable="false">
+        <label>{Map}</label>
+        <input faims_map="true" ref="Map">
+          <label/>
+        </input>
+        <group ref="Colgroup_1" faims_style="orientation">
+          <label/>
+          <group ref="Col_1" faims_style="even">
+            <label/>
+            <trigger ref="Center_Me_1">
+              <label>{Center_Me}</label>
+            </trigger>
+          </group>
+          <group ref="Col_2" faims_style="even">
+            <label/>
+            <trigger ref="Save_Map_Settings_1">
+              <label>{Save_Map_Settings}</label>
+            </trigger>
+          </group>
+        </group>
+        <trigger ref="Save_Selected_Geometry">
+          <label>{Save_Selected_Geometry}</label>
+        </trigger>
       </group>
       <group ref="Vars" faims_hidden="true">
         <label>{Vars}</label>

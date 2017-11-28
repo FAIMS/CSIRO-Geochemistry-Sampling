@@ -15,9 +15,9 @@ SUFFIX_TAB_GROUPS.add("Soil_Crust_Sample");
 SUFFIX_TAB_GROUPS.add("Water_Sample");
 
 void onClickProjectNewSample(String type) {
-  if ("{Water_Sample}"       .equals(type)) onClickProjectNewWaterSample();
-  if ("{Vegetation_Sample}"  .equals(type)) onClickProjectNewVegetationSample();
-  if ("{Rock_Sample}"        .equals(type)) onClickProjectNewRockSample();
-  if ("{Soil_Sample}"        .equals(type)) onClickProjectNewSoilSample();
-  if ("{Soil__Crust__Sample}".equals(type)) onClickProjectNewSoilCrustSample();
+  if ("Water Sample"       .equals(type)) onClickProjectNewWaterSample();
+  if ("Vegetation Sample"  .equals(type)) onClickProjectNewVegetationSample();
+  if ("Rock Sample"        .equals(type)) onClickProjectNewRockSample();
+  if ("Soil Sample"        .equals(type)) onClickProjectNewSoilSample();
+  if ("Soil (Crust) Sample".equals(type)) onClickProjectNewSoilCrustSample();
 }

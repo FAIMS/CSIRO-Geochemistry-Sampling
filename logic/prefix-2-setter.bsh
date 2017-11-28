@@ -5,11 +5,11 @@ void maybeSetPrefix2() {
   String refPrefix  = "Project/Start/Sample_Prefix_2";
 
   Map type2fix = new HashMap();
-  type2fix.put("{Water_Sample}",        "W");
-  type2fix.put("{Vegetation_Sample}",   "V");
-  type2fix.put("{Soil_Sample}",         "S");
-  type2fix.put("{Soil__Crust__Sample}", "CR");
-  type2fix.put("{Rock_Sample}",         "R");
+  type2fix.put("Water Sample",        "W");
+  type2fix.put("Vegetation Sample",   "V");
+  type2fix.put("Soil Sample",         "S");
+  type2fix.put("Soil (Crust) Sample", "CR");
+  type2fix.put("Rock Sample",         "R");
 
   String fix = type2fix.get(sampleType);
   setFieldValue(refPrefix, fix);

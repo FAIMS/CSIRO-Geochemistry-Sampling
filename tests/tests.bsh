@@ -19,114 +19,226 @@ void initFieldValues() {
   setFieldValue("Project/Start/Sample_Starting_ID",           "0000");
 }
 
+// VALIDATION OF SAMPLE ID RANGES
 {
-  print("TEST: VALIDATION OF SAMPLE ID RANGES (SHOULD SHOW 2 WARNINGS):");
   initFieldValues();
   setFieldValue("Project/Sample_ID_Ranges/Minimum_Sample_ID", "000");
   setFieldValue("Project/Sample_ID_Ranges/Maximum_Sample_ID", "000");
-  executeOnEvent(
-      "Project/Sample_ID_Ranges/Minimum_Sample_ID",
-      "blur"
-  );
-  executeOnEvent(
-      "Project/Sample_ID_Ranges/Maximum_Sample_ID",
-      "blur"
-  );
-  print("");
+  ExecuteOnEvents() {
+    void run() {
+      executeOnEvent(
+          "Project/Sample_ID_Ranges/Minimum_Sample_ID",
+          "blur"
+      );
+      executeOnEvent(
+          "Project/Sample_ID_Ranges/Maximum_Sample_ID",
+          "blur"
+      );
+    }
+    return this;
+  }
+  String out = getStdout(ExecuteOnEvents());
+  String exp = "";
+  exp += "showWarning: Invalid Minimum Sample ID | The 'Minimum Sample ID' field must contain a number consisting  of 4 digits.\n";
+  exp += "showWarning: Invalid Maximum Sample ID | The 'Maximum Sample ID' field must contain a number consisting  of 4 digits.\n";
+  assert(exp.equals(out));
+}
 
-  print("TEST: VALIDATION OF SAMPLE ID RANGES (SHOULD SHOW 0 WARNINGS):");
+// VALIDATION OF SAMPLE ID RANGES (SHOULD SHOW 0 WARNINGS)
+{
   initFieldValues();
   setFieldValue("Project/Sample_ID_Ranges/Minimum_Sample_ID", "0000");
   setFieldValue("Project/Sample_ID_Ranges/Maximum_Sample_ID", "0000");
-  executeOnEvent(
-      "Project/Sample_ID_Ranges/Minimum_Sample_ID",
-      "blur"
-  );
-  executeOnEvent(
-      "Project/Sample_ID_Ranges/Maximum_Sample_ID",
-      "blur"
-  );
-  print("");
+  ExecuteOnEvents() {
+    void run() {
+      executeOnEvent(
+          "Project/Sample_ID_Ranges/Minimum_Sample_ID",
+          "blur"
+      );
+      executeOnEvent(
+          "Project/Sample_ID_Ranges/Maximum_Sample_ID",
+          "blur"
+      );
+    }
+    return this;
+  }
 
-  print("TEST: VALIDATION OF SAMPLE ID (SHOULD SHOW 1 WARNINGS):");
+  String out = getStdout(ExecuteOnEvents());
+  String exp = "";
+  assert(exp.equals(out));
+}
+
+// VALIDATION OF SAMPLE ID (SHOULD SHOW 1 WARNINGS)
+{
   initFieldValues();
   setFieldValue("Project/Sample_ID_Ranges/Minimum_Sample_ID", "0000");
   setFieldValue("Project/Sample_ID_Ranges/Maximum_Sample_ID", "0000");
   setFieldValue("Project/Start/Sample_Starting_ID",           "0001");
-  executeOnEvent(
-      "Project/Start/Create_New_Sample",
-      "click"
-  );
-  print("");
 
-  print("TEST: VALIDATION OF SAMPLE ID (SHOULD SHOW 1 WARNINGS):");
+  ExecuteOnEvents() {
+    void run() {
+      executeOnEvent(
+          "Project/Start/Create_New_Sample",
+          "click"
+      );
+    }
+    return this;
+  }
+
+  String out = getStdout(ExecuteOnEvents());
+  String exp = "showWarning: Invalid 'Next Sample ID' | Please enter a number into the 'Next Sample ID' field. 'Next Sample ID' must consist of 4 digits and be in the range specified in the 'Sample ID Ranges' tab.\n";
+  assert(exp.equals(out));
+}
+
+// VALIDATION OF SAMPLE ID (SHOULD SHOW 1 WARNINGS)
+{
   initFieldValues();
   setFieldValue("Project/Start/Sample_Starting_ID", "000");
-  executeOnEvent(
-      "Project/Start/Create_New_Sample",
-      "click"
-  );
-  print("");
+  ExecuteOnEvents() {
+    void run() {
+      executeOnEvent(
+          "Project/Start/Create_New_Sample",
+          "click"
+      );
+    }
+    return this;
+  }
+  String out = getStdout(ExecuteOnEvents());
+  String exp = "showWarning: Invalid 'Next Sample ID' | Please enter a number into the 'Next Sample ID' field. 'Next Sample ID' must consist of 4 digits and be in the range specified in the 'Sample ID Ranges' tab.\n";
+  assert(exp.equals(out));
+}
 
-  print("TEST: VALIDATION OF SAMPLE ID (SHOULD SHOW 0 WARNINGS):");
+// VALIDATION OF SAMPLE ID (SHOULD SHOW 0 WARNINGS)
+{
   initFieldValues();
   setFieldValue("Project/Sample_ID_Ranges/Minimum_Sample_ID", "0000");
   setFieldValue("Project/Sample_ID_Ranges/Maximum_Sample_ID", "0000");
   setFieldValue("Project/Start/Sample_Starting_ID",           "0000");
-  executeOnEvent(
-      "Project/Start/Create_New_Sample",
-      "click"
-  );
-  print("");
+  ExecuteOnEvents() {
+    void run() {
+      executeOnEvent(
+          "Project/Start/Create_New_Sample",
+          "click"
+      );
+    }
+    return this;
+  }
 
-  print("TEST: VALIDATION OF SAMPLE PREFIX 1 (SHOULD SHOW 1 WARNINGS):");
-  initFieldValues();
-  setFieldValue("Project/Start/Sample_Prefix_1", "00000");
-  executeOnEvent(
-      "Project/Start/Create_New_Sample",
-      "click"
-  );
-  print("");
-
-  print("TEST: VALIDATION OF SAMPLE PREFIX 1 (SHOULD SHOW 0 WARNINGS):");
-  initFieldValues();
-  setFieldValue("Project/Start/Sample_Prefix_1", "a0");
-  executeOnEvent(
-      "Project/Start/Create_New_Sample",
-      "click"
-  );
-  print("");
-
-  print("TEST: VALIDATION OF SAMPLE PREFIX 2 (SHOULD SHOW 1 WARNINGS):");
-  initFieldValues();
-  setFieldValue("Project/Start/Sample_Prefix_2", "a0000");
-  executeOnEvent(
-      "Project/Start/Create_New_Sample",
-      "click"
-  );
-  print("");
-
-  print("TEST: VALIDATION OF SAMPLE PREFIX 2 (SHOULD SHOW 0 WARNINGS):");
-  initFieldValues();
-  setFieldValue("Project/Start/Sample_Prefix_2", "a00");
-  executeOnEvent(
-      "Project/Start/Create_New_Sample",
-      "click"
-  );
-  print("");
+  String out = getStdout(ExecuteOnEvents());
+  String exp = "";
+  assert(exp.equals(out));
 }
 
+// VALIDATION OF SAMPLE PREFIX 1
 {
-  print("TEST: printLabel():");
-  String getDisplayedTabGroup() { return "Water_Sample"; }
+  initFieldValues();
+  setFieldValue("Project/Start/Sample_Prefix_1", "00000");
+  ExecuteOnEvents() {
+    void run() {
+      executeOnEvent(
+          "Project/Start/Create_New_Sample",
+          "click"
+      );
+    }
+    return this;
+  }
+
+  String out = getStdout(ExecuteOnEvents());
+  String exp = "";
+  assert(exp.equals(out));
+}
+
+// VALIDATION OF SAMPLE PREFIX 1
+{
+  initFieldValues();
+  setFieldValue("Project/Start/Sample_Prefix_1", "a0");
+  ExecuteOnEvents() {
+    void run() {
+      executeOnEvent(
+          "Project/Start/Create_New_Sample",
+          "click"
+      );
+    }
+    return this;
+  }
+
+  String out = getStdout(ExecuteOnEvents());
+  String exp = "";
+  assert(exp.equals(out));
+}
+
+// VALIDATION OF SAMPLE PREFIX 2
+{
+  initFieldValues();
+  setFieldValue("Project/Start/Sample_Prefix_2", "");
+
+  ExecuteOnEvents() {
+    void run() {
+      executeOnEvent(
+          "Project/Start/Create_New_Sample",
+          "click"
+      );
+    }
+    return this;
+  }
+
+  String out = getStdout(ExecuteOnEvents());
+  String exp = "showWarning: Invalid 'Sample Prefix 2' | Please enter a number into the 'Sample Prefix 2' field. 'Sample Prefix 2' must consist of at least one character.\n";
+  assert(exp.equals(out));
+}
+
+// VALIDATION OF SAMPLE PREFIX 2
+{
+  initFieldValues();
+  setFieldValue("Project/Start/Sample_Prefix_2", "a00");
+
+  ExecuteOnEvents() {
+    void run() {
+      executeOnEvent(
+          "Project/Start/Create_New_Sample",
+          "click"
+      );
+    }
+    return this;
+  }
+
+  String out = getStdout(ExecuteOnEvents());
+  String exp = "";
+  assert(exp.equals(out));
+}
+
+// printLabel()
+{
+  updateDisplayedTabGroup("Water_Sample");
   setFieldValue("Water_Sample/Basic_Info/Timestamp_Field", "10/10/2010");
   setFieldValue("Water_Sample/Vars/Timestamp", "03Nov2017");
   setUuid("Water_Sample", "1234567890123456789");
-  executeOnEvent(
-      "Water_Sample/Basic_Info/Print_Label",
-      "click"
-  );
-  print("");
+  ExecuteOnEvents() {
+    void run() {
+      executeOnEvent(
+          "Water_Sample/Basic_Info/Print_Label",
+          "click"
+      );
+    }
+    return this;
+  }
+
+  String out = getStdout(ExecuteOnEvents());
+  String exp = "";
+  exp += "printLabel: -- Water 10Oct2010\n";
+  exp += "printLabel: \r\n";
+  exp += "^XA^POI\r\n";
+  exp += "^FO500,20^A0,20,20^FDCSIRO^FS\r\n";
+  exp += "^FO460,50\r\n";
+  exp += "^BXN,6,200\r\n";
+  exp += "^FDhttp://igsn.org/--^FS\r\n";
+  exp += "^FO15,25^A0,90,40^FD--^FS\r\n";
+  exp += "^FO15,130^A0,60,35^TBN,120,100^FDWater^FS\r\n";
+  exp += "^FO205,130^A0,60,35^FD10Oct2010^FS\r\n";
+  exp += "^FO0,115^GB430,0,2^FS\r\n";
+  exp += "^FO190,115^GB0,85,2^FS\r\n";
+  exp += "^XZ\n";
+  assert(exp.equals(out));
 }
 
 {
@@ -142,7 +254,24 @@ void initFieldValues() {
 {
   updateDisplayedTabGroup("Water_Sample");
   SCANNED_IGSN = "aa-BBB-1111";
-  setIgsn();
+  SetIgsn() {
+    void run() {
+      setIgsn();
+    }
+    return this;
+  }
+  String out = getStdout(SetIgsn());
+  String exp = "";
+  exp += "prefix1: aa\n";
+  exp += "prefix2: BBB\n";
+  exp += "suffix2: \n";
+  exp += "igsn: aa-BBB-1111\n";
+  exp += "suffix3: \n";
+  exp += "prefix2: BBB\n";
+  exp += "prefix2: BBB\n";
+  exp += "prefix2: BBB\n";
+
+  assert(exp.equals(out));
   assert(getFieldValue("Water_Sample/Basic_Info/Sample_Prefix_1").equals("aa"));
   assert(getFieldValue("Water_Sample/Basic_Info/Sample_Prefix_2").equals("BBB"));
   assert(getFieldValue("Water_Sample/Basic_Info/Sample_ID")      .equals("1111"));
@@ -151,10 +280,54 @@ void initFieldValues() {
 {
   setFieldValue("Project/Start/Sample_Prefix_1", "CSMAST");
   String igsn = "CSMAST-W-0004-AN";
-  assert("CSMAST".equals(parsePrefix1 (igsn)));
-  assert("W"     .equals(parsePrefix2 (igsn)));
+  String suff;
+  String pre1;
+  String pre2;
+
+  ParseSuffix() {
+    void run() {
+      suff = parseSuffix(igsn);
+    }
+    return this;
+  }
+
+  ParsePrefix1() {
+    void run() {
+      pre1 = parsePrefix1(igsn);
+    }
+    return this;
+  }
+
+  ParsePrefix2() {
+    void run() {
+      pre2 = parsePrefix2(igsn);
+    }
+    return this;
+  }
+
+  // Parse Suffix
+  String out1 = getStdout(ParseSuffix());
+  String exp1 = "";
+  exp1 += "suffix2: AN\n";
+  exp1 += "igsn: CSMAST-W-0004-AN\n";
+  exp1 += "suffix3: {AN}\n";
+  exp1 += "prefix2: W\n";
+
+  // Parse Prefix 1
+  String out2 = getStdout(ParsePrefix1());
+  String exp2 = "prefix1: CSMAST\n";
+
+  // Parse Prefix 2
+  String out3 = getStdout(ParsePrefix2());
+  String exp3 = "prefix2: W\n";
+
+  assert("CSMAST".equals(pre1));
+  assert("W"     .equals(pre2));
   assert("0004"  .equals(parseSampleId(igsn)));
-  assert(parseSuffix(igsn) == null);
+  assert(suff == null);
+  assert(exp1.equals(out1));
+  assert(exp2.equals(out2));
+  assert(exp3.equals(out3));
 }
 
 {
@@ -179,4 +352,77 @@ void initFieldValues() {
   setFieldValue(refSp1, "1");
   val = getFieldValue(refSp1);
   assert(val.equals("1"));
+}
+
+{
+  setFieldValue("Project/Start/Sample_Type", "Water Sample");
+  maybeSetPrefix2();
+
+  String val = getFieldValue("Project/Start/Sample_Prefix_2");
+
+  assert("W".equals(val));
+}
+
+{
+  updateDisplayedTabGroup("Project");
+  initFieldValues();
+  setFieldValue("Project/Start/Sample_Type", "Water Sample");
+
+  executeOnEvent("Project/Start/Create_New_Sample", "click");
+
+  assert("Project"     .equals(getPreviouslyDisplayedTabGroup()));
+  assert("Water_Sample".equals(getDisplayedTabGroup()));
+}
+
+{
+  CreateSampleFromIgsn() {
+    void run() {
+      createSampleFromIgsn("CSMAST-W-0004-AN");
+    }
+    return this;
+  }
+
+  String out = getStdout(CreateSampleFromIgsn());
+  String exp = "";
+  exp += "prefix2: W\n";
+  exp += "showAlert: New Sample | A sample having the scanned IGSN was not found on this device. A new Water Sample with this IGSN will be created instead. Tap  'OK' to proceed or 'Cancel' otherwise. | reallyCreateSampleFromIgsn(\"Water Sample\", \"CSMAST-W-0004-AN\") | \n";
+
+  assert(exp.equals(out));
+}
+
+{
+  ReallyCreateSampleFromIgsn() {
+    void run() {
+      reallyCreateSampleFromIgsn("Water Sample", "CSMAST-W-0004-AN");
+    }
+    return this;
+  }
+
+  updateDisplayedTabGroup("Project");
+  String out = getStdout(ReallyCreateSampleFromIgsn());
+  String exp = "";
+  exp += "prefix1: CSMAST\n";
+  exp += "prefix2: W\n";
+  exp += "suffix2: AN\n";
+  exp += "igsn: CSMAST-W-0004-AN\n";
+  exp += "suffix3: {AN}\n";
+  exp += "prefix2: W\n";
+
+  assert("Project"     .equals(getPreviouslyDisplayedTabGroup()));
+  assert("Water_Sample".equals(getDisplayedTabGroup()));
+  assert(exp.equals(out));
+}
+
+{
+  SaveSelectedPoint() {
+    void run() {
+      saveSelectedPoint();
+    }
+    return this;
+  }
+
+  String out = getStdout(SaveSelectedPoint());
+  String exp = "showToast: Select exactly one point\n";
+
+  assert(exp.equals(out));
 }

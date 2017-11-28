@@ -1,14 +1,6 @@
 /*********************************** SHAPE ************************************/
 void clearGeometry() {
-  List geometry = getGeometryList(MAP_REF, DATA_ENTRY_LAYER_ID);
-
-  if (geometry == null)     return;
-  if (geometry.size() == 0) return;
-
-  for (geom : geometry) {
-    print("Geometry cleared:" + geom.userData.geomId);
-    clearGeometry(MAP_REF, geom.userData.geomId);
-  }
+  clearGeometry(MAP_REF);
 }
 
 boolean checkForGeometry() {
