@@ -16,7 +16,7 @@ void initTabGroupMap(String ref) {
 
   //showBaseMap(ref, "orthophoto 5m", "files/data/maps/orthophoto5m.3857.tif");
   //showBaseMap(ref, "orthophoto 10m", "files/data/maps/orthophoto10m.3857.tif");
-  showRasterMap(ref, "sentinel2", "files/data/maps/sentinel2.3857.tif");
+  //showRasterMap(ref, "sentinel2", "files/data/maps/sentinel2.3857.tif");
 
   ps = createPointStyle(0, Color.CYAN, 0.2f, 1f);
   ls = createLineStyle(0, Color.GREEN, 0.05f, 0.3f, null);
@@ -25,7 +25,7 @@ void initTabGroupMap(String ref) {
   table = "extract";
   idcolumn = "FID";
   labelcolumn = "CaveNo";
-  showSpatialLayer(ref, "ExtractVector", "files/data/maps/spatialite.3857.db", table, idcolumn, labelcolumn, ps, ls, pos, ts);
+  //showSpatialLayer(ref, "ExtractVector", "files/data/maps/spatialite.3857.db", table, idcolumn, labelcolumn, ps, ls, pos, ts);
 
   ps = createPointStyle(0, Color.MAGENTA, 0.2f, 1f);
   ls = createLineStyle(0, Color.GREEN, 0.05f, 0.3f, null);
@@ -34,7 +34,7 @@ void initTabGroupMap(String ref) {
   table = "Samples4km";
   idcolumn = "FID";
   labelcolumn = "ET_ID";
-  showSpatialLayer(ref, "SamplesVector", "files/data/maps/spatialite.3857.db", table, idcolumn, labelcolumn, ps, ls, pos, ts);
+  //showSpatialLayer(ref, "SamplesVector", "files/data/maps/spatialite.3857.db", table, idcolumn, labelcolumn, ps, ls, pos, ts);
 }
 
 void updateMapUuid() {
