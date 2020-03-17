@@ -1,12 +1,15 @@
 /*
- * GENERATED WITH FAIMS-TOOLS, SHA1: c4eb48c14ec95c4b254868d44a617c00d5169399
+ * GENERATED WITH FAIMS-TOOLS, SHA1: 2a1f0f3a3e1f9ce5bcbe4eb5cd952554b865b911
  */
 import android.util.Log;
 import android.os.Build.MODEL;
 import java.util.concurrent.atomic.AtomicInteger;
+import android.database.DatabaseUtils;
 
 // Beanshell won't let me write "\0".
 final String SEP = Character.toString ((char) 0);
+
+final String MSG_LOADING = "Loading...";
 
 final String USER_MENU_PATH = "User/User/Users";
 userMenuPath = USER_MENU_PATH; // Depricated. Use `USER_MENU_PATH` instead
@@ -70,6 +73,43 @@ String listToSqlString(List l){
   sqlString += ")";
 
   return sqlString;
+}
+
+// Run a list of queries one-after-the-other. The next query starts executing
+// once the previous finishes.
+//
+// `callbacks` is a list of `FetchCallback` objects corresponding to each query
+// in `queries`. Although `callbacks` cannot be null, any of it elements can.
+void sequentialFetchAll(List queries, List callbacks) {
+  if (queries == null || callbacks == null)
+    throw IllegalArgumentException("Arguments cannot be null");
+  if (queries.size() != callbacks.size())
+    throw IllegalArgumentException("Argument lists must have the same length");
+
+  if (queries.size() == 0)
+    return;
+
+  String        queriesHead   = queries  .get(0);
+  FetchCallback callbacksHead = callbacks.get(0);
+
+  List queriesTail   = queries  .subList(1, queries  .size());
+  List callbacksTail = callbacks.subList(1, callbacks.size());
+
+  FetchCallback executeTail = new FetchCallback() {
+    onFetch(result) {
+      if (callbacksHead != null)
+        callbacksHead.onFetch(result);
+
+      sequentialFetchAll(queriesTail, callbacksTail);
+    }
+
+    onError(String message) {
+      if (callbacksHead != null)
+        callbacksHead.onError(message);
+    }
+  };
+
+  fetchAll(queriesHead, executeTail);
 }
 
 /******************************************************************************/
@@ -136,7 +176,7 @@ String escape(String s) {
   return translate(s, dict);
 }
 
-Map MEMOISED_FILTERED_BY_REGEX = new HashMap();
+Map MEMOISED_FILTERED_BY_REGEX = new LinkedHashMap();
 
 List filterListByRegex(List unfiltered, String regex, boolean forceUpdate) {
   // Return a copy of the memoised result if possible. It's important to return
@@ -152,7 +192,7 @@ List filterListByRegex(List unfiltered, String regex, boolean forceUpdate) {
 
   // Compute the filtered list
   List filteredList;
-  Set  filteredSet = new HashSet();
+  Set  filteredSet = new LinkedHashSet();
   for (element : unfiltered)
     if (element.matches(regex))
       filteredSet.add(element);
@@ -252,26 +292,28 @@ String function2callableString(String function, Object[] args) {
 /******************************************************************************/
 /*                           DOCUMENT OBJECT MODEL                            */
 /******************************************************************************/
-String  PREVIOUSLY_DISPLAYED_TAB_GROUP = "";
-String  CURRENTLY_DISPLAYED_TAB_GROUP  = "";
-String  PREVIOUSLY_DISPLAYED_TAB       = "";
-String  CURRENTLY_DISPLAYED_TAB        = "";
-Map     REF_TO_TYPE                    = new HashMap();
-HashSet DATA_REFS                      = new HashSet();
-HashSet NO_UI_REFS                     = new HashSet();
-HashSet HIER_REFS                      = new HashSet();
-Map     VP_REF_TO_REF                  = new HashMap();
-HashSet REFS_AS_HASH_SET               = null;
-List    REFS_AS_LIST                   = null;
-List    TAB_GROUPS_AS_LIST             = new ArrayList();
-HashSet TAB_GROUPS_AS_HASH_SET         = null;
-List    TABS_AS_LIST                   = new ArrayList();
-HashSet TABS_AS_HASH_SET               = null;
-HashMap ATTRIB_NAMES_NON_STANDARD      = new HashMap();
-List    NODATA_TAB_GROUPS              = new ArrayList();
+String  PREVIOUSLY_DISPLAYED_TAB_GROUP    = "";
+String  CURRENTLY_DISPLAYED_TAB_GROUP     = "";
+String  PREVIOUSLY_DISPLAYED_TAB          = "";
+String  CURRENTLY_DISPLAYED_TAB           = "";
+Map     REF_TO_TYPE                       = new LinkedHashMap();
+HashSet DATA_REFS                         = new HashSet();
+HashSet NO_UI_REFS                        = new HashSet();
+HashSet HIER_REFS                         = new HashSet();
+Map     VP_REF_TO_REF                     = new HashMap();
+HashSet REFS_AS_HASH_SET                  = null;
+List    REFS_AS_LIST                      = null;
+List    TAB_GROUPS_AS_LIST                = new ArrayList();
+HashSet TAB_GROUPS_AS_HASH_SET            = null;
+List    TABS_AS_LIST                      = new ArrayList();
+HashSet TABS_AS_HASH_SET                  = null;
+HashMap ATTRIB_NAMES_NON_STANDARD         = new HashMap();
+List    NODATA_TAB_GROUPS                 = new ArrayList();
+List    NOAUTOSAVE_TAB_GROUPS             = new ArrayList();
+HashSet NOAUTOSAVE_TAB_GROUPS_AS_HASH_SET = null;
 NODATA_TAB_GROUPS.add("Logo");
-  NODATA_TAB_GROUPS.add("User");
-  NODATA_TAB_GROUPS.add("Project");
+NODATA_TAB_GROUPS.add("User");
+NODATA_TAB_GROUPS.add("Project");
 
 REF_TO_TYPE.put("Logo/Logo_Tab/CSIRO_Logo", "webview");
 REF_TO_TYPE.put("Logo/Logo_Tab/Login", "button");
@@ -783,6 +825,8 @@ DATA_REFS.add("Photolog/Photolog/Photo_Note");
 DATA_REFS.add("Shape/Shape_Note/Label");
 DATA_REFS.add("Shape/Shape_Note/Note");
 
+
+
 NO_UI_REFS.add("Water_Sample/Basic_Info/Location_Number");
 NO_UI_REFS.add("Vegetation_Sample/Basic_Info/Location_Number");
 NO_UI_REFS.add("Soil_Sample/Basic_Info/Location_Number");
@@ -888,6 +932,20 @@ List getRefsByType(String type) {
   return refs;
 }
 
+List getNoautosaveTabGroups() {
+  return NOAUTOSAVE_TAB_GROUPS;
+}
+
+HashSet getNoautosaveTabGroupsAsHashSet() {
+  if (NOAUTOSAVE_TAB_GROUPS_AS_HASH_SET == null)
+    NOAUTOSAVE_TAB_GROUPS_AS_HASH_SET = new HashSet(NOAUTOSAVE_TAB_GROUPS);
+  return NOAUTOSAVE_TAB_GROUPS_AS_HASH_SET;
+}
+
+boolean isFlaggedNoautosave(String ref) {
+  return getNoautosaveTabGroupsAsHashSet().contains(ref);
+}
+
 boolean hasData(String ref) {
   return DATA_REFS.contains(ref);
 }
@@ -904,22 +962,31 @@ boolean hasVpRef(String ref) {
   return getVpRef(ref) != null;
 }
 
+/* Returns `true` if `ref` refers to a hierarhical menu. (e.g. a hierarchical
+ * dropdown or hierarchical picture gallery.) Returns `false` otherwise.
+ */
 boolean isHier(String ref) {
   return HIER_REFS.contains(ref);
 }
 
 boolean isValidRef(String ref) {
-    return getRefsAsHashSet()     .contains(ref) ||
-           getTabsAsHashSet()     .contains(ref) ||
-           getTabGroupsAsHashSet().contains(ref);
+  boolean isValidRef = false;
+  if (!isInUnitTestTime())
+    isValidRef = isValidRef || linker.getUIRenderer().getViewByRef(ref) != null;
+  isValidRef = isValidRef || getRefsAsHashSet()     .contains(ref);
+  isValidRef = isValidRef || getTabsAsHashSet()     .contains(ref);
+  isValidRef = isValidRef || getTabGroupsAsHashSet().contains(ref);
+  return isValidRef;
 }
 
 boolean validateRef(ref) {
+  String msg =
+    isInUnitTestTime() ?
+    "Ref '" + ref + "' may not refer to a UI element" :
+    "Ref '" + ref + "' does not refer to a UI element";
+
   if (!isValidRef(ref) && !"module".equals(ref)) {
-    Log.w(
-        this.callstack.get(1).getInvocationText(),
-        "Ref '" + ref + "' may not refer to a UI element"
-    );
+    Log.w(this.callstack.get(1).getInvocationText(), msg);
     return false;
   }
   return true;
@@ -1122,6 +1189,26 @@ String guessArch16nValFromKey(String key) {
   return key;
 }
 
+/* Example:
+ *   english.0.properties:
+ *       please=Please
+ *       enable_gps=enable GPS
+ *       ...
+ *
+ *   ui_logic.bsh:
+ *       arch16nSubstituteValues("{please} {enable_gps}.") ==
+ *           "Please enable GPS."
+ */
+String arch16nSubstituteValues(String unSubbed) {
+  if (isInUnitTestTime())
+    return "";
+
+  List entries = new ArrayList();
+  entries.add(new NameValuePair(unSubbed, ""));
+  entries = linker.convertToNameValuePairs(entries);
+  return entries.get(0).getName();
+}
+
 String getAttributeName(String ref) {
   String guiElementRef = getGuiElementRef(ref);
   if (isNull(guiElementRef))
@@ -1174,6 +1261,13 @@ List getRefsMatching(String pattern) {
   return filterListByRegex(getRefs(), regex);
 }
 
+String getRefMatching(String pattern) {
+  List matches = getRefsMatching(pattern);
+  if (matches.size() == 0)
+    return "";
+  return matches.get(0);
+}
+
 /******************************************************************************/
 /*                            BINDING ACCUMULATOR                             */
 /*                                                                            */
@@ -1186,7 +1280,8 @@ List getRefsMatching(String pattern) {
 /*         events more consistent.                                            */
 /*   - "copy" --- Triggered as a record is duplicated, immediately before it  */
 /*         is first saved.                                                    */
-/*   - "create" --- Triggered after a record is first created.                */
+/*   - "create" --- Triggered after a savable, auto-generated tab group is    */
+/*         shown (but possibly before the "show" event is triggered).         */
 /*   - "delete" --- Triggered after a record is deleted.                      */
 /*   - "prefetch" --- Triggered before the "fetch" event. More specifically,  */
 /*         this event is triggered before a tab group is fetched and          */
@@ -1201,6 +1296,9 @@ List getRefsMatching(String pattern) {
 /*   - "save" --- Triggered each time a tab group is saved. This includes the */
 /*         first time the tab group is saved as well as subsequent            */
 /*         onSave(String, Boolean) calls.                                     */
+/*   - "firstsave" --- Similar to "save", but only triggered upon the first   */
+/*         save (i.e. the save which creates the arch ent). When this event   */
+/*         is triggered, it occurs immediately before the "save" event.       */
 /*                                                                            */
 /* Additionally, the binding accumulator augments the "load" event so that    */
 /* the `statement` in addOnEvent("module", "load", statement) gets executed   */
@@ -1208,7 +1306,7 @@ List getRefsMatching(String pattern) {
 /* loaded, including the execution of any asynchronous functions.)            */
 /*                                                                            */
 /* Importantly, a single call to `bindOnEvents` must occur after all the      */
-/* `addOnEvent` and `delOnEvents` calls. Calling `bindOnEvents` is what       */
+/* `addOnEvent` and `delOnEvent` calls. Calling `bindOnEvents` is what        */
 /* actually establishes the bindings once they have been added to the         */
 /* accumulator.                                                               */
 /******************************************************************************/
@@ -1237,6 +1335,7 @@ CUSTOM_EVENTS.add("focus");
 CUSTOM_EVENTS.add("leave");
 CUSTOM_EVENTS.add("prefetch");
 CUSTOM_EVENTS.add("save");
+CUSTOM_EVENTS.add("firstsave");
 
 List getPrioritised(String statement, int priority) {
   List prioritised = new ArrayList();
@@ -1371,6 +1470,8 @@ String getStatementsString(String ref, String event) {
 }
 
 void executeOnEvent(String ref, String event) {
+  validateRef(ref);
+
   String stmtsStr = getStatementsString(ref, event);
   execute(stmtsStr);
 }
@@ -1395,10 +1496,32 @@ void delOnEvent(String ref, String event, String statement) {
   }
 }
 
+void delOnEvents(String ref, String event) {
+  validateRef(ref);
+
+  String key = getOnEventKey(ref, event);
+  ON_EVT_STMTS.remove(key);
+}
+
 void addOnEvent(String ref, String event, String statement, int precedence) {
   addToOnEventPriorities(ref, event, statement, precedence, ON_EVT_STMTS);
 }
 
+/* Adds a condition to be checked before any expressions bound by `addOnEvent`
+ * are evaluated. `check` is `boolean` expression which must evaluate to `true`
+ * before the bound expressions evaluate. For instance, in the following logic,
+ * `onShowMyTabGroup()` will never be evaluated:
+ *
+ * ```
+ * boolean myChecker() {
+ *   showWarning("I'm Sorry, Dave", "I'm afraid I can't do that.");
+ *   return false;
+ * }
+ *
+ * addOnEvent    ("My_Tab_Group", "show", "onShowMyTabGroup()");
+ * addOnEventCond("My_Tab_Group", "show", "myChecker()");
+ * ```
+ */
 void addOnEventCond(String ref, String event, String check) {
   addToOnEventPriorities(ref, event, check, PRECEDENCE_MID, ON_EVT_CONDS);
 }
@@ -1605,7 +1728,8 @@ makeLocalId();
 /* Code to a) time queries; and b) create dummy records. (The vast majority   */
 /* the code is for the latter.)                                               */
 /******************************************************************************/
-import android.database.DatabaseUtils;
+import android.os.StatFs;
+import android.os.Environment;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.channels.Channels;
@@ -1627,23 +1751,23 @@ String                PERF_TEST_IMG          = "";
                       PERF_TYPE_TREE         = null;
 int                   PERF_PHOTOS_PER_FIELD  = 1;
 
-int getNumPhotos() {
-  return getNumPhotos(PERF_TYPE_TREE);
+int getNumDummyPhotos() {
+  return getNumDummyPhotos(PERF_TYPE_TREE);
 }
 
-int getNumPhotos(tree) {
+int getNumDummyPhotos(tree) {
   if (tree == null) return 0;
 
   int childSum = 0;
   for (child : tree.getChildren())
-    childSum += getNumPhotos(child);
+    childSum += getNumDummyPhotos(child);
 
   boolean isRoot = isNull(tree.label);
   if (isRoot) return childSum;
-  else        return childSum + getNumPhotosAtNode(tree);
+  else        return childSum + getNumDummyPhotosAtNode(tree);
 }
 
-int getNumPhotosAtNode(tree) {
+int getNumDummyPhotosAtNode(tree) {
   // Figure out how many camera refs there are at this node (i.e. in this arch
   // ent).
   List cameraRefs = getRefsByType("camera");
@@ -1655,6 +1779,28 @@ int getNumPhotosAtNode(tree) {
   return getNumDummyRecordsAtNode(tree) *
     cameraRefsAtNode.size() *
     PERF_PHOTOS_PER_FIELD;
+}
+
+int getNumSavedPhotos() {
+  String dirStr = "/sdcard/faims/modules/" + getModuleId() + "/files/server/";
+  return getNumFilesInDir(dirStr);
+}
+
+int getNumFilesInDir(String path) {
+  File file = new File(path);
+  return getNumFilesInDir(file);
+}
+
+int getNumFilesInDir(File dir) {
+  int num = 0;
+
+  File[] files = dir.listFiles();
+  if (files == null) return num;
+
+  for (File file : dir.listFiles())
+    num += file.isFile() ? 1 : getNumFilesInDir(file);
+
+  return num;
 }
 
 int getNumDummyRecords() {
@@ -1679,6 +1825,66 @@ int getNumDummyRecordsAtNode(tree) {
     sum *= tree.data;
   }
   return sum;
+}
+
+float getFileSizeInMBytes(String path) {
+  File file = new File(path);
+  return file.length() / 1000.f / 1000.f;
+}
+
+float getDirSizeInMBytes(String path) {
+  File file = new File(path);
+  return getDirSizeInMBytes(file);
+}
+
+float getDirSizeInMBytes(File dir) {
+  float length = 0;
+
+  File[] files = dir.listFiles();
+  if (files == null) return length;
+
+  for (File file : dir.listFiles())
+    length += file.isFile()
+      ? file.length() / 1000.f / 1000.f
+      : getDirSizeInMBytes(file);
+
+  return length;
+}
+
+float getSizeDummyPhotosInMBytes() {
+  return getNumDummyPhotos() * getFileSizeInMBytes(PERF_TEST_IMG);
+}
+
+float getSizeSavedPhotosInMBytes() {
+  String dirStr = "/sdcard/faims/modules/" + getModuleId() + "/files/server/";
+  return getDirSizeInMBytes(dirStr);
+}
+
+String megabytesToString(float mb) {
+  DecimalFormat df = new DecimalFormat();
+  df.setMaximumFractionDigits(1);
+  return df.format(mb);
+}
+
+String getSizeDummyPhotosInMBytesAsString() {
+  return megabytesToString(getSizeDummyPhotosInMBytes());
+}
+
+String getSizeSavedPhotosInMBytesAsString() {
+  return megabytesToString(getSizeSavedPhotosInMBytes());
+}
+
+float getFreeSpaceInMBytes() {
+  return getFreeSpaceInMBytes(Environment.getRootDirectory().getAbsolutePath());
+}
+
+float getFreeSpaceInMBytes(String path) {
+  StatFs statFs = new StatFs(path);
+  return statFs.getBlockCount() * statFs.getBlockSize() / 1000.f / 1000.f;
+}
+
+String getFreeSpaceInMBytesAsString() {
+  return megabytesToString(getFreeSpaceInMBytes());
 }
 
 Tree(String label, Object data) {
@@ -1892,47 +2098,47 @@ void timedPopulateCursorList(String ref, String q, int limit) {
 
 void setUpTypeHierarchy() {
   //- 
-  //  - Water Sample
+  //  - Rock Sample
+  //    - Photolog
+  //  - Shape
+  //  - Soil Crust Sample
   //    - Photolog
   //  - Soil Sample
   //    - Photolog
-  //  - Rock Sample
-  //    - Photolog
   //  - Vegetation Sample
   //    - Photolog
-  //  - Soil Crust Sample
+  //  - Water Sample
   //    - Photolog
-  //  - Shape
 
   n0 = Tree("", 1);
-  n1 = Tree("Water Sample", 1);
+  n1 = Tree("Rock Sample", 1);
   n2 = Tree("Photolog", 1);
-  n3 = Tree("Soil Sample", 1);
-  n4 = Tree("Photolog", 1);
-  n5 = Tree("Rock Sample", 1);
-  n6 = Tree("Photolog", 1);
-  n7 = Tree("Vegetation Sample", 1);
-  n8 = Tree("Photolog", 1);
-  n9 = Tree("Soil Crust Sample", 1);
-  n10 = Tree("Photolog", 1);
-  n11 = Tree("Shape", 1);
+  n3 = Tree("Shape", 1);
+  n4 = Tree("Soil Crust Sample", 1);
+  n5 = Tree("Photolog", 1);
+  n6 = Tree("Soil Sample", 1);
+  n7 = Tree("Photolog", 1);
+  n8 = Tree("Vegetation Sample", 1);
+  n9 = Tree("Photolog", 1);
+  n10 = Tree("Water Sample", 1);
+  n11 = Tree("Photolog", 1);
 
   n0.addChild(n1);
   n0.addChild(n3);
-  n0.addChild(n5);
-  n0.addChild(n7);
-  n0.addChild(n9);
-  n0.addChild(n11);
+  n0.addChild(n4);
+  n0.addChild(n6);
+  n0.addChild(n8);
+  n0.addChild(n10);
 
   n1.addChild(n2);
 
-  n3.addChild(n4);
+  n4.addChild(n5);
 
-  n5.addChild(n6);
+  n6.addChild(n7);
 
-  n7.addChild(n8);
+  n8.addChild(n9);
 
-  n9.addChild(n10);
+  n10.addChild(n11);
 
 
   PERF_TYPE_TREE = n0;
@@ -2019,6 +2225,23 @@ List getAttribsForArchEnt(String archEntType) {
   return attribs;
 }
 
+List getDummyGeometry(String archEntType) {
+  String tabGroupRef = archEntType.replaceAll(" ", "_");
+
+  if (getTakeFromGpsMappings().get(tabGroupRef) == null)
+    return null;
+
+  Double northing = 1.f;
+  Double easting  = 1.f;
+
+  MapPos mapPos = new MapPos(easting, northing);
+  Point samplePoint = new Point(mapPos, null, (PointStyle) null, null);
+  ArrayList geolist = new ArrayList();
+  geolist.add(samplePoint);
+
+  return geolist;
+}
+
 void displayRecordDigest(int numCreated) {
   String q = "";
   q += "   SELECT '{All}', count(*)";
@@ -2045,6 +2268,14 @@ void displayRecordDigest(int numCreated) {
 
         body += "\t- " + type + ": " + num + "\n";
       }
+
+      body += "\nThere are " +
+        getNumSavedPhotos() +
+        " saved files on this device. There is " +
+        getFreeSpaceInMBytesAsString() +
+        " MB of free space on this device, of which the saved files use " +
+        getSizeSavedPhotosInMBytesAsString() +
+        " MB.";
 
       if (dialog != null)
         dialog.dismiss();
@@ -2100,12 +2331,13 @@ PerfSaveCallback(tree, String parentUuid) {
 
 void saveArchEnts(tree, String parentUuid) {
   String archEntName = tree.label;
+  List   geometry    = getDummyGeometry(archEntName);
   int    numEnts     = tree.data;
   cb                 = PerfSaveCallback(tree, parentUuid);
 
   for (int i = 0; i < numEnts; i++) {
     List attribs = getAttribsForArchEnt(archEntName);
-    saveArchEnt(null, archEntName, (List) null, attribs, cb);
+    saveArchEnt(null, archEntName, geometry, attribs, cb);
   }
 }
 
@@ -2144,7 +2376,7 @@ void enqueueTestFiles(int numFiles, String cb) {
 
   // Set `PERF_NUM_CBS_TODO_FILE` and `PERF_NUM_CBS_DONE_FILE`
   int numPhotosToMake;
-  numPhotosToMake  = getNumPhotos();
+  numPhotosToMake  = getNumDummyPhotos();
   numPhotosToMake -= PERF_FILES.size();
   numPhotosToMake  = Math.max(0, numPhotosToMake);
   // We're going to count returns from attachFile too, hence multiplication by 2
@@ -2178,9 +2410,9 @@ PerfImageDownloader() {
       return;
 
     String filStr = "/sdcard/faims/modules/" + getModuleId() +
-        "/files/app/test.jpg";
-    String urlStr = "https://raw.githubusercontent.com/FAIMS/FAIMS-Tools/" +
-        "master/test-images/construction-2894x1924.jpg";
+        "/files/test.jpg";
+    String urlStr = "https://github.com/FAIMS/FAIMS-Tools/raw/master/" +
+        "generators/christian/tests/images/construction-2894x1924.jpg";
 
     if (detectFile(filStr))
       return;
@@ -2335,6 +2567,9 @@ void checkSetDummyRecordQuantityIsDone() {
   int cbsDone = PERF_NUM_CBS_DONE_SET.incrementAndGet();
   int cbsTodo = PERF_NUM_CBS_TODO_SET.get();
   if (cbsTodo == cbsDone) {
+    String totalImgs = getNumDummyPhotos() + "";
+    String totalSizs = getSizeDummyPhotosInMBytesAsString();
+    String totalFree = getFreeSpaceInMBytesAsString();
     String totalRecs = getNumDummyRecords() + "";
     String treeString = PERF_TYPE_TREE.toString();
     String treeStringNoRoot = treeString.substring(
@@ -2346,7 +2581,10 @@ void checkSetDummyRecordQuantityIsDone() {
     String body =
          "{perf_update_body_1} " + treeStringNoRoot +
         " {perf_update_body_2} " + totalRecs +
-        " {perf_update_body_3}";
+        " {perf_update_body_3} " + totalImgs +
+        " {perf_update_body_4} " + totalFree +
+        " {perf_update_body_5} " + totalSizs +
+        " {perf_update_body_6}";
 
     showAlert(head, body, "createDummyRecords()", "");
   }
@@ -2436,6 +2674,7 @@ if (!isNull(USER_MENU_PATH)) {
   addOnEvent(userMenuTabGroup, "show",  "setUpPerfActionBarItems()");
   addOnEvent(userMenuTabGroup, "leave", "setUpPerfActionBarItems()");
 }
+
 
 /******************************************************************************/
 /*                           LOCALSETTINGS UPDATES                            */
@@ -2962,6 +3201,13 @@ boolean populateMenu(String ref, List entries) {
   return populateMenu(null, ref, "", entries, true);
 }
 
+void populateMenu(String ref, String entry) {
+  List entries  = new ArrayList();
+  entries.add(new NameValuePair(entry, ""));
+
+  populateMenu(ref, entries);
+}
+
 /******************************************************************************/
 /*                             MENU VALUE GETTER                              */
 /*                                                                            */
@@ -2999,7 +3245,8 @@ void addMenuEntry(
     String attrName,
     String vocabId,
     String vocabName,
-    String picUrl
+    String picUrl,
+    String parentVocabId
 ) {
   List menuEntries = ATTRIB_NAME_TO_MENU_ENTRIES.get(attrName);
   if (menuEntries == null) {
@@ -3011,6 +3258,7 @@ void addMenuEntry(
   menuEntry.add(vocabId);
   menuEntry.add(vocabName);
   menuEntry.add(picUrl);
+  menuEntry.add(parentVocabId);
 
   menuEntries.add(menuEntry);
 }
@@ -3018,13 +3266,17 @@ void addMenuEntry(
 List getMenuEntries(String attrName) {
   List menuEntries = ATTRIB_NAME_TO_MENU_ENTRIES.get(attrName);
   if (menuEntries == null) return new ArrayList();
-  else                     return menuEntries;
+  else                     return new ArrayList(menuEntries);
+}
+
+List getMenuEntriesFromRef(String ref) {
+  return getMenuEntries(getAttributeName(ref));
 }
 
 List getVocabIdsFromAttribName(String attribName) {
   List vocabIds = ATTRIB_NAME_TO_VOCABIDS.get(attribName);
   if (vocabIds == null) return new ArrayList();
-  else                  return vocabIds;
+  else                  return new ArrayList(vocabIds);
 }
 
 List getVocabIdsFromRef(String ref) {
@@ -3038,10 +3290,10 @@ List getVocabIdsFromRef(String ref) {
  */
 void fetchMenuValues() {
   String q = "";
-  q += "   SELECT vocabid, vocabname, attributename, pictureurl";
-  q += "     FROM vocabulary";
-  q += "     JOIN attributekey USING (attributeid)";
-  q += " ORDER BY vocabcountorder";
+  q += "   SELECT VocabID, VocabName, AttributeName, PictureURL, ParentVocabID";
+  q += "     FROM Vocabulary";
+  q += "     JOIN AttributeKey USING (AttributeID)";
+  q += " ORDER BY VocabCountOrder";
 
   FetchCallback populateHashMap = new FetchCallback() {
     onFetch(List result) {
@@ -3049,10 +3301,11 @@ void fetchMenuValues() {
         result = new ArrayList();
 
       for (List row : result) {
-        String vocabId   = row.get(0);
-        String vocabName = row.get(1);
-        String attrName  = row.get(2);
-        String picUrl    = row.get(3);
+        String vocabId       = row.get(0);
+        String vocabName     = row.get(1);
+        String attrName      = row.get(2);
+        String picUrl        = row.get(3);
+        String parentVocabId = row.get(4);
 
         // Populate VOCABID_TO_VOCABNAME
         VOCABID_TO_VOCABNAME.put(vocabId, vocabName);
@@ -3064,7 +3317,7 @@ void fetchMenuValues() {
         addVocabId(attrName, vocabId);
 
         // Populate ATTRIB_NAME_TO_MENU_ENTRIES
-        addMenuEntry(attrName, vocabId, vocabName, picUrl);
+        addMenuEntry(attrName, vocabId, vocabName, picUrl, parentVocabId);
       }
 
       decAndExecIfModuleLoaded();
@@ -3315,6 +3568,8 @@ addActionBarItem("external_gps", new ToggleActionButtonCallback() {
 /******************************************************************************/
 /*                                 USER LOGIN                                 */
 /******************************************************************************/
+boolean USER_MENU_IS_LOADED = false;
+
 void populateListForUsers(){
   String q = "";
   q  = " SELECT          userid ";
@@ -3327,11 +3582,17 @@ void populateListForUsers(){
   q += "   FROM user ";
   q += "  WHERE userdeleted is null";
 
-  fetchAll(q, new FetchCallback() {
+
+  FetchCallback callback = new FetchCallback() {
     onFetch(result) {
       populateMenu(USER_MENU_PATH, result);
+      USER_MENU_IS_LOADED = true;
     }
-  });
+  };
+
+  USER_MENU_IS_LOADED = false;
+  populateMenu(USER_MENU_PATH, MSG_LOADING);
+  fetchAll(q, callback);
 }
 
 String getUserMenuValue(int i) {
@@ -3379,6 +3640,8 @@ if (!isNull(USER_MENU_PATH)) {
 
   addOnEvent(USER_MENU_PATH, "show",  "populateListForUsers()");
   addOnEvent(USER_MENU_PATH, "click", "selectUser()");
+
+  addOnEventCond(USER_MENU_PATH, "click", "USER_MENU_IS_LOADED");
 }
 
 
@@ -3469,10 +3732,11 @@ void validatePhotolog() {
 /******************************************************************************/
 /*                                 AUTOSAVING                                 */
 /******************************************************************************/
-Map tabgroupToUuid = Collections.synchronizedMap(new HashMap());
+Map TABGROUP_TO_UUID = Collections.synchronizedMap(new HashMap());
+Set SEEN_UUIDS       = Collections.synchronizedSet(new HashSet());
 
 String getUuid(String tabgroup) {
-  return tabgroupToUuid.get(tabgroup);
+  return TABGROUP_TO_UUID.get(tabgroup);
 }
 
 String getUuid() {
@@ -3480,27 +3744,36 @@ String getUuid() {
 }
 
 void setUuid(String tabgroup, String uuid) {
-  tabgroupToUuid.put(tabgroup, uuid);
+  TABGROUP_TO_UUID.put(tabgroup, uuid);
 }
 
-void saveTabGroup(String tabgroup) {
-  saveTabGroup(tabgroup, "");
-}
-
-void saveTabGroup(String tabgroup, String callback) {
-  Boolean enableAutosave      = true;
-  String  id                  = getUuid(tabgroup);
-  String  parentTabgroup_     = parentTabgroup;
-  String  parentTabgroupUuid_ = getUuid(parentTabgroup_);
-  Boolean userWasSet          = !username.equals("");
-
-  callback += "; " + fun2str("executeOnEvent", new Object[]{tabgroup, "save"});
+SaveCallback getDefaultSaveCallback(String tabgroup, String callback) {
+  String parentTabgroup_     = parentTabgroup;
+  String parentTabgroupUuid_ = getUuid(parentTabgroup_);
 
   parentTabgroup = null;
 
-  SaveCallback saveCallback  = new SaveCallback() {
+  Boolean userWasSet = !username.equals("");
+
+  callback += "; " + fun2str("executeOnEvent", new Object[]{tabgroup, "save"});
+
+  String callbackFirstSave =
+    fun2str("executeOnEvent", new Object[]{tabgroup, "firstsave"}) + "; " +
+    callback;
+
+  return new SaveCallback() {
     onSave(uuid, newRecord) {
       setUuid(tabgroup, uuid);
+
+      // This is a workaround for a bug where `newRecord` can be `true` twice if
+      // a record was saved again shortly after it was created.
+      if (SEEN_UUIDS.contains(uuid))
+        newRecord = false;
+      if (uuid != null)
+        SEEN_UUIDS.add(uuid);
+
+      String cb = newRecord ? callbackFirstSave : callback;
+
       // Make a child-parent relationship if need be.
       if (
           newRecord &&
@@ -3517,10 +3790,10 @@ void saveTabGroup(String tabgroup, String callback) {
           uuid,
           "Parent Of",
           "Child Of",
-          callback
+          cb
         );
       } else {
-        execute(callback);
+        execute(cb);
       }
 
       // This fixes an interesting bug. Without this, if a user was not set
@@ -3531,7 +3804,7 @@ void saveTabGroup(String tabgroup, String callback) {
       // Adding this allows subsequent saves to succeed. Presumably it plays
       // some role in helping FAIMS associate the correct user with a record.
       if (!userWasSet) {
-        saveTabGroup(tabgroup, callback);
+        saveTabGroup(tabgroup, cb);
       }
 
     }
@@ -3539,10 +3812,21 @@ void saveTabGroup(String tabgroup, String callback) {
       showToast(message);
     }
   };
+}
+
+void saveTabGroup(String tabgroup) {
+  saveTabGroup(tabgroup, "");
+}
+
+void saveTabGroup(String tabgroup, String callback) {
+  Boolean enableAutosave = true;
+  String  uuid           = getUuid(tabgroup);
+
+  SaveCallback saveCallback = getDefaultSaveCallback(tabgroup, callback);
 
   saveTabGroup(
       tabgroup,
-      id,
+      uuid,
       autoSaveGeo,
       autoSaveAttrs,
       saveCallback,
@@ -3606,51 +3890,13 @@ void populateAuthorAndTimestamp(String tabgroup) {
   if (!isNull(timestampPath)) setFieldValue(timestampPath, getTimestampNow());
 }
 
-void onShowWaterSample () {
-  saveTabGroup("Water_Sample");
+for (String tabGroup : getTabGroups()) {
+  if (isFlaggedNodata    (tabGroup)) continue;
+  if (hasNoUi            (tabGroup)) continue;
+  if (isFlaggedNoautosave(tabGroup)) continue;
+  String funStr = fun2str("saveTabGroup", new Object[]{tabGroup});
+  addOnEvent(tabGroup, "show", funStr);
 }
-
-void onShowVegetationSample () {
-  saveTabGroup("Vegetation_Sample");
-}
-
-void onShowSoilSample () {
-  saveTabGroup("Soil_Sample");
-}
-
-void onShowSoilCrustSample () {
-  saveTabGroup("Soil_Crust_Sample");
-}
-
-void onShowRockSample () {
-  saveTabGroup("Rock_Sample");
-}
-
-void onShowpH () {
-  saveTabGroup("pH");
-}
-
-void onShowEh () {
-  saveTabGroup("Eh");
-}
-
-void onShowPhotolog () {
-  saveTabGroup("Photolog");
-}
-
-void onShowShape () {
-  saveTabGroup("Shape");
-}
-
-addOnEvent("Water_Sample", "show", "onShowWaterSample()");
-addOnEvent("Vegetation_Sample", "show", "onShowVegetationSample()");
-addOnEvent("Soil_Sample", "show", "onShowSoilSample()");
-addOnEvent("Soil_Crust_Sample", "show", "onShowSoilCrustSample()");
-addOnEvent("Rock_Sample", "show", "onShowRockSample()");
-addOnEvent("pH", "show", "onShowpH()");
-addOnEvent("Eh", "show", "onShowEh()");
-addOnEvent("Photolog", "show", "onShowPhotolog()");
-addOnEvent("Shape", "show", "onShowShape()");
 
 void onClickLogoLogin () {
   newTab("User", true);
@@ -3837,10 +4083,9 @@ void saveEntitiesToRel(String type, String entity1, String entity2, String callb
 /** Saves two entity id's as a hierachical relation with some callback executed. **/
 void saveEntitiesToHierRel(String type, String entity1, String entity2, String e1verb, String e2verb, String callback) {
   if (isNull(entity1) || isNull(entity2)) return;
-  saveRel(null, type, null, null, new SaveCallback() {
-    onSave(rel_id, newRecord) {
-      addReln(entity1, rel_id, e1verb);
-      addReln(entity2, rel_id, e2verb);
+
+  SaveCallback execCallback = new SaveCallback() {
+    onSaveAssociation(entity_id, rel_id) {
       if(!isNull(callback)) {
          execute(callback);
       }
@@ -3849,7 +4094,29 @@ void saveEntitiesToHierRel(String type, String entity1, String entity2, String e
       Log.e("saveEntitiesToHierRel", message);
       showToast(message);
     }
-  });
+  };
+
+  SaveCallback addMoreToRel = new SaveCallback() {
+    onSaveAssociation(entity_id, rel_id) {
+      addReln(entity2, rel_id, e2verb, execCallback);
+    }
+    onError(message) {
+      Log.e("saveEntitiesToHierRel", message);
+      showToast(message);
+    }
+  };
+
+  SaveCallback addToRel = new SaveCallback() {
+    onSave(rel_id, newRecord) {
+      addReln(entity1, rel_id, e1verb, addMoreToRel);
+    }
+    onError(message) {
+      Log.e("saveEntitiesToHierRel", message);
+      showToast(message);
+    }
+  };
+
+  saveRel(null, type, null, null, addToRel);
 }
 
 // Makes a new record of the given tabgroup
@@ -3911,10 +4178,19 @@ void deleteRecord(String tabgroup) {
 }
 
 void reallyDeleteRecord(String tabgroup) {
-  deleteArchEnt(getUuid(tabgroup));
+  DeleteCallback callback = new DeleteCallback() {
+    onDelete(uuid) {
+      populateEntityListsOfArchEnt(tabgroup);
+      executeOnEvent(tabgroup, "delete");
+    }
+
+    onError(message) {
+      showToast(message);
+    }
+  };
+
+  deleteArchEnt(getUuid(tabgroup), callback);
   cancelTabGroup(tabgroup, false);
-  populateEntityListsOfArchEnt(tabgroup);
-  executeOnEvent(tabgroup, "delete");
 }
 
 // Duplicates the current record of the given tabgroup
@@ -4744,13 +5020,14 @@ void search(){
                        "                 WHERE measure LIKE {term}||'%'  "+
                        "                   AND ( aenttypename = {type} OR '' = {type} ) "+
                        "                )  "+
-                       " ORDER BY response "+
+                       " ORDER BY substr(uuid, 7, 13) desc, response " +
                        " LIMIT ? "+
                        "OFFSET ? ";
   searchQuery = dbReplaceFirst(searchQuery, "{term}", term);
   searchQuery = dbReplaceFirst(searchQuery, "{type}", type);
   searchQuery = dbReplaceFirst(searchQuery, "{type}", type);
 
+  populateMenu(refEntityList, MSG_LOADING);
   populateCursorList(refEntityList, searchQuery, 25);
   refreshTabgroupCSS("Project");
 
@@ -4905,23 +5182,20 @@ addOnEvent("Rock_Sample/Basic_Info/Take_From_GPS_1", "click", "takePoint(\"Rock_
 Map getTakeFromGpsMappings() {
   Map tabgroupToTabRef = new HashMap();
   tabgroupToTabRef.put("Water_Sample", "Water_Sample/Basic_Info");
-tabgroupToTabRef.put("Vegetation_Sample", "Vegetation_Sample/Basic_Info");
-tabgroupToTabRef.put("Soil_Sample", "Soil_Sample/Basic_Info");
-tabgroupToTabRef.put("Soil_Crust_Sample", "Soil_Crust_Sample/Basic_Info");
-tabgroupToTabRef.put("Rock_Sample", "Rock_Sample/Basic_Info");
+  tabgroupToTabRef.put("Vegetation_Sample", "Vegetation_Sample/Basic_Info");
+  tabgroupToTabRef.put("Soil_Sample", "Soil_Sample/Basic_Info");
+  tabgroupToTabRef.put("Soil_Crust_Sample", "Soil_Crust_Sample/Basic_Info");
+  tabgroupToTabRef.put("Rock_Sample", "Rock_Sample/Basic_Info");
   return tabgroupToTabRef;
 }
 
 /* Takes the current point using gps. */
 void takePoint(String tabgroup) {
+  triggerAutoSave();
   Map tabgroupToTabRef = getTakeFromGpsMappings();
 
-  String archEntType = tabgroup.replaceAll("_", " ");
+  String archEntType = getArchEntType(tabgroup);
   String currentUuid = getUuid(tabgroup);
-  if (isNull(currentUuid)){
-    showToast("{Please_enter_data_first}");
-    return;
-  }
 
   boolean isInternalGPSOff = !isInternalGPSOn();
   boolean isExternalGPSOff = !isExternalGPSOn();
@@ -4937,19 +5211,36 @@ void takePoint(String tabgroup) {
   Double northing     = projPosition.getLatitude();
   Double easting      = projPosition.getLongitude();
 
-  samplePoint = new Point(new MapPos(easting, northing), null, (PointStyle) null, null);
+  String sLatitude    = "" + latitude;
+  String sLongitude   = "" + longitude;
+  String sNorthing    = "" + northing;
+  String sEasting     = "" + easting;
+
+  MapPos mapPos = new MapPos(easting, northing);
+  Point samplePoint = new Point(mapPos, null, (PointStyle) null, null);
   ArrayList geolist = new ArrayList();
   geolist.add(samplePoint);
 
   String accuracy = "" + getGPSEstimatedAccuracy();
-  setFieldValue(tabgroupToTabRef.get(tabgroup) + "/Accuracy", accuracy);
+  setFieldValue(tabgroupToTabRef.get(tabgroup) + "/Accuracy",  accuracy);
+  setFieldValue(tabgroupToTabRef.get(tabgroup) + "/Longitude", sLongitude);
+  setFieldValue(tabgroupToTabRef.get(tabgroup) + "/Latitude",  sLatitude);
+  setFieldValue(tabgroupToTabRef.get(tabgroup) + "/Easting",   sEasting);
+  setFieldValue(tabgroupToTabRef.get(tabgroup) + "/Northing",  sNorthing);
 
-  saveArchEnt(currentUuid, archEntType, geolist, null, new SaveCallback() {
-    onSave(uuid, newRecord) {
-      print("[takePoint()] Added geometry: " + geolist);
-      fillInGPS(tabgroup);
-    }
-  });
+  List attribs = createAttributeList();
+  attribs.add(createEntityAttribute("Accuracy",  "", "", accuracy,   "1.0"));
+  attribs.add(createEntityAttribute("Longitude", "", "", sLongitude,  "1.0"));
+  attribs.add(createEntityAttribute("Latitude",  "", "", sLatitude, "1.0"));
+  attribs.add(createEntityAttribute("Northing",  "", "", sNorthing,  "1.0"));
+  attribs.add(createEntityAttribute("Easting",   "", "", sEasting,   "1.0"));
+
+  String showToast = fun2str(
+      "showToast",
+      getArch16nKey(tabgroup) + " {toast_saved}"
+  );
+  SaveCallback saveCallback = getDefaultSaveCallback(tabgroup, showToast);
+  saveArchEnt(currentUuid, archEntType, geolist, attribs, saveCallback);
 }
 
 /* Sets the value of GPS views for the given tab ref. */
@@ -5001,34 +5292,15 @@ void clearGpsInTab(String tabRef) {
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
-
-void bindQrScanning(String refButton, String refChild, boolean isChild) {
-  String event = "click";
-
-  String parentTabGroup;
-  if (isChild) parentTabGroup = getTabGroupRef(refButton);
-  else         parentTabGroup = null;
-
-  String stmt = fun2str(
-      "scanRecordFromQrCode",
-      new Object[]{parentTabGroup, refChild}
-  );
-
-  addOnEvent(refButton, event, stmt);
+void bindQrScanning(String refButton) {
+  addOnEvent(refButton, "click", "scanEntityFromQrCode()");
 }
 
-void scanRecordFromQrCode(String parentTabGroup, String refChild) {
-  String callback = fun2str(
-      "loadOrCreateEntityFromScannedAttrib",
-      new Object[]{parentTabGroup, refChild}
-  );
-  scanCode(callback);
+void scanEntityFromQrCode() {
+  scanCode("loadEntityFromScannedQrCode()");
 }
 
-void loadOrCreateEntityFromScannedAttrib(
-    String parentTabGroup,
-    String refChild
-) {
+void loadEntityFromScannedQrCode() {
   String code = getLastScanContents();
 
   String  uuidString  = "";
@@ -5067,9 +5339,39 @@ Integer incField(String ref, Integer defaultVal) {
     return defaultVal;
   }
 
-  Integer inc = Integer.parseInt(val) + 1;
-  setFieldValue(ref, inc);
-  insertIntoLocalSettings(ref, inc.toString());
+  Integer inc = null;
+  try {
+    inc = Integer.parseInt(val) + 1;
+  } catch (Exception e) { ; }
+
+  if (inc == null) {
+    try {
+      Double dinc = Double.parseDouble(val) + 1;
+      inc = Math.round(dinc);
+
+      String head, body;
+      head  = "{inc_field_head}";
+      body  = "{inc_field_body_1}" + getArch16nKey(ref) + "{inc_field_body_2}";
+
+      showWarning(head, body);
+    } catch (Exception e) {
+      Log.d("incField", "" + e);
+      ;
+    }
+  }
+
+  if (inc == null) {
+    String head, body;
+    head  = "{inc_field_head}";
+    body  = "{inc_field_body_1}" + getArch16nKey(ref) + "{inc_field_body_3}";
+
+    showWarning(head, body);
+  }
+
+  if (inc != null) {
+    setFieldValue(ref, inc);
+    insertIntoLocalSettings(ref, inc.toString());
+  }
 
   return inc;
 }
@@ -5093,9 +5395,9 @@ void incAutoNum(String destPath) {
 /******************************************************************************/
 /*                         POPULATION VIA <MARKDOWN>                          */
 /******************************************************************************/
-populateWebViewHtml("Logo/Logo_Tab/CSIRO_Logo", "--smart/-S has been removed.  Use +smart or -smart extension instead.\nFor example: pandoc -f markdown+smart -t markdown-smart.\n--normalize has been removed.  Normalization is now automatic.\nTry pandoc --help for more information.\n");
-populateWebViewHtml("Water_Sample/pH_Eh/addNewpHText", "--smart/-S has been removed.  Use +smart or -smart extension instead.\nFor example: pandoc -f markdown+smart -t markdown-smart.\n--normalize has been removed.  Normalization is now automatic.\nTry pandoc --help for more information.\n");
-populateWebViewHtml("Water_Sample/pH_Eh/addNewEhText", "--smart/-S has been removed.  Use +smart or -smart extension instead.\nFor example: pandoc -f markdown+smart -t markdown-smart.\n--normalize has been removed.  Normalization is now automatic.\nTry pandoc --help for more information.\n");
+populateWebViewHtml("Logo/Logo_Tab/CSIRO_Logo", "<p><img src=\"files/data/CSIRO_Grad_RGB_hr.jpg\" /></p>\n<p>This module was generated by the FAIMS Team for CSIRO, Nathan Reid and Jens Klump and is distributed under a GPL v3 license.</p>\n");
+populateWebViewHtml("Water_Sample/pH_Eh/addNewpHText", "<p>pH</p>\n");
+populateWebViewHtml("Water_Sample/pH_Eh/addNewEhText", "<p>Eh (mV)</p>\n");
 
 /******************************************************************************/
 /*                POPULATION OF ENTITY AND CHILD ENTITY LISTS                 */
@@ -5137,7 +5439,7 @@ void populateMenuWithEntities (
     limit +
     "        )  " +
     "  JOIN latestNonDeletedArchEntFormattedIdentifiers ON (childuuid = uuid)   " +
-    "  order by createdat desc";
+    "  order by createdat desc, response";
 
   String getEntitiesQ = "" +
     "SELECT uuid, response "+
@@ -5146,7 +5448,7 @@ void populateMenuWithEntities (
     "                  FROM latestNonDeletedArchEntIdentifiers "+
     "                 WHERE aenttypename = '"+entType+"' OR '"+entType+"' = '' " +
     "               )  "+
-    " ORDER BY response " +
+    " ORDER BY substr(uuid, 7, 13) desc, response " +
     limit;
 
   FetchCallback cbPopulateDropDown = new FetchCallback() {

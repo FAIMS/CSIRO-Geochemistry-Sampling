@@ -54,13 +54,13 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{AK}
-<description></description></term>
+<description> </description></term>
         <term>{AN}
-<description></description></term>
+<description> </description></term>
         <term>{CB}
-<description></description></term>
+<description> </description></term>
         <term>{CT}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Water Sample Timestamp" type="measure" isIdentifier="true">
@@ -104,9 +104,9 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{Sampling_Location}
-<description></description></term>
+<description> </description></term>
         <term>{Observation_Only}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Location Number" type="measure">
@@ -120,21 +120,21 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{28349}
-<description></description></term>
+<description> </description></term>
         <term>{28350}
-<description></description></term>
+<description> </description></term>
         <term>{28351}
-<description></description></term>
+<description> </description></term>
         <term>{28352}
-<description></description></term>
+<description> </description></term>
         <term>{28353}
-<description></description></term>
+<description> </description></term>
         <term>{28354}
-<description></description></term>
+<description> </description></term>
         <term>{28355}
-<description></description></term>
+<description> </description></term>
         <term>{28356}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Latitude" type="measure">
@@ -188,13 +188,13 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{Cations}
-<description></description></term>
+<description> </description></term>
         <term>{Anions}
-<description></description></term>
+<description> </description></term>
         <term>{Alkalinity}
-<description></description></term>
+<description> </description></term>
         <term>{Carbon__1L_}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Notes" type="measure">
@@ -218,15 +218,15 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{Still_Bore__Bailed_}
-<description></description></term>
+<description> </description></term>
         <term>{Still_Well__Bailed_}
-<description></description></term>
+<description> </description></term>
         <term>{Flowing_Bore}
-<description></description></term>
+<description> </description></term>
         <term>{Flowing_Well}
-<description></description></term>
+<description> </description></term>
         <term>{Other}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Hole Lining" type="vocab">
@@ -235,19 +235,19 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{Metal}
-<description></description></term>
+<description> </description></term>
         <term>{Rusty}
-<description></description></term>
+<description> </description></term>
         <term>{Poly_pipe_plastic}
-<description></description></term>
+<description> </description></term>
         <term>{Cement}
-<description></description></term>
+<description> </description></term>
         <term>{Wood}
-<description></description></term>
+<description> </description></term>
         <term>{Dirt}
-<description></description></term>
+<description> </description></term>
         <term>{Other}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Hole Open Closed" type="vocab">
@@ -256,11 +256,11 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{No_Observation}
-<description></description></term>
+<description> </description></term>
         <term>{Open_uncovered}
-<description></description></term>
+<description> </description></term>
         <term>{Closed_covered}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Pipes In Hole" type="vocab">
@@ -269,15 +269,15 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{Metal_Pipes}
-<description></description></term>
+<description> </description></term>
         <term>{Poly_Pipes}
-<description></description></term>
+<description> </description></term>
         <term>{Fibreglass_Pipes}
-<description></description></term>
+<description> </description></term>
         <term>{No_pipes_clear}
-<description></description></term>
+<description> </description></term>
         <term>{Other}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Hole Angle" type="vocab">
@@ -286,11 +286,11 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{Vertical}
-<description></description></term>
+<description> </description></term>
         <term>{Angled}
-<description></description></term>
+<description> </description></term>
         <term>{Other}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Estimated Angle" type="measure">
@@ -304,11 +304,11 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{No_Observation}
-<description></description></term>
+<description> </description></term>
         <term>{Yes}
-<description></description></term>
+<description> </description></term>
         <term>{No}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Sampling Issues" type="vocab">
@@ -317,13 +317,13 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{Sampled_from_outflow_of_tank}
-<description></description></term>
+<description> </description></term>
         <term>{Bailed_from_a_flowing_windmill__access_issues__no_wind_etc__}
-<description></description></term>
+<description> </description></term>
         <term>{Pumped}
-<description></description></term>
+<description> </description></term>
         <term>{Other}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Temperature" type="measure">
@@ -410,9 +410,9 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{Sampling_Location}
-<description></description></term>
+<description> </description></term>
         <term>{Observation_Only}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Location Number" type="measure">
@@ -431,21 +431,21 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{28349}
-<description></description></term>
+<description> </description></term>
         <term>{28350}
-<description></description></term>
+<description> </description></term>
         <term>{28351}
-<description></description></term>
+<description> </description></term>
         <term>{28352}
-<description></description></term>
+<description> </description></term>
         <term>{28353}
-<description></description></term>
+<description> </description></term>
         <term>{28354}
-<description></description></term>
+<description> </description></term>
         <term>{28355}
-<description></description></term>
+<description> </description></term>
         <term>{28356}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Latitude" type="measure">
@@ -494,17 +494,17 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{No_Observation}
-<description></description></term>
+<description> </description></term>
         <term>{Clay}
-<description></description></term>
+<description> </description></term>
         <term>{Sandy}
-<description></description></term>
+<description> </description></term>
         <term>{Silty}
-<description></description></term>
+<description> </description></term>
         <term>{Loam}
-<description></description></term>
+<description> </description></term>
         <term>{Other}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Landform" type="vocab">
@@ -513,81 +513,81 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{Alluvial_Landforms}
-<description></description><term>{Alluvial_Plain}
-<description></description></term><term>{Flood_Plain}
-<description></description></term><term>{Anastomatic_Plain}
-<description></description></term><term>{Bar_Plain}
-<description></description></term><term>{Covered_Plain}
-<description></description></term><term>{Meander_Plain}
-<description></description></term><term>{Flood_Out}
-<description></description></term><term>{Alluvial_Terrace}
-<description></description></term><term>{Stagnant_Alluvial_Plain}
-<description></description></term><term>{Alluvial_Swamp}
-<description></description></term><term>{Terraced_Land}
-<description></description></term></term>
+<description> </description><term>{Alluvial_Plain}
+<description> </description></term><term>{Flood_Plain}
+<description> </description></term><term>{Anastomatic_Plain}
+<description> </description></term><term>{Bar_Plain}
+<description> </description></term><term>{Covered_Plain}
+<description> </description></term><term>{Meander_Plain}
+<description> </description></term><term>{Flood_Out}
+<description> </description></term><term>{Alluvial_Terrace}
+<description> </description></term><term>{Stagnant_Alluvial_Plain}
+<description> </description></term><term>{Alluvial_Swamp}
+<description> </description></term><term>{Terraced_Land}
+<description> </description></term></term>
         <term>{Dune_Field}
-<description></description><term>{Longitudinal_Dunefield}
-<description></description></term></term>
+<description> </description><term>{Longitudinal_Dunefield}
+<description> </description></term></term>
         <term>{Fan}
-<description></description><term>{Alluvial_Fan}
-<description></description></term><term>{Colluvial_Fan}
-<description></description></term><term>{Sheet_Flood_Fan}
-<description></description></term></term>
+<description> </description><term>{Alluvial_Fan}
+<description> </description></term><term>{Colluvial_Fan}
+<description> </description></term><term>{Sheet_Flood_Fan}
+<description> </description></term></term>
         <term>{Plain}
-<description></description><term>{Depositional_Plain}
-<description></description></term><term>{Lacustrine_Plain}
-<description></description></term><term>{Playa_Plain}
-<description></description></term><term>{Sandplain}
-<description></description></term></term>
+<description> </description><term>{Depositional_Plain}
+<description> </description></term><term>{Lacustrine_Plain}
+<description> </description></term><term>{Playa_Plain}
+<description> </description></term><term>{Sandplain}
+<description> </description></term></term>
         <term>{Glacial_Landforms}
-<description></description><term>{Depositional_Glacial_Landforms}
-<description></description></term><term>{Erosional_Glacial_Land}
-<description></description></term></term>
+<description> </description><term>{Depositional_Glacial_Landforms}
+<description> </description></term><term>{Erosional_Glacial_Land}
+<description> </description></term></term>
         <term>{Delta}
-<description></description></term>
+<description> </description></term>
         <term>{Coastal_Lands}
-<description></description><term>{Beach_Ridge_Plain}
-<description></description></term><term>{Chenier_Plain}
-<description></description></term><term>{Coral_Reef}
-<description></description></term><term>{Marine_Plain}
-<description></description></term><term>{Tidal_Flat}
-<description></description></term><term>{Coastal_Dunes}
-<description></description></term><term>{Coastal_Plain}
-<description></description></term><term>{Beach}
-<description></description></term></term>
+<description> </description><term>{Beach_Ridge_Plain}
+<description> </description></term><term>{Chenier_Plain}
+<description> </description></term><term>{Coral_Reef}
+<description> </description></term><term>{Marine_Plain}
+<description> </description></term><term>{Tidal_Flat}
+<description> </description></term><term>{Coastal_Dunes}
+<description> </description></term><term>{Coastal_Plain}
+<description> </description></term><term>{Beach}
+<description> </description></term></term>
         <term>{Erosional_Landforms}
-<description></description><term>{Erosional_Plain}
-<description></description></term><term>{Pediment}
-<description></description></term><term>{Pediplain}
-<description></description></term><term>{Peneplain}
-<description></description></term><term>{Etchplain}
-<description></description></term><term>{Rises}
-<description></description></term><term>{Residual_Rises}
-<description></description></term><term>{Low_Hills}
-<description></description></term><term>{Hills}
-<description></description></term><term>{Mountains}
-<description></description></term><term>{Escarpment}
-<description></description></term><term>{Badlands}
-<description></description></term><term>{Drainage_Depression}
-<description></description></term></term>
+<description> </description><term>{Erosional_Plain}
+<description> </description></term><term>{Pediment}
+<description> </description></term><term>{Pediplain}
+<description> </description></term><term>{Peneplain}
+<description> </description></term><term>{Etchplain}
+<description> </description></term><term>{Rises}
+<description> </description></term><term>{Residual_Rises}
+<description> </description></term><term>{Low_Hills}
+<description> </description></term><term>{Hills}
+<description> </description></term><term>{Mountains}
+<description> </description></term><term>{Escarpment}
+<description> </description></term><term>{Badlands}
+<description> </description></term><term>{Drainage_Depression}
+<description> </description></term></term>
         <term>{Karst}
-<description></description></term>
+<description> </description></term>
         <term>{Plateau}
-<description></description></term>
+<description> </description></term>
         <term>{Volcanic_Landform}
-<description></description><term>{Caldera}
-<description></description></term><term>{Cone}
-<description></description></term><term>{Lava_Plain}
-<description></description></term><term>{Ash_Plain}
-<description></description></term><term>{Lava_Flow}
-<description></description></term><term>{Lava_Plateau}
-<description></description></term></term>
+<description> </description><term>{Caldera}
+<description> </description></term><term>{Cone}
+<description> </description></term><term>{Lava_Plain}
+<description> </description></term><term>{Ash_Plain}
+<description> </description></term><term>{Lava_Flow}
+<description> </description></term><term>{Lava_Plateau}
+<description> </description></term></term>
         <term>{Made_Land}
-<description></description></term>
+<description> </description></term>
         <term>{Meteor_Crater}
-<description></description></term>
+<description> </description></term>
         <term>{Other}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Notes" type="measure">
@@ -629,9 +629,9 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{A}
-<description></description></term>
+<description> </description></term>
         <term>{B}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Soil Sample Timestamp" type="measure" isIdentifier="true">
@@ -670,9 +670,9 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{Sampling_Location}
-<description></description></term>
+<description> </description></term>
         <term>{Observation_Only}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Location Number" type="measure">
@@ -686,21 +686,21 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{28349}
-<description></description></term>
+<description> </description></term>
         <term>{28350}
-<description></description></term>
+<description> </description></term>
         <term>{28351}
-<description></description></term>
+<description> </description></term>
         <term>{28352}
-<description></description></term>
+<description> </description></term>
         <term>{28353}
-<description></description></term>
+<description> </description></term>
         <term>{28354}
-<description></description></term>
+<description> </description></term>
         <term>{28355}
-<description></description></term>
+<description> </description></term>
         <term>{28356}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Latitude" type="measure">
@@ -749,11 +749,11 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{No_Observation}
-<description></description></term>
+<description> </description></term>
         <term>{Yes}
-<description></description></term>
+<description> </description></term>
         <term>{No}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Soil Texture" type="vocab">
@@ -762,17 +762,17 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{No_Observation}
-<description></description></term>
+<description> </description></term>
         <term>{Clay}
-<description></description></term>
+<description> </description></term>
         <term>{Sandy}
-<description></description></term>
+<description> </description></term>
         <term>{Silty}
-<description></description></term>
+<description> </description></term>
         <term>{Loam}
-<description></description></term>
+<description> </description></term>
         <term>{Other}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Geology" type="vocab">
@@ -781,114 +781,114 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{Sedimentary}
-<description></description><term>{Agglomerate}
-<description></description></term><term>{Alluvium}
-<description></description></term><term>{Arenite}
-<description></description></term><term>{Argillite}
-<description></description></term><term>{Arkose}
-<description></description></term><term>{Calcrete}
-<description></description></term><term>{Carbonaceous_Shale}
-<description></description></term><term>{Carbonaceous_Chert}
-<description></description></term><term>{Carbonate_Rock}
-<description></description></term><term>{Chert}
-<description></description></term><term>{Chloritic_Shale}
-<description></description></term><term>{Clay}
-<description></description></term><term>{Claystone}
-<description></description></term><term>{Colluvium}
-<description></description></term><term>{Conglomerate}
-<description></description></term><term>{Conglomerate__Monomictic}
-<description></description></term><term>{Conglomerate__Polymictic}
-<description></description></term><term>{Dolomite__Sandy}
-<description></description></term><term>{Dolomitic_Shale}
-<description></description></term><term>{Dolomite__Silty}
-<description></description></term><term>{Duricrust}
-<description></description></term><term>{Duricrust__Transported_Lateritic}
-<description></description></term><term>{Ferruginous_Clays}
-<description></description></term><term>{Ferricrete}
-<description></description></term><term>{Grainstone__Mud_Free_Limestone_}
-<description></description></term><term>{Gravel}
-<description></description></term><term>{Gravels__Transported}
-<description></description></term><term>{Grey_Wackestone}
-<description></description></term><term>{Ironstone__Magnetite_Haematite}
-<description></description></term><term>{Kaolin}
-<description></description></term><term>{Laterite__Mottled__Clay__Zone}
-<description></description></term><term>{Laterite__Pisolitic_Zone}
-<description></description></term><term>{Limestone}
-<description></description></term><term>{Limestone__Sandy}
-<description></description></term><term>{Mudstone}
-<description></description></term><term>{Mudstone__Calcareous_ca_10_50__}
-<description></description></term><term>{Packstone}
-<description></description></term><term>{Sands__Transported}
-<description></description></term><term>{Sandstone}
-<description></description></term><term>{Sandstone__Arkosic__fs_50_}
-<description></description></term><term>{Sandstone__Chloritic}
-<description></description></term><term>{Sandstone__Clayey}
-<description></description></term><term>{Sandstone__Dolomitic_sd_10_50__}
-<description></description></term><term>{Sandstone__Lithic}
-<description></description></term><term>{Sandstone__Micaceous}
-<description></description></term><term>{Sandstone__Quartz}
-<description></description></term><term>{Sandstone__Tuffaceous}
-<description></description></term><term>{Saprock}
-<description></description></term><term>{Saprolite__Lower}
-<description></description></term><term>{Saprolite__Upper}
-<description></description></term><term>{Sedimentary_Nondescript}
-<description></description></term><term>{Shale}
-<description></description></term><term>{Siltstone}
-<description></description></term><term>{Siltstone___Chloritic}
-<description></description></term><term>{Siltstone__Dolomitic__sd_10_50__}
-<description></description></term><term>{Siltstone_Micaceous}
-<description></description></term><term>{Slate}
-<description></description></term><term>{Wackestone}
-<description></description></term><term>{Silcrete}
-<description></description></term></term>
+<description> </description><term>{Agglomerate}
+<description> </description></term><term>{Alluvium}
+<description> </description></term><term>{Arenite}
+<description> </description></term><term>{Argillite}
+<description> </description></term><term>{Arkose}
+<description> </description></term><term>{Calcrete}
+<description> </description></term><term>{Carbonaceous_Shale}
+<description> </description></term><term>{Carbonaceous_Chert}
+<description> </description></term><term>{Carbonate_Rock}
+<description> </description></term><term>{Chert}
+<description> </description></term><term>{Chloritic_Shale}
+<description> </description></term><term>{Clay}
+<description> </description></term><term>{Claystone}
+<description> </description></term><term>{Colluvium}
+<description> </description></term><term>{Conglomerate}
+<description> </description></term><term>{Conglomerate__Monomictic}
+<description> </description></term><term>{Conglomerate__Polymictic}
+<description> </description></term><term>{Dolomite__Sandy}
+<description> </description></term><term>{Dolomitic_Shale}
+<description> </description></term><term>{Dolomite__Silty}
+<description> </description></term><term>{Duricrust}
+<description> </description></term><term>{Duricrust__Transported_Lateritic}
+<description> </description></term><term>{Ferruginous_Clays}
+<description> </description></term><term>{Ferricrete}
+<description> </description></term><term>{Grainstone__Mud_Free_Limestone_}
+<description> </description></term><term>{Gravel}
+<description> </description></term><term>{Gravels__Transported}
+<description> </description></term><term>{Grey_Wackestone}
+<description> </description></term><term>{Ironstone__Magnetite_Haematite}
+<description> </description></term><term>{Kaolin}
+<description> </description></term><term>{Laterite__Mottled__Clay__Zone}
+<description> </description></term><term>{Laterite__Pisolitic_Zone}
+<description> </description></term><term>{Limestone}
+<description> </description></term><term>{Limestone__Sandy}
+<description> </description></term><term>{Mudstone}
+<description> </description></term><term>{Mudstone__Calcareous_ca_10_50__}
+<description> </description></term><term>{Packstone}
+<description> </description></term><term>{Sands__Transported}
+<description> </description></term><term>{Sandstone}
+<description> </description></term><term>{Sandstone__Arkosic__fs_50_}
+<description> </description></term><term>{Sandstone__Chloritic}
+<description> </description></term><term>{Sandstone__Clayey}
+<description> </description></term><term>{Sandstone__Dolomitic_sd_10_50__}
+<description> </description></term><term>{Sandstone__Lithic}
+<description> </description></term><term>{Sandstone__Micaceous}
+<description> </description></term><term>{Sandstone__Quartz}
+<description> </description></term><term>{Sandstone__Tuffaceous}
+<description> </description></term><term>{Saprock}
+<description> </description></term><term>{Saprolite__Lower}
+<description> </description></term><term>{Saprolite__Upper}
+<description> </description></term><term>{Sedimentary_Nondescript}
+<description> </description></term><term>{Shale}
+<description> </description></term><term>{Siltstone}
+<description> </description></term><term>{Siltstone___Chloritic}
+<description> </description></term><term>{Siltstone__Dolomitic__sd_10_50__}
+<description> </description></term><term>{Siltstone_Micaceous}
+<description> </description></term><term>{Slate}
+<description> </description></term><term>{Wackestone}
+<description> </description></term><term>{Silcrete}
+<description> </description></term></term>
         <term>{Metamorphic}
-<description></description><term>{Calc_Schist}
-<description></description></term><term>{Gneiss__Gneissic}
-<description></description></term><term>{Marble}
-<description></description></term><term>{Metamorphic_Nondescript}
-<description></description></term><term>{Migmatite}
-<description></description></term><term>{Mylonite}
-<description></description></term><term>{Schist}
-<description></description></term><term>{Quartzite}
-<description></description></term></term>
+<description> </description><term>{Calc_Schist}
+<description> </description></term><term>{Gneiss__Gneissic}
+<description> </description></term><term>{Marble}
+<description> </description></term><term>{Metamorphic_Nondescript}
+<description> </description></term><term>{Migmatite}
+<description> </description></term><term>{Mylonite}
+<description> </description></term><term>{Schist}
+<description> </description></term><term>{Quartzite}
+<description> </description></term></term>
         <term>{Igneous}
-<description></description><term>{Amphibolite}
-<description></description></term><term>{Andesite}
-<description></description></term><term>{Anorthosite}
-<description></description></term><term>{Basalt}
-<description></description></term><term>{Breccia__Pyroclastic}
-<description></description></term><term>{Breccia__Volcanic}
-<description></description></term><term>{Dacite}
-<description></description></term><term>{Diorite}
-<description></description></term><term>{Dolerite}
-<description></description></term><term>{Gabbro}
-<description></description></term><term>{Gabbronorite}
-<description></description></term><term>{Granite}
-<description></description></term><term>{Granodiorite}
-<description></description></term><term>{Igneous_Nondescript}
-<description></description></term><term>{Ignimbrite}
-<description></description></term><term>{Kimberlite}
-<description></description></term><term>{Monzodiorite}
-<description></description></term><term>{Monzonite}
-<description></description></term><term>{Norite}
-<description></description></term><term>{Olivine_Gabbronorite}
-<description></description></term><term>{Pegmatite}
-<description></description></term><term>{Porphyry}
-<description></description></term><term>{Rhyodacite}
-<description></description></term><term>{Rhyolite}
-<description></description></term><term>{Syenite}
-<description></description></term><term>{Tonalite}
-<description></description></term><term>{Trachyte}
-<description></description></term><term>{Troctolite}
-<description></description></term><term>{Tuff}
-<description></description></term><term>{Tuff__Crystal}
-<description></description></term><term>{Tuff__Lapilli}
-<description></description></term><term>{Tuff__Lapilli_Crystal}
-<description></description></term><term>{Tuff__Lithic}
-<description></description></term><term>{Volcanic_Nondescript}
-<description></description></term></term>
+<description> </description><term>{Amphibolite}
+<description> </description></term><term>{Andesite}
+<description> </description></term><term>{Anorthosite}
+<description> </description></term><term>{Basalt}
+<description> </description></term><term>{Breccia__Pyroclastic}
+<description> </description></term><term>{Breccia__Volcanic}
+<description> </description></term><term>{Dacite}
+<description> </description></term><term>{Diorite}
+<description> </description></term><term>{Dolerite}
+<description> </description></term><term>{Gabbro}
+<description> </description></term><term>{Gabbronorite}
+<description> </description></term><term>{Granite}
+<description> </description></term><term>{Granodiorite}
+<description> </description></term><term>{Igneous_Nondescript}
+<description> </description></term><term>{Ignimbrite}
+<description> </description></term><term>{Kimberlite}
+<description> </description></term><term>{Monzodiorite}
+<description> </description></term><term>{Monzonite}
+<description> </description></term><term>{Norite}
+<description> </description></term><term>{Olivine_Gabbronorite}
+<description> </description></term><term>{Pegmatite}
+<description> </description></term><term>{Porphyry}
+<description> </description></term><term>{Rhyodacite}
+<description> </description></term><term>{Rhyolite}
+<description> </description></term><term>{Syenite}
+<description> </description></term><term>{Tonalite}
+<description> </description></term><term>{Trachyte}
+<description> </description></term><term>{Troctolite}
+<description> </description></term><term>{Tuff}
+<description> </description></term><term>{Tuff__Crystal}
+<description> </description></term><term>{Tuff__Lapilli}
+<description> </description></term><term>{Tuff__Lapilli_Crystal}
+<description> </description></term><term>{Tuff__Lithic}
+<description> </description></term><term>{Volcanic_Nondescript}
+<description> </description></term></term>
         <term>{Other}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Drainage" type="vocab">
@@ -897,11 +897,11 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{No_Observation}
-<description></description></term>
+<description> </description></term>
         <term>{Yes}
-<description></description></term>
+<description> </description></term>
         <term>{No}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Contamination" type="vocab">
@@ -910,11 +910,11 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{No_Observation}
-<description></description></term>
+<description> </description></term>
         <term>{Yes}
-<description></description></term>
+<description> </description></term>
         <term>{No}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Regolith Type" type="vocab">
@@ -923,43 +923,43 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{Transported_Regolith}
-<description></description><term>{Alluvial_sediments}
-<description></description><term>{Channel_deposits}
-<description></description></term><term>{Overbank_deposits}
-<description></description></term></term><term>{Aeolian_sediments}
-<description></description><term>{Aeolian_sand}
-<description></description></term><term>{Loess}
-<description></description></term><term>{Parna}
-<description></description></term></term><term>{Colluvial_sediments}
-<description></description><term>{Mass_movement}
-<description></description></term><term>{Sheet_flow_deposit}
-<description></description></term><term>{Fanglomerate}
-<description></description></term></term><term>{Evaporite}
-<description></description><term>{Halite}
-<description></description></term><term>{Gypsum}
-<description></description></term></term><term>{Lacustrine_sediments}
-<description></description></term><term>{Glacial_sediments}
-<description></description></term><term>{Volcanic_sediments}
-<description></description><term>{Tephra}
-<description></description></term></term><term>{Fill}
-<description></description></term><term>{Coastal_sediments}
-<description></description><term>{Beach_sediments}
-<description></description></term><term>{Estuarine_sediments}
-<description></description></term><term>{Coral}
-<description></description></term><term>{Marine_sediments}
-<description></description></term></term></term>
+<description> </description><term>{Alluvial_sediments}
+<description> </description><term>{Channel_deposits}
+<description> </description></term><term>{Overbank_deposits}
+<description> </description></term></term><term>{Aeolian_sediments}
+<description> </description><term>{Aeolian_sand}
+<description> </description></term><term>{Loess}
+<description> </description></term><term>{Parna}
+<description> </description></term></term><term>{Colluvial_sediments}
+<description> </description><term>{Mass_movement}
+<description> </description></term><term>{Sheet_flow_deposit}
+<description> </description></term><term>{Fanglomerate}
+<description> </description></term></term><term>{Evaporite}
+<description> </description><term>{Halite}
+<description> </description></term><term>{Gypsum}
+<description> </description></term></term><term>{Lacustrine_sediments}
+<description> </description></term><term>{Glacial_sediments}
+<description> </description></term><term>{Volcanic_sediments}
+<description> </description><term>{Tephra}
+<description> </description></term></term><term>{Fill}
+<description> </description></term><term>{Coastal_sediments}
+<description> </description><term>{Beach_sediments}
+<description> </description></term><term>{Estuarine_sediments}
+<description> </description></term><term>{Coral}
+<description> </description></term><term>{Marine_sediments}
+<description> </description></term></term></term>
         <term>{In_Situ_Regolith}
-<description></description><term>{Weathered_bedrock}
-<description></description></term><term>{Residual_material}
-<description></description></term><term>{Saprolite}
-<description></description><term>{Completely_weathered_bedrock}
-<description></description></term><term>{Very_highly_weathered_bedrock}
-<description></description></term><term>{Highly_weathered_bedrock}
-<description></description></term><term>{Moderately_weathered_bedrock}
-<description></description></term><term>{Slightly_weathered_bedrock}
-<description></description></term></term></term>
+<description> </description><term>{Weathered_bedrock}
+<description> </description></term><term>{Residual_material}
+<description> </description></term><term>{Saprolite}
+<description> </description><term>{Completely_weathered_bedrock}
+<description> </description></term><term>{Very_highly_weathered_bedrock}
+<description> </description></term><term>{Highly_weathered_bedrock}
+<description> </description></term><term>{Moderately_weathered_bedrock}
+<description> </description></term><term>{Slightly_weathered_bedrock}
+<description> </description></term></term></term>
         <term>{Other}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Landform" type="vocab">
@@ -968,81 +968,81 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{Alluvial_Landforms}
-<description></description><term>{Alluvial_Plain}
-<description></description></term><term>{Flood_Plain}
-<description></description></term><term>{Anastomatic_Plain}
-<description></description></term><term>{Bar_Plain}
-<description></description></term><term>{Covered_Plain}
-<description></description></term><term>{Meander_Plain}
-<description></description></term><term>{Flood_Out}
-<description></description></term><term>{Alluvial_Terrace}
-<description></description></term><term>{Stagnant_Alluvial_Plain}
-<description></description></term><term>{Alluvial_Swamp}
-<description></description></term><term>{Terraced_Land}
-<description></description></term></term>
+<description> </description><term>{Alluvial_Plain}
+<description> </description></term><term>{Flood_Plain}
+<description> </description></term><term>{Anastomatic_Plain}
+<description> </description></term><term>{Bar_Plain}
+<description> </description></term><term>{Covered_Plain}
+<description> </description></term><term>{Meander_Plain}
+<description> </description></term><term>{Flood_Out}
+<description> </description></term><term>{Alluvial_Terrace}
+<description> </description></term><term>{Stagnant_Alluvial_Plain}
+<description> </description></term><term>{Alluvial_Swamp}
+<description> </description></term><term>{Terraced_Land}
+<description> </description></term></term>
         <term>{Dune_Field}
-<description></description><term>{Longitudinal_Dunefield}
-<description></description></term></term>
+<description> </description><term>{Longitudinal_Dunefield}
+<description> </description></term></term>
         <term>{Fan}
-<description></description><term>{Alluvial_Fan}
-<description></description></term><term>{Colluvial_Fan}
-<description></description></term><term>{Sheet_Flood_Fan}
-<description></description></term></term>
+<description> </description><term>{Alluvial_Fan}
+<description> </description></term><term>{Colluvial_Fan}
+<description> </description></term><term>{Sheet_Flood_Fan}
+<description> </description></term></term>
         <term>{Plain}
-<description></description><term>{Depositional_Plain}
-<description></description></term><term>{Lacustrine_Plain}
-<description></description></term><term>{Playa_Plain}
-<description></description></term><term>{Sandplain}
-<description></description></term></term>
+<description> </description><term>{Depositional_Plain}
+<description> </description></term><term>{Lacustrine_Plain}
+<description> </description></term><term>{Playa_Plain}
+<description> </description></term><term>{Sandplain}
+<description> </description></term></term>
         <term>{Glacial_Landforms}
-<description></description><term>{Depositional_Glacial_Landforms}
-<description></description></term><term>{Erosional_Glacial_Land}
-<description></description></term></term>
+<description> </description><term>{Depositional_Glacial_Landforms}
+<description> </description></term><term>{Erosional_Glacial_Land}
+<description> </description></term></term>
         <term>{Delta}
-<description></description></term>
+<description> </description></term>
         <term>{Coastal_Lands}
-<description></description><term>{Beach_Ridge_Plain}
-<description></description></term><term>{Chenier_Plain}
-<description></description></term><term>{Coral_Reef}
-<description></description></term><term>{Marine_Plain}
-<description></description></term><term>{Tidal_Flat}
-<description></description></term><term>{Coastal_Dunes}
-<description></description></term><term>{Coastal_Plain}
-<description></description></term><term>{Beach}
-<description></description></term></term>
+<description> </description><term>{Beach_Ridge_Plain}
+<description> </description></term><term>{Chenier_Plain}
+<description> </description></term><term>{Coral_Reef}
+<description> </description></term><term>{Marine_Plain}
+<description> </description></term><term>{Tidal_Flat}
+<description> </description></term><term>{Coastal_Dunes}
+<description> </description></term><term>{Coastal_Plain}
+<description> </description></term><term>{Beach}
+<description> </description></term></term>
         <term>{Erosional_Landforms}
-<description></description><term>{Erosional_Plain}
-<description></description></term><term>{Pediment}
-<description></description></term><term>{Pediplain}
-<description></description></term><term>{Peneplain}
-<description></description></term><term>{Etchplain}
-<description></description></term><term>{Rises}
-<description></description></term><term>{Residual_Rises}
-<description></description></term><term>{Low_Hills}
-<description></description></term><term>{Hills}
-<description></description></term><term>{Mountains}
-<description></description></term><term>{Escarpment}
-<description></description></term><term>{Badlands}
-<description></description></term><term>{Drainage_Depression}
-<description></description></term></term>
+<description> </description><term>{Erosional_Plain}
+<description> </description></term><term>{Pediment}
+<description> </description></term><term>{Pediplain}
+<description> </description></term><term>{Peneplain}
+<description> </description></term><term>{Etchplain}
+<description> </description></term><term>{Rises}
+<description> </description></term><term>{Residual_Rises}
+<description> </description></term><term>{Low_Hills}
+<description> </description></term><term>{Hills}
+<description> </description></term><term>{Mountains}
+<description> </description></term><term>{Escarpment}
+<description> </description></term><term>{Badlands}
+<description> </description></term><term>{Drainage_Depression}
+<description> </description></term></term>
         <term>{Karst}
-<description></description></term>
+<description> </description></term>
         <term>{Plateau}
-<description></description></term>
+<description> </description></term>
         <term>{Volcanic_Landform}
-<description></description><term>{Caldera}
-<description></description></term><term>{Cone}
-<description></description></term><term>{Lava_Plain}
-<description></description></term><term>{Ash_Plain}
-<description></description></term><term>{Lava_Flow}
-<description></description></term><term>{Lava_Plateau}
-<description></description></term></term>
+<description> </description><term>{Caldera}
+<description> </description></term><term>{Cone}
+<description> </description></term><term>{Lava_Plain}
+<description> </description></term><term>{Ash_Plain}
+<description> </description></term><term>{Lava_Flow}
+<description> </description></term><term>{Lava_Plateau}
+<description> </description></term></term>
         <term>{Made_Land}
-<description></description></term>
+<description> </description></term>
         <term>{Meteor_Crater}
-<description></description></term>
+<description> </description></term>
         <term>{Other}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Vegetation" type="measure">
@@ -1089,9 +1089,9 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{A}
-<description></description></term>
+<description> </description></term>
         <term>{B}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Soil Crust Sample Timestamp" type="measure" isIdentifier="true">
@@ -1130,9 +1130,9 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{Sampling_Location}
-<description></description></term>
+<description> </description></term>
         <term>{Observation_Only}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Location Number" type="measure">
@@ -1146,21 +1146,21 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{28349}
-<description></description></term>
+<description> </description></term>
         <term>{28350}
-<description></description></term>
+<description> </description></term>
         <term>{28351}
-<description></description></term>
+<description> </description></term>
         <term>{28352}
-<description></description></term>
+<description> </description></term>
         <term>{28353}
-<description></description></term>
+<description> </description></term>
         <term>{28354}
-<description></description></term>
+<description> </description></term>
         <term>{28355}
-<description></description></term>
+<description> </description></term>
         <term>{28356}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Latitude" type="measure">
@@ -1209,11 +1209,11 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{No_Observation}
-<description></description></term>
+<description> </description></term>
         <term>{Yes}
-<description></description></term>
+<description> </description></term>
         <term>{No}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Soil Texture" type="vocab">
@@ -1222,17 +1222,17 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{No_Observation}
-<description></description></term>
+<description> </description></term>
         <term>{Clay}
-<description></description></term>
+<description> </description></term>
         <term>{Sandy}
-<description></description></term>
+<description> </description></term>
         <term>{Silty}
-<description></description></term>
+<description> </description></term>
         <term>{Loam}
-<description></description></term>
+<description> </description></term>
         <term>{Other}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Geology" type="vocab">
@@ -1241,114 +1241,114 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{Sedimentary}
-<description></description><term>{Agglomerate}
-<description></description></term><term>{Alluvium}
-<description></description></term><term>{Arenite}
-<description></description></term><term>{Argillite}
-<description></description></term><term>{Arkose}
-<description></description></term><term>{Calcrete}
-<description></description></term><term>{Carbonaceous_Shale}
-<description></description></term><term>{Carbonaceous_Chert}
-<description></description></term><term>{Carbonate_Rock}
-<description></description></term><term>{Chert}
-<description></description></term><term>{Chloritic_Shale}
-<description></description></term><term>{Clay}
-<description></description></term><term>{Claystone}
-<description></description></term><term>{Colluvium}
-<description></description></term><term>{Conglomerate}
-<description></description></term><term>{Conglomerate__Monomictic}
-<description></description></term><term>{Conglomerate__Polymictic}
-<description></description></term><term>{Dolomite__Sandy}
-<description></description></term><term>{Dolomitic_Shale}
-<description></description></term><term>{Dolomite__Silty}
-<description></description></term><term>{Duricrust}
-<description></description></term><term>{Duricrust__Transported_Lateritic}
-<description></description></term><term>{Ferruginous_Clays}
-<description></description></term><term>{Ferricrete}
-<description></description></term><term>{Grainstone__Mud_Free_Limestone_}
-<description></description></term><term>{Gravel}
-<description></description></term><term>{Gravels__Transported}
-<description></description></term><term>{Grey_Wackestone}
-<description></description></term><term>{Ironstone__Magnetite_Haematite}
-<description></description></term><term>{Kaolin}
-<description></description></term><term>{Laterite__Mottled__Clay__Zone}
-<description></description></term><term>{Laterite__Pisolitic_Zone}
-<description></description></term><term>{Limestone}
-<description></description></term><term>{Limestone__Sandy}
-<description></description></term><term>{Mudstone}
-<description></description></term><term>{Mudstone__Calcareous_ca_10_50__}
-<description></description></term><term>{Packstone}
-<description></description></term><term>{Sands__Transported}
-<description></description></term><term>{Sandstone}
-<description></description></term><term>{Sandstone__Arkosic__fs_50_}
-<description></description></term><term>{Sandstone__Chloritic}
-<description></description></term><term>{Sandstone__Clayey}
-<description></description></term><term>{Sandstone__Dolomitic_sd_10_50__}
-<description></description></term><term>{Sandstone__Lithic}
-<description></description></term><term>{Sandstone__Micaceous}
-<description></description></term><term>{Sandstone__Quartz}
-<description></description></term><term>{Sandstone__Tuffaceous}
-<description></description></term><term>{Saprock}
-<description></description></term><term>{Saprolite__Lower}
-<description></description></term><term>{Saprolite__Upper}
-<description></description></term><term>{Sedimentary_Nondescript}
-<description></description></term><term>{Shale}
-<description></description></term><term>{Siltstone}
-<description></description></term><term>{Siltstone___Chloritic}
-<description></description></term><term>{Siltstone__Dolomitic__sd_10_50__}
-<description></description></term><term>{Siltstone_Micaceous}
-<description></description></term><term>{Slate}
-<description></description></term><term>{Wackestone}
-<description></description></term><term>{Silcrete}
-<description></description></term></term>
+<description> </description><term>{Agglomerate}
+<description> </description></term><term>{Alluvium}
+<description> </description></term><term>{Arenite}
+<description> </description></term><term>{Argillite}
+<description> </description></term><term>{Arkose}
+<description> </description></term><term>{Calcrete}
+<description> </description></term><term>{Carbonaceous_Shale}
+<description> </description></term><term>{Carbonaceous_Chert}
+<description> </description></term><term>{Carbonate_Rock}
+<description> </description></term><term>{Chert}
+<description> </description></term><term>{Chloritic_Shale}
+<description> </description></term><term>{Clay}
+<description> </description></term><term>{Claystone}
+<description> </description></term><term>{Colluvium}
+<description> </description></term><term>{Conglomerate}
+<description> </description></term><term>{Conglomerate__Monomictic}
+<description> </description></term><term>{Conglomerate__Polymictic}
+<description> </description></term><term>{Dolomite__Sandy}
+<description> </description></term><term>{Dolomitic_Shale}
+<description> </description></term><term>{Dolomite__Silty}
+<description> </description></term><term>{Duricrust}
+<description> </description></term><term>{Duricrust__Transported_Lateritic}
+<description> </description></term><term>{Ferruginous_Clays}
+<description> </description></term><term>{Ferricrete}
+<description> </description></term><term>{Grainstone__Mud_Free_Limestone_}
+<description> </description></term><term>{Gravel}
+<description> </description></term><term>{Gravels__Transported}
+<description> </description></term><term>{Grey_Wackestone}
+<description> </description></term><term>{Ironstone__Magnetite_Haematite}
+<description> </description></term><term>{Kaolin}
+<description> </description></term><term>{Laterite__Mottled__Clay__Zone}
+<description> </description></term><term>{Laterite__Pisolitic_Zone}
+<description> </description></term><term>{Limestone}
+<description> </description></term><term>{Limestone__Sandy}
+<description> </description></term><term>{Mudstone}
+<description> </description></term><term>{Mudstone__Calcareous_ca_10_50__}
+<description> </description></term><term>{Packstone}
+<description> </description></term><term>{Sands__Transported}
+<description> </description></term><term>{Sandstone}
+<description> </description></term><term>{Sandstone__Arkosic__fs_50_}
+<description> </description></term><term>{Sandstone__Chloritic}
+<description> </description></term><term>{Sandstone__Clayey}
+<description> </description></term><term>{Sandstone__Dolomitic_sd_10_50__}
+<description> </description></term><term>{Sandstone__Lithic}
+<description> </description></term><term>{Sandstone__Micaceous}
+<description> </description></term><term>{Sandstone__Quartz}
+<description> </description></term><term>{Sandstone__Tuffaceous}
+<description> </description></term><term>{Saprock}
+<description> </description></term><term>{Saprolite__Lower}
+<description> </description></term><term>{Saprolite__Upper}
+<description> </description></term><term>{Sedimentary_Nondescript}
+<description> </description></term><term>{Shale}
+<description> </description></term><term>{Siltstone}
+<description> </description></term><term>{Siltstone___Chloritic}
+<description> </description></term><term>{Siltstone__Dolomitic__sd_10_50__}
+<description> </description></term><term>{Siltstone_Micaceous}
+<description> </description></term><term>{Slate}
+<description> </description></term><term>{Wackestone}
+<description> </description></term><term>{Silcrete}
+<description> </description></term></term>
         <term>{Metamorphic}
-<description></description><term>{Calc_Schist}
-<description></description></term><term>{Gneiss__Gneissic}
-<description></description></term><term>{Marble}
-<description></description></term><term>{Metamorphic_Nondescript}
-<description></description></term><term>{Migmatite}
-<description></description></term><term>{Mylonite}
-<description></description></term><term>{Schist}
-<description></description></term><term>{Quartzite}
-<description></description></term></term>
+<description> </description><term>{Calc_Schist}
+<description> </description></term><term>{Gneiss__Gneissic}
+<description> </description></term><term>{Marble}
+<description> </description></term><term>{Metamorphic_Nondescript}
+<description> </description></term><term>{Migmatite}
+<description> </description></term><term>{Mylonite}
+<description> </description></term><term>{Schist}
+<description> </description></term><term>{Quartzite}
+<description> </description></term></term>
         <term>{Igneous}
-<description></description><term>{Amphibolite}
-<description></description></term><term>{Andesite}
-<description></description></term><term>{Anorthosite}
-<description></description></term><term>{Basalt}
-<description></description></term><term>{Breccia__Pyroclastic}
-<description></description></term><term>{Breccia__Volcanic}
-<description></description></term><term>{Dacite}
-<description></description></term><term>{Diorite}
-<description></description></term><term>{Dolerite}
-<description></description></term><term>{Gabbro}
-<description></description></term><term>{Gabbronorite}
-<description></description></term><term>{Granite}
-<description></description></term><term>{Granodiorite}
-<description></description></term><term>{Igneous_Nondescript}
-<description></description></term><term>{Ignimbrite}
-<description></description></term><term>{Kimberlite}
-<description></description></term><term>{Monzodiorite}
-<description></description></term><term>{Monzonite}
-<description></description></term><term>{Norite}
-<description></description></term><term>{Olivine_Gabbronorite}
-<description></description></term><term>{Pegmatite}
-<description></description></term><term>{Porphyry}
-<description></description></term><term>{Rhyodacite}
-<description></description></term><term>{Rhyolite}
-<description></description></term><term>{Syenite}
-<description></description></term><term>{Tonalite}
-<description></description></term><term>{Trachyte}
-<description></description></term><term>{Troctolite}
-<description></description></term><term>{Tuff}
-<description></description></term><term>{Tuff__Crystal}
-<description></description></term><term>{Tuff__Lapilli}
-<description></description></term><term>{Tuff__Lapilli_Crystal}
-<description></description></term><term>{Tuff__Lithic}
-<description></description></term><term>{Volcanic_Nondescript}
-<description></description></term></term>
+<description> </description><term>{Amphibolite}
+<description> </description></term><term>{Andesite}
+<description> </description></term><term>{Anorthosite}
+<description> </description></term><term>{Basalt}
+<description> </description></term><term>{Breccia__Pyroclastic}
+<description> </description></term><term>{Breccia__Volcanic}
+<description> </description></term><term>{Dacite}
+<description> </description></term><term>{Diorite}
+<description> </description></term><term>{Dolerite}
+<description> </description></term><term>{Gabbro}
+<description> </description></term><term>{Gabbronorite}
+<description> </description></term><term>{Granite}
+<description> </description></term><term>{Granodiorite}
+<description> </description></term><term>{Igneous_Nondescript}
+<description> </description></term><term>{Ignimbrite}
+<description> </description></term><term>{Kimberlite}
+<description> </description></term><term>{Monzodiorite}
+<description> </description></term><term>{Monzonite}
+<description> </description></term><term>{Norite}
+<description> </description></term><term>{Olivine_Gabbronorite}
+<description> </description></term><term>{Pegmatite}
+<description> </description></term><term>{Porphyry}
+<description> </description></term><term>{Rhyodacite}
+<description> </description></term><term>{Rhyolite}
+<description> </description></term><term>{Syenite}
+<description> </description></term><term>{Tonalite}
+<description> </description></term><term>{Trachyte}
+<description> </description></term><term>{Troctolite}
+<description> </description></term><term>{Tuff}
+<description> </description></term><term>{Tuff__Crystal}
+<description> </description></term><term>{Tuff__Lapilli}
+<description> </description></term><term>{Tuff__Lapilli_Crystal}
+<description> </description></term><term>{Tuff__Lithic}
+<description> </description></term><term>{Volcanic_Nondescript}
+<description> </description></term></term>
         <term>{Other}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Drainage" type="vocab">
@@ -1357,11 +1357,11 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{No_Observation}
-<description></description></term>
+<description> </description></term>
         <term>{Yes}
-<description></description></term>
+<description> </description></term>
         <term>{No}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Contamination" type="vocab">
@@ -1370,11 +1370,11 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{No_Observation}
-<description></description></term>
+<description> </description></term>
         <term>{Yes}
-<description></description></term>
+<description> </description></term>
         <term>{No}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Regolith Type" type="vocab">
@@ -1383,43 +1383,43 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{Transported_Regolith}
-<description></description><term>{Alluvial_sediments}
-<description></description><term>{Channel_deposits}
-<description></description></term><term>{Overbank_deposits}
-<description></description></term></term><term>{Aeolian_sediments}
-<description></description><term>{Aeolian_sand}
-<description></description></term><term>{Loess}
-<description></description></term><term>{Parna}
-<description></description></term></term><term>{Colluvial_sediments}
-<description></description><term>{Mass_movement}
-<description></description></term><term>{Sheet_flow_deposit}
-<description></description></term><term>{Fanglomerate}
-<description></description></term></term><term>{Evaporite}
-<description></description><term>{Halite}
-<description></description></term><term>{Gypsum}
-<description></description></term></term><term>{Lacustrine_sediments}
-<description></description></term><term>{Glacial_sediments}
-<description></description></term><term>{Volcanic_sediments}
-<description></description><term>{Tephra}
-<description></description></term></term><term>{Fill}
-<description></description></term><term>{Coastal_sediments}
-<description></description><term>{Beach_sediments}
-<description></description></term><term>{Estuarine_sediments}
-<description></description></term><term>{Coral}
-<description></description></term><term>{Marine_sediments}
-<description></description></term></term></term>
+<description> </description><term>{Alluvial_sediments}
+<description> </description><term>{Channel_deposits}
+<description> </description></term><term>{Overbank_deposits}
+<description> </description></term></term><term>{Aeolian_sediments}
+<description> </description><term>{Aeolian_sand}
+<description> </description></term><term>{Loess}
+<description> </description></term><term>{Parna}
+<description> </description></term></term><term>{Colluvial_sediments}
+<description> </description><term>{Mass_movement}
+<description> </description></term><term>{Sheet_flow_deposit}
+<description> </description></term><term>{Fanglomerate}
+<description> </description></term></term><term>{Evaporite}
+<description> </description><term>{Halite}
+<description> </description></term><term>{Gypsum}
+<description> </description></term></term><term>{Lacustrine_sediments}
+<description> </description></term><term>{Glacial_sediments}
+<description> </description></term><term>{Volcanic_sediments}
+<description> </description><term>{Tephra}
+<description> </description></term></term><term>{Fill}
+<description> </description></term><term>{Coastal_sediments}
+<description> </description><term>{Beach_sediments}
+<description> </description></term><term>{Estuarine_sediments}
+<description> </description></term><term>{Coral}
+<description> </description></term><term>{Marine_sediments}
+<description> </description></term></term></term>
         <term>{In_Situ_Regolith}
-<description></description><term>{Weathered_bedrock}
-<description></description></term><term>{Residual_material}
-<description></description></term><term>{Saprolite}
-<description></description><term>{Completely_weathered_bedrock}
-<description></description></term><term>{Very_highly_weathered_bedrock}
-<description></description></term><term>{Highly_weathered_bedrock}
-<description></description></term><term>{Moderately_weathered_bedrock}
-<description></description></term><term>{Slightly_weathered_bedrock}
-<description></description></term></term></term>
+<description> </description><term>{Weathered_bedrock}
+<description> </description></term><term>{Residual_material}
+<description> </description></term><term>{Saprolite}
+<description> </description><term>{Completely_weathered_bedrock}
+<description> </description></term><term>{Very_highly_weathered_bedrock}
+<description> </description></term><term>{Highly_weathered_bedrock}
+<description> </description></term><term>{Moderately_weathered_bedrock}
+<description> </description></term><term>{Slightly_weathered_bedrock}
+<description> </description></term></term></term>
         <term>{Other}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Landform" type="vocab">
@@ -1428,81 +1428,81 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{Alluvial_Landforms}
-<description></description><term>{Alluvial_Plain}
-<description></description></term><term>{Flood_Plain}
-<description></description></term><term>{Anastomatic_Plain}
-<description></description></term><term>{Bar_Plain}
-<description></description></term><term>{Covered_Plain}
-<description></description></term><term>{Meander_Plain}
-<description></description></term><term>{Flood_Out}
-<description></description></term><term>{Alluvial_Terrace}
-<description></description></term><term>{Stagnant_Alluvial_Plain}
-<description></description></term><term>{Alluvial_Swamp}
-<description></description></term><term>{Terraced_Land}
-<description></description></term></term>
+<description> </description><term>{Alluvial_Plain}
+<description> </description></term><term>{Flood_Plain}
+<description> </description></term><term>{Anastomatic_Plain}
+<description> </description></term><term>{Bar_Plain}
+<description> </description></term><term>{Covered_Plain}
+<description> </description></term><term>{Meander_Plain}
+<description> </description></term><term>{Flood_Out}
+<description> </description></term><term>{Alluvial_Terrace}
+<description> </description></term><term>{Stagnant_Alluvial_Plain}
+<description> </description></term><term>{Alluvial_Swamp}
+<description> </description></term><term>{Terraced_Land}
+<description> </description></term></term>
         <term>{Dune_Field}
-<description></description><term>{Longitudinal_Dunefield}
-<description></description></term></term>
+<description> </description><term>{Longitudinal_Dunefield}
+<description> </description></term></term>
         <term>{Fan}
-<description></description><term>{Alluvial_Fan}
-<description></description></term><term>{Colluvial_Fan}
-<description></description></term><term>{Sheet_Flood_Fan}
-<description></description></term></term>
+<description> </description><term>{Alluvial_Fan}
+<description> </description></term><term>{Colluvial_Fan}
+<description> </description></term><term>{Sheet_Flood_Fan}
+<description> </description></term></term>
         <term>{Plain}
-<description></description><term>{Depositional_Plain}
-<description></description></term><term>{Lacustrine_Plain}
-<description></description></term><term>{Playa_Plain}
-<description></description></term><term>{Sandplain}
-<description></description></term></term>
+<description> </description><term>{Depositional_Plain}
+<description> </description></term><term>{Lacustrine_Plain}
+<description> </description></term><term>{Playa_Plain}
+<description> </description></term><term>{Sandplain}
+<description> </description></term></term>
         <term>{Glacial_Landforms}
-<description></description><term>{Depositional_Glacial_Landforms}
-<description></description></term><term>{Erosional_Glacial_Land}
-<description></description></term></term>
+<description> </description><term>{Depositional_Glacial_Landforms}
+<description> </description></term><term>{Erosional_Glacial_Land}
+<description> </description></term></term>
         <term>{Delta}
-<description></description></term>
+<description> </description></term>
         <term>{Coastal_Lands}
-<description></description><term>{Beach_Ridge_Plain}
-<description></description></term><term>{Chenier_Plain}
-<description></description></term><term>{Coral_Reef}
-<description></description></term><term>{Marine_Plain}
-<description></description></term><term>{Tidal_Flat}
-<description></description></term><term>{Coastal_Dunes}
-<description></description></term><term>{Coastal_Plain}
-<description></description></term><term>{Beach}
-<description></description></term></term>
+<description> </description><term>{Beach_Ridge_Plain}
+<description> </description></term><term>{Chenier_Plain}
+<description> </description></term><term>{Coral_Reef}
+<description> </description></term><term>{Marine_Plain}
+<description> </description></term><term>{Tidal_Flat}
+<description> </description></term><term>{Coastal_Dunes}
+<description> </description></term><term>{Coastal_Plain}
+<description> </description></term><term>{Beach}
+<description> </description></term></term>
         <term>{Erosional_Landforms}
-<description></description><term>{Erosional_Plain}
-<description></description></term><term>{Pediment}
-<description></description></term><term>{Pediplain}
-<description></description></term><term>{Peneplain}
-<description></description></term><term>{Etchplain}
-<description></description></term><term>{Rises}
-<description></description></term><term>{Residual_Rises}
-<description></description></term><term>{Low_Hills}
-<description></description></term><term>{Hills}
-<description></description></term><term>{Mountains}
-<description></description></term><term>{Escarpment}
-<description></description></term><term>{Badlands}
-<description></description></term><term>{Drainage_Depression}
-<description></description></term></term>
+<description> </description><term>{Erosional_Plain}
+<description> </description></term><term>{Pediment}
+<description> </description></term><term>{Pediplain}
+<description> </description></term><term>{Peneplain}
+<description> </description></term><term>{Etchplain}
+<description> </description></term><term>{Rises}
+<description> </description></term><term>{Residual_Rises}
+<description> </description></term><term>{Low_Hills}
+<description> </description></term><term>{Hills}
+<description> </description></term><term>{Mountains}
+<description> </description></term><term>{Escarpment}
+<description> </description></term><term>{Badlands}
+<description> </description></term><term>{Drainage_Depression}
+<description> </description></term></term>
         <term>{Karst}
-<description></description></term>
+<description> </description></term>
         <term>{Plateau}
-<description></description></term>
+<description> </description></term>
         <term>{Volcanic_Landform}
-<description></description><term>{Caldera}
-<description></description></term><term>{Cone}
-<description></description></term><term>{Lava_Plain}
-<description></description></term><term>{Ash_Plain}
-<description></description></term><term>{Lava_Flow}
-<description></description></term><term>{Lava_Plateau}
-<description></description></term></term>
+<description> </description><term>{Caldera}
+<description> </description></term><term>{Cone}
+<description> </description></term><term>{Lava_Plain}
+<description> </description></term><term>{Ash_Plain}
+<description> </description></term><term>{Lava_Flow}
+<description> </description></term><term>{Lava_Plateau}
+<description> </description></term></term>
         <term>{Made_Land}
-<description></description></term>
+<description> </description></term>
         <term>{Meteor_Crater}
-<description></description></term>
+<description> </description></term>
         <term>{Other}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Vegetation" type="measure">
@@ -1584,9 +1584,9 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{Sampling_Location}
-<description></description></term>
+<description> </description></term>
         <term>{Observation_Only}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Core ID" type="measure">
@@ -1600,21 +1600,21 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{28349}
-<description></description></term>
+<description> </description></term>
         <term>{28350}
-<description></description></term>
+<description> </description></term>
         <term>{28351}
-<description></description></term>
+<description> </description></term>
         <term>{28352}
-<description></description></term>
+<description> </description></term>
         <term>{28353}
-<description></description></term>
+<description> </description></term>
         <term>{28354}
-<description></description></term>
+<description> </description></term>
         <term>{28355}
-<description></description></term>
+<description> </description></term>
         <term>{28356}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Latitude" type="measure">
@@ -1743,114 +1743,114 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{Sedimentary}
-<description></description><term>{Agglomerate}
-<description></description></term><term>{Alluvium}
-<description></description></term><term>{Arenite}
-<description></description></term><term>{Argillite}
-<description></description></term><term>{Arkose}
-<description></description></term><term>{Calcrete}
-<description></description></term><term>{Carbonaceous_Shale}
-<description></description></term><term>{Carbonaceous_Chert}
-<description></description></term><term>{Carbonate_Rock}
-<description></description></term><term>{Chert}
-<description></description></term><term>{Chloritic_Shale}
-<description></description></term><term>{Clay}
-<description></description></term><term>{Claystone}
-<description></description></term><term>{Colluvium}
-<description></description></term><term>{Conglomerate}
-<description></description></term><term>{Conglomerate__Monomictic}
-<description></description></term><term>{Conglomerate__Polymictic}
-<description></description></term><term>{Dolomite__Sandy}
-<description></description></term><term>{Dolomitic_Shale}
-<description></description></term><term>{Dolomite__Silty}
-<description></description></term><term>{Duricrust}
-<description></description></term><term>{Duricrust__Transported_Lateritic}
-<description></description></term><term>{Ferruginous_Clays}
-<description></description></term><term>{Ferricrete}
-<description></description></term><term>{Grainstone__Mud_Free_Limestone_}
-<description></description></term><term>{Gravel}
-<description></description></term><term>{Gravels__Transported}
-<description></description></term><term>{Grey_Wackestone}
-<description></description></term><term>{Ironstone__Magnetite_Haematite}
-<description></description></term><term>{Kaolin}
-<description></description></term><term>{Laterite__Mottled__Clay__Zone}
-<description></description></term><term>{Laterite__Pisolitic_Zone}
-<description></description></term><term>{Limestone}
-<description></description></term><term>{Limestone__Sandy}
-<description></description></term><term>{Mudstone}
-<description></description></term><term>{Mudstone__Calcareous_ca_10_50__}
-<description></description></term><term>{Packstone}
-<description></description></term><term>{Sands__Transported}
-<description></description></term><term>{Sandstone}
-<description></description></term><term>{Sandstone__Arkosic__fs_50_}
-<description></description></term><term>{Sandstone__Chloritic}
-<description></description></term><term>{Sandstone__Clayey}
-<description></description></term><term>{Sandstone__Dolomitic_sd_10_50__}
-<description></description></term><term>{Sandstone__Lithic}
-<description></description></term><term>{Sandstone__Micaceous}
-<description></description></term><term>{Sandstone__Quartz}
-<description></description></term><term>{Sandstone__Tuffaceous}
-<description></description></term><term>{Saprock}
-<description></description></term><term>{Saprolite__Lower}
-<description></description></term><term>{Saprolite__Upper}
-<description></description></term><term>{Sedimentary_Nondescript}
-<description></description></term><term>{Shale}
-<description></description></term><term>{Siltstone}
-<description></description></term><term>{Siltstone___Chloritic}
-<description></description></term><term>{Siltstone__Dolomitic__sd_10_50__}
-<description></description></term><term>{Siltstone_Micaceous}
-<description></description></term><term>{Slate}
-<description></description></term><term>{Wackestone}
-<description></description></term><term>{Silcrete}
-<description></description></term></term>
+<description> </description><term>{Agglomerate}
+<description> </description></term><term>{Alluvium}
+<description> </description></term><term>{Arenite}
+<description> </description></term><term>{Argillite}
+<description> </description></term><term>{Arkose}
+<description> </description></term><term>{Calcrete}
+<description> </description></term><term>{Carbonaceous_Shale}
+<description> </description></term><term>{Carbonaceous_Chert}
+<description> </description></term><term>{Carbonate_Rock}
+<description> </description></term><term>{Chert}
+<description> </description></term><term>{Chloritic_Shale}
+<description> </description></term><term>{Clay}
+<description> </description></term><term>{Claystone}
+<description> </description></term><term>{Colluvium}
+<description> </description></term><term>{Conglomerate}
+<description> </description></term><term>{Conglomerate__Monomictic}
+<description> </description></term><term>{Conglomerate__Polymictic}
+<description> </description></term><term>{Dolomite__Sandy}
+<description> </description></term><term>{Dolomitic_Shale}
+<description> </description></term><term>{Dolomite__Silty}
+<description> </description></term><term>{Duricrust}
+<description> </description></term><term>{Duricrust__Transported_Lateritic}
+<description> </description></term><term>{Ferruginous_Clays}
+<description> </description></term><term>{Ferricrete}
+<description> </description></term><term>{Grainstone__Mud_Free_Limestone_}
+<description> </description></term><term>{Gravel}
+<description> </description></term><term>{Gravels__Transported}
+<description> </description></term><term>{Grey_Wackestone}
+<description> </description></term><term>{Ironstone__Magnetite_Haematite}
+<description> </description></term><term>{Kaolin}
+<description> </description></term><term>{Laterite__Mottled__Clay__Zone}
+<description> </description></term><term>{Laterite__Pisolitic_Zone}
+<description> </description></term><term>{Limestone}
+<description> </description></term><term>{Limestone__Sandy}
+<description> </description></term><term>{Mudstone}
+<description> </description></term><term>{Mudstone__Calcareous_ca_10_50__}
+<description> </description></term><term>{Packstone}
+<description> </description></term><term>{Sands__Transported}
+<description> </description></term><term>{Sandstone}
+<description> </description></term><term>{Sandstone__Arkosic__fs_50_}
+<description> </description></term><term>{Sandstone__Chloritic}
+<description> </description></term><term>{Sandstone__Clayey}
+<description> </description></term><term>{Sandstone__Dolomitic_sd_10_50__}
+<description> </description></term><term>{Sandstone__Lithic}
+<description> </description></term><term>{Sandstone__Micaceous}
+<description> </description></term><term>{Sandstone__Quartz}
+<description> </description></term><term>{Sandstone__Tuffaceous}
+<description> </description></term><term>{Saprock}
+<description> </description></term><term>{Saprolite__Lower}
+<description> </description></term><term>{Saprolite__Upper}
+<description> </description></term><term>{Sedimentary_Nondescript}
+<description> </description></term><term>{Shale}
+<description> </description></term><term>{Siltstone}
+<description> </description></term><term>{Siltstone___Chloritic}
+<description> </description></term><term>{Siltstone__Dolomitic__sd_10_50__}
+<description> </description></term><term>{Siltstone_Micaceous}
+<description> </description></term><term>{Slate}
+<description> </description></term><term>{Wackestone}
+<description> </description></term><term>{Silcrete}
+<description> </description></term></term>
         <term>{Metamorphic}
-<description></description><term>{Calc_Schist}
-<description></description></term><term>{Gneiss__Gneissic}
-<description></description></term><term>{Marble}
-<description></description></term><term>{Metamorphic_Nondescript}
-<description></description></term><term>{Migmatite}
-<description></description></term><term>{Mylonite}
-<description></description></term><term>{Schist}
-<description></description></term><term>{Quartzite}
-<description></description></term></term>
+<description> </description><term>{Calc_Schist}
+<description> </description></term><term>{Gneiss__Gneissic}
+<description> </description></term><term>{Marble}
+<description> </description></term><term>{Metamorphic_Nondescript}
+<description> </description></term><term>{Migmatite}
+<description> </description></term><term>{Mylonite}
+<description> </description></term><term>{Schist}
+<description> </description></term><term>{Quartzite}
+<description> </description></term></term>
         <term>{Igneous}
-<description></description><term>{Amphibolite}
-<description></description></term><term>{Andesite}
-<description></description></term><term>{Anorthosite}
-<description></description></term><term>{Basalt}
-<description></description></term><term>{Breccia__Pyroclastic}
-<description></description></term><term>{Breccia__Volcanic}
-<description></description></term><term>{Dacite}
-<description></description></term><term>{Diorite}
-<description></description></term><term>{Dolerite}
-<description></description></term><term>{Gabbro}
-<description></description></term><term>{Gabbronorite}
-<description></description></term><term>{Granite}
-<description></description></term><term>{Granodiorite}
-<description></description></term><term>{Igneous_Nondescript}
-<description></description></term><term>{Ignimbrite}
-<description></description></term><term>{Kimberlite}
-<description></description></term><term>{Monzodiorite}
-<description></description></term><term>{Monzonite}
-<description></description></term><term>{Norite}
-<description></description></term><term>{Olivine_Gabbronorite}
-<description></description></term><term>{Pegmatite}
-<description></description></term><term>{Porphyry}
-<description></description></term><term>{Rhyodacite}
-<description></description></term><term>{Rhyolite}
-<description></description></term><term>{Syenite}
-<description></description></term><term>{Tonalite}
-<description></description></term><term>{Trachyte}
-<description></description></term><term>{Troctolite}
-<description></description></term><term>{Tuff}
-<description></description></term><term>{Tuff__Crystal}
-<description></description></term><term>{Tuff__Lapilli}
-<description></description></term><term>{Tuff__Lapilli_Crystal}
-<description></description></term><term>{Tuff__Lithic}
-<description></description></term><term>{Volcanic_Nondescript}
-<description></description></term></term>
+<description> </description><term>{Amphibolite}
+<description> </description></term><term>{Andesite}
+<description> </description></term><term>{Anorthosite}
+<description> </description></term><term>{Basalt}
+<description> </description></term><term>{Breccia__Pyroclastic}
+<description> </description></term><term>{Breccia__Volcanic}
+<description> </description></term><term>{Dacite}
+<description> </description></term><term>{Diorite}
+<description> </description></term><term>{Dolerite}
+<description> </description></term><term>{Gabbro}
+<description> </description></term><term>{Gabbronorite}
+<description> </description></term><term>{Granite}
+<description> </description></term><term>{Granodiorite}
+<description> </description></term><term>{Igneous_Nondescript}
+<description> </description></term><term>{Ignimbrite}
+<description> </description></term><term>{Kimberlite}
+<description> </description></term><term>{Monzodiorite}
+<description> </description></term><term>{Monzonite}
+<description> </description></term><term>{Norite}
+<description> </description></term><term>{Olivine_Gabbronorite}
+<description> </description></term><term>{Pegmatite}
+<description> </description></term><term>{Porphyry}
+<description> </description></term><term>{Rhyodacite}
+<description> </description></term><term>{Rhyolite}
+<description> </description></term><term>{Syenite}
+<description> </description></term><term>{Tonalite}
+<description> </description></term><term>{Trachyte}
+<description> </description></term><term>{Troctolite}
+<description> </description></term><term>{Tuff}
+<description> </description></term><term>{Tuff__Crystal}
+<description> </description></term><term>{Tuff__Lapilli}
+<description> </description></term><term>{Tuff__Lapilli_Crystal}
+<description> </description></term><term>{Tuff__Lithic}
+<description> </description></term><term>{Volcanic_Nondescript}
+<description> </description></term></term>
         <term>{Other}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Inclusion Size" type="vocab">
@@ -1859,13 +1859,13 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{Fine}
-<description></description></term>
+<description> </description></term>
         <term>{Medium}
-<description></description></term>
+<description> </description></term>
         <term>{Coarse}
-<description></description></term>
+<description> </description></term>
         <term>{Other}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Grain Size" type="vocab">
@@ -1874,13 +1874,13 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{Fine}
-<description></description></term>
+<description> </description></term>
         <term>{Medium}
-<description></description></term>
+<description> </description></term>
         <term>{Coarse}
-<description></description></term>
+<description> </description></term>
         <term>{Other}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Sorting" type="vocab">
@@ -1889,13 +1889,13 @@
       <appendCharacterString> - </appendCharacterString>
       <lookup>
         <term>{Poor}
-<description></description></term>
+<description> </description></term>
         <term>{Moderate}
-<description></description></term>
+<description> </description></term>
         <term>{Well_Sorted}
-<description></description></term>
+<description> </description></term>
         <term>{Other}
-<description></description></term>
+<description> </description></term>
       </lookup>
     </property>
     <property name="Other Lithological Descriptors" type="measure">
