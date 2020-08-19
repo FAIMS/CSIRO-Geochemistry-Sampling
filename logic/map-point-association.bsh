@@ -22,19 +22,19 @@ void initTabGroupMap(String ref) {
   ls = createLineStyle(0, Color.GREEN, 0.05f, 0.3f, null);
   pos = createPolygonStyle(0, Color.parseColor("#440000FF"), createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
   ts = createTextStyle(0, Color.WHITE, 40, Typeface.SANS_SERIF);
-  table = "extract";
-  idcolumn = "FID";
-  labelcolumn = "CaveNo";
-  //showSpatialLayer(ref, "ExtractVector", "files/data/maps/spatialite.3857.db", table, idcolumn, labelcolumn, ps, ls, pos, ts);
+  table = "RoadClipped";
+  idcolumn = "PK_UID";
+  labelcolumn = "NAME";
+  showSpatialLayer(ref, "RoadClipped", "files/data/maps/spatialite.maps.3857.db", table, idcolumn, labelcolumn, ps, ls, pos, ts);
 
   ps = createPointStyle(0, Color.MAGENTA, 0.2f, 1f);
   ls = createLineStyle(0, Color.GREEN, 0.05f, 0.3f, null);
   pos = createPolygonStyle(0, Color.parseColor("#440000FF"), createLineStyle(10, Color.parseColor("#AA000000"), 0.01f, 0.3f, null));
   ts = createTextStyle(0, Color.WHITE, 40, Typeface.SANS_SERIF);
-  table = "Samples4km";
-  idcolumn = "FID";
-  labelcolumn = "ET_ID";
-  //showSpatialLayer(ref, "SamplesVector", "files/data/maps/spatialite.3857.db", table, idcolumn, labelcolumn, ps, ls, pos, ts);
+  table = "Sample_LocationsSWYilgarn";
+  idcolumn = "PK_UID";
+  labelcolumn = "Target";
+  showSpatialLayer(ref, "Sample_LocationsSWYilgarn", "files/data/maps/spatialite.maps.3857.db", table, idcolumn, labelcolumn, ps, ls, pos, ts);
 }
 
 void updateMapUuid() {
