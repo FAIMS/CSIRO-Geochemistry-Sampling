@@ -75,3 +75,17 @@ If you have any questions about the module, please contact the FAIMS team at **e
   <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20171109-122943[1].png" width="250"/>
    <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/Screenshot_20170912-110355.png" width="250"/>
   </p>
+
+## Server - printer FAIMS kit: 
+
+<p align="left">
+  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/CSIRO_setup.jpg" />
+</p>
+
+## Label printing in the field with Zebra printer: 
+
+<p align="left">
+  <img src="https://github.com/FAIMS/CSIRO-Geochemistry-Sampling/blob/master/Screenshots/CSIRO_printer_screenshot.png" width="250"/>
+</p>
+
+If you want to know more about Zebra printing labels in the field, watch our short video on YouTube https://www.youtube.com/watch?v=Wx0vSblD_bM
